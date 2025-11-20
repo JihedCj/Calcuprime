@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free savings calculator - Calculate how much your savings will grow over time with compound interest. Plan your savings goals.">
+    <meta name="keywords" content="savings calculator, savings account, interest calculator, savings growth, emergency fund calculator">
+    <title>Savings Calculator - Calculate Savings Growth | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/savings-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html#finance">Finance</a></li><li><a href="../index.html#health">Health</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Savings Calculator</h1>
+            <p class="calculator-description">Calculate how your savings grow with compound interest</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Savings Details</h3>
+                <div class="form-group"><label for="initial" class="form-label">Initial Deposit ($)</label><input type="number" id="initial" class="form-input" value="1000" min="0" step="100"></div>
+                <div class="form-group"><label for="monthly" class="form-label">Monthly Deposit ($)</label><input type="number" id="monthly" class="form-input" value="100" min="0" step="10"></div>
+                <div class="form-group"><label for="rate" class="form-label">Annual Interest Rate (%)</label><input type="number" id="rate" class="form-input" value="2.5" min="0" max="20" step="0.1"></div>
+                <div class="form-group"><label for="years" class="form-label">Time Period (years)</label><input type="number" id="years" class="form-input" value="5" min="1" max="50"></div>
+                <button onclick="calculate()" class="btn-calculate">Calculate Savings</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Results</h3>
+                <div class="result-item"><div class="result-label">Final Balance</div><div class="result-value" id="final" style="font-size: 2.5rem; color: #10b981;">$0</div></div>
+                <div class="result-item"><div class="result-label">Total Deposits</div><div class="result-value" id="deposits">$0</div></div>
+                <div class="result-item"><div class="result-label">Interest Earned</div><div class="result-value" id="interest">$0</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Building Your Savings</h2>
+            <p>Regular savings with compound interest is one of the most effective ways to build wealth. Even small monthly contributions grow significantly over time.</p>
+            <h2>Savings Tips</h2>
+            <ul><li><strong>Automate:</strong> Set up automatic transfers to savings</li><li><strong>Emergency Fund:</strong> Aim for 3-6 months of expenses</li><li><strong>High-Yield Accounts:</strong> Choose accounts with competitive rates</li><li><strong>Increase Over Time:</strong> Boost contributions as income grows</li></ul>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const initial = parseFloat(document.getElementById('initial').value);
+            const monthly = parseFloat(document.getElementById('monthly').value);
+            const rate = parseFloat(document.getElementById('rate').value) / 100 / 12;
+            const months = parseInt(document.getElementById('years').value) * 12;
+            
+            let balance = initial;
+            for(let i = 0; i < months; i++) {
+                balance = balance * (1 + rate) + monthly;
+            }
+            
+            const totalDeposits = initial + (monthly * months);
+            const interestEarned = balance - totalDeposits;
+            
+            document.getElementById('final').textContent = '$' + balance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('deposits').textContent = '$' + totalDeposits.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('interest').textContent = '$' + interestEarned.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free fraction calculator - Add, subtract, multiply, and divide fractions. Simplify fractions and convert to decimals.">
+    <meta name="keywords" content="fraction calculator, add fractions, subtract fractions, multiply fractions, divide fractions, simplify fractions">
+    <title>Fraction Calculator - Add, Subtract, Multiply, Divide | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/fraction-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html#math">Math</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Fraction Calculator</h1>
+            <p class="calculator-description">Add, subtract, multiply, and divide fractions</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Fraction Operations</h3>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <input type="number" id="num1" class="form-input" value="1" style="width: 60px;">
+                    <span>/</span>
+                    <input type="number" id="den1" class="form-input" value="2" style="width: 60px;">
+                </div>
+                <div class="form-group"><label class="form-label">Operation</label>
+                    <select id="operation" class="form-select">
+                        <option value="+">Add (+)</option>
+                        <option value="-">Subtract (-)</option>
+                        <option value="*">Multiply (×)</option>
+                        <option value="/">Divide (÷)</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <input type="number" id="num2" class="form-input" value="1" style="width: 60px;">
+                    <span>/</span>
+                    <input type="number" id="den2" class="form-input" value="4" style="width: 60px;">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Result</h3>
+                <div class="result-item"><div class="result-label">Answer</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #3b82f6;">1/2</div></div>
+                <div class="result-item"><div class="result-label">Decimal</div><div class="result-value" id="decimal">0.5</div></div>
+                <div class="result-item"><div class="result-label">Mixed Number</div><div class="result-value" id="mixed">1/2</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Fraction Operations</h2>
+            <p>Fractions represent parts of a whole. Operations follow specific rules to maintain mathematical accuracy.</p>
+            <h2>How to Calculate Fractions</h2>
+            <h3>Addition & Subtraction</h3>
+            <p>Find common denominator, then add/subtract numerators: 1/4 + 1/2 = 1/4 + 2/4 = 3/4</p>
+            <h3>Multiplication</h3>
+            <p>Multiply numerators together and denominators together: 1/2 × 3/4 = 3/8</p>
+            <h3>Division</h3>
+            <p>Flip the second fraction and multiply: 1/2 ÷ 1/4 = 1/2 × 4/1 = 4/2 = 2</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+        function simplify(num, den) {
+            const g = gcd(Math.abs(num), Math.abs(den));
+            return [num / g, den / g];
+        }
+        function calculate() {
+            let n1 = parseInt(document.getElementById('num1').value);
+            let d1 = parseInt(document.getElementById('den1').value);
+            let n2 = parseInt(document.getElementById('num2').value);
+            let d2 = parseInt(document.getElementById('den2').value);
+            const op = document.getElementById('operation').value;
+
+            if(d1 === 0 || d2 === 0) { alert('Denominator cannot be zero'); return; }
+
+            let resNum, resDen;
+            if(op === '+') { resNum = n1*d2 + n2*d1; resDen = d1*d2; }
+            else if(op === '-') { resNum = n1*d2 - n2*d1; resDen = d1*d2; }
+            else if(op === '*') { resNum = n1*n2; resDen = d1*d2; }
+            else { resNum = n1*d2; resDen = d1*n2; }
+
+            [resNum, resDen] = simplify(resNum, resDen);
+            if(resDen < 0) { resNum = -resNum; resDen = -resDen; }
+
+            const decimal = resNum / resDen;
+            const whole = Math.floor(Math.abs(decimal));
+            const fracNum = Math.abs(resNum) - whole * Math.abs(resDen);
+            const mixed = whole > 0 && fracNum > 0 ? (resNum < 0 ? '-' : '') + whole + ' ' + fracNum + '/' + Math.abs(resDen) : resNum + '/' + resDen;
+
+            document.getElementById('result').textContent = resNum + '/' + resDen;
+            document.getElementById('decimal').textContent = decimal.toFixed(4);
+            document.getElementById('mixed').textContent = mixed;
+        }
+        document.querySelectorAll('input, select').forEach(el => el.addEventListener('change', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>
