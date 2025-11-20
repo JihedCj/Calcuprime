@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free one rep max calculator - Calculate your 1RM for strength training. Get training percentages and recommendations.">
-    <meta name="keywords" content="one rep max calculator, 1rm calculator, strength calculator, max lift calculator, training percentages">
+    <meta name="description" content="Free one rep max calculator - Calculate your 1RM for strength training using Epley and Brzycki formulas. Get training percentages and weight recommendations for all rep ranges.">
+    <meta name="keywords" content="one rep max calculator, 1rm calculator, strength calculator, max lift calculator, training percentages, powerlifting">
     <title>One Rep Max Calculator | CalcuPrime</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="canonical" href="https://calcuprime.com/calculators/one-rep-max-calculator.html">
@@ -20,36 +20,200 @@
     <main class="calculator-container">
         <div class="calculator-header">
             <h1 class="calculator-title">One Rep Max Calculator</h1>
-            <p class="calculator-description">Calculate one rep maximum</p>
+            <p class="calculator-description">Calculate your 1RM and training percentages for optimal strength programming</p>
         </div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs">
-                <h3>Calculator Input</h3>
-                <div class="form-group"><label for="input1" class="form-label">Value 1</label><input type="number" id="input1" class="form-input" value="100" min="0" step="1"></div>
-                <div class="form-group"><label for="input2" class="form-label">Value 2</label><input type="number" id="input2" class="form-input" value="5" min="0" step="0.1"></div>
-                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+                <h3>Lift Information</h3>
+                <div class="form-group">
+                    <label for="exercise" class="form-label">Exercise</label>
+                    <select id="exercise" class="form-input">
+                        <option value="bench">Bench Press</option>
+                        <option value="squat">Squat</option>
+                        <option value="deadlift">Deadlift</option>
+                        <option value="overhead">Overhead Press</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="weight" class="form-label">Weight Lifted (lbs)</label>
+                    <input type="number" id="weight" class="form-input" value="225" min="1" step="5">
+                </div>
+                <div class="form-group">
+                    <label for="reps" class="form-label">Reps Completed</label>
+                    <input type="number" id="reps" class="form-input" value="5" min="1" max="12" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="formula" class="form-label">Formula</label>
+                    <select id="formula" class="form-input">
+                        <option value="epley">Epley (most common)</option>
+                        <option value="brzycki">Brzycki (conservative)</option>
+                        <option value="average">Average of Both</option>
+                    </select>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate 1RM</button>
             </div>
             <div class="calculator-results">
-                <h3>Results</h3>
-                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+                <h3>Your Estimated 1RM</h3>
+                <div class="result-item">
+                    <div class="result-label">One Rep Max</div>
+                    <div class="result-value" id="oneRepMax" style="font-size: 2.5rem; color: #10b981;">0 lbs</div>
+                </div>
+                <h3 style="margin-top: 2rem;">Training Percentages</h3>
+                <div class="result-item">
+                    <div class="result-label">95% (1-2 reps)</div>
+                    <div class="result-value" id="pct95">0 lbs</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">90% (2-4 reps)</div>
+                    <div class="result-value" id="pct90">0 lbs</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">85% (4-6 reps)</div>
+                    <div class="result-value" id="pct85">0 lbs</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">80% (6-8 reps)</div>
+                    <div class="result-value" id="pct80">0 lbs</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">75% (8-10 reps)</div>
+                    <div class="result-value" id="pct75">0 lbs</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">70% (10-12 reps)</div>
+                    <div class="result-value" id="pct70">0 lbs</div>
+                </div>
             </div>
         </div>
         <div class="content-section">
-            <h2>How to Use This Calculator</h2>
-            <p>Enter your values above to get instant, accurate calculations. Our One Rep Max Calculator provides reliable results for your needs.</p>
-            <h2>Understanding Your Results</h2>
-            <p>The calculator processes your inputs using proven formulas to deliver accurate results you can trust for planning and decision-making.</p>
+            <h2>What is One Rep Max (1RM)?</h2>
+            <p>Your one rep max (1RM) is the maximum weight you can lift for a single repetition of a given exercise with proper form. It represents the peak of your absolute strength for that specific movement and serves as the foundation for programming effective strength training routines. Whether you're a powerlifter preparing for competition, a CrossFit athlete working on Olympic lifts, or a general fitness enthusiast tracking progress, knowing your 1RM provides an objective benchmark for measuring strength gains and structuring progressive overload.</p>
+
+            <p>Rather than testing your actual 1RM—which carries injury risk and requires significant recovery—this calculator estimates your 1RM based on submaximal lifts. By lifting a moderate weight for multiple repetitions, we can reliably predict your single-rep maximum using validated formulas developed through decades of strength training research.</p>
+
+            <h2>How 1RM Formulas Work</h2>
+            <p>Several mathematical formulas estimate 1RM from submaximal lifts. The two most widely used and validated are:</p>
+
+            <p><strong>Epley Formula (1985):</strong> 1RM = Weight × (1 + Reps/30). This is the most commonly used formula in strength training circles and tends to be accurate across a wide range of rep ranges. For example, if you lift 225 lbs for 5 reps, the Epley formula estimates your 1RM at 225 × (1 + 5/30) = 225 × 1.167 = 263 lbs. The Epley formula slightly favors higher rep ranges and is generally optimistic in its estimates.</p>
+
+            <p><strong>Brzycki Formula (1993):</strong> 1RM = Weight × (36 / (37 - Reps)). This formula tends to be more conservative and is particularly accurate for lower rep ranges (1-6 reps). Using the same example of 225 lbs for 5 reps, Brzycki estimates 225 × (36 / (37 - 5)) = 225 × 1.125 = 253 lbs. The Brzycki formula is often preferred by powerlifters who work primarily in lower rep ranges.</p>
+
+            <p>Both formulas lose accuracy beyond 10 repetitions. High-rep sets (12+ reps) involve significant muscular endurance rather than pure strength, making 1RM predictions less reliable. For best results, use weights you can lift for 3-8 repetitions.</p>
+
+            <h2>Why 1RM Matters for Training</h2>
+            <p>Knowing your 1RM enables percentage-based training, the cornerstone of effective strength programming. Different training adaptations occur at different percentages of your 1RM:</p>
+
+            <p><strong>90-100% (1-3 reps):</strong> Maximum strength and neural adaptation. This range develops the nervous system's ability to recruit high-threshold motor units and generate maximal force. Used primarily by powerlifters, Olympic weightlifters, and athletes requiring peak strength. High injury risk and CNS fatigue demand careful programming.</p>
+
+            <p><strong>80-90% (4-6 reps):</strong> Strength with moderate volume. This range balances heavy loading with enough volume to accumulate training stimulus. Commonly used in intermediate and advanced strength programs for compound movements. Provides excellent strength gains with manageable fatigue and injury risk.</p>
+
+            <p><strong>70-80% (6-10 reps):</strong> Hypertrophy and strength combination. This range optimally balances mechanical tension, metabolic stress, and muscle damage—the three mechanisms of muscle growth. Most bodybuilding and general strength programs center on this range. Sustainable for high weekly volume.</p>
+
+            <p><strong>60-70% (10-15 reps):</strong> Muscular endurance and hypertrophy. Lighter loads with higher reps develop work capacity and metabolic conditioning while still promoting muscle growth. Useful for deload weeks, technique refinement, and high-volume accumulation phases. Lower injury risk makes this range ideal for beginners.</p>
+
+            <h2>Testing Your 1RM Safely</h2>
+            <p>While this calculator eliminates the need for true 1RM testing, some situations warrant an actual max attempt—powerlifting competitions, ego satisfaction, or validation of estimates. Follow these protocols for safe 1RM testing:</p>
+
+            <p><strong>Proper Warm-Up:</strong> Begin with 5-10 minutes of general movement (rowing, cycling, dynamic stretching). Perform specific warm-up sets: 8-10 reps at 50% estimated 1RM, 5-6 reps at 70%, 3-4 reps at 80%, 1-2 reps at 90%, 1 rep at 95%. Rest 2-3 minutes between sets. This progressive loading primes neuromuscular pathways without inducing fatigue.</p>
+
+            <p><strong>Use a Spotter:</strong> For bench press, overhead press, and squats, always use competent spotters who understand proper assist technique. For deadlifts, ensure safety bars or platforms are set correctly. Never attempt maximal lifts alone unless using equipment with appropriate safety mechanisms (power rack with spotter arms, safety bars set at proper height).</p>
+
+            <p><strong>Perfect Form:</strong> Maximal attempts with compromised technique invite injury. If you cannot maintain proper form, the weight is too heavy. Lower back rounding on deadlifts, knee valgus on squats, or excessive arch on bench press all indicate excessive load. A slightly lower weight lifted with excellent form is safer and more productive than a form-breakdown max.</p>
+
+            <p><strong>Know When to Stop:</strong> If a weight doesn't move within 2-3 seconds of maximal effort, it's your max for that day. Grinding through 10-second reps increases injury risk without benefit. Accept the weight that moves with maximal but controlled speed.</p>
+
+            <h2>Using Training Percentages Effectively</h2>
+            <p>Once you know your 1RM, percentage-based programming becomes straightforward. Common programming schemes include:</p>
+
+            <p><strong>Linear Periodization:</strong> Progress from higher volume/lower intensity to lower volume/higher intensity over weeks or months. Week 1-4: 4×8 at 70%, Week 5-8: 4×6 at 80%, Week 9-12: 5×3 at 87%, Week 13: Test new 1RM. This traditional approach works well for beginners but becomes less effective as training age increases.</p>
+
+            <p><strong>Daily Undulating Periodization (DUP):</strong> Vary intensity and volume workout to workout. Monday: 4×6 at 80%, Wednesday: 5×10 at 65%, Friday: 6×3 at 87%. This approach provides varied stimuli while managing fatigue and is highly effective for intermediate and advanced lifters.</p>
+
+            <p><strong>Block Periodization:</strong> Dedicate training blocks to specific adaptations. Hypertrophy block (4 weeks of 70-75% for 8-12 reps), Strength block (4 weeks of 80-85% for 4-6 reps), Peaking block (3 weeks of 87-95% for 1-3 reps), Deload week, Competition or test. This structured approach is used by competitive strength athletes.</p>
+
+            <h2>Progression Strategies</h2>
+            <p>Strength gains require progressive overload—gradually increasing training stress over time. Several methods enable progression:</p>
+
+            <p><strong>Linear Progression:</strong> Add weight to the bar each workout or week. Effective for beginners who can add 5-10 lbs to lower body lifts and 2.5-5 lbs to upper body lifts weekly. Eventually, linear progression stalls as adaptation rates slow, typically after 3-9 months of consistent training.</p>
+
+            <p><strong>Double Progression:</strong> Add reps before adding weight. If your program calls for 3×8 at a given weight, progress to 3×9, then 3×10, then increase weight by 5-10 lbs and return to 3×8. This approach works well for intermediate lifters and bodybuilders.</p>
+
+            <p><strong>Percentage Increases:</strong> Increase your working weight percentages based on tested or estimated 1RM increases every 4-12 weeks. Test new 1RM, recalculate training percentages, continue program with heavier loads. This approach suits intermediate and advanced lifters using percentage-based programs.</p>
+
+            <h2>Exercise-Specific Considerations</h2>
+            <p><strong>Squat:</strong> High-bar squats typically allow 5-10% more weight than low-bar due to different leverages and muscle recruitment. Front squats typically range 80-85% of back squat max. Squat 1RM testing requires excellent core stability and confidence. Most coaches recommend estimating from sets of 3-5 rather than true 1RM attempts due to injury risk.</p>
+
+            <p><strong>Bench Press:</strong> The most commonly tested lift and generally the safest for true 1RM attempts with proper spotting. Bench press responds well to percentage-based programming. Close-grip bench typically sits at 85-90% of standard bench max.</p>
+
+            <p><strong>Deadlift:</strong> Conventional deadlifts typically exceed squat maxes by 10-20% for most lifters. Sumo deadlifts range 95-105% of conventional deadlift depending on individual leverages. Deadlift 1RM testing is relatively safe as you can simply drop the weight, but form breakdown (rounded back) should immediately halt attempts.</p>
+
+            <p><strong>Overhead Press:</strong> Typically 60-70% of bench press max. Strict overhead press 1RM testing is safe but requires excellent shoulder mobility. Push press allows 10-20% more weight than strict press due to leg drive.</p>
+
+            <h2>Common Mistakes with 1RM Training</h2>
+            <p><strong>Testing Too Frequently:</strong> True 1RM attempts are taxing on the nervous system and joints. Testing monthly or more often disrupts training progression and increases injury risk. Test 1RM every 8-16 weeks maximum, or simply estimate from training lifts.</p>
+
+            <p><strong>Training Too Heavy Too Often:</strong> Constantly working at 90%+ of 1RM produces minimal volume and excessive fatigue. Most strength development occurs at 70-85% intensity. Reserve 90%+ work for peaking phases or occasional heavy singles for neural adaptation.</p>
+
+            <p><strong>Ignoring Technique:</strong> Chasing weight at the expense of form eventually leads to injury. If your estimated 1RM increases but your form deteriorates, you're not getting stronger—you're lifting more weight with worse technique. Prioritize movement quality over numbers.</p>
+
+            <p><strong>Not Adjusting for Fatigue:</strong> Your 1RM fluctuates based on sleep, nutrition, stress, and accumulated training fatigue. A weight that felt manageable last week might feel impossibly heavy today. Listen to your body and adjust working weights down 5-10% on bad days rather than forcing prescribed percentages.</p>
+
+            <h2>When to Retest Your 1RM</h2>
+            <p>Retest or recalculate your 1RM when:</p>
+
+            <p><strong>Completing Training Blocks:</strong> After 8-12 weeks of focused training, retest to assess progress and recalculate percentages. This prevents working with outdated 1RMs that lead to under-training.</p>
+
+            <p><strong>Lifts Feel Easy:</strong> If your prescribed 80% sets feel like 70% effort, your estimated 1RM is probably too low. Perform an AMRAP (as many reps as possible) set with your working weight and recalculate.</p>
+
+            <p><strong>Before Competition:</strong> Competitive powerlifters and weightlifters should test within 2-3 weeks of competition to dial in attempts. This isn't a true max—more like a confident opener to confirm strength levels.</p>
+
+            <h2>The Bottom Line</h2>
+            <p>Your one rep max is a tool, not a goal in itself (unless you're a competitive powerlifter). Use 1RM estimates to guide intelligent training decisions, structure progressive overload, and track long-term strength development. Focus on consistent execution of well-designed percentage-based programs rather than frequent max attempts. Progress in training weights at 70-85% intensity correlates strongly with 1RM improvement while minimizing injury risk and recovery demands. Calculate your 1RM, program appropriately, train consistently, and strength gains will follow.</p>
         </div>
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
     <script src="../js/main.js"></script>
     <script>
         function calculate() {
-            const input1 = parseFloat(document.getElementById('input1').value);
-            const input2 = parseFloat(document.getElementById('input2').value);
-            const result = input1 * input2;
-            document.getElementById('result').textContent = result.toFixed(2);
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+            const reps = parseInt(document.getElementById('reps').value) || 1;
+            const formula = document.getElementById('formula').value;
+
+            let oneRepMax;
+
+            if (formula === 'epley') {
+                // Epley formula: 1RM = weight × (1 + reps/30)
+                oneRepMax = weight * (1 + reps / 30);
+            } else if (formula === 'brzycki') {
+                // Brzycki formula: 1RM = weight × (36 / (37 - reps))
+                if (reps >= 37) {
+                    oneRepMax = weight * 2; // Fallback for high reps
+                } else {
+                    oneRepMax = weight * (36 / (37 - reps));
+                }
+            } else {
+                // Average of both formulas
+                const epley = weight * (1 + reps / 30);
+                const brzycki = reps >= 37 ? weight * 2 : weight * (36 / (37 - reps));
+                oneRepMax = (epley + brzycki) / 2;
+            }
+
+            // Round to nearest 5 lbs for practical use
+            oneRepMax = Math.round(oneRepMax / 5) * 5;
+
+            // Display 1RM
+            document.getElementById('oneRepMax').textContent = oneRepMax + ' lbs';
+
+            // Calculate and display training percentages
+            document.getElementById('pct95').textContent = Math.round(oneRepMax * 0.95 / 5) * 5 + ' lbs';
+            document.getElementById('pct90').textContent = Math.round(oneRepMax * 0.90 / 5) * 5 + ' lbs';
+            document.getElementById('pct85').textContent = Math.round(oneRepMax * 0.85 / 5) * 5 + ' lbs';
+            document.getElementById('pct80').textContent = Math.round(oneRepMax * 0.80 / 5) * 5 + ' lbs';
+            document.getElementById('pct75').textContent = Math.round(oneRepMax * 0.75 / 5) * 5 + ' lbs';
+            document.getElementById('pct70').textContent = Math.round(oneRepMax * 0.70 / 5) * 5 + ' lbs';
         }
+
         document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
         window.addEventListener('load', calculate);
     </script>
