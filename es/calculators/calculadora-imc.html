@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de IMC gratuita - Calcule su Índice de Masa Corporal al instante. Obtenga su puntuación de IMC y categoría de salud con recomendaciones personalizadas.">
+    <meta name="keywords" content="calculadora imc, índice de masa corporal, tabla imc, peso saludable, calculadora de peso, calculadora obesidad">
+
+    <title>Calculadora de IMC (Índice de Masa Corporal) - Gratis | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-imc.html">
+
+    <!-- Hreflang tags -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/bmi-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-imc.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/bmi-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finanzas">Finanzas</a></li>
+                <li><a href="../index.html#salud">Salud</a></li>
+                <li><a href="../index.html#convertidores">Convertidores</a></li>
+                <li><a href="../index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de IMC (Índice de Masa Corporal)</h1>
+            <p class="calculator-description">Calcule su Índice de Masa Corporal (IMC) y descubra su rango de peso saludable</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Su Información</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Sistema de Unidades</label>
+                    <select id="unitSystem" class="form-select">
+                        <option value="metric">Métrico (kg, cm)</option>
+                        <option value="imperial">Imperial (lbs, pulgadas)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="age" class="form-label">Edad (años)</label>
+                    <input type="number" id="age" class="form-input" value="30" min="2" max="120">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender" class="form-label">Sexo</label>
+                    <select id="gender" class="form-select">
+                        <option value="male">Masculino</option>
+                        <option value="female">Femenino</option>
+                    </select>
+                </div>
+
+                <div id="metricInputs">
+                    <div class="form-group">
+                        <label for="heightCm" class="form-label">Estatura (cm)</label>
+                        <input type="number" id="heightCm" class="form-input" value="170" min="50" max="250">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weightKg" class="form-label">Peso (kg)</label>
+                        <input type="number" id="weightKg" class="form-input" value="70" min="20" max="300" step="0.1">
+                    </div>
+                </div>
+
+                <div id="imperialInputs" style="display: none;">
+                    <div class="form-group">
+                        <label for="heightFt" class="form-label">Estatura (pies)</label>
+                        <input type="number" id="heightFt" class="form-input" value="5" min="3" max="8">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="heightIn" class="form-label">Estatura (pulgadas)</label>
+                        <input type="number" id="heightIn" class="form-input" value="7" min="0" max="11">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weightLbs" class="form-label">Peso (lbs)</label>
+                        <input type="number" id="weightLbs" class="form-input" value="154" min="44" max="660" step="0.1">
+                    </div>
+                </div>
+
+                <button onclick="calculateBMI()" class="btn-calculate">Calcular IMC</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Sus Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Su IMC</div>
+                    <div class="result-value" id="bmiValue" style="font-size: 3rem;">0.0</div>
+                </div>
+
+                <div class="result-item" style="text-align: center;">
+                    <div id="bmiCategory" style="font-size: 1.5rem; font-weight: 600; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        Ingrese sus datos
+                    </div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Rango de Peso Saludable</div>
+                    <div class="result-value" id="healthyRange" style="font-size: 1.5rem;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Peso a Perder/Ganar</div>
+                    <div class="result-value" id="weightChange" style="font-size: 1.3rem;">-</div>
+                </div>
+
+                <div id="bmiChart" style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Escala de IMC</h4>
+                    <div style="display: flex; height: 30px; border-radius: 5px; overflow: hidden; margin-bottom: 10px;">
+                        <div style="flex: 1; background: #60a5fa; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white;">Bajo peso</div>
+                        <div style="flex: 1; background: #34d399; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white;">Normal</div>
+                        <div style="flex: 1; background: #fbbf24; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white;">Sobrepeso</div>
+                        <div style="flex: 1; background: #f87171; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white;">Obesidad</div>
+                    </div>
+                    <div style="font-size: 0.75rem; color: #6b7280; text-align: center;">
+                        &lt;18.5 &nbsp;&nbsp;&nbsp; 18.5-24.9 &nbsp;&nbsp;&nbsp; 25-29.9 &nbsp;&nbsp;&nbsp; ≥30
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el IMC (Índice de Masa Corporal)?</h2>
+            <p>El Índice de Masa Corporal (IMC) es un cálculo simple que utiliza la estatura y el peso de una persona. La fórmula es IMC = kg/m² donde kg es el peso de una persona en kilogramos y m² es su estatura en metros al cuadrado. Un IMC de 25.0 o más indica sobrepeso, mientras que el rango saludable es de 18.5 a 24.9.</p>
+
+            <h2>Cómo Usar la Calculadora de IMC</h2>
+            <ol>
+                <li><strong>Elija su sistema de unidades:</strong> Seleccione Métrico (kg, cm) o Imperial (lbs, pulgadas)</li>
+                <li><strong>Ingrese su edad:</strong> Su edad ayuda a proporcionar contexto para sus resultados de IMC</li>
+                <li><strong>Seleccione su sexo:</strong> El sexo afecta los rangos de peso ideal</li>
+                <li><strong>Ingrese su estatura:</strong> Introduzca su estatura en centímetros o pies y pulgadas</li>
+                <li><strong>Ingrese su peso:</strong> Introduzca su peso actual en kilogramos o libras</li>
+                <li><strong>Calcular:</strong> Haga clic en el botón Calcular IMC para ver sus resultados</li>
+            </ol>
+
+            <h2>Interpretación de sus Resultados de IMC</h2>
+            <h3>Categorías de IMC</h3>
+            <ul>
+                <li><strong>Bajo peso (IMC &lt; 18.5):</strong> Puede indicar desnutrición, trastorno alimentario u otros problemas de salud. Consulte a un profesional de la salud.</li>
+                <li><strong>Peso normal (IMC 18.5-24.9):</strong> Indica un rango de peso saludable para la mayoría de los adultos. Manténgalo con una dieta equilibrada y ejercicio.</li>
+                <li><strong>Sobrepeso (IMC 25-29.9):</strong> Superior al peso ideal. Puede aumentar el riesgo de problemas de salud. Considere cambios en el estilo de vida.</li>
+                <li><strong>Obesidad (IMC ≥ 30):</strong> Riesgos de salud significativamente elevados. Se recomienda consulta médica para un plan de manejo del peso.</li>
+            </ul>
+
+            <h2>Fórmula del IMC</h2>
+            <p>El cálculo del IMC utiliza las siguientes fórmulas:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                <strong>Métrico:</strong> IMC = peso(kg) / [estatura(m)]²<br>
+                <strong>Imperial:</strong> IMC = [peso(lbs) / estatura(pulgadas)²] × 703
+            </p>
+
+            <h2>Limitaciones del IMC</h2>
+            <p>Aunque el IMC es una herramienta de detección útil, tiene limitaciones:</p>
+            <ul>
+                <li><strong>No mide la grasa corporal directamente:</strong> Dos personas con el mismo IMC pueden tener composiciones corporales muy diferentes</li>
+                <li><strong>No considera la masa muscular:</strong> Los atletas pueden tener un IMC alto debido al músculo, no a la grasa</li>
+                <li><strong>Diferencias de edad:</strong> Los adultos mayores naturalmente tienen más grasa corporal que los adultos más jóvenes con el mismo IMC</li>
+                <li><strong>Diferencias de sexo:</strong> Las mujeres típicamente tienen más grasa corporal que los hombres con el mismo IMC</li>
+                <li><strong>Variaciones étnicas:</strong> Los riesgos de salud asociados con el IMC varían entre diferentes grupos étnicos</li>
+            </ul>
+
+            <h2>Consejos para el Manejo Saludable del Peso</h2>
+            <ul>
+                <li><strong>Consuma una dieta balanceada:</strong> Enfóquese en alimentos integrales, frutas, verduras, proteínas magras y granos enteros</li>
+                <li><strong>Haga ejercicio regularmente:</strong> Procure 150 minutos de actividad aeróbica moderada por semana</li>
+                <li><strong>Manténgase hidratado:</strong> Beba abundante agua durante todo el día</li>
+                <li><strong>Duerma lo suficiente:</strong> 7-9 horas por noche apoya un metabolismo saludable</li>
+                <li><strong>Maneje el estrés:</strong> El estrés alto puede conducir al aumento de peso</li>
+                <li><strong>Monitoree su progreso:</strong> Controle su peso y medidas regularmente</li>
+                <li><strong>Sea paciente:</strong> La pérdida de peso saludable es de 0.5-1 kg por semana</li>
+            </ul>
+
+            <h2>Cuándo Buscar Asesoramiento Médico</h2>
+            <p>Consulte a un profesional de la salud si:</p>
+            <ul>
+                <li>Su IMC está por debajo de 18.5 o por encima de 30</li>
+                <li>Está experimentando pérdida o aumento de peso rápido</li>
+                <li>Tiene inquietudes sobre su peso o salud</li>
+                <li>Está planeando cambios significativos en su dieta o ejercicio</li>
+                <li>Tiene condiciones de salud existentes afectadas por el peso</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+            <h3>¿Es el IMC preciso para todos?</h3>
+            <p>El IMC es una herramienta de detección general y puede no ser preciso para atletas, fisicoculturistas, mujeres embarazadas, personas de edad avanzada o ciertos grupos étnicos. Debe utilizarse junto con otras evaluaciones de salud.</p>
+
+            <h3>¿Cuál es un IMC saludable?</h3>
+            <p>Para la mayoría de los adultos, un IMC entre 18.5 y 24.9 se considera saludable. Sin embargo, este rango puede variar según la edad, el sexo y la etnia.</p>
+
+            <h3>¿Con qué frecuencia debo verificar mi IMC?</h3>
+            <p>Verificar su IMC mensual o trimestralmente es suficiente para la mayoría de las personas. Enfóquese más en hábitos saludables consistentes que en mediciones frecuentes.</p>
+
+            <h3>¿Pueden los niños usar calculadoras de IMC?</h3>
+            <p>Los niños y adolescentes necesitan cálculos especializados de percentiles de IMC por edad. Use una calculadora de IMC pediátrica o consulte con un pediatra.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Calculadoras Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="calculadora-calorias.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calculadora de Calorías</h3>
+                    <p class="calc-description">Calcule las necesidades calóricas diarias</p>
+                </a>
+
+                <a href="calculadora-peso-ideal.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Calculadora de Peso Ideal</h3>
+                    <p class="calc-description">Encuentre su peso corporal ideal</p>
+                </a>
+
+                <a href="calculadora-grasa-corporal.html" class="calc-card">
+                    <div class="calc-icon">📊</div>
+                    <h3 class="calc-title">Calculadora de Grasa Corporal</h3>
+                    <p class="calc-description">Estime el porcentaje de grasa corporal</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Language detector script
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const currentPath = window.location.pathname;
+
+            // If user's browser is set to English and they're on Spanish page, suggest English version
+            if (userLang.startsWith('en') && currentPath.includes('/es/')) {
+                const englishUrl = currentPath.replace('/es/', '/');
+
+                // Create notification banner
+                const banner = document.createElement('div');
+                banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: #3b82f6; color: white; padding: 12px 20px; text-align: center; z-index: 10000; font-size: 14px;';
+                banner.innerHTML = `
+                    <span>English version available. </span>
+                    <a href="${englishUrl}" style="color: white; text-decoration: underline; font-weight: 600;">Switch to English</a>
+                    <button onclick="this.parentElement.remove()" style="background: none; border: none; color: white; font-size: 20px; margin-left: 20px; cursor: pointer; padding: 0 10px;">&times;</button>
+                `;
+
+                // Only show if user hasn't dismissed it in this session
+                if (!sessionStorage.getItem('langBannerDismissed')) {
+                    document.body.insertBefore(banner, document.body.firstChild);
+                    banner.querySelector('button').addEventListener('click', function() {
+                        sessionStorage.setItem('langBannerDismissed', 'true');
+                    });
+                }
+            }
+        })();
+
+        // Unit system toggle
+        document.getElementById('unitSystem').addEventListener('change', function() {
+            const isMetric = this.value === 'metric';
+            document.getElementById('metricInputs').style.display = isMetric ? 'block' : 'none';
+            document.getElementById('imperialInputs').style.display = isMetric ? 'none' : 'block';
+        });
+
+        function calculateBMI() {
+            const unitSystem = document.getElementById('unitSystem').value;
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+
+            let heightM, weightKg;
+
+            if (unitSystem === 'metric') {
+                const heightCm = parseFloat(document.getElementById('heightCm').value);
+                weightKg = parseFloat(document.getElementById('weightKg').value);
+
+                if (!heightCm || !weightKg || heightCm <= 0 || weightKg <= 0) {
+                    alert('Por favor ingrese estatura y peso válidos');
+                    return;
+                }
+
+                heightM = heightCm / 100;
+            } else {
+                const heightFt = parseFloat(document.getElementById('heightFt').value);
+                const heightIn = parseFloat(document.getElementById('heightIn').value);
+                const weightLbs = parseFloat(document.getElementById('weightLbs').value);
+
+                if (!heightFt || !weightLbs || heightFt <= 0 || weightLbs <= 0) {
+                    alert('Por favor ingrese estatura y peso válidos');
+                    return;
+                }
+
+                const totalInches = (heightFt * 12) + heightIn;
+                heightM = totalInches * 0.0254;
+                weightKg = weightLbs * 0.453592;
+            }
+
+            // Calculate BMI
+            const bmi = weightKg / (heightM * heightM);
+
+            // Determine category and color
+            let category, color, advice;
+            if (bmi < 18.5) {
+                category = 'Bajo peso';
+                color = '#60a5fa';
+                advice = 'Puede necesitar aumentar de peso. Consulte a un profesional de la salud.';
+            } else if (bmi < 25) {
+                category = 'Peso Normal';
+                color = '#34d399';
+                advice = '¡Está en un rango de peso saludable. Continúe con el buen trabajo!';
+            } else if (bmi < 30) {
+                category = 'Sobrepeso';
+                color = '#fbbf24';
+                advice = 'Considere adoptar un estilo de vida más saludable con dieta y ejercicio.';
+            } else {
+                category = 'Obesidad';
+                color = '#f87171';
+                advice = 'Consulte a un profesional de la salud para un plan de manejo del peso.';
+            }
+
+            // Calculate healthy weight range (BMI 18.5-24.9)
+            const minHealthyWeight = 18.5 * heightM * heightM;
+            const maxHealthyWeight = 24.9 * heightM * heightM;
+
+            let healthyRangeText;
+            if (unitSystem === 'metric') {
+                healthyRangeText = `${minHealthyWeight.toFixed(1)} - ${maxHealthyWeight.toFixed(1)} kg`;
+            } else {
+                healthyRangeText = `${(minHealthyWeight * 2.20462).toFixed(1)} - ${(maxHealthyWeight * 2.20462).toFixed(1)} lbs`;
+            }
+
+            // Calculate weight to lose/gain
+            let weightChange = '';
+            if (bmi < 18.5) {
+                const toGain = minHealthyWeight - weightKg;
+                weightChange = unitSystem === 'metric'
+                    ? `Ganar ${toGain.toFixed(1)} kg`
+                    : `Ganar ${(toGain * 2.20462).toFixed(1)} lbs`;
+            } else if (bmi > 24.9) {
+                const toLose = weightKg - maxHealthyWeight;
+                weightChange = unitSystem === 'metric'
+                    ? `Perder ${toLose.toFixed(1)} kg`
+                    : `Perder ${(toLose * 2.20462).toFixed(1)} lbs`;
+            } else {
+                weightChange = '¡Está en un peso saludable!';
+            }
+
+            // Display results
+            document.getElementById('bmiValue').textContent = bmi.toFixed(1);
+            document.getElementById('bmiCategory').textContent = category;
+            document.getElementById('bmiCategory').style.backgroundColor = color;
+            document.getElementById('bmiCategory').style.color = 'white';
+            document.getElementById('healthyRange').textContent = healthyRangeText;
+            document.getElementById('weightChange').textContent = weightChange;
+
+            // Animate results
+            showResult('bmiValue');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateBMI);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', calculateBMI);
+    </script>
+</body>
+</html>

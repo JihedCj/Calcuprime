@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadoras de Salud y Fitness - Herramientas en línea gratuitas para calcular IMC, necesidades calóricas diarias, fecha de parto y peso ideal. Obtén información personalizada de salud al instante.">
+    <meta name="keywords" content="calculadora salud, calculadora fitness, calculadora IMC, calculadora calorías, calculadora embarazo, calculadora peso ideal, herramientas fitness, herramientas salud">
+    <meta name="author" content="CalcuPrime">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Calculadoras de Salud y Fitness - Herramientas Gratuitas en Línea | CalcuPrime">
+    <meta property="og:description" content="Calcula IMC, necesidades calóricas, fecha de parto y peso ideal con nuestras calculadoras gratuitas de salud y fitness. Información personalizada para tu viaje de bienestar.">
+    <meta property="og:image" content="../../assets/og-image.jpg">
+    <meta property="og:url" content="https://calcuprime.com/es/category/salud.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Calculadoras de Salud y Fitness - Herramientas Gratuitas en Línea | CalcuPrime">
+    <meta name="twitter:description" content="Calcula IMC, necesidades calóricas, fecha de parto y peso ideal con nuestras calculadoras gratuitas de salud y fitness.">
+
+    <!-- Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/category/health.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/category/salud.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/category/health.html">
+
+    <title>Calculadoras de Salud y Fitness - Herramientas Gratuitas en Línea | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/category/salud.html">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Calculadoras de Salud y Fitness",
+        "description": "Calculadoras gratuitas en línea de salud y fitness para IMC, necesidades calóricas, seguimiento del embarazo y cálculo de peso ideal",
+        "url": "https://calcuprime.com/es/category/salud.html",
+        "inLanguage": "es",
+        "mainEntity": [
+            {
+                "@type": "CalculatorTool",
+                "name": "Calculadora de IMC",
+                "description": "Calcula tu Índice de Masa Corporal y estado de salud",
+                "url": "https://calcuprime.com/es/calculators/calculadora-imc.html"
+            },
+            {
+                "@type": "CalculatorTool",
+                "name": "Calculadora de Calorías",
+                "description": "Calcula tus necesidades calóricas diarias y objetivos de peso",
+                "url": "https://calcuprime.com/es/calculators/calculadora-calorias.html"
+            },
+            {
+                "@type": "CalculatorTool",
+                "name": "Calculadora de Embarazo",
+                "description": "Calcula tu fecha de parto y semanas de embarazo",
+                "url": "https://calcuprime.com/es/calculators/calculadora-embarazo.html"
+            },
+            {
+                "@type": "CalculatorTool",
+                "name": "Calculadora de Peso Ideal",
+                "description": "Calcula tu rango de peso corporal ideal",
+                "url": "https://calcuprime.com/es/calculators/calculadora-peso-ideal.html"
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finance">Finanzas</a></li>
+                <li><a href="../../es/index.html#health">Salud</a></li>
+                <li><a href="../../es/index.html#converters">Conversores</a></li>
+                <li><a href="../../es/index.html#math">Matemáticas</a></li>
+                <li><a href="../../es/index.html#chemistry">Química</a></li>
+                <li><a href="../../es/index.html#everyday">Cotidiano</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Buscar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">&times;</button>
+            <input type="text" id="searchInput" placeholder="Buscar calculadoras..." class="search-input">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Calculadoras de Salud y Fitness</h1>
+            <p class="hero-subtitle">Herramientas gratuitas y precisas para rastrear tus métricas de salud, monitorear objetivos de fitness y tomar decisiones informadas sobre bienestar</p>
+        </div>
+    </section>
+
+    <!-- Category Overview -->
+    <section class="section">
+        <div class="container">
+            <div class="content-section">
+                <h2>Acerca de Nuestras Calculadoras de Salud</h2>
+                <p>Bienvenido a la colección completa de calculadoras de salud y fitness de CalcuPrime. Ya sea que estés comenzando un viaje de fitness, monitoreando tu peso o rastreando un embarazo, nuestras herramientas proporcionan cálculos rápidos y precisos para ayudarte a entender mejor tu salud. Todas las calculadoras están diseñadas con las mejores prácticas médicas en mente y proporcionan resultados basados científicamente.</p>
+
+                <h3>¿Por Qué Usar Calculadoras de Salud?</h3>
+                <ul>
+                    <li><strong>Rastrea Tu Progreso:</strong> Monitorea cambios en tus métricas de salud a lo largo del tiempo para ver resultados reales de tus esfuerzos</li>
+                    <li><strong>Establece Objetivos Realistas:</strong> Comprende tus métricas de salud básicas para establecer objetivos de fitness y bienestar alcanzables</li>
+                    <li><strong>Toma Decisiones Informadas:</strong> Obtén información basada en datos para apoyar elecciones de estilo de vida y discusiones de salud con profesionales</li>
+                    <li><strong>Información Personalizada:</strong> Recibe recomendaciones adaptadas basadas en tus métricas y circunstancias de salud individuales</li>
+                    <li><strong>Motivación:</strong> Celebra el progreso con datos medibles que muestran que tu compromiso con el bienestar está dando resultados</li>
+                    <li><strong>Apoyo Profesional:</strong> Comparte los resultados de la calculadora con médicos y nutricionistas para consultas más informadas</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Calculators Grid -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 2rem;">Nuestras Calculadoras de Salud</h2>
+            <div class="calculator-grid">
+                <!-- BMI Calculator Card -->
+                <a href="../../es/calculators/calculadora-imc.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Calculadora de IMC</h3>
+                    <p class="calc-description">Calcula tu Índice de Masa Corporal y descubre tu categoría de salud. Obtén recomendaciones para rangos de peso saludables.</p>
+                    <div style="margin-top: auto; color: #2563eb; font-weight: 600; font-size: 0.9rem;">Más información →</div>
+                </a>
+
+                <!-- Calorie Calculator Card -->
+                <a href="../../es/calculators/calculadora-calorias.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calculadora de Calorías</h3>
+                    <p class="calc-description">Determina tus necesidades calóricas diarias según tu nivel de actividad. Planifica la nutrición para pérdida, mantenimiento o ganancia de peso.</p>
+                    <div style="margin-top: auto; color: #2563eb; font-weight: 600; font-size: 0.9rem;">Más información →</div>
+                </a>
+
+                <!-- Pregnancy Calculator Card -->
+                <a href="../../es/calculators/calculadora-embarazo.html" class="calc-card">
+                    <div class="calc-icon">👶</div>
+                    <h3 class="calc-title">Calculadora de Embarazo</h3>
+                    <p class="calc-description">Calcula tu fecha de parto y semana actual de embarazo. Rastrea el progreso de tu embarazo e hitos importantes.</p>
+                    <div style="margin-top: auto; color: #2563eb; font-weight: 600; font-size: 0.9rem;">Más información →</div>
+                </a>
+
+                <!-- Ideal Weight Calculator Card -->
+                <a href="../../es/calculators/calculadora-peso-ideal.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Calculadora de Peso Ideal</h3>
+                    <p class="calc-description">Calcula tu rango de peso corporal ideal basado en altura y estructura corporal. Obtén objetivos de salud personalizados.</p>
+                    <div style="margin-top: auto; color: #2563eb; font-weight: 600; font-size: 0.9rem;">Más información →</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Calculator Descriptions -->
+    <section class="section">
+        <div class="container">
+            <div class="content-section">
+                <h2>Calculadora de IMC - Tu Índice de Masa Corporal</h2>
+                <p>La Calculadora de IMC (Índice de Masa Corporal) es una de las métricas de salud más utilizadas. Proporciona una medida numérica simple de tu peso corporal en relación con tu altura, ayudándote a comprender si estás en un rango de peso saludable. El IMC se calcula como tu peso en kilogramos dividido por el cuadrado de tu altura en metros (kg/m²).</p>
+
+                <h3>Lo Que Te Dice el IMC:</h3>
+                <ul>
+                    <li><strong>IMC &lt; 18.5:</strong> Bajo peso - Puede necesitar aumentar de peso</li>
+                    <li><strong>IMC 18.5 - 24.9:</strong> Peso Normal - Rango saludable para la mayoría de los adultos</li>
+                    <li><strong>IMC 25 - 29.9:</strong> Sobrepeso - Puede beneficiarse de cambios en el estilo de vida</li>
+                    <li><strong>IMC ≥ 30:</strong> Obesidad - Mayores riesgos para la salud; considera consulta médica</li>
+                </ul>
+
+                <h3>Características de la Calculadora de IMC:</h3>
+                <ul>
+                    <li>Soporte para unidades métricas (kg, cm) e imperiales (lbs, pulgadas)</li>
+                    <li>Cálculo personalizado de rango de peso saludable</li>
+                    <li>Escala visual de IMC para fácil comprensión</li>
+                    <li>Consideraciones específicas de edad y género</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Calculadora de Calorías - Tus Necesidades Energéticas Diarias</h2>
+                <p>La Calculadora de Calorías te ayuda a determinar tus requerimientos calóricos diarios basados en tus datos personales y nivel de actividad. Esta información es esencial para la gestión del peso, ya sea que tu objetivo sea perder peso, mantener tu peso actual o ganar masa muscular.</p>
+
+                <h3>Cómo Funciona:</h3>
+                <ul>
+                    <li>Calcula tu Tasa Metabólica Basal (TMB) - calorías quemadas en reposo</li>
+                    <li>Aplica tu nivel de actividad para determinar el Gasto Energético Total Diario (GETD)</li>
+                    <li>Sugiere ingesta calórica para diferentes objetivos de peso</li>
+                    <li>Tiene en cuenta edad, género, altura, peso y nivel de actividad</li>
+                </ul>
+
+                <h3>Niveles de Actividad:</h3>
+                <ul>
+                    <li><strong>Sedentario:</strong> Poco o ningún ejercicio (TMB × 1.2)</li>
+                    <li><strong>Ligeramente Activo:</strong> Ejercicio ligero 1-3 días/semana (TMB × 1.375)</li>
+                    <li><strong>Moderadamente Activo:</strong> Ejercicio moderado 3-5 días/semana (TMB × 1.55)</li>
+                    <li><strong>Muy Activo:</strong> Ejercicio intenso 6-7 días/semana (TMB × 1.725)</li>
+                    <li><strong>Extremadamente Activo:</strong> Ejercicio muy intenso/trabajo físico (TMB × 1.9)</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Calculadora de Embarazo - Rastreando Tu Viaje</h2>
+                <p>La Calculadora de Embarazo está diseñada para ayudar a las futuras madres a rastrear su viaje de embarazo. Al ingresar tu último período menstrual o fecha estimada de parto, puedes conocer instantáneamente tu semana actual de embarazo, fecha estimada de parto e hitos importantes.</p>
+
+                <h3>Información Clave:</h3>
+                <ul>
+                    <li>Semana y trimestre actual de embarazo</li>
+                    <li>Fecha estimada de parto (calculada como 40 semanas desde el UPM)</li>
+                    <li>Días hasta tu fecha de parto</li>
+                    <li>Información de etapa de desarrollo fetal</li>
+                    <li>Horario recomendado de cuidado prenatal</li>
+                </ul>
+
+                <h3>Hitos del Embarazo:</h3>
+                <ul>
+                    <li><strong>Primer Trimestre (Semanas 1-13):</strong> Desarrollo de órganos, aumento de hormonas, posibles náuseas matutinas</li>
+                    <li><strong>Segundo Trimestre (Semanas 14-27):</strong> Vientre visible, movimientos del bebé, reducción de náuseas</li>
+                    <li><strong>Tercer Trimestre (Semanas 28-40):</strong> Crecimiento rápido, preparación para el nacimiento, aumento de molestias</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Calculadora de Peso Ideal - Tu Peso Objetivo</h2>
+                <p>La Calculadora de Peso Ideal utiliza fórmulas probadas para determinar el rango de peso ideal para tu altura, edad y estructura corporal. Esto te ayuda a establecer objetivos de peso realistas y saludables que son apropiados para tus características individuales.</p>
+
+                <h3>Métodos de Cálculo:</h3>
+                <ul>
+                    <li><strong>Fórmula de Devine:</strong> Ampliamente utilizada para determinar el peso corporal ideal</li>
+                    <li><strong>Fórmula de Robinson:</strong> Versión actualizada que tiene en cuenta datos de población moderna</li>
+                    <li><strong>Método Basado en IMC:</strong> Utiliza el rango de IMC saludable (18.5-24.9) para calcular el rango de peso</li>
+                </ul>
+
+                <h3>Factores Considerados:</h3>
+                <ul>
+                    <li>Altura - Determinante principal del peso ideal</li>
+                    <li>Tamaño de Estructura Corporal - Estructuras pequeñas, medianas o grandes tienen diferentes pesos ideales</li>
+                    <li>Edad - La masa muscular disminuye naturalmente con la edad</li>
+                    <li>Género - Los hombres típicamente tienen diferentes pesos ideales que las mujeres</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health & Fitness Tips -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="content-section">
+                <h2>Consejos de Salud y Fitness</h2>
+
+                <h3>Gestión de Peso Saludable</h3>
+                <ul>
+                    <li><strong>Establece Objetivos Realistas:</strong> Apunta a una pérdida de peso de 0.5-1 kg por semana - esto es sostenible y saludable</li>
+                    <li><strong>Enfócate en la Nutrición:</strong> Come alimentos integrales, muchas verduras, proteínas magras y grasas saludables</li>
+                    <li><strong>Mantén la Consistencia:</strong> El ejercicio regular y los hábitos alimenticios saludables importan más que la perfección</li>
+                    <li><strong>Hidratación:</strong> Bebe al menos 8-10 vasos de agua diariamente para apoyar el metabolismo</li>
+                    <li><strong>Calidad del Sueño:</strong> Obtén 7-9 horas de sueño de calidad por noche para una salud óptima</li>
+                    <li><strong>Maneja el Estrés:</strong> Practica meditación, yoga u otras técnicas de reducción del estrés</li>
+                </ul>
+
+                <h3>Recomendaciones de Ejercicio</h3>
+                <ul>
+                    <li><strong>Cardio:</strong> 150 minutos de actividad aeróbica moderada por semana (o 75 minutos de vigorosa)</li>
+                    <li><strong>Entrenamiento de Fuerza:</strong> 2-3 sesiones por semana dirigidas a todos los grupos musculares principales</li>
+                    <li><strong>Flexibilidad:</strong> Estiramientos diarios o yoga para mejorar la movilidad</li>
+                    <li><strong>Consistencia:</strong> Comienza con objetivos alcanzables y aumenta gradualmente la intensidad</li>
+                    <li><strong>Variedad:</strong> Mezcla diferentes tipos de ejercicio para prevenir el aburrimiento y trabajar todos los grupos musculares</li>
+                </ul>
+
+                <h3>Pautas de Nutrición</h3>
+                <ul>
+                    <li><strong>Dieta Equilibrada:</strong> Incluye proteínas, carbohidratos y grasas saludables en cada comida</li>
+                    <li><strong>Control de Porciones:</strong> Usa tu calculadora de calorías para guiar porciones apropiadas</li>
+                    <li><strong>Frutas y Verduras:</strong> Apunta a 5+ porciones diarias para vitaminas y minerales</li>
+                    <li><strong>Limita Alimentos Procesados:</strong> Minimiza azúcar, sodio y grasas trans</li>
+                    <li><strong>Planificación de Comidas:</strong> Prepara comidas con anticipación para evitar elecciones alimenticias impulsivas</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 2rem;">Preguntas Frecuentes</h2>
+
+            <div class="content-section">
+                <h3>Preguntas Generales de Salud</h3>
+
+                <h4 style="margin-top: 1.5rem;">¿Es el IMC preciso para todos?</h4>
+                <p>El IMC es una herramienta de detección útil para la mayoría de los adultos, pero tiene limitaciones. Puede no ser preciso para atletas, fisicoculturistas, personas mayores o mujeres embarazadas, ya que no tiene en cuenta la masa muscular o la composición corporal. Para estos grupos, pueden ser necesarias evaluaciones de salud adicionales.</p>
+
+                <h4>¿Con qué frecuencia debo rastrear mis métricas de salud?</h4>
+                <p>Para el seguimiento del peso, una vez por semana es típicamente suficiente. Rastrea tu IMC mensual o trimestralmente para ver cambios significativos. Para métricas de fitness, las fotos de progreso y mediciones mensuales pueden ser motivadoras y revelar cambios que la báscula podría no mostrar.</p>
+
+                <h4>¿Puedo usar estas calculadoras si tengo una condición médica?</h4>
+                <p>Estas calculadoras son para fines informativos generales. Si tienes alguna condición médica, estás tomando medicamentos o tienes preocupaciones de salud específicas, siempre consulta con tu proveedor de atención médica antes de hacer cambios significativos en el estilo de vida basados en los resultados de la calculadora.</p>
+
+                <h4>¿Son estas calculadoras adecuadas para adolescentes?</h4>
+                <p>La calculadora de IMC se puede usar para adolescentes, pero los cálculos de percentil de IMC por edad son más apropiados para niños y adolescentes. Consulta a un pediatra para métricas de salud específicas de edad. Nuestras calculadoras están diseñadas principalmente para adultos.</p>
+
+                <h4>¿Qué tan precisas son estas calculadoras de salud?</h4>
+                <p>Nuestras calculadoras usan fórmulas médicamente reconocidas y son tan precisas como la información que proporcionas. Sin embargo, son herramientas de detección, no instrumentos de diagnóstico. Para diagnóstico médico o planes de salud personalizados, siempre consulta a profesionales de la salud.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>Preguntas sobre IMC y Peso</h3>
+
+                <h4>¿Cuál es la diferencia entre IMC y porcentaje de grasa corporal?</h4>
+                <p>El IMC mide el peso en relación con la altura y se calcula usando una fórmula simple. El porcentaje de grasa corporal mide la proporción de grasa en tu composición corporal. Dos personas con el mismo IMC pueden tener porcentajes de grasa corporal muy diferentes dependiendo de la masa muscular.</p>
+
+                <h4>¿Por qué mi IMC es alto aunque me siento saludable?</h4>
+                <p>Podrías tener una alta masa muscular, que pesa más que la grasa. Los atletas y las personas muy en forma a menudo tienen IMC más altos. El análisis de composición corporal te daría una imagen mejor que el IMC solo. Consulta a tu médico si estás preocupado.</p>
+
+                <h4>¿Hay un peso ideal para mi altura?</h4>
+                <p>El peso ideal varía según el tamaño de la estructura corporal, edad, género y masa muscular. Nuestra Calculadora de Peso Ideal proporciona un rango de peso saludable en lugar de un número "ideal" único. Apunta al rango que corresponde a tu estructura corporal.</p>
+
+                <h4>¿Qué tan rápido puedo esperar perder peso de manera segura?</h4>
+                <p>La pérdida de peso saludable es típicamente de 0.5-1 kg por semana. Esto es sostenible y te permite mantener la masa muscular. La pérdida de peso más rápida a menudo resulta en pérdida de músculo y es más difícil de mantener a largo plazo.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>Preguntas sobre Calorías y Nutrición</h3>
+
+                <h4>¿Cuál es la diferencia entre TMB y GETD?</h4>
+                <p>TMB (Tasa Metabólica Basal) es las calorías que quemas en reposo completo. GETD (Gasto Energético Total Diario) incluye TMB más las calorías quemadas a través de la actividad y la digestión. Nuestra calculadora de calorías determina tu GETD según el nivel de actividad.</p>
+
+                <h4>¿Cómo uso mi número de calorías diarias?</h4>
+                <p>Para perder peso, come 300-500 calorías por debajo de tu GETD. Para ganar peso, come 300-500 calorías por encima. Para mantenimiento, come en tu GETD. Estos déficits/superávits resultan en aproximadamente 0.5 kg de cambio por semana.</p>
+
+                <h4>¿Debo comer las mismas calorías todos los días?</h4>
+                <p>Si bien no es necesario comer exactamente las mismas calorías diariamente, promediar la ingesta calórica correcta durante una semana apoya el progreso constante. Algo de flexibilidad ayuda con la adherencia a largo plazo y previene el agotamiento.</p>
+
+                <h4>¿Son malos los carbohidratos para la pérdida de peso?</h4>
+                <p>Los carbohidratos no son inherentemente malos para la pérdida de peso. Lo que más importa es la ingesta calórica total. Elige carbohidratos complejos (granos integrales, verduras, legumbres) que proporcionan saciedad y nutrientes. La clave es el equilibrio y el control de porciones.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>Preguntas sobre Embarazo</h3>
+
+                <h4>¿Cómo se calcula mi fecha de parto?</h4>
+                <p>El embarazo estándar es de 40 semanas, calculadas desde el primer día de tu último período menstrual (UPM). Las fechas de parto son estimaciones, y solo alrededor del 5% de los bebés nacen en la fecha exacta de parto. La mayoría de los nacimientos ocurren dentro de las 2 semanas de la fecha de parto.</p>
+
+                <h4>¿Qué pasa si mi fecha de parto parece incorrecta?</h4>
+                <p>Si no estás segura de tu último período menstrual o tienes ciclos irregulares, una ecografía de tu proveedor de atención médica puede darte una fecha de parto más precisa, especialmente si se hace en el primer trimestre.</p>
+
+                <h4>¿Debo aumentar de peso durante el embarazo?</h4>
+                <p>Sí, el aumento de peso saludable es importante para el desarrollo fetal. El aumento de peso recomendado es de 11-16 kg para mujeres de peso normal, 7-11 kg para mujeres con sobrepeso y 5-9 kg para mujeres obesas. Consulta a tu médico para recomendaciones personalizadas.</p>
+
+                <h4>¿Cómo sé si mi embarazo está progresando normalmente?</h4>
+                <p>La atención prenatal regular es esencial. Tu médico monitoreará tu peso, presión arterial y desarrollo del bebé a través de chequeos regulares y ecografías. Siempre reporta cualquier síntoma preocupante inmediatamente.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Categories -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 2rem;">Categorías Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="finanzas.html" class="calc-card" style="border-left: 4px solid #2563eb;">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Calculadoras Financieras</h3>
+                    <p class="calc-description">Gestiona tu dinero con calculadoras de préstamos, hipotecas e inversiones</p>
+                </a>
+
+                <a href="conversores.html" class="calc-card" style="border-left: 4px solid #2563eb;">
+                    <div class="calc-icon">🔄</div>
+                    <h3 class="calc-title">Conversores de Unidades</h3>
+                    <p class="calc-description">Convierte unidades de longitud, peso, temperatura y moneda</p>
+                </a>
+
+                <a href="matematicas.html" class="calc-card" style="border-left: 4px solid #2563eb;">
+                    <div class="calc-icon">🔢</div>
+                    <h3 class="calc-title">Calculadoras Matemáticas</h3>
+                    <p class="calc-description">Resuelve problemas matemáticos desde cálculos básicos hasta avanzados</p>
+                </a>
+
+                <a href="quimica.html" class="calc-card" style="border-left: 4px solid #2563eb;">
+                    <div class="calc-icon">⚗️</div>
+                    <h3 class="calc-title">Calculadoras de Química</h3>
+                    <p class="calc-description">Calcula masa molar, molaridad y ecuaciones químicas</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Resources Section -->
+    <section class="section">
+        <div class="container">
+            <div class="content-section">
+                <h2>Recursos de Salud y Descargo de Responsabilidad</h2>
+                <p><strong>Importante:</strong> Estas calculadoras son solo para fines informativos y educativos. No deben usarse como sustituto del consejo, diagnóstico o tratamiento médico profesional. Siempre consulta con un profesional de la salud cualificado para obtener orientación de salud personalizada.</p>
+
+                <h3>Cuándo Buscar Ayuda Profesional</h3>
+                <ul>
+                    <li>Si tu IMC está significativamente fuera del rango normal (por debajo de 18.5 o por encima de 30)</li>
+                    <li>Si estás experimentando cambios de peso rápidos e inexplicables</li>
+                    <li>Si tienes preocupaciones sobre tu salud o nivel de fitness</li>
+                    <li>Si estás planeando cambios significativos en la dieta o el ejercicio</li>
+                    <li>Si tienes condiciones de salud existentes</li>
+                    <li>Si estás embarazada y tienes alguna complicación</li>
+                    <li>Si estás tomando medicamentos que pueden afectar el peso o el metabolismo</li>
+                </ul>
+
+                <h3>Recursos Profesionales</h3>
+                <ul>
+                    <li><strong>Médico de Atención Primaria:</strong> Tu primer punto de contacto para preocupaciones de salud</li>
+                    <li><strong>Dietista Registrado:</strong> Experto en nutrición y planificación de comidas personalizada</li>
+                    <li><strong>Entrenador Personal Certificado:</strong> Orientación profesional para programas de ejercicio</li>
+                    <li><strong>Obstetra/Ginecólogo:</strong> Atención especializada durante el embarazo</li>
+                    <li><strong>Profesional de Salud Mental:</strong> Apoyo para trastornos alimentarios o problemas relacionados con el estrés</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section section-alt">
+        <div class="container" style="text-align: center;">
+            <h2>¿Listo Para Tomar El Control de Tu Salud?</h2>
+            <p style="font-size: 1.125rem; color: #6b7280; margin: 1.5rem 0 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Comienza a rastrear tus métricas de salud hoy con nuestras calculadoras gratuitas. Obtén información personalizada para apoyar tu viaje de bienestar.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="../../es/calculators/calculadora-imc.html" style="background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 0.75rem; text-decoration: none; font-weight: 600; transition: background 0.3s ease;">Calcula Tu IMC</a>
+                <a href="../../es/calculators/calculadora-calorias.html" style="background: white; color: #2563eb; border: 2px solid #2563eb; padding: 0.75rem 1.5rem; border-radius: 0.75rem; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Encuentra Tus Necesidades Calóricas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Calculadoras y conversores en línea profesionales para todas tus necesidades de cálculo. Gratuitos, precisos y fáciles de usar.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categorías</h4>
+                    <ul class="footer-links">
+                        <li><a href="finanzas.html">Finanzas</a></li>
+                        <li><a href="salud.html">Salud</a></li>
+                        <li><a href="conversores.html">Conversores</a></li>
+                        <li><a href="matematicas.html">Matemáticas</a></li>
+                        <li><a href="quimica.html">Química</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Recursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="../../es/about.html">Acerca de</a></li>
+                        <li><a href="../../es/contact.html">Contacto</a></li>
+                        <li><a href="../../es/sitemap.xml">Mapa del Sitio</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="../../es/privacy.html">Política de Privacidad</a></li>
+                        <li><a href="../../es/terms.html">Términos de Servicio</a></li>
+                        <li><a href="../../es/cookies.html">Política de Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados. | Calculadoras de salud solo para fines informativos. No es un sustituto del consejo médico profesional.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

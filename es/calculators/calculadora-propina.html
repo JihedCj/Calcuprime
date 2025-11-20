@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de propinas gratuita - Calcula propinas de restaurante, divide cuentas y aprende sobre etiqueta de propinas. Incluye sugerencias de porcentaje y cálculos por persona.">
+    <meta name="keywords" content="calculadora de propinas, calculadora de gratificación, propina restaurante, dividir cuenta, guía de propinas, porcentaje de propina">
+
+    <title>Calculadora de Propinas - Gratificación de Restaurante y División de Cuenta | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-propina.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/tip-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-propina.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/tip-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finanzas">Finanzas</a></li>
+                <li><a href="../index.html#salud">Salud</a></li>
+                <li><a href="../index.html#conversores">Conversores</a></li>
+                <li><a href="../index.html#cotidiano">Cotidiano</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Propinas</h1>
+            <p class="calculator-description">Calcula propinas de restaurante, divide cuentas y determina montos justos de gratificación con nuestra calculadora integral de propinas</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <!-- Calculator Inputs -->
+            <div class="calculator-inputs">
+                <h3>Detalles de la Cuenta</h3>
+
+                <div class="form-group">
+                    <label for="billAmount" class="form-label">Monto de la Cuenta ($)</label>
+                    <input type="number" id="billAmount" class="form-input" value="100" step="0.01" min="0" placeholder="0.00">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Porcentaje de Propina</label>
+                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 12px;">
+                        <button class="tip-btn" data-tip="10">10%</button>
+                        <button class="tip-btn" data-tip="15">15%</button>
+                        <button class="tip-btn active" data-tip="18">18%</button>
+                        <button class="tip-btn" data-tip="20">20%</button>
+                        <button class="tip-btn" data-tip="25">25%</button>
+                    </div>
+                    <input type="number" id="tipPercent" class="form-input" value="18" step="0.1" min="0" max="100" placeholder="% Personalizado">
+                </div>
+
+                <div class="form-group">
+                    <label for="numPeople" class="form-label">Número de Personas</label>
+                    <input type="number" id="numPeople" class="form-input" value="1" step="1" min="1" placeholder="1">
+                </div>
+
+                <div id="tipQualityIndicator" style="padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; transition: all 0.3s;">
+                    <div style="font-size: 2rem; margin-bottom: 5px;">😊</div>
+                    <div style="font-weight: 600; font-size: 1.1rem;">Propina por Buen Servicio</div>
+                    <div style="font-size: 0.85rem; color: #6b7280; margin-top: 5px;">Gratificación estándar por buen servicio</div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="calculator-results">
+                <h3>Desglose de Propina</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Monto de Propina</div>
+                    <div class="result-value" id="tipAmount" style="color: #2563eb;">$18.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total de la Cuenta</div>
+                    <div class="result-value" id="totalBill" style="color: #10b981;">$118.00</div>
+                </div>
+
+                <div style="border-top: 2px solid #e5e7eb; margin: 20px 0; padding-top: 20px;">
+                    <h4 style="margin: 0 0 15px 0; color: #374151;">Por Persona</h4>
+
+                    <div class="result-item">
+                        <div class="result-label">Propina por Persona</div>
+                        <div class="result-value" id="tipPerPerson" style="color: #8b5cf6; font-size: 1.5rem;">$18.00</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Total por Persona</div>
+                        <div class="result-value" id="totalPerPerson" style="color: #059669; font-size: 1.5rem;">$118.00</div>
+                    </div>
+                </div>
+
+                <div style="padding: 15px; background: #f3f4f6; border-radius: 8px; margin-top: 15px;">
+                    <p style="margin: 0; color: #6b7280; font-size: 0.9rem; line-height: 1.5;">
+                        <strong>Fórmula:</strong> Propina = Cuenta × (Porcentaje ÷ 100)<br>
+                        Total = Cuenta + Propina
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar la Calculadora de Propinas</h2>
+            <p>Nuestra calculadora de propinas facilita determinar montos apropiados de gratificación y dividir cuentas equitativamente entre tu grupo:</p>
+
+            <ol style="line-height: 1.8;">
+                <li><strong>Ingresa el monto de la cuenta</strong> - Introduce el total de tu cuenta del restaurante antes de la propina</li>
+                <li><strong>Selecciona el porcentaje de propina</strong> - Usa los botones rápidos (10%, 15%, 18%, 20%, 25%) o ingresa un porcentaje personalizado</li>
+                <li><strong>Especifica el número de personas</strong> - Indica cuántas personas dividirán la cuenta</li>
+                <li><strong>Ver resultados</strong> - Observa el monto de la propina, total de la cuenta y cálculos por persona instantáneamente</li>
+            </ol>
+
+            <p>La calculadora se actualiza automáticamente al cambiar valores, y muestra un indicador de calidad de propina para ayudar a evaluar la idoneidad del servicio.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo los Porcentajes de Propina</h2>
+
+            <h3>Guías Estándar de Propinas</h3>
+            <div style="background: #f9fafb; border-left: 4px solid #2563eb; padding: 20px; margin: 15px 0;">
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li><strong>10% - Servicio Deficiente:</strong> Reservado para servicio por debajo del estándar con problemas significativos</li>
+                    <li><strong>15% - Servicio Aceptable:</strong> Servicio básico que cumple con las expectativas mínimas</li>
+                    <li><strong>18% - Buen Servicio:</strong> Propina estándar por servicio atento y profesional</li>
+                    <li><strong>20% - Servicio Excelente:</strong> Servicio superior al promedio con atención excepcional</li>
+                    <li><strong>25%+ - Servicio Sobresaliente:</strong> Servicio excepcional que va más allá de lo esperado</li>
+                </ul>
+            </div>
+
+            <h3>Factores a Considerar</h3>
+            <ul style="line-height: 1.8;">
+                <li><strong>Calidad del Servicio:</strong> Atención, amabilidad y profesionalismo del personal</li>
+                <li><strong>Complejidad del Pedido:</strong> Grupos grandes, solicitudes especiales o pedidos complicados</li>
+                <li><strong>Tipo de Restaurante:</strong> Los restaurantes de alta cocina típicamente ameritan porcentajes más altos</li>
+                <li><strong>Costumbres Locales:</strong> Las normas de propina varían por región y país</li>
+                <li><strong>Problemas de Servicio:</strong> Mal servicio debido al personal (no retrasos de cocina)</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Etiqueta y Mejores Prácticas para Propinas</h2>
+
+            <h3>Cuándo Dar Propina</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div style="background: #ecfdf5; padding: 20px; border-radius: 8px;">
+                    <h4 style="color: #059669; margin-top: 0;">Siempre Dar Propina</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 0.95rem;">
+                        <li>Restaurantes con servicio de mesa</li>
+                        <li>Repartidores de comida</li>
+                        <li>Cantineros</li>
+                        <li>Estilistas de cabello</li>
+                        <li>Conductores de taxi/servicios de transporte</li>
+                        <li>Limpieza de hotel</li>
+                        <li>Valet parking</li>
+                    </ul>
+                </div>
+
+                <div style="background: #fef3c7; padding: 20px; border-radius: 8px;">
+                    <h4 style="color: #d97706; margin-top: 0;">A Veces Dar Propina</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 0.95rem;">
+                        <li>Cafeterías (frasco de propinas)</li>
+                        <li>Restaurantes casual rápido</li>
+                        <li>Pedidos para llevar (10%)</li>
+                        <li>Restaurantes buffet</li>
+                        <li>Food trucks</li>
+                        <li>Baristas (servicio en mostrador)</li>
+                    </ul>
+                </div>
+
+                <div style="background: #fee2e2; padding: 20px; border-radius: 8px;">
+                    <h4 style="color: #dc2626; margin-top: 0;">No se Espera Propina</h4>
+                    <ul style="margin: 0; padding-left: 20px; font-size: 0.95rem;">
+                        <li>Restaurantes de comida rápida</li>
+                        <li>Cafeterías de autoservicio</li>
+                        <li>Servicio solo en mostrador</li>
+                        <li>Gratificación automática incluida</li>
+                        <li>Países donde no es costumbre dar propina</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Situaciones Especiales de Propinas</h3>
+            <ul style="line-height: 1.8;">
+                <li><strong>Gratificación Automática:</strong> Revisa tu cuenta - muchos restaurantes agregan 18-20% automático para grupos grandes</li>
+                <li><strong>Cuentas con Descuento:</strong> Da propina sobre el monto antes del descuento cuando uses cupones o promociones</li>
+                <li><strong>Artículos Gratuitos:</strong> Incluye artículos de cortesía en tu cálculo de propina</li>
+                <li><strong>Cuentas Divididas:</strong> Asegúrate de que la propina total sume el porcentaje apropiado al dividir</li>
+                <li><strong>Para Llevar:</strong> 10% es cortés para pedidos para llevar que requirieron preparación</li>
+                <li><strong>Servicio de Bar:</strong> $1-2 por bebida o 15-20% del total</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Costumbres de Propinas Alrededor del Mundo</h2>
+            <p>Las prácticas de propinas varían significativamente entre países. Entender las costumbres locales te ayuda a evitar dar propina excesiva, insuficiente o causar ofensa:</p>
+
+            <h3>Países Donde se Espera Propina (15-20%)</h3>
+            <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <ul style="margin: 0; padding-left: 20px; column-count: 2; column-gap: 30px;">
+                    <li><strong>Estados Unidos</strong> - 15-20% estándar, 20%+ en ciudades principales</li>
+                    <li><strong>Canadá</strong> - 15-20% esperado por buen servicio</li>
+                    <li><strong>México</strong> - 10-15% típico, más alto en áreas turísticas</li>
+                    <li><strong>Egipto</strong> - Dar propina (baksheesh) es práctica común</li>
+                </ul>
+            </div>
+
+            <h3>Países Donde la Propina es Modesta (5-10%)</h3>
+            <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <ul style="margin: 0; padding-left: 20px; column-count: 2; column-gap: 30px;">
+                    <li><strong>Reino Unido</strong> - 10-12%, a menudo incluido en la cuenta</li>
+                    <li><strong>Alemania</strong> - Redondear o agregar 5-10%</li>
+                    <li><strong>Francia</strong> - Service compris (incluido), 5% extra por servicio excelente</li>
+                    <li><strong>Italia</strong> - Coperto (cargo por cubierto) incluido, propina pequeña opcional</li>
+                    <li><strong>España</strong> - 5-10% por servicio excepcional</li>
+                    <li><strong>Países Bajos</strong> - Servicio incluido, redondear es apreciado</li>
+                    <li><strong>República Checa</strong> - 10% se está volviendo estándar</li>
+                    <li><strong>Grecia</strong> - Propinas pequeñas apreciadas (5-10%)</li>
+                </ul>
+            </div>
+
+            <h3>Países Donde No se Espera Propina</h3>
+            <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <ul style="margin: 0; padding-left: 20px; column-count: 2; column-gap: 30px;">
+                    <li><strong>Japón</strong> - Puede considerarse grosero o confuso</li>
+                    <li><strong>Corea del Sur</strong> - No es costumbre, puede ser rechazado</li>
+                    <li><strong>China</strong> - Generalmente no esperado (excepto lugares exclusivos)</li>
+                    <li><strong>Singapur</strong> - Cargo por servicio incluido, propina desalentada</li>
+                    <li><strong>Australia</strong> - No hay cultura de propinas, buenos salarios para el personal</li>
+                    <li><strong>Nueva Zelanda</strong> - No esperado, pero apreciado por servicio excepcional</li>
+                    <li><strong>Dinamarca</strong> - Servicio incluido en precios</li>
+                    <li><strong>Bélgica</strong> - Cargo por servicio incluido por ley</li>
+                </ul>
+            </div>
+
+            <h3>Notas Importantes Sobre Propinas Internacionales</h3>
+            <ul style="line-height: 1.8;">
+                <li>Siempre verifica si el cargo por servicio ya está incluido en tu cuenta</li>
+                <li>En algunos países, dar propina puede ser ofensivo o crear situaciones incómodas</li>
+                <li>Las áreas turísticas pueden tener expectativas diferentes que los establecimientos locales</li>
+                <li>En caso de duda, observa a los locales o pregunta al conserje del hotel</li>
+                <li>Las propinas en efectivo a menudo se prefieren sobre propinas con tarjeta de crédito internacionalmente</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Errores Comunes de Propinas a Evitar</h2>
+
+            <div style="display: grid; gap: 15px;">
+                <div style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 15px;">
+                    <strong style="color: #dc2626;">Error:</strong> Dar propina solo sobre el monto después de impuestos
+                    <br><strong>Solución:</strong> Calcula la propina sobre el subtotal antes de impuestos para precisión
+                </div>
+
+                <div style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 15px;">
+                    <strong style="color: #dc2626;">Error:</strong> No verificar la gratificación automática
+                    <br><strong>Solución:</strong> Siempre revisa tu cuenta antes de agregar propina adicional
+                </div>
+
+                <div style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 15px;">
+                    <strong style="color: #dc2626;">Error:</strong> Dar poca propina a los repartidores
+                    <br><strong>Solución:</strong> Considera distancia, clima y propina mínima de $3-5
+                </div>
+
+                <div style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 15px;">
+                    <strong style="color: #dc2626;">Error:</strong> Dar mala propina debido a problemas de cocina
+                    <br><strong>Solución:</strong> Separa el desempeño del mesero de problemas de calidad de comida
+                </div>
+
+                <div style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 15px;">
+                    <strong style="color: #dc2626;">Error:</strong> No dar propina sobre artículos gratuitos o cortesía
+                    <br><strong>Solución:</strong> Da propina sobre lo que habría sido la cuenta completa
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Guía Rápida de Referencia de Propinas</h2>
+
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <thead>
+                        <tr style="background: #2563eb; color: white;">
+                            <th style="padding: 12px; text-align: left; border: 1px solid #1e40af;">Servicio</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #1e40af;">Propina Estándar</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #1e40af;">Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>Restaurante (servicio de mesa)</strong></td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">15-20%</td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">20% es cada vez más estándar</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>Buffet</strong></td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">10%</td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">Menos servicio, propina más baja</td>
+                        </tr>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>Cantinero</strong></td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">$1-2 por bebida o 15-20%</td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">Más alto para cócteles complejos</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>Entrega de Comida</strong></td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">15-20% (mín $3-5)</td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">Más por mal clima, distancia</td>
+                        </tr>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>Para Llevar</strong></td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">10%</td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">Opcional pero apreciado</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>Estilista de Cabello</strong></td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">15-20%</td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">Más por servicios complicados</td>
+                        </tr>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>Taxi/Uber</strong></td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">10-15%</td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">Más por ayuda con equipaje</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>Limpieza de Hotel</strong></td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">$2-5 por noche</td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">Dejar diariamente, no al final de la estadía</td>
+                        </tr>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>Valet Parking</strong></td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">$2-5</td>
+                            <td style="padding: 12px; border: 1px solid #e5e7eb;">Dar propina cuando devuelven el auto</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes sobre Propinas</h2>
+
+            <h3>¿Debo dar propina sobre impuestos?</h3>
+            <p>Tradicionalmente, las propinas se calculan sobre el subtotal antes de impuestos. Sin embargo, muchas personas calculan sobre el total incluyendo impuestos por simplicidad. Cualquier método es aceptable.</p>
+
+            <h3>¿Qué pasa si el servicio fue malo?</h3>
+            <p>Si el servicio fue genuinamente malo debido a problemas del mesero (no problemas de cocina), puedes dar menos del 15%. Considera hablar con un gerente sobre problemas serios de servicio en lugar de simplemente no dejar propina.</p>
+
+            <h3>¿Debo dar propina si la gratificación automática está incluida?</h3>
+            <p>Revisa tu cuenta cuidadosamente. Si la gratificación automática (usualmente 18-20%) ya está agregada, no necesitas dar propina adicional a menos que el servicio haya sido excepcional.</p>
+
+            <h3>¿Cuánto debo dar de propina en una cuenta grande?</h3>
+            <p>El porcentaje se mantiene igual sin importar el tamaño de la cuenta. Una cuenta de $500 con buen servicio debe recibir 18-20% ($90-100) igual que una cuenta más pequeña.</p>
+
+            <h3>¿Es mejor dar propina en efectivo o con tarjeta?</h3>
+            <p>Muchos meseros prefieren propinas en efectivo ya que las reciben inmediatamente y en su totalidad. Sin embargo, las propinas con tarjeta de crédito son perfectamente aceptables y aseguran un registro en papel.</p>
+
+            <h3>¿Qué pasa con dar propina en restaurantes de comida rápida?</h3>
+            <p>Los restaurantes de comida rápida típicamente no esperan propinas. Si hay un frasco de propinas en el mostrador, agregar cambio suelto es apreciado pero no requerido.</p>
+
+            <h3>¿Cómo doy propina para pedidos para llevar?</h3>
+            <p>Aunque no es obligatorio, 10% para pedidos para llevar es cortés y apreciado, especialmente para pedidos grandes o complicados que requirieron preparación extra.</p>
+
+            <h3>¿Debo reducir la propina si uso un cupón?</h3>
+            <p>No - siempre calcula tu propina basándote en lo que habría sido la cuenta completa antes de que se aplicaran descuentos o cupones.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Consejos para Mejor Servicio (y Mejores Propinas)</h2>
+            <ul style="line-height: 1.8;">
+                <li><strong>Sé cortés:</strong> Trata a los meseros con respeto - a menudo resulta en mejor servicio</li>
+                <li><strong>Comunícate claramente:</strong> Informa a tu mesero sobre alergias, preferencias o problemas inmediatamente</li>
+                <li><strong>Sé comprensivo:</strong> Restaurantes ocupados significan servicio más lento - considera esto en tu evaluación</li>
+                <li><strong>Presta atención al esfuerzo:</strong> Recompensa a meseros que hacen un esfuerzo extra</li>
+                <li><strong>Da propina en efectivo cuando sea posible:</strong> Los meseros reciben propinas en efectivo inmediatamente</li>
+                <li><strong>Considera la experiencia completa:</strong> Incluye amabilidad, conocimiento y atención en tu evaluación</li>
+                <li><strong>Recuerda grupos grandes:</strong> Grupos grandes requieren significativamente más trabajo - da propina en consecuencia</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Calculadoras Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="calculadora-porcentaje.html" class="calc-card">
+                    <div class="calc-icon">%</div>
+                    <h3 class="calc-title">Calculadora de Porcentajes</h3>
+                    <p class="calc-description">Calcula porcentajes y descuentos</p>
+                </a>
+
+                <a href="calculadora-descuento.html" class="calc-card">
+                    <div class="calc-icon">🏷️</div>
+                    <h3 class="calc-title">Calculadora de Descuentos</h3>
+                    <p class="calc-description">Calcula precios de venta y ahorros</p>
+                </a>
+
+                <a href="calculadora-division-cuenta.html" class="calc-card">
+                    <div class="calc-icon">🧾</div>
+                    <h3 class="calc-title">Divisor de Cuentas</h3>
+                    <p class="calc-description">Divide cuentas y gastos equitativamente</p>
+                </a>
+
+                <a href="calculadora-impuesto-ventas.html" class="calc-card">
+                    <div class="calc-icon">💳</div>
+                    <h3 class="calc-title">Calculadora de Impuestos</h3>
+                    <p class="calc-description">Calcula impuestos sobre compras</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Language detection and redirect
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const currentPath = window.location.pathname;
+            const isSpanishPage = currentPath.includes('/es/');
+
+            // If user prefers English but is on Spanish page, suggest English version
+            if (isSpanishPage && !userLang.startsWith('es') && !sessionStorage.getItem('languagePreferenceSet')) {
+                const switchToEnglish = confirm('Would you like to view this page in English?\n¿Desea ver esta página en inglés?');
+                if (switchToEnglish) {
+                    window.location.href = '/calculators/tip-calculator.html';
+                }
+                sessionStorage.setItem('languagePreferenceSet', 'true');
+            }
+        })();
+
+        // Get all elements
+        const billAmount = document.getElementById('billAmount');
+        const tipPercent = document.getElementById('tipPercent');
+        const numPeople = document.getElementById('numPeople');
+        const tipButtons = document.querySelectorAll('.tip-btn');
+
+        const tipAmount = document.getElementById('tipAmount');
+        const totalBill = document.getElementById('totalBill');
+        const tipPerPerson = document.getElementById('tipPerPerson');
+        const totalPerPerson = document.getElementById('totalPerPerson');
+        const tipQualityIndicator = document.getElementById('tipQualityIndicator');
+
+        // Tip button functionality
+        tipButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                tipButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                // Set the tip percentage
+                tipPercent.value = this.dataset.tip;
+                // Calculate
+                calculate();
+            });
+        });
+
+        // Update tip quality indicator
+        function updateTipQualityIndicator(percent) {
+            const indicator = tipQualityIndicator;
+            let emoji, title, description, bgColor;
+
+            if (percent < 10) {
+                emoji = '😞';
+                title = 'Propina Muy Baja';
+                description = 'Por debajo de la gratificación estándar';
+                bgColor = '#fee2e2';
+            } else if (percent < 15) {
+                emoji = '😐';
+                title = 'Propina Aceptable';
+                description = 'Aceptable para servicio básico';
+                bgColor = '#fef3c7';
+            } else if (percent < 18) {
+                emoji = '🙂';
+                title = 'Buena Propina';
+                description = 'Gratificación estándar por buen servicio';
+                bgColor = '#dbeafe';
+            } else if (percent < 22) {
+                emoji = '😊';
+                title = 'Excelente Propina';
+                description = 'Por encima del promedio, muestra aprecio';
+                bgColor = '#d1fae5';
+            } else {
+                emoji = '🤩';
+                title = 'Propina Sobresaliente';
+                description = 'Generosidad excepcional';
+                bgColor = '#e9d5ff';
+            }
+
+            indicator.style.backgroundColor = bgColor;
+            indicator.innerHTML = `
+                <div style="font-size: 2rem; margin-bottom: 5px;">${emoji}</div>
+                <div style="font-weight: 600; font-size: 1.1rem;">${title}</div>
+                <div style="font-size: 0.85rem; color: #6b7280; margin-top: 5px;">${description}</div>
+            `;
+        }
+
+        // Calculate function
+        function calculate() {
+            const bill = parseFloat(billAmount.value) || 0;
+            const percent = parseFloat(tipPercent.value) || 0;
+            const people = parseInt(numPeople.value) || 1;
+
+            // Calculate tip and total
+            const tip = bill * (percent / 100);
+            const total = bill + tip;
+
+            // Calculate per person amounts
+            const tipPP = tip / people;
+            const totalPP = total / people;
+
+            // Update displays
+            tipAmount.textContent = '$' + tip.toFixed(2);
+            totalBill.textContent = '$' + total.toFixed(2);
+            tipPerPerson.textContent = '$' + tipPP.toFixed(2);
+            totalPerPerson.textContent = '$' + totalPP.toFixed(2);
+
+            // Update tip quality indicator
+            updateTipQualityIndicator(percent);
+
+            // Update active button if custom percentage matches a button
+            tipButtons.forEach(btn => {
+                if (parseFloat(btn.dataset.tip) === percent) {
+                    tipButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Auto-calculate on input
+        billAmount.addEventListener('input', calculate);
+        tipPercent.addEventListener('input', calculate);
+        numPeople.addEventListener('input', calculate);
+
+        // Initial calculation
+        calculate();
+    </script>
+
+    <style>
+        .tip-btn {
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            color: #374151;
+        }
+
+        .tip-btn:hover {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .tip-btn.active {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: white;
+        }
+
+        table {
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.85rem;
+            }
+
+            table th, table td {
+                padding: 8px !important;
+            }
+        }
+    </style>
+</body>
+</html>

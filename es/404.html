@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>404 - Página No Encontrada | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+
+    <style>
+        .error-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .error-content {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .error-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .error-description {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #1f2937;
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .popular-calculators {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-top: 2rem;
+        }
+
+        .popular-calculators h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .calculator-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .calculator-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: #1f2937;
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .calculator-link:hover {
+            border-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .calculator-link-icon {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+        }
+
+        .calculator-link-text {
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 5rem;
+            }
+
+            .error-title {
+                font-size: 1.5rem;
+            }
+
+            .error-description {
+                font-size: 1rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .calculator-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/es/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/es/#finanzas">Finanzas</a></li>
+                <li><a href="/es/#salud">Salud</a></li>
+                <li><a href="/es/#conversores">Conversores</a></li>
+                <li><a href="/es/#matematicas">Matemáticas</a></li>
+                <li><a href="/es/#cotidiano">Cotidiano</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Buscar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Error Content -->
+    <main class="error-container">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">¡Página No Encontrada!</h1>
+            <p class="error-description">
+                La página que buscas no existe o ha sido movida.
+                No te preocupes, puedes encontrar lo que necesitas usando nuestra navegación o prueba una de nuestras calculadoras populares a continuación.
+            </p>
+
+            <div class="error-actions">
+                <a href="/es/" class="btn-primary">← Volver al Inicio</a>
+                <button onclick="history.back()" class="btn-secondary">Regresar</button>
+            </div>
+
+            <div class="popular-calculators">
+                <h3>Calculadoras Populares</h3>
+                <div class="calculator-links">
+                    <a href="/es/calculators/calculadora-hipoteca.html" class="calculator-link">
+                        <span class="calculator-link-icon">🏠</span>
+                        <span class="calculator-link-text">Calculadora de Hipoteca</span>
+                    </a>
+                    <a href="/es/calculators/calculadora-imc.html" class="calculator-link">
+                        <span class="calculator-link-icon">⚖️</span>
+                        <span class="calculator-link-text">Calculadora de IMC</span>
+                    </a>
+                    <a href="/es/calculators/calculadora-porcentaje.html" class="calculator-link">
+                        <span class="calculator-link-icon">%</span>
+                        <span class="calculator-link-text">Calculadora de Porcentajes</span>
+                    </a>
+                    <a href="/es/calculators/calculadora-calorias.html" class="calculator-link">
+                        <span class="calculator-link-icon">🔥</span>
+                        <span class="calculator-link-text">Calculadora de Calorías</span>
+                    </a>
+                    <a href="/es/calculators/calculadora-prestamos.html" class="calculator-link">
+                        <span class="calculator-link-icon">💰</span>
+                        <span class="calculator-link-text">Calculadora de Préstamos</span>
+                    </a>
+                    <a href="/es/calculators/conversor-divisas.html" class="calculator-link">
+                        <span class="calculator-link-icon">💱</span>
+                        <span class="calculator-link-text">Conversor de Divisas</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Calculadoras y conversores profesionales en línea para todas tus necesidades de cálculo.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categorías</h4>
+                    <ul class="footer-links">
+                        <li><a href="/es/category/finanzas.html">Finanzas</a></li>
+                        <li><a href="/es/category/salud.html">Salud</a></li>
+                        <li><a href="/es/category/conversores.html">Conversores</a></li>
+                        <li><a href="/es/category/cotidiano.html">Cotidiano</a></li>
+                        <li><a href="/es/category/matematicas.html">Matemáticas</a></li>
+                        <li><a href="/es/category/quimica.html">Química</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Recursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="/es/acerca.html">Acerca de</a></li>
+                        <li><a href="/es/contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/es/privacidad.html">Política de Privacidad</a></li>
+                        <li><a href="/es/terminos.html">Términos de Servicio</a></li>
+                        <li><a href="/es/cookies.html">Política de Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

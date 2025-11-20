@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CalcuPrime - Calculadoras y conversores en línea gratuitos para finanzas, salud, química y uso cotidiano. Rápidos, precisos y compatibles con móviles.">
+    <meta name="keywords" content="calculadora, conversor, calculadora en línea, calculadora financiera, calculadora de salud, conversor de unidades">
+    <meta name="author" content="CalcuPrime">
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CalcuPrime - Calculadoras y Conversores Profesionales en Línea">
+    <meta property="og:description" content="Calculadoras y conversores gratuitos para todas tus necesidades">
+    <meta property="og:image" content="../assets/og-image.jpg">
+
+    <title>CalcuPrime - Calculadoras y Conversores Profesionales en Línea</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/es/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#finanzas">Finanzas</a></li>
+                <li><a href="#salud">Salud</a></li>
+                <li><a href="#conversores">Conversores</a></li>
+                <li><a href="#matematicas">Matemáticas</a></li>
+                <li><a href="#quimica">Química</a></li>
+                <li><a href="#cotidiano">Cotidiano</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Buscar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Modal de Búsqueda -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">&times;</button>
+            <input type="text" id="searchInput" placeholder="Buscar calculadoras..." class="search-input">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Sección Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Calculadoras y Conversores Profesionales</h1>
+            <p class="hero-subtitle">Herramientas rápidas, precisas y gratuitas para finanzas, salud, química y cálculos cotidianos</p>
+
+            <div class="hero-search">
+                <input type="text" id="heroSearch" placeholder="Buscar una calculadora..." class="hero-search-input">
+                <button class="hero-search-btn">Buscar</button>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Calculadoras</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Conversores</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1M+</span>
+                    <span class="stat-label">Usuarios</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculadoras Populares -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Más Populares</h2>
+            <div class="calculator-grid">
+                <a href="/es/calculators/mortgage-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏠</div>
+                    <h3 class="calc-title">Calculadora de Hipoteca</h3>
+                    <p class="calc-description">Calcula pagos mensuales, intereses y amortización</p>
+                </a>
+
+                <a href="/es/calculators/bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Calculadora de IMC</h3>
+                    <p class="calc-description">Calcula tu Índice de Masa Corporal y estado de salud</p>
+                </a>
+
+                <a href="/es/calculators/percentage-calculator.html" class="calc-card">
+                    <div class="calc-icon">%</div>
+                    <h3 class="calc-title">Calculadora de Porcentajes</h3>
+                    <p class="calc-description">Calcula porcentajes, aumentos y descuentos</p>
+                </a>
+
+                <a href="/es/calculators/calorie-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calculadora de Calorías</h3>
+                    <p class="calc-description">Calcula necesidades calóricas diarias y objetivos de peso</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculadoras Financieras -->
+    <section class="section section-alt" id="finanzas">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Calculadoras Financieras</h2>
+                <a href="/es/category/finance.html" class="section-link">Ver todas →</a>
+            </div>
+            <div class="calculator-grid">
+                <a href="/es/calculators/loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Calculadora de Préstamos</h3>
+                    <p class="calc-description">Calcula pagos de préstamos e interés total</p>
+                </a>
+
+                <a href="/es/calculators/investment-calculator.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Calculadora de Inversiones</h3>
+                    <p class="calc-description">Proyecta el crecimiento de inversiones a lo largo del tiempo</p>
+                </a>
+
+                <a href="/es/calculators/compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Interés Compuesto</h3>
+                    <p class="calc-description">Calcula ganancias de interés compuesto</p>
+                </a>
+
+                <a href="/es/calculators/retirement-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏖️</div>
+                    <h3 class="calc-title">Calculadora de Jubilación</h3>
+                    <p class="calc-description">Planifica tus ahorros para la jubilación</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculadoras de Salud -->
+    <section class="section" id="salud">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Calculadoras de Salud y Fitness</h2>
+                <a href="/es/category/health.html" class="section-link">Ver todas →</a>
+            </div>
+            <div class="calculator-grid">
+                <a href="/es/calculators/bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Calculadora de IMC</h3>
+                    <p class="calc-description">Calcula el Índice de Masa Corporal</p>
+                </a>
+
+                <a href="/es/calculators/calorie-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calculadora de Calorías</h3>
+                    <p class="calc-description">Necesidades calóricas diarias</p>
+                </a>
+
+                <a href="/es/calculators/pregnancy-calculator.html" class="calc-card">
+                    <div class="calc-icon">👶</div>
+                    <h3 class="calc-title">Calculadora de Embarazo</h3>
+                    <p class="calc-description">Cálculo de fecha de parto y semanas</p>
+                </a>
+
+                <a href="/es/calculators/ideal-weight-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Peso Ideal</h3>
+                    <p class="calc-description">Calcula tu peso corporal ideal</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conversores -->
+    <section class="section section-alt" id="conversores">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Conversores de Unidades</h2>
+                <a href="/es/category/converters.html" class="section-link">Ver todos →</a>
+            </div>
+            <div class="calculator-grid">
+                <a href="/es/calculators/length-converter.html" class="calc-card">
+                    <div class="calc-icon">📏</div>
+                    <h3 class="calc-title">Conversor de Longitud</h3>
+                    <p class="calc-description">Convierte metros, pies, pulgadas, millas</p>
+                </a>
+
+                <a href="/es/calculators/weight-converter.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Conversor de Peso</h3>
+                    <p class="calc-description">Convierte kg, libras, onzas</p>
+                </a>
+
+                <a href="/es/calculators/temperature-converter.html" class="calc-card">
+                    <div class="calc-icon">🌡️</div>
+                    <h3 class="calc-title">Conversor de Temperatura</h3>
+                    <p class="calc-description">Convierte Celsius, Fahrenheit, Kelvin</p>
+                </a>
+
+                <a href="/es/calculators/currency-converter.html" class="calc-card">
+                    <div class="calc-icon">💱</div>
+                    <h3 class="calc-title">Conversor de Divisas</h3>
+                    <p class="calc-description">Tasas de cambio de divisas en tiempo real</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculadoras Cotidianas -->
+    <section class="section" id="cotidiano">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Calculadoras Cotidianas</h2>
+                <a href="/es/category/everyday.html" class="section-link">Ver todas →</a>
+            </div>
+            <div class="calculator-grid">
+                <a href="/es/calculators/tip-calculator.html" class="calc-card">
+                    <div class="calc-icon">💵</div>
+                    <h3 class="calc-title">Calculadora de Propinas</h3>
+                    <p class="calc-description">Calcula propinas de restaurantes y divide cuentas</p>
+                </a>
+
+                <a href="/es/calculators/discount-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏷️</div>
+                    <h3 class="calc-title">Calculadora de Descuentos</h3>
+                    <p class="calc-description">Encuentra precios de oferta y calcula ahorros</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Calculadoras y conversores profesionales en línea para todas tus necesidades de cálculo.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categorías</h4>
+                    <ul class="footer-links">
+                        <li><a href="/es/category/finance.html">Finanzas</a></li>
+                        <li><a href="/es/category/health.html">Salud</a></li>
+                        <li><a href="/es/category/converters.html">Conversores</a></li>
+                        <li><a href="/es/category/everyday.html">Cotidiano</a></li>
+                        <li><a href="/es/category/math.html">Matemáticas</a></li>
+                        <li><a href="/es/category/chemistry.html">Química</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Recursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="/es/about.html">Acerca de</a></li>
+                        <li><a href="/es/blog.html">Blog</a></li>
+                        <li><a href="/es/contact.html">Contacto</a></li>
+                        <li><a href="/es/sitemap.html">Mapa del Sitio</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/es/privacy.html">Política de Privacidad</a></li>
+                        <li><a href="/es/terms.html">Términos de Servicio</a></li>
+                        <li><a href="/es/cookies.html">Política de Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/language-detector.js"></script>
+</body>
+</html>

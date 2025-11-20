@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de hipoteca gratuita - Calcule pagos mensuales, interés total y vea el calendario de amortización. Compare diferentes plazos y tasas de interés.">
+    <meta name="keywords" content="calculadora de hipoteca, calculadora de préstamo hipotecario, pago de hipoteca, calendario de amortización, calculadora de tasa de interés">
+
+    <title>Calculadora de Hipoteca - Calculadora Gratuita de Préstamos Hipotecarios | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-hipoteca.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/mortgage-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-hipoteca.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/mortgage-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finanzas</a></li>
+                <li><a href="../index.html#health">Salud</a></li>
+                <li><a href="../index.html#converters">Conversores</a></li>
+                <li><a href="../index.html#math">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Calculator Content -->
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Hipoteca</h1>
+            <p class="calculator-description">Calcule sus pagos mensuales de hipoteca, interés total y vea el calendario detallado de amortización</p>
+        </div>
+
+        <!-- Calculator Tool -->
+        <div class="calculator-wrapper">
+            <!-- Inputs -->
+            <div class="calculator-inputs">
+                <h3>Detalles del Préstamo</h3>
+
+                <div class="form-group">
+                    <label for="homePrice" class="form-label">Precio de la Vivienda</label>
+                    <input type="number" id="homePrice" class="form-input" value="300000" min="0" step="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="downPayment" class="form-label">Pago Inicial</label>
+                    <input type="number" id="downPayment" class="form-input" value="60000" min="0" step="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="loanTerm" class="form-label">Plazo del Préstamo (años)</label>
+                    <select id="loanTerm" class="form-select">
+                        <option value="10">10 años</option>
+                        <option value="15">15 años</option>
+                        <option value="20">20 años</option>
+                        <option value="25">25 años</option>
+                        <option value="30" selected>30 años</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="interestRate" class="form-label">Tasa de Interés (%)</label>
+                    <input type="number" id="interestRate" class="form-input" value="6.5" min="0" max="20" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="propertyTax" class="form-label">Impuesto Predial Anual (opcional)</label>
+                    <input type="number" id="propertyTax" class="form-input" value="3000" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="homeInsurance" class="form-label">Seguro de Vivienda Anual (opcional)</label>
+                    <input type="number" id="homeInsurance" class="form-input" value="1200" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="pmi" class="form-label">PMI ($/mes, si aplica)</label>
+                    <input type="number" id="pmi" class="form-input" value="0" min="0" step="10">
+                </div>
+
+                <button onclick="calculateMortgage()" class="btn-calculate">Calcular</button>
+            </div>
+
+            <!-- Results -->
+            <div class="calculator-results">
+                <h3>Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Pago Mensual (C&I)</div>
+                    <div class="result-value" id="monthlyPayment">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Pago Mensual Total</div>
+                    <div class="result-value" id="totalMonthlyPayment">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Monto del Préstamo</div>
+                    <div class="result-value" id="loanAmount">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Interés Total</div>
+                    <div class="result-value" id="totalInterest">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Monto Total Pagado</div>
+                    <div class="result-value" id="totalPaid">$0.00</div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h4 style="margin-bottom: 10px;">Desglose de Pagos</h4>
+                    <canvas id="paymentChart" style="max-height: 200px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Amortization Schedule -->
+        <div class="content-section" id="amortizationSection" style="display: none;">
+            <h2>Calendario de Amortización</h2>
+            <div style="overflow-x: auto;">
+                <table id="amortizationTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f3f4f6;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Año</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Capital</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Interés</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="amortizationBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SEO Content -->
+        <div class="content-section">
+            <h2>Cómo Usar la Calculadora de Hipoteca</h2>
+            <p>Nuestra calculadora de hipoteca le ayuda a estimar sus pagos mensuales de hipoteca y comprender el costo total de su préstamo hipotecario. Siga estos pasos:</p>
+            <ol>
+                <li><strong>Precio de la Vivienda:</strong> Ingrese el precio total de compra de la vivienda</li>
+                <li><strong>Pago Inicial:</strong> Ingrese el monto que planea pagar por adelantado (típicamente el 20% del precio de la vivienda)</li>
+                <li><strong>Plazo del Préstamo:</strong> Elija la duración de su hipoteca (15 o 30 años es lo más común)</li>
+                <li><strong>Tasa de Interés:</strong> Ingrese la tasa de interés anual de su hipoteca</li>
+                <li><strong>Costos Adicionales:</strong> Incluya el impuesto predial, seguro de vivienda y PMI si aplica</li>
+            </ol>
+
+            <h2>Entendiendo su Pago Hipotecario</h2>
+            <p>Su pago mensual de hipoteca típicamente incluye cuatro componentes, a menudo referidos como PITI:</p>
+            <ul>
+                <li><strong>Capital:</strong> El monto que pidió prestado para comprar la vivienda</li>
+                <li><strong>Interés:</strong> El costo de pedir dinero prestado al prestamista</li>
+                <li><strong>Impuestos:</strong> Impuestos prediales anuales divididos por 12 meses</li>
+                <li><strong>Seguro:</strong> Seguro de propietario de vivienda y PMI (si el pago inicial es menor al 20%)</li>
+            </ul>
+
+            <h2>¿Qué es el PMI?</h2>
+            <p>El Seguro Hipotecario Privado (PMI, por sus siglas en inglés) generalmente se requiere cuando su pago inicial es menor al 20% del valor de la vivienda. El PMI protege al prestamista en caso de que usted incumpla con el préstamo. Una vez que haya acumulado el 20% de capital en su vivienda, generalmente puede solicitar que se elimine el PMI.</p>
+
+            <h2>Hipotecas de Tasa Fija vs. Tasa Ajustable</h2>
+            <h3>Hipoteca de Tasa Fija</h3>
+            <p>Una hipoteca de tasa fija mantiene la misma tasa de interés durante todo el plazo del préstamo, proporcionando pagos mensuales predecibles. Esto es ideal para compradores de vivienda que planean quedarse en su casa a largo plazo y desean estabilidad en los pagos.</p>
+
+            <h3>Hipoteca de Tasa Ajustable (ARM)</h3>
+            <p>Una ARM tiene una tasa de interés que puede cambiar periódicamente, típicamente comenzando con una tasa más baja que las hipotecas de tasa fija. Aunque la tasa inicial es atractiva, los pagos pueden aumentar significativamente cuando la tasa se ajusta.</p>
+
+            <h2>Consejos para Obtener la Mejor Tasa Hipotecaria</h2>
+            <ul>
+                <li>Mejore su puntaje de crédito antes de solicitar (apunte a 740+)</li>
+                <li>Ahorre para un pago inicial más grande (20% o más)</li>
+                <li>Compare tasas de múltiples prestamistas</li>
+                <li>Considere pagar puntos para reducir su tasa de interés</li>
+                <li>Compre en el momento adecuado - las tasas fluctúan según las condiciones económicas</li>
+                <li>Mantenga su relación deuda-ingreso por debajo del 43%</li>
+            </ul>
+
+            <h2>¿Cuánto Puede Pagar por una Vivienda?</h2>
+            <p>La mayoría de los asesores financieros recomiendan mantener su pago hipotecario por debajo del 28% de su ingreso bruto mensual. Sus pagos totales de deuda mensual (incluyendo hipoteca, préstamos de auto, tarjetas de crédito, etc.) no deben exceder el 36% de su ingreso bruto mensual.</p>
+
+            <h2>Costos Adicionales de ser Propietario de Vivienda</h2>
+            <p>Más allá de su pago hipotecario, presupueste para estos gastos continuos:</p>
+            <ul>
+                <li><strong>Mantenimiento y Reparaciones:</strong> Presupueste del 1-2% del valor de la vivienda anualmente</li>
+                <li><strong>Cuotas de HOA:</strong> Si su propiedad es parte de una asociación de propietarios</li>
+                <li><strong>Servicios Públicos:</strong> Electricidad, gas, agua, internet, etc.</li>
+                <li><strong>Garantía de Vivienda:</strong> Protección opcional para sistemas principales y electrodomésticos</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+            <h3>¿Qué puntaje de crédito necesito para comprar una casa?</h3>
+            <p>Aunque puede calificar para un préstamo FHA con un puntaje de crédito tan bajo como 580, los préstamos convencionales típicamente requieren un puntaje mínimo de 620. Puntajes más altos (740+) le darán mejores tasas de interés.</p>
+
+            <h3>¿Debo elegir una hipoteca a 15 o 30 años?</h3>
+            <p>Una hipoteca a 15 años tiene pagos mensuales más altos pero interés total significativamente menor. Una hipoteca a 30 años ofrece pagos mensuales más bajos pero cuesta más en intereses a largo plazo. Elija según su presupuesto y objetivos financieros.</p>
+
+            <h3>¿Cuándo debo refinanciar mi hipoteca?</h3>
+            <p>Considere refinanciar cuando las tasas de interés caigan al menos 0.5-1%, quiera cambiar los términos del préstamo o necesite acceder al capital de su vivienda. Calcule si los ahorros superan los costos de cierre.</p>
+
+            <h3>¿Qué documentos necesito para una solicitud de hipoteca?</h3>
+            <p>Los documentos típicos incluyen: comprobante de ingresos (talones de pago, declaraciones de impuestos), extractos bancarios, verificación de empleo, autorización de informe de crédito y documentos de identificación.</p>
+        </div>
+
+        <!-- Related Calculators -->
+        <div class="content-section">
+            <h2>Calculadoras Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="calculadora-prestamos.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Calculadora de Préstamos</h3>
+                    <p class="calc-description">Calcule cualquier tipo de pago de préstamo</p>
+                </a>
+
+                <a href="calculadora-refinanciacion.html" class="calc-card">
+                    <div class="calc-icon">🔄</div>
+                    <h3 class="calc-title">Calculadora de Refinanciación</h3>
+                    <p class="calc-description">¿Debería refinanciar su hipoteca?</p>
+                </a>
+
+                <a href="calculadora-capacidad-vivienda.html" class="calc-card">
+                    <div class="calc-icon">🏡</div>
+                    <h3 class="calc-title">Capacidad de Compra</h3>
+                    <p class="calc-description">¿Cuánto puede pagar por una casa?</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Language Detector Script -->
+    <script>
+        // Detect browser language and suggest switching
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const currentLang = document.documentElement.lang;
+
+            // If user's browser is not set to Spanish and they're on Spanish page
+            if (currentLang === 'es' && !userLang.startsWith('es')) {
+                const englishUrl = window.location.href.replace('/es/', '/').replace('calculadora-hipoteca', 'mortgage-calculator');
+
+                // Store user preference
+                const langPreference = localStorage.getItem('languagePreference');
+
+                if (!langPreference) {
+                    const switchLang = confirm('Your browser is set to English. Would you like to switch to the English version?\n\nSu navegador está configurado en inglés. ¿Le gustaría cambiar a la versión en inglés?');
+
+                    if (switchLang) {
+                        window.location.href = englishUrl;
+                    } else {
+                        localStorage.setItem('languagePreference', 'es');
+                    }
+                }
+            }
+
+            // If user's browser is Spanish and they're on English page (for future reference)
+            if (currentLang !== 'es' && userLang.startsWith('es')) {
+                localStorage.setItem('suggestSpanish', 'true');
+            }
+        })();
+    </script>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculateMortgage() {
+            // Get input values
+            const homePrice = parseFloat(document.getElementById('homePrice').value) || 0;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const loanTerm = parseInt(document.getElementById('loanTerm').value) || 30;
+            const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const propertyTax = parseFloat(document.getElementById('propertyTax').value) || 0;
+            const homeInsurance = parseFloat(document.getElementById('homeInsurance').value) || 0;
+            const pmi = parseFloat(document.getElementById('pmi').value) || 0;
+
+            // Validate inputs
+            if (homePrice <= 0 || downPayment < 0 || interestRate < 0) {
+                alert('Por favor ingrese valores válidos');
+                return;
+            }
+
+            if (downPayment >= homePrice) {
+                alert('El pago inicial debe ser menor que el precio de la vivienda');
+                return;
+            }
+
+            // Calculate loan amount
+            const loanAmount = homePrice - downPayment;
+
+            // Calculate monthly interest rate
+            const monthlyRate = interestRate / 100 / 12;
+
+            // Calculate number of payments
+            const numPayments = loanTerm * 12;
+
+            // Calculate monthly payment (Principal & Interest)
+            let monthlyPayment;
+            if (monthlyRate === 0) {
+                monthlyPayment = loanAmount / numPayments;
+            } else {
+                monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
+                                (Math.pow(1 + monthlyRate, numPayments) - 1);
+            }
+
+            // Calculate additional monthly costs
+            const monthlyPropertyTax = propertyTax / 12;
+            const monthlyInsurance = homeInsurance / 12;
+
+            // Calculate total monthly payment
+            const totalMonthly = monthlyPayment + monthlyPropertyTax + monthlyInsurance + pmi;
+
+            // Calculate total interest
+            const totalPaid = monthlyPayment * numPayments;
+            const totalInterest = totalPaid - loanAmount;
+
+            // Display results
+            document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
+            document.getElementById('totalMonthlyPayment').textContent = formatCurrency(totalMonthly);
+            document.getElementById('loanAmount').textContent = formatCurrency(loanAmount);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('totalPaid').textContent = formatCurrency(totalPaid);
+
+            // Generate amortization schedule
+            generateAmortizationSchedule(loanAmount, monthlyRate, numPayments, monthlyPayment);
+
+            // Show amortization section
+            document.getElementById('amortizationSection').style.display = 'block';
+
+            // Scroll to results
+            document.querySelector('.calculator-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function generateAmortizationSchedule(principal, monthlyRate, numPayments, monthlyPayment) {
+            const tbody = document.getElementById('amortizationBody');
+            tbody.innerHTML = '';
+
+            let balance = principal;
+            let year = 1;
+            let yearPrincipal = 0;
+            let yearInterest = 0;
+
+            for (let month = 1; month <= numPayments; month++) {
+                const interestPayment = balance * monthlyRate;
+                const principalPayment = monthlyPayment - interestPayment;
+                balance -= principalPayment;
+
+                yearPrincipal += principalPayment;
+                yearInterest += interestPayment;
+
+                // Display yearly summary
+                if (month % 12 === 0 || month === numPayments) {
+                    const row = tbody.insertRow();
+                    row.innerHTML = `
+                        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">${year}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(yearPrincipal)}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(yearInterest)}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(Math.max(0, balance))}</td>
+                    `;
+
+                    year++;
+                    yearPrincipal = 0;
+                    yearInterest = 0;
+                }
+            }
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('es-ES', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(num);
+        }
+
+        // Calculate on page load
+        window.addEventListener('load', function() {
+            calculateMortgage();
+        });
+
+        // Recalculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateMortgage);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conversor de longitud gratuito - Convierte entre milímetros, centímetros, metros, kilómetros, pulgadas, pies, yardas, millas y millas náuticas al instante.">
+    <meta name="keywords" content="conversor de longitud, conversor de distancia, conversor de unidades, metros a pies, cm a pulgadas, km a millas, métrico a imperial">
+
+    <title>Conversor de Longitud - Convierte Unidades de Distancia Instantáneamente | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/conversor-longitud.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/length-converter.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-longitud.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/length-converter.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../index.html#finance">Finanzas</a></li>
+                <li><a href="../../index.html#health">Salud</a></li>
+                <li><a href="../../index.html#converters">Conversores</a></li>
+                <li><a href="../../index.html#math">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Conversor de Longitud</h1>
+            <p class="calculator-description">Convierte entre unidades de longitud métricas e imperiales instantáneamente con conversión bidireccional en tiempo real</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Ingrese Valor en Cualquier Unidad</h3>
+                <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 20px;">Escriba un valor en cualquier campo a continuación y todas las demás unidades se actualizarán automáticamente</p>
+
+                <!-- Quick Conversion Buttons -->
+                <div style="margin-bottom: 25px;">
+                    <label class="form-label">Valores Rápidos</label>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                        <button class="quick-btn" onclick="setQuickValue(1)">1</button>
+                        <button class="quick-btn" onclick="setQuickValue(10)">10</button>
+                        <button class="quick-btn" onclick="setQuickValue(100)">100</button>
+                        <button class="quick-btn" onclick="setQuickValue(1000)">1000</button>
+                    </div>
+                </div>
+
+                <!-- Metric Units -->
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 15px; color: #2563eb;">Unidades Métricas</h4>
+
+                    <div class="form-group">
+                        <label for="millimeters" class="form-label">Milímetros (mm)</label>
+                        <input type="number" id="millimeters" class="form-input" placeholder="0" step="any" oninput="convertLength('millimeters')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="centimeters" class="form-label">Centímetros (cm)</label>
+                        <input type="number" id="centimeters" class="form-input" placeholder="0" step="any" oninput="convertLength('centimeters')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meters" class="form-label">Metros (m)</label>
+                        <input type="number" id="meters" class="form-input" placeholder="0" step="any" oninput="convertLength('meters')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kilometers" class="form-label">Kilómetros (km)</label>
+                        <input type="number" id="kilometers" class="form-input" placeholder="0" step="any" oninput="convertLength('kilometers')">
+                    </div>
+                </div>
+
+                <!-- Imperial Units -->
+                <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 15px; color: #d97706;">Unidades Imperiales</h4>
+
+                    <div class="form-group">
+                        <label for="inches" class="form-label">Pulgadas (in)</label>
+                        <input type="number" id="inches" class="form-input" placeholder="0" step="any" oninput="convertLength('inches')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feet" class="form-label">Pies (ft)</label>
+                        <input type="number" id="feet" class="form-input" placeholder="0" step="any" oninput="convertLength('feet')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yards" class="form-label">Yardas (yd)</label>
+                        <input type="number" id="yards" class="form-input" placeholder="0" step="any" oninput="convertLength('yards')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="miles" class="form-label">Millas (mi)</label>
+                        <input type="number" id="miles" class="form-input" placeholder="0" step="any" oninput="convertLength('miles')">
+                    </div>
+                </div>
+
+                <!-- Nautical -->
+                <div style="background: #ecfdf5; padding: 20px; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px; color: #059669;">Náuticas</h4>
+
+                    <div class="form-group">
+                        <label for="nauticalMiles" class="form-label">Millas Náuticas (nmi)</label>
+                        <input type="number" id="nauticalMiles" class="form-input" placeholder="0" step="any" oninput="convertLength('nauticalMiles')">
+                    </div>
+                </div>
+
+                <button onclick="clearAll()" style="width: 100%; margin-top: 20px; padding: 12px; background: #ef4444; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Borrar Todo</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Conversiones Comunes</h3>
+
+                <div style="background: #eff6ff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2563eb;">
+                    <h4 style="margin-bottom: 15px;">Referencia Rápida</h4>
+                    <div style="display: grid; gap: 10px; font-size: 0.875rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 pulgada</span>
+                            <span style="font-weight: 600;">= 2,54 cm</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 pie</span>
+                            <span style="font-weight: 600;">= 30,48 cm</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 yarda</span>
+                            <span style="font-weight: 600;">= 0,9144 m</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 milla</span>
+                            <span style="font-weight: 600;">= 1,609 km</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 milla náutica</span>
+                            <span style="font-weight: 600;">= 1,852 km</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #d97706;">
+                    <h4 style="margin-bottom: 15px;">Conversiones Métricas</h4>
+                    <div style="display: grid; gap: 10px; font-size: 0.875rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 metro</span>
+                            <span style="font-weight: 600;">= 100 cm</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 metro</span>
+                            <span style="font-weight: 600;">= 1.000 mm</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 kilómetro</span>
+                            <span style="font-weight: 600;">= 1.000 m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #ecfdf5; padding: 20px; border-radius: 8px; border-left: 4px solid #059669;">
+                    <h4 style="margin-bottom: 15px;">Conversiones Imperiales</h4>
+                    <div style="display: grid; gap: 10px; font-size: 0.875rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 pie</span>
+                            <span style="font-weight: 600;">= 12 pulgadas</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 yarda</span>
+                            <span style="font-weight: 600;">= 3 pies</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 milla</span>
+                            <span style="font-weight: 600;">= 5.280 pies</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 milla</span>
+                            <span style="font-weight: 600;">= 1.760 yardas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar el Conversor de Longitud</h2>
+            <p>Este conversor de longitud bidireccional facilita la conversión entre unidades métricas e imperiales instantáneamente:</p>
+            <ol>
+                <li><strong>Ingrese un valor:</strong> Escriba cualquier número en cualquier campo de unidad</li>
+                <li><strong>Conversión automática:</strong> Todas las demás unidades se actualizan al instante</li>
+                <li><strong>Valores rápidos:</strong> Use los botones 1, 10, 100 o 1000 para conversiones comunes</li>
+                <li><strong>Alta precisión:</strong> Obtenga conversiones precisas con hasta 10 decimales</li>
+                <li><strong>Borrar todo:</strong> Reinicie todos los campos con un clic</li>
+            </ol>
+
+            <h2>Comprendiendo las Unidades de Longitud</h2>
+
+            <h3>Sistema Métrico (Unidades SI)</h3>
+            <p>El sistema métrico, también conocido como Sistema Internacional de Unidades (SI), se basa en potencias de 10, lo que hace que las conversiones sean simples e intuitivas. Es utilizado por la mayoría de los países del mundo.</p>
+
+            <ul>
+                <li><strong>Milímetro (mm):</strong> 1/1000 de metro. Usado para mediciones pequeñas como grosor, precipitación o ingeniería de precisión.</li>
+                <li><strong>Centímetro (cm):</strong> 1/100 de metro. Común para mediciones cotidianas como altura, ropa y artículos del hogar.</li>
+                <li><strong>Metro (m):</strong> La unidad base de longitud en SI. Definido como la distancia que la luz viaja en 1/299.792.458 de segundo.</li>
+                <li><strong>Kilómetro (km):</strong> 1.000 metros. Usado para distancias más largas como carreteras, viajes y geografía.</li>
+            </ul>
+
+            <h3>Sistema Imperial</h3>
+            <p>El sistema imperial se originó en Gran Bretaña y se usa principalmente en Estados Unidos hoy. Se basa en mediciones históricas.</p>
+
+            <ul>
+                <li><strong>Pulgada (in):</strong> Originalmente basada en el ancho del pulgar humano. 1 pulgada = exactamente 2,54 cm (definido en 1959).</li>
+                <li><strong>Pie (ft):</strong> Históricamente basado en la longitud del pie humano. 1 pie = 12 pulgadas = 30,48 cm.</li>
+                <li><strong>Yarda (yd):</strong> Originalmente la distancia desde la nariz hasta el brazo extendido. 1 yarda = 3 pies = 36 pulgadas.</li>
+                <li><strong>Milla (mi):</strong> Proviene del romano "mille passus" (1.000 pasos). 1 milla = 5.280 pies = 1,609344 km.</li>
+            </ul>
+
+            <h3>Mediciones Náuticas</h3>
+            <ul>
+                <li><strong>Milla Náutica (nmi):</strong> Basada en la circunferencia de la Tierra. 1 milla náutica = 1 minuto de latitud = 1,852 km exactamente. Usado en navegación marítima y aviación.</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Por qué Estados Unidos no usa el sistema métrico?</h3>
+            <p>Estados Unidos comenzó esfuerzos de metrificación en la década de 1970, pero siguió siendo voluntario. El alto costo de convertir la infraestructura (señales de tráfico, herramientas, educación) y la resistencia pública llevaron a una adopción incompleta. Estados Unidos es oficialmente métrico-capaz pero usa principalmente unidades tradicionales en la vida diaria.</p>
+
+            <h3>¿Cuál sistema es más preciso?</h3>
+            <p>Ningún sistema es inherentemente más preciso: la precisión depende de las herramientas de medición, no de las unidades. Sin embargo, la estructura decimal del sistema métrico facilita los cálculos y reduce los errores de conversión.</p>
+
+            <h3>¿Cuál es la diferencia entre una milla y una milla náutica?</h3>
+            <p>Una milla terrestre (1,609 km) se usa en tierra. Una milla náutica (1,852 km) se basa en la geometría de la Tierra: equivale a un minuto de latitud. Las millas náuticas se usan en navegación marítima y aviación porque se relacionan directamente con las coordenadas de navegación.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Conversores Relacionados</h2>
+            <div class="calculator-grid">
+                <a href="conversor-peso.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Conversor de Peso</h3>
+                    <p class="calc-description">Convierte kilogramos, libras, onzas</p>
+                </a>
+
+                <a href="conversor-temperatura.html" class="calc-card">
+                    <div class="calc-icon">🌡️</div>
+                    <h3 class="calc-title">Conversor de Temperatura</h3>
+                    <p class="calc-description">Convierte Celsius, Fahrenheit, Kelvin</p>
+                </a>
+
+                <a href="conversor-divisas.html" class="calc-card">
+                    <div class="calc-icon">💱</div>
+                    <h3 class="calc-title">Conversor de Divisas</h3>
+                    <p class="calc-description">Convierte entre monedas principales</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Language detector - redirect if browser prefers English
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const isSpanishPage = window.location.pathname.includes('/es/');
+            const hasVisited = sessionStorage.getItem('languageChecked');
+
+            if (!hasVisited && isSpanishPage && !userLang.startsWith('es')) {
+                // User's browser is not set to Spanish, offer English version
+                if (confirm('English version available. Would you like to switch?\n\nVersión en inglés disponible. ¿Desea cambiar?')) {
+                    window.location.href = '/calculators/length-converter.html';
+                }
+                sessionStorage.setItem('languageChecked', 'true');
+            }
+        })();
+
+        // Conversion factors to meters (base unit)
+        const conversionFactors = {
+            millimeters: 0.001,
+            centimeters: 0.01,
+            meters: 1,
+            kilometers: 1000,
+            inches: 0.0254,
+            feet: 0.3048,
+            yards: 0.9144,
+            miles: 1609.344,
+            nauticalMiles: 1852
+        };
+
+        // Track which field is being edited to prevent circular updates
+        let isConverting = false;
+
+        function convertLength(sourceUnit) {
+            if (isConverting) return;
+            isConverting = true;
+
+            const sourceValue = parseFloat(document.getElementById(sourceUnit).value);
+
+            if (isNaN(sourceValue) || sourceValue === '') {
+                // Clear all fields if input is invalid
+                isConverting = false;
+                return;
+            }
+
+            // Convert source value to meters first
+            const valueInMeters = sourceValue * conversionFactors[sourceUnit];
+
+            // Convert from meters to all other units
+            for (let unit in conversionFactors) {
+                if (unit !== sourceUnit) {
+                    const convertedValue = valueInMeters / conversionFactors[unit];
+                    const inputField = document.getElementById(unit);
+
+                    // Format the number nicely - remove trailing zeros
+                    let formattedValue = convertedValue.toFixed(10);
+                    formattedValue = parseFloat(formattedValue).toString();
+
+                    inputField.value = formattedValue;
+                }
+            }
+
+            isConverting = false;
+        }
+
+        function setQuickValue(value) {
+            // Set value in meters and convert to all other units
+            document.getElementById('meters').value = value;
+            convertLength('meters');
+        }
+
+        function clearAll() {
+            for (let unit in conversionFactors) {
+                document.getElementById(unit).value = '';
+            }
+        }
+
+        // Add button styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .quick-btn {
+                padding: 10px;
+                background: #2563eb;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .quick-btn:hover {
+                background: #1d4ed8;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .quick-btn:active {
+                transform: translateY(0);
+            }
+            .form-input:focus {
+                outline: none;
+                border-color: #2563eb;
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

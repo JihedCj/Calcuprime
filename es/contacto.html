@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contacte a CalcuPrime - Póngase en contacto con nuestro equipo para soporte, comentarios, asociaciones o consultas de prensa. Estamos aquí para ayudarlo con todas sus necesidades de calculadora.">
+    <meta name="keywords" content="contacto CalcuPrime, soporte de calculadora, comentarios, asociaciones, consultas de prensa">
+    <meta name="author" content="CalcuPrime">
+    <meta name="robots" content="index, follow">
+
+    <!-- Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/contact.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/contacto.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/contact.html">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Contáctenos - CalcuPrime">
+    <meta property="og:description" content="Póngase en contacto con CalcuPrime. Estamos aquí para ayudarlo con soporte, comentarios y consultas.">
+    <meta property="og:image" content="../assets/og-image.jpg">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <title>Contáctenos - CalcuPrime | Póngase en Contacto</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/contacto.html">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+
+    <style>
+        /* Contact Page Specific Styles */
+        .contact-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .contact-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-hero p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-section {
+            padding: 3rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-form-container,
+        .contact-info-container {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .contact-form-container h2,
+        .contact-info-container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-label .required {
+            color: #ef4444;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: var(--font-family);
+            transition: all 0.3s ease;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-input.error,
+        .form-select.error,
+        .form-textarea.error {
+            border-color: #ef4444;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .privacy-notice {
+            background: var(--bg-alt);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        .privacy-notice a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .privacy-notice a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-alt);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-method-icon {
+            font-size: 1.5rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .contact-method-content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .contact-method-content p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .contact-method-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .contact-method-content a:hover {
+            text-decoration: underline;
+        }
+
+        .support-categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .support-category {
+            background: var(--bg-alt);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .support-category-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .support-category h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .business-info {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .business-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            padding: 1rem;
+            background: var(--bg-alt);
+            border-radius: 0.75rem;
+        }
+
+        .info-item h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-item p {
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .faq-section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .faq-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .faq-question::before {
+            content: "P:";
+            color: var(--primary-color);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-left: 1.75rem;
+        }
+
+        .response-time {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .response-time h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .response-time p {
+            margin: 0;
+            opacity: 0.95;
+        }
+
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 10px 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .language-switch a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .language-switch a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .support-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .language-switch {
+                position: static;
+                margin: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switch">
+        <a href="../contact.html">🇬🇧 English</a>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="../" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../#finance">Finanzas</a></li>
+                <li><a href="../#health">Salud</a></li>
+                <li><a href="../#converters">Convertidores</a></li>
+                <li><a href="../#math">Matemáticas</a></li>
+                <li><a href="../#chemistry">Química</a></li>
+                <li><a href="../#everyday">Cotidiano</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Buscar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">&times;</button>
+            <input type="text" id="searchInput" placeholder="Buscar calculadoras..." class="search-input">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Contáctenos</h1>
+            <p>¿Tiene preguntas o comentarios? Nos encantaría saber de usted. Nuestro equipo está aquí para ayudarlo con cualquier consulta.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-container">
+                    <h2>Envíenos un Mensaje</h2>
+                    <div class="success-message" id="successMessage">
+                        ¡Gracias por contactarnos! Nos pondremos en contacto con usted dentro de 24-48 horas.
+                    </div>
+                    <form id="contactForm" novalidate>
+                        <div class="form-group">
+                            <label for="name" class="form-label">
+                                Nombre Completo <span class="required">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                class="form-input"
+                                required
+                                placeholder="Juan Pérez"
+                            >
+                            <div class="error-message" id="nameError">Por favor ingrese su nombre</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                Correo Electrónico <span class="required">*</span>
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="form-input"
+                                required
+                                placeholder="juan@ejemplo.com"
+                            >
+                            <div class="error-message" id="emailError">Por favor ingrese un correo electrónico válido</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label">
+                                Asunto <span class="required">*</span>
+                            </label>
+                            <select id="subject" name="subject" class="form-select" required>
+                                <option value="">Seleccione un asunto...</option>
+                                <option value="general">Consulta General</option>
+                                <option value="feedback">Comentarios y Sugerencias</option>
+                                <option value="bug">Reporte de Error</option>
+                                <option value="feature">Solicitud de Función</option>
+                                <option value="partnership">Consulta de Asociación</option>
+                                <option value="press">Prensa y Medios</option>
+                                <option value="support">Soporte Técnico</option>
+                                <option value="other">Otro</option>
+                            </select>
+                            <div class="error-message" id="subjectError">Por favor seleccione un asunto</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">
+                                Mensaje <span class="required">*</span>
+                            </label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                class="form-textarea"
+                                required
+                                placeholder="Díganos cómo podemos ayudarle..."
+                            ></textarea>
+                            <div class="error-message" id="messageError">Por favor ingrese su mensaje (mínimo 10 caracteres)</div>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            Enviar Mensaje
+                        </button>
+
+                        <div class="privacy-notice">
+                            Al enviar este formulario, usted acepta nuestra <a href="privacidad.html">Política de Privacidad</a>.
+                            Solo usaremos su información para responder a su consulta y nunca la compartiremos con terceros.
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="contact-info-container">
+                    <h2>Póngase en Contacto</h2>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">📧</div>
+                        <div class="contact-method-content">
+                            <h3>Envíenos un Correo</h3>
+                            <p><a href="mailto:support@calcuprime.com">support@calcuprime.com</a></p>
+                            <p>Para consultas generales y soporte</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">💼</div>
+                        <div class="contact-method-content">
+                            <h3>Consultas Comerciales</h3>
+                            <p><a href="mailto:business@calcuprime.com">business@calcuprime.com</a></p>
+                            <p>Para asociaciones y colaboraciones</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-method-icon">📰</div>
+                        <div class="contact-method-content">
+                            <h3>Prensa y Medios</h3>
+                            <p><a href="mailto:press@calcuprime.com">press@calcuprime.com</a></p>
+                            <p>Para consultas de medios y comunicados de prensa</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem; font-size: 1.125rem;">Categorías de Soporte</h3>
+                    <div class="support-categories">
+                        <div class="support-category">
+                            <div class="support-category-icon">💬</div>
+                            <h3>Comentarios</h3>
+                        </div>
+                        <div class="support-category">
+                            <div class="support-category-icon">🐛</div>
+                            <h3>Reportes de Errores</h3>
+                        </div>
+                        <div class="support-category">
+                            <div class="support-category-icon">🤝</div>
+                            <h3>Asociaciones</h3>
+                        </div>
+                        <div class="support-category">
+                            <div class="support-category-icon">📢</div>
+                            <h3>Prensa</h3>
+                        </div>
+                    </div>
+
+                    <div class="response-time">
+                        <h3>⏱️ Tiempo de Respuesta Esperado</h3>
+                        <p>Normalmente respondemos dentro de 24-48 horas durante días hábiles</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Information -->
+            <div class="business-info">
+                <h2>Acerca de CalcuPrime</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h3>Nombre de la Empresa</h3>
+                        <p>CalcuPrime</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Tipo de Servicio</h3>
+                        <p>Plataforma de Calculadoras en Línea</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Fundada</h3>
+                        <p>2024</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Cobertura de Servicio</h3>
+                        <p>Global</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5rem; color: var(--text-secondary); line-height: 1.6;">
+                    CalcuPrime es una plataforma profesional de calculadoras en línea que proporciona calculadoras y conversores gratuitos, precisos y fáciles de usar para finanzas, salud, química y cálculos cotidianos. Nuestra misión es hacer que los cálculos complejos sean simples y accesibles para todos, en cualquier lugar.
+                </p>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2>Preguntas Frecuentes</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Cuán rápido recibiré una respuesta?</div>
+                    <div class="faq-answer">
+                        Nuestro objetivo es responder a todas las consultas dentro de 24-48 horas durante días hábiles (lunes a viernes).
+                        Los mensajes recibidos durante los fines de semana o días festivos se atenderán el siguiente día hábil.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Las calculadoras de CalcuPrime son realmente gratuitas?</div>
+                    <div class="faq-answer">
+                        ¡Sí! Todas nuestras calculadoras y conversores son completamente gratuitos. Apoyamos nuestro servicio a través de publicidad ética, lo que nos ayuda a mantener y mejorar nuestra plataforma sin cobrar a los usuarios.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Cómo puedo reportar un error o error en una calculadora?</div>
+                    <div class="faq-answer">
+                        Por favor use el formulario de contacto arriba y seleccione "Reporte de Error" como asunto. Incluya detalles sobre qué calculadora estaba usando, qué entradas proporcionó y cuál fue el resultado inesperado.
+                        Las capturas de pantalla son útiles si es posible.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Puedo sugerir una nueva calculadora o función?</div>
+                    <div class="faq-answer">
+                        ¡Absolutamente! Nos encanta escuchar sugerencias de nuestros usuarios. Seleccione "Comentarios y Sugerencias" o "Solicitud de Función" en el formulario de contacto y díganos qué calculadora o función le gustaría ver.
+                        Revisamos todas las sugerencias y priorizamos según la demanda de los usuarios.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Ofrecen acceso API o soluciones de marca blanca?</div>
+                    <div class="faq-answer">
+                        Para consultas comerciales que incluyen acceso API, soluciones de marca blanca u oportunidades de asociación, envíenos un correo electrónico a business@calcuprime.com con detalles sobre sus requisitos.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Cómo garantizan la precisión de sus calculadoras?</div>
+                    <div class="faq-answer">
+                        Todas nuestras calculadoras se desarrollan utilizando fórmulas estándar de la industria y se someten a pruebas exhaustivas.
+                        Actualizamos regularmente nuestras calculadoras según los comentarios de los usuarios y los estándares cambiantes. Sin embargo, para decisiones críticas, siempre recomendamos consultar con un profesional calificado.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Mis datos están seguros cuando uso sus calculadoras?</div>
+                    <div class="faq-answer">
+                        Sí. Todos los cálculos se realizan localmente en su navegador y no almacenamos ni transmitimos sus datos de cálculo a nuestros servidores. Lea nuestra <a href="privacidad.html">Política de Privacidad</a> para obtener detalles completos sobre cómo manejamos los datos.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Puedo usar las calculadoras de CalcuPrime en mi dispositivo móvil?</div>
+                    <div class="faq-answer">
+                        ¡Sí! Toda nuestra plataforma es completamente responsive y está optimizada para dispositivos móviles, tabletas y computadoras de escritorio. Puede acceder a todas las funciones desde cualquier dispositivo con un navegador web.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Calculadoras y conversores profesionales en línea para todas sus necesidades de cálculo.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categorías</h4>
+                    <ul class="footer-links">
+                        <li><a href="../category/finance.html">Finanzas</a></li>
+                        <li><a href="../category/health.html">Salud</a></li>
+                        <li><a href="../category/converters.html">Convertidores</a></li>
+                        <li><a href="../category/math.html">Matemáticas</a></li>
+                        <li><a href="../category/chemistry.html">Química</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Recursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="acerca.html">Acerca de</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="../sitemap.html">Mapa del sitio</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacidad.html">Política de Privacidad</a></li>
+                        <li><a href="terminos.html">Términos de Servicio</a></li>
+                        <li><a href="cookies.html">Política de Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Form Validation and Submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+
+            // Form fields
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const subjectSelect = document.getElementById('subject');
+            const messageTextarea = document.getElementById('message');
+
+            // Error messages
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const subjectError = document.getElementById('subjectError');
+            const messageError = document.getElementById('messageError');
+
+            // Validation functions
+            function validateName() {
+                const name = nameInput.value.trim();
+                if (name.length < 2) {
+                    nameInput.classList.add('error');
+                    nameError.classList.add('show');
+                    return false;
+                }
+                nameInput.classList.remove('error');
+                nameError.classList.remove('show');
+                return true;
+            }
+
+            function validateEmail() {
+                const email = emailInput.value.trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    emailInput.classList.add('error');
+                    emailError.classList.add('show');
+                    return false;
+                }
+                emailInput.classList.remove('error');
+                emailError.classList.remove('show');
+                return true;
+            }
+
+            function validateSubject() {
+                if (subjectSelect.value === '') {
+                    subjectSelect.classList.add('error');
+                    subjectError.classList.add('show');
+                    return false;
+                }
+                subjectSelect.classList.remove('error');
+                subjectError.classList.remove('show');
+                return true;
+            }
+
+            function validateMessage() {
+                const message = messageTextarea.value.trim();
+                if (message.length < 10) {
+                    messageTextarea.classList.add('error');
+                    messageError.classList.add('show');
+                    return false;
+                }
+                messageTextarea.classList.remove('error');
+                messageError.classList.remove('show');
+                return true;
+            }
+
+            // Real-time validation
+            nameInput.addEventListener('blur', validateName);
+            emailInput.addEventListener('blur', validateEmail);
+            subjectSelect.addEventListener('change', validateSubject);
+            messageTextarea.addEventListener('blur', validateMessage);
+
+            // Clear error on input
+            nameInput.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateName();
+                }
+            });
+
+            emailInput.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateEmail();
+                }
+            });
+
+            messageTextarea.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateMessage();
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Validate all fields
+                const isNameValid = validateName();
+                const isEmailValid = validateEmail();
+                const isSubjectValid = validateSubject();
+                const isMessageValid = validateMessage();
+
+                if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
+                    // Disable submit button
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Enviando...';
+
+                    // Simulate form submission (replace with actual submission logic)
+                    setTimeout(function() {
+                        // Show success message
+                        successMessage.classList.add('show');
+
+                        // Reset form
+                        form.reset();
+
+                        // Re-enable submit button
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Enviar Mensaje';
+
+                        // Hide success message after 5 seconds
+                        setTimeout(function() {
+                            successMessage.classList.remove('show');
+                        }, 5000);
+
+                        // Scroll to success message
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

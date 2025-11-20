@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conversor de peso gratuito - Convierte entre miligramos, gramos, kilogramos, toneladas métricas, onzas, libras, stones y toneladas estadounidenses. Conversión bidireccional en tiempo real con referencias comunes.">
+    <meta name="keywords" content="conversor de peso, conversor de masa, kg a lbs, libras a kg, gramos a onzas, calculadora de conversión de peso, métrico a imperial">
+
+    <title>Conversor de Peso - Herramienta Gratuita de Conversión de Masa y Peso | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/conversor-peso.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/weight-converter.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-peso.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/weight-converter.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../index.html#finance">Finanzas</a></li>
+                <li><a href="../../index.html#health">Salud</a></li>
+                <li><a href="../../index.html#converters">Conversores</a></li>
+                <li><a href="../../index.html#math">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Conversor de Peso</h1>
+            <p class="calculator-description">Convierte peso y masa entre unidades métricas e imperiales con conversión bidireccional en tiempo real</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Conversión de Peso</h3>
+                <p style="color: #6b7280; margin-bottom: 20px;">Ingrese un valor en cualquier campo para convertir automáticamente</p>
+
+                <!-- Metric Units -->
+                <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin-top: 0; color: #2563eb;">Sistema Métrico</h4>
+
+                    <div class="form-group">
+                        <label for="milligrams" class="form-label">Miligramos (mg)</label>
+                        <input type="number" id="milligrams" class="form-input weight-input" data-unit="mg" step="any" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="grams" class="form-label">Gramos (g)</label>
+                        <input type="number" id="grams" class="form-input weight-input" data-unit="g" step="any" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kilograms" class="form-label">Kilogramos (kg)</label>
+                        <input type="number" id="kilograms" class="form-input weight-input" data-unit="kg" step="any" placeholder="0" value="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metricTons" class="form-label">Toneladas Métricas (t)</label>
+                        <input type="number" id="metricTons" class="form-input weight-input" data-unit="t" step="any" placeholder="0">
+                    </div>
+                </div>
+
+                <!-- Imperial Units -->
+                <div style="background: #fef3f2; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin-top: 0; color: #dc2626;">Sistema Imperial</h4>
+
+                    <div class="form-group">
+                        <label for="ounces" class="form-label">Onzas (oz)</label>
+                        <input type="number" id="ounces" class="form-input weight-input" data-unit="oz" step="any" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pounds" class="form-label">Libras (lbs)</label>
+                        <input type="number" id="pounds" class="form-input weight-input" data-unit="lbs" step="any" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stones" class="form-label">Stones (st)</label>
+                        <input type="number" id="stones" class="form-input weight-input" data-unit="st" step="any" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usTons" class="form-label">Toneladas Estadounidenses (ton)</label>
+                        <input type="number" id="usTons" class="form-input weight-input" data-unit="ton" step="any" placeholder="0">
+                    </div>
+                </div>
+
+                <button onclick="clearAll()" class="btn-calculate" style="background: #6b7280;">Borrar Todo</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Conversiones Rápidas</h3>
+                <p style="color: #6b7280; margin-bottom: 15px;">Haga clic para convertir instantáneamente</p>
+
+                <div style="display: grid; gap: 10px; margin-bottom: 20px;">
+                    <button onclick="quickConvert(1, 'kg')" class="quick-btn">1 Kilogramo</button>
+                    <button onclick="quickConvert(100, 'g')" class="quick-btn">100 Gramos</button>
+                    <button onclick="quickConvert(1, 'lbs')" class="quick-btn">1 Libra</button>
+                    <button onclick="quickConvert(16, 'oz')" class="quick-btn">16 Onzas</button>
+                    <button onclick="quickConvert(1, 'st')" class="quick-btn">1 Stone</button>
+                    <button onclick="quickConvert(1000, 'kg')" class="quick-btn">1 Tonelada Métrica</button>
+                </div>
+
+                <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h4 style="margin-top: 0;">Conversión Actual</h4>
+                    <div id="conversionDisplay" style="font-size: 1.1rem; color: #1f2937; line-height: 1.8;">
+                        <strong>1 kg</strong> = 2,205 lbs<br>
+                        <strong>1 kg</strong> = 35,274 oz<br>
+                        <strong>1 kg</strong> = 1000 g
+                    </div>
+                </div>
+
+                <div style="background: #dbeafe; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <h4 style="margin-top: 0; color: #1e40af;">¿Sabías Que?</h4>
+                    <p style="margin: 0; color: #1e3a8a; font-size: 0.9rem;">El kilogramo es la única unidad base del SI con un prefijo métrico. Está definido por la constante de Planck, lo que lo convierte en una de las unidades más precisamente definidas en física.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Conversions Reference Table -->
+        <div class="content-section">
+            <h2>Conversiones de Peso Comunes</h2>
+            <p>Referencia rápida para conversiones de peso frecuentemente utilizadas:</p>
+
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <thead>
+                        <tr style="background: #2563eb; color: white;">
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">De</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">A</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Multiplicar por</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Ejemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">Kilogramos</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Libras</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">2,20462</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">5 kg = 11,02 lbs</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Libras</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Kilogramos</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">0,453592</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">10 lbs = 4,54 kg</td>
+                        </tr>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">Gramos</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Onzas</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">0,035274</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">100 g = 3,53 oz</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Onzas</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Gramos</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">28,3495</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">5 oz = 141,75 g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Understanding Weight Units -->
+        <div class="content-section">
+            <h2>Comprendiendo las Unidades de Peso y Masa</h2>
+
+            <h3>¿Cuál es la Diferencia entre Peso y Masa?</h3>
+            <p>Aunque a menudo se usan indistintamente en la vida cotidiana, <strong>masa</strong> y <strong>peso</strong> son técnicamente diferentes:</p>
+            <ul>
+                <li><strong>Masa</strong> es la cantidad de materia en un objeto, medida en kilogramos (kg) o gramos (g). La masa permanece constante independientemente de la ubicación.</li>
+                <li><strong>Peso</strong> es la fuerza ejercida sobre un objeto debido a la gravedad, medida en newtons (N). El peso varía según la atracción gravitacional.</li>
+                <li>En aplicaciones prácticas, comúnmente usamos unidades de masa (kg, lbs) para expresar "peso" en contextos cotidianos.</li>
+            </ul>
+
+            <h3>Unidades del Sistema Métrico</h3>
+            <p>El sistema métrico (Sistema Internacional de Unidades - SI) utiliza mediciones basadas en decimales:</p>
+            <ul>
+                <li><strong>Miligramo (mg)</strong> - Una milésima de gramo. Usado para medicamentos, vitaminas y mediciones de precisión.</li>
+                <li><strong>Gramo (g)</strong> - Unidad base para masas pequeñas. Común en cocina, porciones de alimentos y joyería.</li>
+                <li><strong>Kilogramo (kg)</strong> - 1.000 gramos. La unidad base del SI para masa, usada para peso corporal, comestibles y propósitos generales.</li>
+                <li><strong>Tonelada Métrica (t)</strong> - 1.000 kilogramos. También llamada tonelada, usada para masas grandes como vehículos y carga.</li>
+            </ul>
+
+            <h3>Unidades del Sistema Imperial</h3>
+            <p>El sistema imperial, utilizado principalmente en Estados Unidos, incluye:</p>
+            <ul>
+                <li><strong>Onza (oz)</strong> - 1/16 de libra. Usada para ingredientes alimentarios, paquetes postales y metales preciosos.</li>
+                <li><strong>Libra (lbs)</strong> - Aproximadamente 453,6 gramos. Unidad estándar para peso corporal y alimentos en EE. UU. y Reino Unido.</li>
+                <li><strong>Stone (st)</strong> - 14 libras. Utilizado principalmente en Reino Unido e Irlanda para mediciones de peso corporal.</li>
+                <li><strong>Tonelada Estadounidense (ton)</strong> - 2.000 libras. También llamada tonelada corta, usada para vehículos grandes y materiales industriales.</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Cómo convierto kilogramos a libras?</h3>
+            <p>Multiplique el número de kilogramos por 2,20462 para obtener libras. Por ejemplo: 5 kg × 2,20462 = 11,02 lbs. Para cálculos mentales rápidos, multiplique por 2,2 o simplemente duplique el valor de kg y agregue 10%.</p>
+
+            <h3>¿Cuántos gramos hay en una libra?</h3>
+            <p>Una libra equivale exactamente a 453,592 gramos (a menudo redondeado a 454 gramos para simplificar). Por el contrario, un gramo equivale aproximadamente a 0,0022 libras.</p>
+
+            <h3>¿Por qué algunos países usan stones para medir el peso?</h3>
+            <p>La unidad stone (igual a 14 libras o aproximadamente 6,35 kg) se utiliza principalmente en Reino Unido e Irlanda para medir el peso corporal humano. Es una unidad tradicional que ha permanecido en uso común a pesar de la adopción oficial del sistema métrico.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Conversores Relacionados</h2>
+            <div class="calculator-grid">
+                <a href="conversor-longitud.html" class="calc-card">
+                    <div class="calc-icon">📏</div>
+                    <h3 class="calc-title">Conversor de Longitud</h3>
+                    <p class="calc-description">Convierte unidades de distancia y longitud</p>
+                </a>
+
+                <a href="conversor-temperatura.html" class="calc-card">
+                    <div class="calc-icon">🌡️</div>
+                    <h3 class="calc-title">Conversor de Temperatura</h3>
+                    <p class="calc-description">Convierte unidades de temperatura</p>
+                </a>
+
+                <a href="conversor-divisas.html" class="calc-card">
+                    <div class="calc-icon">💱</div>
+                    <h3 class="calc-title">Conversor de Divisas</h3>
+                    <p class="calc-description">Convierte entre monedas principales</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Language detector - redirect if browser prefers English
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const isSpanishPage = window.location.pathname.includes('/es/');
+            const hasVisited = sessionStorage.getItem('languageChecked');
+
+            if (!hasVisited && isSpanishPage && !userLang.startsWith('es')) {
+                if (confirm('English version available. Would you like to switch?\n\nVersión en inglés disponible. ¿Desea cambiar?')) {
+                    window.location.href = '/calculators/weight-converter.html';
+                }
+                sessionStorage.setItem('languageChecked', 'true');
+            }
+        })();
+
+        // Conversion factors to grams (base unit)
+        const conversionFactors = {
+            'mg': 0.001,
+            'g': 1,
+            'kg': 1000,
+            't': 1000000,
+            'oz': 28.349523125,
+            'lbs': 453.59237,
+            'st': 6350.29318,
+            'ton': 907184.74
+        };
+
+        const unitNames = {
+            'mg': 'miligramos',
+            'g': 'gramos',
+            'kg': 'kilogramos',
+            't': 'toneladas métricas',
+            'oz': 'onzas',
+            'lbs': 'libras',
+            'st': 'stones',
+            'ton': 'toneladas estadounidenses'
+        };
+
+        let isUpdating = false;
+
+        document.querySelectorAll('.weight-input').forEach(input => {
+            input.addEventListener('input', function() {
+                if (!isUpdating) {
+                    convertWeight(this);
+                }
+            });
+
+            input.addEventListener('focus', function() {
+                this.select();
+            });
+        });
+
+        function convertWeight(sourceInput) {
+            isUpdating = true;
+
+            const sourceValue = parseFloat(sourceInput.value);
+            const sourceUnit = sourceInput.dataset.unit;
+
+            if (isNaN(sourceValue) || sourceValue === '') {
+                document.querySelectorAll('.weight-input').forEach(input => {
+                    if (input !== sourceInput) {
+                        input.value = '';
+                    }
+                });
+                isUpdating = false;
+                updateConversionDisplay(0, sourceUnit);
+                return;
+            }
+
+            const valueInGrams = sourceValue * conversionFactors[sourceUnit];
+
+            document.querySelectorAll('.weight-input').forEach(input => {
+                if (input !== sourceInput) {
+                    const targetUnit = input.dataset.unit;
+                    const convertedValue = valueInGrams / conversionFactors[targetUnit];
+
+                    if (Math.abs(convertedValue) < 0.001) {
+                        input.value = convertedValue.toExponential(4);
+                    } else if (Math.abs(convertedValue) < 1) {
+                        input.value = convertedValue.toFixed(6);
+                    } else if (Math.abs(convertedValue) < 100) {
+                        input.value = convertedValue.toFixed(4);
+                    } else if (Math.abs(convertedValue) < 10000) {
+                        input.value = convertedValue.toFixed(2);
+                    } else {
+                        input.value = convertedValue.toFixed(1);
+                    }
+                }
+            });
+
+            updateConversionDisplay(sourceValue, sourceUnit);
+            isUpdating = false;
+        }
+
+        function updateConversionDisplay(value, unit) {
+            if (value === 0 || isNaN(value)) {
+                document.getElementById('conversionDisplay').innerHTML = `
+                    <strong>1 kg</strong> = 2,205 lbs<br>
+                    <strong>1 kg</strong> = 35,274 oz<br>
+                    <strong>1 kg</strong> = 1000 g
+                `;
+                return;
+            }
+
+            const valueInGrams = value * conversionFactors[unit];
+            const displayLines = [];
+
+            const relevantUnits = getRelevantUnits(unit);
+            relevantUnits.forEach(targetUnit => {
+                const converted = valueInGrams / conversionFactors[targetUnit];
+                const formattedValue = formatDisplayValue(converted);
+                displayLines.push(
+                    `<strong>${value} ${unit}</strong> = ${formattedValue} ${targetUnit}`
+                );
+            });
+
+            document.getElementById('conversionDisplay').innerHTML = displayLines.join('<br>');
+        }
+
+        function getRelevantUnits(sourceUnit) {
+            const relevantMap = {
+                'mg': ['g', 'oz', 'lbs'],
+                'g': ['kg', 'oz', 'lbs'],
+                'kg': ['lbs', 'g', 'oz'],
+                't': ['kg', 'lbs', 'ton'],
+                'oz': ['g', 'lbs', 'kg'],
+                'lbs': ['kg', 'oz', 'g'],
+                'st': ['kg', 'lbs', 'g'],
+                'ton': ['t', 'kg', 'lbs']
+            };
+            return relevantMap[sourceUnit] || ['g', 'kg', 'lbs'];
+        }
+
+        function formatDisplayValue(value) {
+            if (Math.abs(value) < 0.001) {
+                return value.toExponential(2);
+            } else if (Math.abs(value) < 1) {
+                return value.toFixed(4);
+            } else if (Math.abs(value) < 100) {
+                return value.toFixed(3);
+            } else if (Math.abs(value) < 1000) {
+                return value.toFixed(2);
+            } else {
+                return value.toFixed(1);
+            }
+        }
+
+        function quickConvert(value, unit) {
+            const input = document.querySelector(`[data-unit="${unit}"]`);
+            input.value = value;
+            convertWeight(input);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function clearAll() {
+            isUpdating = true;
+            document.querySelectorAll('.weight-input').forEach(input => {
+                input.value = '';
+            });
+            document.getElementById('kilograms').value = '1';
+            isUpdating = false;
+            convertWeight(document.getElementById('kilograms'));
+        }
+
+        window.addEventListener('load', function() {
+            convertWeight(document.getElementById('kilograms'));
+        });
+    </script>
+
+    <style>
+        .quick-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-btn:active {
+            transform: translateY(0);
+        }
+
+        .weight-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 8px !important;
+            }
+        }
+    </style>
+</body>
+</html>

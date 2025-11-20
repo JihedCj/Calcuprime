@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de inversiones gratuita - Calcula el crecimiento de tus inversiones con interés compuesto y contribuciones regulares. Planifica para jubilación, metas de ahorro y construcción de riqueza.">
+    <meta name="keywords" content="calculadora de inversiones, calculadora de interés compuesto, calculadora de jubilación, calculadora de ahorros, crecimiento de inversiones, calculadora de portafolio">
+
+    <title>Calculadora de Inversiones - Calculadora Gratuita de Interés Compuesto y Crecimiento | CalcuPrime</title>
+
+    <!-- Alternate language versions (hreflang) -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/investment-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-inversion.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/investment-calculator.html">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-inversion.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finance">Finanzas</a></li>
+                <li><a href="../../es/index.html#health">Salud</a></li>
+                <li><a href="../../es/index.html#converters">Conversores</a></li>
+                <li><a href="../../es/index.html#math">Matemáticas</a></li>
+                <li><a href="../../calculators/investment-calculator.html" class="lang-switch">EN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Inversiones</h1>
+            <p class="calculator-description">Calcula el crecimiento de tus inversiones con interés compuesto y contribuciones regulares. Planifica tu futuro financiero.</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Detalles de Inversión</h3>
+
+                <div class="form-group">
+                    <label for="initialInvestment" class="form-label">Inversión Inicial ($)</label>
+                    <input type="number" id="initialInvestment" class="form-input" value="10000" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyContribution" class="form-label">Contribución Mensual ($)</label>
+                    <input type="number" id="monthlyContribution" class="form-input" value="500" min="0" step="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="annualReturn" class="form-label">Tasa de Rendimiento Anual (%)</label>
+                    <input type="number" id="annualReturn" class="form-input" value="8" min="0" max="50" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="investmentPeriod" class="form-label">Período de Inversión (años)</label>
+                    <input type="number" id="investmentPeriod" class="form-input" value="20" min="1" max="50" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="compoundFrequency" class="form-label">Frecuencia de Capitalización</label>
+                    <select id="compoundFrequency" class="form-select">
+                        <option value="12">Mensual</option>
+                        <option value="4">Trimestral</option>
+                        <option value="2">Semestral</option>
+                        <option value="1">Anual</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contributionTiming" class="form-label">Momento de Contribución</label>
+                    <select id="contributionTiming" class="form-select">
+                        <option value="end">Final del Período</option>
+                        <option value="beginning">Inicio del Período</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateInvestment()" class="btn-calculate">Calcular Crecimiento</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tu Crecimiento de Inversión</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Valor Futuro</div>
+                    <div class="result-value" id="futureValue" style="font-size: 2.5rem; color: #10b981;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total de Contribuciones</div>
+                    <div class="result-value" id="totalContributions" style="font-size: 1.5rem;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Ganancias Totales</div>
+                    <div class="result-value" id="totalEarnings" style="font-size: 1.5rem; color: #2563eb;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Retorno sobre la Inversión (ROI)</div>
+                    <div class="result-value" id="roi" style="font-size: 1.3rem; color: #8b5cf6;">0%</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px; color: #374151;">Desglose del Crecimiento</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #6b7280;">Inversión Inicial:</span>
+                        <span id="initialDisplay" style="font-weight: 600;">$0.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #6b7280;">Total de Contribuciones:</span>
+                        <span id="contributionsDisplay" style="font-weight: 600;">$0.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #6b7280;">Interés Ganado:</span>
+                        <span id="interestDisplay" style="font-weight: 600; color: #10b981;">$0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desglose Anual -->
+        <div class="content-section" id="yearlyBreakdownSection" style="display: none;">
+            <h2>Crecimiento Año a Año</h2>
+            <p style="color: #6b7280; margin-bottom: 20px;">Observa cómo tu inversión crece con el tiempo mediante interés compuesto</p>
+            <div style="overflow-x: auto;">
+                <table id="yearlyTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f3f4f6;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Año</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Saldo Inicial</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Contribuciones</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Interés Ganado</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Saldo Final</th>
+                        </tr>
+                    </thead>
+                    <tbody id="yearlyBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar la Calculadora de Inversiones</h2>
+            <p>Nuestra calculadora de inversiones te ayuda a proyectar el crecimiento de tus inversiones en el tiempo, considerando el interés compuesto y las contribuciones regulares. Así es como usarla:</p>
+            <ol>
+                <li><strong>Inversión Inicial:</strong> Ingresa la cantidad con la que deseas comenzar. Esto podría ser dinero que ya has ahorrado o planeas invertir inicialmente.</li>
+                <li><strong>Contribución Mensual:</strong> Ingresa cuánto planeas agregar a tu inversión cada mes. Las contribuciones consistentes aceleran significativamente el crecimiento.</li>
+                <li><strong>Tasa de Rendimiento Anual:</strong> Ingresa la tasa esperada de rendimiento anual. El promedio histórico del mercado de valores es 7-10%, pero los rendimientos varían.</li>
+                <li><strong>Período de Inversión:</strong> Elige cuántos años planeas invertir. Los períodos más largos permiten que el interés compuesto haga su magia.</li>
+                <li><strong>Frecuencia de Capitalización:</strong> Selecciona con qué frecuencia se capitaliza el interés. La capitalización más frecuente genera rendimientos ligeramente más altos.</li>
+                <li><strong>Momento de Contribución:</strong> Elige si las contribuciones se realizan al inicio o final de cada período.</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo el Interés Compuesto</h2>
+            <p>El interés compuesto a menudo se llama la "octava maravilla del mundo" por una buena razón. Es el proceso en el que tus ganancias de inversión generan sus propias ganancias.</p>
+
+            <h3>Cómo Funciona el Interés Compuesto</h3>
+            <p>Cuando inviertes dinero, obtienes rendimientos sobre tu inversión inicial. Con interés compuesto, esos rendimientos se reinvierten, y comienzas a obtener rendimientos sobre tus rendimientos. Con el tiempo, esto crea un crecimiento exponencial en lugar de lineal.</p>
+
+            <h3>El Poder del Tiempo</h3>
+            <p>Cuanto más tiempo tu dinero esté invertido, más poderoso se vuelve el interés compuesto. Incluso pequeñas contribuciones realizadas temprano pueden crecer a cantidades sustanciales durante décadas. Esta es la razón por la cual comenzar a invertir temprano es una de las decisiones financieras más importantes que puedes tomar.</p>
+
+            <h3>Fórmula de Interés Compuesto</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                VF = P × (1 + r/n)^(nt) + PMT × [((1 + r/n)^(nt) - 1) / (r/n)]<br><br>
+                Donde:<br>
+                VF = Valor Futuro<br>
+                P = Principal (inversión inicial)<br>
+                r = Tasa de interés anual (decimal)<br>
+                n = Número de veces que el interés se capitaliza por año<br>
+                t = Número de años<br>
+                PMT = Pago regular (contribución)
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>Estrategias de Inversión para el Éxito</h2>
+
+            <h3>1. Comienza Temprano</h3>
+            <p>El tiempo es tu mayor activo al invertir. Comenzar solo 5 años antes puede resultar en riqueza significativamente mayor debido al interés compuesto. Incluso si solo puedes invertir pequeñas cantidades inicialmente, comenzar temprano le da a tu dinero más tiempo para crecer.</p>
+
+            <h3>2. Invierte Regularmente</h3>
+            <p>Promediación de costos en dólares - invertir la misma cantidad regularmente independientemente de las condiciones del mercado - ayuda a reducir el impacto de la volatilidad del mercado y elimina la emoción de invertir. Configura contribuciones automáticas para hacer invertir sin esfuerzo.</p>
+
+            <h3>3. Diversifica tu Portafolio</h3>
+            <p>No pongas todos los huevos en la misma canasta. Distribuye tus inversiones entre diferentes clases de activos (acciones, bonos, bienes raíces) y sectores para reducir el riesgo. La diversificación ayuda a proteger tu portafolio de pérdidas significativas.</p>
+
+            <h3>4. Mantén los Costos Bajos</h3>
+            <p>Las comisiones de inversión pueden erosionar significativamente los rendimientos con el tiempo. Una comisión del 1% podría no parecer mucho, pero durante 30 años, puede costarte cientos de miles de dólares. Elige fondos indexados de bajo costo y minimiza el trading.</p>
+
+            <h3>5. Mantén el Rumbo</h3>
+            <p>La volatilidad del mercado es normal. Resiste la tentación de vender durante caídas o perseguir inversiones calientes. Históricamente, los mercados siempre se han recuperado de caídas y han alcanzado nuevos máximos. El pensamiento a largo plazo vence las reacciones a corto plazo.</p>
+
+            <h3>6. Aumenta Contribuciones con el Tiempo</h3>
+            <p>A medida que tus ingresos crecen, aumenta tus contribuciones de inversión. Incluso pequeños aumentos, como elevar tu contribución en 1% cada año, pueden tener un impacto dramático en tu riqueza a largo plazo.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Planificación de Jubilación con Inversiones</h2>
+
+            <h3>La Regla del 72</h3>
+            <p>La Regla del 72 es una forma rápida de estimar cuánto tiempo tardará tu inversión en duplicarse. Divide 72 entre tu tasa de rendimiento anual esperada. Por ejemplo, con rendimientos del 8%, tu dinero se duplica aproximadamente cada 9 años (72 ÷ 8 = 9).</p>
+
+            <h3>¿Cuánto Deberías Ahorrar para la Jubilación?</h3>
+            <p>Los asesores financieros a menudo recomiendan ahorrar 15-20% de tu ingreso bruto para la jubilación. Sin embargo, la cantidad exacta depende de:</p>
+            <ul>
+                <li>Cuándo comienzas a ahorrar (más temprano es mejor)</li>
+                <li>Tu estilo de vida deseado en la jubilación</li>
+                <li>Edad esperada de jubilación</li>
+                <li>Beneficios de seguridad social</li>
+                <li>Otras fuentes de ingresos en la jubilación</li>
+            </ul>
+
+            <h3>Opciones de Cuentas de Jubilación</h3>
+            <ul>
+                <li><strong>401(k):</strong> Plan de jubilación patrocinado por el empleador, a menudo con contribuciones coincidentes. Las contribuciones son pre-impuestos, reduciendo el ingreso imponible actual.</li>
+                <li><strong>IRA Tradicional:</strong> Cuenta individual de jubilación con contribuciones deducibles de impuestos. Los impuestos se pagan al retirar en la jubilación.</li>
+                <li><strong>Roth IRA:</strong> Las contribuciones se realizan con dólares después de impuestos, pero los retiros en la jubilación están libres de impuestos. Excelente para inversores jóvenes.</li>
+                <li><strong>Roth 401(k):</strong> Combina características de 401(k) e IRA Roth. Contribuciones después de impuestos con retiros libres de impuestos.</li>
+            </ul>
+
+            <h3>La Regla del 4%</h3>
+            <p>Una directriz común de planificación de jubilación sugiere que puedes retirar de manera segura el 4% de tus ahorros de jubilación anualmente sin quedarte sin dinero. Usando esta regla, necesitarías 25 veces tus gastos anuales ahorrados para la jubilación.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Errores Comunes de Inversión que Debes Evitar</h2>
+
+            <h3>Intentar Cronometrar el Mercado</h3>
+            <p>Intentar comprar bajo y vender alto suena bien en teoría, pero incluso los inversores profesionales luchan por cronometrar el mercado consistentemente. Los estudios muestran que el tiempo en el mercado vence el cronometraje del mercado.</p>
+
+            <h3>Dejar que las Emociones Conduzcan Decisiones</h3>
+            <p>El miedo y la codicia son emociones poderosas que pueden llevar a decisiones de inversión pobres. Vender durante caídas del mercado congela pérdidas, mientras que comprar durante burbujas a menudo conduce a pagar demasiado. Mantente fiel a tu plan sin importar las condiciones del mercado.</p>
+
+            <h3>No Rebalancear tu Portafolio</h3>
+            <p>A medida que diferentes inversiones crecen a diferentes tasas, tu portafolio puede desviarse de tu asignación objetivo. Rebalancea anualmente para mantener tu nivel de riesgo deseado y aprovechar los movimientos del mercado.</p>
+
+            <h3>Ignorar la Inflación</h3>
+            <p>La inflación erosiona el poder de compra con el tiempo. Tus inversiones necesitan superar la inflación para hacer crecer tu riqueza real. Esta es la razón por la cual mantener todo tu dinero en cuentas de ahorros a menudo resulta en perder poder de compra.</p>
+
+            <h3>No Maximizar el Emparejamiento del Empleador</h3>
+            <p>Si tu empleador ofrece un emparejamiento de 401(k), siempre contribuye lo suficiente para obtener el emparejamiento completo. Es dinero gratuito y un retorno instantáneo del 100% en esa porción de tu inversión. No aprovechar es dejar dinero sobre la mesa.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Expectativas de Rendimiento de Inversión por Clase de Activo</h2>
+
+            <h3>Acciones (Equity)</h3>
+            <p><strong>Promedio Histórico:</strong> 10% anualmente (antes de inflación)</p>
+            <p>Las acciones representan propiedad en empresas y históricamente proporcionan los rendimientos a largo plazo más altos. Sin embargo, también vienen con mayor volatilidad y riesgo, especialmente a corto plazo.</p>
+
+            <h3>Bonos (Renta Fija)</h3>
+            <p><strong>Promedio Histórico:</strong> 5-6% anualmente</p>
+            <p>Los bonos son préstamos a gobiernos o corporaciones. Típicamente proporcionan rendimientos más bajos que las acciones pero con menos volatilidad, lo que los hace populares para inversores conservadores o aquellos cercanos a la jubilación.</p>
+
+            <h3>Bienes Raíces</h3>
+            <p><strong>Promedio Histórico:</strong> 8-10% anualmente (incluyendo ingresos por renta)</p>
+            <p>Los bienes raíces pueden proporcionar ingresos estables a través de alquiler y apreciación potencial. Sin embargo, requiere más gestión activa y tiene barreras de entrada más altas que acciones o bonos.</p>
+
+            <h3>Efectivo y Cuentas de Ahorros</h3>
+            <p><strong>Promedio Actual:</strong> 0.5-5% anualmente</p>
+            <p>Aunque seguro y líquido, las inversiones en efectivo típicamente apenas mantienen el ritmo con la inflación. Son mejores para fondos de emergencia y ahorros a corto plazo, no para construcción de riqueza a largo plazo.</p>
+
+            <h3>Fondos Indexados</h3>
+            <p><strong>Promedio Histórico:</strong> 7-10% anualmente</p>
+            <p>Los fondos indexados rastrean índices de mercado como el S&P 500. Ofrecen amplia diversificación, tarifas bajas y históricamente han superado fondos gestionados activamente durante períodos largos.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Estrategias de Inversión con Ventajas Fiscales</h2>
+
+            <h3>Maximiza Cuentas de Impuestos Diferidos</h3>
+            <p>Contribuir a 401(k)s e IRAs tradicionales reduce tu ingreso imponible actual mientras permite que las inversiones crezcan con impuestos diferidos. Esto puede resultar en ahorros fiscales significativos, especialmente si estás en una categoría fiscal alta ahora pero esperas estar en una más baja en la jubilación.</p>
+
+            <h3>Considera Conversiones Roth</h3>
+            <p>Convertir fondos de cuentas de jubilación tradicionales a Roth significa pagar impuestos ahora pero disfrutar crecimiento y retiros libres de impuestos después. Esto puede ser especialmente beneficioso si esperas estar en una categoría fiscal más alta en la jubilación o si las tasas fiscales aumentan.</p>
+
+            <h3>Cosecha de Pérdidas Fiscales</h3>
+            <p>Vender inversiones con pérdida puede compensar ganancias de capital y reducir tu factura fiscal. Luego puedes reinvertir los ingresos en inversiones similares (pero no idénticas) para mantener tu asignación de portafolio mientras se beneficia de la deducción fiscal.</p>
+
+            <h3>Mantén Inversiones a Largo Plazo</h3>
+            <p>Las inversiones mantenidas por más de un año califican para tasas de impuestos de ganancias de capital a largo plazo, que son significativamente más bajas que las tasas a corto plazo. Esta es otra razón para evitar trading frecuente.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Ejemplos de Inversión del Mundo Real</h2>
+
+            <h3>Ejemplo 1: Comenzar a los 25 años</h3>
+            <p>Un inversionista de 25 años invierte $5,000 inicialmente y contribuye $300 mensualmente con rendimiento anual del 8% durante 40 años:</p>
+            <ul>
+                <li>Total de Contribuciones: $149,000</li>
+                <li>Ganancias de Inversión: $840,000+</li>
+                <li>Valor Final: $990,000+</li>
+            </ul>
+            <p><strong>Conclusión Clave:</strong> Comenzar temprano significa que tus $149,000 en contribuciones crecen a casi $1 millón.</p>
+
+            <h3>Ejemplo 2: Comenzar a los 35 años</h3>
+            <p>Un inversionista de 35 años invierte $5,000 inicialmente y contribuye $300 mensualmente con rendimiento anual del 8% durante 30 años:</p>
+            <ul>
+                <li>Total de Contribuciones: $113,000</li>
+                <li>Ganancias de Inversión: $310,000+</li>
+                <li>Valor Final: $423,000+</li>
+            </ul>
+            <p><strong>Conclusión Clave:</strong> Retrasar 10 años cuesta más de $500,000 en valor final, a pesar de solo $36,000 menos en contribuciones.</p>
+
+            <h3>Ejemplo 3: Ahorrador Agresivo</h3>
+            <p>Un inversionista comienza con $20,000 y contribuye $1,000 mensualmente con rendimiento del 9% durante 25 años:</p>
+            <ul>
+                <li>Total de Contribuciones: $320,000</li>
+                <li>Ganancias de Inversión: $760,000+</li>
+                <li>Valor Final: $1,080,000+</li>
+            </ul>
+            <p><strong>Conclusión Clave:</strong> Contribuciones más altas combinadas con buenos rendimientos pueden construir riqueza relativamente rápido.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Cuál es una tasa de rendimiento realista para inversiones?</h3>
+            <p>Para un portafolio diversificado de acciones y bonos, 6-8% es una estimación conservadora después de contabilizar inflación y comisiones. El mercado de valores históricamente ha devuelto alrededor del 10% anualmente antes de inflación, pero el desempeño pasado no garantiza resultados futuros. Es mejor usar estimaciones conservadoras en tu planificación.</p>
+
+            <h3>¿Cuánto debería haber ahorrado a los 30? ¿A los 40? ¿A los 50?</h3>
+            <p>Una directriz común: A los 30, apunta a 1x tu salario anual ahorrado. A los 40, apunta a 3x tu salario. A los 50, apunta a 6x tu salario. A la jubilación a los 67, deberías tener 10x tu salario ahorrado. Estos son objetivos generales - tus necesidades específicas pueden variar.</p>
+
+            <h3>¿Debería pagar deuda o invertir?</h3>
+            <p>Si tu deuda tiene una tasa de interés más alta que tus rendimientos esperados de inversión (como la mayoría de tarjetas de crédito), prioriza pagar la deuda. Para deuda de bajo interés (como una hipoteca), invertir mientras haces pagos mínimos a menudo tiene más sentido financiero. Siempre considera tu tolerancia al riesgo personal y situación financiera.</p>
+
+            <h3>¿Con qué frecuencia debería verificar mis inversiones?</h3>
+            <p>Verificar trimestralmente o anualmente es suficiente para la mayoría de inversionistas a largo plazo. Verificar demasiado frecuentemente puede llevar a reacciones emocionales a la volatilidad normal del mercado. Enfócate en tu plan a largo plazo en lugar de fluctuaciones diarias.</p>
+
+            <h3>¿Qué si no puedo permitirme invertir mucho?</h3>
+            <p>Comienza con lo que puedas permitirte, incluso si es solo $25 o $50 por mes. Muchos brokers ahora permiten inversión de acciones fraccionarias sin mínimos. El hábito de invertir regularmente es más importante que la cantidad. A medida que tus ingresos crecen, aumenta gradualmente tus contribuciones.</p>
+
+            <h3>¿Cuándo debería comenzar a retirar dinero de mis inversiones?</h3>
+            <p>Para cuentas de jubilación, puedes comenzar retiros sin penalización a los 59½ y debes comenzar distribuciones mínimas requeridas (RMD) a los 73. Para cuentas imponibles, puedes retirar en cualquier momento, pero considera las implicaciones fiscales y el impacto en tus metas a largo plazo.</p>
+
+            <h3>¿Ahora es un buen momento para invertir?</h3>
+            <p>El mejor momento para invertir fue ayer; el segundo mejor es hoy. Intentar cronometrar el mercado es casi imposible. Si inviertes a largo plazo (10+ años), comenzar ahora e invertir consistentemente es más importante que esperar el momento "perfecto".</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Calculadoras Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="calculadora-jubilacion.html" class="calc-card">
+                    <div class="calc-icon">🏖️</div>
+                    <h3 class="calc-title">Calculadora de Jubilación</h3>
+                    <p class="calc-description">Planifica tus metas de ahorro para jubilación</p>
+                </a>
+
+                <a href="calculadora-interes-compuesto.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Calculadora de Interés Compuesto</h3>
+                    <p class="calc-description">Calcula el crecimiento por interés compuesto</p>
+                </a>
+
+                <a href="calculadora-ahorros.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Calculadora de Ahorros</h3>
+                    <p class="calc-description">Monitorea tu progreso de ahorro</p>
+                </a>
+
+                <a href="calculadora-401k.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Calculadora 401(k)</h3>
+                    <p class="calc-description">Maximiza tus contribuciones 401(k)</p>
+                </a>
+
+                <a href="calculadora-roth-ira.html" class="calc-card">
+                    <div class="calc-icon">💎</div>
+                    <h3 class="calc-title">Calculadora Roth IRA</h3>
+                    <p class="calc-description">Planifica tu estrategia Roth IRA</p>
+                </a>
+
+                <a href="calculadora-hipoteca.html" class="calc-card">
+                    <div class="calc-icon">🏠</div>
+                    <h3 class="calc-title">Calculadora de Hipoteca</h3>
+                    <p class="calc-description">Calcula pagos de préstamo hipotecario</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Detector de idioma automático
+        function detectAndSwitchLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('en') && window.location.pathname.includes('/es/')) {
+                // Puedes mostrar una notificación al usuario sobre el cambio de idioma
+                console.log('Usuario con idioma inglés detectado en página en español');
+            }
+        }
+
+        // Ejecutar detector de idioma al cargar la página
+        window.addEventListener('load', detectAndSwitchLanguage);
+
+        function calculateInvestment() {
+            // Obtener valores de entrada
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) || 0;
+            const years = parseInt(document.getElementById('investmentPeriod').value) || 0;
+            const compoundFrequency = parseInt(document.getElementById('compoundFrequency').value) || 12;
+            const contributionTiming = document.getElementById('contributionTiming').value;
+
+            // Validar entradas
+            if (years <= 0) {
+                return;
+            }
+
+            // Calcular períodos totales
+            const totalPeriods = years * 12; // Períodos mensuales
+            const ratePerPeriod = (annualReturn / 100) / 12; // Tasa mensual
+
+            // Calcular valor futuro con contribuciones mensuales
+            let futureValue = initialInvestment;
+            let totalContributions = initialInvestment;
+
+            // Almacenar datos anuales para desglose
+            const yearlyData = [];
+            let currentYear = 0;
+            let yearStartBalance = initialInvestment;
+            let yearContributions = 0;
+            let yearInterest = 0;
+
+            for (let month = 1; month <= totalPeriods; month++) {
+                // Agregar contribución al inicio o final del período
+                if (contributionTiming === 'beginning') {
+                    futureValue += monthlyContribution;
+                    totalContributions += monthlyContribution;
+                    yearContributions += monthlyContribution;
+                }
+
+                // Aplicar interés mensual
+                const interestEarned = futureValue * ratePerPeriod;
+                futureValue += interestEarned;
+                yearInterest += interestEarned;
+
+                // Agregar contribución al final del período
+                if (contributionTiming === 'end') {
+                    futureValue += monthlyContribution;
+                    totalContributions += monthlyContribution;
+                    yearContributions += monthlyContribution;
+                }
+
+                // Almacenar datos anuales
+                if (month % 12 === 0 || month === totalPeriods) {
+                    currentYear++;
+                    yearlyData.push({
+                        year: currentYear,
+                        startBalance: yearStartBalance,
+                        contributions: yearContributions,
+                        interest: yearInterest,
+                        endBalance: futureValue
+                    });
+
+                    yearStartBalance = futureValue;
+                    yearContributions = 0;
+                    yearInterest = 0;
+                }
+            }
+
+            // Calcular ganancias totales
+            const totalEarnings = futureValue - totalContributions;
+
+            // Calcular ROI
+            const roi = totalContributions > 0 ? ((totalEarnings / totalContributions) * 100) : 0;
+
+            // Mostrar resultados principales
+            document.getElementById('futureValue').textContent = formatCurrency(futureValue);
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions);
+            document.getElementById('totalEarnings').textContent = formatCurrency(totalEarnings);
+            document.getElementById('roi').textContent = roi.toFixed(1) + '%';
+
+            // Mostrar desglose
+            document.getElementById('initialDisplay').textContent = formatCurrency(initialInvestment);
+            document.getElementById('contributionsDisplay').textContent = formatCurrency(totalContributions - initialInvestment);
+            document.getElementById('interestDisplay').textContent = formatCurrency(totalEarnings);
+
+            // Generar tabla de desglose anual
+            generateYearlyBreakdown(yearlyData);
+
+            // Mostrar sección de desglose anual
+            document.getElementById('yearlyBreakdownSection').style.display = 'block';
+
+            // Animar resultados
+            animateValue('futureValue');
+        }
+
+        function generateYearlyBreakdown(yearlyData) {
+            const tbody = document.getElementById('yearlyBody');
+            tbody.innerHTML = '';
+
+            yearlyData.forEach(data => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">${data.year}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(data.startBalance)}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(data.contributions)}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; color: #10b981;">${formatCurrency(data.interest)}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; font-weight: 600;">${formatCurrency(data.endBalance)}</td>
+                `;
+            });
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('es-ES', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(num);
+        }
+
+        function animateValue(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        // Calcular automáticamente al cambiar entrada
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateInvestment);
+        });
+
+        // Calcular al cargar la página
+        window.addEventListener('load', function() {
+            calculateInvestment();
+        });
+    </script>
+</body>
+</html>

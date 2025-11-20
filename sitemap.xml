@@ -1,184 +1,427 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <!-- Homepage -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+    <!-- Homepage - English -->
     <url>
         <loc>https://calcuprime.com/</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 
-    <!-- Category Pages -->
+    <!-- Homepage - Spanish -->
+    <url>
+        <loc>https://calcuprime.com/es/</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Category Pages - English -->
     <url>
         <loc>https://calcuprime.com/category/finance.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/category/finanzas.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/category/health.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/category/salud.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/category/converters.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/category/conversores.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/category/math.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/category/matematicas.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/category/chemistry.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/category/quimica.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/category/everyday.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/category/cotidiano.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
 
-    <!-- Finance Calculators -->
+    <!-- Category Pages - Spanish -->
+    <url>
+        <loc>https://calcuprime.com/es/category/finanzas.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/category/finance.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/category/salud.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/category/health.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/category/conversores.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/category/converters.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/category/matematicas.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/category/math.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/category/quimica.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/category/chemistry.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/category/cotidiano.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/category/everyday.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Finance Calculators - English -->
     <url>
         <loc>https://calcuprime.com/calculators/mortgage-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-hipoteca.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/loan-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-prestamos.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/investment-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-inversion.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/compound-interest-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-interes-compuesto.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/retirement-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-jubilacion.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
 
-    <!-- Health Calculators -->
+    <!-- Finance Calculators - Spanish -->
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-hipoteca.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/mortgage-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-prestamos.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/loan-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-inversion.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/investment-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-interes-compuesto.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/compound-interest-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-jubilacion.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/retirement-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Health Calculators - English -->
     <url>
         <loc>https://calcuprime.com/calculators/bmi-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-imc.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/calorie-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-calorias.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/pregnancy-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-embarazo.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/ideal-weight-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-peso-ideal.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Math & Everyday Calculators -->
+    <!-- Health Calculators - Spanish -->
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-imc.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/bmi-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-calorias.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/calorie-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-embarazo.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/pregnancy-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-peso-ideal.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/ideal-weight-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Math & Everyday Calculators - English -->
     <url>
         <loc>https://calcuprime.com/calculators/percentage-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-porcentaje.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/tip-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-propina.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/discount-calculator.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-descuento.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Unit Converters -->
+    <!-- Math & Everyday Calculators - Spanish -->
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-porcentaje.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/percentage-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-propina.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/tip-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/calculadora-descuento.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/discount-calculator.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Unit Converters - English -->
     <url>
         <loc>https://calcuprime.com/calculators/length-converter.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-longitud.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/weight-converter.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-peso.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/temperature-converter.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-temperatura.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/calculators/currency-converter.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-divisas.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
 
-    <!-- Static/Legal Pages -->
+    <!-- Unit Converters - Spanish -->
+    <url>
+        <loc>https://calcuprime.com/es/calculators/conversor-longitud.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/length-converter.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/conversor-peso.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/weight-converter.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/conversor-temperatura.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/temperature-converter.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/calculators/conversor-divisas.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/currency-converter.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Static/Legal Pages - English -->
     <url>
         <loc>https://calcuprime.com/about.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/acerca.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/contact.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/contacto.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/privacy.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/privacidad.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/terms.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/terminos.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
         <loc>https://calcuprime.com/cookies.html</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="https://calcuprime.com/es/cookies.html"/>
         <lastmod>2024-11-20</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.4</priority>
     </url>
+
+    <!-- Static/Legal Pages - Spanish -->
+    <url>
+        <loc>https://calcuprime.com/es/acerca.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/about.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/contacto.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/contact.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/privacidad.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/privacy.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/terminos.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/terms.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://calcuprime.com/es/cookies.html</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://calcuprime.com/cookies.html"/>
+        <lastmod>2024-11-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
 </urlset>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de embarazo gratuita - Calcula tu fecha prevista de parto, semana actual, trimestre y haz un seguimiento de tu embarazo semana a semana. Obtén información personalizada sobre embarazo.">
+    <meta name="keywords" content="calculadora de embarazo, calculadora de fecha de parto, calculadora de semana de embarazo, calculadora de fecha de concepción, calculadora de trimestre">
+    <meta name="language" content="es-ES">
+    <meta name="language" content="es">
+
+    <title>Calculadora de Embarazo - Fecha de Parto y Seguimiento | CalcuPrime</title>
+
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-embarazo.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-embarazo.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/pregnancy-calculator.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/pregnancy-calculator.html">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        // Detector de idioma
+        (function() {
+            const preferredLang = localStorage.getItem('preferredLanguage');
+            if (!preferredLang) {
+                const browserLang = navigator.language || navigator.userLanguage;
+                if (browserLang.startsWith('es')) {
+                    localStorage.setItem('preferredLanguage', 'es');
+                }
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#convertidores">Convertidores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Embarazo</h1>
+            <p class="calculator-description">Calcula tu fecha prevista de parto, semana actual de embarazo y haz seguimiento de tu embarazo semana a semana</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Información del Embarazo</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Método de Cálculo</label>
+                    <select id="calculationMethod" class="form-select">
+                        <option value="lmp">Último Período Menstrual (UPM)</option>
+                        <option value="conception">Fecha de Concepción</option>
+                    </select>
+                </div>
+
+                <div id="lmpInputs">
+                    <div class="form-group">
+                        <label for="lmpDate" class="form-label">Primer Día del Último Período</label>
+                        <input type="date" id="lmpDate" class="form-input">
+                    </div>
+                </div>
+
+                <div id="conceptionInputs" style="display: none;">
+                    <div class="form-group">
+                        <label for="conceptionDate" class="form-label">Fecha de Concepción</label>
+                        <input type="date" id="conceptionDate" class="form-input">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cycleLength" class="form-label">Duración Promedio del Ciclo (días)</label>
+                    <input type="number" id="cycleLength" class="form-input" value="28" min="21" max="35">
+                    <p style="font-size: 0.75rem; color: #6b7280; margin-top: 5px;">Rango típico: 21-35 días</p>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tus Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Fecha Prevista de Parto</div>
+                    <div class="result-value" id="dueDate" style="font-size: 2rem; color: #ec4899;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Semana Actual</div>
+                    <div class="result-value" id="currentWeek" style="font-size: 2.5rem; color: #8b5cf6;">-</div>
+                    <p style="font-size: 0.875rem; color: #6b7280; margin-top: 5px;" id="daysIntoWeek"></p>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Trimestre</div>
+                    <div class="result-value" id="trimester" style="font-size: 2rem; color: #10b981;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Días Faltantes para la Fecha de Parto</div>
+                    <div class="result-value" id="daysRemaining" style="font-size: 2rem;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Fecha Estimada de Concepción</div>
+                    <div class="result-value" id="conceptionDateResult" style="font-size: 1.3rem; color: #f59e0b;">-</div>
+                </div>
+
+                <div style="background: #fce7f3; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #ec4899;">
+                    <p style="margin: 0; font-size: 0.875rem; color: #9f1239;" id="progressMessage"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator-wrapper" style="margin-top: 30px;">
+            <div style="width: 100%;">
+                <h3>Cronología Semana a Semana</h3>
+                <div id="weeklyTimeline" style="max-height: 400px; overflow-y: auto; padding: 15px; background: #f9fafb; border-radius: 8px;">
+                    <p style="color: #6b7280; text-align: center;">Ingresa tus fechas para ver tu cronología de embarazo personalizada</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar la Calculadora de Embarazo</h2>
+            <p>Nuestra calculadora de embarazo proporciona estimaciones precisas de tu fecha de parto y te ayuda a hacer seguimiento de tu embarazo:</p>
+            <ol>
+                <li><strong>Elige el método de cálculo:</strong> Selecciona el Último Período Menstrual (más común) o la Fecha de Concepción</li>
+                <li><strong>Ingresa tu fecha:</strong> Introduce el primer día de tu último período o tu fecha de concepción</li>
+                <li><strong>Ajusta la duración del ciclo:</strong> Si tu ciclo difiere de 28 días, actualiza este valor para mayor precisión</li>
+                <li><strong>Ve los resultados:</strong> Obtén tu fecha de parto, semana actual, trimestre y cuenta regresiva</li>
+                <li><strong>Explora la cronología:</strong> Ve los hitos semana a semana e información sobre el desarrollo</li>
+            </ol>
+
+            <h2>Entendiendo la Datación del Embarazo</h2>
+
+            <h3>Método del Último Período Menstrual (UPM)</h3>
+            <p>El método UPM es la forma más común de calcular tu fecha de parto. Los profesionales de salud normalmente usan el primer día de tu último período menstrual como punto de partida, aunque la concepción generalmente ocurre aproximadamente 2 semanas después. Por eso el embarazo se cuenta como 40 semanas (280 días) a partir del UPM.</p>
+
+            <h3>Método de Fecha de Concepción</h3>
+            <p>Si conoces tu fecha de concepción (por seguimiento de fertilidad, FIV u otros métodos), puedes calcular tu fecha de parto más precisamente. El embarazo a partir de la concepción es aproximadamente 38 semanas (266 días).</p>
+
+            <h3>Regla de Naegele</h3>
+            <p>El cálculo estándar sigue la Regla de Naegele:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+                <strong>Fecha de Parto = UPM + 280 días (40 semanas)</strong><br>
+                O: UPM + 1 año - 3 meses + 7 días
+            </p>
+
+            <h2>Trimestres del Embarazo</h2>
+            <p>El embarazo se divide en tres trimestres, cada uno de aproximadamente 13 semanas:</p>
+
+            <h3>Primer Trimestre (Semanas 1-13)</h3>
+            <ul>
+                <li><strong>Desarrollo del bebé:</strong> Se forman los órganos y estructuras principales. El corazón comienza a latir alrededor de la semana 6. Se desarrollan los dedos, los dedos de los pies y los rasgos faciales.</li>
+                <li><strong>Tu cuerpo:</strong> Los cambios hormonales causan fatiga, náuseas matutinas, sensibilidad en los senos y micción frecuente.</li>
+                <li><strong>Tamaño:</strong> Hacia la semana 12, el bebé mide aproximadamente 2,5 pulgadas (tamaño de una lima).</li>
+                <li><strong>Hitos importantes:</strong> Primera consulta prenatal, ecografía de datación, posibles pruebas genéticas.</li>
+            </ul>
+
+            <h3>Segundo Trimestre (Semanas 14-27)</h3>
+            <ul>
+                <li><strong>Desarrollo del bebé:</strong> Crecimiento rápido. El bebé puede escuchar sonidos, practicar la respiración y moverse activamente. El sexo puede ser visible en la ecografía.</li>
+                <li><strong>Tu cuerpo:</strong> Regresa la energía, las náuseas matutinas generalmente desaparecen. La barriga del embarazo se hace visible. Puedes sentir los primeros movimientos (aceleración) alrededor de las semanas 18-20.</li>
+                <li><strong>Tamaño:</strong> Hacia la semana 27, el bebé mide aproximadamente 14 pulgadas (tamaño de una coliflor).</li>
+                <li><strong>Hitos importantes:</strong> Ecografía de anatomía (semanas 18-22), prueba de glucosa, sentir los movimientos del bebé.</li>
+            </ul>
+
+            <h3>Tercer Trimestre (Semanas 28-40+)</h3>
+            <ul>
+                <li><strong>Desarrollo del bebé:</strong> Crecimiento final y maduración. Se desarrollan los pulmones. El bebé gana peso y se posiciona para el nacimiento.</li>
+                <li><strong>Tu cuerpo:</strong> Mayor incomodidad, la micción frecuente regresa, falta de aliento, contracciones de Braxton Hicks, preparándose para el parto.</li>
+                <li><strong>Tamaño:</strong> Al término, el bebé típicamente mide 19-21 pulgadas de largo y pesa 6-9 libras.</li>
+                <li><strong>Hitos importantes:</strong> Aumentan las consultas prenatales regulares, prueba de estreptococo del grupo B, discusiones sobre el plan de parto, visita al hospital.</li>
+            </ul>
+
+            <h2>Síntomas Comunes del Embarazo por Trimestre</h2>
+
+            <h3>Síntomas del Primer Trimestre</h3>
+            <ul>
+                <li>Náuseas matutinas (náuseas y vómitos)</li>
+                <li>Fatiga extrema y cansancio</li>
+                <li>Sensibilidad e hinchazón de los senos</li>
+                <li>Micción frecuente</li>
+                <li>Aversión alimentaria o antojos</li>
+                <li>Cambios de humor</li>
+                <li>Manchado leve o calambres</li>
+                <li>Estreñimiento</li>
+                <li>Sentido del olfato aumentado</li>
+            </ul>
+
+            <h3>Síntomas del Segundo Trimestre</h3>
+            <ul>
+                <li>Barriga que crece y aumento de peso</li>
+                <li>Sentir los movimientos del bebé</li>
+                <li>Dolor de espalda y dolor ligamentario redondo</li>
+                <li>Cambios en la piel (oscurecimiento, estrías)</li>
+                <li>Congestión nasal</li>
+                <li>Encías sangrantes</li>
+                <li>Calambres en las piernas</li>
+                <li>Contracciones de Braxton Hicks (más adelante en el trimestre)</li>
+                <li>Mayor energía en comparación con el primer trimestre</li>
+            </ul>
+
+            <h3>Síntomas del Tercer Trimestre</h3>
+            <ul>
+                <li>Falta de aliento</li>
+                <li>Micción frecuente (el bebé presiona la vejiga)</li>
+                <li>Acidez estomacal e indigestión</li>
+                <li>Hinchazón en pies y tobillos</li>
+                <li>Dificultad para dormir</li>
+                <li>Contracciones de Braxton Hicks más frecuentes</li>
+                <li>Filtración de calostro de los senos</li>
+                <li>"Encajamiento" del bebé (bajada) antes del parto</li>
+                <li>Dolor de espalda baja y presión pélvica</li>
+            </ul>
+
+            <h2>Cuidado Prenatal Esencial</h2>
+
+            <h3>Cronograma de Consultas Prenatales</h3>
+            <ul>
+                <li><strong>Semanas 4-28:</strong> Una consulta cada 4 semanas</li>
+                <li><strong>Semanas 28-36:</strong> Una consulta cada 2 semanas</li>
+                <li><strong>Semanas 36-40+:</strong> Una consulta cada semana hasta el parto</li>
+            </ul>
+
+            <h3>Pruebas Prenatales Importantes</h3>
+            <ul>
+                <li><strong>Ecografía de datación (semanas 8-13):</strong> Confirma la fecha de parto y revisa si hay múltiples</li>
+                <li><strong>Cribado del primer trimestre (semanas 11-14):</strong> Análisis de sangre y ecografía para condiciones genéticas</li>
+                <li><strong>Cribado de ADN libre de células (semana 10+):</strong> Análisis de sangre opcional para condiciones cromosómicas</li>
+                <li><strong>Ecografía de anatomía (semanas 18-22):</strong> Ecografía detallada que verifica el desarrollo del bebé</li>
+                <li><strong>Cribado de glucosa (semanas 24-28):</strong> Prueba de diabetes gestacional</li>
+                <li><strong>Prueba de estreptococo del grupo B (semanas 35-37):</strong> Hisopo vaginal para detectar bacterias</li>
+            </ul>
+
+            <h3>Nutrición Prenatal</h3>
+            <ul>
+                <li><strong>Ácido fólico:</strong> 400-800 mcg diarios (previene defectos del tubo neural)</li>
+                <li><strong>Hierro:</strong> 27 mg diarios (previene anemia)</li>
+                <li><strong>Calcio:</strong> 1.000 mg diarios (para el desarrollo óseo del bebé)</li>
+                <li><strong>DHA:</strong> 200-300 mg diarios (apoya el desarrollo cerebral)</li>
+                <li><strong>Proteína:</strong> 25g adicionales por día (71g total)</li>
+                <li><strong>Calorías:</strong> Agrega 300-500 calorías extra por día (segundo y tercer trimestres)</li>
+            </ul>
+
+            <h2>Alimentos a Evitar Durante el Embarazo</h2>
+            <ul>
+                <li><strong>Mariscos, huevos y carne crudos o poco cocidos:</strong> Riesgo de enfermedades transmitidas por alimentos</li>
+                <li><strong>Pescado con alto contenido de mercurio:</strong> Tiburón, pez espada, caballa real, pez gato</li>
+                <li><strong>Productos lácteos no pasteurizados y jugos:</strong> Riesgo de listeria</li>
+                <li><strong>Carnes de fiambrera y hot dogs:</strong> A menos que se calienten hasta que humeen</li>
+                <li><strong>Brotes crudos:</strong> Riesgo de contaminación bacteriana</li>
+                <li><strong>Alcohol:</strong> No hay cantidad segura durante el embarazo</li>
+                <li><strong>Exceso de cafeína:</strong> Limita a 200mg por día (aproximadamente una taza de café de 12 oz)</li>
+                <li><strong>Productos sin lavar:</strong> Riesgo de toxoplasmosis</li>
+            </ul>
+
+            <h2>Ejercicio Durante el Embarazo</h2>
+            <p>El ejercicio regular durante el embarazo ofrece muchos beneficios:</p>
+            <ul>
+                <li>Reduce el dolor de espalda y mejora la postura</li>
+                <li>Disminuye el riesgo de diabetes gestacional</li>
+                <li>Mejora el sueño y el estado de ánimo</li>
+                <li>Desarrolla resistencia para el parto</li>
+                <li>Ayuda con el aumento de peso saludable</li>
+                <li>Acelera la recuperación posparto</li>
+            </ul>
+
+            <h3>Ejercicios Seguros Durante el Embarazo</h3>
+            <ul>
+                <li>Caminar (30 minutos la mayoría de los días)</li>
+                <li>Natación y aeróbicos acuáticos</li>
+                <li>Yoga prenatal y Pilates</li>
+                <li>Ciclismo estacionario</li>
+                <li>Aeróbicos de bajo impacto</li>
+                <li>Entrenamiento de fuerza con pesas ligeras</li>
+            </ul>
+
+            <h3>Ejercicios a Evitar</h3>
+            <ul>
+                <li>Deportes de contacto (fútbol, baloncesto, hockey)</li>
+                <li>Actividades con riesgo de caída (esquí, equitación, gimnasia)</li>
+                <li>Buceo autónomo</li>
+                <li>Yoga o Pilates en ambiente caliente</li>
+                <li>Ejercicio en altitudes elevadas (por encima de 6.000 pies)</li>
+                <li>Acostarse boca arriba después de las 20 semanas</li>
+            </ul>
+
+            <h2>Recomendaciones de Aumento de Peso</h2>
+            <p>El aumento de peso recomendado durante el embarazo depende de tu IMC previo al embarazo:</p>
+            <ul>
+                <li><strong>Bajo peso (IMC &lt; 18,5):</strong> 12,7-18,1 kg (28-40 libras)</li>
+                <li><strong>Peso normal (IMC 18,5-24,9):</strong> 11,3-15,9 kg (25-35 libras)</li>
+                <li><strong>Sobrepeso (IMC 25-29,9):</strong> 6,8-11,3 kg (15-25 libras)</li>
+                <li><strong>Obeso (IMC ≥ 30):</strong> 5-9,1 kg (11-20 libras)</li>
+            </ul>
+
+            <h2>Señales de Advertencia - Cuándo Llamar a Tu Médico</h2>
+            <p>Contacta a tu proveedor de salud inmediatamente si experimentas:</p>
+            <ul>
+                <li>Sangrado vaginal o manchado (después del primer trimestre)</li>
+                <li>Dolor abdominal severo o calambres</li>
+                <li>Hinchazón súbita de la cara, manos o pies</li>
+                <li>Dolor de cabeza severo o persistente</li>
+                <li>Cambios en la visión (visión borrosa, manchas, luces parpadeantes)</li>
+                <li>Fiebre alta (más de 38,3°C/101°F)</li>
+                <li>Micción dolorosa o ardiente</li>
+                <li>Disminución del movimiento fetal (después de las 28 semanas)</li>
+                <li>Filtración de líquido de la vagina (posibles membranas rotas)</li>
+                <li>Contracciones regulares antes de las 37 semanas</li>
+            </ul>
+
+            <h2>Preparándose para la Llegada del Bebé</h2>
+
+            <h3>Lista de Verificación del Tercer Trimestre</h3>
+            <ul>
+                <li><strong>Toma una clase de educación sobre el parto:</strong> Aprende sobre el parto, el nacimiento y el cuidado del recién nacido</li>
+                <li><strong>Crea un plan de parto:</strong> Documenta tus preferencias para el parto</li>
+                <li><strong>Visita el hospital o centro de parto:</strong> Familiarízate con la instalación</li>
+                <li><strong>Elige pediatra:</strong> Programa entrevistas y haz tu selección</li>
+                <li><strong>Instala el asiento de auto:</strong> Haz que lo inspeccionen para una instalación correcta</li>
+                <li><strong>Prepara la maleta del hospital:</strong> Incluye artículos esenciales para ti y el bebé (alrededor de la semana 36)</li>
+                <li><strong>Prepara la habitación del bebé:</strong> Instala la cuna, cambiador y artículos esenciales</li>
+                <li><strong>Abastécete de suministros:</strong> Pañales, toallitas, ropa de bebé, suministros de lactancia</li>
+                <li><strong>Planifica el apoyo posparto:</strong> Organiza ayuda para las primeras semanas en casa</li>
+                <li><strong>Discute el permiso de maternidad/paternidad:</strong> Finaliza los planes con tu empleador</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Qué tan precisa es mi fecha de parto?</h3>
+            <p>Las fechas de parto son estimaciones, y solo alrededor del 5% de los bebés nacen en su fecha exacta. La mayoría de los bebés nacen entre las semanas 37-42 de embarazo. Tu fecha de parto puede ajustarse después de tu ecografía de datación en el primer trimestre.</p>
+
+            <h3>¿Cuándo empezaré a notar que estoy embarazada?</h3>
+            <p>Las madres primerizas típicamente comienzan a notar cambios entre las semanas 12-16. Si este es tu segundo embarazo o posterior, puedes notarlo antes. El tipo de cuerpo, la posición del bebé y el tono muscular también afectan cuándo se nota.</p>
+
+            <h3>¿Cuándo podré saber el sexo del bebé?</h3>
+            <p>Una ecografía normalmente puede determinar el sexo entre las semanas 18-22. Algunas pruebas de sangre (ADN libre de células) pueden detectar el sexo tan pronto como a las 10 semanas, aunque estas son principalmente pruebas de cribado opcional para condiciones genéticas.</p>
+
+            <h3>¿Es normal no sentirse embarazada a veces?</h3>
+            <p>Sí, especialmente en el primer trimestre y entre las semanas 13-18 cuando los síntomas a menudo desaparecen pero el movimiento aún no se siente. Si tienes preocupaciones o notas un cambio súbito en los síntomas, comunícate con tu proveedor de salud.</p>
+
+            <h3>¿Cuándo sentiré que el bebé se mueve?</h3>
+            <p>Las madres primerizas típicamente sienten el movimiento (aceleración) entre las semanas 18-22. Las madres experimentadas pueden notarlo antes, alrededor de las 16 semanas. Inicialmente, se siente como aleteos o burbujas.</p>
+
+            <h3>¿Puedo viajar durante el embarazo?</h3>
+            <p>El tiempo más seguro para viajar es durante el segundo trimestre (semanas 14-27). La mayoría de las aerolíneas permiten viajar hasta las 36 semanas para vuelos nacionales. Siempre consulta con tu proveedor de salud antes de viajar, especialmente si tienes complicaciones.</p>
+
+            <h3>¿Cuánta agua debo beber?</h3>
+            <p>Procura beber 8-12 tazas (64-96 onzas) de agua por día. Mantenerse hidratado ayuda con problemas comunes del embarazo como estreñimiento, hinchazón y sobrecalentamiento. Bebe más si estás ejercitando o hace calor.</p>
+
+            <h3>¿Qué pasa con las náuseas matutinas?</h3>
+            <p>A pesar del nombre, las náuseas matutinas pueden ocurrir en cualquier momento del día y afectan a aproximadamente el 70-80% de las mujeres embarazadas. Generalmente alcanzan su pico alrededor de las semanas 9-10 y desaparecen hacia las semanas 14-16. Los consejos para el alivio incluyen comer comidas pequeñas y frecuentes, mantenerse hidratada, comer galletas antes de levantarse de la cama e intentar suplementos de jengibre o vitamina B6 (consulta con tu médico primero).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Calculadoras Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="calculadora-imc.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Calculadora de IMC</h3>
+                    <p class="calc-description">Calcula tu Índice de Masa Corporal</p>
+                </a>
+
+                <a href="calculadora-calorias.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calculadora de Calorías</h3>
+                    <p class="calc-description">Calcula las necesidades calóricas diarias</p>
+                </a>
+
+                <a href="calculadora-peso-ideal.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Calculadora de Peso Ideal</h3>
+                    <p class="calc-description">Encuentra tu peso corporal ideal</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Set default date to today
+        const today = new Date();
+        const defaultLMP = new Date(today);
+        defaultLMP.setDate(today.getDate() - 70); // Set to ~10 weeks ago
+        document.getElementById('lmpDate').value = defaultLMP.toISOString().split('T')[0];
+
+        // Calculation method toggle
+        document.getElementById('calculationMethod').addEventListener('change', function() {
+            const isLMP = this.value === 'lmp';
+            document.getElementById('lmpInputs').style.display = isLMP ? 'block' : 'none';
+            document.getElementById('conceptionInputs').style.display = isLMP ? 'none' : 'block';
+            calculatePregnancy();
+        });
+
+        function calculatePregnancy() {
+            const calculationMethod = document.getElementById('calculationMethod').value;
+            const cycleLength = parseInt(document.getElementById('cycleLength').value) || 28;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            let lmpDate, conceptionDate, dueDate;
+
+            if (calculationMethod === 'lmp') {
+                const lmpInput = document.getElementById('lmpDate').value;
+                if (!lmpInput) {
+                    resetResults();
+                    return;
+                }
+                lmpDate = new Date(lmpInput + 'T00:00:00');
+
+                // Calculate conception date (LMP + cycle length - 14 days, adjusted for cycle)
+                conceptionDate = new Date(lmpDate);
+                conceptionDate.setDate(lmpDate.getDate() + (cycleLength - 14));
+
+                // Calculate due date (LMP + 280 days)
+                dueDate = new Date(lmpDate);
+                dueDate.setDate(lmpDate.getDate() + 280);
+            } else {
+                const conceptionInput = document.getElementById('conceptionDate').value;
+                if (!conceptionInput) {
+                    resetResults();
+                    return;
+                }
+                conceptionDate = new Date(conceptionInput + 'T00:00:00');
+
+                // Calculate LMP (conception - (cycle length - 14) days)
+                lmpDate = new Date(conceptionDate);
+                lmpDate.setDate(conceptionDate.getDate() - (cycleLength - 14));
+
+                // Calculate due date (conception + 266 days)
+                dueDate = new Date(conceptionDate);
+                dueDate.setDate(conceptionDate.getDate() + 266);
+            }
+
+            // Calculate days since LMP
+            const daysSinceLMP = Math.floor((today - lmpDate) / (1000 * 60 * 60 * 24));
+
+            // Calculate current week and days
+            const weeks = Math.floor(daysSinceLMP / 7);
+            const days = daysSinceLMP % 7;
+
+            // Calculate trimester
+            let trimester;
+            if (weeks < 13) {
+                trimester = 'Primer Trimestre';
+            } else if (weeks < 27) {
+                trimester = 'Segundo Trimestre';
+            } else {
+                trimester = 'Tercer Trimestre';
+            }
+
+            // Calculate days remaining
+            const daysRemaining = Math.floor((dueDate - today) / (1000 * 60 * 60 * 24));
+
+            // Format dates
+            const dueDateFormatted = formatDate(dueDate);
+            const conceptionDateFormatted = formatDate(conceptionDate);
+
+            // Display results
+            document.getElementById('dueDate').textContent = dueDateFormatted;
+            document.getElementById('currentWeek').textContent = weeks >= 0 && weeks <= 42 ? `Semana ${weeks}` : '-';
+            document.getElementById('daysIntoWeek').textContent = weeks >= 0 && weeks <= 42 ? `${days} día${days !== 1 ? 's' : ''} dentro de la semana ${weeks}` : '';
+            document.getElementById('trimester').textContent = weeks >= 0 && weeks <= 42 ? trimester : '-';
+            document.getElementById('daysRemaining').textContent = daysRemaining >= 0 ? `${daysRemaining} días` : '¡Tu bebé ya ha llegado!';
+            document.getElementById('conceptionDateResult').textContent = conceptionDateFormatted;
+
+            // Progress message
+            let progressMsg = '';
+            if (daysRemaining < 0) {
+                progressMsg = '¡Felicitaciones! Tu bebé debería haber llegado. Si aún no ha nacido, comunícate con tu proveedor de salud.';
+            } else if (weeks < 13) {
+                progressMsg = `Estás en tu primer trimestre. ¡Los órganos principales del bebé se están formando!`;
+            } else if (weeks < 27) {
+                progressMsg = `Estás en tu segundo trimestre. ¡Esta es a menudo la fase más cómoda!`;
+            } else if (weeks < 37) {
+                progressMsg = `Estás en tu tercer trimestre. ¡El bebé está creciendo y preparándose para el nacimiento!`;
+            } else {
+                progressMsg = `¡Estás a término! El bebé podría llegar en cualquier momento.`;
+            }
+            document.getElementById('progressMessage').textContent = progressMsg;
+
+            // Generate weekly timeline
+            generateWeeklyTimeline(weeks, lmpDate);
+        }
+
+        function formatDate(date) {
+            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            return `${date.getDate()} de ${months[date.getMonth()]} de ${date.getFullYear()}`;
+        }
+
+        function resetResults() {
+            document.getElementById('dueDate').textContent = '-';
+            document.getElementById('currentWeek').textContent = '-';
+            document.getElementById('daysIntoWeek').textContent = '';
+            document.getElementById('trimester').textContent = '-';
+            document.getElementById('daysRemaining').textContent = '-';
+            document.getElementById('conceptionDateResult').textContent = '-';
+            document.getElementById('progressMessage').textContent = '';
+            document.getElementById('weeklyTimeline').innerHTML = '<p style="color: #6b7280; text-align: center;">Ingresa tus fechas para ver tu cronología de embarazo personalizada</p>';
+        }
+
+        function generateWeeklyTimeline(currentWeek, lmpDate) {
+            const weekInfo = {
+                4: { title: 'Semana 4', description: 'Ocurre la implantación. La prueba de embarazo puede ser positiva. El bebé tiene el tamaño de una semilla de amapola.', development: 'El embrión consta de dos capas. Se están formando el saco amniótico y la placenta.' },
+                5: { title: 'Semana 5', description: 'Comienza el latido del corazón. El bebé tiene el tamaño de una semilla de sésamo.', development: 'El tubo neural (que se convierte en el cerebro y la médula espinal) comienza a formarse. El sistema circulatorio se está desarrollando.' },
+                6: { title: 'Semana 6', description: 'Se detecta el primer latido en la ecografía. El bebé tiene el tamaño de una lenteja.', development: 'Los rasgos faciales comienzan a formarse. Aparecen los brotes de brazos y piernas. El corazón late 100-160 veces por minuto.' },
+                8: { title: 'Semana 8', description: 'Todos los órganos principales están presentes. El bebé tiene el tamaño de una frambuesa.', development: 'Los brazos y las piernas crecen. Los dedos de manos y pies comienzan a formarse. Los rasgos faciales son más distintos.' },
+                10: { title: 'Semana 10', description: 'El bebé se llama oficialmente feto. El bebé tiene el tamaño de una fresa.', development: 'Los órganos vitales se han formado completamente. El bebé puede hacer movimientos. Los huesos comienzan a endurecerse.' },
+                12: { title: 'Semana 12', description: 'Fin del primer trimestre. El bebé tiene el tamaño de una lima.', development: 'Se desarrollan los reflejos. Se forman los órganos sexuales. Se forman las cuerdas vocales. El riesgo de aborto espontáneo disminuye significativamente.' },
+                13: { title: 'Semana 13', description: 'Comienzo del segundo trimestre. El bebé tiene el tamaño de un limón.', development: 'Los intestinos se mueven hacia el abdomen. Se forman las cuerdas vocales. La cabeza es aproximadamente 1/3 del tamaño del cuerpo.' },
+                16: { title: 'Semana 16', description: 'Puedes sentir los primeros movimientos. El bebé tiene el tamaño de un aguacate.', development: 'Se desarrolla el sistema musculoesquelético. La piel es transparente. El bebé puede hacer expresiones faciales.' },
+                18: { title: 'Semana 18', description: 'La ecografía de anatomía ocurre alrededor de esta fecha. El bebé tiene el tamaño de un pimiento.', development: 'Puede escuchar sonidos. El sistema digestivo funciona. Se están desarrollando las huellas dactilares únicas.' },
+                20: { title: 'Semana 20', description: '¡A la mitad del embarazo! El bebé tiene el tamaño de un plátano.', development: 'El bebé es cada vez más activo. Se desarrolla el ciclo de sueño-vigilia. El bebé puede escuchar los latidos de tu corazón.' },
+                24: { title: 'Semana 24', description: 'El bebé podría sobrevivir con ayuda médica si nace. El bebé tiene el tamaño de una mazorca de maíz.', development: 'Se desarrollan los pulmones. El bebé responde a los sonidos. Se forman las papilas gustativas.' },
+                27: { title: 'Semana 27', description: 'Fin del segundo trimestre. El bebé tiene el tamaño de una coliflor.', development: 'Puede abrir y cerrar los ojos. El cerebro es muy activo. Los pulmones aún están inmaduros pero se desarrollan rápidamente.' },
+                28: { title: 'Semana 28', description: 'Comienzo del tercer trimestre. El bebé tiene el tamaño de una berenjena.', development: 'El bebé puede soñar. La vista se está desarrollando. Está añadiendo grasa corporal. ¡Ahora pesa más de 2 libras!' },
+                32: { title: 'Semana 32', description: 'El bebé practica movimientos de respiración. El bebé tiene el tamaño de una calabaza.', development: 'El bebé gana aproximadamente 0,5 libras por semana. La piel se está volviendo menos transparente. Los huesos se han formado completamente pero aún son blandos.' },
+                36: { title: 'Semana 36', description: 'Es probable que el bebé esté de cabeza hacia abajo. El bebé tiene el tamaño de una lechuga romana.', development: 'Casi listo para el nacimiento. Está perdiendo el vernix (recubrimiento protector). Puede encastrarse en la pelvis.' },
+                37: { title: 'Semana 37', description: '¡El bebé es a término! El bebé tiene el tamaño de un manojo de acelgas.', development: 'El bebé está listo para nacer. Practicando el parpadeo, la succión y la respiración. Ganando aproximadamente 1 oz por día.' },
+                40: { title: 'Semana 40', description: '¡Semana de la fecha de parto! El bebé tiene el tamaño de una calabaza pequeña.', development: 'Solo el 5% de los bebés nacen en la fecha exacta de parto. El bebé pesa aproximadamente 6-9 libras y mide 19-22 pulgadas.' }
+            };
+
+            const timelineHTML = [];
+            const milestoneWeeks = [4, 5, 6, 8, 10, 12, 13, 16, 18, 20, 24, 27, 28, 32, 36, 37, 40];
+
+            for (const week of milestoneWeeks) {
+                const info = weekInfo[week];
+                const weekDate = new Date(lmpDate);
+                weekDate.setDate(lmpDate.getDate() + (week * 7));
+                const weekDateStr = formatDate(weekDate);
+
+                const isCurrent = week === currentWeek;
+                const isPast = week < currentWeek;
+                const isFuture = week > currentWeek;
+
+                let statusColor = '#e5e7eb';
+                let statusText = 'Próximo';
+                if (isCurrent) {
+                    statusColor = '#8b5cf6';
+                    statusText = 'Semana Actual';
+                } else if (isPast) {
+                    statusColor = '#10b981';
+                    statusText = 'Completado';
+                }
+
+                timelineHTML.push(`
+                    <div style="padding: 15px; margin-bottom: 15px; background: white; border-radius: 8px; border-left: 4px solid ${statusColor}; ${isCurrent ? 'box-shadow: 0 4px 6px rgba(139, 92, 246, 0.1);' : ''}">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <h4 style="margin: 0; color: #1f2937; font-size: 1.1rem;">${info.title}</h4>
+                            <span style="padding: 4px 12px; background: ${statusColor}; color: ${isCurrent || isPast ? 'white' : '#6b7280'}; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">${statusText}</span>
+                        </div>
+                        <p style="margin: 5px 0; color: #6b7280; font-size: 0.875rem;">${weekDateStr}</p>
+                        <p style="margin: 8px 0 0 0; color: #374151; font-weight: 500;">${info.description}</p>
+                        <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 0.875rem;">${info.development}</p>
+                    </div>
+                `);
+            }
+
+            document.getElementById('weeklyTimeline').innerHTML = timelineHTML.join('');
+        }
+
+        // Auto-calculate on input change
+        document.getElementById('lmpDate').addEventListener('change', calculatePregnancy);
+        document.getElementById('conceptionDate').addEventListener('change', calculatePregnancy);
+        document.getElementById('cycleLength').addEventListener('input', calculatePregnancy);
+
+        // Calculate on page load
+        window.addEventListener('load', calculatePregnancy);
+    </script>
+</body>
+</html>

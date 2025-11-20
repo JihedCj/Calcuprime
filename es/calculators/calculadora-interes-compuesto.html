@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora gratuita de interés compuesto - Calcula el crecimiento de inversiones con diferentes frecuencias de capitalización. Compara capitalización diaria, mensual, trimestral y anual con cálculos de rendimiento porcentual anual (TPA).">
+    <meta name="keywords" content="calculadora de interés compuesto, calculadora de inversión, calculadora TPA, frecuencia de capitalización, calculadora de ahorros, calculadora de interés">
+    <meta name="language" content="es">
+    <meta name="audience" content="financial">
+
+    <title>Calculadora de Interés Compuesto - Calcula el Crecimiento de Inversiones | CalcuPrime</title>
+
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-interes-compuesto.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/compound-interest-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-interes-compuesto.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/compound-interest-calculator.html">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        // Language detector
+        if (!localStorage.getItem('preferredLanguage')) {
+            const userLang = navigator.language.split('-')[0];
+            if (userLang === 'es') {
+                localStorage.setItem('preferredLanguage', 'es');
+            } else {
+                localStorage.setItem('preferredLanguage', 'en');
+            }
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finance">Finanzas</a></li>
+                <li><a href="../../es/index.html#health">Salud</a></li>
+                <li><a href="../../es/index.html#converters">Conversores</a></li>
+                <li><a href="../../es/index.html#math">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Interés Compuesto</h1>
+            <p class="calculator-description">Calcula el crecimiento de inversiones con diferentes frecuencias de capitalización y compara rendimientos</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Detalles de Inversión</h3>
+
+                <div class="form-group">
+                    <label for="principal" class="form-label">Inversión Inicial ($)</label>
+                    <input type="number" id="principal" class="form-input" value="10000" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyContribution" class="form-label">Aportación Mensual ($)</label>
+                    <input type="number" id="monthlyContribution" class="form-input" value="200" min="0" step="10">
+                </div>
+
+                <div class="form-group">
+                    <label for="interestRate" class="form-label">Tasa de Interés Anual (%)</label>
+                    <input type="number" id="interestRate" class="form-input" value="7" min="0" max="100" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="timePeriod" class="form-label">Período de Tiempo (Años)</label>
+                    <input type="number" id="timePeriod" class="form-input" value="10" min="1" max="100" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="compoundFrequency" class="form-label">Frecuencia de Capitalización</label>
+                    <select id="compoundFrequency" class="form-select">
+                        <option value="365">Diaria (365)</option>
+                        <option value="12" selected>Mensual (12)</option>
+                        <option value="4">Trimestral (4)</option>
+                        <option value="2">Semestral (2)</option>
+                        <option value="1">Anual (1)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Valor Futuro</div>
+                    <div class="result-value" id="futureValue" style="font-size: 2.5rem; color: #2563eb;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Aportaciones Totales</div>
+                    <div class="result-value" id="totalContributions">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Interés Total Ganado</div>
+                    <div class="result-value" id="totalInterest" style="color: #10b981;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Rendimiento Porcentual Anual (TPA)</div>
+                    <div class="result-value" id="apy" style="font-size: 1.5rem; color: #8b5cf6;">0.00%</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 10px;">Desglose de Crecimiento</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Capital Inicial:</span>
+                        <span id="principalPercent" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Aportaciones:</span>
+                        <span id="contributionsPercent" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Intereses:</span>
+                        <span id="interestPercent" style="font-weight: 600; color: #10b981;"></span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px; padding: 15px; background: #ecfdf5; border-radius: 8px; border-left: 4px solid #10b981;">
+                    <h4 style="margin-bottom: 10px; color: #047857; font-size: 0.95rem;">Regla del 72:</h4>
+                    <p style="margin: 0; font-size: 0.9rem;">Su dinero se duplicará aproximadamente en <strong><span id="rule72"></span> años</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="comparisonSection">
+            <h2>Comparación de Frecuencias de Capitalización</h2>
+            <p style="margin-bottom: 15px;">Observe cómo diferentes frecuencias de capitalización afectan el crecimiento de su inversión</p>
+            <div style="overflow-x: auto;">
+                <table id="comparisonTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f3f4f6;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Frecuencia</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">TPA</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Valor Futuro</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Interés Ganado</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Diferencia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonBody"></tbody>
+                </table>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #6b7280;">Nota: Una capitalización más frecuente resulta en rendimientos más altos, ya que los intereses se calculan y se agregan al capital principal más a menudo.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar la Calculadora de Interés Compuesto</h2>
+            <p>Nuestra calculadora de interés compuesto le ayuda a entender cómo crecen sus inversiones a lo largo del tiempo:</p>
+            <ol>
+                <li><strong>Ingrese la Inversión Inicial:</strong> El monto inicial que está invirtiendo</li>
+                <li><strong>Establezca la Aportación Mensual:</strong> Monto adicional que invertirá cada mes (opcional)</li>
+                <li><strong>Introduzca la Tasa de Interés:</strong> Tasa de rendimiento anual esperada (por ejemplo, 7% para el promedio del mercado de valores)</li>
+                <li><strong>Elija el Período de Tiempo:</strong> Cuántos años permitirá que su inversión crezca</li>
+                <li><strong>Seleccione la Frecuencia de Capitalización:</strong> Con qué frecuencia se calcula el interés y se agrega al capital</li>
+                <li><strong>Revise los Resultados:</strong> Vea su valor futuro, interés total, TPA y comparación de frecuencias</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo el Interés Compuesto</h2>
+            <p>El interés compuesto es la octava maravilla del mundo. Quien lo entiende, lo gana; quien no, lo paga. Este poderoso concepto es lo que hace que su dinero crezca exponencialmente a lo largo del tiempo.</p>
+
+            <h3>Cómo Funciona el Interés Compuesto</h3>
+            <p>A diferencia del interés simple, que solo genera rendimientos sobre su capital inicial, el interés compuesto genera rendimientos tanto sobre su capital inicial como sobre los intereses acumulados previamente. Esto crea un efecto de bola de nieve donde su dinero crece más rápidamente a lo largo del tiempo.</p>
+
+            <p><strong>Ejemplo:</strong> Si invierte $10,000 con una tasa de interés anual del 7%:</p>
+            <ul>
+                <li><strong>Año 1:</strong> $10,000 × 1.07 = $10,700 (ganó $700)</li>
+                <li><strong>Año 2:</strong> $10,700 × 1.07 = $11,449 (ganó $749 sobre $10,700)</li>
+                <li><strong>Año 3:</strong> $11,449 × 1.07 = $12,250 (ganó $801 sobre $11,449)</li>
+            </ul>
+            <p>Observe cómo el monto de interés aumenta cada año, aunque la tasa se mantenga igual.</p>
+
+            <h3>La Fórmula del Interés Compuesto</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+                A = P(1 + r/n)^(nt)<br><br>
+                Donde:<br>
+                A = Monto final<br>
+                P = Capital inicial (inversión inicial)<br>
+                r = Tasa de interés anual (en decimal)<br>
+                n = Frecuencia de capitalización por año<br>
+                t = Tiempo en años<br><br>
+                Para aportaciones regulares:<br>
+                A = P(1 + r/n)^(nt) + PMT × [((1 + r/n)^(nt) - 1) / (r/n)]<br>
+                PMT = Aportación mensual
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>El Poder de la Frecuencia de Capitalización</h2>
+            <p>La frecuencia de capitalización se refiere a la frecuencia con que se calcula el interés y se agrega a su capital. Cuanto más frecuente sea la capitalización, más ganará.</p>
+
+            <h3>Tipos de Frecuencia de Capitalización</h3>
+            <ul>
+                <li><strong>Diaria (365):</strong> Interés calculado cada día - rendimientos más altos</li>
+                <li><strong>Mensual (12):</strong> Interés calculado 12 veces por año - común en cuentas de ahorro</li>
+                <li><strong>Trimestral (4):</strong> Interés calculado 4 veces por año - común en bonos</li>
+                <li><strong>Semestral (2):</strong> Interés calculado dos veces por año</li>
+                <li><strong>Anual (1):</strong> Interés calculado una vez por año - rendimientos más bajos</li>
+            </ul>
+
+            <h3>TPA vs TAE</h3>
+            <p><strong>TAE (Tasa Anual Equivalente):</strong> La tasa de interés anual establecida sin capitalización.</p>
+            <p><strong>TPA (Tasa Porcentual Anual):</strong> La tasa anual efectiva incluida el efecto de la capitalización. La TPA siempre es más alta que la TAE cuando la capitalización ocurre más de una vez por año.</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                <strong>Ejemplo:</strong> Una TAE del 6% con capitalización mensual equivale a una TPA del 6.17%.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>La Regla del 72</h2>
+            <p>La Regla del 72 es una fórmula simple para estimar cuánto tiempo tardará su inversión en duplicarse:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+                Años para Duplicar = 72 ÷ Tasa de Interés
+            </p>
+
+            <h3>Ejemplos de la Regla del 72</h3>
+            <ul>
+                <li><strong>Con rendimiento del 6%:</strong> 72 ÷ 6 = 12 años para duplicar</li>
+                <li><strong>Con rendimiento del 8%:</strong> 72 ÷ 8 = 9 años para duplicar</li>
+                <li><strong>Con rendimiento del 10%:</strong> 72 ÷ 10 = 7.2 años para duplicar</li>
+                <li><strong>Con rendimiento del 12%:</strong> 72 ÷ 12 = 6 años para duplicar</li>
+            </ul>
+
+            <p>Esta regla simple le ayuda a comprender rápidamente el poder de diferentes tasas de rendimiento y horizontes de tiempo sin cálculos complejos.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Estrategias de Inversión para Maximizar el Interés Compuesto</h2>
+
+            <h3>1. Comience Temprano</h3>
+            <p>El tiempo es su mayor activo. Cuanto antes comience a invertir, más tiempo tendrá el interés compuesto para hacer su magia.</p>
+            <p><strong>Ejemplo:</strong> Empezar a los 25 años versus a los 35 años con $10,000 con rendimiento del 7%:</p>
+            <ul>
+                <li>Inicio a los 25, jubilación a los 65 (40 años): $149,744</li>
+                <li>Inicio a los 35, jubilación a los 65 (30 años): $76,123</li>
+                <li>¡Comenzar 10 años antes casi duplica su dinero!</li>
+            </ul>
+
+            <h3>2. Invierta Regularmente</h3>
+            <p>Las aportaciones mensuales consistentes aceleran dramáticamente la construcción de riqueza. Incluso pequeñas cantidades se acumulan significativamente a lo largo del tiempo.</p>
+            <p><strong>Ejemplo:</strong> $10,000 iniciales + $200/mes durante 30 años con rendimiento del 7%:</p>
+            <ul>
+                <li>Aportaciones totales: $82,000</li>
+                <li>Valor final: $244,692</li>
+                <li>Interés ganado: $162,692</li>
+            </ul>
+
+            <h3>3. Reinvierta Dividendos e Intereses</h3>
+            <p>Siempre reinvierta sus ganancias para maximizar la capitalización. Los pagos de dividendos e intereses deben reinvertirse automáticamente para comprar más acciones o agregar al capital.</p>
+
+            <h3>4. Maximice Cuentas con Ventajas Fiscales</h3>
+            <p>Utilice cuentas de jubilación (401k, IRA, Roth IRA) donde las inversiones crecen sin impuestos o con impuestos diferidos, permitiendo que el interés compuesto trabaje sin ser obstaculizado por impuestos.</p>
+
+            <h3>5. Elija Rendimientos Más Altos Sabiamente</h3>
+            <p>Mayores rendimientos significan capitalización más rápida, pero equilibre el riesgo con la recompensa:</p>
+            <ul>
+                <li><strong>Cuentas de Ahorro:</strong> 0.5-2% TPA - seguro, asegurado por FDIC</li>
+                <li><strong>Bonos:</strong> 2-6% - riesgo moderado, rendimientos estables</li>
+                <li><strong>Mercado de Valores:</strong> 7-10% promedio - riesgo más alto, mejores rendimientos a largo plazo</li>
+                <li><strong>Bienes Raíces:</strong> 8-12% - requiere capital y administración</li>
+            </ul>
+
+            <h3>6. Minimice las Comisiones</h3>
+            <p>Las comisiones de inversión se capitalizan negativamente. Una comisión anual del 1% puede reducir sus rendimientos entre 25-30% en 30 años. Elija fondos de bajo costo e intente minimizar costos de transacción.</p>
+
+            <h3>7. Manténgase Invertido Durante Caídas del Mercado</h3>
+            <p>La volatilidad del mercado es normal. Manténgase invertido para beneficiarse del crecimiento compuesto a largo plazo. El tiempo en el mercado vence el momento en el mercado.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Escenarios de Inversión en el Mundo Real</h2>
+
+            <h3>El Fondo Universitario</h3>
+            <p><strong>Escenario:</strong> Ahorrar para la universidad de su hijo en 18 años</p>
+            <ul>
+                <li>Inversión inicial: $5,000</li>
+                <li>Aportación mensual: $300</li>
+                <li>Rendimiento esperado: 7% (promedio del mercado de valores)</li>
+                <li>Capitalización: Mensual</li>
+                <li><strong>Resultado después de 18 años: $133,866</strong></li>
+            </ul>
+
+            <h3>Jubilación Anticipada</h3>
+            <p><strong>Escenario:</strong> Construir riqueza para jubilarse anticipadamente a los 50 años</p>
+            <ul>
+                <li>Inicio a los 25 años con $10,000</li>
+                <li>Aportación mensual: $500</li>
+                <li>Rendimiento esperado: 8%</li>
+                <li>Capitalización: Mensual</li>
+                <li><strong>Resultado después de 25 años: $584,328</strong></li>
+            </ul>
+
+            <h3>Construcción de Riqueza</h3>
+            <p><strong>Escenario:</strong> Convertirse en millonario mediante inversión consistente</p>
+            <ul>
+                <li>Inversión inicial: $20,000</li>
+                <li>Aportación mensual: $1,000</li>
+                <li>Rendimiento esperado: 9%</li>
+                <li>Tiempo para alcanzar $1 millón: ~23 años</li>
+            </ul>
+
+            <h3>Crecimiento del Fondo de Emergencia</h3>
+            <p><strong>Escenario:</strong> Construir un fondo de emergencia de 6 meses</p>
+            <ul>
+                <li>Objetivo: $15,000</li>
+                <li>Depósito inicial: $2,000</li>
+                <li>Aportación mensual: $400</li>
+                <li>Ahorro de alto rendimiento: 4.5% TPA</li>
+                <li><strong>Tiempo para alcanzar la meta: ~31 meses</strong></li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Instrumentos de Inversión Comunes para Crecimiento Compuesto</h2>
+
+            <h3>Cuentas de Ahorro de Alto Rendimiento</h3>
+            <p><strong>Rendimientos:</strong> 3-5% TPA | <strong>Riesgo:</strong> Muy Bajo | <strong>Liquidez:</strong> Alta</p>
+            <p>Cuentas aseguradas por FDIC que ofrecen interés más alto que ahorros tradicionales. Ideales para fondos de emergencia y metas a corto plazo. Los intereses se capitalizan diariamente o mensualmente.</p>
+
+            <h3>Certificados de Depósito (CDs)</h3>
+            <p><strong>Rendimientos:</strong> 3-5% TPA | <strong>Riesgo:</strong> Muy Bajo | <strong>Liquidez:</strong> Baja</p>
+            <p>Depósitos a plazo fijo que ofrecen rendimientos garantizados. Los plazos van de 3 meses a 5 años. Se aplican penalizaciones por retiro anticipado. Asegurado por FDIC hasta $250,000.</p>
+
+            <h3>Fondos Indexados</h3>
+            <p><strong>Rendimientos:</strong> 7-10% promedio | <strong>Riesgo:</strong> Moderado | <strong>Liquidez:</strong> Alta</p>
+            <p>Fondos diversificados que rastrean índices de mercado como S&P 500. Comisiones bajas, exposición amplia del mercado, dividendos se reinvierten automáticamente para capitalización.</p>
+
+            <h3>Acciones de Dividendos</h3>
+            <p><strong>Rendimientos:</strong> 8-12% promedio | <strong>Riesgo:</strong> Moderado-Alto | <strong>Liquidez:</strong> Alta</p>
+            <p>Acciones individuales que pagan dividendos regulares. Reinvertir dividendos capitaliza tanto la apreciación de acciones como el crecimiento de dividendos a lo largo del tiempo.</p>
+
+            <h3>Fondos de Inversión Inmobiliaria (REITs)</h3>
+            <p><strong>Rendimientos:</strong> 8-12% promedio | <strong>Riesgo:</strong> Moderado | <strong>Liquidez:</strong> Media</p>
+            <p>Invierta en bienes raíces sin comprar propiedades. Se requiere que paguen el 90% del ingreso como dividendos. Reinvierta dividendos para crecimiento capitalizado.</p>
+
+            <h3>Cuentas 401(k) e IRA</h3>
+            <p><strong>Rendimientos:</strong> Varía según inversiones | <strong>Riesgo:</strong> Varía | <strong>Beneficios Fiscales:</strong> Altos</p>
+            <p>Cuentas de jubilación con ventajas fiscales. El aporte de empleador en 401(k) proporciona un retorno inmediato del 50-100%. El crecimiento capitalizado se difiere o se exenta de impuestos (Roth).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Errores de Interés Compuesto a Evitar</h2>
+
+            <h3>1. Esperar Demasiado para Comenzar</h3>
+            <p>Cada año que retrasa le cuesta exponencialmente debido a capitalización perdida. Comience a invertir lo antes posible, incluso con montos pequeños.</p>
+
+            <h3>2. Retirar Dinero Anticipadamente</h3>
+            <p>Sacar dinero interrumpe el crecimiento compuesto. Un retiro de $5,000 hoy podría costarle $50,000 en 30 años con crecimiento del 8%.</p>
+
+            <h3>3. No Reinvertir Rendimientos</h3>
+            <p>Gastar dividendos e intereses previene capitalización. Siempre reinvierta rendimientos para maximizar crecimiento.</p>
+
+            <h3>4. Intentar Cronometrar el Mercado</h3>
+            <p>Perder solo los 10 mejores días del mercado en 20 años puede reducir rendimientos a la mitad. Manténgase invertido y permita que la capitalización funcione.</p>
+
+            <h3>5. Ignorar Comisiones y Gastos</h3>
+            <p>Una comisión anual del 2% versus 0.5% sobre $100,000 en 30 años le cuesta más de $100,000 en crecimiento capitalizado perdido.</p>
+
+            <h3>6. No Ajustar por Inflación</h3>
+            <p>La inflación reduce el poder adquisitivo. Su rendimiento real es rendimiento nominal menos inflación. Enfóquese en rendimientos que superen la inflación en 3-5%.</p>
+
+            <h3>7. Ser Demasiado Conservador</h3>
+            <p>Inversiones de bajo riesgo y bajo rendimiento pueden no capitalizarse lo suficientemente rápido para alcanzar metas. Equilibre seguridad con crecimiento según su horizonte temporal.</p>
+
+            <h3>8. Aportaciones Inconsistentes</h3>
+            <p>La inversión irregular reduce el potencial capitalizado. Configure aportaciones automáticas para mantener consistencia.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Qué es el interés compuesto?</h3>
+            <p>El interés compuesto es el interés calculado tanto en el capital inicial como en los intereses acumulados de períodos anteriores. Permite que su dinero crezca exponencialmente a lo largo del tiempo.</p>
+
+            <h3>¿Cómo se diferencia el interés compuesto del interés simple?</h3>
+            <p>El interés simple se calcula únicamente sobre el monto principal. El interés compuesto se calcula sobre el capital más los intereses acumulados, resultando en crecimiento exponencial versus crecimiento lineal.</p>
+
+            <h3>¿Cuál es la mejor frecuencia de capitalización?</h3>
+            <p>La capitalización más frecuente produce rendimientos más altos. La capitalización diaria es mejor, seguida por mensual, trimestral, semestral y anual. Sin embargo, la diferencia entre diaria y mensual generalmente es mínima.</p>
+
+            <h3>¿Cuánto tiempo tarda en duplicarse mi dinero?</h3>
+            <p>Use la Regla del 72: divida 72 por su tasa de rendimiento anual. Con 8%, el dinero se duplica en 9 años (72 ÷ 8 = 9).</p>
+
+            <h3>¿Debo invertir un pago único o hacer aportaciones mensuales?</h3>
+            <p>Ambos son poderosos. Los pagos únicos se benefician de capitalización inmediata. Las aportaciones mensuales proporcionan promediación del costo en dólares y hacen la inversión más accesible. Combine ambos para máximo crecimiento.</p>
+
+            <h3>¿Qué tasa de rendimiento debo esperar?</h3>
+            <p>Promedios históricos: S&P 500 ~10%, cartera diversificada ~7-8%, bonos ~3-5%, cuentas de ahorro ~1-4%. Use estimaciones conservadoras (6-7%) para planificación.</p>
+
+            <h3>¿Cómo afecta la inflación al interés compuesto?</h3>
+            <p>La inflación reduce el poder adquisitivo. Si gana 7% pero la inflación es 3%, su rendimiento real es 4%. Siempre considere rendimientos ajustados por inflación para planificación a largo plazo.</p>
+
+            <h3>¿Puedo perder dinero con interés compuesto?</h3>
+            <p>En cuentas de ahorro y CDs, no - su capital está protegido. En inversiones de mercado, pérdidas a corto plazo son posibles, pero el crecimiento capitalizado a largo plazo históricamente supera volatilidad.</p>
+
+            <h3>¿Cuál es la mejor edad para comenzar a invertir?</h3>
+            <p>¡Ahora! Cuanto antes comience, más tiempo tiene el interés compuesto para trabajar. Comenzar a los 25 versus 35 puede duplicar ahorros de jubilación debido a 10 años adicionales de capitalización.</p>
+
+            <h3>¿Cuánto debo invertir mensualmente?</h3>
+            <p>Expertos financieros recomiendan ahorrar 15-20% del ingreso bruto. Comience con lo que pueda permitirse e incremente con el tiempo. Incluso $100/mes se capitaliza significativamente durante décadas.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Calculadoras Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="calculadora-inversiones.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Calculadora de Inversiones</h3>
+                    <p class="calc-description">Calcula rendimientos de inversión y crecimiento</p>
+                </a>
+
+                <a href="calculadora-jubilacion.html" class="calc-card">
+                    <div class="calc-icon">🏖️</div>
+                    <h3 class="calc-title">Calculadora de Jubilación</h3>
+                    <p class="calc-description">Planifique sus ahorros de jubilación</p>
+                </a>
+
+                <a href="calculadora-ahorros.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Calculadora de Ahorros</h3>
+                    <p class="calc-description">Calcula metas de ahorro y cronograma</p>
+                </a>
+
+                <a href="calculadora-prestamo.html" class="calc-card">
+                    <div class="calc-icon">💳</div>
+                    <h3 class="calc-title">Calculadora de Préstamo</h3>
+                    <p class="calc-description">Calcula pagos de préstamo e intereses</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculateCompoundInterest() {
+            const principal = parseFloat(document.getElementById('principal').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const years = parseFloat(document.getElementById('timePeriod').value) || 0;
+            const frequency = parseInt(document.getElementById('compoundFrequency').value) || 12;
+
+            if (principal < 0 || annualRate < 0 || years <= 0) {
+                return;
+            }
+
+            const r = annualRate / 100;
+            const n = frequency;
+            const t = years;
+
+            // Calculate compound interest for principal
+            const principalGrowth = principal * Math.pow(1 + r / n, n * t);
+
+            // Calculate future value of monthly contributions
+            let contributionsGrowth = 0;
+            if (monthlyContribution > 0) {
+                // Convert annual rate to monthly rate for contributions
+                const monthlyRate = r / 12;
+                const totalMonths = years * 12;
+
+                // Future value of annuity formula
+                contributionsGrowth = monthlyContribution *
+                    ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate) *
+                    (1 + monthlyRate);
+            }
+
+            const futureValue = principalGrowth + contributionsGrowth;
+            const totalContributions = principal + (monthlyContribution * years * 12);
+            const totalInterest = futureValue - totalContributions;
+
+            // Calculate APY
+            const apy = (Math.pow(1 + r / n, n) - 1) * 100;
+
+            // Display results
+            document.getElementById('futureValue').textContent = formatCurrency(futureValue);
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('apy').textContent = apy.toFixed(2) + '%';
+
+            // Breakdown percentages
+            const principalPercent = ((principal / futureValue) * 100).toFixed(1);
+            const contributionsPercent = (((monthlyContribution * years * 12) / futureValue) * 100).toFixed(1);
+            const interestPercent = ((totalInterest / futureValue) * 100).toFixed(1);
+
+            document.getElementById('principalPercent').textContent = principalPercent + '% (' + formatCurrency(principal) + ')';
+            document.getElementById('contributionsPercent').textContent = contributionsPercent + '% (' + formatCurrency(monthlyContribution * years * 12) + ')';
+            document.getElementById('interestPercent').textContent = interestPercent + '% (' + formatCurrency(totalInterest) + ')';
+
+            // Rule of 72
+            const rule72 = annualRate > 0 ? (72 / annualRate).toFixed(1) : 'N/A';
+            document.getElementById('rule72').textContent = rule72;
+
+            // Generate comparison table
+            generateComparisonTable(principal, monthlyContribution, annualRate, years);
+        }
+
+        function generateComparisonTable(principal, monthlyContribution, annualRate, years) {
+            const frequencies = [
+                { name: 'Diaria', value: 365 },
+                { name: 'Mensual', value: 12 },
+                { name: 'Trimestral', value: 4 },
+                { name: 'Semestral', value: 2 },
+                { name: 'Anual', value: 1 }
+            ];
+
+            const tbody = document.getElementById('comparisonBody');
+            tbody.innerHTML = '';
+
+            const results = frequencies.map(freq => {
+                const r = annualRate / 100;
+                const n = freq.value;
+                const t = years;
+
+                // Calculate for principal
+                const principalGrowth = principal * Math.pow(1 + r / n, n * t);
+
+                // Calculate for monthly contributions
+                let contributionsGrowth = 0;
+                if (monthlyContribution > 0) {
+                    const monthlyRate = r / 12;
+                    const totalMonths = years * 12;
+                    contributionsGrowth = monthlyContribution *
+                        ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate) *
+                        (1 + monthlyRate);
+                }
+
+                const futureValue = principalGrowth + contributionsGrowth;
+                const totalContributions = principal + (monthlyContribution * years * 12);
+                const totalInterest = futureValue - totalContributions;
+                const apy = (Math.pow(1 + r / n, n) - 1) * 100;
+
+                return {
+                    name: freq.name,
+                    apy: apy,
+                    futureValue: futureValue,
+                    totalInterest: totalInterest
+                };
+            });
+
+            // Calculate difference from annual compounding (baseline)
+            const annualValue = results[results.length - 1].futureValue;
+
+            results.forEach((result, index) => {
+                const difference = result.futureValue - annualValue;
+                const row = tbody.insertRow();
+
+                // Highlight selected frequency
+                const selectedFreq = parseInt(document.getElementById('compoundFrequency').value);
+                const currentFreq = frequencies[index].value;
+                if (currentFreq === selectedFreq) {
+                    row.style.background = '#eff6ff';
+                    row.style.fontWeight = '600';
+                }
+
+                row.innerHTML = `
+                    <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">${result.name}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${result.apy.toFixed(2)}%</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(result.futureValue)}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; color: #10b981;">${formatCurrency(result.totalInterest)}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; color: ${difference >= 0 ? '#10b981' : '#ef4444'};">
+                        ${difference >= 0 ? '+' : ''}${formatCurrency(difference)}
+                    </td>
+                `;
+            });
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('es-ES', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(num);
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateCompoundInterest);
+            input.addEventListener('change', calculateCompoundInterest);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', calculateCompoundInterest);
+    </script>
+</body>
+</html>

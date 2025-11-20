@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de calorías gratis - Calcula tus necesidades calóricas diarias (TDEE), TMB y macros para pérdida de peso, mantenimiento o ganancia muscular.">
+    <meta name="keywords" content="calculadora de calorías, calculadora TDEE, calculadora TMB, calorías diarias, calculadora pérdida de peso, calculadora de macros">
+
+    <title>Calculadora de Calorías - Calcula tus Necesidades Calóricas Diarias | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-calorias.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/calorie-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-calorias.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/calorie-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finanzas</a></li>
+                <li><a href="../index.html#health">Salud</a></li>
+                <li><a href="../index.html#converters">Conversores</a></li>
+                <li><a href="../index.html#math">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Calorías</h1>
+            <p class="calculator-description">Calcula tus necesidades calóricas diarias (TDEE), TMB y requerimientos de macronutrientes</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Tu Información</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Sistema de Unidades</label>
+                    <select id="unitSystem" class="form-select">
+                        <option value="metric">Métrico (kg, cm)</option>
+                        <option value="imperial">Imperial (lbs, pulgadas)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="age" class="form-label">Edad (años)</label>
+                    <input type="number" id="age" class="form-input" value="30" min="15" max="80">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender" class="form-label">Sexo Biológico</label>
+                    <select id="gender" class="form-select">
+                        <option value="male">Hombre</option>
+                        <option value="female">Mujer</option>
+                    </select>
+                </div>
+
+                <div id="metricInputs">
+                    <div class="form-group">
+                        <label for="heightCm" class="form-label">Altura (cm)</label>
+                        <input type="number" id="heightCm" class="form-input" value="175" min="120" max="250">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weightKg" class="form-label">Peso (kg)</label>
+                        <input type="number" id="weightKg" class="form-input" value="75" min="30" max="300" step="0.1">
+                    </div>
+                </div>
+
+                <div id="imperialInputs" style="display: none;">
+                    <div class="form-group">
+                        <label for="heightFt" class="form-label">Altura (pies)</label>
+                        <input type="number" id="heightFt" class="form-input" value="5" min="4" max="7">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="heightIn" class="form-label">Altura (pulgadas)</label>
+                        <input type="number" id="heightIn" class="form-input" value="9" min="0" max="11">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weightLbs" class="form-label">Peso (lbs)</label>
+                        <input type="number" id="weightLbs" class="form-input" value="165" min="66" max="660" step="0.1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="activityLevel" class="form-label">Nivel de Actividad</label>
+                    <select id="activityLevel" class="form-select">
+                        <option value="1.2">Sedentario (poco o ningún ejercicio)</option>
+                        <option value="1.375">Ligeramente activo (1-3 días/semana)</option>
+                        <option value="1.55" selected>Moderadamente activo (3-5 días/semana)</option>
+                        <option value="1.725">Muy activo (6-7 días/semana)</option>
+                        <option value="1.9">Extra activo (atleta, trabajo físico)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="goal" class="form-label">Objetivo</label>
+                    <select id="goal" class="form-select">
+                        <option value="-500">Pérdida de Peso (0.5 kg/semana)</option>
+                        <option value="-1000">Pérdida de Peso Extrema (1 kg/semana)</option>
+                        <option value="0" selected>Mantenimiento de Peso</option>
+                        <option value="250">Ganancia Magra (0.25 kg/semana)</option>
+                        <option value="500">Ganancia de Peso (0.5 kg/semana)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tus Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">TMB (Tasa Metabólica Basal)</div>
+                    <div class="result-value" id="bmrValue" style="font-size: 2rem;">0</div>
+                    <p style="font-size: 0.875rem; color: #6b7280; margin-top: 5px;">Calorías quemadas en reposo</p>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">TDEE (Calorías de Mantenimiento)</div>
+                    <div class="result-value" id="tdeeValue" style="font-size: 2.5rem; color: #2563eb;">0</div>
+                    <p style="font-size: 0.875rem; color: #6b7280; margin-top: 5px;">Calorías para mantener el peso</p>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Objetivo Calórico Diario</div>
+                    <div class="result-value" id="goalValue" style="font-size: 2.5rem; color: #10b981;">0</div>
+                    <p style="font-size: 0.875rem; color: #6b7280; margin-top: 5px;" id="goalDescription">Según tu objetivo</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px;">Distribución de Macronutrientes</h4>
+
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="font-weight: 500;">Proteínas</span>
+                            <span id="protein" style="font-weight: 600; color: #2563eb;">0g</span>
+                        </div>
+                        <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div style="background: #2563eb; height: 100%; width: 30%;"></div>
+                        </div>
+                        <p style="font-size: 0.75rem; color: #6b7280; margin-top: 3px;">30% de calorías</p>
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="font-weight: 500;">Carbohidratos</span>
+                            <span id="carbs" style="font-weight: 600; color: #10b981;">0g</span>
+                        </div>
+                        <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div style="background: #10b981; height: 100%; width: 40%;"></div>
+                        </div>
+                        <p style="font-size: 0.75rem; color: #6b7280; margin-top: 3px;">40% de calorías</p>
+                    </div>
+
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="font-weight: 500;">Grasas</span>
+                            <span id="fats" style="font-weight: 600; color: #f59e0b;">0g</span>
+                        </div>
+                        <div style="background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div style="background: #f59e0b; height: 100%; width: 30%;"></div>
+                        </div>
+                        <p style="font-size: 0.75rem; color: #6b7280; margin-top: 3px;">30% de calorías</p>
+                    </div>
+                </div>
+
+                <div style="background: #eff6ff; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #2563eb;">
+                    <p style="margin: 0; font-size: 0.875rem; color: #1e40af;" id="weeklyChange"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar la Calculadora de Calorías</h2>
+            <p>Nuestra calculadora integral de calorías te ayuda a determinar tus necesidades calóricas diarias según tu composición corporal, nivel de actividad y objetivos:</p>
+            <ol>
+                <li><strong>Ingresa tus datos físicos:</strong> Edad, sexo, altura y peso actual</li>
+                <li><strong>Selecciona tu nivel de actividad:</strong> Sé honesto sobre tu actividad típica para obtener resultados precisos</li>
+                <li><strong>Elige tu objetivo:</strong> Pérdida de peso, mantenimiento o ganancia de peso</li>
+                <li><strong>Revisa tus resultados:</strong> Observa tu TMB, TDEE y objetivo calórico personalizado</li>
+                <li><strong>Verifica los macros:</strong> Obtén la ingesta recomendada de proteínas, carbohidratos y grasas</li>
+            </ol>
+
+            <h2>Entendiendo tus Resultados</h2>
+
+            <h3>¿Qué es la TMB?</h3>
+            <p>La Tasa Metabólica Basal (TMB) es el número de calorías que tu cuerpo quema en reposo completo para mantener funciones vitales como la respiración, circulación y producción celular. Esto representa las calorías mínimas que necesitas para sobrevivir.</p>
+
+            <h3>¿Qué es el TDEE?</h3>
+            <p>El Gasto Energético Diario Total (TDEE por sus siglas en inglés) es tu TMB multiplicada por tu nivel de actividad. Esto representa el total de calorías que quemas en un día típico, incluyendo ejercicio y actividades diarias. Para mantener tu peso actual, consume calorías equivalentes a tu TDEE.</p>
+
+            <h3>Macronutrientes Explicados</h3>
+            <ul>
+                <li><strong>Proteínas (4 calorías/gramo):</strong> Esenciales para la reparación, crecimiento y mantenimiento muscular. Recomendamos el 30% de calorías para la mayoría de objetivos.</li>
+                <li><strong>Carbohidratos (4 calorías/gramo):</strong> Fuente principal de energía para entrenamientos y función cerebral. Recomendamos el 40% de calorías.</li>
+                <li><strong>Grasas (9 calorías/gramo):</strong> Importantes para la producción de hormonas y absorción de nutrientes. Recomendamos el 30% de calorías.</li>
+            </ul>
+
+            <h2>Métodos de Cálculo de la TMB</h2>
+            <p>Esta calculadora utiliza la ecuación de Mifflin-St Jeor, considerada una de las fórmulas de TMB más precisas:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+                <strong>Hombres:</strong> TMB = (10 × peso en kg) + (6.25 × altura en cm) - (5 × edad) + 5<br>
+                <strong>Mujeres:</strong> TMB = (10 × peso en kg) + (6.25 × altura en cm) - (5 × edad) - 161
+            </p>
+
+            <h2>Guía de Niveles de Actividad</h2>
+            <ul>
+                <li><strong>Sedentario (1.2):</strong> Trabajo de oficina, poco o ningún ejercicio</li>
+                <li><strong>Ligeramente Activo (1.375):</strong> Ejercicio ligero 1-3 días/semana, algo de caminata</li>
+                <li><strong>Moderadamente Activo (1.55):</strong> Ejercicio moderado 3-5 días/semana</li>
+                <li><strong>Muy Activo (1.725):</strong> Ejercicio intenso 6-7 días/semana</li>
+                <li><strong>Extra Activo (1.9):</strong> Ejercicio muy intenso, trabajo físico, entrenamiento dos veces al día</li>
+            </ul>
+
+            <h2>Consejos para Alcanzar tus Objetivos Calóricos</h2>
+
+            <h3>Para Pérdida de Peso:</h3>
+            <ul>
+                <li>Crea un déficit calórico moderado (500-1000 calorías/día)</li>
+                <li>Prioriza las proteínas para preservar la masa muscular</li>
+                <li>Registra tu ingesta de alimentos con precisión</li>
+                <li>Sé paciente - la pérdida de peso sostenible es de 0.5-1 kg por semana</li>
+                <li>No bajes de 1200 calorías (mujeres) o 1500 calorías (hombres)</li>
+            </ul>
+
+            <h3>Para Ganancia Muscular:</h3>
+            <ul>
+                <li>Crea un ligero superávit calórico (250-500 calorías/día)</li>
+                <li>Consume proteína adecuada (1.6-2.2g por kg de peso corporal)</li>
+                <li>Enfócate en la sobrecarga progresiva en el entrenamiento</li>
+                <li>Sé paciente - la ganancia de músculo magro es lenta (0.25-0.5 kg por semana)</li>
+            </ul>
+
+            <h3>Para Mantenimiento:</h3>
+            <ul>
+                <li>Come según tu TDEE</li>
+                <li>Monitorea tu peso semanalmente</li>
+                <li>Ajusta las calorías si tu peso tiende a subir o bajar</li>
+                <li>Enfócate en alimentos integrales densos en nutrientes</li>
+            </ul>
+
+            <h2>Errores Comunes a Evitar</h2>
+            <ul>
+                <li><strong>Sobreestimar el nivel de actividad:</strong> La mayoría de las personas deberían empezar con "ligeramente activo" o "moderadamente activo"</li>
+                <li><strong>No registrar con precisión:</strong> Mide las porciones y registra todo lo que comes</li>
+                <li><strong>Reducir calorías demasiado:</strong> Esto puede ralentizar el metabolismo y causar pérdida muscular</li>
+                <li><strong>Ignorar las proteínas:</strong> La proteína adecuada es crucial para la composición corporal</li>
+                <li><strong>Ser impaciente:</strong> Los cambios sostenibles llevan tiempo</li>
+                <li><strong>Olvidar las calorías líquidas:</strong> Registra bebidas, aceites de cocina y condimentos</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Qué tan precisa es esta calculadora de calorías?</h3>
+            <p>Esta calculadora proporciona una estimación científicamente fundamentada usando la ecuación de Mifflin-St Jeor. Sin embargo, las tasas metabólicas individuales varían. Usa estos números como punto de partida y ajusta según tus resultados durante 2-4 semanas.</p>
+
+            <h3>¿Debo comer las calorías del ejercicio?</h3>
+            <p>Tu nivel de actividad ya considera el ejercicio. Solo añade calorías extra si haces significativamente más actividad de lo habitual o eres un atleta con volumen de entrenamiento muy alto.</p>
+
+            <h3>¿Con qué frecuencia debo recalcular mis calorías?</h3>
+            <p>Recalcula cada 5-10 kg de cambio de peso, o si tu nivel de actividad cambia significativamente.</p>
+
+            <h3>¿Puedo comer lo que quiera siempre que alcance mi objetivo calórico?</h3>
+            <p>Aunque las calorías son lo más importante para el cambio de peso, la calidad de los alimentos afecta la salud, saciedad, energía y composición corporal. Enfócate en alimentos integrales y densos en nutrientes.</p>
+
+            <h3>¿Qué pasa si no estoy perdiendo peso con mi déficit calculado?</h3>
+            <p>Dale 2-3 semanas, ya que el peso fluctúa diariamente. Si aún no hay progreso, reduce las calorías en 100-200 o aumenta ligeramente la actividad. Asegúrate de estar registrando con precisión.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Calculadoras Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="calculadora-imc.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Calculadora de IMC</h3>
+                    <p class="calc-description">Calcula tu Índice de Masa Corporal</p>
+                </a>
+
+                <a href="calculadora-peso-ideal.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Calculadora de Peso Ideal</h3>
+                    <p class="calc-description">Encuentra tu peso corporal ideal</p>
+                </a>
+
+                <a href="calculadora-macros.html" class="calc-card">
+                    <div class="calc-icon">🥗</div>
+                    <h3 class="calc-title">Calculadora de Macros</h3>
+                    <p class="calc-description">Calcula necesidades detalladas de macronutrientes</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Language detector script
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const currentPath = window.location.pathname;
+
+            // If user's browser is not Spanish and they're on Spanish page, suggest English version
+            if (!userLang.startsWith('es') && currentPath.includes('/es/')) {
+                const englishUrl = currentPath.replace('/es/', '/');
+                console.log('English version available at: ' + englishUrl);
+            }
+        })();
+
+        // Unit system toggle
+        document.getElementById('unitSystem').addEventListener('change', function() {
+            const isMetric = this.value === 'metric';
+            document.getElementById('metricInputs').style.display = isMetric ? 'block' : 'none';
+            document.getElementById('imperialInputs').style.display = isMetric ? 'none' : 'block';
+            calculateCalories();
+        });
+
+        function calculateCalories() {
+            const unitSystem = document.getElementById('unitSystem').value;
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+            const activityLevel = parseFloat(document.getElementById('activityLevel').value);
+            const goal = parseInt(document.getElementById('goal').value);
+
+            let heightCm, weightKg;
+
+            if (unitSystem === 'metric') {
+                heightCm = parseFloat(document.getElementById('heightCm').value);
+                weightKg = parseFloat(document.getElementById('weightKg').value);
+            } else {
+                const heightFt = parseFloat(document.getElementById('heightFt').value);
+                const heightIn = parseFloat(document.getElementById('heightIn').value);
+                const weightLbs = parseFloat(document.getElementById('weightLbs').value);
+
+                const totalInches = (heightFt * 12) + heightIn;
+                heightCm = totalInches * 2.54;
+                weightKg = weightLbs * 0.453592;
+            }
+
+            if (!heightCm || !weightKg || !age) return;
+
+            // Calculate BMR using Mifflin-St Jeor Equation
+            let bmr;
+            if (gender === 'male') {
+                bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) + 5;
+            } else {
+                bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
+            }
+
+            // Calculate TDEE
+            const tdee = bmr * activityLevel;
+
+            // Calculate goal calories
+            const goalCalories = tdee + goal;
+
+            // Calculate macros (30% protein, 40% carbs, 30% fat)
+            const proteinCals = goalCalories * 0.30;
+            const carbsCals = goalCalories * 0.40;
+            const fatsCals = goalCalories * 0.30;
+
+            const proteinGrams = Math.round(proteinCals / 4);
+            const carbsGrams = Math.round(carbsCals / 4);
+            const fatsGrams = Math.round(fatsCals / 9);
+
+            // Display results
+            document.getElementById('bmrValue').textContent = Math.round(bmr) + ' cal';
+            document.getElementById('tdeeValue').textContent = Math.round(tdee) + ' cal';
+            document.getElementById('goalValue').textContent = Math.round(goalCalories) + ' cal';
+
+            document.getElementById('protein').textContent = proteinGrams + 'g';
+            document.getElementById('carbs').textContent = carbsGrams + 'g';
+            document.getElementById('fats').textContent = fatsGrams + 'g';
+
+            // Update goal description (in Spanish)
+            let description = '';
+            let weeklyChange = '';
+            if (goal === -500) {
+                description = 'Para pérdida de peso moderada';
+                weeklyChange = 'Esperado: -0.5 kg (-1 lb) por semana';
+            } else if (goal === -1000) {
+                description = 'Para pérdida de peso agresiva';
+                weeklyChange = 'Esperado: -1 kg (-2 lbs) por semana';
+            } else if (goal === 0) {
+                description = 'Para mantener el peso actual';
+                weeklyChange = 'El peso debe permanecer estable';
+            } else if (goal === 250) {
+                description = 'Para ganancia muscular magra';
+                weeklyChange = 'Esperado: +0.25 kg (+0.5 lbs) por semana';
+            } else if (goal === 500) {
+                description = 'Para ganancia de peso/músculo';
+                weeklyChange = 'Esperado: +0.5 kg (+1 lb) por semana';
+            }
+
+            document.getElementById('goalDescription').textContent = description;
+            document.getElementById('weeklyChange').textContent = weeklyChange;
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateCalories);
+            input.addEventListener('change', calculateCalories);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', calculateCalories);
+    </script>
+</body>
+</html>

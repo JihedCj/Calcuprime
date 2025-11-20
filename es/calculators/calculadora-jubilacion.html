@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de jubilación gratuita - Planifica tus ahorros de jubilación, calcula el crecimiento de planes 401(k), contribuciones IRA y determina cuánto necesitas para jubilarte cómodamente.">
+    <meta name="keywords" content="calculadora de jubilación, calculadora 401k, calculadora IRA, planificación de jubilación, ahorros de jubilación, calculadora de seguro social">
+
+    <title>Calculadora de Jubilación - Planifica tus Ahorros | CalcuPrime</title>
+
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-jubilacion.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/retirement-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-jubilacion.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/retirement-calculator.html">
+
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        // Detector de idioma del navegador
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const currentLang = document.documentElement.lang;
+
+            // Si el usuario prefiere inglés y está en la versión española, redirigir
+            if (userLang.startsWith('en') && currentLang === 'es') {
+                // Mostrar opción pero no forzar redirección
+                console.log('Detected English preference, offering language switch');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finance">Finanzas</a></li>
+                <li><a href="../../es/index.html#health">Salud</a></li>
+                <li><a href="../../es/index.html#converters">Convertidores</a></li>
+                <li><a href="../../es/index.html#math">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Jubilación</h1>
+            <p class="calculator-description">Planifica tus ahorros de jubilación y verifica si estás en camino hacia una jubilación cómoda</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Tu Información</h3>
+
+                <div class="form-group">
+                    <label for="currentAge" class="form-label">Edad Actual</label>
+                    <input type="number" id="currentAge" class="form-input" value="35" min="18" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="retirementAge" class="form-label">Edad Prevista de Jubilación</label>
+                    <input type="number" id="retirementAge" class="form-input" value="65" min="50" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentSavings" class="form-label">Ahorros Actuales de Jubilación ($)</label>
+                    <input type="number" id="currentSavings" class="form-input" value="50000" min="0" step="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyContribution" class="form-label">Contribución Mensual ($)</label>
+                    <input type="number" id="monthlyContribution" class="form-input" value="500" min="0" step="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="employerMatch" class="form-label">Aporte del Empleador ($ mensuales, opcional)</label>
+                    <input type="number" id="employerMatch" class="form-input" value="250" min="0" step="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="returnRate" class="form-label">Rendimiento Anual Esperado (%)</label>
+                    <input type="number" id="returnRate" class="form-input" value="7" min="0" max="20" step="0.5">
+                    <small style="color: #6b7280; font-size: 0.85rem;">Rango típico: 6-8% para cartera diversificada</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="inflationRate" class="form-label">Tasa de Inflación Esperada (%)</label>
+                    <input type="number" id="inflationRate" class="form-input" value="3" min="0" max="10" step="0.5">
+                </div>
+
+                <div class="form-group">
+                    <label for="retirementExpenses" class="form-label">Gastos Mensuales de Jubilación ($)</label>
+                    <input type="number" id="retirementExpenses" class="form-input" value="4000" min="0" step="100">
+                    <small style="color: #6b7280; font-size: 0.85rem;">En dólares de hoy</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="retirementDuration" class="form-label">Años Esperados en Jubilación</label>
+                    <input type="number" id="retirementDuration" class="form-input" value="30" min="10" max="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="socialSecurity" class="form-label">Seguro Social Esperado ($, mensual, opcional)</label>
+                    <input type="number" id="socialSecurity" class="form-input" value="1500" min="0" step="100">
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Análisis de Jubilación</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Ahorros Proyectados en la Jubilación</div>
+                    <div class="result-value" id="projectedSavings" style="font-size: 2.5rem; color: #2563eb;">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Ahorros de Jubilación Requeridos</div>
+                    <div class="result-value" id="requiredSavings">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Ingreso Mensual de Ahorros (Regla del 4%)</div>
+                    <div class="result-value" id="monthlyIncome">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Ingreso Mensual Total de Jubilación</div>
+                    <div class="result-value" id="totalMonthlyIncome">$0</div>
+                    <small style="color: #6b7280; font-size: 0.85rem;">Incluyendo Seguro Social</small>
+                </div>
+
+                <div id="shortfallSurplus" style="margin-top: 20px; padding: 20px; border-radius: 8px;">
+                    <h4 id="statusTitle" style="margin-bottom: 10px;"></h4>
+                    <p id="statusAmount" style="font-size: 1.5rem; font-weight: 700; margin: 10px 0;"></p>
+                    <p id="statusMessage" style="font-size: 0.9rem; margin: 5px 0;"></p>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Preparación para la Jubilación</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Años hasta la Jubilación:</span>
+                        <span id="yearsUntilRetirement" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Contribuciones Totales:</span>
+                        <span id="totalContributions" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Crecimiento de Inversiones:</span>
+                        <span id="investmentGrowth" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Índice de Preparación:</span>
+                        <span id="readinessScore" style="font-weight: 600;"></span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #eff6ff; border-radius: 8px; border-left: 4px solid #2563eb;">
+                    <h4 style="margin-bottom: 10px; color: #1e40af;">La Regla del 4%</h4>
+                    <p style="font-size: 0.9rem; margin: 0;">Retira el 4% de tus ahorros de jubilación anualmente para que tu dinero dure 30 años o más. Esto equivale a <span id="safeWithdrawalAmount" style="font-weight: 600;"></span> por año de tus ahorros proyectados.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="projectionChart" style="display: none;">
+            <h2>Proyección de Ahorros en el Tiempo</h2>
+            <p style="margin-bottom: 15px;">Tu trayectoria de crecimiento de ahorros de jubilación</p>
+            <div style="overflow-x: auto;">
+                <table id="projectionTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f3f4f6;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Edad</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Año</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Contribuciones Anuales</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Saldo Total</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Intereses Ganados</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectionBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar la Calculadora de Jubilación</h2>
+            <p>Nuestra calculadora integral de jubilación te ayuda a planificar una jubilación cómoda analizando múltiples factores:</p>
+            <ol>
+                <li><strong>Ingresa tu Información de Edad:</strong> Tu edad actual y cuándo planeas jubilarte</li>
+                <li><strong>Agrega tus Ahorros:</strong> El saldo actual de tu cuenta de jubilación</li>
+                <li><strong>Establece Contribuciones:</strong> Ahorros mensuales y aporte del empleador</li>
+                <li><strong>Configura Rendimientos:</strong> Rendimientos de inversión esperados e inflación</li>
+                <li><strong>Planifica Gastos:</strong> Gasto mensual estimado en jubilación</li>
+                <li><strong>Incluye Seguro Social:</strong> Beneficios mensuales esperados (opcional)</li>
+                <li><strong>Revisa Resultados:</strong> Verifica si estás en camino y haz ajustes</li>
+            </ol>
+
+            <h2>Entendiendo la Planificación de Jubilación</h2>
+            <p>La planificación de jubilación es el proceso de determinar los objetivos de ingresos de jubilación y las acciones necesarias para lograrlos. Implica:</p>
+            <ul>
+                <li><strong>Identificar Fuentes de Ingresos:</strong> 401(k), IRA, Seguro Social, pensiones</li>
+                <li><strong>Estimar Gastos:</strong> Atención médica, vivienda, estilo de vida, viajes</li>
+                <li><strong>Implementar Planes de Ahorro:</strong> Contribuciones consistentes e inversiones inteligentes</li>
+                <li><strong>Gestionar Riesgos:</strong> Volatilidad del mercado, inflación, longevidad</li>
+            </ul>
+
+            <h2>La Regla del 4% Explicada</h2>
+            <p>La regla del 4% es una guía de planificación de jubilación que sugiere que puedes retirar el 4% de tus ahorros de jubilación en el primer año, luego ajustar por inflación anualmente, sin quedarte sin dinero durante al menos 30 años.</p>
+
+            <h3>Cómo Funciona</h3>
+            <p>Si tienes $1,000,000 ahorrados:</p>
+            <ul>
+                <li>Año 1: Retira $40,000 (4% de $1,000,000)</li>
+                <li>Año 2: Retira $41,200 (ajustado por inflación del 3%)</li>
+                <li>Año 3: Retira $42,436 (ajustado por inflación del 3%)</li>
+            </ul>
+
+            <h3>Suposiciones y Limitaciones</h3>
+            <ul>
+                <li>Basada en rendimientos históricos del mercado (50% acciones, 50% bonos)</li>
+                <li>Asume un período de jubilación de 30 años</li>
+                <li>Puede ser conservadora para horizontes de jubilación más largos</li>
+                <li>No cuenta para impuestos, comisiones o cambios en gastos</li>
+                <li>Considera 3-3.5% para jubilación anticipada o enfoque conservador</li>
+            </ul>
+
+            <h2>Planes de Jubilación 401(k)</h2>
+            <p>Un 401(k) es un plan de ahorros de jubilación patrocinado por el empleador que ofrece ventajas fiscales significativas.</p>
+
+            <h3>Características Clave</h3>
+            <ul>
+                <li><strong>Límites de Contribución (2024):</strong> $23,000 por año ($30,500 si tienes 50 años o más)</li>
+                <li><strong>Aporte del Empleador:</strong> Dinero gratuito que aumenta inmediatamente los rendimientos</li>
+                <li><strong>Ventajas Fiscales:</strong> Las contribuciones reducen el ingreso imponible</li>
+                <li><strong>Crecimiento con Impuestos Diferidos:</strong> Las inversiones crecen sin impuestos anuales</li>
+                <li><strong>Deducciones Automáticas de Nómina:</strong> Ahorros fáciles y consistentes</li>
+            </ul>
+
+            <h3>401(k) Tradicional vs Roth 401(k)</h3>
+            <p><strong>401(k) Tradicional:</strong></p>
+            <ul>
+                <li>Las contribuciones son antes de impuestos (reduce el ingreso imponible actual)</li>
+                <li>Paga impuestos en los retiros en jubilación</li>
+                <li>Lo mejor si esperas una tasa fiscal menor en jubilación</li>
+            </ul>
+
+            <p><strong>Roth 401(k):</strong></p>
+            <ul>
+                <li>Las contribuciones son después de impuestos (sin beneficio fiscal inmediato)</li>
+                <li>Los retiros en jubilación están libres de impuestos</li>
+                <li>Lo mejor si esperas una tasa fiscal mayor en jubilación</li>
+            </ul>
+
+            <h3>Maximizando tu 401(k)</h3>
+            <ol>
+                <li><strong>Contribuye Suficiente para el Aporte Completo:</strong> No dejes dinero gratuito sobre la mesa</li>
+                <li><strong>Aumenta Contribuciones Anualmente:</strong> Especialmente después de aumentos salariales</li>
+                <li><strong>Elige Fondos de Índice de Bajo Costo:</strong> Minimiza comisiones para maximizar crecimiento</li>
+                <li><strong>Mantén Asignación de Activos Adecuada:</strong> Equilibra riesgo y retorno</li>
+                <li><strong>Evita Retiros Anticipados:</strong> 10% de penalización más impuestos antes de los 59½</li>
+            </ol>
+
+            <h2>Cuentas de Jubilación Individual (IRA)</h2>
+            <p>Las IRA son cuentas de ahorros de jubilación con ventajas fiscales disponibles para cualquiera con ingresos del trabajo.</p>
+
+            <h3>IRA Tradicional</h3>
+            <ul>
+                <li><strong>Límite de Contribución (2024):</strong> $7,000 por año ($8,000 si tienes 50 años o más)</li>
+                <li><strong>Deducción Fiscal:</strong> Las contribuciones pueden ser deducibles de impuestos</li>
+                <li><strong>Crecimiento con Impuestos Diferidos:</strong> Sin impuestos hasta el retiro</li>
+                <li><strong>Distribuciones Mínimas Requeridas:</strong> Debe comenzar a los 73 años</li>
+                <li><strong>Impuestos en Retiros:</strong> Imponibles como ingresos ordinarios</li>
+            </ul>
+
+            <h3>Roth IRA</h3>
+            <ul>
+                <li><strong>Límite de Contribución (2024):</strong> $7,000 por año ($8,000 si tienes 50 años o más)</li>
+                <li><strong>Contribuciones Después de Impuestos:</strong> Sin beneficio fiscal inmediato</li>
+                <li><strong>Crecimiento Libre de Impuestos:</strong> Los retiros calificados están completamente libres de impuestos</li>
+                <li><strong>Sin RMD:</strong> El dinero puede crecer indefinidamente</li>
+                <li><strong>Límites de Ingresos:</strong> La eliminación comienza en $146,000 (soltero), $230,000 (casado)</li>
+            </ul>
+
+            <h3>IRA Tradicional vs Roth IRA</h3>
+            <p><strong>Elige IRA Tradicional si:</strong></p>
+            <ul>
+                <li>Quieres una deducción fiscal inmediata</li>
+                <li>Esperas una tasa fiscal menor en jubilación</li>
+                <li>Estás en una categoría impositiva alta ahora</li>
+            </ul>
+
+            <p><strong>Elige Roth IRA si:</strong></p>
+            <ul>
+                <li>Quieres ingresos de jubilación libres de impuestos</li>
+                <li>Esperas una tasa fiscal mayor en jubilación</li>
+                <li>Eres joven y en una categoría impositiva menor</li>
+                <li>Quieres más flexibilidad (sin RMD)</li>
+            </ul>
+
+            <h2>Beneficios del Seguro Social</h2>
+            <p>El Seguro Social proporciona una base de ingresos de jubilación para la mayoría de las personas.</p>
+
+            <h3>Cómo se Calculan los Beneficios</h3>
+            <ul>
+                <li>Basado en tus 35 años de mayores ingresos</li>
+                <li>Ajustado por inflación (ingresos indexados)</li>
+                <li>Se calcula el ingreso mensual indexado promedio (AIME)</li>
+                <li>Se aplica la fórmula al AIME para obtener el monto de seguro primario (PIA)</li>
+            </ul>
+
+            <h3>Cuándo Solicitar el Seguro Social</h3>
+            <p><strong>A los 62 años (Más Temprano):</strong></p>
+            <ul>
+                <li>Los beneficios se reducen aproximadamente 30%</li>
+                <li>Tiene sentido si necesitas ingresos o tienes problemas de salud</li>
+            </ul>
+
+            <p><strong>Edad de Jubilación Completa (66-67):</strong></p>
+            <ul>
+                <li>100% de tu beneficio</li>
+                <li>Nacido en 1960 o después: A los 67 años</li>
+            </ul>
+
+            <p><strong>A los 70 años (Máximo):</strong></p>
+            <ul>
+                <li>Los beneficios aumentan aproximadamente 24-32%</li>
+                <li>Lo mejor si tienes buena salud y puedes esperar</li>
+                <li>Sin beneficio adicional después de los 70 años</li>
+            </ul>
+
+            <h3>Maximizando el Seguro Social</h3>
+            <ol>
+                <li><strong>Trabaja al menos 35 años:</strong> Los ceros perjudican tu promedio</li>
+                <li><strong>Maximiza tus ingresos:</strong> Mayores ingresos = mayores beneficios</li>
+                <li><strong>Retrasa la solicitud si es posible:</strong> 8% de aumento por año después de FRA</li>
+                <li><strong>Coordina con tu cónyuge:</strong> Optimiza los beneficios combinados</li>
+                <li><strong>Continúa trabajando después de solicitar:</strong> Puede aumentar beneficios futuros</li>
+            </ol>
+
+            <h3>Beneficios Promedio del Seguro Social (2024)</h3>
+            <ul>
+                <li><strong>Trabajador Jubilado Promedio:</strong> $1,907 por mes</li>
+                <li><strong>Beneficio Máximo en FRA:</strong> $3,822 por mes</li>
+                <li><strong>Beneficio Máximo a los 70:</strong> $4,873 por mes</li>
+            </ul>
+
+            <h2>Estrategias de Inversión para la Jubilación</h2>
+
+            <h3>Asignación de Activos por Edad</h3>
+            <p><strong>Regla del 110:</strong> Resta tu edad de 110 para obtener el porcentaje de acciones</p>
+            <ul>
+                <li><strong>Edad 30:</strong> 80% acciones, 20% bonos (110 - 30 = 80)</li>
+                <li><strong>Edad 50:</strong> 60% acciones, 40% bonos (110 - 50 = 60)</li>
+                <li><strong>Edad 70:</strong> 40% acciones, 60% bonos (110 - 70 = 40)</li>
+            </ul>
+
+            <h3>Estrategias de Diversificación</h3>
+            <ul>
+                <li><strong>Acciones Nacionales:</strong> Gran capitalización, mediana capitalización, pequeña capitalización</li>
+                <li><strong>Acciones Internacionales:</strong> Mercados desarrollados y emergentes</li>
+                <li><strong>Bonos:</strong> Gobierno, corporativos, municipales</li>
+                <li><strong>Bienes Raíces:</strong> REIT para exposición a propiedades</li>
+                <li><strong>Efectivo/Equivalentes:</strong> Fondo de emergencia, necesidades a corto plazo</li>
+            </ul>
+
+            <h3>Fondos de Fecha Objetivo</h3>
+            <p>Ajustan automáticamente la asignación de activos a medida que te acercas a la jubilación:</p>
+            <ul>
+                <li>Elige el fondo con el año más cercano a tu jubilación (p. ej., 2055, 2060)</li>
+                <li>Comienza agresivo (mayormente acciones) cuando es joven</li>
+                <li>Se vuelve conservador (más bonos) a medida que envejeces</li>
+                <li>Enfoque simple y sin intervención</li>
+                <li>Cuidado con los gastos operacionales más altos</li>
+            </ul>
+
+            <h2>Atención Médica en la Jubilación</h2>
+
+            <h3>Medicare</h3>
+            <p>Seguro de salud federal para mayores de 65 años y algunas personas más jóvenes con discapacidades.</p>
+            <ul>
+                <li><strong>Parte A (Hospital):</strong> Generalmente sin prima</li>
+                <li><strong>Parte B (Médico):</strong> Prima estándar de $174.70/mes (2024)</li>
+                <li><strong>Parte D (Prescripción):</strong> Varía según el plan</li>
+                <li><strong>Medigap/Advantage:</strong> Opciones de cobertura complementaria</li>
+            </ul>
+
+            <h3>Costos de Atención Médica</h3>
+            <ul>
+                <li>La pareja promedio necesita $315,000 para atención médica en jubilación</li>
+                <li>Medicare no cubre: dental, visión, audífonos, atención a largo plazo</li>
+                <li>Considera una Cuenta de Ahorros de Salud (HSA) para ahorros de atención médica libres de impuestos</li>
+            </ul>
+
+            <h3>Seguro de Cuidado a Largo Plazo</h3>
+            <ul>
+                <li>Cubre hogar de ancianos, vivienda asistida, atención en el hogar</li>
+                <li>Costo promedio: $3,000-8,000 por año</li>
+                <li>Lo mejor comprado en tus 50 años</li>
+                <li>Puede proteger los ahorros de jubilación de gastos catastróficos</li>
+            </ul>
+
+            <h2>Errores Comunes en la Planificación de Jubilación</h2>
+            <ul>
+                <li><strong>Comenzar demasiado tarde:</strong> El interés compuesto necesita tiempo para funcionar</li>
+                <li><strong>Subestimar gastos:</strong> Muchos costos aumentan en jubilación</li>
+                <li><strong>No maximizar el aporte del empleador:</strong> Dejar dinero gratuito atrás</li>
+                <li><strong>Solicitar el Seguro Social demasiado pronto:</strong> Reducción permanente de beneficios</li>
+                <li><strong>Ignorar la inflación:</strong> $4,000/mes hoy ≠ $4,000/mes en 30 años</li>
+                <li><strong>Pagar comisiones de inversión altas:</strong> 1% de comisión puede costar cientos de miles</li>
+                <li><strong>No planificar la atención médica:</strong> Los costos médicos son un gasto importante en jubilación</li>
+                <li><strong>Retiros anticipados de cuentas de jubilación:</strong> Penalizaciones e inversión perdida</li>
+                <li><strong>Falta de diversificación:</strong> No pongas todos los huevos en una canasta</li>
+                <li><strong>No ajustar la estrategia con el tiempo:</strong> Revisa y reequilibra anualmente</li>
+            </ul>
+
+            <h2>Contribuciones de Recuperación</h2>
+            <p>Si tienes 50 años o más, aprovecha las contribuciones de recuperación:</p>
+            <ul>
+                <li><strong>Recuperación 401(k):</strong> $7,500 adicionales por año (total $30,500)</li>
+                <li><strong>Recuperación IRA:</strong> $1,000 adicionales por año (total $8,000)</li>
+                <li><strong>Impacto:</strong> $8,500/año adicionales durante 15 años = $218,000+ (al 7% de rendimiento)</li>
+            </ul>
+
+            <h2>Estrategias de Retiro en Jubilación</h2>
+
+            <h3>Planes de Retiro Sistemático</h3>
+            <ul>
+                <li><strong>Porcentaje Fijo:</strong> Retira el mismo porcentaje anualmente (p. ej., 4%)</li>
+                <li><strong>Dólar Fijo:</strong> Retira cantidad específica ajustada por inflación</li>
+                <li><strong>Distribución Mínima Requerida (RMD):</strong> Retiros mandatarios del IRS de cuentas tradicionales</li>
+                <li><strong>Retiro Dinámico:</strong> Ajusta según desempeño del mercado y necesidades</li>
+            </ul>
+
+            <h3>Orden de Retiro Eficiente en Impuestos</h3>
+            <ol>
+                <li><strong>Cuentas Imponibles Primero:</strong> Cuentas de corretaje (tasas de ganancia de capital más bajas)</li>
+                <li><strong>Impuestos Diferidos Después:</strong> 401(k)/IRA Tradicional (gestiona categoría impositiva)</li>
+                <li><strong>Libre de Impuestos al Final:</strong> Roth 401(k)/IRA (preserva crecimiento libre de impuestos)</li>
+            </ol>
+
+            <h3>Gestionando Distribuciones Mínimas Requeridas (RMD)</h3>
+            <ul>
+                <li>Debe comenzar a los 73 años para 401(k) e IRA tradicionales</li>
+                <li>Penalización por no retirar: 25% del monto no retirado</li>
+                <li>Calcula: Saldo de cuenta ÷ factor de expectativa de vida</li>
+                <li>Estrategia: Considera conversiones Roth antes de que comience RMD</li>
+            </ul>
+
+            <h2>Inflación y tu Jubilación</h2>
+            <p>La inflación erosiona el poder adquisitivo con el tiempo. Con inflación del 3%:</p>
+            <ul>
+                <li><strong>En 10 años:</strong> Los bienes de $100 cuestan $134</li>
+                <li><strong>En 20 años:</strong> Los bienes de $100 cuestan $181</li>
+                <li><strong>En 30 años:</strong> Los bienes de $100 cuestan $243</li>
+            </ul>
+
+            <h3>Estrategias de Protección contra la Inflación</h3>
+            <ul>
+                <li><strong>Mantén exposición a acciones:</strong> Las acciones históricamente superan la inflación</li>
+                <li><strong>Valores del Tesoro Protegidos contra la Inflación (TIPS):</strong> Principal se ajusta con la inflación</li>
+                <li><strong>Bienes raíces:</strong> Los valores de propiedad y rentas tienden a subir con la inflación</li>
+                <li><strong>Retrasa el Seguro Social:</strong> Los beneficios aumentan con el costo de vida</li>
+            </ul>
+
+            <h2>Hitos de Planificación de Jubilación por Edad</h2>
+
+            <h3>Edad 20-30: Construir Base</h3>
+            <ul>
+                <li>Comienza a contribuir al 401(k), apunta al 10-15% del ingreso</li>
+                <li>Abre una Roth IRA si eres elegible</li>
+                <li>Construye fondo de emergencia (3-6 meses de gastos)</li>
+                <li>Paga la deuda de alto interés</li>
+            </ul>
+
+            <h3>Edad 30-40: Acelera Ahorros</h3>
+            <ul>
+                <li>Objetivo: 1-2x el salario anual ahorrado para los 35</li>
+                <li>Maximiza el aporte del empleador</li>
+                <li>Aumenta contribuciones con aumentos salariales</li>
+                <li>Diversifica inversiones</li>
+            </ul>
+
+            <h3>Edad 40-50: Años de Mayores Ingresos</h3>
+            <ul>
+                <li>Objetivo: 3-4x el salario anual ahorrado para los 45</li>
+                <li>Maximiza contribuciones de jubilación si es posible</li>
+                <li>Considera contribuciones de recuperación a los 50</li>
+                <li>Revisa y ajusta asignación de activos</li>
+            </ul>
+
+            <h3>Edad 50-60: Empujón Final</h3>
+            <ul>
+                <li>Objetivo: 6-8x el salario anual ahorrado para los 55</li>
+                <li>Utiliza contribuciones de recuperación</li>
+                <li>Estima beneficios del Seguro Social</li>
+                <li>Planifica costos de atención médica</li>
+                <li>Considera seguro de cuidado a largo plazo</li>
+            </ul>
+
+            <h3>Edad 60+: Fase de Transición</h3>
+            <ul>
+                <li>Objetivo: 10x el salario anual ahorrado para los 67</li>
+                <li>Decide cuándo solicitar el Seguro Social</li>
+                <li>Cambia a inversiones más conservadoras</li>
+                <li>Crea plan de ingresos de jubilación</li>
+                <li>Inscríbete en Medicare a los 65</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Cuánto debo tener ahorrado para la jubilación?</h3>
+            <p>Una regla común es ahorrar 10-15x tu ingreso anual previo a la jubilación. Por ejemplo, si ganas $80,000/año, apunta a $800,000-$1,200,000. Sin embargo, esto varía según tu estilo de vida, beneficios del Seguro Social y objetivos de jubilación.</p>
+
+            <h3>¿Qué pasa si estoy atrasado en ahorros de jubilación?</h3>
+            <p>Nunca es demasiado tarde para comenzar. Enfócate en: (1) Maximizar contribuciones ahora, (2) Usar contribuciones de recuperación después de los 50, (3) Reducir gastos para ahorrar más, (4) Retrasar la jubilación algunos años, (5) Planificar trabajar a tiempo parcial en jubilación temprana, (6) Reducir tu estilo de vida.</p>
+
+            <h3>¿Debo pagar mi hipoteca antes de jubilarme?</h3>
+            <p>Depende de tu tasa de interés, situación fiscal y nivel de comodidad. Las tasas hipotecarias bajas (menos del 4%) podrían invertirse mejor. Las tasas altas (6%+) a menudo vale la pena pagarlas. Considera tu comodidad psicológica con una vida libre de deudas versus la optimización matemática.</p>
+
+            <h3>¿Cuánto de mi ingreso debo ahorrar para la jubilación?</h3>
+            <p>Comienza con al menos 10-15% del ingreso bruto, incluyendo el aporte del empleador. Si comienzas tarde, apunta al 20-25%. Cuanto más joven comiences, menos necesitas ahorrar mensualmente debido al interés compuesto.</p>
+
+            <h3>¿Cuál es una tasa de retiro segura en jubilación?</h3>
+            <p>La regla del 4% sugiere retirar el 4% anualmente. Los planificadores conservadores usan 3-3.5% para jubilaciones más largas (40+ años). Las estrategias dinámicas se ajustan según el desempeño del mercado y necesidades de gasto.</p>
+
+            <h3>¿Debo convertir IRA Tradicional a Roth IRA?</h3>
+            <p>Las conversiones Roth tienen sentido si: (1) Esperas tasas fiscales más altas en jubilación, (2) Actualmente estás en una categoría impositiva baja, (3) Puedes pagar impuestos de conversión de fondos no de jubilación, (4) Quieres reducir RMD futuros. Consulta con un profesional fiscal.</p>
+
+            <h3>¿Cómo se gravan los ingresos de jubilación?</h3>
+            <p>Retiros 401(k)/IRA Tradicional: Se gravan como ingresos ordinarios. Retiros Roth 401(k)/IRA: Libres de impuestos si califican. Seguro Social: 0-85% imponible según ingreso total. Cuentas de corretaje: Tasas de ganancia de capital (típicamente más bajas).</p>
+
+            <h3>¿Qué sucede con mi 401(k) cuando cambio de trabajo?</h3>
+            <p>Tienes varias opciones: (1) Déjalo con el empleador anterior (si se permite), (2) Trasládalo al 401(k) del nuevo empleador, (3) Trasládalo a IRA (más flexibilidad), (4) Retíralo (no recomendado - impuestos y penalizaciones). Los traspasos directos evitan impuestos y penalizaciones.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Calculadoras Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="calculadora-interes-compuesto.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Interés Compuesto</h3>
+                    <p class="calc-description">Calcula el crecimiento de inversiones en el tiempo</p>
+                </a>
+
+                <a href="calculadora-ahorros.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Calculadora de Ahorros</h3>
+                    <p class="calc-description">Planifica tus objetivos de ahorro</p>
+                </a>
+
+                <a href="calculadora-inversiones.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Calculadora de Inversiones</h3>
+                    <p class="calc-description">Proyecta rentabilidad de inversiones</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculateRetirement() {
+            // Obtener valores de entrada
+            const currentAge = parseInt(document.getElementById('currentAge').value) || 0;
+            const retirementAge = parseInt(document.getElementById('retirementAge').value) || 0;
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const employerMatch = parseFloat(document.getElementById('employerMatch').value) || 0;
+            const returnRate = parseFloat(document.getElementById('returnRate').value) || 0;
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) || 0;
+            const retirementExpenses = parseFloat(document.getElementById('retirementExpenses').value) || 0;
+            const retirementDuration = parseInt(document.getElementById('retirementDuration').value) || 0;
+            const socialSecurity = parseFloat(document.getElementById('socialSecurity').value) || 0;
+
+            // Validación
+            if (currentAge >= retirementAge) {
+                alert('La edad de jubilación debe ser mayor que la edad actual');
+                return;
+            }
+
+            if (currentAge <= 0 || retirementAge <= 0) {
+                return;
+            }
+
+            // Calcular años hasta la jubilación
+            const yearsUntilRetirement = retirementAge - currentAge;
+
+            // Calcular contribución mensual total (personal + aporte del empleador)
+            const totalMonthlyContribution = monthlyContribution + employerMatch;
+
+            // Convertir tasas anuales a mensuales
+            const monthlyReturnRate = returnRate / 100 / 12;
+            const monthlyInflationRate = inflationRate / 100 / 12;
+
+            // Calcular ahorros proyectados en jubilación usando interés compuesto
+            let projectedSavings = currentSavings;
+            let totalContributions = 0;
+            const monthsUntilRetirement = yearsUntilRetirement * 12;
+
+            // Calcular con contribuciones mensuales e interés compuesto
+            for (let month = 1; month <= monthsUntilRetirement; month++) {
+                projectedSavings = projectedSavings * (1 + monthlyReturnRate) + totalMonthlyContribution;
+                totalContributions += totalMonthlyContribution;
+            }
+
+            // Ajustar gastos de jubilación por inflación
+            const adjustedRetirementExpenses = retirementExpenses * Math.pow(1 + inflationRate / 100, yearsUntilRetirement);
+
+            // Calcular ahorros requeridos usando regla del 4%
+            // Gastos anuales / 0.04 = ahorros requeridos
+            const annualRetirementExpenses = adjustedRetirementExpenses * 12;
+            const annualSocialSecurity = socialSecurity * 12;
+            const annualExpensesFromSavings = Math.max(0, annualRetirementExpenses - annualSocialSecurity);
+            const requiredSavings = annualExpensesFromSavings / 0.04;
+
+            // Calcular ingreso mensual de ahorros usando regla del 4%
+            const annualWithdrawal = projectedSavings * 0.04;
+            const monthlyIncomeFromSavings = annualWithdrawal / 12;
+            const totalMonthlyIncome = monthlyIncomeFromSavings + socialSecurity;
+
+            // Calcular déficit o superávit
+            const difference = projectedSavings - requiredSavings;
+            const monthlyDifference = totalMonthlyIncome - adjustedRetirementExpenses;
+
+            // Calcular crecimiento de inversión
+            const investmentGrowth = projectedSavings - currentSavings - totalContributions;
+
+            // Calcular índice de preparación (porcentaje de ahorros requeridos)
+            const readinessScore = Math.min(100, (projectedSavings / requiredSavings * 100));
+
+            // Mostrar resultados
+            document.getElementById('projectedSavings').textContent = formatCurrency(projectedSavings);
+            document.getElementById('requiredSavings').textContent = formatCurrency(requiredSavings);
+            document.getElementById('monthlyIncome').textContent = formatCurrency(monthlyIncomeFromSavings);
+            document.getElementById('totalMonthlyIncome').textContent = formatCurrency(totalMonthlyIncome);
+            document.getElementById('safeWithdrawalAmount').textContent = formatCurrency(annualWithdrawal);
+
+            // Mostrar métricas de preparación
+            document.getElementById('yearsUntilRetirement').textContent = yearsUntilRetirement + ' años';
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions);
+            document.getElementById('investmentGrowth').textContent = formatCurrency(investmentGrowth);
+            document.getElementById('readinessScore').textContent = readinessScore.toFixed(1) + '%';
+
+            // Mostrar estado de déficit/superávit
+            const statusDiv = document.getElementById('shortfallSurplus');
+            const statusTitle = document.getElementById('statusTitle');
+            const statusAmount = document.getElementById('statusAmount');
+            const statusMessage = document.getElementById('statusMessage');
+
+            if (difference >= 0) {
+                statusDiv.style.background = '#ecfdf5';
+                statusDiv.style.borderLeft = '4px solid #10b981';
+                statusTitle.style.color = '#047857';
+                statusTitle.textContent = '¡En Camino! Superávit Proyectado';
+                statusAmount.textContent = formatCurrency(difference);
+                statusAmount.style.color = '#059669';
+                statusMessage.textContent = `Se proyecta que tengas ${formatCurrency(monthlyDifference)} más por mes que tus gastos en jubilación.`;
+            } else {
+                statusDiv.style.background = '#fef2f2';
+                statusDiv.style.borderLeft = '4px solid #ef4444';
+                statusTitle.style.color = '#dc2626';
+                statusTitle.textContent = 'Atención: Déficit Proyectado';
+                statusAmount.textContent = formatCurrency(Math.abs(difference));
+                statusAmount.style.color = '#dc2626';
+                statusMessage.textContent = `Puede haber un déficit de ${formatCurrency(Math.abs(monthlyDifference))} por mes. Considera aumentar contribuciones o ajustar planes de jubilación.`;
+            }
+
+            // Generar tabla de proyección
+            generateProjectionTable(currentAge, retirementAge, currentSavings, totalMonthlyContribution, monthlyReturnRate);
+            document.getElementById('projectionChart').style.display = 'block';
+        }
+
+        function generateProjectionTable(currentAge, retirementAge, initialSavings, monthlyContribution, monthlyRate) {
+            const tbody = document.getElementById('projectionBody');
+            tbody.innerHTML = '';
+
+            let balance = initialSavings;
+            const currentYear = new Date().getFullYear();
+
+            for (let age = currentAge; age <= retirementAge; age++) {
+                const year = currentYear + (age - currentAge);
+                let annualContributions = 0;
+                let startBalance = balance;
+
+                // Calcular para cada mes del año
+                for (let month = 0; month < 12; month++) {
+                    balance = balance * (1 + monthlyRate) + monthlyContribution;
+                    annualContributions += monthlyContribution;
+                }
+
+                const interestEarned = balance - startBalance - annualContributions;
+
+                // Mostrar cada 5 años, primer año y último año
+                if (age === currentAge || age === retirementAge || (age - currentAge) % 5 === 0) {
+                    const row = tbody.insertRow();
+                    row.innerHTML = `
+                        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">${age}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${year}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(annualContributions)}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; font-weight: 600;">${formatCurrency(balance)}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; color: #059669;">${formatCurrency(interestEarned)}</td>
+                    `;
+                }
+            }
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('es-ES', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(num);
+        }
+
+        // Auto-calcular en cambio de entrada
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateRetirement);
+            input.addEventListener('change', calculateRetirement);
+        });
+
+        // Calcular en carga de página
+        window.addEventListener('load', calculateRetirement);
+    </script>
+</body>
+</html>

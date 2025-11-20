@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Política de Privacidad de CalcuPrime - Conozca cómo recopilamos, usamos y protegemos su información personal. Cumplimiento con RGPD y CCPA.">
+    <meta name="keywords" content="política de privacidad, protección de datos, RGPD, CCPA, cookies, información personal">
+    <meta name="author" content="CalcuPrime">
+    <meta name="robots" content="index, follow">
+
+    <!-- Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/privacy.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/privacidad.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/privacy.html">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Política de Privacidad - CalcuPrime">
+    <meta property="og:description" content="Política de Privacidad de CalcuPrime - Su privacidad y protección de datos nos importa">
+    <meta property="og:image" content="../assets/og-image.jpg">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <title>Política de Privacidad - CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/privacidad.html">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+
+    <style>
+        .privacy-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            line-height: 1.8;
+        }
+
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .privacy-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .privacy-updated {
+            font-size: 0.95rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .privacy-intro {
+            font-size: 1.1rem;
+            color: #4b5563;
+            margin-bottom: 40px;
+            padding: 25px;
+            background: #f9fafb;
+            border-left: 4px solid #3b82f6;
+            border-radius: 4px;
+        }
+
+        .privacy-section {
+            margin-bottom: 45px;
+        }
+
+        .privacy-section h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 20px;
+            margin-top: 35px;
+        }
+
+        .privacy-section h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .privacy-section p {
+            color: #4b5563;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .privacy-section ul, .privacy-section ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .privacy-section li {
+            color: #4b5563;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .privacy-section strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .contact-box {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .toc {
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1f2937;
+        }
+
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .toc a:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 10px 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .language-switch a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .language-switch a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .privacy-title {
+                font-size: 2rem;
+            }
+
+            .privacy-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .privacy-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .privacy-content {
+                padding: 40px 15px;
+            }
+
+            .language-switch {
+                position: static;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switch">
+        <a href="../privacy.html">🇬🇧 English</a>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="../" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finanzas</a></li>
+                <li><a href="../index.html#health">Salud</a></li>
+                <li><a href="../index.html#converters">Convertidores</a></li>
+                <li><a href="../index.html#math">Matemáticas</a></li>
+                <li><a href="../index.html#chemistry">Química</a></li>
+                <li><a href="../index.html#everyday">Cotidiano</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Buscar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">&times;</button>
+            <input type="text" id="searchInput" placeholder="Buscar calculadoras..." class="search-input">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Content -->
+    <div class="privacy-content">
+        <div class="privacy-header">
+            <h1 class="privacy-title">Política de Privacidad</h1>
+            <p class="privacy-updated">Última Actualización: 20 de noviembre de 2024</p>
+        </div>
+
+        <div class="privacy-intro">
+            <p><strong>Bienvenido a CalcuPrime.</strong> En CalcuPrime ("nosotros", "nuestro" o "nuestra empresa"), estamos comprometidos a proteger su privacidad y garantizar la transparencia sobre cómo recopilamos, usamos y protegemos su información personal. Esta Política de Privacidad explica nuestras prácticas en relación con la recopilación y el procesamiento de datos cuando utiliza nuestro sitio web en calcuprime.com (el "Servicio").</p>
+            <p>Al acceder o utilizar CalcuPrime, usted acepta los términos de esta Política de Privacidad. Si no está de acuerdo con nuestras políticas y prácticas, por favor no utilice nuestro Servicio.</p>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>Tabla de Contenidos</h3>
+            <ul>
+                <li><a href="#information-collection">1. Información que Recopilamos</a></li>
+                <li><a href="#how-we-use">2. Cómo Utilizamos su Información</a></li>
+                <li><a href="#cookies">3. Cookies y Tecnologías de Seguimiento</a></li>
+                <li><a href="#google-adsense">4. Google AdSense y Publicidad</a></li>
+                <li><a href="#google-analytics">5. Google Analytics</a></li>
+                <li><a href="#third-party">6. Servicios de Terceros</a></li>
+                <li><a href="#data-sharing">7. Compartir y Divulgar Datos</a></li>
+                <li><a href="#data-security">8. Seguridad de los Datos</a></li>
+                <li><a href="#data-retention">9. Retención de Datos</a></li>
+                <li><a href="#your-rights">10. Sus Derechos y Opciones</a></li>
+                <li><a href="#gdpr">11. Cumplimiento del RGPD (Usuarios Europeos)</a></li>
+                <li><a href="#ccpa">12. Cumplimiento de la CCPA (Residentes de California)</a></li>
+                <li><a href="#children">13. Privacidad de los Niños</a></li>
+                <li><a href="#international">14. Transferencias Internacionales de Datos</a></li>
+                <li><a href="#changes">15. Cambios a esta Política de Privacidad</a></li>
+                <li><a href="#contact">16. Información de Contacto</a></li>
+            </ul>
+        </div>
+
+        <!-- Section 1: Information Collection -->
+        <div class="privacy-section" id="information-collection">
+            <h2>1. Información que Recopilamos</h2>
+
+            <h3>1.1 Información que Proporciona Directamente</h3>
+            <p>Cuando utiliza nuestras calculadoras y herramientas, puede proporcionar voluntariamente cierta información, incluyendo:</p>
+            <ul>
+                <li><strong>Entradas de Calculadora:</strong> Valores numéricos, medidas y otros datos que ingresa en nuestras calculadoras (por ejemplo, montos de hipoteca, medidas de IMC, conversiones de unidades)</li>
+                <li><strong>Información de Contacto:</strong> Si nos contacta por correo electrónico o formularios de contacto, recopilamos su nombre, dirección de correo electrónico y contenido del mensaje</li>
+                <li><strong>Información de Cuenta:</strong> Si crea una cuenta (si corresponde), recopilamos su nombre de usuario, dirección de correo electrónico y contraseña</li>
+                <li><strong>Comentarios y Respuestas a Encuestas:</strong> Información que proporciona al participar en encuestas o proporcionar comentarios</li>
+            </ul>
+
+            <h3>1.2 Información Recopilada Automáticamente</h3>
+            <p>Cuando accede a CalcuPrime, recopilamos automáticamente cierta información sobre su dispositivo y patrones de uso:</p>
+            <ul>
+                <li><strong>Información del Dispositivo:</strong> Dirección IP, tipo y versión del navegador, sistema operativo, tipo de dispositivo e identificadores únicos del dispositivo</li>
+                <li><strong>Datos de Uso:</strong> Páginas visitadas, tiempo de permanencia en las páginas, patrones de clics, páginas de referencia/salida, fecha y hora de las visitas</li>
+                <li><strong>Datos de Ubicación:</strong> Ubicación geográfica aproximada basada en la dirección IP</li>
+                <li><strong>Datos Técnicos:</strong> Configuración del navegador, zona horaria, resolución de pantalla y otra información técnica</li>
+            </ul>
+
+            <h3>1.3 Cookies y Tecnologías Similares</h3>
+            <p>Utilizamos cookies, balizas web, etiquetas de píxeles y tecnologías de seguimiento similares para recopilar información sobre sus actividades de navegación. Consulte la Sección 3 para obtener información detallada sobre las cookies.</p>
+        </div>
+
+        <!-- Section 2: How We Use Information -->
+        <div class="privacy-section" id="how-we-use">
+            <h2>2. Cómo Utilizamos su Información</h2>
+
+            <p>Utilizamos la información recopilada para los siguientes fines:</p>
+
+            <h3>2.1 Provisión y Mejora del Servicio</h3>
+            <ul>
+                <li>Para proporcionar, operar y mantener nuestros servicios de calculadoras y conversores</li>
+                <li>Para procesar sus cálculos y mostrar resultados precisos</li>
+                <li>Para mejorar, personalizar y mejorar su experiencia de usuario</li>
+                <li>Para desarrollar nuevas características, productos y servicios</li>
+                <li>Para analizar patrones de uso y optimizar el rendimiento del sitio web</li>
+            </ul>
+
+            <h3>2.2 Comunicación</h3>
+            <ul>
+                <li>Para responder a sus consultas, comentarios y solicitudes de soporte</li>
+                <li>Para enviar información administrativa, actualizaciones y alertas de seguridad</li>
+                <li>Para notificarle sobre cambios en nuestro Servicio o políticas</li>
+                <li>Para enviar comunicaciones de marketing (con su consentimiento cuando sea requerido)</li>
+            </ul>
+
+            <h3>2.3 Análisis e Investigación</h3>
+            <ul>
+                <li>Para monitorear y analizar tendencias de uso y preferencias de usuarios</li>
+                <li>Para medir la efectividad de nuestro contenido y características</li>
+                <li>Para realizar investigaciones y análisis estadísticos</li>
+                <li>Para crear datos agregados y anonimizados con fines analíticos</li>
+            </ul>
+
+            <h3>2.4 Publicidad y Marketing</h3>
+            <ul>
+                <li>Para mostrar anuncios personalizados a través de Google AdSense y otros socios publicitarios</li>
+                <li>Para medir la efectividad de las campañas publicitarias</li>
+                <li>Para proporcionar contenido y ofertas dirigidas basadas en sus intereses</li>
+            </ul>
+
+            <h3>2.5 Legal y Seguridad</h3>
+            <ul>
+                <li>Para cumplir con obligaciones legales y requisitos regulatorios</li>
+                <li>Para proteger contra fraude, acceso no autorizado y amenazas de seguridad</li>
+                <li>Para hacer cumplir nuestros Términos de Servicio y otras políticas</li>
+                <li>Para resolver disputas y solucionar problemas</li>
+            </ul>
+        </div>
+
+        <!-- Section 3: Cookies -->
+        <div class="privacy-section" id="cookies">
+            <h2>3. Cookies y Tecnologías de Seguimiento</h2>
+
+            <h3>3.1 ¿Qué son las Cookies?</h3>
+            <p>Las cookies son pequeños archivos de texto que se almacenan en su dispositivo cuando visita nuestro sitio web. Nos ayudan a reconocer su dispositivo y recordar cierta información sobre sus preferencias y patrones de uso.</p>
+
+            <h3>3.2 Tipos de Cookies que Utilizamos</h3>
+
+            <div class="highlight-box">
+                <h4><strong>Cookies Esenciales</strong></h4>
+                <p>Estas cookies son necesarias para que el sitio web funcione correctamente. Habilitan funciones básicas como seguridad, gestión de red y accesibilidad. No puede optar por no recibir estas cookies.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4><strong>Cookies de Análisis</strong></h4>
+                <p>Utilizamos cookies de análisis (principalmente Google Analytics) para comprender cómo los visitantes interactúan con nuestro sitio web. Estas cookies recopilan información sobre las páginas visitadas, el tiempo de permanencia y los patrones de navegación.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4><strong>Cookies Publicitarias</strong></h4>
+                <p>Estas cookies se utilizan para mostrar anuncios relevantes y realizar un seguimiento del rendimiento de las campañas publicitarias. Utilizamos Google AdSense y otros socios publicitarios que pueden establecer cookies en su dispositivo.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4><strong>Cookies de Funcionalidad</strong></h4>
+                <p>Estas cookies recuerdan sus preferencias y opciones (como idioma, región o configuración de visualización) para proporcionar características mejoradas y personalizadas.</p>
+            </div>
+
+            <h3>3.3 Duración de las Cookies</h3>
+            <ul>
+                <li><strong>Cookies de Sesión:</strong> Cookies temporales que se eliminan cuando cierra su navegador</li>
+                <li><strong>Cookies Persistentes:</strong> Permanecen en su dispositivo durante un período predeterminado o hasta que se eliminen manualmente</li>
+            </ul>
+
+            <h3>3.4 Gestión de Cookies</h3>
+            <p>Puede controlar y gestionar las cookies a través de la configuración de su navegador. La mayoría de los navegadores le permiten:</p>
+            <ul>
+                <li>Ver y eliminar cookies</li>
+                <li>Bloquear cookies de terceros</li>
+                <li>Bloquear cookies de sitios web específicos</li>
+                <li>Bloquear todas las cookies</li>
+                <li>Eliminar todas las cookies cuando cierre su navegador</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Importante:</strong> Si elige desactivar las cookies, algunas características de nuestro Servicio pueden no funcionar correctamente o pueden no estar disponibles.</p>
+            </div>
+
+            <p>Para obtener más información sobre la gestión de cookies, visite: <a href="http://www.allaboutcookies.org" target="_blank" rel="noopener">www.allaboutcookies.org</a></p>
+        </div>
+
+        <!-- Section 4: Google AdSense -->
+        <div class="privacy-section" id="google-adsense">
+            <h2>4. Google AdSense y Publicidad</h2>
+
+            <h3>4.1 Publicidad de Terceros</h3>
+            <p>CalcuPrime utiliza Google AdSense para mostrar anuncios en nuestro sitio web. Google AdSense es un servicio de publicidad proporcionado por Google LLC que utiliza cookies y otras tecnologías de seguimiento para publicar anuncios basados en sus visitas anteriores a nuestro sitio web u otros sitios web en Internet.</p>
+
+            <h3>4.2 Cómo Funciona Google AdSense</h3>
+            <p>Google AdSense utiliza cookies para:</p>
+            <ul>
+                <li>Mostrar anuncios basados en sus visitas a CalcuPrime y otros sitios web</li>
+                <li>Medir el rendimiento y la participación de los anuncios</li>
+                <li>Proporcionar publicidad personalizada basada en sus intereses</li>
+                <li>Evitar que el mismo anuncio aparezca continuamente</li>
+                <li>Detectar y prevenir el fraude de clics</li>
+            </ul>
+
+            <h3>4.3 Publicidad Personalizada vs. No Personalizada</h3>
+            <p><strong>Publicidad Personalizada:</strong> Los anuncios se adaptan en función de sus intereses y comportamiento de navegación utilizando cookies y otros identificadores.</p>
+            <p><strong>Publicidad No Personalizada:</strong> Los anuncios se basan en información contextual (el contenido de la página actual) en lugar de datos del usuario.</p>
+
+            <h3>4.4 Cookie DART de DoubleClick</h3>
+            <p>Google utiliza la cookie DART de DoubleClick para publicar anuncios a nuestros usuarios en función de sus visitas a CalcuPrime y otros sitios web. La cookie DART permite a Google publicar anuncios basados en sus intereses mientras mantiene su privacidad.</p>
+
+            <h3>4.5 Optar por No Recibir Publicidad Personalizada</h3>
+            <p>Puede optar por no recibir publicidad personalizada visitando:</p>
+            <ul>
+                <li><strong>Configuración de Anuncios de Google:</strong> <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">google.com/settings/ads</a></li>
+                <li><strong>Network Advertising Initiative:</strong> <a href="http://www.networkadvertising.org/choices/" target="_blank" rel="noopener">networkadvertising.org/choices/</a></li>
+                <li><strong>Digital Advertising Alliance:</strong> <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener">aboutads.info/choices/</a></li>
+                <li><strong>European Interactive Digital Advertising Alliance:</strong> <a href="http://www.youronlinechoices.eu/" target="_blank" rel="noopener">youronlinechoices.eu/</a></li>
+            </ul>
+        </div>
+
+        <!-- Section 10: Your Rights -->
+        <div class="privacy-section" id="your-rights">
+            <h2>10. Sus Derechos y Opciones</h2>
+
+            <h3>10.1 Acceso y Portabilidad</h3>
+            <p>Usted tiene derecho a:</p>
+            <ul>
+                <li><strong>Acceso:</strong> Solicitar una copia de la información personal que tenemos sobre usted</li>
+                <li><strong>Portabilidad de Datos:</strong> Recibir sus datos en un formato estructurado, de uso común y legible por máquina</li>
+                <li><strong>Transferencia:</strong> Solicitar la transferencia de sus datos a otro proveedor de servicios (cuando sea técnicamente posible)</li>
+            </ul>
+
+            <h3>10.2 Corrección y Actualización</h3>
+            <p>Usted tiene derecho a:</p>
+            <ul>
+                <li>Solicitar la corrección de información personal inexacta o incompleta</li>
+                <li>Actualizar la información y las preferencias de su cuenta</li>
+                <li>Notificarnos cambios en su información de contacto</li>
+            </ul>
+
+            <h3>10.3 Eliminación y Borrado</h3>
+            <p>Usted tiene derecho a solicitar la eliminación de su información personal (también conocido como el "derecho al olvido") cuando:</p>
+            <ul>
+                <li>Los datos ya no son necesarios para los fines para los que fueron recopilados</li>
+                <li>Usted retira el consentimiento y no hay otra base legal para el procesamiento</li>
+                <li>Usted se opone al procesamiento y no hay motivos legítimos preponderantes</li>
+                <li>Los datos han sido procesados ilegalmente</li>
+                <li>Las obligaciones legales requieren la eliminación</li>
+            </ul>
+        </div>
+
+        <!-- Section 11: GDPR -->
+        <div class="privacy-section" id="gdpr">
+            <h2>11. Cumplimiento del RGPD (Usuarios Europeos)</h2>
+
+            <h3>11.1 Base Legal para el Procesamiento</h3>
+            <p>Según el Reglamento General de Protección de Datos (RGPD), procesamos información personal basándonos en las siguientes bases legales:</p>
+            <ul>
+                <li><strong>Consentimiento:</strong> Usted ha dado su consentimiento explícito para actividades de procesamiento específicas (por ejemplo, comunicaciones de marketing, cookies)</li>
+                <li><strong>Ejecución del Contrato:</strong> El procesamiento es necesario para proporcionarle nuestros servicios</li>
+                <li><strong>Obligaciones Legales:</strong> El procesamiento es requerido para cumplir con requisitos legales</li>
+                <li><strong>Intereses Legítimos:</strong> El procesamiento es necesario para nuestros intereses comerciales legítimos (por ejemplo, prevención de fraude, análisis, seguridad), siempre que estos no anulen sus derechos y libertades</li>
+            </ul>
+
+            <h3>11.2 Derechos del RGPD</h3>
+            <p>Si se encuentra en el Espacio Económico Europeo (EEE), Reino Unido o Suiza, tiene los siguientes derechos según el RGPD:</p>
+            <ul>
+                <li>Derecho de acceso a sus datos personales</li>
+                <li>Derecho de rectificación de datos inexactos</li>
+                <li>Derecho de supresión ("derecho al olvido")</li>
+                <li>Derecho de limitación del tratamiento</li>
+                <li>Derecho a la portabilidad de los datos</li>
+                <li>Derecho de oposición al tratamiento</li>
+                <li>Derecho a retirar el consentimiento</li>
+                <li>Derecho a presentar una reclamación ante una autoridad de control</li>
+                <li>Derecho a no ser objeto de decisiones automatizadas, incluida la elaboración de perfiles</li>
+            </ul>
+
+            <h3>11.3 Responsable del Tratamiento</h3>
+            <p>CalcuPrime es el responsable del tratamiento de su información personal. Nuestros datos de contacto se proporcionan en la Sección 16.</p>
+
+            <h3>11.4 Delegado de Protección de Datos</h3>
+            <p>Para consultas relacionadas con el RGPD, puede contactar a nuestro Delegado de Protección de Datos en: privacy@calcuprime.com</p>
+        </div>
+
+        <!-- Section 12: CCPA -->
+        <div class="privacy-section" id="ccpa">
+            <h2>12. Cumplimiento de la CCPA (Residentes de California)</h2>
+
+            <h3>12.1 Derechos de Privacidad de California</h3>
+            <p>Si es residente de California, la Ley de Privacidad del Consumidor de California (CCPA) le proporciona derechos específicos con respecto a su información personal:</p>
+
+            <h3>12.2 Derecho a Saber</h3>
+            <p>Usted tiene derecho a solicitar que revelemos:</p>
+            <ul>
+                <li>Categorías de información personal que recopilamos sobre usted</li>
+                <li>Categorías de fuentes de las que recopilamos información personal</li>
+                <li>Nuestro propósito comercial o comercial para recopilar o vender información personal</li>
+                <li>Categorías de terceros con los que compartimos información personal</li>
+                <li>Piezas específicas de información personal que recopilamos sobre usted</li>
+            </ul>
+
+            <h3>12.3 Derecho a Eliminar</h3>
+            <p>Usted tiene derecho a solicitar la eliminación de su información personal que recopilamos de usted, sujeto a ciertas excepciones.</p>
+
+            <h3>12.4 Derecho a Optar por No Participar</h3>
+            <p>Usted tiene derecho a optar por no participar en la "venta" de su información personal. Sin embargo, no vendemos información personal según lo define la CCPA.</p>
+
+            <h3>12.5 Derecho a la No Discriminación</h3>
+            <p>No lo discriminaremos por ejercer cualquiera de sus derechos de la CCPA, incluyendo:</p>
+            <ul>
+                <li>Negar bienes o servicios</li>
+                <li>Cobrar precios o tarifas diferentes</li>
+                <li>Proporcionar un nivel o calidad de servicios diferente</li>
+                <li>Sugerir que recibirá precios o calidad de servicios diferentes</li>
+            </ul>
+        </div>
+
+        <!-- Section 13: Children's Privacy -->
+        <div class="privacy-section" id="children">
+            <h2>13. Privacidad de los Niños</h2>
+
+            <h3>13.1 Restricciones de Edad</h3>
+            <p>CalcuPrime no está dirigido a niños menores de 13 años (o 16 en el EEE). No recopilamos intencionalmente información personal de niños menores de estas edades.</p>
+
+            <h3>13.2 Consentimiento Parental</h3>
+            <p>Si nos enteramos de que hemos recopilado información personal de un niño menor de 13 años (o 16 en el EEE) sin el consentimiento parental verificable, tomaremos medidas para eliminar esa información lo más rápido posible.</p>
+
+            <h3>13.3 Cumplimiento de COPPA</h3>
+            <p>Cumplimos con la Ley de Protección de la Privacidad en Línea de los Niños (COPPA) y no:</p>
+            <ul>
+                <li>Recopilamos intencionalmente información de niños menores de 13 años</li>
+                <li>Permitimos que niños menores de 13 años creen cuentas o perfiles</li>
+                <li>Dirigimos publicidad a niños</li>
+                <li>Compartimos información de niños con terceros (si se recopila inadvertidamente)</li>
+            </ul>
+        </div>
+
+        <!-- Section 14: International Transfers -->
+        <div class="privacy-section" id="international">
+            <h2>14. Transferencias Internacionales de Datos</h2>
+
+            <h3>14.1 Transferencias Transfronterizas de Datos</h3>
+            <p>Su información puede ser transferida, almacenada y procesada en países distintos de su país de residencia. Estos países pueden tener leyes de protección de datos que difieran de las de su país.</p>
+
+            <h3>14.2 Salvaguardias para Transferencias</h3>
+            <p>Cuando transferimos datos personales internacionalmente, implementamos salvaguardias apropiadas para garantizar que su información permanezca protegida, incluyendo:</p>
+            <ul>
+                <li>Cláusulas Contractuales Tipo aprobadas por la Comisión Europea</li>
+                <li>Acuerdos de procesamiento de datos con proveedores de servicios</li>
+                <li>Garantizar que las transferencias sean solo a países con protección de datos adecuada</li>
+                <li>Implementar medidas técnicas y organizativas de seguridad</li>
+            </ul>
+        </div>
+
+        <!-- Section 15: Changes to Policy -->
+        <div class="privacy-section" id="changes">
+            <h2>15. Cambios a esta Política de Privacidad</h2>
+
+            <h3>15.1 Actualizaciones de la Política</h3>
+            <p>Podemos actualizar esta Política de Privacidad de vez en cuando para reflejar cambios en nuestras prácticas, tecnologías, requisitos legales u otros factores. Cuando hagamos cambios, actualizaremos la fecha de "Última Actualización" en la parte superior de esta política.</p>
+
+            <h3>15.2 Cambios Materiales</h3>
+            <p>Si realizamos cambios materiales a esta Política de Privacidad que afecten significativamente sus derechos o cómo procesamos su información, nosotros:</p>
+            <ul>
+                <li>Proporcionaremos un aviso destacado en nuestro sitio web</li>
+                <li>Le enviaremos una notificación por correo electrónico (si tenemos su dirección de correo electrónico)</li>
+                <li>Solicitaremos su consentimiento cuando sea requerido por ley</li>
+                <li>Proporcionaremos un período razonable para revisar los cambios antes de que entren en vigencia</li>
+            </ul>
+        </div>
+
+        <!-- Section 16: Contact Information -->
+        <div class="privacy-section" id="contact">
+            <h2>16. Información de Contacto</h2>
+
+            <div class="contact-box">
+                <h3>Cómo Contactarnos</h3>
+                <p>Si tiene alguna pregunta, inquietud o solicitud con respecto a esta Política de Privacidad o nuestras prácticas de datos, contáctenos:</p>
+
+                <p><strong>CalcuPrime</strong><br>
+                Correo electrónico: <a href="mailto:privacy@calcuprime.com">privacy@calcuprime.com</a><br>
+                Sitio web: <a href="https://calcuprime.com">https://calcuprime.com</a><br>
+                Formulario de contacto: <a href="contacto.html">calcuprime.com/es/contacto.html</a></p>
+
+                <p><strong>Delegado de Protección de Datos:</strong><br>
+                Correo electrónico: <a href="mailto:dpo@calcuprime.com">dpo@calcuprime.com</a></p>
+
+                <p><strong>Tiempo de Respuesta:</strong><br>
+                Nuestro objetivo es responder a todas las consultas relacionadas con la privacidad dentro de 30 días (o según lo requiera la ley aplicable).</p>
+            </div>
+        </div>
+
+        <!-- Acknowledgment -->
+        <div class="privacy-section">
+            <div class="highlight-box">
+                <h3>Reconocimiento</h3>
+                <p>Al utilizar CalcuPrime, usted reconoce que ha leído, comprendido y acepta estar sujeto a esta Política de Privacidad. Esta política debe leerse junto con nuestros <a href="terminos.html">Términos de Servicio</a> y <a href="cookies.html">Política de Cookies</a>.</p>
+
+                <p><strong>Gracias por confiar en CalcuPrime con su información. Estamos comprometidos a proteger su privacidad y proporcionar prácticas de datos transparentes y responsables.</strong></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Calculadoras y conversores profesionales en línea para todas sus necesidades de cálculo.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categorías</h4>
+                    <ul class="footer-links">
+                        <li><a href="../category/finance.html">Finanzas</a></li>
+                        <li><a href="../category/health.html">Salud</a></li>
+                        <li><a href="../category/converters.html">Convertidores</a></li>
+                        <li><a href="../category/math.html">Matemáticas</a></li>
+                        <li><a href="../category/chemistry.html">Química</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Recursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="acerca.html">Acerca de</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="../sitemap.html">Mapa del sitio</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacidad.html">Política de Privacidad</a></li>
+                        <li><a href="terminos.html">Términos de Servicio</a></li>
+                        <li><a href="cookies.html">Política de Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

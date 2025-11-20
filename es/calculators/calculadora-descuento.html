@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de descuentos gratuita - Calcula precios de venta, porcentajes de descuento, montos de ahorro y compara múltiples descuentos. Herramienta inteligente de compras para encontrar las mejores ofertas.">
+    <meta name="keywords" content="calculadora de descuentos, calculadora de precio de venta, calculadora de ahorros, calculadora de porcentaje de descuento, calculadora de compras, porcentaje de descuento">
+
+    <title>Calculadora de Descuentos - Calcula Precios de Venta y Ahorros | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-descuento.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/discount-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-descuento.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/discount-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .quick-discount-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .quick-discount-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .quick-discount-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .quick-discount-btn:active {
+            transform: translateY(0);
+        }
+
+        .price-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .price-box {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .original-price-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .sale-price-box {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .price-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .savings-banner {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .savings-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .savings-label {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .discount-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            margin-bottom: 15px;
+        }
+
+        .discount-input-group .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .remove-btn {
+            padding: 10px 15px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: #dc2626;
+        }
+
+        .add-discount-btn {
+            padding: 10px 20px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .add-discount-btn:hover {
+            background: #059669;
+        }
+
+        @media (max-width: 768px) {
+            .price-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-discount-buttons {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .price-amount {
+                font-size: 2rem;
+            }
+
+            .savings-amount {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finanzas">Finanzas</a></li>
+                <li><a href="../index.html#salud">Salud</a></li>
+                <li><a href="../index.html#conversores">Conversores</a></li>
+                <li><a href="../index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Descuentos</h1>
+            <p class="calculator-description">Calcula precios de venta, ahorros y compara descuentos para tomar decisiones inteligentes de compra</p>
+        </div>
+
+        <div class="calculator-wrapper" style="grid-template-columns: 1fr;">
+            <!-- Mode Selector -->
+            <div class="calculator-inputs">
+                <h3>Selecciona Modo de Descuento</h3>
+                <div class="form-group">
+                    <select id="calcMode" class="form-select" style="font-size: 1.1rem;">
+                        <option value="singleDiscount">Descuento Simple</option>
+                        <option value="multipleDiscounts">Descuentos Múltiples (Acumulados)</option>
+                        <option value="fixedAmount">Descuento de Monto Fijo</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Mode 1: Single Discount -->
+            <div id="mode-singleDiscount" class="calculator-inputs">
+                <h3>Calculadora de Descuento Simple</h3>
+                <p style="color: #6b7280; margin-bottom: 20px;">Calcula el precio final después de aplicar un descuento porcentual</p>
+
+                <div class="form-group">
+                    <label for="originalPrice1" class="form-label">Precio Original ($)</label>
+                    <input type="number" id="originalPrice1" class="form-input" value="100" step="0.01" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="discountPercent1" class="form-label">Porcentaje de Descuento (%)</label>
+                    <input type="number" id="discountPercent1" class="form-input" value="20" step="0.01" min="0" max="100">
+                </div>
+
+                <!-- Quick Discount Buttons -->
+                <div style="margin-top: 15px;">
+                    <label class="form-label">Selección Rápida de Descuento</label>
+                    <div class="quick-discount-buttons">
+                        <button class="quick-discount-btn" onclick="setDiscount(10)">10% DESC</button>
+                        <button class="quick-discount-btn" onclick="setDiscount(20)">20% DESC</button>
+                        <button class="quick-discount-btn" onclick="setDiscount(25)">25% DESC</button>
+                        <button class="quick-discount-btn" onclick="setDiscount(30)">30% DESC</button>
+                        <button class="quick-discount-btn" onclick="setDiscount(50)">50% DESC</button>
+                        <button class="quick-discount-btn" onclick="setDiscount(75)">75% DESC</button>
+                    </div>
+                </div>
+
+                <!-- Price Comparison -->
+                <div class="price-comparison">
+                    <div class="price-box original-price-box">
+                        <div class="price-label">Precio Original</div>
+                        <div class="price-amount" id="displayOriginal1">$100.00</div>
+                    </div>
+                    <div class="price-box sale-price-box">
+                        <div class="price-label">Precio de Venta</div>
+                        <div class="price-amount" id="displaySale1">$80.00</div>
+                    </div>
+                </div>
+
+                <!-- Savings Banner -->
+                <div class="savings-banner">
+                    <div class="savings-label">AHORRAS</div>
+                    <div class="savings-amount" id="savings1">$20.00</div>
+                    <div class="savings-label" id="savingsPercent1">20% DE DESCUENTO</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Monto de Descuento</div>
+                    <div class="result-value" id="discountAmount1" style="font-size: 1.8rem; color: #ef4444;">$20.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Precio Final</div>
+                    <div class="result-value" id="finalPrice1" style="font-size: 2.5rem; color: #2563eb;">$80.00</div>
+                </div>
+
+                <div style="padding: 15px; background: #f3f4f6; border-radius: 8px; margin-top: 15px;">
+                    <p style="margin: 0; color: #6b7280; font-size: 0.9rem;">
+                        <strong>Fórmula:</strong> Precio Final = Precio Original × (1 - Descuento% ÷ 100)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Mode 2: Multiple Discounts -->
+            <div id="mode-multipleDiscounts" class="calculator-inputs" style="display: none;">
+                <h3>Calculadora de Descuentos Múltiples</h3>
+                <p style="color: #6b7280; margin-bottom: 20px;">Acumula múltiples descuentos para ver el precio final (los descuentos se aplican secuencialmente)</p>
+
+                <div class="form-group">
+                    <label for="originalPrice2" class="form-label">Precio Original ($)</label>
+                    <input type="number" id="originalPrice2" class="form-input" value="100" step="0.01" min="0">
+                </div>
+
+                <div id="discountsList">
+                    <div class="discount-input-group">
+                        <div class="form-group">
+                            <label class="form-label">Descuento 1 (%)</label>
+                            <input type="number" class="form-input discount-input" value="20" step="0.01" min="0" max="100">
+                        </div>
+                    </div>
+                    <div class="discount-input-group">
+                        <div class="form-group">
+                            <label class="form-label">Descuento 2 (%)</label>
+                            <input type="number" class="form-input discount-input" value="10" step="0.01" min="0" max="100">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="add-discount-btn" onclick="addDiscount()">+ Agregar Otro Descuento</button>
+
+                <!-- Price Comparison -->
+                <div class="price-comparison">
+                    <div class="price-box original-price-box">
+                        <div class="price-label">Precio Original</div>
+                        <div class="price-amount" id="displayOriginal2">$100.00</div>
+                    </div>
+                    <div class="price-box sale-price-box">
+                        <div class="price-label">Precio Final</div>
+                        <div class="price-amount" id="displaySale2">$72.00</div>
+                    </div>
+                </div>
+
+                <!-- Savings Banner -->
+                <div class="savings-banner">
+                    <div class="savings-label">AHORRO TOTAL</div>
+                    <div class="savings-amount" id="savings2">$28.00</div>
+                    <div class="savings-label" id="savingsPercent2">28% DE DESCUENTO</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Monto Total de Descuento</div>
+                    <div class="result-value" id="totalDiscount2" style="font-size: 1.8rem; color: #ef4444;">$28.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Tasa de Descuento Efectiva</div>
+                    <div class="result-value" id="effectiveRate2" style="font-size: 1.5rem; color: #f59e0b;">28%</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Precio Final</div>
+                    <div class="result-value" id="finalPrice2" style="font-size: 2.5rem; color: #2563eb;">$72.00</div>
+                </div>
+
+                <div id="discountBreakdown" style="padding: 15px; background: #f3f4f6; border-radius: 8px; margin-top: 15px;">
+                    <p style="margin: 0; color: #6b7280; font-size: 0.9rem;">
+                        <strong>Desglose:</strong> Los descuentos se aplican secuencialmente. Cada descuento se aplica al precio actual, no al original.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Mode 3: Fixed Amount Off -->
+            <div id="mode-fixedAmount" class="calculator-inputs" style="display: none;">
+                <h3>Descuento de Monto Fijo</h3>
+                <p style="color: #6b7280; margin-bottom: 20px;">Calcula el precio final con un descuento de monto fijo en dólares</p>
+
+                <div class="form-group">
+                    <label for="originalPrice3" class="form-label">Precio Original ($)</label>
+                    <input type="number" id="originalPrice3" class="form-input" value="100" step="0.01" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="fixedDiscount" class="form-label">Monto de Descuento ($)</label>
+                    <input type="number" id="fixedDiscount" class="form-input" value="25" step="0.01" min="0">
+                </div>
+
+                <!-- Price Comparison -->
+                <div class="price-comparison">
+                    <div class="price-box original-price-box">
+                        <div class="price-label">Precio Original</div>
+                        <div class="price-amount" id="displayOriginal3">$100.00</div>
+                    </div>
+                    <div class="price-box sale-price-box">
+                        <div class="price-label">Precio de Venta</div>
+                        <div class="price-amount" id="displaySale3">$75.00</div>
+                    </div>
+                </div>
+
+                <!-- Savings Banner -->
+                <div class="savings-banner">
+                    <div class="savings-label">AHORRAS</div>
+                    <div class="savings-amount" id="savings3">$25.00</div>
+                    <div class="savings-label" id="savingsPercent3">25% DE DESCUENTO</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Monto de Descuento</div>
+                    <div class="result-value" id="discountAmount3" style="font-size: 1.8rem; color: #ef4444;">$25.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Porcentaje de Descuento</div>
+                    <div class="result-value" id="discountPercent3" style="font-size: 1.5rem; color: #f59e0b;">25%</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Precio Final</div>
+                    <div class="result-value" id="finalPrice3" style="font-size: 2.5rem; color: #2563eb;">$75.00</div>
+                </div>
+
+                <div style="padding: 15px; background: #f3f4f6; border-radius: 8px; margin-top: 15px;">
+                    <p style="margin: 0; color: #6b7280; font-size: 0.9rem;">
+                        <strong>Fórmula:</strong> Precio Final = Precio Original - Monto de Descuento
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="content-section">
+            <h2>Cómo Usar la Calculadora de Descuentos</h2>
+            <p>Nuestra calculadora de descuentos te ayuda a tomar decisiones inteligentes de compra mostrándote exactamente cuánto ahorrarás. Elige entre tres modos de cálculo diferentes:</p>
+
+            <h3>1. Descuento Simple</h3>
+            <p>Calcula el precio de venta cuando se aplica un descuento porcentual único. Perfecto para la mayoría de las ventas, artículos en liquidación y ofertas promocionales. Simplemente ingresa el precio original y el porcentaje de descuento para ver tus ahorros instantáneamente.</p>
+            <p><strong>Ejemplo:</strong> Un artículo de $100 con 20% de descuento = precio final de $80 (ahorras $20)</p>
+
+            <h3>2. Descuentos Múltiples (Acumulados)</h3>
+            <p>Algunas tiendas permiten acumular múltiples descuentos. Esta calculadora te muestra el precio final cuando se aplican múltiples descuentos porcentuales secuencialmente. Recuerda, ¡acumular 20% + 10% NO es lo mismo que 30% de descuento!</p>
+            <p><strong>Ejemplo:</strong> Un artículo de $100 con 20% de descuento, luego 10% de descuento = precio final de $72 (28% de descuento efectivo)</p>
+
+            <h3>3. Descuento de Monto Fijo</h3>
+            <p>Calcula los ahorros cuando tienes un descuento de monto fijo en dólares (como "$25 de descuento"). La calculadora también te muestra qué porcentaje de descuento representa esto.</p>
+            <p><strong>Ejemplo:</strong> Un artículo de $100 con $25 de descuento = precio final de $75 (25% de descuento)</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo los Tipos de Descuento</h2>
+
+            <h3>Descuentos Porcentuales</h3>
+            <p>El tipo de descuento más común. Un porcentaje del precio original se resta del total. La fórmula es: Precio Final = Precio Original × (1 - Descuento% ÷ 100)</p>
+
+            <h3>Descuentos de Monto Fijo</h3>
+            <p>Se deduce un monto específico en dólares del precio original. Común en cupones y códigos promocionales. La fórmula es: Precio Final = Precio Original - Monto de Descuento</p>
+
+            <h3>Descuentos Acumulados</h3>
+            <p>Múltiples descuentos aplicados en secuencia. Cada descuento se aplica al precio actual, no al original. ¡Un descuento del 20% seguido de un 10% te da 28% de descuento, no 30%!</p>
+            <p style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                <strong>Importante:</strong> Los descuentos acumulados son multiplicativos, no aditivos. (1 - 0.20) × (1 - 0.10) = 0.72 = 28% de descuento total.
+            </p>
+
+            <h3>BOGO (Compra Uno Lleva Otro)</h3>
+            <p>Aunque no se calcula directamente aquí, las ofertas BOGO equivalen a un 50% de descuento en dos artículos. BOGO 50% significa que obtienes el segundo artículo a mitad de precio, lo que equivale a un 25% de descuento en tu compra total de dos artículos.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Consejos de Compras Inteligentes</h2>
+
+            <h3>Mejores Momentos para Comprar con Descuentos</h3>
+            <ul>
+                <li><strong>Black Friday y Cyber Monday:</strong> Típicamente 30-70% de descuento en electrónicos, artículos para el hogar y ropa</li>
+                <li><strong>Ventas de Fin de Temporada:</strong> 50-80% de descuento en artículos de temporada (abrigos de invierno en marzo, trajes de baño en septiembre)</li>
+                <li><strong>Eventos de Liquidación:</strong> 40-90% de descuento en artículos descontinuados o con exceso de inventario</li>
+                <li><strong>Ventas de Días Festivos:</strong> Día de los Caídos, Día del Trabajo, Día de los Presidentes - típicamente 25-50% de descuento</li>
+                <li><strong>Prime Day / Ventas de Amazon:</strong> Julio - descuentos significativos en electrónicos y artículos para el hogar</li>
+            </ul>
+
+            <h3>Cómo Maximizar tus Ahorros</h3>
+            <ul>
+                <li><strong>Acumular Cupones:</strong> Usa cupones del fabricante con cupones de la tienda cuando sea permitido</li>
+                <li><strong>Igualación de Precios:</strong> Muchos minoristas igualarán los precios más bajos de competidores</li>
+                <li><strong>Registrarse para Correos:</strong> Obtén códigos de descuento exclusivos (a menudo 10-20% de descuento en primera compra)</li>
+                <li><strong>Usar Apps de Reembolso:</strong> Combina precios de venta con reembolso para doble ahorro</li>
+                <li><strong>Comprar Fuera de Temporada Alta:</strong> Compras a mitad de semana a menudo tienen mejores ofertas de liquidación</li>
+                <li><strong>Comparar Precios:</strong> Usa herramientas de comparación de precios antes de hacer compras grandes</li>
+                <li><strong>Esperar Mejores Ofertas:</strong> La mayoría de los artículos tienen descuentos más profundos después de las rebajas iniciales</li>
+            </ul>
+
+            <h3>Señales de Alerta en Descuentos</h3>
+            <ul>
+                <li><strong>Precios "Originales" Inflados:</strong> Algunos minoristas aumentan precios antes de aplicar descuentos</li>
+                <li><strong>Requisitos de Compra Mínima:</strong> Calcula si realmente estás ahorrando dinero</li>
+                <li><strong>Presión de Tiempo Limitado:</strong> Las ventas "Solo Hoy" a menudo se repiten semanalmente</li>
+                <li><strong>MSRP vs Precio Real:</strong> Muchos artículos nunca se venden al precio sugerido del fabricante</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Estrategias de Venta que Usan los Minoristas</h2>
+
+            <h3>Precios Psicológicos</h3>
+            <p>Los minoristas usan porcentajes de descuento específicos para activar decisiones de compra:</p>
+            <ul>
+                <li><strong>20-30% de descuento:</strong> Umbral de "buena oferta" - los consumidores empiezan a considerar compras</li>
+                <li><strong>40-50% de descuento:</strong> "Gran oferta" - fuerte motivación de compra</li>
+                <li><strong>60-75% de descuento:</strong> "Comprar ahora" - crea urgencia y FOMO</li>
+                <li><strong>50% de descuento (vs 1/2 precio):</strong> El formato de porcentaje se siente como mejor oferta</li>
+            </ul>
+
+            <h3>Precios de Anclaje</h3>
+            <p>Mostrar el precio original junto al precio de venta hace que el descuento se sienta más valioso. Cuanto más alto parezca el precio original, mejor parece la oferta.</p>
+
+            <h3>Descuentos Escalonados</h3>
+            <p>Estrategias de compra más, ahorra más que fomentan compras más grandes:</p>
+            <ul>
+                <li>1 artículo: 10% de descuento</li>
+                <li>2 artículos: 20% de descuento</li>
+                <li>3+ artículos: 30% de descuento</li>
+            </ul>
+            <p>¡Calcula si comprar más realmente ahorra dinero o solo aumenta el gasto!</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Ejemplos de Cálculo de Descuentos</h2>
+
+            <h3>Ejemplo 1: Descuento Porcentual Simple</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px;">
+                <strong>Escenario:</strong> Una laptop cuesta $800 y está en venta con 25% de descuento.<br>
+                <strong>Cálculo:</strong> $800 × (1 - 25/100) = $800 × 0.75 = $600<br>
+                <strong>Ahorros:</strong> $200 (25% del precio original)
+            </p>
+
+            <h3>Ejemplo 2: Descuentos Acumulados Múltiples</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px;">
+                <strong>Escenario:</strong> Una chaqueta de $200 tiene una venta del 30%, más tienes un cupón del 10%.<br>
+                <strong>Paso 1:</strong> $200 × (1 - 30/100) = $140 (después del 30% de descuento)<br>
+                <strong>Paso 2:</strong> $140 × (1 - 10/100) = $126 (después del 10% adicional de descuento)<br>
+                <strong>Descuento Efectivo:</strong> 37% de descuento del precio original<br>
+                <strong>Ahorros:</strong> $74
+            </p>
+
+            <h3>Ejemplo 3: Descuento de Monto Fijo</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px;">
+                <strong>Escenario:</strong> Un par de zapatos de $150 con un cupón de $40 de descuento.<br>
+                <strong>Cálculo:</strong> $150 - $40 = $110<br>
+                <strong>Porcentaje Ahorrado:</strong> ($40 ÷ $150) × 100 = 26.67%<br>
+                <strong>Ahorros:</strong> $40 (26.67% de descuento)
+            </p>
+
+            <h3>Ejemplo 4: Descuento con Compra Mínima</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px;">
+                <strong>Escenario:</strong> "$20 de descuento cuando gastes $100 o más"<br>
+                <strong>Si gastas exactamente $100:</strong> Descuento efectivo = 20%<br>
+                <strong>Si gastas $200:</strong> Descuento efectivo = 10%<br>
+                <strong>Consejo:</strong> Cuanto más gastas, menos valioso se vuelve el descuento fijo como porcentaje.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>Comparar: Descuentos Porcentuales vs Fijos</h2>
+
+            <h3>Cuándo los Descuentos Porcentuales Son Mejores</h3>
+            <ul>
+                <li>Artículos de alto valor (cuanto más caro, más ahorras)</li>
+                <li>Múltiples artículos en tu carrito</li>
+                <li>Cuando el porcentaje es 30% o mayor</li>
+            </ul>
+
+            <h3>Cuándo los Descuentos de Monto Fijo Son Mejores</h3>
+            <ul>
+                <li>Artículos de precio más bajo donde el monto fijo representa un alto porcentaje</li>
+                <li>Cuando el monto fijo es grande en relación al precio de compra</li>
+                <li>Ejemplo: $20 de descuento en un artículo de $50 = 40% de descuento (mejor que la mayoría de ventas porcentuales)</li>
+            </ul>
+
+            <div style="background: #e0f2fe; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <h4 style="color: #0369a1; margin-top: 0;">Consejo Pro: Calcula el Punto de Equilibrio</h4>
+                <p style="margin-bottom: 0; color: #0c4a6e;">
+                    Para encontrar cuándo un descuento fijo es igual a un descuento porcentual: Divide el monto fijo por el porcentaje.<br>
+                    Ejemplo: $20 de descuento vs 30% de descuento → Punto de equilibrio: $20 ÷ 0.30 = $66.67<br>
+                    Por debajo de $66.67, los $20 de descuento son mejores. Por encima de $66.67, el 30% de descuento es mejor.
+                </p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Fórmulas Comunes de Descuentos</h2>
+
+            <h3>Calcular Precio Final desde Descuento Porcentual</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                Precio Final = Precio Original × (1 - Descuento% ÷ 100)
+            </p>
+
+            <h3>Calcular Monto de Descuento</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                Monto de Descuento = Precio Original × (Descuento% ÷ 100)
+            </p>
+
+            <h3>Calcular Porcentaje de Descuento desde Precios</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                Descuento% = [(Precio Original - Precio de Venta) ÷ Precio Original] × 100
+            </p>
+
+            <h3>Calcular Precio Original desde Precio de Venta</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                Precio Original = Precio de Venta ÷ (1 - Descuento% ÷ 100)
+            </p>
+
+            <h3>Tasa de Descuento Efectiva (Descuentos Múltiples)</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                Tasa Efectiva = [1 - (1 - D1%) × (1 - D2%) × (1 - D3%)] × 100
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Cómo se calcula un porcentaje de descuento?</h3>
+            <p>Para calcular un porcentaje de descuento, resta el precio de venta del precio original, divide por el precio original y multiplica por 100. Fórmula: [(Original - Venta) ÷ Original] × 100</p>
+
+            <h3>¿30% de descuento es lo mismo que 20% + 10% de descuento?</h3>
+            <p>¡No! Los descuentos acumulados son multiplicativos, no aditivos. 20% + 10% de descuento equivale a un 28% de descuento total, no 30%. Cada descuento se aplica al precio actual, no al original.</p>
+
+            <h3>¿Qué es mejor: $20 de descuento o 20% de descuento?</h3>
+            <p>Depende del precio. Son iguales a $100. Por debajo de $100, los $20 de descuento son mejores. Por encima de $100, el 20% de descuento ahorra más dinero.</p>
+
+            <h3>¿Cuánto es 25% de descuento?</h3>
+            <p>25% de descuento significa que pagas el 75% del precio original. Para un artículo de $100, ahorras $25 y pagas $75.</p>
+
+            <h3>¿Puedo combinar cupones y ventas?</h3>
+            <p>Depende de la política de la tienda. Muchos minoristas te permiten usar un cupón en artículos en venta, pero lee la letra pequeña. Algunos cupones excluyen mercancía en venta.</p>
+
+            <h3>¿Cuál es el mejor porcentaje de descuento?</h3>
+            <p>Generalmente, 40% o más se considera un excelente descuento. Sin embargo, 20-30% de descuento a menudo es el punto ideal donde los minoristas mantienen márgenes de ganancia mientras ofrecen valor real a los clientes.</p>
+
+            <h3>¿Cómo calculo el porcentaje inverso (encontrar precio original)?</h3>
+            <p>Si conoces el precio de venta y el porcentaje de descuento, divide el precio de venta por (1 - descuento como decimal). Por ejemplo, si algo cuesta $60 después de 20% de descuento: $60 ÷ 0.80 = $75 precio original.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Calculadoras Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="calculadora-porcentaje.html" class="calc-card">
+                    <div class="calc-icon">%</div>
+                    <h3 class="calc-title">Calculadora de Porcentajes</h3>
+                    <p class="calc-description">Calcula porcentajes y cambios porcentuales</p>
+                </a>
+
+                <a href="calculadora-propina.html" class="calc-card">
+                    <div class="calc-icon">💵</div>
+                    <h3 class="calc-title">Calculadora de Propinas</h3>
+                    <p class="calc-description">Calcula propinas de restaurante y divide cuentas</p>
+                </a>
+
+                <a href="calculadora-impuesto-ventas.html" class="calc-card">
+                    <div class="calc-icon">🧾</div>
+                    <h3 class="calc-title">Calculadora de Impuestos</h3>
+                    <p class="calc-description">Calcula impuestos sobre compras</p>
+                </a>
+
+                <a href="calculadora-comparacion-precios.html" class="calc-card">
+                    <div class="calc-icon">🔍</div>
+                    <h3 class="calc-title">Comparación de Precios</h3>
+                    <p class="calc-description">Compara precios unitarios y ahorros al por mayor</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Language detection and redirect
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const currentPath = window.location.pathname;
+            const isSpanishPage = currentPath.includes('/es/');
+
+            // If user prefers English but is on Spanish page, suggest English version
+            if (isSpanishPage && !userLang.startsWith('es') && !sessionStorage.getItem('languagePreferenceSet')) {
+                const switchToEnglish = confirm('Would you like to view this page in English?\n¿Desea ver esta página en inglés?');
+                if (switchToEnglish) {
+                    window.location.href = '/calculators/discount-calculator.html';
+                }
+                sessionStorage.setItem('languagePreferenceSet', 'true');
+            }
+        })();
+
+        // Mode switching
+        document.getElementById('calcMode').addEventListener('change', function() {
+            document.querySelectorAll('[id^="mode-"]').forEach(el => el.style.display = 'none');
+            document.getElementById('mode-' + this.value).style.display = 'block';
+            calculate();
+        });
+
+        // Quick discount button function
+        function setDiscount(percent) {
+            document.getElementById('discountPercent1').value = percent;
+            calculate();
+        }
+
+        // Add discount function for multiple discounts mode
+        function addDiscount() {
+            const discountsList = document.getElementById('discountsList');
+            const discountCount = discountsList.children.length + 1;
+
+            const newDiscountGroup = document.createElement('div');
+            newDiscountGroup.className = 'discount-input-group';
+            newDiscountGroup.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">Descuento ${discountCount} (%)</label>
+                    <input type="number" class="form-input discount-input" value="5" step="0.01" min="0" max="100">
+                </div>
+                <button class="remove-btn" onclick="removeDiscount(this)">×</button>
+            `;
+
+            discountsList.appendChild(newDiscountGroup);
+
+            // Add event listener to new input
+            newDiscountGroup.querySelector('.discount-input').addEventListener('input', calculate);
+            calculate();
+        }
+
+        // Remove discount function
+        function removeDiscount(btn) {
+            const discountsList = document.getElementById('discountsList');
+            if (discountsList.children.length > 1) {
+                btn.parentElement.remove();
+
+                // Renumber remaining discounts
+                Array.from(discountsList.children).forEach((group, index) => {
+                    const label = group.querySelector('.form-label');
+                    label.textContent = `Descuento ${index + 1} (%)`;
+                });
+
+                calculate();
+            }
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return '$' + Math.abs(amount).toFixed(2);
+        }
+
+        // Format percentage
+        function formatPercent(percent) {
+            return percent.toFixed(2) + '%';
+        }
+
+        // Main calculation function
+        function calculate() {
+            const mode = document.getElementById('calcMode').value;
+
+            if (mode === 'singleDiscount') {
+                calculateSingleDiscount();
+            } else if (mode === 'multipleDiscounts') {
+                calculateMultipleDiscounts();
+            } else if (mode === 'fixedAmount') {
+                calculateFixedAmount();
+            }
+        }
+
+        // Mode 1: Single Discount
+        function calculateSingleDiscount() {
+            const originalPrice = parseFloat(document.getElementById('originalPrice1').value) || 0;
+            const discountPercent = parseFloat(document.getElementById('discountPercent1').value) || 0;
+
+            const discountAmount = originalPrice * (discountPercent / 100);
+            const finalPrice = originalPrice - discountAmount;
+
+            // Update displays
+            document.getElementById('displayOriginal1').textContent = formatCurrency(originalPrice);
+            document.getElementById('displaySale1').textContent = formatCurrency(finalPrice);
+            document.getElementById('savings1').textContent = formatCurrency(discountAmount);
+            document.getElementById('savingsPercent1').textContent = formatPercent(discountPercent) + ' DE DESCUENTO';
+            document.getElementById('discountAmount1').textContent = formatCurrency(discountAmount);
+            document.getElementById('finalPrice1').textContent = formatCurrency(finalPrice);
+        }
+
+        // Mode 2: Multiple Discounts
+        function calculateMultipleDiscounts() {
+            const originalPrice = parseFloat(document.getElementById('originalPrice2').value) || 0;
+            const discountInputs = document.querySelectorAll('.discount-input');
+
+            let currentPrice = originalPrice;
+            let breakdownText = '<strong>Desglose:</strong><br>';
+
+            discountInputs.forEach((input, index) => {
+                const discount = parseFloat(input.value) || 0;
+                const discountAmount = currentPrice * (discount / 100);
+                const newPrice = currentPrice - discountAmount;
+
+                breakdownText += `Después de ${discount}% de descuento: ${formatCurrency(currentPrice)} → ${formatCurrency(newPrice)}<br>`;
+                currentPrice = newPrice;
+            });
+
+            const totalSavings = originalPrice - currentPrice;
+            const effectiveRate = originalPrice > 0 ? (totalSavings / originalPrice) * 100 : 0;
+
+            // Update displays
+            document.getElementById('displayOriginal2').textContent = formatCurrency(originalPrice);
+            document.getElementById('displaySale2').textContent = formatCurrency(currentPrice);
+            document.getElementById('savings2').textContent = formatCurrency(totalSavings);
+            document.getElementById('savingsPercent2').textContent = formatPercent(effectiveRate) + ' DE DESCUENTO';
+            document.getElementById('totalDiscount2').textContent = formatCurrency(totalSavings);
+            document.getElementById('effectiveRate2').textContent = formatPercent(effectiveRate);
+            document.getElementById('finalPrice2').textContent = formatCurrency(currentPrice);
+
+            document.getElementById('discountBreakdown').innerHTML =
+                '<p style="margin: 0; color: #6b7280; font-size: 0.9rem;">' + breakdownText + '</p>';
+        }
+
+        // Mode 3: Fixed Amount
+        function calculateFixedAmount() {
+            const originalPrice = parseFloat(document.getElementById('originalPrice3').value) || 0;
+            const fixedDiscount = parseFloat(document.getElementById('fixedDiscount').value) || 0;
+
+            const finalPrice = Math.max(0, originalPrice - fixedDiscount);
+            const actualDiscount = originalPrice - finalPrice;
+            const discountPercent = originalPrice > 0 ? (actualDiscount / originalPrice) * 100 : 0;
+
+            // Update displays
+            document.getElementById('displayOriginal3').textContent = formatCurrency(originalPrice);
+            document.getElementById('displaySale3').textContent = formatCurrency(finalPrice);
+            document.getElementById('savings3').textContent = formatCurrency(actualDiscount);
+            document.getElementById('savingsPercent3').textContent = formatPercent(discountPercent) + ' DE DESCUENTO';
+            document.getElementById('discountAmount3').textContent = formatCurrency(actualDiscount);
+            document.getElementById('discountPercent3').textContent = formatPercent(discountPercent);
+            document.getElementById('finalPrice3').textContent = formatCurrency(finalPrice);
+        }
+
+        // Auto-calculate on input
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        // Add event listeners to initial discount inputs
+        document.querySelectorAll('.discount-input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conversor de divisas gratuito - Convierte entre USD, EUR, GBP, JPY, CAD, AUD, CHF, CNY, INR, MXN y otras monedas principales. Tasas de cambio en tiempo real y recursos educativos.">
+    <meta name="keywords" content="conversor de divisas, calculadora de tipo de cambio, conversor forex, conversor de dinero, USD a EUR, cambio de moneda">
+
+    <title>Conversor de Divisas - Calculadora Gratuita de Tipos de Cambio | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/conversor-divisas.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/currency-converter.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-divisas.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/currency-converter.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Alternar menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../index.html#finance">Finanzas</a></li>
+                <li><a href="../../index.html#health">Salud</a></li>
+                <li><a href="../../index.html#converters">Conversores</a></li>
+                <li><a href="../../index.html#math">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Conversor de Divisas</h1>
+            <p class="calculator-description">Convierte entre las principales monedas del mundo con tasas de cambio en tiempo real e información completa de forex</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Convertir Divisa</h3>
+
+                <div class="form-group">
+                    <label for="fromAmount" class="form-label">Cantidad</label>
+                    <input type="number" id="fromAmount" class="form-input" value="1000" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="fromCurrency" class="form-label">Desde Moneda</label>
+                    <select id="fromCurrency" class="form-select">
+                        <option value="USD" selected>USD - Dólar Estadounidense</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - Libra Esterlina</option>
+                        <option value="JPY">JPY - Yen Japonés</option>
+                        <option value="CAD">CAD - Dólar Canadiense</option>
+                        <option value="AUD">AUD - Dólar Australiano</option>
+                        <option value="CHF">CHF - Franco Suizo</option>
+                        <option value="CNY">CNY - Yuan Chino</option>
+                        <option value="INR">INR - Rupia India</option>
+                        <option value="MXN">MXN - Peso Mexicano</option>
+                    </select>
+                </div>
+
+                <div style="text-align: center; margin: 15px 0;">
+                    <button onclick="swapCurrencies()" style="background: #f3f4f6; border: 2px solid #e5e7eb; border-radius: 50%; width: 45px; height: 45px; font-size: 1.3rem; cursor: pointer; transition: all 0.2s; color: #2563eb;">⇅</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="toCurrency" class="form-label">Hacia Moneda</label>
+                    <select id="toCurrency" class="form-select">
+                        <option value="USD">USD - Dólar Estadounidense</option>
+                        <option value="EUR" selected>EUR - Euro</option>
+                        <option value="GBP">GBP - Libra Esterlina</option>
+                        <option value="JPY">JPY - Yen Japonés</option>
+                        <option value="CAD">CAD - Dólar Canadiense</option>
+                        <option value="AUD">AUD - Dólar Australiano</option>
+                        <option value="CHF">CHF - Franco Suizo</option>
+                        <option value="CNY">CNY - Yuan Chino</option>
+                        <option value="INR">INR - Rupia India</option>
+                        <option value="MXN">MXN - Peso Mexicano</option>
+                    </select>
+                </div>
+
+                <div style="background: #fff4e6; border-left: 4px solid #f59e0b; padding: 12px; border-radius: 4px; margin-top: 15px;">
+                    <p style="margin: 0; font-size: 0.85rem; color: #92400e;"><strong>Nota:</strong> Las tasas de cambio son estimaciones y pueden variar de las tasas reales del mercado. Siempre verifique las tasas con su institución financiera antes de realizar transacciones.</p>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Cantidad Convertida</h3>
+
+                <div class="result-item">
+                    <div class="result-label" id="conversionLabel">1.000,00 USD =</div>
+                    <div class="result-value" id="toAmount" style="font-size: 2.5rem; color: #2563eb;">920,50 EUR</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Tasa de Cambio</div>
+                    <div class="result-value" id="exchangeRate" style="font-size: 1.3rem; color: #10b981;">1 USD = 0,9205 EUR</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Tasa Inversa</div>
+                    <div class="result-value" id="inverseRate" style="font-size: 1.1rem; color: #6b7280;">1 EUR = 1,0864 USD</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 0.95rem; color: #374151;">Última Actualización</h4>
+                    <p id="lastUpdated" style="margin: 0; color: #6b7280; font-size: 0.9rem;">-</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Pares de Divisas Populares</h2>
+            <p>Referencia rápida para los pares de divisas más negociados en el mercado de cambio de divisas</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
+                <div style="background: #f9fafb; padding: 15px; border-radius: 8px; border-left: 4px solid #2563eb;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; color: #1f2937;">USD/EUR</span>
+                        <span style="color: #2563eb; font-weight: 600;" id="pair-USD-EUR">0,9205</span>
+                    </div>
+                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #6b7280;">Dólar Estadounidense a Euro</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 15px; border-radius: 8px; border-left: 4px solid #10b981;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; color: #1f2937;">USD/GBP</span>
+                        <span style="color: #10b981; font-weight: 600;" id="pair-USD-GBP">0,7850</span>
+                    </div>
+                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #6b7280;">Dólar Estadounidense a Libra Esterlina</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; color: #1f2937;">USD/JPY</span>
+                        <span style="color: #f59e0b; font-weight: 600;" id="pair-USD-JPY">149,50</span>
+                    </div>
+                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #6b7280;">Dólar Estadounidense a Yen Japonés</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 15px; border-radius: 8px; border-left: 4px solid #8b5cf6;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; color: #1f2937;">EUR/GBP</span>
+                        <span style="color: #8b5cf6; font-weight: 600;" id="pair-EUR-GBP">0,8529</span>
+                    </div>
+                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #6b7280;">Euro a Libra Esterlina</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 15px; border-radius: 8px; border-left: 4px solid #ef4444;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; color: #1f2937;">USD/MXN</span>
+                        <span style="color: #ef4444; font-weight: 600;" id="pair-USD-MXN">17,25</span>
+                    </div>
+                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #6b7280;">Dólar Estadounidense a Peso Mexicano</p>
+                </div>
+
+                <div style="background: #f9fafb; padding: 15px; border-radius: 8px; border-left: 4px solid #06b6d4;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; color: #1f2937;">USD/CAD</span>
+                        <span style="color: #06b6d4; font-weight: 600;" id="pair-USD-CAD">1,3650</span>
+                    </div>
+                    <p style="margin: 5px 0 0 0; font-size: 0.85rem; color: #6b7280;">Dólar Estadounidense a Dólar Canadiense</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Información de Divisas</h2>
+
+            <h3>Principales Monedas Mundiales</h3>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                    <thead>
+                        <tr style="background: #f3f4f6;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Moneda</th>
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Código</th>
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Símbolo</th>
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">País/Región</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">Dólar Estadounidense</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600;">USD</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">$</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">Estados Unidos</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">Euro</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600;">EUR</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">€</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">Eurozona (19 países)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">Libra Esterlina</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600;">GBP</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">£</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">Reino Unido</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">Yen Japonés</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600;">JPY</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">¥</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">Japón</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">Peso Mexicano</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600;">MXN</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">$</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">México</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">Yuan Chino</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600;">CNY</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">¥</td>
+                            <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">China</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Comprendiendo el Mercado de Divisas (Forex)</h2>
+
+            <h3>¿Qué es Forex?</h3>
+            <p>El mercado de divisas, también conocido como forex o FX, es el mercado global para negociar monedas nacionales. Es el mercado financiero más grande y líquido del mundo, con más de $7 billones negociados diariamente. A diferencia de los mercados de valores, forex opera 24 horas al día, cinco días a la semana, en los principales centros financieros de todo el mundo.</p>
+
+            <h3>Cómo Funcionan las Tasas de Cambio</h3>
+            <p>Una tasa de cambio representa el valor de una moneda en términos de otra. Por ejemplo, si la tasa USD/EUR es 0,92, significa que un dólar estadounidense se puede cambiar por 0,92 euros. Las tasas de cambio fluctúan constantemente basándose en varios factores económicos incluyendo:</p>
+            <ul>
+                <li><strong>Oferta y Demanda:</strong> Cuando más personas quieren comprar una moneda, su valor aumenta</li>
+                <li><strong>Tasas de Interés:</strong> Tasas de interés más altas atraen inversión extranjera, aumentando la demanda de moneda</li>
+                <li><strong>Desempeño Económico:</strong> Las economías fuertes típicamente tienen monedas más fuertes</li>
+                <li><strong>Estabilidad Política:</strong> La incertidumbre política puede debilitar una moneda</li>
+                <li><strong>Inflación:</strong> Tasas de inflación más bajas generalmente fortalecen el valor de la moneda</li>
+                <li><strong>Balanza Comercial:</strong> Los países con superávit comercial a menudo tienen monedas más fuertes</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Por qué cambian las tasas de cambio?</h3>
+            <p>Las tasas de cambio fluctúan basándose en la oferta y demanda en el mercado forex, que está influenciado por datos económicos, tasas de interés, eventos políticos, balanzas comerciales y sentimiento del mercado. Estos factores cambian constantemente, causando que las tasas se muevan a lo largo del día de negociación.</p>
+
+            <h3>¿Cuál es la diferencia entre tasas de compra y venta?</h3>
+            <p>La tasa de compra (bid) es lo que el servicio de cambio le pagará por su moneda. La tasa de venta (ask) es lo que le cobran para comprar moneda extranjera. La diferencia entre estas tasas (el spread) es cómo los servicios de cambio obtienen su ganancia.</p>
+
+            <h3>¿Cuándo es el mejor momento para cambiar divisas?</h3>
+            <p>Predecir el mercado es difícil incluso para profesionales. Para transferencias grandes, monitoree las tasas a lo largo del tiempo y use alertas de tasas. Para viajes, cambie dinero 1-2 semanas antes de la salida para evitar cargos premium de último momento. Evite fines de semana y días festivos cuando los spreads son más amplios.</p>
+
+            <h3>¿Son las tasas de cambio iguales en todas partes?</h3>
+            <p>No. La tasa interbancaria (a la que los bancos comercian) es consistente, pero las tasas minoristas varían significativamente. Los bancos típicamente ofrecen mejores tasas que aeropuertos u hoteles. Los servicios en línea a menudo superan a los bancos tradicionales. Siempre compare el costo total incluyendo comisiones.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Calculadoras Relacionadas</h2>
+            <div class="calculator-grid">
+                <a href="conversor-longitud.html" class="calc-card">
+                    <div class="calc-icon">📏</div>
+                    <h3 class="calc-title">Conversor de Longitud</h3>
+                    <p class="calc-description">Convierte metros, pies, pulgadas y más</p>
+                </a>
+
+                <a href="conversor-peso.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Conversor de Peso</h3>
+                    <p class="calc-description">Convierte kg, libras, onzas y más</p>
+                </a>
+
+                <a href="conversor-temperatura.html" class="calc-card">
+                    <div class="calc-icon">🌡️</div>
+                    <h3 class="calc-title">Conversor de Temperatura</h3>
+                    <p class="calc-description">Convierte Celsius, Fahrenheit, Kelvin</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Language detector - redirect if browser prefers English
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const isSpanishPage = window.location.pathname.includes('/es/');
+            const hasVisited = sessionStorage.getItem('languageChecked');
+
+            if (!hasVisited && isSpanishPage && !userLang.startsWith('es')) {
+                if (confirm('English version available. Would you like to switch?\n\nVersión en inglés disponible. ¿Desea cambiar?')) {
+                    window.location.href = '/calculators/currency-converter.html';
+                }
+                sessionStorage.setItem('languageChecked', 'true');
+            }
+        })();
+
+        const exchangeRates = {
+            'USD': 1.0000,
+            'EUR': 0.9205,
+            'GBP': 0.7850,
+            'JPY': 149.50,
+            'CAD': 1.3650,
+            'AUD': 1.5320,
+            'CHF': 0.8845,
+            'CNY': 7.2450,
+            'INR': 83.15,
+            'MXN': 17.25
+        };
+
+        const currencySymbols = {
+            'USD': '$',
+            'EUR': '€',
+            'GBP': '£',
+            'JPY': '¥',
+            'CAD': 'C$',
+            'AUD': 'A$',
+            'CHF': 'CHF',
+            'CNY': '¥',
+            'INR': '₹',
+            'MXN': '$'
+        };
+
+        function convertCurrency() {
+            const fromAmount = parseFloat(document.getElementById('fromAmount').value) || 0;
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+
+            const amountInUSD = fromAmount / exchangeRates[fromCurrency];
+            const convertedAmount = amountInUSD * exchangeRates[toCurrency];
+
+            const rate = exchangeRates[toCurrency] / exchangeRates[fromCurrency];
+            const inverseRate = 1 / rate;
+
+            const fromSymbol = currencySymbols[fromCurrency];
+            const toSymbol = currencySymbols[toCurrency];
+
+            document.getElementById('conversionLabel').textContent =
+                `${formatNumber(fromAmount)} ${fromCurrency} =`;
+
+            document.getElementById('toAmount').textContent =
+                `${formatNumber(convertedAmount)} ${toCurrency}`;
+
+            document.getElementById('exchangeRate').textContent =
+                `1 ${fromCurrency} = ${formatNumber(rate, 4)} ${toCurrency}`;
+
+            document.getElementById('inverseRate').textContent =
+                `1 ${toCurrency} = ${formatNumber(inverseRate, 4)} ${fromCurrency}`;
+
+            const now = new Date();
+            document.getElementById('lastUpdated').textContent =
+                now.toLocaleString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+        }
+
+        function swapCurrencies() {
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+
+            document.getElementById('fromCurrency').value = toCurrency;
+            document.getElementById('toCurrency').value = fromCurrency;
+
+            convertCurrency();
+        }
+
+        function formatNumber(num, decimals = 2) {
+            return new Intl.NumberFormat('es-ES', {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            }).format(num);
+        }
+
+        function updatePopularPairs() {
+            const pairs = [
+                ['USD', 'EUR'],
+                ['USD', 'GBP'],
+                ['USD', 'JPY'],
+                ['EUR', 'GBP'],
+                ['USD', 'MXN'],
+                ['USD', 'CAD']
+            ];
+
+            pairs.forEach(([from, to]) => {
+                const rate = exchangeRates[to] / exchangeRates[from];
+                const element = document.getElementById(`pair-${from}-${to}`);
+                if (element) {
+                    element.textContent = formatNumber(rate, 4);
+                }
+            });
+        }
+
+        document.getElementById('fromAmount').addEventListener('input', convertCurrency);
+        document.getElementById('fromCurrency').addEventListener('change', convertCurrency);
+        document.getElementById('toCurrency').addEventListener('change', convertCurrency);
+
+        window.addEventListener('load', function() {
+            convertCurrency();
+            updatePopularPairs();
+        });
+    </script>
+</body>
+</html>
