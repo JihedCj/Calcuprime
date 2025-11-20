@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free running pace calculator - Calculate pace per mile/km, finish time, and split times for races.">
+    <meta name="description" content="Free running pace calculator - Calculate pace per mile/km, finish time, and split times for races. Plan your race strategy with accurate pace calculations.">
     <meta name="keywords" content="running pace calculator, pace calculator, running calculator, race pace, finish time calculator">
     <title>Running Pace Calculator | CalcuPrime</title>
     <link rel="stylesheet" href="../css/style.css">
@@ -20,36 +20,187 @@
     <main class="calculator-container">
         <div class="calculator-header">
             <h1 class="calculator-title">Running Pace Calculator</h1>
-            <p class="calculator-description">Calculate running pace and finish time</p>
+            <p class="calculator-description">Calculate your running pace, finish time, and race splits for optimal performance</p>
         </div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs">
-                <h3>Calculator Input</h3>
-                <div class="form-group"><label for="input1" class="form-label">Value 1</label><input type="number" id="input1" class="form-input" value="100" min="0" step="1"></div>
-                <div class="form-group"><label for="input2" class="form-label">Value 2</label><input type="number" id="input2" class="form-input" value="5" min="0" step="0.1"></div>
-                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+                <h3>Race Information</h3>
+                <div class="form-group">
+                    <label for="distance" class="form-label">Distance</label>
+                    <select id="distance" class="form-input">
+                        <option value="5">5K (3.1 miles)</option>
+                        <option value="10">10K (6.2 miles)</option>
+                        <option value="21.1">Half Marathon (13.1 miles)</option>
+                        <option value="42.2" selected>Marathon (26.2 miles)</option>
+                        <option value="custom">Custom Distance</option>
+                    </select>
+                </div>
+                <div class="form-group" id="customDistanceGroup" style="display:none;">
+                    <label for="customDistance" class="form-label">Custom Distance (km)</label>
+                    <input type="number" id="customDistance" class="form-input" value="10" min="0.1" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="hours" class="form-label">Target Hours</label>
+                    <input type="number" id="hours" class="form-input" value="3" min="0" max="10" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="minutes" class="form-label">Target Minutes</label>
+                    <input type="number" id="minutes" class="form-input" value="30" min="0" max="59" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="seconds" class="form-label">Target Seconds</label>
+                    <input type="number" id="seconds" class="form-input" value="0" min="0" max="59" step="1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate Pace</button>
             </div>
             <div class="calculator-results">
-                <h3>Results</h3>
-                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+                <h3>Your Running Pace</h3>
+                <div class="result-item">
+                    <div class="result-label">Pace per Mile</div>
+                    <div class="result-value" id="pacePerMile" style="font-size: 2.5rem; color: #10b981;">0:00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Pace per Kilometer</div>
+                    <div class="result-value" id="pacePerKm">0:00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Average Speed (mph)</div>
+                    <div class="result-value" id="speedMph">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Average Speed (km/h)</div>
+                    <div class="result-value" id="speedKmh">0</div>
+                </div>
             </div>
         </div>
         <div class="content-section">
-            <h2>How to Use This Calculator</h2>
-            <p>Enter your values above to get instant, accurate calculations. Our Running Pace Calculator provides reliable results for your needs.</p>
-            <h2>Understanding Your Results</h2>
-            <p>The calculator processes your inputs using proven formulas to deliver accurate results you can trust for planning and decision-making.</p>
+            <h2>Understanding Running Pace</h2>
+            <p>Running pace is the time it takes to cover one mile or kilometer, typically expressed as minutes per mile (min/mi) or minutes per kilometer (min/km). Understanding and managing your pace is fundamental to race strategy, training effectiveness, and achieving personal bests. Whether you're training for your first 5K or targeting a Boston qualifying marathon time, pace awareness transforms random running into strategic, goal-oriented training.</p>
+
+            <h2>Why Pace Matters</h2>
+            <p>Pace control separates successful races from disappointing ones. Starting too fast leads to premature fatigue and dramatic slowdowns—the dreaded "wall" in marathons. Running too conservatively wastes fitness and leaves time on the table. Optimal pacing means running the fastest even-effort race your current fitness allows, maximizing performance without bonking.</p>
+
+            <p>Research consistently shows that even pacing or slight negative splits (running the second half slightly faster) produces the best race results. Studies of elite marathoners reveal that the fastest times occur when pace variation stays within 2-3% throughout the race. For most runners, this means maintaining consistent effort rather than chasing early adrenaline or ego.</p>
+
+            <h2>Common Race Distances and Target Paces</h2>
+            <p><strong>5K (3.1 miles):</strong> A 5K is run at approximately 95-100% of VO2 max intensity—hard but sustainable for 15-35 minutes for most runners. Elite runners finish in 13-15 minutes (4:15-4:50 per mile pace), while recreational runners typically finish in 20-40 minutes (6:30-13:00 per mile pace). The 5K demands sustained speed and mental toughness but forgives pacing errors more than longer races.</p>
+
+            <p><strong>10K (6.2 miles):</strong> Run at approximately 90-95% max heart rate, the 10K requires maintaining discomfort for 30-70 minutes. Elite times fall around 27-30 minutes (4:20-4:50 per mile), while recreational runners finish in 45-90 minutes (7:15-14:30 per mile). The 10K is long enough that pacing discipline matters significantly—starting too aggressively leads to severe fade in the final miles.</p>
+
+            <p><strong>Half Marathon (13.1 miles):</strong> Run at approximately 85-90% max heart rate, the half marathon balances endurance with speed. Elite times cluster around 60-65 minutes (4:35-5:00 per mile), while recreational runners typically finish in 1:30-3:00 (6:50-13:45 per mile). Pacing is critical—every 10 seconds per mile too fast in the first half typically costs 20-30 seconds per mile in the second half.</p>
+
+            <p><strong>Marathon (26.2 miles):</strong> Run at approximately 80-85% max heart rate for 2-6 hours, the marathon brutally punishes pacing mistakes. Elite men run under 2:05 (4:45 per mile), elite women under 2:20 (5:20 per mile), and recreational runners typically finish in 3:00-6:00 hours (6:50-13:45 per mile). Conservative early pacing is essential—most marathoners run their second half 5-15 minutes slower than their first half (positive split), but minimizing this differential separates good races from great ones.</p>
+
+            <h2>Calculating Your Target Pace</h2>
+            <p>Your goal pace should reflect current fitness, not aspirational fitness. Several methods help establish realistic targets:</p>
+
+            <p><strong>Recent Race Performance:</strong> Use a recent race result to predict equivalent performances at other distances. A 22-minute 5K suggests approximately 46-minute 10K, 1:42 half marathon, and 3:30 marathon capability (assuming appropriate training). Pace calculators using Riegel's formula (T2 = T1 × (D2/D1)^1.06) provide reasonable estimates, though they assume proper distance-specific training.</p>
+
+            <p><strong>Training Pace:</strong> Your easy run pace (conversational, 70-75% max HR) typically falls 1:30-2:30 minutes per mile slower than 5K pace, 1:00-1:30 slower than 10K pace, and 0:30-1:00 slower than half marathon pace. Marathon pace usually sits 0:30-1:00 minutes per mile slower than half marathon pace. If easy runs feel harder than these guidelines suggest, your goal pace is probably too aggressive.</p>
+
+            <p><strong>Tempo Run Pace:</strong> Tempo runs (comfortably hard, 85-90% max HR, sustainable for 20-60 minutes) approximate your current half marathon pace or sit about 15-30 seconds per mile faster than marathon pace. If you can sustain a pace for 30-40 minutes in training, you can likely race a half marathon at that pace.</p>
+
+            <h2>Pacing Strategies for Different Races</h2>
+            <p><strong>Even Pacing:</strong> Maintaining consistent splits throughout the race maximizes performance for most runners in most races. Even pacing minimizes glycogen depletion and allows the cardiovascular system to find a sustainable rhythm. Aim for variation of less than 2-3% between miles.</p>
+
+            <p><strong>Negative Splits:</strong> Running the second half faster than the first half is physiologically efficient and psychologically empowering. Start conservatively (5-10 seconds per mile slower than goal pace for the first 25-30% of the race), settle into goal pace for the middle 40-50%, then push the final 20-25% if feeling strong. This strategy works especially well for marathons and is nearly foolproof for newer runners.</p>
+
+            <p><strong>Variable Pacing (Hills/Wind):</strong> On hilly courses, maintain even effort rather than even pace. Slow slightly on uphills to avoid excessive heart rate spikes, then regain time on downhills without overstriding or pounding. In headwinds, reduce pace slightly (5-10 seconds per mile) and regain time when the wind shifts to tailwind or crosswind.</p>
+
+            <p><strong>Competitive Pacing:</strong> In smaller races where place matters more than time, run with competitors rather than strictly watching splits. However, ensure you're not pulled into an unsustainable pace early. A good rule: if you can't comfortably exchange a few words with competitors in the first mile, you're running too hard.</p>
+
+            <h2>Common Pacing Mistakes</h2>
+            <p><strong>Starting Too Fast:</strong> The most common and costly error. The first mile of any race feels easy due to adrenaline, taper, and excitement. For marathons, starting 30 seconds per mile too fast typically results in slowing by 60-90 seconds per mile in the final miles. Start conservatively—every race gets harder, never easier.</p>
+
+            <p><strong>Ignoring Weather:</strong> Hot weather (above 60°F) slows pace by 1-2% per 5°F increase. Humidity compounds this effect. Adjust goal pace downward by 10-30 seconds per mile on hot days rather than stubbornly chasing unrealistic times. Heat-related slowdowns are physiological, not mental weakness.</p>
+
+            <p><strong>Following Faster Runners:</strong> Running with people ahead of your fitness level leads to early exhaustion. It's better to gradually pass slowing runners than to crash spectacularly. Have the discipline to let faster runners go, especially in the first third of any race.</p>
+
+            <p><strong>No Plan B:</strong> Rigid adherence to a single goal pace despite clear signals of a bad day (illness, injury, weather, poor sleep) ruins races and risks injury. Successful runners have A goals (optimal conditions), B goals (realistic conditions), and C goals (survive and finish). Adjust expectations based on how your body responds, not what your training log says you "should" run.</p>
+
+            <h2>Using Pace in Training</h2>
+            <p><strong>Easy Run Pace:</strong> 70-75% max HR, conversational, 1:30-2:30 minutes per mile slower than 5K race pace. These recovery runs comprise 70-80% of training volume and build aerobic base without fatigue accumulation.</p>
+
+            <p><strong>Marathon Pace Runs:</strong> Sections of long runs or dedicated runs at goal marathon pace teach your body to use fat efficiently and help dial in race nutrition. These feel comfortably hard—you can speak in short phrases but not hold long conversations.</p>
+
+            <p><strong>Tempo Pace:</strong> Approximately current half marathon pace or 15-30 seconds per mile faster than marathon pace. Sustained for 20-40 minutes, tempo runs improve lactate threshold—the fastest pace you can sustain aerobically.</p>
+
+            <p><strong>Interval Pace:</strong> Significantly faster than race pace (often 5K pace or faster), intervals improve VO2 max and running economy. These hard efforts last 2-8 minutes with recovery periods of equal or greater duration.</p>
+
+            <h2>Technology and Pace Monitoring</h2>
+            <p><strong>GPS Watches:</strong> Modern GPS watches provide real-time pace feedback, enabling precise pace management. However, GPS accuracy varies (±2-3% typical, worse under tree cover or tall buildings). Use GPS as a guide, not gospel, and correlate with perceived effort.</p>
+
+            <p><strong>Pace Bands:</strong> Printed wrist bands showing target splits for each mile help maintain pace without constantly checking watches. Especially useful for marathons where mental fatigue makes math difficult.</p>
+
+            <p><strong>Mile Markers:</strong> Most races have mile markers allowing pace verification without technology. Calculate expected split times before the race and check against actual times at markers. Adjust if consistently off target.</p>
+
+            <p><strong>Perceived Effort:</strong> Experienced runners develop internal pacing sense independent of technology. Rate of perceived exertion (RPE) on a 1-10 scale should match intended intensity: easy runs feel 3-4, marathon pace 6-7, tempo 7-8, intervals 8-9. Trust your body—if pace feels too hard despite what the watch says, it probably is.</p>
+
+            <h2>The Mental Game of Pacing</h2>
+            <p>Optimal pacing requires discipline early (resisting the urge to surge when feeling fresh) and courage late (maintaining pace when fatigued). Strategies that help:</p>
+
+            <p><strong>Chunking:</strong> Break races into manageable sections. Focus on completing one segment at a time rather than dwelling on total distance remaining. Many marathoners think in 5K or 10K blocks, or landmark to landmark.</p>
+
+            <p><strong>Positive Self-Talk:</strong> Replace "I can't maintain this pace" with "I've trained for this pace." Confidence in preparation enables trust in pacing.</p>
+
+            <p><strong>Focus on Process:</strong> Concentrate on form (posture, arm swing, foot strike) rather than obsessing over splits. Good form enables good pace; obsessing over pace deteriorates form.</p>
+
+            <h2>The Bottom Line</h2>
+            <p>Successful pacing balances ambition with realism. Start conservatively, assess honestly, adjust intelligently. Every runner has breakthrough races where everything clicks and disappointing races where nothing works—pacing discipline maximizes the former and minimizes the latter. Use pace calculators as planning tools, GPS watches as guardrails, and body awareness as the final arbiter. Run your own race at your own pace, and the finish line takes care of itself.</p>
         </div>
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
     <script src="../js/main.js"></script>
     <script>
+        document.getElementById('distance').addEventListener('change', function() {
+            if (this.value === 'custom') {
+                document.getElementById('customDistanceGroup').style.display = 'block';
+            } else {
+                document.getElementById('customDistanceGroup').style.display = 'none';
+            }
+        });
+
         function calculate() {
-            const input1 = parseFloat(document.getElementById('input1').value);
-            const input2 = parseFloat(document.getElementById('input2').value);
-            const result = input1 * input2;
-            document.getElementById('result').textContent = result.toFixed(2);
+            let distanceKm;
+            const distanceSelect = document.getElementById('distance').value;
+
+            if (distanceSelect === 'custom') {
+                distanceKm = parseFloat(document.getElementById('customDistance').value) || 10;
+            } else {
+                distanceKm = parseFloat(distanceSelect);
+            }
+
+            const hours = parseFloat(document.getElementById('hours').value) || 0;
+            const minutes = parseFloat(document.getElementById('minutes').value) || 0;
+            const seconds = parseFloat(document.getElementById('seconds').value) || 0;
+
+            // Convert total time to seconds
+            const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+
+            // Calculate pace per kilometer in seconds
+            const pacePerKmSeconds = totalSeconds / distanceKm;
+
+            // Calculate pace per mile in seconds
+            const distanceMiles = distanceKm * 0.621371;
+            const pacePerMileSeconds = totalSeconds / distanceMiles;
+
+            // Convert pace to minutes:seconds format
+            const pacePerKmMin = Math.floor(pacePerKmSeconds / 60);
+            const pacePerKmSec = Math.round(pacePerKmSeconds % 60);
+            const pacePerMileMin = Math.floor(pacePerMileSeconds / 60);
+            const pacePerMileSec = Math.round(pacePerMileSeconds % 60);
+
+            // Calculate speeds
+            const speedMph = (distanceMiles / (totalSeconds / 3600)).toFixed(2);
+            const speedKmh = (distanceKm / (totalSeconds / 3600)).toFixed(2);
+
+            // Display results
+            document.getElementById('pacePerMile').textContent = pacePerMileMin + ':' + (pacePerMileSec < 10 ? '0' : '') + pacePerMileSec + ' min/mi';
+            document.getElementById('pacePerKm').textContent = pacePerKmMin + ':' + (pacePerKmSec < 10 ? '0' : '') + pacePerKmSec + ' min/km';
+            document.getElementById('speedMph').textContent = speedMph + ' mph';
+            document.getElementById('speedKmh').textContent = speedKmh + ' km/h';
         }
+
         document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
         window.addEventListener('load', calculate);
     </script>
