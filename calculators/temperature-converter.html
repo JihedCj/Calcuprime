@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free temperature converter - Convert between Celsius, Fahrenheit, and Kelvin instantly. Includes temperature reference points, visual scale, and educational content.">
+    <meta name="keywords" content="temperature converter, celsius to fahrenheit, fahrenheit to celsius, kelvin converter, temperature conversion, celsius fahrenheit kelvin">
+
+    <title>Temperature Converter - Celsius, Fahrenheit, Kelvin | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/temperature-converter.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Temperature Converter</h1>
+            <p class="calculator-description">Convert between Celsius, Fahrenheit, and Kelvin with real-time conversion and temperature references</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Temperature Input</h3>
+
+                <div class="form-group">
+                    <label for="celsius" class="form-label">Celsius (°C)</label>
+                    <input type="number" id="celsius" class="form-input" value="0" step="0.01" placeholder="Enter temperature">
+                </div>
+
+                <div class="form-group">
+                    <label for="fahrenheit" class="form-label">Fahrenheit (°F)</label>
+                    <input type="number" id="fahrenheit" class="form-input" value="32" step="0.01" placeholder="Enter temperature">
+                </div>
+
+                <div class="form-group">
+                    <label for="kelvin" class="form-label">Kelvin (K)</label>
+                    <input type="number" id="kelvin" class="form-input" value="273.15" step="0.01" placeholder="Enter temperature">
+                </div>
+
+                <div style="padding: 15px; background: #f3f4f6; border-radius: 8px; margin-top: 15px;">
+                    <h4 style="margin: 0 0 10px 0; color: #374151; font-size: 0.9rem;">Quick Reference</h4>
+                    <div style="display: grid; gap: 8px; font-size: 0.85rem; color: #6b7280;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Absolute Zero:</span>
+                            <span style="font-weight: 500;">-273.15°C / -459.67°F / 0K</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Water Freezes:</span>
+                            <span style="font-weight: 500;">0°C / 32°F / 273.15K</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Room Temp:</span>
+                            <span style="font-weight: 500;">20°C / 68°F / 293.15K</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Body Temp:</span>
+                            <span style="font-weight: 500;">37°C / 98.6°F / 310.15K</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Water Boils:</span>
+                            <span style="font-weight: 500;">100°C / 212°F / 373.15K</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Visual Temperature Scale</h3>
+
+                <div style="position: relative; margin: 30px 0;">
+                    <div id="tempScale" style="height: 400px; background: linear-gradient(to top, #3b82f6 0%, #60a5fa 20%, #34d399 40%, #fbbf24 60%, #f87171 80%, #dc2626 100%); border-radius: 12px; position: relative; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <div id="tempMarker" style="position: absolute; left: -10px; right: -10px; height: 4px; background: white; border: 2px solid #1f2937; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transition: top 0.3s ease;">
+                            <div style="position: absolute; right: -120px; top: -12px; background: #1f2937; color: white; padding: 6px 12px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; white-space: nowrap;" id="markerLabel">0°C</div>
+                        </div>
+
+                        <!-- Temperature scale markers -->
+                        <div style="position: absolute; right: 100%; margin-right: 15px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 10px 0; font-size: 0.75rem; color: #6b7280;">
+                            <span>100°C</span>
+                            <span>75°C</span>
+                            <span>50°C</span>
+                            <span>25°C</span>
+                            <span>0°C</span>
+                            <span>-25°C</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 15px; background: #f9fafb; border-radius: 8px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; font-size: 0.85rem;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 20px; height: 20px; background: #3b82f6; border-radius: 4px;"></div>
+                                <span>Freezing Cold</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 20px; height: 20px; background: #34d399; border-radius: 4px;"></div>
+                                <span>Cool</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 20px; height: 20px; background: #fbbf24; border-radius: 4px;"></div>
+                                <span>Warm</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 20px; height: 20px; background: #ef4444; border-radius: 4px;"></div>
+                                <span>Very Hot</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px;">Common Temperature Points</h4>
+                    <div style="display: grid; gap: 10px;">
+                        <button onclick="setTemperature(-273.15)" class="quick-temp-btn">Absolute Zero</button>
+                        <button onclick="setTemperature(0)" class="quick-temp-btn">Water Freezing</button>
+                        <button onclick="setTemperature(20)" class="quick-temp-btn">Room Temperature</button>
+                        <button onclick="setTemperature(37)" class="quick-temp-btn">Body Temperature</button>
+                        <button onclick="setTemperature(100)" class="quick-temp-btn">Water Boiling</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Temperature Scales</h2>
+            <p>Temperature is a measure of the average kinetic energy of particles in a substance. Different temperature scales have been developed throughout history, each with its own reference points and applications.</p>
+
+            <h3>Celsius (°C)</h3>
+            <p>The Celsius scale, also known as centigrade, is the most widely used temperature scale worldwide. It was developed by Swedish astronomer Anders Celsius in 1742. The scale is based on the freezing point (0°C) and boiling point (100°C) of water at standard atmospheric pressure.</p>
+            <ul>
+                <li><strong>Freezing point of water:</strong> 0°C</li>
+                <li><strong>Boiling point of water:</strong> 100°C</li>
+                <li><strong>Used in:</strong> Most countries worldwide, scientific research (alongside Kelvin)</li>
+                <li><strong>Named after:</strong> Anders Celsius (1701-1744)</li>
+            </ul>
+
+            <h3>Fahrenheit (°F)</h3>
+            <p>The Fahrenheit scale was developed by German physicist Daniel Gabriel Fahrenheit in 1724. It's primarily used in the United States and a few other countries. The scale was originally based on three reference points: the freezing point of a brine solution, the freezing point of water, and human body temperature.</p>
+            <ul>
+                <li><strong>Freezing point of water:</strong> 32°F</li>
+                <li><strong>Boiling point of water:</strong> 212°F</li>
+                <li><strong>Used in:</strong> United States, Bahamas, Belize, Cayman Islands, Palau</li>
+                <li><strong>Named after:</strong> Daniel Gabriel Fahrenheit (1686-1736)</li>
+            </ul>
+
+            <h3>Kelvin (K)</h3>
+            <p>The Kelvin scale is an absolute temperature scale used primarily in scientific contexts. Developed by William Thomson (Lord Kelvin) in 1848, it starts at absolute zero, the theoretical temperature at which all molecular motion ceases. The Kelvin scale uses the same degree intervals as Celsius but has no negative values.</p>
+            <ul>
+                <li><strong>Absolute zero:</strong> 0K (-273.15°C)</li>
+                <li><strong>Freezing point of water:</strong> 273.15K</li>
+                <li><strong>Boiling point of water:</strong> 373.15K</li>
+                <li><strong>Used in:</strong> Scientific research, physics, chemistry, astronomy</li>
+                <li><strong>Named after:</strong> William Thomson, 1st Baron Kelvin (1824-1907)</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Temperature Conversion Formulas</h2>
+
+            <h3>Celsius to Fahrenheit</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 1.1rem;">
+                °F = (°C × 9/5) + 32
+            </p>
+            <p><strong>Example:</strong> Convert 25°C to Fahrenheit<br>
+            °F = (25 × 9/5) + 32 = 45 + 32 = 77°F</p>
+
+            <h3>Fahrenheit to Celsius</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 1.1rem;">
+                °C = (°F - 32) × 5/9
+            </p>
+            <p><strong>Example:</strong> Convert 86°F to Celsius<br>
+            °C = (86 - 32) × 5/9 = 54 × 5/9 = 30°C</p>
+
+            <h3>Celsius to Kelvin</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 1.1rem;">
+                K = °C + 273.15
+            </p>
+            <p><strong>Example:</strong> Convert 25°C to Kelvin<br>
+            K = 25 + 273.15 = 298.15K</p>
+
+            <h3>Kelvin to Celsius</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 1.1rem;">
+                °C = K - 273.15
+            </p>
+            <p><strong>Example:</strong> Convert 300K to Celsius<br>
+            °C = 300 - 273.15 = 26.85°C</p>
+
+            <h3>Fahrenheit to Kelvin</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 1.1rem;">
+                K = (°F - 32) × 5/9 + 273.15
+            </p>
+            <p><strong>Example:</strong> Convert 77°F to Kelvin<br>
+            K = (77 - 32) × 5/9 + 273.15 = 25 + 273.15 = 298.15K</p>
+
+            <h3>Kelvin to Fahrenheit</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 1.1rem;">
+                °F = (K - 273.15) × 9/5 + 32
+            </p>
+            <p><strong>Example:</strong> Convert 298K to Fahrenheit<br>
+            °F = (298 - 273.15) × 9/5 + 32 = 24.85 × 1.8 + 32 = 76.73°F</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Historical Background</h2>
+
+            <h3>The Evolution of Temperature Measurement</h3>
+            <p>The measurement of temperature has evolved significantly over the centuries, from simple observations of hot and cold to precise scientific instruments and standardized scales.</p>
+
+            <h4>Early Temperature Concepts (Ancient Times - 1600s)</h4>
+            <ul>
+                <li><strong>Ancient Greeks:</strong> Philosophers like Aristotle theorized about hot and cold as fundamental qualities</li>
+                <li><strong>Philo of Byzantium (3rd century BC):</strong> Observed thermal expansion of air</li>
+                <li><strong>Galileo Galilei (1593):</strong> Invented the thermoscope, the first device to show temperature variations</li>
+            </ul>
+
+            <h4>Development of Temperature Scales (1700s)</h4>
+            <ul>
+                <li><strong>1714:</strong> Daniel Gabriel Fahrenheit invented the mercury thermometer</li>
+                <li><strong>1724:</strong> Fahrenheit proposed his temperature scale</li>
+                <li><strong>1742:</strong> Anders Celsius introduced the Celsius scale (originally with 100° at freezing and 0° at boiling)</li>
+                <li><strong>1744:</strong> After Celsius's death, the scale was reversed to its current form by Carl Linnaeus</li>
+            </ul>
+
+            <h4>Scientific Revolution (1800s)</h4>
+            <ul>
+                <li><strong>1848:</strong> William Thomson (Lord Kelvin) proposed the absolute temperature scale</li>
+                <li><strong>1854:</strong> Kelvin determined absolute zero to be -273.15°C</li>
+                <li><strong>1887:</strong> The Kelvin scale was officially adopted for scientific use</li>
+            </ul>
+
+            <h4>Modern Era (1900s - Present)</h4>
+            <ul>
+                <li><strong>1948:</strong> The Celsius scale was officially renamed from "centigrade" to avoid confusion with angular measurement</li>
+                <li><strong>1954:</strong> The Kelvin was defined as 1/273.16 of the triple point of water</li>
+                <li><strong>2019:</strong> The Kelvin was redefined based on the Boltzmann constant, making it independent of physical artifacts</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Temperature Reference Points</h2>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                    <thead>
+                        <tr style="background: #f3f4f6; border-bottom: 2px solid #d1d5db;">
+                            <th style="padding: 12px; text-align: left; font-weight: 600;">Reference Point</th>
+                            <th style="padding: 12px; text-align: center; font-weight: 600;">Celsius (°C)</th>
+                            <th style="padding: 12px; text-align: center; font-weight: 600;">Fahrenheit (°F)</th>
+                            <th style="padding: 12px; text-align: center; font-weight: 600;">Kelvin (K)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 12px;">Absolute Zero</td>
+                            <td style="padding: 12px; text-align: center;">-273.15</td>
+                            <td style="padding: 12px; text-align: center;">-459.67</td>
+                            <td style="padding: 12px; text-align: center;">0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #f9fafb;">
+                            <td style="padding: 12px;">Coldest Natural Temp on Earth</td>
+                            <td style="padding: 12px; text-align: center;">-89.2</td>
+                            <td style="padding: 12px; text-align: center;">-128.6</td>
+                            <td style="padding: 12px; text-align: center;">184</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 12px;">Water Freezes</td>
+                            <td style="padding: 12px; text-align: center;">0</td>
+                            <td style="padding: 12px; text-align: center;">32</td>
+                            <td style="padding: 12px; text-align: center;">273.15</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #f9fafb;">
+                            <td style="padding: 12px;">Average Human Body Temperature</td>
+                            <td style="padding: 12px; text-align: center;">37</td>
+                            <td style="padding: 12px; text-align: center;">98.6</td>
+                            <td style="padding: 12px; text-align: center;">310.15</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 12px;">Room Temperature</td>
+                            <td style="padding: 12px; text-align: center;">20</td>
+                            <td style="padding: 12px; text-align: center;">68</td>
+                            <td style="padding: 12px; text-align: center;">293.15</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #f9fafb;">
+                            <td style="padding: 12px;">Water Boils (at sea level)</td>
+                            <td style="padding: 12px; text-align: center;">100</td>
+                            <td style="padding: 12px; text-align: center;">212</td>
+                            <td style="padding: 12px; text-align: center;">373.15</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 12px;">Typical Oven Baking Temperature</td>
+                            <td style="padding: 12px; text-align: center;">180</td>
+                            <td style="padding: 12px; text-align: center;">350</td>
+                            <td style="padding: 12px; text-align: center;">453.15</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb; background: #f9fafb;">
+                            <td style="padding: 12px;">Paper Ignites</td>
+                            <td style="padding: 12px; text-align: center;">233</td>
+                            <td style="padding: 12px; text-align: center;">451</td>
+                            <td style="padding: 12px; text-align: center;">506.15</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 12px;">Surface of the Sun</td>
+                            <td style="padding: 12px; text-align: center;">5,505</td>
+                            <td style="padding: 12px; text-align: center;">9,941</td>
+                            <td style="padding: 12px; text-align: center;">5,778</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Practical Applications</h2>
+
+            <h3>Weather and Climate</h3>
+            <ul>
+                <li><strong>Weather Forecasting:</strong> Understanding temperature in different scales helps interpret weather reports globally</li>
+                <li><strong>Climate Science:</strong> Temperature data is crucial for tracking climate change and global warming</li>
+                <li><strong>Agriculture:</strong> Farmers use temperature data to determine planting and harvesting schedules</li>
+            </ul>
+
+            <h3>Cooking and Food Safety</h3>
+            <ul>
+                <li><strong>Cooking Temperatures:</strong> Recipes from different countries may use different temperature scales</li>
+                <li><strong>Food Storage:</strong> Proper refrigeration temperatures prevent bacterial growth (4°C / 39°F or below)</li>
+                <li><strong>Food Safety:</strong> Internal cooking temperatures ensure food is safe to eat</li>
+            </ul>
+
+            <h3>Science and Engineering</h3>
+            <ul>
+                <li><strong>Chemical Reactions:</strong> Temperature affects reaction rates and equilibrium</li>
+                <li><strong>Material Properties:</strong> Metals expand and contract with temperature changes</li>
+                <li><strong>Thermodynamics:</strong> The Kelvin scale is essential for calculations involving heat and energy</li>
+            </ul>
+
+            <h3>Medical and Health</h3>
+            <ul>
+                <li><strong>Body Temperature:</strong> Normal human body temperature is approximately 37°C (98.6°F)</li>
+                <li><strong>Fever Detection:</strong> Temperatures above 38°C (100.4°F) typically indicate fever</li>
+                <li><strong>Medical Equipment:</strong> Sterilization requires specific high temperatures</li>
+            </ul>
+
+            <h3>International Travel and Business</h3>
+            <ul>
+                <li><strong>Travel Planning:</strong> Understanding both Celsius and Fahrenheit helps when traveling internationally</li>
+                <li><strong>Global Commerce:</strong> International business requires familiarity with different temperature standards</li>
+                <li><strong>Product Specifications:</strong> Electronics and machinery specifications may use different temperature scales</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Why are there different temperature scales?</h3>
+            <p>Different temperature scales were developed at different times and places based on various reference points. The Fahrenheit scale was created before the Celsius scale, while Kelvin was developed later for scientific purposes. Cultural and historical factors determine which scale is used in different regions today.</p>
+
+            <h3>Which temperature scale is most commonly used?</h3>
+            <p>Celsius is the most widely used temperature scale globally, adopted by most countries and the scientific community (alongside Kelvin). Fahrenheit is primarily used in the United States and a handful of other countries.</p>
+
+            <h3>Why doesn't the Kelvin scale use degrees?</h3>
+            <p>The Kelvin is a base unit in the International System of Units (SI) and represents an absolute temperature scale. It's simply referred to as "kelvin" (not "degrees Kelvin") because it doesn't represent a degree or division of a range, but an absolute measurement starting from absolute zero.</p>
+
+            <h3>Can temperature go below absolute zero?</h3>
+            <p>In classical thermodynamics, absolute zero (0K or -273.15°C) is the lowest possible temperature. However, in quantum systems, scientists have achieved "negative absolute temperatures" in specialized conditions, though this is a complex quantum phenomenon that doesn't mean temperatures are colder than absolute zero.</p>
+
+            <h3>Why is body temperature 98.6°F and not 100°F?</h3>
+            <p>When Fahrenheit developed his scale, he attempted to set human body temperature at 96°F (which was divisible by 12, making it easier for his 12-division thermometers). However, he measured slightly incorrectly, and modern measurements show average body temperature to be approximately 98.6°F (37°C).</p>
+
+            <h3>At what temperature are Celsius and Fahrenheit equal?</h3>
+            <p>Celsius and Fahrenheit scales intersect at -40°. That is, -40°C equals -40°F. This is the only point where the two scales show the same numerical value.</p>
+
+            <h3>Why does water boil at different temperatures?</h3>
+            <p>Water's boiling point changes with atmospheric pressure. At sea level (standard pressure), water boils at 100°C (212°F). At higher altitudes where air pressure is lower, water boils at lower temperatures. This is why cooking times need adjustment at high elevations.</p>
+
+            <h3>Is there a maximum temperature?</h3>
+            <p>While there's no theoretical maximum temperature in classical physics, the highest meaningful temperature is the Planck temperature (approximately 1.4 × 10³² K), at which point our current understanding of physics breaks down. The highest temperature ever created by humans was achieved in particle colliders, reaching about 5.5 trillion K.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Temperature Conversion Tips</h2>
+
+            <h3>Quick Mental Approximations</h3>
+            <ul>
+                <li><strong>Celsius to Fahrenheit:</strong> Double the Celsius temperature and add 30 (not exact, but close for everyday temperatures)</li>
+                <li><strong>Fahrenheit to Celsius:</strong> Subtract 30 from Fahrenheit and divide by 2 (approximate)</li>
+                <li><strong>Celsius to Kelvin:</strong> Simply add 273 (close enough for most purposes)</li>
+            </ul>
+
+            <h3>Common Conversion Benchmarks</h3>
+            <ul>
+                <li>0°C = 32°F (water freezes)</li>
+                <li>10°C = 50°F (cool day)</li>
+                <li>20°C = 68°F (room temperature)</li>
+                <li>30°C = 86°F (hot day)</li>
+                <li>40°C = 104°F (very hot day)</li>
+            </ul>
+
+            <h3>Scientific Precision</h3>
+            <ul>
+                <li>For scientific work, always use the exact conversion formulas</li>
+                <li>Kelvin is preferred in thermodynamics and most physics calculations</li>
+                <li>Keep track of significant figures in your calculations</li>
+                <li>Be aware of rounding errors in multi-step conversions</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators & Converters</h2>
+            <div class="calculator-grid">
+                <a href="length-converter.html" class="calc-card">
+                    <div class="calc-icon">📏</div>
+                    <h3 class="calc-title">Length Converter</h3>
+                    <p class="calc-description">Convert meters, feet, inches, and more</p>
+                </a>
+
+                <a href="weight-converter.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Weight Converter</h3>
+                    <p class="calc-description">Convert kg, pounds, ounces, and more</p>
+                </a>
+
+                <a href="volume-converter.html" class="calc-card">
+                    <div class="calc-icon">🧪</div>
+                    <h3 class="calc-title">Volume Converter</h3>
+                    <p class="calc-description">Convert liters, gallons, cups, and more</p>
+                </a>
+
+                <a href="speed-converter.html" class="calc-card">
+                    <div class="calc-icon">🚗</div>
+                    <h3 class="calc-title">Speed Converter</h3>
+                    <p class="calc-description">Convert mph, km/h, knots, and more</p>
+                </a>
+
+                <a href="pressure-converter.html" class="calc-card">
+                    <div class="calc-icon">🌡️</div>
+                    <h3 class="calc-title">Pressure Converter</h3>
+                    <p class="calc-description">Convert PSI, bar, pascal, and more</p>
+                </a>
+
+                <a href="energy-converter.html" class="calc-card">
+                    <div class="calc-icon">⚡</div>
+                    <h3 class="calc-title">Energy Converter</h3>
+                    <p class="calc-description">Convert joules, calories, and more</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Get all input elements
+        const celsiusInput = document.getElementById('celsius');
+        const fahrenheitInput = document.getElementById('fahrenheit');
+        const kelvinInput = document.getElementById('kelvin');
+        const tempMarker = document.getElementById('tempMarker');
+        const markerLabel = document.getElementById('markerLabel');
+
+        // Conversion functions
+        function celsiusToFahrenheit(c) {
+            return (c * 9/5) + 32;
+        }
+
+        function celsiusToKelvin(c) {
+            return c + 273.15;
+        }
+
+        function fahrenheitToCelsius(f) {
+            return (f - 32) * 5/9;
+        }
+
+        function kelvinToCelsius(k) {
+            return k - 273.15;
+        }
+
+        // Update visual scale marker position
+        function updateScale(celsius) {
+            // Scale range: -25°C to 100°C
+            const minTemp = -25;
+            const maxTemp = 100;
+
+            // Clamp temperature to scale range
+            let clampedTemp = Math.max(minTemp, Math.min(maxTemp, celsius));
+
+            // Calculate position (0% at top = 100°C, 100% at bottom = -25°C)
+            const percentage = ((maxTemp - clampedTemp) / (maxTemp - minTemp)) * 100;
+
+            tempMarker.style.top = percentage + '%';
+            markerLabel.textContent = celsius.toFixed(1) + '°C';
+        }
+
+        // Update all fields from Celsius
+        function updateFromCelsius() {
+            const celsius = parseFloat(celsiusInput.value);
+            if (isNaN(celsius)) {
+                fahrenheitInput.value = '';
+                kelvinInput.value = '';
+                return;
+            }
+
+            fahrenheitInput.value = celsiusToFahrenheit(celsius).toFixed(2);
+            kelvinInput.value = celsiusToKelvin(celsius).toFixed(2);
+            updateScale(celsius);
+        }
+
+        // Update all fields from Fahrenheit
+        function updateFromFahrenheit() {
+            const fahrenheit = parseFloat(fahrenheitInput.value);
+            if (isNaN(fahrenheit)) {
+                celsiusInput.value = '';
+                kelvinInput.value = '';
+                return;
+            }
+
+            const celsius = fahrenheitToCelsius(fahrenheit);
+            celsiusInput.value = celsius.toFixed(2);
+            kelvinInput.value = celsiusToKelvin(celsius).toFixed(2);
+            updateScale(celsius);
+        }
+
+        // Update all fields from Kelvin
+        function updateFromKelvin() {
+            const kelvin = parseFloat(kelvinInput.value);
+            if (isNaN(kelvin)) {
+                celsiusInput.value = '';
+                fahrenheitInput.value = '';
+                return;
+            }
+
+            const celsius = kelvinToCelsius(kelvin);
+            celsiusInput.value = celsius.toFixed(2);
+            fahrenheitInput.value = celsiusToFahrenheit(celsius).toFixed(2);
+            updateScale(celsius);
+        }
+
+        // Set temperature in Celsius (for quick reference buttons)
+        function setTemperature(celsius) {
+            celsiusInput.value = celsius;
+            updateFromCelsius();
+
+            // Smooth scroll to input section
+            document.querySelector('.calculator-inputs').scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
+        }
+
+        // Add event listeners
+        celsiusInput.addEventListener('input', updateFromCelsius);
+        fahrenheitInput.addEventListener('input', updateFromFahrenheit);
+        kelvinInput.addEventListener('input', updateFromKelvin);
+
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            updateFromCelsius();
+        });
+    </script>
+
+    <style>
+        .quick-temp-btn {
+            padding: 12px 16px;
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .quick-temp-btn:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+            transform: translateX(4px);
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .calc-card {
+            display: block;
+            padding: 24px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .calc-card:hover {
+            border-color: #2563eb;
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .calc-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .calc-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 8px 0;
+        }
+
+        .calc-description {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            #tempMarker #markerLabel {
+                right: auto;
+                left: -140px;
+            }
+        }
+    </style>
+</body>
+</html>

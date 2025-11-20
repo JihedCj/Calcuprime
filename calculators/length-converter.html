@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free length converter - Convert between millimeters, centimeters, meters, kilometers, inches, feet, yards, miles, and nautical miles instantly.">
+    <meta name="keywords" content="length converter, distance converter, unit converter, meters to feet, cm to inches, km to miles, metric to imperial">
+
+    <title>Length Converter - Convert Distance Units Instantly | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/length-converter.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Length Converter</h1>
+            <p class="calculator-description">Convert between metric and imperial length units instantly with real-time bidirectional conversion</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Enter Value in Any Unit</h3>
+                <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 20px;">Type a value in any field below and all other units will update automatically</p>
+
+                <!-- Quick Conversion Buttons -->
+                <div style="margin-bottom: 25px;">
+                    <label class="form-label">Quick Values</label>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                        <button class="quick-btn" onclick="setQuickValue(1)">1</button>
+                        <button class="quick-btn" onclick="setQuickValue(10)">10</button>
+                        <button class="quick-btn" onclick="setQuickValue(100)">100</button>
+                        <button class="quick-btn" onclick="setQuickValue(1000)">1000</button>
+                    </div>
+                </div>
+
+                <!-- Metric Units -->
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 15px; color: #2563eb;">Metric Units</h4>
+
+                    <div class="form-group">
+                        <label for="millimeters" class="form-label">Millimeters (mm)</label>
+                        <input type="number" id="millimeters" class="form-input" placeholder="0" step="any" oninput="convertLength('millimeters')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="centimeters" class="form-label">Centimeters (cm)</label>
+                        <input type="number" id="centimeters" class="form-input" placeholder="0" step="any" oninput="convertLength('centimeters')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meters" class="form-label">Meters (m)</label>
+                        <input type="number" id="meters" class="form-input" placeholder="0" step="any" oninput="convertLength('meters')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kilometers" class="form-label">Kilometers (km)</label>
+                        <input type="number" id="kilometers" class="form-input" placeholder="0" step="any" oninput="convertLength('kilometers')">
+                    </div>
+                </div>
+
+                <!-- Imperial Units -->
+                <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 15px; color: #d97706;">Imperial Units</h4>
+
+                    <div class="form-group">
+                        <label for="inches" class="form-label">Inches (in)</label>
+                        <input type="number" id="inches" class="form-input" placeholder="0" step="any" oninput="convertLength('inches')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feet" class="form-label">Feet (ft)</label>
+                        <input type="number" id="feet" class="form-input" placeholder="0" step="any" oninput="convertLength('feet')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yards" class="form-label">Yards (yd)</label>
+                        <input type="number" id="yards" class="form-input" placeholder="0" step="any" oninput="convertLength('yards')">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="miles" class="form-label">Miles (mi)</label>
+                        <input type="number" id="miles" class="form-input" placeholder="0" step="any" oninput="convertLength('miles')">
+                    </div>
+                </div>
+
+                <!-- Nautical -->
+                <div style="background: #ecfdf5; padding: 20px; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px; color: #059669;">Nautical</h4>
+
+                    <div class="form-group">
+                        <label for="nauticalMiles" class="form-label">Nautical Miles (nmi)</label>
+                        <input type="number" id="nauticalMiles" class="form-input" placeholder="0" step="any" oninput="convertLength('nauticalMiles')">
+                    </div>
+                </div>
+
+                <button onclick="clearAll()" style="width: 100%; margin-top: 20px; padding: 12px; background: #ef4444; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Clear All</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Common Conversions</h3>
+
+                <div style="background: #eff6ff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2563eb;">
+                    <h4 style="margin-bottom: 15px;">Quick Reference</h4>
+                    <div style="display: grid; gap: 10px; font-size: 0.875rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 inch</span>
+                            <span style="font-weight: 600;">= 2.54 cm</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 foot</span>
+                            <span style="font-weight: 600;">= 30.48 cm</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 yard</span>
+                            <span style="font-weight: 600;">= 0.9144 m</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 mile</span>
+                            <span style="font-weight: 600;">= 1.609 km</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 nautical mile</span>
+                            <span style="font-weight: 600;">= 1.852 km</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #d97706;">
+                    <h4 style="margin-bottom: 15px;">Metric Conversions</h4>
+                    <div style="display: grid; gap: 10px; font-size: 0.875rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 meter</span>
+                            <span style="font-weight: 600;">= 100 cm</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 meter</span>
+                            <span style="font-weight: 600;">= 1,000 mm</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 kilometer</span>
+                            <span style="font-weight: 600;">= 1,000 m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #ecfdf5; padding: 20px; border-radius: 8px; border-left: 4px solid #059669;">
+                    <h4 style="margin-bottom: 15px;">Imperial Conversions</h4>
+                    <div style="display: grid; gap: 10px; font-size: 0.875rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 foot</span>
+                            <span style="font-weight: 600;">= 12 inches</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 yard</span>
+                            <span style="font-weight: 600;">= 3 feet</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 mile</span>
+                            <span style="font-weight: 600;">= 5,280 feet</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: white; border-radius: 4px;">
+                            <span>1 mile</span>
+                            <span style="font-weight: 600;">= 1,760 yards</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use the Length Converter</h2>
+            <p>This bidirectional length converter makes it easy to convert between metric and imperial units instantly:</p>
+            <ol>
+                <li><strong>Enter a value:</strong> Type any number in any unit field</li>
+                <li><strong>Automatic conversion:</strong> All other units update instantly</li>
+                <li><strong>Quick values:</strong> Use the 1, 10, 100, or 1000 buttons for common conversions</li>
+                <li><strong>High precision:</strong> Get accurate conversions with up to 10 decimal places</li>
+                <li><strong>Clear all:</strong> Reset all fields with one click</li>
+            </ol>
+
+            <h2>Understanding Length Units</h2>
+
+            <h3>Metric System (SI Units)</h3>
+            <p>The metric system, also known as the International System of Units (SI), is based on powers of 10, making conversions simple and intuitive. It's used by most countries worldwide.</p>
+
+            <ul>
+                <li><strong>Millimeter (mm):</strong> 1/1000 of a meter. Used for small measurements like thickness, rainfall, or precision engineering.</li>
+                <li><strong>Centimeter (cm):</strong> 1/100 of a meter. Common for everyday measurements like height, clothing, and household items.</li>
+                <li><strong>Meter (m):</strong> The base unit of length in SI. Defined as the distance light travels in 1/299,792,458 of a second.</li>
+                <li><strong>Kilometer (km):</strong> 1,000 meters. Used for longer distances like roads, travel, and geography.</li>
+            </ul>
+
+            <h3>Imperial System</h3>
+            <p>The imperial system originated in Britain and is primarily used in the United States today. It's based on historical measurements.</p>
+
+            <ul>
+                <li><strong>Inch (in):</strong> Originally based on the width of a human thumb. 1 inch = exactly 2.54 cm (defined in 1959).</li>
+                <li><strong>Foot (ft):</strong> Historically based on the length of a human foot. 1 foot = 12 inches = 30.48 cm.</li>
+                <li><strong>Yard (yd):</strong> Originally the distance from the nose to the outstretched arm. 1 yard = 3 feet = 36 inches.</li>
+                <li><strong>Mile (mi):</strong> Comes from the Roman "mille passus" (1,000 paces). 1 mile = 5,280 feet = 1.609344 km.</li>
+            </ul>
+
+            <h3>Nautical Measurements</h3>
+            <ul>
+                <li><strong>Nautical Mile (nmi):</strong> Based on Earth's circumference. 1 nautical mile = 1 minute of latitude = 1.852 km exactly. Used in maritime and aviation navigation.</li>
+            </ul>
+
+            <h2>History of Length Measurement</h2>
+
+            <h3>Ancient Measurements</h3>
+            <p>Early civilizations used body parts for measurement:</p>
+            <ul>
+                <li><strong>Cubit:</strong> Ancient Egypt - length from elbow to fingertips (approximately 45-53 cm)</li>
+                <li><strong>Foot:</strong> Ancient Rome - length of a human foot (varied, standardized later)</li>
+                <li><strong>Pace:</strong> Roman military - double step distance (approximately 1.48 meters)</li>
+                <li><strong>Fathom:</strong> Maritime - distance between outstretched arms (6 feet or 1.83 meters)</li>
+            </ul>
+
+            <h3>The Metric Revolution</h3>
+            <p>The metric system was developed in France during the 1790s following the French Revolution. Its goals were:</p>
+            <ul>
+                <li>Create a universal system based on nature (originally the meter was 1/10,000,000 of the distance from equator to North Pole)</li>
+                <li>Use decimal divisions for easy calculation</li>
+                <li>Eliminate the confusion of different regional measurement systems</li>
+            </ul>
+            <p>Today, the meter is defined by the speed of light, making it incredibly precise and universal.</p>
+
+            <h3>Imperial System Development</h3>
+            <p>The British Imperial System was formally defined in 1824, standardizing measurements across the British Empire. In 1959, the international yard and pound agreement further standardized units between English-speaking countries, defining the inch as exactly 2.54 centimeters.</p>
+
+            <h2>Length Units by Country</h2>
+
+            <h3>Metric System Countries</h3>
+            <p>Over 95% of the world's population uses the metric system, including:</p>
+            <ul>
+                <li>All of Europe (including UK for most measurements)</li>
+                <li>Asia (China, Japan, India, etc.)</li>
+                <li>Africa</li>
+                <li>Australia and New Zealand</li>
+                <li>South America</li>
+                <li>Canada (officially metric, though imperial still used informally)</li>
+            </ul>
+
+            <h3>Imperial System Countries</h3>
+            <p>Only three countries have not officially adopted the metric system:</p>
+            <ul>
+                <li><strong>United States:</strong> Primarily uses imperial (feet, miles), though metric is used in science, medicine, and military</li>
+                <li><strong>Liberia:</strong> Uses imperial system due to American influence</li>
+                <li><strong>Myanmar (Burma):</strong> Uses traditional Burmese units and some imperial, gradually adopting metric</li>
+            </ul>
+
+            <h3>Mixed Usage</h3>
+            <p>Many countries use both systems in different contexts:</p>
+            <ul>
+                <li><strong>United Kingdom:</strong> Officially metric but uses miles for roads, pints for beer, feet/inches for height</li>
+                <li><strong>Canada:</strong> Officially metric but imperial used in construction and informally</li>
+                <li><strong>Aviation worldwide:</strong> Uses feet for altitude and nautical miles for distance</li>
+            </ul>
+
+            <h2>Practical Applications</h2>
+
+            <h3>Construction and Architecture</h3>
+            <p>Precise length measurements are critical in construction:</p>
+            <ul>
+                <li>US construction typically uses feet and inches</li>
+                <li>Most other countries use millimeters for precision work</li>
+                <li>Architectural drawings require exact conversions when working internationally</li>
+            </ul>
+
+            <h3>Sports and Athletics</h3>
+            <p>Different sports use different measurement systems:</p>
+            <ul>
+                <li><strong>Metric:</strong> Olympic track events (100m, 200m, etc.), swimming pools (25m, 50m)</li>
+                <li><strong>Imperial:</strong> American football (yards), golf (yards), horse racing (furlongs in UK/US)</li>
+                <li><strong>Nautical:</strong> Sailing races often use nautical miles</li>
+            </ul>
+
+            <h3>Science and Engineering</h3>
+            <p>The scientific community universally uses the metric system:</p>
+            <ul>
+                <li>SI units (meters) required for scientific publications</li>
+                <li>Engineering in metric countries uses millimeters for precision</li>
+                <li>US engineering increasingly adopting metric for international compatibility</li>
+            </ul>
+
+            <h2>Conversion Tips and Tricks</h2>
+
+            <h3>Mental Math Shortcuts</h3>
+            <ul>
+                <li><strong>Inches to cm:</strong> Multiply by 2.5 (approximate, actual is 2.54)</li>
+                <li><strong>Feet to meters:</strong> Divide by 3.3 (approximate, actual is 3.28084)</li>
+                <li><strong>Miles to km:</strong> Multiply by 1.6 (approximate, actual is 1.609344)</li>
+                <li><strong>Km to miles:</strong> Multiply by 0.6 (approximate, actual is 0.621371)</li>
+            </ul>
+
+            <h3>The Fibonacci Sequence Trick</h3>
+            <p>Consecutive Fibonacci numbers approximate the miles-to-kilometers conversion:</p>
+            <ul>
+                <li>5 miles ≈ 8 km (actual: 8.05 km)</li>
+                <li>8 miles ≈ 13 km (actual: 12.87 km)</li>
+                <li>13 miles ≈ 21 km (actual: 20.92 km)</li>
+            </ul>
+            <p>This works because the ratio between consecutive Fibonacci numbers approaches the golden ratio (1.618), which is very close to the miles-to-kilometers conversion factor (1.609).</p>
+
+            <h2>Common Conversion Examples</h2>
+
+            <h3>Everyday Conversions</h3>
+            <ul>
+                <li>Standard door height: 80 inches = 203.2 cm ≈ 2 meters</li>
+                <li>Basketball hoop: 10 feet = 3.048 meters</li>
+                <li>Football field (American): 100 yards = 91.44 meters</li>
+                <li>Soccer field: 100-110 meters = 328-360 feet</li>
+                <li>Marathon: 26.2 miles = 42.195 kilometers</li>
+                <li>Credit card width: 85.6 mm = 3.37 inches</li>
+            </ul>
+
+            <h3>Height Conversions</h3>
+            <ul>
+                <li>5 feet = 152.4 cm = 1.524 m</li>
+                <li>5 feet 6 inches = 167.64 cm = 1.68 m</li>
+                <li>6 feet = 182.88 cm = 1.83 m</li>
+                <li>170 cm = 5 feet 7 inches</li>
+                <li>180 cm = 5 feet 11 inches</li>
+            </ul>
+
+            <h3>Distance Conversions</h3>
+            <ul>
+                <li>1 mile = 1.609 km (US road distance)</li>
+                <li>5 km = 3.107 miles (common running race)</li>
+                <li>10 km = 6.214 miles (common running race)</li>
+                <li>Half marathon: 21.0975 km = 13.1 miles</li>
+                <li>100 km = 62.137 miles (ultramarathon)</li>
+            </ul>
+
+            <h2>Precision and Rounding</h2>
+            <p>When converting between measurement systems, consider the appropriate level of precision:</p>
+            <ul>
+                <li><strong>Engineering/Manufacturing:</strong> Use maximum precision (6+ decimal places)</li>
+                <li><strong>Construction:</strong> Usually round to 1-2 decimal places</li>
+                <li><strong>Everyday use:</strong> Whole numbers or 1 decimal place sufficient</li>
+                <li><strong>Scientific:</strong> Follow significant figures rules based on measurement precision</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Why doesn't the US use the metric system?</h3>
+            <p>The US began metrication efforts in the 1970s, but it remained voluntary. The high cost of converting infrastructure (road signs, tools, education) and public resistance led to incomplete adoption. The US is officially metric-capable but primarily uses customary units in daily life.</p>
+
+            <h3>Which system is more accurate?</h3>
+            <p>Neither system is inherently more accurate - precision depends on measurement tools, not units. However, the metric system's decimal-based structure makes calculations easier and reduces conversion errors.</p>
+
+            <h3>What's the difference between a mile and a nautical mile?</h3>
+            <p>A statute mile (1.609 km) is used on land. A nautical mile (1.852 km) is based on Earth's geometry - it equals one minute of latitude. Nautical miles are used in maritime and aviation because they relate directly to navigation coordinates.</p>
+
+            <h3>How precise are these conversions?</h3>
+            <p>This converter uses exact conversion factors defined by international standards. The inch is legally defined as exactly 2.54 centimeters, making all derived conversions mathematically exact (within floating-point precision limits).</p>
+
+            <h3>Why are there 5,280 feet in a mile?</h3>
+            <p>The Roman mile was 1,000 paces (5,000 Roman feet). The English furlong (660 feet) was a common agricultural measurement. To make 8 furlongs equal 1 mile, the mile became 5,280 feet (8 × 660) in the 16th century.</p>
+
+            <h3>Can I convert between these units manually?</h3>
+            <p>Yes! Memorize key conversion factors (1 inch = 2.54 cm, 1 mile = 1.609 km) and use multiplication/division. For example: to convert 10 miles to km, multiply 10 × 1.609 = 16.09 km.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Converters</h2>
+            <div class="calculator-grid">
+                <a href="area-converter.html" class="calc-card">
+                    <div class="calc-icon">📐</div>
+                    <h3 class="calc-title">Area Converter</h3>
+                    <p class="calc-description">Convert square meters, feet, acres, hectares</p>
+                </a>
+
+                <a href="volume-converter.html" class="calc-card">
+                    <div class="calc-icon">🧊</div>
+                    <h3 class="calc-title">Volume Converter</h3>
+                    <p class="calc-description">Convert liters, gallons, cubic units</p>
+                </a>
+
+                <a href="weight-converter.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Weight Converter</h3>
+                    <p class="calc-description">Convert kilograms, pounds, ounces</p>
+                </a>
+
+                <a href="temperature-converter.html" class="calc-card">
+                    <div class="calc-icon">🌡️</div>
+                    <h3 class="calc-title">Temperature Converter</h3>
+                    <p class="calc-description">Convert Celsius, Fahrenheit, Kelvin</p>
+                </a>
+
+                <a href="speed-converter.html" class="calc-card">
+                    <div class="calc-icon">🚀</div>
+                    <h3 class="calc-title">Speed Converter</h3>
+                    <p class="calc-description">Convert km/h, mph, knots, m/s</p>
+                </a>
+
+                <a href="time-converter.html" class="calc-card">
+                    <div class="calc-icon">⏱️</div>
+                    <h3 class="calc-title">Time Converter</h3>
+                    <p class="calc-description">Convert seconds, minutes, hours, days</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Conversion factors to meters (base unit)
+        const conversionFactors = {
+            millimeters: 0.001,
+            centimeters: 0.01,
+            meters: 1,
+            kilometers: 1000,
+            inches: 0.0254,
+            feet: 0.3048,
+            yards: 0.9144,
+            miles: 1609.344,
+            nauticalMiles: 1852
+        };
+
+        // Track which field is being edited to prevent circular updates
+        let isConverting = false;
+
+        function convertLength(sourceUnit) {
+            if (isConverting) return;
+            isConverting = true;
+
+            const sourceValue = parseFloat(document.getElementById(sourceUnit).value);
+
+            if (isNaN(sourceValue) || sourceValue === '') {
+                // Clear all fields if input is invalid
+                isConverting = false;
+                return;
+            }
+
+            // Convert source value to meters first
+            const valueInMeters = sourceValue * conversionFactors[sourceUnit];
+
+            // Convert from meters to all other units
+            for (let unit in conversionFactors) {
+                if (unit !== sourceUnit) {
+                    const convertedValue = valueInMeters / conversionFactors[unit];
+                    const inputField = document.getElementById(unit);
+
+                    // Format the number nicely - remove trailing zeros
+                    let formattedValue = convertedValue.toFixed(10);
+                    formattedValue = parseFloat(formattedValue).toString();
+
+                    inputField.value = formattedValue;
+                }
+            }
+
+            isConverting = false;
+        }
+
+        function setQuickValue(value) {
+            // Set value in meters and convert to all other units
+            document.getElementById('meters').value = value;
+            convertLength('meters');
+        }
+
+        function clearAll() {
+            for (let unit in conversionFactors) {
+                document.getElementById(unit).value = '';
+            }
+        }
+
+        // Add button styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .quick-btn {
+                padding: 10px;
+                background: #2563eb;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .quick-btn:hover {
+                background: #1d4ed8;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .quick-btn:active {
+                transform: translateY(0);
+            }
+            .form-input:focus {
+                outline: none;
+                border-color: #2563eb;
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

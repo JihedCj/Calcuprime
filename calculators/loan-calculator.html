@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free loan calculator - Calculate monthly payments, total interest, and amortization schedule for any loan. Compare different loan terms and rates.">
+    <meta name="keywords" content="loan calculator, personal loan, auto loan, loan payment calculator, interest calculator">
+
+    <title>Loan Calculator - Calculate Monthly Loan Payments | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/loan-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Loan Calculator</h1>
+            <p class="calculator-description">Calculate monthly payments, total interest, and view amortization schedule for any loan</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Loan Details</h3>
+
+                <div class="form-group">
+                    <label for="loanAmount" class="form-label">Loan Amount ($)</label>
+                    <input type="number" id="loanAmount" class="form-input" value="20000" min="100" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="interestRate" class="form-label">Annual Interest Rate (%)</label>
+                    <input type="number" id="interestRate" class="form-input" value="7.5" min="0" max="50" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="loanTerm" class="form-label">Loan Term</label>
+                    <select id="loanTermType" class="form-select" style="margin-bottom: 10px;">
+                        <option value="years">Years</option>
+                        <option value="months">Months</option>
+                    </select>
+                    <input type="number" id="loanTerm" class="form-input" value="5" min="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="startDate" class="form-label">Start Date (optional)</label>
+                    <input type="date" id="startDate" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="extraPayment" class="form-label">Extra Monthly Payment (optional)</label>
+                    <input type="number" id="extraPayment" class="form-input" value="0" min="0" step="10">
+                </div>
+
+                <button onclick="calculateLoan()" class="btn-calculate">Calculate</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Results</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Monthly Payment</div>
+                    <div class="result-value" id="monthlyPayment" style="font-size: 2.5rem; color: #2563eb;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Interest Paid</div>
+                    <div class="result-value" id="totalInterest">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Amount Paid</div>
+                    <div class="result-value" id="totalPaid">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Payoff Date</div>
+                    <div class="result-value" id="payoffDate" style="font-size: 1.2rem;">-</div>
+                </div>
+
+                <div id="extraPaymentResults" style="display: none; background: #ecfdf5; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #10b981;">
+                    <h4 style="margin-bottom: 10px; color: #047857;">With Extra Payments:</h4>
+                    <p style="margin: 5px 0; font-size: 0.9rem;"><strong>Interest Saved:</strong> <span id="interestSaved"></span></p>
+                    <p style="margin: 5px 0; font-size: 0.9rem;"><strong>Time Saved:</strong> <span id="timeSaved"></span></p>
+                    <p style="margin: 5px 0; font-size: 0.9rem;"><strong>New Payoff Date:</strong> <span id="newPayoffDate"></span></p>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 10px;">Payment Breakdown</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Principal:</span>
+                        <span id="principalPercent" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Interest:</span>
+                        <span id="interestPercent" style="font-weight: 600;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="amortizationSection" style="display: none;">
+            <h2>Amortization Schedule</h2>
+            <p style="margin-bottom: 15px;">Detailed breakdown of your loan payments over time</p>
+            <div style="overflow-x: auto;">
+                <table id="amortizationTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f3f4f6;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Payment #</th>
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Date</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Payment</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Principal</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Interest</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="amortizationBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use the Loan Calculator</h2>
+            <p>Our loan calculator helps you understand the true cost of borrowing and plan your repayment strategy:</p>
+            <ol>
+                <li><strong>Enter Loan Amount:</strong> The total amount you're borrowing</li>
+                <li><strong>Set Interest Rate:</strong> Annual percentage rate (APR) from your lender</li>
+                <li><strong>Choose Loan Term:</strong> How long you'll take to repay (in years or months)</li>
+                <li><strong>Add Extra Payments (optional):</strong> See how additional payments reduce interest and time</li>
+                <li><strong>Review Results:</strong> Monthly payment, total interest, and payoff schedule</li>
+            </ol>
+
+            <h2>Understanding Loan Payments</h2>
+            <p>Your monthly loan payment consists of two parts:</p>
+            <ul>
+                <li><strong>Principal:</strong> The portion that reduces your loan balance</li>
+                <li><strong>Interest:</strong> The cost of borrowing money</li>
+            </ul>
+            <p>Early in the loan, most of your payment goes toward interest. As the balance decreases, more goes toward principal. This is called amortization.</p>
+
+            <h2>How Loan Interest is Calculated</h2>
+            <p>Loans use the following formula to calculate monthly payments:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+                M = P × [r(1+r)^n] / [(1+r)^n - 1]<br><br>
+                Where:<br>
+                M = Monthly payment<br>
+                P = Principal (loan amount)<br>
+                r = Monthly interest rate (annual rate ÷ 12)<br>
+                n = Number of payments
+            </p>
+
+            <h2>Benefits of Making Extra Payments</h2>
+            <ul>
+                <li><strong>Save on Interest:</strong> Reduce the total interest paid significantly</li>
+                <li><strong>Pay Off Faster:</strong> Become debt-free months or years earlier</li>
+                <li><strong>Build Equity Faster:</strong> Own your asset sooner</li>
+                <li><strong>Improve Credit:</strong> Lower debt-to-income ratio</li>
+                <li><strong>Financial Freedom:</strong> Free up money for other goals</li>
+            </ul>
+
+            <h2>Types of Loans</h2>
+
+            <h3>Personal Loans</h3>
+            <p>Unsecured loans typically ranging from $1,000 to $50,000 with terms of 1-7 years. Interest rates vary based on creditworthiness (5-36% APR). Use for debt consolidation, home improvements, or major purchases.</p>
+
+            <h3>Auto Loans</h3>
+            <p>Secured by the vehicle with terms typically 3-7 years. New car loans: 3-5% APR. Used car loans: 5-10% APR. Larger down payments result in better rates.</p>
+
+            <h3>Student Loans</h3>
+            <p>Federal loans have fixed rates (4-7%) with flexible repayment options. Private loans have variable rates (3-14%) based on credit. Repayment terms: 10-25 years.</p>
+
+            <h3>Home Equity Loans</h3>
+            <p>Secured by home equity with fixed rates (6-9% APR). Borrow up to 85% of home equity. Terms: 5-30 years. Interest may be tax-deductible.</p>
+
+            <h2>How to Get the Best Loan Rate</h2>
+            <ul>
+                <li><strong>Improve Credit Score:</strong> Pay bills on time, reduce debt, fix errors</li>
+                <li><strong>Shop Around:</strong> Compare rates from multiple lenders</li>
+                <li><strong>Make a Larger Down Payment:</strong> Reduces lender risk</li>
+                <li><strong>Choose Shorter Terms:</strong> Lower rates for faster repayment</li>
+                <li><strong>Consider a Co-signer:</strong> Someone with good credit can help</li>
+                <li><strong>Check for Discounts:</strong> Autopay, existing customer benefits</li>
+                <li><strong>Avoid Add-ons:</strong> Skip unnecessary insurance or warranties</li>
+            </ul>
+
+            <h2>Loan Payment Strategies</h2>
+
+            <h3>Biweekly Payments</h3>
+            <p>Pay half your monthly payment every two weeks. You'll make 26 half-payments (13 full payments) per year instead of 12, paying off your loan faster.</p>
+
+            <h3>Round Up Payments</h3>
+            <p>If your payment is $387, pay $400. Small extra amounts add up significantly over time.</p>
+
+            <h3>Apply Windfalls</h3>
+            <p>Use tax refunds, bonuses, or gifts to make lump sum payments toward principal.</p>
+
+            <h3>Refinance When Rates Drop</h3>
+            <p>If interest rates fall or your credit improves, refinancing can save thousands.</p>
+
+            <h2>Common Loan Mistakes to Avoid</h2>
+            <ul>
+                <li><strong>Not shopping around:</strong> Always compare at least 3-5 lenders</li>
+                <li><strong>Focusing only on monthly payment:</strong> Consider total cost and interest</li>
+                <li><strong>Extending term too long:</strong> Longer terms mean more interest paid</li>
+                <li><strong>Borrowing more than needed:</strong> Only borrow what's necessary</li>
+                <li><strong>Ignoring fees:</strong> Origination fees, prepayment penalties add up</li>
+                <li><strong>Not reading fine print:</strong> Understand all terms before signing</li>
+                <li><strong>Missing payments:</strong> Damages credit and incurs late fees</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>What credit score do I need for a personal loan?</h3>
+            <p>Most lenders require a minimum score of 580-600, but scores above 700 qualify for the best rates. Scores below 580 may require secured loans or co-signers.</p>
+
+            <h3>Can I pay off my loan early?</h3>
+            <p>Most loans allow early payoff, but some have prepayment penalties. Check your loan agreement. Even with a penalty, early payoff often saves money.</p>
+
+            <h3>Should I choose a fixed or variable rate?</h3>
+            <p>Fixed rates provide payment certainty, ideal for budgeting. Variable rates may start lower but can increase, better for short-term loans or if you expect rates to drop.</p>
+
+            <h3>How does loan term affect my payment?</h3>
+            <p>Longer terms = lower monthly payments but more total interest. Shorter terms = higher monthly payments but less total interest. Choose based on your budget and goals.</p>
+
+            <h3>What's the difference between APR and interest rate?</h3>
+            <p>Interest rate is the cost to borrow. APR includes the interest rate plus fees (origination, closing costs), giving you the true cost of the loan.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="mortgage-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏠</div>
+                    <h3 class="calc-title">Mortgage Calculator</h3>
+                    <p class="calc-description">Calculate home loan payments</p>
+                </a>
+
+                <a href="debt-payoff-calculator.html" class="calc-card">
+                    <div class="calc-icon">💳</div>
+                    <h3 class="calc-title">Debt Payoff Calculator</h3>
+                    <p class="calc-description">Plan your debt elimination strategy</p>
+                </a>
+
+                <a href="compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Compound Interest</h3>
+                    <p class="calc-description">Calculate investment growth</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Set default start date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('startDate').value = today;
+
+        function calculateLoan() {
+            const principal = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            let termValue = parseInt(document.getElementById('loanTerm').value) || 0;
+            const termType = document.getElementById('loanTermType').value;
+            const extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
+            const startDateStr = document.getElementById('startDate').value;
+
+            if (principal <= 0 || annualRate < 0 || termValue <= 0) {
+                alert('Please enter valid loan details');
+                return;
+            }
+
+            // Convert term to months
+            const termMonths = termType === 'years' ? termValue * 12 : termValue;
+
+            // Calculate monthly interest rate
+            const monthlyRate = annualRate / 100 / 12;
+
+            // Calculate monthly payment
+            let monthlyPayment;
+            if (monthlyRate === 0) {
+                monthlyPayment = principal / termMonths;
+            } else {
+                monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, termMonths)) /
+                                (Math.pow(1 + monthlyRate, termMonths) - 1);
+            }
+
+            // Calculate totals without extra payment
+            let balance = principal;
+            let totalInterest = 0;
+            let paymentCount = 0;
+
+            for (let i = 0; i < termMonths && balance > 0; i++) {
+                const interestPayment = balance * monthlyRate;
+                const principalPayment = Math.min(monthlyPayment - interestPayment, balance);
+                totalInterest += interestPayment;
+                balance -= principalPayment;
+                paymentCount++;
+            }
+
+            const totalPaid = principal + totalInterest;
+
+            // Calculate with extra payment if specified
+            let newBalance = principal;
+            let newTotalInterest = 0;
+            let newPaymentCount = 0;
+
+            if (extraPayment > 0) {
+                for (let i = 0; i < termMonths && newBalance > 0; i++) {
+                    const interestPayment = newBalance * monthlyRate;
+                    const totalPayment = monthlyPayment + extraPayment;
+                    const principalPayment = Math.min(totalPayment - interestPayment, newBalance);
+                    newTotalInterest += interestPayment;
+                    newBalance -= principalPayment;
+                    newPaymentCount++;
+                }
+            }
+
+            // Display results
+            document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('totalPaid').textContent = formatCurrency(totalPaid);
+
+            // Calculate payoff date
+            if (startDateStr) {
+                const startDate = new Date(startDateStr);
+                const payoffDate = new Date(startDate);
+                payoffDate.setMonth(payoffDate.getMonth() + paymentCount);
+                document.getElementById('payoffDate').textContent = payoffDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+
+                if (extraPayment > 0) {
+                    const newPayoffDate = new Date(startDate);
+                    newPayoffDate.setMonth(newPayoffDate.getMonth() + newPaymentCount);
+                    document.getElementById('newPayoffDate').textContent = newPayoffDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+                }
+            } else {
+                document.getElementById('payoffDate').textContent = `${paymentCount} months`;
+            }
+
+            // Payment breakdown percentages
+            const principalPercent = ((principal / totalPaid) * 100).toFixed(1);
+            const interestPercent = ((totalInterest / totalPaid) * 100).toFixed(1);
+            document.getElementById('principalPercent').textContent = principalPercent + '%';
+            document.getElementById('interestPercent').textContent = interestPercent + '%';
+
+            // Extra payment results
+            if (extraPayment > 0) {
+                const interestSaved = totalInterest - newTotalInterest;
+                const timeSaved = paymentCount - newPaymentCount;
+
+                document.getElementById('extraPaymentResults').style.display = 'block';
+                document.getElementById('interestSaved').textContent = formatCurrency(interestSaved);
+                document.getElementById('timeSaved').textContent = `${timeSaved} months (${(timeSaved / 12).toFixed(1)} years)`;
+            } else {
+                document.getElementById('extraPaymentResults').style.display = 'none';
+            }
+
+            // Generate amortization schedule
+            generateAmortizationSchedule(principal, monthlyRate, termMonths, monthlyPayment, extraPayment, startDateStr);
+            document.getElementById('amortizationSection').style.display = 'block';
+        }
+
+        function generateAmortizationSchedule(principal, monthlyRate, termMonths, monthlyPayment, extraPayment, startDateStr) {
+            const tbody = document.getElementById('amortizationBody');
+            tbody.innerHTML = '';
+
+            let balance = principal;
+            const startDate = startDateStr ? new Date(startDateStr) : new Date();
+
+            for (let i = 1; i <= termMonths && balance > 0.01; i++) {
+                const interestPayment = balance * monthlyRate;
+                const totalPayment = monthlyPayment + extraPayment;
+                const principalPayment = Math.min(totalPayment - interestPayment, balance);
+                balance -= principalPayment;
+
+                const paymentDate = new Date(startDate);
+                paymentDate.setMonth(paymentDate.getMonth() + i);
+
+                // Show every payment for first 12, then yearly
+                if (i <= 12 || i % 12 === 0 || balance <= 0.01) {
+                    const row = tbody.insertRow();
+                    row.innerHTML = `
+                        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">${i}</td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">${paymentDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(monthlyPayment + extraPayment)}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(principalPayment)}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(interestPayment)}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(Math.max(0, balance))}</td>
+                    `;
+                }
+            }
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(num);
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateLoan);
+            input.addEventListener('change', calculateLoan);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', calculateLoan);
+    </script>
+</body>
+</html>

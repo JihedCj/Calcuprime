@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free retirement calculator - Plan your retirement savings, calculate 401k growth, IRA contributions, and determine how much you need to retire comfortably.">
+    <meta name="keywords" content="retirement calculator, 401k calculator, IRA calculator, retirement planning, retirement savings, social security calculator">
+
+    <title>Retirement Calculator - Plan Your Retirement Savings | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/retirement-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Retirement Calculator</h1>
+            <p class="calculator-description">Plan your retirement savings and see if you're on track to retire comfortably</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Your Information</h3>
+
+                <div class="form-group">
+                    <label for="currentAge" class="form-label">Current Age</label>
+                    <input type="number" id="currentAge" class="form-input" value="35" min="18" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="retirementAge" class="form-label">Planned Retirement Age</label>
+                    <input type="number" id="retirementAge" class="form-input" value="65" min="50" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentSavings" class="form-label">Current Retirement Savings ($)</label>
+                    <input type="number" id="currentSavings" class="form-input" value="50000" min="0" step="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyContribution" class="form-label">Monthly Contribution ($)</label>
+                    <input type="number" id="monthlyContribution" class="form-input" value="500" min="0" step="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="employerMatch" class="form-label">Employer Match ($ per month, optional)</label>
+                    <input type="number" id="employerMatch" class="form-input" value="250" min="0" step="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="returnRate" class="form-label">Expected Annual Return (%)</label>
+                    <input type="number" id="returnRate" class="form-input" value="7" min="0" max="20" step="0.5">
+                    <small style="color: #6b7280; font-size: 0.85rem;">Typical range: 6-8% for diversified portfolio</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="inflationRate" class="form-label">Expected Inflation Rate (%)</label>
+                    <input type="number" id="inflationRate" class="form-input" value="3" min="0" max="10" step="0.5">
+                </div>
+
+                <div class="form-group">
+                    <label for="retirementExpenses" class="form-label">Monthly Retirement Expenses ($)</label>
+                    <input type="number" id="retirementExpenses" class="form-input" value="4000" min="0" step="100">
+                    <small style="color: #6b7280; font-size: 0.85rem;">In today's dollars</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="retirementDuration" class="form-label">Expected Years in Retirement</label>
+                    <input type="number" id="retirementDuration" class="form-input" value="30" min="10" max="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="socialSecurity" class="form-label">Expected Monthly Social Security ($, optional)</label>
+                    <input type="number" id="socialSecurity" class="form-input" value="1500" min="0" step="100">
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Retirement Analysis</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Projected Savings at Retirement</div>
+                    <div class="result-value" id="projectedSavings" style="font-size: 2.5rem; color: #2563eb;">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Required Retirement Savings</div>
+                    <div class="result-value" id="requiredSavings">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Monthly Income from Savings (4% Rule)</div>
+                    <div class="result-value" id="monthlyIncome">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Monthly Retirement Income</div>
+                    <div class="result-value" id="totalMonthlyIncome">$0</div>
+                    <small style="color: #6b7280; font-size: 0.85rem;">Including Social Security</small>
+                </div>
+
+                <div id="shortfallSurplus" style="margin-top: 20px; padding: 20px; border-radius: 8px;">
+                    <h4 id="statusTitle" style="margin-bottom: 10px;"></h4>
+                    <p id="statusAmount" style="font-size: 1.5rem; font-weight: 700; margin: 10px 0;"></p>
+                    <p id="statusMessage" style="font-size: 0.9rem; margin: 5px 0;"></p>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Retirement Readiness</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Years Until Retirement:</span>
+                        <span id="yearsUntilRetirement" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Total Contributions:</span>
+                        <span id="totalContributions" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Investment Growth:</span>
+                        <span id="investmentGrowth" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Readiness Score:</span>
+                        <span id="readinessScore" style="font-weight: 600;"></span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #eff6ff; border-radius: 8px; border-left: 4px solid #2563eb;">
+                    <h4 style="margin-bottom: 10px; color: #1e40af;">The 4% Rule</h4>
+                    <p style="font-size: 0.9rem; margin: 0;">Withdraw 4% of your retirement savings annually to make your money last 30+ years. This equals <span id="safeWithdrawalAmount" style="font-weight: 600;"></span> per year from your projected savings.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="projectionChart" style="display: none;">
+            <h2>Savings Projection Over Time</h2>
+            <p style="margin-bottom: 15px;">Your retirement savings growth trajectory</p>
+            <div style="overflow-x: auto;">
+                <table id="projectionTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f3f4f6;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Age</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Year</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Annual Contributions</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Total Balance</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Interest Earned</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectionBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use the Retirement Calculator</h2>
+            <p>Our comprehensive retirement calculator helps you plan for a comfortable retirement by analyzing multiple factors:</p>
+            <ol>
+                <li><strong>Enter Your Age Information:</strong> Current age and when you plan to retire</li>
+                <li><strong>Add Your Savings:</strong> Current retirement account balance</li>
+                <li><strong>Set Contributions:</strong> Monthly savings and employer matching</li>
+                <li><strong>Configure Returns:</strong> Expected investment returns and inflation</li>
+                <li><strong>Plan Expenses:</strong> Estimated monthly spending in retirement</li>
+                <li><strong>Include Social Security:</strong> Expected monthly benefits (optional)</li>
+                <li><strong>Review Results:</strong> See if you're on track and make adjustments</li>
+            </ol>
+
+            <h2>Understanding Retirement Planning</h2>
+            <p>Retirement planning is the process of determining retirement income goals and the actions necessary to achieve those goals. It involves:</p>
+            <ul>
+                <li><strong>Identifying Income Sources:</strong> 401(k), IRA, Social Security, pensions</li>
+                <li><strong>Estimating Expenses:</strong> Healthcare, housing, lifestyle, travel</li>
+                <li><strong>Implementing Savings Plans:</strong> Consistent contributions and smart investing</li>
+                <li><strong>Managing Risks:</strong> Market volatility, inflation, longevity</li>
+            </ul>
+
+            <h2>The 4% Rule Explained</h2>
+            <p>The 4% rule is a retirement planning guideline suggesting you can withdraw 4% of your retirement savings in the first year, then adjust for inflation annually, without running out of money for at least 30 years.</p>
+
+            <h3>How It Works</h3>
+            <p>If you have $1,000,000 saved:</p>
+            <ul>
+                <li>Year 1: Withdraw $40,000 (4% of $1,000,000)</li>
+                <li>Year 2: Withdraw $41,200 (adjusted for 3% inflation)</li>
+                <li>Year 3: Withdraw $42,436 (adjusted for 3% inflation)</li>
+            </ul>
+
+            <h3>Assumptions and Limitations</h3>
+            <ul>
+                <li>Based on historical market returns (50% stocks, 50% bonds)</li>
+                <li>Assumes 30-year retirement period</li>
+                <li>May be conservative for longer retirement horizons</li>
+                <li>Doesn't account for taxes, fees, or changing expenses</li>
+                <li>Consider 3-3.5% for earlier retirement or conservative approach</li>
+            </ul>
+
+            <h2>401(k) Retirement Plans</h2>
+            <p>A 401(k) is an employer-sponsored retirement savings plan that offers significant tax advantages.</p>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Contribution Limits (2024):</strong> $23,000 per year ($30,500 if age 50+)</li>
+                <li><strong>Employer Matching:</strong> Free money that immediately boosts returns</li>
+                <li><strong>Tax Advantages:</strong> Contributions reduce taxable income</li>
+                <li><strong>Tax-Deferred Growth:</strong> Investments grow without annual taxes</li>
+                <li><strong>Automatic Payroll Deductions:</strong> Easy, consistent savings</li>
+            </ul>
+
+            <h3>Traditional vs Roth 401(k)</h3>
+            <p><strong>Traditional 401(k):</strong></p>
+            <ul>
+                <li>Contributions are pre-tax (reduces current taxable income)</li>
+                <li>Pay taxes on withdrawals in retirement</li>
+                <li>Best if you expect lower tax rate in retirement</li>
+            </ul>
+
+            <p><strong>Roth 401(k):</strong></p>
+            <ul>
+                <li>Contributions are after-tax (no immediate tax benefit)</li>
+                <li>Withdrawals in retirement are tax-free</li>
+                <li>Best if you expect higher tax rate in retirement</li>
+            </ul>
+
+            <h3>Maximizing Your 401(k)</h3>
+            <ol>
+                <li><strong>Contribute Enough for Full Match:</strong> Don't leave free money on the table</li>
+                <li><strong>Increase Contributions Annually:</strong> Especially after raises</li>
+                <li><strong>Choose Low-Cost Index Funds:</strong> Minimize fees to maximize growth</li>
+                <li><strong>Maintain Proper Asset Allocation:</strong> Balance risk and return</li>
+                <li><strong>Avoid Early Withdrawals:</strong> 10% penalty plus taxes before age 59½</li>
+            </ol>
+
+            <h2>Individual Retirement Accounts (IRAs)</h2>
+            <p>IRAs are tax-advantaged retirement savings accounts available to anyone with earned income.</p>
+
+            <h3>Traditional IRA</h3>
+            <ul>
+                <li><strong>Contribution Limit (2024):</strong> $7,000 per year ($8,000 if age 50+)</li>
+                <li><strong>Tax Deduction:</strong> Contributions may be tax-deductible</li>
+                <li><strong>Tax-Deferred Growth:</strong> No taxes until withdrawal</li>
+                <li><strong>Required Minimum Distributions:</strong> Must start at age 73</li>
+                <li><strong>Withdrawal Taxes:</strong> Taxed as ordinary income</li>
+            </ul>
+
+            <h3>Roth IRA</h3>
+            <ul>
+                <li><strong>Contribution Limit (2024):</strong> $7,000 per year ($8,000 if age 50+)</li>
+                <li><strong>After-Tax Contributions:</strong> No immediate tax benefit</li>
+                <li><strong>Tax-Free Growth:</strong> Qualified withdrawals are completely tax-free</li>
+                <li><strong>No RMDs:</strong> Money can grow indefinitely</li>
+                <li><strong>Income Limits:</strong> Phase-out starts at $146,000 (single), $230,000 (married)</li>
+            </ul>
+
+            <h3>Traditional IRA vs Roth IRA</h3>
+            <p><strong>Choose Traditional IRA if:</strong></p>
+            <ul>
+                <li>You want an immediate tax deduction</li>
+                <li>You expect lower tax rate in retirement</li>
+                <li>You're in a high tax bracket now</li>
+            </ul>
+
+            <p><strong>Choose Roth IRA if:</strong></p>
+            <ul>
+                <li>You want tax-free retirement income</li>
+                <li>You expect higher tax rate in retirement</li>
+                <li>You're young and in a lower tax bracket</li>
+                <li>You want more flexibility (no RMDs)</li>
+            </ul>
+
+            <h2>Social Security Benefits</h2>
+            <p>Social Security provides a foundation of retirement income for most Americans.</p>
+
+            <h3>How Benefits Are Calculated</h3>
+            <ul>
+                <li>Based on your 35 highest-earning years</li>
+                <li>Adjusted for inflation (indexed earnings)</li>
+                <li>Average indexed monthly earnings (AIME) calculated</li>
+                <li>Formula applied to AIME to get primary insurance amount (PIA)</li>
+            </ul>
+
+            <h3>When to Claim Social Security</h3>
+            <p><strong>Age 62 (Earliest):</strong></p>
+            <ul>
+                <li>Benefits reduced by about 30%</li>
+                <li>Makes sense if you need income or have health issues</li>
+            </ul>
+
+            <p><strong>Full Retirement Age (66-67):</strong></p>
+            <ul>
+                <li>100% of your benefit</li>
+                <li>Born 1960 or later: Age 67</li>
+            </ul>
+
+            <p><strong>Age 70 (Maximum):</strong></p>
+            <ul>
+                <li>Benefits increased by about 24-32%</li>
+                <li>Best if you're healthy and can wait</li>
+                <li>No additional benefit after age 70</li>
+            </ul>
+
+            <h3>Maximizing Social Security</h3>
+            <ol>
+                <li><strong>Work at least 35 years:</strong> Zeros hurt your average</li>
+                <li><strong>Maximize earnings:</strong> Higher income = higher benefits</li>
+                <li><strong>Delay claiming if possible:</strong> 8% increase per year after FRA</li>
+                <li><strong>Coordinate with spouse:</strong> Optimize combined benefits</li>
+                <li><strong>Continue working after claiming:</strong> Can increase future benefits</li>
+            </ol>
+
+            <h3>Average Social Security Benefits (2024)</h3>
+            <ul>
+                <li><strong>Average Retired Worker:</strong> $1,907 per month</li>
+                <li><strong>Maximum Benefit at FRA:</strong> $3,822 per month</li>
+                <li><strong>Maximum Benefit at 70:</strong> $4,873 per month</li>
+            </ul>
+
+            <h2>Retirement Investment Strategies</h2>
+
+            <h3>Asset Allocation by Age</h3>
+            <p><strong>Rule of 110:</strong> Subtract your age from 110 to get stock percentage</p>
+            <ul>
+                <li><strong>Age 30:</strong> 80% stocks, 20% bonds (110 - 30 = 80)</li>
+                <li><strong>Age 50:</strong> 60% stocks, 40% bonds (110 - 50 = 60)</li>
+                <li><strong>Age 70:</strong> 40% stocks, 60% bonds (110 - 70 = 40)</li>
+            </ul>
+
+            <h3>Diversification Strategies</h3>
+            <ul>
+                <li><strong>Domestic Stocks:</strong> Large-cap, mid-cap, small-cap</li>
+                <li><strong>International Stocks:</strong> Developed and emerging markets</li>
+                <li><strong>Bonds:</strong> Government, corporate, municipal</li>
+                <li><strong>Real Estate:</strong> REITs for property exposure</li>
+                <li><strong>Cash/Cash Equivalents:</strong> Emergency fund, short-term needs</li>
+            </ul>
+
+            <h3>Target-Date Funds</h3>
+            <p>Automatically adjust asset allocation as you approach retirement:</p>
+            <ul>
+                <li>Choose fund with year closest to retirement (e.g., 2055, 2060)</li>
+                <li>Starts aggressive (mostly stocks) when young</li>
+                <li>Becomes conservative (more bonds) as you age</li>
+                <li>Simple, hands-off approach</li>
+                <li>Watch out for higher expense ratios</li>
+            </ul>
+
+            <h2>Healthcare in Retirement</h2>
+
+            <h3>Medicare</h3>
+            <p>Federal health insurance for age 65+ and certain younger people with disabilities.</p>
+            <ul>
+                <li><strong>Part A (Hospital):</strong> Usually premium-free</li>
+                <li><strong>Part B (Medical):</strong> $174.70/month standard premium (2024)</li>
+                <li><strong>Part D (Prescription):</strong> Varies by plan</li>
+                <li><strong>Medigap/Advantage:</strong> Supplemental coverage options</li>
+            </ul>
+
+            <h3>Healthcare Costs</h3>
+            <ul>
+                <li>Average couple needs $315,000 for healthcare in retirement</li>
+                <li>Medicare doesn't cover: dental, vision, hearing aids, long-term care</li>
+                <li>Consider Health Savings Account (HSA) for tax-free healthcare savings</li>
+            </ul>
+
+            <h3>Long-Term Care Insurance</h3>
+            <ul>
+                <li>Covers nursing home, assisted living, in-home care</li>
+                <li>Average cost: $3,000-8,000 per year</li>
+                <li>Best purchased in your 50s</li>
+                <li>Can protect retirement savings from catastrophic expenses</li>
+            </ul>
+
+            <h2>Common Retirement Planning Mistakes</h2>
+            <ul>
+                <li><strong>Starting too late:</strong> Compound interest needs time to work</li>
+                <li><strong>Underestimating expenses:</strong> Many costs increase in retirement</li>
+                <li><strong>Not maximizing employer match:</strong> Leaving free money behind</li>
+                <li><strong>Taking Social Security too early:</strong> Permanent reduction in benefits</li>
+                <li><strong>Ignoring inflation:</strong> $4,000/month today ≠ $4,000/month in 30 years</li>
+                <li><strong>Paying high investment fees:</strong> 1% fee can cost hundreds of thousands</li>
+                <li><strong>Not planning for healthcare:</strong> Medical costs are a major retirement expense</li>
+                <li><strong>Withdrawing from retirement accounts early:</strong> Penalties and lost growth</li>
+                <li><strong>Lack of diversification:</strong> Don't put all eggs in one basket</li>
+                <li><strong>Not adjusting strategy over time:</strong> Review and rebalance annually</li>
+            </ul>
+
+            <h2>Catch-Up Contributions</h2>
+            <p>If you're age 50 or older, take advantage of catch-up contributions:</p>
+            <ul>
+                <li><strong>401(k) Catch-Up:</strong> Additional $7,500 per year (total $30,500)</li>
+                <li><strong>IRA Catch-Up:</strong> Additional $1,000 per year (total $8,000)</li>
+                <li><strong>Impact:</strong> Extra $8,500/year for 15 years = $218,000+ (at 7% return)</li>
+            </ul>
+
+            <h2>Withdrawal Strategies in Retirement</h2>
+
+            <h3>Systematic Withdrawal Plans</h3>
+            <ul>
+                <li><strong>Fixed Percentage:</strong> Withdraw same percentage annually (e.g., 4%)</li>
+                <li><strong>Fixed Dollar:</strong> Withdraw specific amount adjusted for inflation</li>
+                <li><strong>Required Minimum Distribution (RMD):</strong> IRS-mandated withdrawals from traditional accounts</li>
+                <li><strong>Dynamic Withdrawal:</strong> Adjust based on market performance and needs</li>
+            </ul>
+
+            <h3>Tax-Efficient Withdrawal Order</h3>
+            <ol>
+                <li><strong>Taxable Accounts First:</strong> Brokerage accounts (lower capital gains rates)</li>
+                <li><strong>Tax-Deferred Next:</strong> Traditional 401(k)/IRA (manage tax bracket)</li>
+                <li><strong>Tax-Free Last:</strong> Roth 401(k)/IRA (preserve tax-free growth)</li>
+            </ol>
+
+            <h3>Managing Required Minimum Distributions (RMDs)</h3>
+            <ul>
+                <li>Must start at age 73 for traditional 401(k) and IRA</li>
+                <li>Penalty for missing: 25% of amount not withdrawn</li>
+                <li>Calculate: Account balance ÷ life expectancy factor</li>
+                <li>Strategy: Consider Roth conversions before RMDs begin</li>
+            </ul>
+
+            <h2>Inflation and Your Retirement</h2>
+            <p>Inflation erodes purchasing power over time. At 3% inflation:</p>
+            <ul>
+                <li><strong>In 10 years:</strong> $100 of goods costs $134</li>
+                <li><strong>In 20 years:</strong> $100 of goods costs $181</li>
+                <li><strong>In 30 years:</strong> $100 of goods costs $243</li>
+            </ul>
+
+            <h3>Inflation Protection Strategies</h3>
+            <ul>
+                <li><strong>Maintain stock exposure:</strong> Stocks historically outpace inflation</li>
+                <li><strong>Treasury Inflation-Protected Securities (TIPS):</strong> Principal adjusts with inflation</li>
+                <li><strong>Real estate:</strong> Property values and rents tend to rise with inflation</li>
+                <li><strong>Delay Social Security:</strong> Benefits increase with cost of living</li>
+            </ul>
+
+            <h2>Retirement Planning Milestones by Age</h2>
+
+            <h3>Age 20-30: Build Foundation</h3>
+            <ul>
+                <li>Start contributing to 401(k), aim for 10-15% of income</li>
+                <li>Open a Roth IRA if eligible</li>
+                <li>Build emergency fund (3-6 months expenses)</li>
+                <li>Pay off high-interest debt</li>
+            </ul>
+
+            <h3>Age 30-40: Accelerate Savings</h3>
+            <ul>
+                <li>Target: 1-2x annual salary saved by age 35</li>
+                <li>Maximize employer match</li>
+                <li>Increase contributions with raises</li>
+                <li>Diversify investments</li>
+            </ul>
+
+            <h3>Age 40-50: Peak Earning Years</h3>
+            <ul>
+                <li>Target: 3-4x annual salary saved by age 45</li>
+                <li>Max out retirement contributions if possible</li>
+                <li>Consider catch-up contributions at 50</li>
+                <li>Review and adjust asset allocation</li>
+            </ul>
+
+            <h3>Age 50-60: Final Push</h3>
+            <ul>
+                <li>Target: 6-8x annual salary saved by age 55</li>
+                <li>Utilize catch-up contributions</li>
+                <li>Estimate Social Security benefits</li>
+                <li>Plan for healthcare costs</li>
+                <li>Consider long-term care insurance</li>
+            </ul>
+
+            <h3>Age 60+: Transition Phase</h3>
+            <ul>
+                <li>Target: 10x annual salary saved by age 67</li>
+                <li>Decide when to claim Social Security</li>
+                <li>Shift to more conservative investments</li>
+                <li>Create retirement income plan</li>
+                <li>Enroll in Medicare at 65</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>How much should I have saved for retirement?</h3>
+            <p>A common rule is to save 10-15x your annual pre-retirement income. For example, if you earn $80,000/year, aim for $800,000-$1,200,000. However, this varies based on lifestyle, Social Security benefits, and retirement goals.</p>
+
+            <h3>What if I'm behind on retirement savings?</h3>
+            <p>It's never too late to start. Focus on: (1) Maximizing contributions now, (2) Using catch-up contributions after age 50, (3) Reducing expenses to save more, (4) Delaying retirement by a few years, (5) Planning to work part-time in early retirement, (6) Downsizing your lifestyle.</p>
+
+            <h3>Should I pay off my mortgage before retiring?</h3>
+            <p>It depends on your interest rate, tax situation, and comfort level. Low mortgage rates (under 4%) might be better invested. High rates (6%+) are often worth paying off. Consider your psychological comfort with debt-free living versus mathematical optimization.</p>
+
+            <h3>How much of my income should I save for retirement?</h3>
+            <p>Start with at least 10-15% of gross income, including employer match. If starting late, aim for 20-25%. The younger you start, the less you need to save monthly due to compound interest.</p>
+
+            <h3>What's a safe withdrawal rate in retirement?</h3>
+            <p>The 4% rule suggests withdrawing 4% annually. Conservative planners use 3-3.5% for longer retirements (40+ years). Dynamic strategies adjust based on market performance and spending needs.</p>
+
+            <h3>Should I convert traditional IRA to Roth IRA?</h3>
+            <p>Roth conversions make sense if: (1) You expect higher tax rates in retirement, (2) You're currently in a low tax bracket, (3) You can pay conversion taxes from non-retirement funds, (4) You want to reduce future RMDs. Consult a tax professional.</p>
+
+            <h3>How is retirement income taxed?</h3>
+            <p>Traditional 401(k)/IRA withdrawals: Taxed as ordinary income. Roth 401(k)/IRA withdrawals: Tax-free if qualified. Social Security: 0-85% taxable depending on total income. Brokerage accounts: Capital gains rates (typically lower).</p>
+
+            <h3>What happens to my 401(k) when I change jobs?</h3>
+            <p>You have several options: (1) Leave it with former employer (if allowed), (2) Roll over to new employer's 401(k), (3) Roll over to IRA (most flexibility), (4) Cash out (not recommended - taxes and penalties). Direct rollovers avoid taxes and penalties.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Compound Interest</h3>
+                    <p class="calc-description">Calculate investment growth over time</p>
+                </a>
+
+                <a href="savings-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Savings Calculator</h3>
+                    <p class="calc-description">Plan your savings goals</p>
+                </a>
+
+                <a href="investment-calculator.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Investment Calculator</h3>
+                    <p class="calc-description">Project investment returns</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function calculateRetirement() {
+            // Get input values
+            const currentAge = parseInt(document.getElementById('currentAge').value) || 0;
+            const retirementAge = parseInt(document.getElementById('retirementAge').value) || 0;
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const employerMatch = parseFloat(document.getElementById('employerMatch').value) || 0;
+            const returnRate = parseFloat(document.getElementById('returnRate').value) || 0;
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) || 0;
+            const retirementExpenses = parseFloat(document.getElementById('retirementExpenses').value) || 0;
+            const retirementDuration = parseInt(document.getElementById('retirementDuration').value) || 0;
+            const socialSecurity = parseFloat(document.getElementById('socialSecurity').value) || 0;
+
+            // Validation
+            if (currentAge >= retirementAge) {
+                alert('Retirement age must be greater than current age');
+                return;
+            }
+
+            if (currentAge <= 0 || retirementAge <= 0) {
+                return;
+            }
+
+            // Calculate years until retirement
+            const yearsUntilRetirement = retirementAge - currentAge;
+
+            // Calculate total monthly contribution (personal + employer match)
+            const totalMonthlyContribution = monthlyContribution + employerMatch;
+
+            // Convert annual rates to monthly
+            const monthlyReturnRate = returnRate / 100 / 12;
+            const monthlyInflationRate = inflationRate / 100 / 12;
+
+            // Calculate projected savings at retirement using compound interest
+            let projectedSavings = currentSavings;
+            let totalContributions = 0;
+            const monthsUntilRetirement = yearsUntilRetirement * 12;
+
+            // Calculate with monthly contributions and compound interest
+            for (let month = 1; month <= monthsUntilRetirement; month++) {
+                projectedSavings = projectedSavings * (1 + monthlyReturnRate) + totalMonthlyContribution;
+                totalContributions += totalMonthlyContribution;
+            }
+
+            // Adjust retirement expenses for inflation
+            const adjustedRetirementExpenses = retirementExpenses * Math.pow(1 + inflationRate / 100, yearsUntilRetirement);
+
+            // Calculate required savings using 4% rule
+            // Annual expenses / 0.04 = required savings
+            const annualRetirementExpenses = adjustedRetirementExpenses * 12;
+            const annualSocialSecurity = socialSecurity * 12;
+            const annualExpensesFromSavings = Math.max(0, annualRetirementExpenses - annualSocialSecurity);
+            const requiredSavings = annualExpensesFromSavings / 0.04;
+
+            // Calculate monthly income from savings using 4% rule
+            const annualWithdrawal = projectedSavings * 0.04;
+            const monthlyIncomeFromSavings = annualWithdrawal / 12;
+            const totalMonthlyIncome = monthlyIncomeFromSavings + socialSecurity;
+
+            // Calculate shortfall or surplus
+            const difference = projectedSavings - requiredSavings;
+            const monthlyDifference = totalMonthlyIncome - adjustedRetirementExpenses;
+
+            // Calculate investment growth
+            const investmentGrowth = projectedSavings - currentSavings - totalContributions;
+
+            // Calculate readiness score (percentage of required savings)
+            const readinessScore = Math.min(100, (projectedSavings / requiredSavings * 100));
+
+            // Display results
+            document.getElementById('projectedSavings').textContent = formatCurrency(projectedSavings);
+            document.getElementById('requiredSavings').textContent = formatCurrency(requiredSavings);
+            document.getElementById('monthlyIncome').textContent = formatCurrency(monthlyIncomeFromSavings);
+            document.getElementById('totalMonthlyIncome').textContent = formatCurrency(totalMonthlyIncome);
+            document.getElementById('safeWithdrawalAmount').textContent = formatCurrency(annualWithdrawal);
+
+            // Display readiness metrics
+            document.getElementById('yearsUntilRetirement').textContent = yearsUntilRetirement + ' years';
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions);
+            document.getElementById('investmentGrowth').textContent = formatCurrency(investmentGrowth);
+            document.getElementById('readinessScore').textContent = readinessScore.toFixed(1) + '%';
+
+            // Display shortfall/surplus status
+            const statusDiv = document.getElementById('shortfallSurplus');
+            const statusTitle = document.getElementById('statusTitle');
+            const statusAmount = document.getElementById('statusAmount');
+            const statusMessage = document.getElementById('statusMessage');
+
+            if (difference >= 0) {
+                statusDiv.style.background = '#ecfdf5';
+                statusDiv.style.borderLeft = '4px solid #10b981';
+                statusTitle.style.color = '#047857';
+                statusTitle.textContent = 'On Track! Projected Surplus';
+                statusAmount.textContent = formatCurrency(difference);
+                statusAmount.style.color = '#059669';
+                statusMessage.textContent = `You're projected to have ${formatCurrency(monthlyDifference)} more per month than your expenses in retirement.`;
+            } else {
+                statusDiv.style.background = '#fef2f2';
+                statusDiv.style.borderLeft = '4px solid #ef4444';
+                statusTitle.style.color = '#dc2626';
+                statusTitle.textContent = 'Attention: Projected Shortfall';
+                statusAmount.textContent = formatCurrency(Math.abs(difference));
+                statusAmount.style.color = '#dc2626';
+                statusMessage.textContent = `You may be ${formatCurrency(Math.abs(monthlyDifference))} short per month. Consider increasing contributions or adjusting retirement plans.`;
+            }
+
+            // Generate projection table
+            generateProjectionTable(currentAge, retirementAge, currentSavings, totalMonthlyContribution, monthlyReturnRate);
+            document.getElementById('projectionChart').style.display = 'block';
+        }
+
+        function generateProjectionTable(currentAge, retirementAge, initialSavings, monthlyContribution, monthlyRate) {
+            const tbody = document.getElementById('projectionBody');
+            tbody.innerHTML = '';
+
+            let balance = initialSavings;
+            const currentYear = new Date().getFullYear();
+
+            for (let age = currentAge; age <= retirementAge; age++) {
+                const year = currentYear + (age - currentAge);
+                let annualContributions = 0;
+                let startBalance = balance;
+
+                // Calculate for each month of the year
+                for (let month = 0; month < 12; month++) {
+                    balance = balance * (1 + monthlyRate) + monthlyContribution;
+                    annualContributions += monthlyContribution;
+                }
+
+                const interestEarned = balance - startBalance - annualContributions;
+
+                // Show every 5 years, first year, and last year
+                if (age === currentAge || age === retirementAge || (age - currentAge) % 5 === 0) {
+                    const row = tbody.insertRow();
+                    row.innerHTML = `
+                        <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">${age}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${year}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(annualContributions)}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; font-weight: 600;">${formatCurrency(balance)}</td>
+                        <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; color: #059669;">${formatCurrency(interestEarned)}</td>
+                    `;
+                }
+            }
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(num);
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateRetirement);
+            input.addEventListener('change', calculateRetirement);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', calculateRetirement);
+    </script>
+</body>
+</html>

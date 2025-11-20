@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free compound interest calculator - Calculate investment growth with different compounding frequencies. Compare daily, monthly, quarterly, and annual compounding with APY calculations.">
+    <meta name="keywords" content="compound interest calculator, investment calculator, APY calculator, compounding frequency, savings calculator, interest calculator">
+
+    <title>Compound Interest Calculator - Calculate Investment Growth | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/compound-interest-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Compound Interest Calculator</h1>
+            <p class="calculator-description">Calculate investment growth with different compounding frequencies and compare returns</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Investment Details</h3>
+
+                <div class="form-group">
+                    <label for="principal" class="form-label">Initial Investment ($)</label>
+                    <input type="number" id="principal" class="form-input" value="10000" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyContribution" class="form-label">Monthly Contribution ($)</label>
+                    <input type="number" id="monthlyContribution" class="form-input" value="200" min="0" step="10">
+                </div>
+
+                <div class="form-group">
+                    <label for="interestRate" class="form-label">Annual Interest Rate (%)</label>
+                    <input type="number" id="interestRate" class="form-input" value="7" min="0" max="100" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="timePeriod" class="form-label">Time Period (Years)</label>
+                    <input type="number" id="timePeriod" class="form-input" value="10" min="1" max="100" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="compoundFrequency" class="form-label">Compounding Frequency</label>
+                    <select id="compoundFrequency" class="form-select">
+                        <option value="365">Daily (365)</option>
+                        <option value="12" selected>Monthly (12)</option>
+                        <option value="4">Quarterly (4)</option>
+                        <option value="2">Semi-Annually (2)</option>
+                        <option value="1">Annually (1)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Results</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Future Value</div>
+                    <div class="result-value" id="futureValue" style="font-size: 2.5rem; color: #2563eb;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Contributions</div>
+                    <div class="result-value" id="totalContributions">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Interest Earned</div>
+                    <div class="result-value" id="totalInterest" style="color: #10b981;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Annual Percentage Yield (APY)</div>
+                    <div class="result-value" id="apy" style="font-size: 1.5rem; color: #8b5cf6;">0.00%</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 10px;">Growth Breakdown</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Principal:</span>
+                        <span id="principalPercent" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Contributions:</span>
+                        <span id="contributionsPercent" style="font-weight: 600;"></span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Interest:</span>
+                        <span id="interestPercent" style="font-weight: 600; color: #10b981;"></span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px; padding: 15px; background: #ecfdf5; border-radius: 8px; border-left: 4px solid #10b981;">
+                    <h4 style="margin-bottom: 10px; color: #047857; font-size: 0.95rem;">Rule of 72 Estimate:</h4>
+                    <p style="margin: 0; font-size: 0.9rem;">Your money will double in approximately <strong><span id="rule72"></span> years</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="comparisonSection">
+            <h2>Compounding Frequency Comparison</h2>
+            <p style="margin-bottom: 15px;">See how different compounding frequencies affect your investment growth</p>
+            <div style="overflow-x: auto;">
+                <table id="comparisonTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f3f4f6;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Frequency</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">APY</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Future Value</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Interest Earned</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonBody"></tbody>
+                </table>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #6b7280;">Note: More frequent compounding results in higher returns due to interest being calculated and added to the principal more often.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use the Compound Interest Calculator</h2>
+            <p>Our compound interest calculator helps you understand how your investments grow over time:</p>
+            <ol>
+                <li><strong>Enter Initial Investment:</strong> The starting amount you're investing</li>
+                <li><strong>Set Monthly Contribution:</strong> Additional amount you'll invest each month (optional)</li>
+                <li><strong>Input Interest Rate:</strong> Expected annual return rate (e.g., 7% for stock market average)</li>
+                <li><strong>Choose Time Period:</strong> How many years you'll let your investment grow</li>
+                <li><strong>Select Compounding Frequency:</strong> How often interest is calculated and added to principal</li>
+                <li><strong>Review Results:</strong> See your future value, total interest, APY, and frequency comparison</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Compound Interest</h2>
+            <p>Compound interest is the eighth wonder of the world. He who understands it, earns it; he who doesn't, pays it. This powerful concept is what makes your money grow exponentially over time.</p>
+
+            <h3>How Compound Interest Works</h3>
+            <p>Unlike simple interest, which only earns returns on your principal, compound interest earns returns on both your principal AND previously earned interest. This creates a snowball effect where your money grows faster over time.</p>
+
+            <p><strong>Example:</strong> If you invest $10,000 at 7% annual interest:</p>
+            <ul>
+                <li><strong>Year 1:</strong> $10,000 × 1.07 = $10,700 (earned $700)</li>
+                <li><strong>Year 2:</strong> $10,700 × 1.07 = $11,449 (earned $749 on $10,700)</li>
+                <li><strong>Year 3:</strong> $11,449 × 1.07 = $12,250 (earned $801 on $11,449)</li>
+            </ul>
+            <p>Notice how the interest amount increases each year, even though the rate stays the same.</p>
+
+            <h3>The Compound Interest Formula</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+                A = P(1 + r/n)^(nt)<br><br>
+                Where:<br>
+                A = Final amount<br>
+                P = Principal (initial investment)<br>
+                r = Annual interest rate (decimal)<br>
+                n = Compounding frequency per year<br>
+                t = Time in years<br><br>
+                For regular contributions:<br>
+                A = P(1 + r/n)^(nt) + PMT × [((1 + r/n)^(nt) - 1) / (r/n)]<br>
+                PMT = Monthly contribution
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>The Power of Compounding Frequency</h2>
+            <p>Compounding frequency refers to how often interest is calculated and added to your principal. The more frequent the compounding, the more you earn.</p>
+
+            <h3>Compounding Frequency Types</h3>
+            <ul>
+                <li><strong>Daily (365):</strong> Interest calculated every day - highest returns</li>
+                <li><strong>Monthly (12):</strong> Interest calculated 12 times per year - common for savings accounts</li>
+                <li><strong>Quarterly (4):</strong> Interest calculated 4 times per year - common for bonds</li>
+                <li><strong>Semi-Annually (2):</strong> Interest calculated twice per year</li>
+                <li><strong>Annually (1):</strong> Interest calculated once per year - lowest returns</li>
+            </ul>
+
+            <h3>APY vs APR</h3>
+            <p><strong>APR (Annual Percentage Rate):</strong> The stated annual interest rate without compounding.</p>
+            <p><strong>APY (Annual Percentage Yield):</strong> The effective annual rate including the effects of compounding. APY is always higher than APR when compounding occurs more than once per year.</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                <strong>Example:</strong> A 6% APR with monthly compounding equals a 6.17% APY.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>The Rule of 72</h2>
+            <p>The Rule of 72 is a simple formula to estimate how long it takes for your investment to double:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+                Years to Double = 72 ÷ Interest Rate
+            </p>
+
+            <h3>Rule of 72 Examples</h3>
+            <ul>
+                <li><strong>At 6% return:</strong> 72 ÷ 6 = 12 years to double</li>
+                <li><strong>At 8% return:</strong> 72 ÷ 8 = 9 years to double</li>
+                <li><strong>At 10% return:</strong> 72 ÷ 10 = 7.2 years to double</li>
+                <li><strong>At 12% return:</strong> 72 ÷ 12 = 6 years to double</li>
+            </ul>
+
+            <p>This simple rule helps you quickly understand the power of different return rates and time horizons without complex calculations.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Investment Strategies for Maximizing Compound Interest</h2>
+
+            <h3>1. Start Early</h3>
+            <p>Time is your greatest asset. The earlier you start investing, the more time compound interest has to work its magic.</p>
+            <p><strong>Example:</strong> Starting at age 25 vs 35 with $10,000 at 7% return:</p>
+            <ul>
+                <li>Start at 25, retire at 65 (40 years): $149,744</li>
+                <li>Start at 35, retire at 65 (30 years): $76,123</li>
+                <li>Starting 10 years earlier nearly doubles your money!</li>
+            </ul>
+
+            <h3>2. Invest Regularly</h3>
+            <p>Consistent monthly contributions dramatically accelerate wealth building. Even small amounts add up significantly over time.</p>
+            <p><strong>Example:</strong> $10,000 initial + $200/month for 30 years at 7%:</p>
+            <ul>
+                <li>Total contributions: $82,000</li>
+                <li>Final value: $244,692</li>
+                <li>Interest earned: $162,692</li>
+            </ul>
+
+            <h3>3. Reinvest Dividends and Interest</h3>
+            <p>Always reinvest your earnings to maximize compounding. Dividends and interest payments should automatically be reinvested to purchase more shares or add to principal.</p>
+
+            <h3>4. Maximize Tax-Advantaged Accounts</h3>
+            <p>Use retirement accounts (401k, IRA, Roth IRA) where investments grow tax-free or tax-deferred, allowing compound interest to work unimpeded by taxes.</p>
+
+            <h3>5. Choose Higher Returns Wisely</h3>
+            <p>Higher returns mean faster compounding, but balance risk with reward:</p>
+            <ul>
+                <li><strong>Savings Accounts:</strong> 0.5-2% APY - safe, FDIC insured</li>
+                <li><strong>Bonds:</strong> 2-6% - moderate risk, steady returns</li>
+                <li><strong>Stock Market:</strong> 7-10% average - higher risk, better long-term returns</li>
+                <li><strong>Real Estate:</strong> 8-12% - requires capital and management</li>
+            </ul>
+
+            <h3>6. Minimize Fees</h3>
+            <p>Investment fees compound negatively. A 1% annual fee can reduce your returns by 25-30% over 30 years. Choose low-cost index funds and minimize transaction costs.</p>
+
+            <h3>7. Stay Invested During Market Downturns</h3>
+            <p>Market volatility is normal. Stay invested to benefit from compound growth over the long term. Time in the market beats timing the market.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Real-World Investment Scenarios</h2>
+
+            <h3>The College Fund</h3>
+            <p><strong>Scenario:</strong> Save for your child's college in 18 years</p>
+            <ul>
+                <li>Initial investment: $5,000</li>
+                <li>Monthly contribution: $300</li>
+                <li>Expected return: 7% (stock market average)</li>
+                <li>Compounding: Monthly</li>
+                <li><strong>Result after 18 years: $133,866</strong></li>
+            </ul>
+
+            <h3>Early Retirement</h3>
+            <p><strong>Scenario:</strong> Build wealth for early retirement at 50</p>
+            <ul>
+                <li>Start at age 25 with $10,000</li>
+                <li>Monthly contribution: $500</li>
+                <li>Expected return: 8%</li>
+                <li>Compounding: Monthly</li>
+                <li><strong>Result after 25 years: $584,328</strong></li>
+            </ul>
+
+            <h3>Wealth Building</h3>
+            <p><strong>Scenario:</strong> Become a millionaire through consistent investing</p>
+            <ul>
+                <li>Initial investment: $20,000</li>
+                <li>Monthly contribution: $1,000</li>
+                <li>Expected return: 9%</li>
+                <li>Time to reach $1 million: ~23 years</li>
+            </ul>
+
+            <h3>Emergency Fund Growth</h3>
+            <p><strong>Scenario:</strong> Build a 6-month emergency fund</p>
+            <ul>
+                <li>Goal: $15,000</li>
+                <li>Initial deposit: $2,000</li>
+                <li>Monthly contribution: $400</li>
+                <li>High-yield savings: 4.5% APY</li>
+                <li><strong>Time to goal: ~31 months</strong></li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Investment Vehicles for Compound Growth</h2>
+
+            <h3>High-Yield Savings Accounts</h3>
+            <p><strong>Returns:</strong> 3-5% APY | <strong>Risk:</strong> Very Low | <strong>Liquidity:</strong> High</p>
+            <p>FDIC insured accounts offering higher interest than traditional savings. Best for emergency funds and short-term goals. Interest compounds daily or monthly.</p>
+
+            <h3>Certificates of Deposit (CDs)</h3>
+            <p><strong>Returns:</strong> 3-5% APY | <strong>Risk:</strong> Very Low | <strong>Liquidity:</strong> Low</p>
+            <p>Fixed-term deposits offering guaranteed returns. Terms range from 3 months to 5 years. Early withdrawal penalties apply. FDIC insured up to $250,000.</p>
+
+            <h3>Index Funds</h3>
+            <p><strong>Returns:</strong> 7-10% average | <strong>Risk:</strong> Moderate | <strong>Liquidity:</strong> High</p>
+            <p>Diversified funds tracking market indices like S&P 500. Low fees, broad market exposure, dividends automatically reinvest for compounding.</p>
+
+            <h3>Dividend Stocks</h3>
+            <p><strong>Returns:</strong> 8-12% average | <strong>Risk:</strong> Moderate-High | <strong>Liquidity:</strong> High</p>
+            <p>Individual stocks paying regular dividends. Reinvesting dividends compounds both stock appreciation and dividend growth over time.</p>
+
+            <h3>Real Estate Investment Trusts (REITs)</h3>
+            <p><strong>Returns:</strong> 8-12% average | <strong>Risk:</strong> Moderate | <strong>Liquidity:</strong> Medium</p>
+            <p>Invest in real estate without buying property. Required to pay 90% of income as dividends. Reinvest dividends for compounding growth.</p>
+
+            <h3>401(k) and IRA Accounts</h3>
+            <p><strong>Returns:</strong> Varies by investments | <strong>Risk:</strong> Varies | <strong>Tax Benefits:</strong> High</p>
+            <p>Tax-advantaged retirement accounts. Employer matching in 401(k) provides immediate 50-100% return. Compound growth is tax-deferred or tax-free (Roth).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Compound Interest Mistakes to Avoid</h2>
+
+            <h3>1. Waiting to Start</h3>
+            <p>Every year you delay costs exponentially due to lost compounding. Start investing as early as possible, even with small amounts.</p>
+
+            <h3>2. Withdrawing Early</h3>
+            <p>Taking money out interrupts compound growth. A $5,000 withdrawal today could cost you $50,000 in 30 years at 8% growth.</p>
+
+            <h3>3. Not Reinvesting Returns</h3>
+            <p>Spending dividends and interest prevents compounding. Always reinvest returns to maximize growth.</p>
+
+            <h3>4. Trying to Time the Market</h3>
+            <p>Missing just 10 best market days over 20 years can cut returns in half. Stay invested and let compounding work.</p>
+
+            <h3>5. Ignoring Fees and Expenses</h3>
+            <p>A 2% annual fee vs 0.5% fee on $100,000 over 30 years costs you over $100,000 in lost compound growth.</p>
+
+            <h3>6. Not Adjusting for Inflation</h3>
+            <p>Inflation reduces purchasing power. Your real return is nominal return minus inflation. Target returns that beat inflation by 3-5%.</p>
+
+            <h3>7. Being Too Conservative</h3>
+            <p>Low-risk, low-return investments may not compound fast enough to reach goals. Balance safety with growth based on time horizon.</p>
+
+            <h3>8. Inconsistent Contributions</h3>
+            <p>Irregular investing reduces compound potential. Set up automatic contributions to maintain consistency.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>What is compound interest?</h3>
+            <p>Compound interest is interest calculated on both the initial principal and accumulated interest from previous periods. It allows your money to grow exponentially over time.</p>
+
+            <h3>How is compound interest different from simple interest?</h3>
+            <p>Simple interest is calculated only on the principal amount. Compound interest is calculated on principal plus accumulated interest, resulting in exponential growth versus linear growth.</p>
+
+            <h3>What is the best compounding frequency?</h3>
+            <p>More frequent compounding produces higher returns. Daily compounding is best, followed by monthly, quarterly, semi-annual, and annual. However, the difference between daily and monthly is typically minimal.</p>
+
+            <h3>How long does it take to double my money?</h3>
+            <p>Use the Rule of 72: divide 72 by your annual return rate. At 8%, money doubles in 9 years (72 ÷ 8 = 9).</p>
+
+            <h3>Should I invest a lump sum or contribute monthly?</h3>
+            <p>Both are powerful. Lump sums benefit from immediate compounding. Monthly contributions provide dollar-cost averaging and make investing more accessible. Combine both for maximum growth.</p>
+
+            <h3>What return rate should I expect?</h3>
+            <p>Historical averages: S&P 500 ~10%, diversified portfolio ~7-8%, bonds ~3-5%, savings accounts ~1-4%. Use conservative estimates (6-7%) for planning.</p>
+
+            <h3>How does inflation affect compound interest?</h3>
+            <p>Inflation reduces purchasing power. If you earn 7% but inflation is 3%, your real return is 4%. Always consider inflation-adjusted returns for long-term planning.</p>
+
+            <h3>Can I lose money with compound interest?</h3>
+            <p>In savings accounts and CDs, no - your principal is protected. In market investments, short-term losses are possible, but long-term compound growth historically overcomes volatility.</p>
+
+            <h3>What's the best age to start investing?</h3>
+            <p>Now! The earlier you start, the more time compound interest has to work. Starting at 25 vs 35 can double your retirement savings due to the extra 10 years of compounding.</p>
+
+            <h3>How much should I invest monthly?</h3>
+            <p>Financial experts recommend saving 15-20% of gross income. Start with what you can afford and increase over time. Even $100/month compounds significantly over decades.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="investment-calculator.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Investment Calculator</h3>
+                    <p class="calc-description">Calculate investment returns and growth</p>
+                </a>
+
+                <a href="retirement-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏖️</div>
+                    <h3 class="calc-title">Retirement Calculator</h3>
+                    <p class="calc-description">Plan your retirement savings</p>
+                </a>
+
+                <a href="savings-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Savings Calculator</h3>
+                    <p class="calc-description">Calculate savings goals and timeline</p>
+                </a>
+
+                <a href="loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💳</div>
+                    <h3 class="calc-title">Loan Calculator</h3>
+                    <p class="calc-description">Calculate loan payments and interest</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function calculateCompoundInterest() {
+            const principal = parseFloat(document.getElementById('principal').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const years = parseFloat(document.getElementById('timePeriod').value) || 0;
+            const frequency = parseInt(document.getElementById('compoundFrequency').value) || 12;
+
+            if (principal < 0 || annualRate < 0 || years <= 0) {
+                return;
+            }
+
+            const r = annualRate / 100;
+            const n = frequency;
+            const t = years;
+
+            // Calculate compound interest for principal
+            const principalGrowth = principal * Math.pow(1 + r / n, n * t);
+
+            // Calculate future value of monthly contributions
+            let contributionsGrowth = 0;
+            if (monthlyContribution > 0) {
+                // Convert annual rate to monthly rate for contributions
+                const monthlyRate = r / 12;
+                const totalMonths = years * 12;
+
+                // Future value of annuity formula
+                contributionsGrowth = monthlyContribution *
+                    ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate) *
+                    (1 + monthlyRate);
+            }
+
+            const futureValue = principalGrowth + contributionsGrowth;
+            const totalContributions = principal + (monthlyContribution * years * 12);
+            const totalInterest = futureValue - totalContributions;
+
+            // Calculate APY
+            const apy = (Math.pow(1 + r / n, n) - 1) * 100;
+
+            // Display results
+            document.getElementById('futureValue').textContent = formatCurrency(futureValue);
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('apy').textContent = apy.toFixed(2) + '%';
+
+            // Breakdown percentages
+            const principalPercent = ((principal / futureValue) * 100).toFixed(1);
+            const contributionsPercent = (((monthlyContribution * years * 12) / futureValue) * 100).toFixed(1);
+            const interestPercent = ((totalInterest / futureValue) * 100).toFixed(1);
+
+            document.getElementById('principalPercent').textContent = principalPercent + '% (' + formatCurrency(principal) + ')';
+            document.getElementById('contributionsPercent').textContent = contributionsPercent + '% (' + formatCurrency(monthlyContribution * years * 12) + ')';
+            document.getElementById('interestPercent').textContent = interestPercent + '% (' + formatCurrency(totalInterest) + ')';
+
+            // Rule of 72
+            const rule72 = annualRate > 0 ? (72 / annualRate).toFixed(1) : 'N/A';
+            document.getElementById('rule72').textContent = rule72;
+
+            // Generate comparison table
+            generateComparisonTable(principal, monthlyContribution, annualRate, years);
+        }
+
+        function generateComparisonTable(principal, monthlyContribution, annualRate, years) {
+            const frequencies = [
+                { name: 'Daily', value: 365 },
+                { name: 'Monthly', value: 12 },
+                { name: 'Quarterly', value: 4 },
+                { name: 'Semi-Annually', value: 2 },
+                { name: 'Annually', value: 1 }
+            ];
+
+            const tbody = document.getElementById('comparisonBody');
+            tbody.innerHTML = '';
+
+            const results = frequencies.map(freq => {
+                const r = annualRate / 100;
+                const n = freq.value;
+                const t = years;
+
+                // Calculate for principal
+                const principalGrowth = principal * Math.pow(1 + r / n, n * t);
+
+                // Calculate for monthly contributions
+                let contributionsGrowth = 0;
+                if (monthlyContribution > 0) {
+                    const monthlyRate = r / 12;
+                    const totalMonths = years * 12;
+                    contributionsGrowth = monthlyContribution *
+                        ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate) *
+                        (1 + monthlyRate);
+                }
+
+                const futureValue = principalGrowth + contributionsGrowth;
+                const totalContributions = principal + (monthlyContribution * years * 12);
+                const totalInterest = futureValue - totalContributions;
+                const apy = (Math.pow(1 + r / n, n) - 1) * 100;
+
+                return {
+                    name: freq.name,
+                    apy: apy,
+                    futureValue: futureValue,
+                    totalInterest: totalInterest
+                };
+            });
+
+            // Calculate difference from annual compounding (baseline)
+            const annualValue = results[results.length - 1].futureValue;
+
+            results.forEach((result, index) => {
+                const difference = result.futureValue - annualValue;
+                const row = tbody.insertRow();
+
+                // Highlight selected frequency
+                const selectedFreq = parseInt(document.getElementById('compoundFrequency').value);
+                const currentFreq = frequencies[index].value;
+                if (currentFreq === selectedFreq) {
+                    row.style.background = '#eff6ff';
+                    row.style.fontWeight = '600';
+                }
+
+                row.innerHTML = `
+                    <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">${result.name}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${result.apy.toFixed(2)}%</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(result.futureValue)}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; color: #10b981;">${formatCurrency(result.totalInterest)}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; color: ${difference >= 0 ? '#10b981' : '#ef4444'};">
+                        ${difference >= 0 ? '+' : ''}${formatCurrency(difference)}
+                    </td>
+                `;
+            });
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(num);
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateCompoundInterest);
+            input.addEventListener('change', calculateCompoundInterest);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', calculateCompoundInterest);
+    </script>
+</body>
+</html>

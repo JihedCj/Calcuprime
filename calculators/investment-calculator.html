@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free investment calculator - Calculate investment growth with compound interest and regular contributions. Plan for retirement, savings goals, and wealth building.">
+    <meta name="keywords" content="investment calculator, compound interest calculator, retirement calculator, savings calculator, investment growth, portfolio calculator">
+
+    <title>Investment Calculator - Free Compound Interest & Growth Calculator | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/investment-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Investment Calculator</h1>
+            <p class="calculator-description">Calculate your investment growth with compound interest and regular contributions. Plan for your financial future.</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Investment Details</h3>
+
+                <div class="form-group">
+                    <label for="initialInvestment" class="form-label">Initial Investment ($)</label>
+                    <input type="number" id="initialInvestment" class="form-input" value="10000" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyContribution" class="form-label">Monthly Contribution ($)</label>
+                    <input type="number" id="monthlyContribution" class="form-input" value="500" min="0" step="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="annualReturn" class="form-label">Annual Return Rate (%)</label>
+                    <input type="number" id="annualReturn" class="form-input" value="8" min="0" max="50" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="investmentPeriod" class="form-label">Investment Period (years)</label>
+                    <input type="number" id="investmentPeriod" class="form-input" value="20" min="1" max="50" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="compoundFrequency" class="form-label">Compound Frequency</label>
+                    <select id="compoundFrequency" class="form-select">
+                        <option value="12">Monthly</option>
+                        <option value="4">Quarterly</option>
+                        <option value="2">Semi-Annually</option>
+                        <option value="1">Annually</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contributionTiming" class="form-label">Contribution Timing</label>
+                    <select id="contributionTiming" class="form-select">
+                        <option value="end">End of Period</option>
+                        <option value="beginning">Beginning of Period</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateInvestment()" class="btn-calculate">Calculate Growth</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Your Investment Growth</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Future Value</div>
+                    <div class="result-value" id="futureValue" style="font-size: 2.5rem; color: #10b981;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Contributions</div>
+                    <div class="result-value" id="totalContributions" style="font-size: 1.5rem;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Earnings</div>
+                    <div class="result-value" id="totalEarnings" style="font-size: 1.5rem; color: #2563eb;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Return on Investment (ROI)</div>
+                    <div class="result-value" id="roi" style="font-size: 1.3rem; color: #8b5cf6;">0%</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px; color: #374151;">Growth Breakdown</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #6b7280;">Initial Investment:</span>
+                        <span id="initialDisplay" style="font-weight: 600;">$0.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #6b7280;">Total Contributions:</span>
+                        <span id="contributionsDisplay" style="font-weight: 600;">$0.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #6b7280;">Interest Earned:</span>
+                        <span id="interestDisplay" style="font-weight: 600; color: #10b981;">$0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Yearly Breakdown -->
+        <div class="content-section" id="yearlyBreakdownSection" style="display: none;">
+            <h2>Year-by-Year Growth</h2>
+            <p style="color: #6b7280; margin-bottom: 20px;">See how your investment grows over time with compound interest</p>
+            <div style="overflow-x: auto;">
+                <table id="yearlyTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f3f4f6;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Year</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Starting Balance</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Contributions</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Interest Earned</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Ending Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="yearlyBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use the Investment Calculator</h2>
+            <p>Our investment calculator helps you project the growth of your investments over time, accounting for compound interest and regular contributions. Here's how to use it:</p>
+            <ol>
+                <li><strong>Initial Investment:</strong> Enter the amount you're starting with. This could be money you already have saved or are planning to invest upfront.</li>
+                <li><strong>Monthly Contribution:</strong> Enter how much you plan to add to your investment each month. Consistent contributions significantly accelerate growth.</li>
+                <li><strong>Annual Return Rate:</strong> Enter the expected annual rate of return. Historical stock market averages are 7-10%, but returns vary.</li>
+                <li><strong>Investment Period:</strong> Choose how many years you plan to invest. Longer periods allow compound interest to work its magic.</li>
+                <li><strong>Compound Frequency:</strong> Select how often interest compounds. More frequent compounding leads to slightly higher returns.</li>
+                <li><strong>Contribution Timing:</strong> Choose whether contributions are made at the beginning or end of each period.</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Compound Interest</h2>
+            <p>Compound interest is often called the "eighth wonder of the world" for good reason. It's the process where your investment earnings generate their own earnings.</p>
+
+            <h3>How Compound Interest Works</h3>
+            <p>When you invest money, you earn returns on your initial investment. With compound interest, those returns are reinvested, and you begin earning returns on your returns. Over time, this creates exponential growth rather than linear growth.</p>
+
+            <h3>The Power of Time</h3>
+            <p>The longer your money is invested, the more powerful compound interest becomes. Even small contributions made early can grow to substantial amounts over decades. This is why starting to invest early is one of the most important financial decisions you can make.</p>
+
+            <h3>Compound Interest Formula</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                FV = P × (1 + r/n)^(nt) + PMT × [((1 + r/n)^(nt) - 1) / (r/n)]<br><br>
+                Where:<br>
+                FV = Future Value<br>
+                P = Principal (initial investment)<br>
+                r = Annual interest rate (decimal)<br>
+                n = Number of times interest compounds per year<br>
+                t = Number of years<br>
+                PMT = Regular payment (contribution)
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>Investment Strategies for Success</h2>
+
+            <h3>1. Start Early</h3>
+            <p>Time is your greatest asset when investing. Starting just 5 years earlier can result in significantly more wealth due to compound interest. Even if you can only invest small amounts initially, starting early gives your money more time to grow.</p>
+
+            <h3>2. Invest Regularly</h3>
+            <p>Dollar-cost averaging - investing the same amount regularly regardless of market conditions - helps reduce the impact of market volatility and removes the emotion from investing. Set up automatic contributions to make investing effortless.</p>
+
+            <h3>3. Diversify Your Portfolio</h3>
+            <p>Don't put all your eggs in one basket. Spread your investments across different asset classes (stocks, bonds, real estate) and sectors to reduce risk. Diversification helps protect your portfolio from significant losses.</p>
+
+            <h3>4. Keep Costs Low</h3>
+            <p>Investment fees can significantly erode returns over time. A 1% fee might not sound like much, but over 30 years, it can cost you hundreds of thousands of dollars. Choose low-cost index funds and minimize trading.</p>
+
+            <h3>5. Stay the Course</h3>
+            <p>Market volatility is normal. Resist the urge to sell during downturns or chase hot investments. Historically, markets have always recovered from downturns and reached new highs. Long-term thinking beats short-term reactions.</p>
+
+            <h3>6. Increase Contributions Over Time</h3>
+            <p>As your income grows, increase your investment contributions. Even small increases, like raising your contribution by 1% each year, can have a dramatic impact on your long-term wealth.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Retirement Planning with Investments</h2>
+
+            <h3>The Rule of 72</h3>
+            <p>The Rule of 72 is a quick way to estimate how long it will take your investment to double. Divide 72 by your expected annual return rate. For example, at 8% returns, your money doubles approximately every 9 years (72 ÷ 8 = 9).</p>
+
+            <h3>How Much Should You Save for Retirement?</h3>
+            <p>Financial advisors often recommend saving 15-20% of your gross income for retirement. However, the exact amount depends on:</p>
+            <ul>
+                <li>When you start saving (earlier is better)</li>
+                <li>Your desired retirement lifestyle</li>
+                <li>Expected retirement age</li>
+                <li>Social Security benefits</li>
+                <li>Other income sources in retirement</li>
+            </ul>
+
+            <h3>Retirement Account Options</h3>
+            <ul>
+                <li><strong>401(k):</strong> Employer-sponsored retirement plan, often with matching contributions. Contributions are pre-tax, reducing current taxable income.</li>
+                <li><strong>Traditional IRA:</strong> Individual retirement account with tax-deductible contributions. Taxes paid upon withdrawal in retirement.</li>
+                <li><strong>Roth IRA:</strong> Contributions made with after-tax dollars, but withdrawals in retirement are tax-free. Excellent for young investors.</li>
+                <li><strong>Roth 401(k):</strong> Combines features of 401(k) and Roth IRA. After-tax contributions with tax-free withdrawals.</li>
+            </ul>
+
+            <h3>The 4% Withdrawal Rule</h3>
+            <p>A common retirement planning guideline suggests you can safely withdraw 4% of your retirement savings annually without running out of money. Using this rule, you'd need 25 times your annual expenses saved for retirement.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Investment Mistakes to Avoid</h2>
+
+            <h3>Trying to Time the Market</h3>
+            <p>Attempting to buy low and sell high sounds good in theory, but even professional investors struggle to time the market consistently. Studies show that time in the market beats timing the market.</p>
+
+            <h3>Letting Emotions Drive Decisions</h3>
+            <p>Fear and greed are powerful emotions that can lead to poor investment decisions. Selling during market crashes locks in losses, while buying during bubbles often leads to overpaying. Stick to your plan regardless of market conditions.</p>
+
+            <h3>Not Rebalancing Your Portfolio</h3>
+            <p>As different investments grow at different rates, your portfolio can drift from your target allocation. Rebalance annually to maintain your desired risk level and take advantage of market movements.</p>
+
+            <h3>Ignoring Inflation</h3>
+            <p>Inflation erodes purchasing power over time. Your investments need to outpace inflation to grow your real wealth. This is why keeping all your money in savings accounts often results in losing purchasing power.</p>
+
+            <h3>Not Maximizing Employer Match</h3>
+            <p>If your employer offers a 401(k) match, always contribute enough to get the full match. It's free money and an instant 100% return on that portion of your investment. Not taking advantage is leaving money on the table.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Investment Return Expectations by Asset Class</h2>
+
+            <h3>Stocks (Equities)</h3>
+            <p><strong>Historical Average:</strong> 10% annually (before inflation)</p>
+            <p>Stocks represent ownership in companies and historically provide the highest long-term returns. However, they also come with higher volatility and risk, especially in the short term.</p>
+
+            <h3>Bonds (Fixed Income)</h3>
+            <p><strong>Historical Average:</strong> 5-6% annually</p>
+            <p>Bonds are loans to governments or corporations. They typically provide lower returns than stocks but with less volatility, making them popular for conservative investors or those near retirement.</p>
+
+            <h3>Real Estate</h3>
+            <p><strong>Historical Average:</strong> 8-10% annually (including rental income)</p>
+            <p>Real estate can provide steady income through rent and potential appreciation. However, it requires more active management and has higher barriers to entry than stocks or bonds.</p>
+
+            <h3>Cash and Savings Accounts</h3>
+            <p><strong>Current Average:</strong> 0.5-5% annually</p>
+            <p>While safe and liquid, cash investments typically barely keep pace with inflation. They're best for emergency funds and short-term savings, not long-term wealth building.</p>
+
+            <h3>Index Funds</h3>
+            <p><strong>Historical Average:</strong> 7-10% annually</p>
+            <p>Index funds track market indices like the S&P 500. They offer broad diversification, low fees, and have historically outperformed actively managed funds over long periods.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Tax-Advantaged Investment Strategies</h2>
+
+            <h3>Maximize Tax-Deferred Accounts</h3>
+            <p>Contributing to 401(k)s and traditional IRAs reduces your current taxable income while allowing investments to grow tax-deferred. This can result in significant tax savings, especially if you're in a high tax bracket now but expect to be in a lower bracket in retirement.</p>
+
+            <h3>Consider Roth Conversions</h3>
+            <p>Converting traditional retirement account funds to Roth accounts means paying taxes now but enjoying tax-free growth and withdrawals later. This can be especially beneficial if you expect to be in a higher tax bracket in retirement or if tax rates increase.</p>
+
+            <h3>Tax-Loss Harvesting</h3>
+            <p>Selling investments at a loss can offset capital gains and reduce your tax bill. You can then reinvest the proceeds in similar (but not identical) investments to maintain your portfolio allocation while benefiting from the tax deduction.</p>
+
+            <h3>Hold Investments Long-Term</h3>
+            <p>Investments held for more than one year qualify for long-term capital gains tax rates, which are significantly lower than short-term rates. This is another reason to avoid frequent trading.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Real-World Investment Examples</h2>
+
+            <h3>Example 1: Starting at Age 25</h3>
+            <p>A 25-year-old invests $5,000 initially and contributes $300 monthly at 8% annual return for 40 years:</p>
+            <ul>
+                <li>Total Contributions: $149,000</li>
+                <li>Investment Earnings: $840,000+</li>
+                <li>Final Value: $990,000+</li>
+            </ul>
+            <p><strong>Key Takeaway:</strong> Starting early means your $149,000 in contributions grows to nearly $1 million.</p>
+
+            <h3>Example 2: Starting at Age 35</h3>
+            <p>A 35-year-old invests $5,000 initially and contributes $300 monthly at 8% annual return for 30 years:</p>
+            <ul>
+                <li>Total Contributions: $113,000</li>
+                <li>Investment Earnings: $310,000+</li>
+                <li>Final Value: $423,000+</li>
+            </ul>
+            <p><strong>Key Takeaway:</strong> Delaying 10 years costs over $500,000 in final value, despite only $36,000 less in contributions.</p>
+
+            <h3>Example 3: Aggressive Saver</h3>
+            <p>An investor starts with $20,000 and contributes $1,000 monthly at 9% return for 25 years:</p>
+            <ul>
+                <li>Total Contributions: $320,000</li>
+                <li>Investment Earnings: $760,000+</li>
+                <li>Final Value: $1,080,000+</li>
+            </ul>
+            <p><strong>Key Takeaway:</strong> Higher contributions combined with good returns can build wealth relatively quickly.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>What is a realistic rate of return for investments?</h3>
+            <p>For a diversified portfolio of stocks and bonds, 6-8% is a conservative estimate after accounting for inflation and fees. The stock market has historically returned about 10% annually before inflation, but past performance doesn't guarantee future results. It's better to use conservative estimates in your planning.</p>
+
+            <h3>How much should I have saved by age 30? 40? 50?</h3>
+            <p>A common guideline: By 30, aim for 1x your annual salary saved. By 40, aim for 3x your salary. By 50, target 6x your salary. By retirement at 67, you should have 10x your salary saved. These are general targets - your specific needs may vary.</p>
+
+            <h3>Should I pay off debt or invest?</h3>
+            <p>If your debt has a higher interest rate than your expected investment returns (like most credit cards), prioritize paying off the debt. For low-interest debt (like a mortgage), investing while making minimum payments often makes more financial sense. Always consider your personal risk tolerance and financial situation.</p>
+
+            <h3>How often should I check my investments?</h3>
+            <p>Checking quarterly or annually is sufficient for most long-term investors. Checking too frequently can lead to emotional reactions to normal market volatility. Focus on your long-term plan rather than day-to-day fluctuations.</p>
+
+            <h3>What if I can't afford to invest much?</h3>
+            <p>Start with whatever you can afford, even if it's just $25 or $50 per month. Many brokers now allow fractional share investing with no minimums. The habit of investing regularly is more important than the amount. As your income grows, gradually increase your contributions.</p>
+
+            <h3>When should I start taking money out of my investments?</h3>
+            <p>For retirement accounts, you can begin penalty-free withdrawals at age 59½ and must start required minimum distributions (RMDs) at age 73. For taxable accounts, you can withdraw anytime, but consider tax implications and the impact on your long-term goals.</p>
+
+            <h3>Is now a good time to invest?</h3>
+            <p>The best time to invest was yesterday; the second-best time is today. Trying to time the market is nearly impossible. If you're investing for the long term (10+ years), starting now and investing consistently is more important than trying to wait for the "perfect" moment.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="retirement-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏖️</div>
+                    <h3 class="calc-title">Retirement Calculator</h3>
+                    <p class="calc-description">Plan your retirement savings goals</p>
+                </a>
+
+                <a href="compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Compound Interest Calculator</h3>
+                    <p class="calc-description">Calculate compound interest growth</p>
+                </a>
+
+                <a href="savings-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Savings Calculator</h3>
+                    <p class="calc-description">Track your savings progress</p>
+                </a>
+
+                <a href="401k-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">401(k) Calculator</h3>
+                    <p class="calc-description">Maximize your 401(k) contributions</p>
+                </a>
+
+                <a href="roth-ira-calculator.html" class="calc-card">
+                    <div class="calc-icon">💎</div>
+                    <h3 class="calc-title">Roth IRA Calculator</h3>
+                    <p class="calc-description">Plan your Roth IRA strategy</p>
+                </a>
+
+                <a href="mortgage-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏠</div>
+                    <h3 class="calc-title">Mortgage Calculator</h3>
+                    <p class="calc-description">Calculate home loan payments</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function calculateInvestment() {
+            // Get input values
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value) || 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) || 0;
+            const years = parseInt(document.getElementById('investmentPeriod').value) || 0;
+            const compoundFrequency = parseInt(document.getElementById('compoundFrequency').value) || 12;
+            const contributionTiming = document.getElementById('contributionTiming').value;
+
+            // Validate inputs
+            if (years <= 0) {
+                return;
+            }
+
+            // Calculate total periods
+            const totalPeriods = years * 12; // Monthly periods
+            const ratePerPeriod = (annualReturn / 100) / 12; // Monthly rate
+
+            // Calculate future value with monthly contributions
+            let futureValue = initialInvestment;
+            let totalContributions = initialInvestment;
+
+            // Store yearly data for breakdown
+            const yearlyData = [];
+            let currentYear = 0;
+            let yearStartBalance = initialInvestment;
+            let yearContributions = 0;
+            let yearInterest = 0;
+
+            for (let month = 1; month <= totalPeriods; month++) {
+                // Add contribution at beginning or end of period
+                if (contributionTiming === 'beginning') {
+                    futureValue += monthlyContribution;
+                    totalContributions += monthlyContribution;
+                    yearContributions += monthlyContribution;
+                }
+
+                // Apply monthly interest
+                const interestEarned = futureValue * ratePerPeriod;
+                futureValue += interestEarned;
+                yearInterest += interestEarned;
+
+                // Add contribution at end of period
+                if (contributionTiming === 'end') {
+                    futureValue += monthlyContribution;
+                    totalContributions += monthlyContribution;
+                    yearContributions += monthlyContribution;
+                }
+
+                // Store yearly data
+                if (month % 12 === 0 || month === totalPeriods) {
+                    currentYear++;
+                    yearlyData.push({
+                        year: currentYear,
+                        startBalance: yearStartBalance,
+                        contributions: yearContributions,
+                        interest: yearInterest,
+                        endBalance: futureValue
+                    });
+
+                    yearStartBalance = futureValue;
+                    yearContributions = 0;
+                    yearInterest = 0;
+                }
+            }
+
+            // Calculate total earnings
+            const totalEarnings = futureValue - totalContributions;
+
+            // Calculate ROI
+            const roi = totalContributions > 0 ? ((totalEarnings / totalContributions) * 100) : 0;
+
+            // Display main results
+            document.getElementById('futureValue').textContent = formatCurrency(futureValue);
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions);
+            document.getElementById('totalEarnings').textContent = formatCurrency(totalEarnings);
+            document.getElementById('roi').textContent = roi.toFixed(1) + '%';
+
+            // Display breakdown
+            document.getElementById('initialDisplay').textContent = formatCurrency(initialInvestment);
+            document.getElementById('contributionsDisplay').textContent = formatCurrency(totalContributions - initialInvestment);
+            document.getElementById('interestDisplay').textContent = formatCurrency(totalEarnings);
+
+            // Generate yearly breakdown table
+            generateYearlyBreakdown(yearlyData);
+
+            // Show yearly breakdown section
+            document.getElementById('yearlyBreakdownSection').style.display = 'block';
+
+            // Animate results
+            animateValue('futureValue');
+        }
+
+        function generateYearlyBreakdown(yearlyData) {
+            const tbody = document.getElementById('yearlyBody');
+            tbody.innerHTML = '';
+
+            yearlyData.forEach(data => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">${data.year}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(data.startBalance)}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb;">${formatCurrency(data.contributions)}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; color: #10b981;">${formatCurrency(data.interest)}</td>
+                    <td style="padding: 12px; text-align: right; border-bottom: 1px solid #e5e7eb; font-weight: 600;">${formatCurrency(data.endBalance)}</td>
+                `;
+            });
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(num);
+        }
+
+        function animateValue(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateInvestment);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', function() {
+            calculateInvestment();
+        });
+    </script>
+</body>
+</html>

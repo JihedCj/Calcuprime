@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free pregnancy calculator - Calculate your due date, current week, trimester, and track your pregnancy week by week. Get personalized pregnancy information.">
+    <meta name="keywords" content="pregnancy calculator, due date calculator, pregnancy week calculator, conception date calculator, trimester calculator">
+
+    <title>Pregnancy Calculator - Due Date & Week Calculator | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/pregnancy-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Pregnancy Calculator</h1>
+            <p class="calculator-description">Calculate your due date, current pregnancy week, and track your journey week by week</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Pregnancy Information</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Calculation Method</label>
+                    <select id="calculationMethod" class="form-select">
+                        <option value="lmp">Last Menstrual Period (LMP)</option>
+                        <option value="conception">Conception Date</option>
+                    </select>
+                </div>
+
+                <div id="lmpInputs">
+                    <div class="form-group">
+                        <label for="lmpDate" class="form-label">First Day of Last Period</label>
+                        <input type="date" id="lmpDate" class="form-input">
+                    </div>
+                </div>
+
+                <div id="conceptionInputs" style="display: none;">
+                    <div class="form-group">
+                        <label for="conceptionDate" class="form-label">Conception Date</label>
+                        <input type="date" id="conceptionDate" class="form-input">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cycleLength" class="form-label">Average Cycle Length (days)</label>
+                    <input type="number" id="cycleLength" class="form-input" value="28" min="21" max="35">
+                    <p style="font-size: 0.75rem; color: #6b7280; margin-top: 5px;">Typical range: 21-35 days</p>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Your Results</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Estimated Due Date</div>
+                    <div class="result-value" id="dueDate" style="font-size: 2rem; color: #ec4899;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Current Week</div>
+                    <div class="result-value" id="currentWeek" style="font-size: 2.5rem; color: #8b5cf6;">-</div>
+                    <p style="font-size: 0.875rem; color: #6b7280; margin-top: 5px;" id="daysIntoWeek"></p>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Trimester</div>
+                    <div class="result-value" id="trimester" style="font-size: 2rem; color: #10b981;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Days Until Due Date</div>
+                    <div class="result-value" id="daysRemaining" style="font-size: 2rem;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Estimated Conception Date</div>
+                    <div class="result-value" id="conceptionDateResult" style="font-size: 1.3rem; color: #f59e0b;">-</div>
+                </div>
+
+                <div style="background: #fce7f3; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #ec4899;">
+                    <p style="margin: 0; font-size: 0.875rem; color: #9f1239;" id="progressMessage"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator-wrapper" style="margin-top: 30px;">
+            <div style="width: 100%;">
+                <h3>Week-by-Week Timeline</h3>
+                <div id="weeklyTimeline" style="max-height: 400px; overflow-y: auto; padding: 15px; background: #f9fafb; border-radius: 8px;">
+                    <p style="color: #6b7280; text-align: center;">Enter your dates to see your personalized pregnancy timeline</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use the Pregnancy Calculator</h2>
+            <p>Our pregnancy calculator provides accurate estimates of your due date and helps you track your pregnancy journey:</p>
+            <ol>
+                <li><strong>Choose calculation method:</strong> Select either Last Menstrual Period (most common) or Conception Date</li>
+                <li><strong>Enter your date:</strong> Input the first day of your last period or your conception date</li>
+                <li><strong>Adjust cycle length:</strong> If your cycle differs from 28 days, update this for more accuracy</li>
+                <li><strong>View results:</strong> Get your due date, current week, trimester, and countdown</li>
+                <li><strong>Explore timeline:</strong> See week-by-week milestones and development information</li>
+            </ol>
+
+            <h2>Understanding Pregnancy Dating</h2>
+
+            <h3>Last Menstrual Period (LMP) Method</h3>
+            <p>The LMP method is the most common way to calculate your due date. Healthcare providers typically use the first day of your last menstrual period as the starting point, even though conception usually occurs about 2 weeks later. This is why pregnancy is counted as 40 weeks (280 days) from the LMP.</p>
+
+            <h3>Conception Date Method</h3>
+            <p>If you know your conception date (from fertility tracking, IVF, or other methods), you can calculate your due date more precisely. Pregnancy from conception is approximately 38 weeks (266 days).</p>
+
+            <h3>Naegele's Rule</h3>
+            <p>The standard calculation follows Naegele's Rule:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 0.9rem;">
+                <strong>Due Date = LMP + 280 days (40 weeks)</strong><br>
+                Or: LMP + 1 year - 3 months + 7 days
+            </p>
+
+            <h2>Pregnancy Trimesters</h2>
+            <p>Pregnancy is divided into three trimesters, each approximately 13 weeks long:</p>
+
+            <h3>First Trimester (Weeks 1-13)</h3>
+            <ul>
+                <li><strong>Baby's development:</strong> Major organs and structures form. Heart begins beating around week 6. Fingers, toes, and facial features develop.</li>
+                <li><strong>Your body:</strong> Hormonal changes cause fatigue, morning sickness, breast tenderness, and frequent urination.</li>
+                <li><strong>Size:</strong> By week 12, baby is about 2.5 inches long (size of a lime).</li>
+                <li><strong>Important milestones:</strong> First prenatal visit, dating ultrasound, possible genetic testing.</li>
+            </ul>
+
+            <h3>Second Trimester (Weeks 14-27)</h3>
+            <ul>
+                <li><strong>Baby's development:</strong> Rapid growth. Baby can hear sounds, practice breathing, and move actively. Sex may be visible on ultrasound.</li>
+                <li><strong>Your body:</strong> Energy returns, morning sickness usually subsides. Baby bump becomes visible. You may feel first movements (quickening) around weeks 18-20.</li>
+                <li><strong>Size:</strong> By week 27, baby is about 14 inches long (size of a head of cauliflower).</li>
+                <li><strong>Important milestones:</strong> Anatomy scan (18-22 weeks), glucose screening, feeling baby move.</li>
+            </ul>
+
+            <h3>Third Trimester (Weeks 28-40+)</h3>
+            <ul>
+                <li><strong>Baby's development:</strong> Final growth and maturation. Lungs develop. Baby gains weight and gets into position for birth.</li>
+                <li><strong>Your body:</strong> Increased discomfort, frequent urination returns, shortness of breath, Braxton Hicks contractions, preparing for labor.</li>
+                <li><strong>Size:</strong> At term, baby is typically 19-21 inches long and weighs 6-9 pounds.</li>
+                <li><strong>Important milestones:</strong> Regular prenatal visits increase, Group B strep test, birth plan discussions, hospital tour.</li>
+            </ul>
+
+            <h2>Common Pregnancy Symptoms by Trimester</h2>
+
+            <h3>First Trimester Symptoms</h3>
+            <ul>
+                <li>Morning sickness (nausea and vomiting)</li>
+                <li>Extreme fatigue and tiredness</li>
+                <li>Breast tenderness and swelling</li>
+                <li>Frequent urination</li>
+                <li>Food aversions or cravings</li>
+                <li>Mood swings</li>
+                <li>Light spotting or cramping</li>
+                <li>Constipation</li>
+                <li>Heightened sense of smell</li>
+            </ul>
+
+            <h3>Second Trimester Symptoms</h3>
+            <ul>
+                <li>Growing belly and weight gain</li>
+                <li>Feeling baby's movements</li>
+                <li>Back pain and round ligament pain</li>
+                <li>Skin changes (darkening, stretch marks)</li>
+                <li>Nasal congestion</li>
+                <li>Bleeding gums</li>
+                <li>Leg cramps</li>
+                <li>Braxton Hicks contractions (later in trimester)</li>
+                <li>Increased energy compared to first trimester</li>
+            </ul>
+
+            <h3>Third Trimester Symptoms</h3>
+            <ul>
+                <li>Shortness of breath</li>
+                <li>Frequent urination (baby pressing on bladder)</li>
+                <li>Heartburn and indigestion</li>
+                <li>Swelling in feet and ankles</li>
+                <li>Difficulty sleeping</li>
+                <li>More frequent Braxton Hicks contractions</li>
+                <li>Leaking colostrum from breasts</li>
+                <li>Baby "dropping" (lightening) before labor</li>
+                <li>Lower back pain and pelvic pressure</li>
+            </ul>
+
+            <h2>Essential Prenatal Care</h2>
+
+            <h3>Prenatal Visit Schedule</h3>
+            <ul>
+                <li><strong>Weeks 4-28:</strong> One visit every 4 weeks</li>
+                <li><strong>Weeks 28-36:</strong> One visit every 2 weeks</li>
+                <li><strong>Weeks 36-40+:</strong> One visit every week until delivery</li>
+            </ul>
+
+            <h3>Important Prenatal Tests</h3>
+            <ul>
+                <li><strong>Dating ultrasound (8-13 weeks):</strong> Confirms due date and checks for multiples</li>
+                <li><strong>First trimester screening (11-14 weeks):</strong> Blood test and ultrasound for genetic conditions</li>
+                <li><strong>Cell-free DNA screening (10+ weeks):</strong> Optional blood test for chromosomal conditions</li>
+                <li><strong>Anatomy scan (18-22 weeks):</strong> Detailed ultrasound checking baby's development</li>
+                <li><strong>Glucose screening (24-28 weeks):</strong> Tests for gestational diabetes</li>
+                <li><strong>Group B strep test (35-37 weeks):</strong> Vaginal swab to check for bacteria</li>
+            </ul>
+
+            <h3>Prenatal Nutrition</h3>
+            <ul>
+                <li><strong>Folic acid:</strong> 400-800 mcg daily (prevents neural tube defects)</li>
+                <li><strong>Iron:</strong> 27 mg daily (prevents anemia)</li>
+                <li><strong>Calcium:</strong> 1,000 mg daily (for baby's bone development)</li>
+                <li><strong>DHA:</strong> 200-300 mg daily (supports brain development)</li>
+                <li><strong>Protein:</strong> Additional 25g per day (71g total)</li>
+                <li><strong>Calories:</strong> Add 300-500 extra calories per day (second and third trimesters)</li>
+            </ul>
+
+            <h2>Foods to Avoid During Pregnancy</h2>
+            <ul>
+                <li><strong>Raw or undercooked seafood, eggs, and meat:</strong> Risk of foodborne illness</li>
+                <li><strong>High-mercury fish:</strong> Shark, swordfish, king mackerel, tilefish</li>
+                <li><strong>Unpasteurized dairy and juices:</strong> Risk of listeria</li>
+                <li><strong>Deli meats and hot dogs:</strong> Unless heated until steaming</li>
+                <li><strong>Raw sprouts:</strong> Risk of bacterial contamination</li>
+                <li><strong>Alcohol:</strong> No safe amount during pregnancy</li>
+                <li><strong>Excess caffeine:</strong> Limit to 200mg per day (about one 12oz coffee)</li>
+                <li><strong>Unwashed produce:</strong> Risk of toxoplasmosis</li>
+            </ul>
+
+            <h2>Exercise During Pregnancy</h2>
+            <p>Regular exercise during pregnancy offers many benefits:</p>
+            <ul>
+                <li>Reduces back pain and improves posture</li>
+                <li>Decreases risk of gestational diabetes</li>
+                <li>Improves sleep and mood</li>
+                <li>Builds stamina for labor and delivery</li>
+                <li>Helps with healthy weight gain</li>
+                <li>Speeds postpartum recovery</li>
+            </ul>
+
+            <h3>Safe Pregnancy Exercises</h3>
+            <ul>
+                <li>Walking (30 minutes most days)</li>
+                <li>Swimming and water aerobics</li>
+                <li>Prenatal yoga and Pilates</li>
+                <li>Stationary cycling</li>
+                <li>Low-impact aerobics</li>
+                <li>Strength training with light weights</li>
+            </ul>
+
+            <h3>Exercises to Avoid</h3>
+            <ul>
+                <li>Contact sports (soccer, basketball, hockey)</li>
+                <li>Activities with fall risk (skiing, horseback riding, gymnastics)</li>
+                <li>Scuba diving</li>
+                <li>Hot yoga or hot Pilates</li>
+                <li>Exercise at high altitudes (above 6,000 feet)</li>
+                <li>Lying flat on your back after 20 weeks</li>
+            </ul>
+
+            <h2>Weight Gain Recommendations</h2>
+            <p>Recommended weight gain during pregnancy depends on your pre-pregnancy BMI:</p>
+            <ul>
+                <li><strong>Underweight (BMI &lt; 18.5):</strong> 28-40 pounds</li>
+                <li><strong>Normal weight (BMI 18.5-24.9):</strong> 25-35 pounds</li>
+                <li><strong>Overweight (BMI 25-29.9):</strong> 15-25 pounds</li>
+                <li><strong>Obese (BMI ≥ 30):</strong> 11-20 pounds</li>
+            </ul>
+
+            <h2>Warning Signs - When to Call Your Doctor</h2>
+            <p>Contact your healthcare provider immediately if you experience:</p>
+            <ul>
+                <li>Vaginal bleeding or spotting (after first trimester)</li>
+                <li>Severe abdominal pain or cramping</li>
+                <li>Sudden swelling of face, hands, or feet</li>
+                <li>Severe or persistent headache</li>
+                <li>Vision changes (blurriness, spots, flashing lights)</li>
+                <li>High fever (over 101°F/38.3°C)</li>
+                <li>Painful or burning urination</li>
+                <li>Decreased fetal movement (after 28 weeks)</li>
+                <li>Fluid leaking from vagina (possible ruptured membranes)</li>
+                <li>Regular contractions before 37 weeks</li>
+            </ul>
+
+            <h2>Preparing for Baby's Arrival</h2>
+
+            <h3>Third Trimester Checklist</h3>
+            <ul>
+                <li><strong>Take childbirth education class:</strong> Learn about labor, delivery, and newborn care</li>
+                <li><strong>Create birth plan:</strong> Document your preferences for labor and delivery</li>
+                <li><strong>Tour hospital or birth center:</strong> Familiarize yourself with the facility</li>
+                <li><strong>Choose pediatrician:</strong> Schedule interviews and make selection</li>
+                <li><strong>Install car seat:</strong> Have it inspected for proper installation</li>
+                <li><strong>Pack hospital bag:</strong> Include essentials for you and baby (around 36 weeks)</li>
+                <li><strong>Prepare nursery:</strong> Set up crib, changing table, and baby essentials</li>
+                <li><strong>Stock up on supplies:</strong> Diapers, wipes, baby clothes, nursing supplies</li>
+                <li><strong>Plan postpartum support:</strong> Arrange help for first weeks at home</li>
+                <li><strong>Discuss maternity/paternity leave:</strong> Finalize plans with employer</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>How accurate is my due date?</h3>
+            <p>Due dates are estimates, and only about 5% of babies are born on their exact due date. Most babies are born between 37-42 weeks of pregnancy. Your due date may be adjusted after your dating ultrasound in the first trimester.</p>
+
+            <h3>When will I start showing?</h3>
+            <p>First-time moms typically start showing between 12-16 weeks. If this is your second or subsequent pregnancy, you may show earlier. Body type, baby's position, and muscle tone also affect when you show.</p>
+
+            <h3>When can I find out the baby's sex?</h3>
+            <p>An ultrasound can typically determine sex between 18-22 weeks. Some blood tests (cell-free DNA) can detect sex as early as 10 weeks, though these are optional screening tests primarily for genetic conditions.</p>
+
+            <h3>Is it normal to not feel pregnant sometimes?</h3>
+            <p>Yes, especially in the first trimester and between weeks 13-18 when symptoms often ease but movement isn't felt yet. If you have concerns or notice a sudden change in symptoms, contact your healthcare provider.</p>
+
+            <h3>When will I feel the baby move?</h3>
+            <p>First-time moms typically feel movement (quickening) between 18-22 weeks. Experienced moms may notice it earlier, around 16 weeks. Initially, it feels like flutters or bubbles.</p>
+
+            <h3>Can I travel during pregnancy?</h3>
+            <p>The safest time to travel is during the second trimester (weeks 14-27). Most airlines allow travel until 36 weeks for domestic flights. Always check with your healthcare provider before traveling, especially if you have complications.</p>
+
+            <h3>How much water should I drink?</h3>
+            <p>Aim for 8-12 cups (64-96 ounces) of water per day. Staying hydrated helps with common pregnancy issues like constipation, swelling, and overheating. Drink more if you're exercising or in hot weather.</p>
+
+            <h3>What about morning sickness?</h3>
+            <p>Despite the name, morning sickness can occur any time of day and affects about 70-80% of pregnant women. It typically peaks around weeks 9-10 and subsides by weeks 14-16. Tips for relief include eating small, frequent meals, staying hydrated, eating crackers before getting out of bed, and trying ginger or vitamin B6 supplements (ask your doctor first).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">BMI Calculator</h3>
+                    <p class="calc-description">Calculate your Body Mass Index</p>
+                </a>
+
+                <a href="calorie-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calorie Calculator</h3>
+                    <p class="calc-description">Calculate daily caloric needs</p>
+                </a>
+
+                <a href="ideal-weight-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Ideal Weight Calculator</h3>
+                    <p class="calc-description">Find your ideal body weight</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Set default date to today
+        const today = new Date();
+        const defaultLMP = new Date(today);
+        defaultLMP.setDate(today.getDate() - 70); // Set to ~10 weeks ago
+        document.getElementById('lmpDate').value = defaultLMP.toISOString().split('T')[0];
+
+        // Calculation method toggle
+        document.getElementById('calculationMethod').addEventListener('change', function() {
+            const isLMP = this.value === 'lmp';
+            document.getElementById('lmpInputs').style.display = isLMP ? 'block' : 'none';
+            document.getElementById('conceptionInputs').style.display = isLMP ? 'none' : 'block';
+            calculatePregnancy();
+        });
+
+        function calculatePregnancy() {
+            const calculationMethod = document.getElementById('calculationMethod').value;
+            const cycleLength = parseInt(document.getElementById('cycleLength').value) || 28;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            let lmpDate, conceptionDate, dueDate;
+
+            if (calculationMethod === 'lmp') {
+                const lmpInput = document.getElementById('lmpDate').value;
+                if (!lmpInput) {
+                    resetResults();
+                    return;
+                }
+                lmpDate = new Date(lmpInput + 'T00:00:00');
+
+                // Calculate conception date (LMP + cycle length - 14 days, adjusted for cycle)
+                conceptionDate = new Date(lmpDate);
+                conceptionDate.setDate(lmpDate.getDate() + (cycleLength - 14));
+
+                // Calculate due date (LMP + 280 days)
+                dueDate = new Date(lmpDate);
+                dueDate.setDate(lmpDate.getDate() + 280);
+            } else {
+                const conceptionInput = document.getElementById('conceptionDate').value;
+                if (!conceptionInput) {
+                    resetResults();
+                    return;
+                }
+                conceptionDate = new Date(conceptionInput + 'T00:00:00');
+
+                // Calculate LMP (conception - (cycle length - 14) days)
+                lmpDate = new Date(conceptionDate);
+                lmpDate.setDate(conceptionDate.getDate() - (cycleLength - 14));
+
+                // Calculate due date (conception + 266 days)
+                dueDate = new Date(conceptionDate);
+                dueDate.setDate(conceptionDate.getDate() + 266);
+            }
+
+            // Calculate days since LMP
+            const daysSinceLMP = Math.floor((today - lmpDate) / (1000 * 60 * 60 * 24));
+
+            // Calculate current week and days
+            const weeks = Math.floor(daysSinceLMP / 7);
+            const days = daysSinceLMP % 7;
+
+            // Calculate trimester
+            let trimester;
+            if (weeks < 13) {
+                trimester = 'First Trimester';
+            } else if (weeks < 27) {
+                trimester = 'Second Trimester';
+            } else {
+                trimester = 'Third Trimester';
+            }
+
+            // Calculate days remaining
+            const daysRemaining = Math.floor((dueDate - today) / (1000 * 60 * 60 * 24));
+
+            // Format dates
+            const dueDateFormatted = formatDate(dueDate);
+            const conceptionDateFormatted = formatDate(conceptionDate);
+
+            // Display results
+            document.getElementById('dueDate').textContent = dueDateFormatted;
+            document.getElementById('currentWeek').textContent = weeks >= 0 && weeks <= 42 ? `Week ${weeks}` : '-';
+            document.getElementById('daysIntoWeek').textContent = weeks >= 0 && weeks <= 42 ? `${days} day${days !== 1 ? 's' : ''} into week ${weeks}` : '';
+            document.getElementById('trimester').textContent = weeks >= 0 && weeks <= 42 ? trimester : '-';
+            document.getElementById('daysRemaining').textContent = daysRemaining >= 0 ? `${daysRemaining} days` : 'Baby has arrived!';
+            document.getElementById('conceptionDateResult').textContent = conceptionDateFormatted;
+
+            // Progress message
+            let progressMsg = '';
+            if (daysRemaining < 0) {
+                progressMsg = 'Congratulations! Your baby should have arrived. If not yet born, contact your healthcare provider.';
+            } else if (weeks < 13) {
+                progressMsg = `You're in your first trimester. Baby's major organs are forming!`;
+            } else if (weeks < 27) {
+                progressMsg = `You're in your second trimester. This is often the most comfortable phase!`;
+            } else if (weeks < 37) {
+                progressMsg = `You're in your third trimester. Baby is growing and preparing for birth!`;
+            } else {
+                progressMsg = `You're full term! Baby could arrive any day now.`;
+            }
+            document.getElementById('progressMessage').textContent = progressMsg;
+
+            // Generate weekly timeline
+            generateWeeklyTimeline(weeks, lmpDate);
+        }
+
+        function formatDate(date) {
+            const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                          'July', 'August', 'September', 'October', 'November', 'December'];
+            return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+        }
+
+        function resetResults() {
+            document.getElementById('dueDate').textContent = '-';
+            document.getElementById('currentWeek').textContent = '-';
+            document.getElementById('daysIntoWeek').textContent = '';
+            document.getElementById('trimester').textContent = '-';
+            document.getElementById('daysRemaining').textContent = '-';
+            document.getElementById('conceptionDateResult').textContent = '-';
+            document.getElementById('progressMessage').textContent = '';
+            document.getElementById('weeklyTimeline').innerHTML = '<p style="color: #6b7280; text-align: center;">Enter your dates to see your personalized pregnancy timeline</p>';
+        }
+
+        function generateWeeklyTimeline(currentWeek, lmpDate) {
+            const weekInfo = {
+                4: { title: 'Week 4', description: 'Implantation occurs. Pregnancy test may show positive. Baby is size of a poppy seed.', development: 'The embryo consists of two layers. Amniotic sac and placenta are forming.' },
+                5: { title: 'Week 5', description: 'Heart begins to beat. Baby is size of a sesame seed.', development: 'Neural tube (becomes brain and spinal cord) begins forming. Circulatory system is developing.' },
+                6: { title: 'Week 6', description: 'First heartbeat detected on ultrasound. Baby is size of a lentil.', development: 'Facial features beginning to form. Arm and leg buds appear. Heart is beating 100-160 times per minute.' },
+                8: { title: 'Week 8', description: 'All major organs present. Baby is size of a raspberry.', development: 'Arms and legs growing. Fingers and toes beginning to form. Facial features more distinct.' },
+                10: { title: 'Week 10', description: 'Baby officially called a fetus. Baby is size of a strawberry.', development: 'Vital organs fully formed. Baby can make movements. Bones beginning to harden.' },
+                12: { title: 'Week 12', description: 'End of first trimester. Baby is size of a lime.', development: 'Reflexes developing. Sex organs forming. Vocal cords forming. Risk of miscarriage decreases significantly.' },
+                13: { title: 'Week 13', description: 'Beginning of second trimester. Baby is size of a lemon.', development: 'Intestines moving into abdomen. Vocal cords forming. Head is about 1/3 of body size.' },
+                16: { title: 'Week 16', description: 'You may feel first movements. Baby is size of an avocado.', development: 'Musculoskeletal system developing. Skin is transparent. Baby can make facial expressions.' },
+                18: { title: 'Week 18', description: 'Anatomy scan around this time. Baby is size of a bell pepper.', development: 'Can hear sounds. Digestive system functioning. Developing unique fingerprints.' },
+                20: { title: 'Week 20', description: 'Halfway through pregnancy! Baby is size of a banana.', development: 'Baby increasingly active. Sleep-wake cycle developing. Baby can hear your heartbeat.' },
+                24: { title: 'Week 24', description: 'Baby could survive with medical help if born. Baby is size of an ear of corn.', development: 'Lungs developing. Baby responds to sounds. Taste buds forming.' },
+                27: { title: 'Week 27', description: 'End of second trimester. Baby is size of a cauliflower.', development: 'Can open and close eyes. Brain very active. Lungs still immature but developing rapidly.' },
+                28: { title: 'Week 28', description: 'Beginning of third trimester. Baby is size of an eggplant.', development: 'Baby can dream. Eyesight developing. Adding body fat. More than 2 pounds now!' },
+                32: { title: 'Week 32', description: 'Baby practices breathing movements. Baby is size of a squash.', development: 'Baby gaining about 0.5 pounds per week. Skin becoming less transparent. Bones fully formed but still soft.' },
+                36: { title: 'Week 36', description: 'Baby is likely head-down. Baby is size of a romaine lettuce.', development: 'Nearly ready for birth. Losing vernix (protective coating). May drop into pelvis.' },
+                37: { title: 'Week 37', description: 'Baby is full term! Baby is size of a bunch of Swiss chard.', development: 'Baby is ready to be born. Practicing blinking, sucking, breathing. Gaining about 1 oz per day.' },
+                40: { title: 'Week 40', description: 'Due date week! Baby is size of a small pumpkin.', development: 'Only 5% of babies born on exact due date. Baby weighs about 6-9 pounds and is 19-22 inches long.' }
+            };
+
+            const timelineHTML = [];
+            const milestoneWeeks = [4, 5, 6, 8, 10, 12, 13, 16, 18, 20, 24, 27, 28, 32, 36, 37, 40];
+
+            for (const week of milestoneWeeks) {
+                const info = weekInfo[week];
+                const weekDate = new Date(lmpDate);
+                weekDate.setDate(lmpDate.getDate() + (week * 7));
+                const weekDateStr = formatDate(weekDate);
+
+                const isCurrent = week === currentWeek;
+                const isPast = week < currentWeek;
+                const isFuture = week > currentWeek;
+
+                let statusColor = '#e5e7eb';
+                let statusText = 'Upcoming';
+                if (isCurrent) {
+                    statusColor = '#8b5cf6';
+                    statusText = 'Current Week';
+                } else if (isPast) {
+                    statusColor = '#10b981';
+                    statusText = 'Completed';
+                }
+
+                timelineHTML.push(`
+                    <div style="padding: 15px; margin-bottom: 15px; background: white; border-radius: 8px; border-left: 4px solid ${statusColor}; ${isCurrent ? 'box-shadow: 0 4px 6px rgba(139, 92, 246, 0.1);' : ''}">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <h4 style="margin: 0; color: #1f2937; font-size: 1.1rem;">${info.title}</h4>
+                            <span style="padding: 4px 12px; background: ${statusColor}; color: ${isCurrent || isPast ? 'white' : '#6b7280'}; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">${statusText}</span>
+                        </div>
+                        <p style="margin: 5px 0; color: #6b7280; font-size: 0.875rem;">${weekDateStr}</p>
+                        <p style="margin: 8px 0 0 0; color: #374151; font-weight: 500;">${info.description}</p>
+                        <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 0.875rem;">${info.development}</p>
+                    </div>
+                `);
+            }
+
+            document.getElementById('weeklyTimeline').innerHTML = timelineHTML.join('');
+        }
+
+        // Auto-calculate on input change
+        document.getElementById('lmpDate').addEventListener('change', calculatePregnancy);
+        document.getElementById('conceptionDate').addEventListener('change', calculatePregnancy);
+        document.getElementById('cycleLength').addEventListener('input', calculatePregnancy);
+
+        // Calculate on page load
+        window.addEventListener('load', calculatePregnancy);
+    </script>
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free weight converter - Convert between milligrams, grams, kilograms, metric tons, ounces, pounds, stones, and US tons. Real-time bidirectional conversion with common weight references.">
+    <meta name="keywords" content="weight converter, mass converter, kg to lbs, pounds to kg, grams to ounces, weight conversion calculator, metric to imperial weight">
+
+    <title>Weight Converter - Free Mass & Weight Conversion Tool | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/weight-converter.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Weight Converter</h1>
+            <p class="calculator-description">Convert weight and mass between metric and imperial units with real-time bidirectional conversion</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Weight Conversion</h3>
+                <p style="color: #6b7280; margin-bottom: 20px;">Enter a value in any field to convert automatically</p>
+
+                <!-- Metric Units -->
+                <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin-top: 0; color: #2563eb;">Metric System</h4>
+
+                    <div class="form-group">
+                        <label for="milligrams" class="form-label">Milligrams (mg)</label>
+                        <input type="number" id="milligrams" class="form-input weight-input" data-unit="mg" step="any" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="grams" class="form-label">Grams (g)</label>
+                        <input type="number" id="grams" class="form-input weight-input" data-unit="g" step="any" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kilograms" class="form-label">Kilograms (kg)</label>
+                        <input type="number" id="kilograms" class="form-input weight-input" data-unit="kg" step="any" placeholder="0" value="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metricTons" class="form-label">Metric Tons (t)</label>
+                        <input type="number" id="metricTons" class="form-input weight-input" data-unit="t" step="any" placeholder="0">
+                    </div>
+                </div>
+
+                <!-- Imperial Units -->
+                <div style="background: #fef3f2; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="margin-top: 0; color: #dc2626;">Imperial System</h4>
+
+                    <div class="form-group">
+                        <label for="ounces" class="form-label">Ounces (oz)</label>
+                        <input type="number" id="ounces" class="form-input weight-input" data-unit="oz" step="any" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pounds" class="form-label">Pounds (lbs)</label>
+                        <input type="number" id="pounds" class="form-input weight-input" data-unit="lbs" step="any" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stones" class="form-label">Stones (st)</label>
+                        <input type="number" id="stones" class="form-input weight-input" data-unit="st" step="any" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usTons" class="form-label">US Tons (ton)</label>
+                        <input type="number" id="usTons" class="form-input weight-input" data-unit="ton" step="any" placeholder="0">
+                    </div>
+                </div>
+
+                <button onclick="clearAll()" class="btn-calculate" style="background: #6b7280;">Clear All</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Quick Conversions</h3>
+                <p style="color: #6b7280; margin-bottom: 15px;">Click to convert instantly</p>
+
+                <div style="display: grid; gap: 10px; margin-bottom: 20px;">
+                    <button onclick="quickConvert(1, 'kg')" class="quick-btn">1 Kilogram</button>
+                    <button onclick="quickConvert(100, 'g')" class="quick-btn">100 Grams</button>
+                    <button onclick="quickConvert(1, 'lbs')" class="quick-btn">1 Pound</button>
+                    <button onclick="quickConvert(16, 'oz')" class="quick-btn">16 Ounces</button>
+                    <button onclick="quickConvert(1, 'st')" class="quick-btn">1 Stone</button>
+                    <button onclick="quickConvert(1000, 'kg')" class="quick-btn">1 Metric Ton</button>
+                </div>
+
+                <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h4 style="margin-top: 0;">Current Conversion</h4>
+                    <div id="conversionDisplay" style="font-size: 1.1rem; color: #1f2937; line-height: 1.8;">
+                        <strong>1 kg</strong> = 2.205 lbs<br>
+                        <strong>1 kg</strong> = 35.274 oz<br>
+                        <strong>1 kg</strong> = 1000 g
+                    </div>
+                </div>
+
+                <div style="background: #dbeafe; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <h4 style="margin-top: 0; color: #1e40af;">Did You Know?</h4>
+                    <p style="margin: 0; color: #1e3a8a; font-size: 0.9rem;">The kilogram is the only SI base unit with a metric prefix. It's defined by the Planck constant, making it one of the most precisely defined units in physics.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Conversions Reference Table -->
+        <div class="content-section">
+            <h2>Common Weight Conversions</h2>
+            <p>Quick reference for frequently used weight conversions:</p>
+
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <thead>
+                        <tr style="background: #2563eb; color: white;">
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">From</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">To</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Multiply by</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">Kilograms</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Pounds</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">2.20462</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">5 kg = 11.02 lbs</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Pounds</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Kilograms</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">0.453592</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">10 lbs = 4.54 kg</td>
+                        </tr>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">Grams</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Ounces</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">0.035274</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">100 g = 3.53 oz</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Ounces</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Grams</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">28.3495</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">5 oz = 141.75 g</td>
+                        </tr>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">Stones</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Kilograms</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">6.35029</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">10 st = 63.5 kg</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Metric Tons</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Kilograms</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">1000</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">2 t = 2000 kg</td>
+                        </tr>
+                        <tr style="background: #f9fafb;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">US Tons</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Pounds</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">2000</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">1 ton = 2000 lbs</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Pounds</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">Ounces</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">16</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">3 lbs = 48 oz</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Understanding Weight Units -->
+        <div class="content-section">
+            <h2>Understanding Weight and Mass Units</h2>
+
+            <h3>What's the Difference Between Weight and Mass?</h3>
+            <p>While often used interchangeably in everyday life, <strong>mass</strong> and <strong>weight</strong> are technically different:</p>
+            <ul>
+                <li><strong>Mass</strong> is the amount of matter in an object, measured in kilograms (kg) or grams (g). Mass remains constant regardless of location.</li>
+                <li><strong>Weight</strong> is the force exerted on an object due to gravity, measured in newtons (N). Weight varies depending on gravitational pull.</li>
+                <li>In practical applications, we commonly use mass units (kg, lbs) to express "weight" in everyday contexts.</li>
+            </ul>
+
+            <h3>Metric System Units</h3>
+            <p>The metric system (International System of Units - SI) uses decimal-based measurements:</p>
+            <ul>
+                <li><strong>Milligram (mg)</strong> - One-thousandth of a gram. Used for medications, vitamins, and precision measurements.</li>
+                <li><strong>Gram (g)</strong> - Base unit for small masses. Common in cooking, food portions, and jewelry.</li>
+                <li><strong>Kilogram (kg)</strong> - 1,000 grams. The SI base unit for mass, used for body weight, groceries, and general purposes.</li>
+                <li><strong>Metric Ton (t)</strong> - 1,000 kilograms. Also called a tonne, used for large masses like vehicles and cargo.</li>
+            </ul>
+
+            <h3>Imperial System Units</h3>
+            <p>The imperial system, primarily used in the United States, includes:</p>
+            <ul>
+                <li><strong>Ounce (oz)</strong> - 1/16 of a pound. Used for food ingredients, postal packages, and precious metals.</li>
+                <li><strong>Pound (lbs)</strong> - Approximately 453.6 grams. Standard unit for body weight and food in the US and UK.</li>
+                <li><strong>Stone (st)</strong> - 14 pounds. Primarily used in the UK and Ireland for body weight measurements.</li>
+                <li><strong>US Ton (ton)</strong> - 2,000 pounds. Also called a short ton, used for large vehicles and industrial materials.</li>
+            </ul>
+
+            <h3>Conversion Formulas</h3>
+            <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <p style="margin: 5px 0; font-family: monospace;"><strong>Metric Conversions:</strong></p>
+                <p style="margin: 5px 0; font-family: monospace;">• 1 kg = 1,000 g = 1,000,000 mg</p>
+                <p style="margin: 5px 0; font-family: monospace;">• 1 metric ton = 1,000 kg</p>
+                <p style="margin: 10px 0 5px 0; font-family: monospace;"><strong>Imperial Conversions:</strong></p>
+                <p style="margin: 5px 0; font-family: monospace;">• 1 lb = 16 oz</p>
+                <p style="margin: 5px 0; font-family: monospace;">• 1 stone = 14 lbs</p>
+                <p style="margin: 5px 0; font-family: monospace;">• 1 US ton = 2,000 lbs</p>
+                <p style="margin: 10px 0 5px 0; font-family: monospace;"><strong>Metric to Imperial:</strong></p>
+                <p style="margin: 5px 0; font-family: monospace;">• 1 kg = 2.20462 lbs</p>
+                <p style="margin: 5px 0; font-family: monospace;">• 1 g = 0.035274 oz</p>
+                <p style="margin: 5px 0; font-family: monospace;">• 1 kg = 0.157473 stones</p>
+            </div>
+        </div>
+
+        <!-- Metric vs Imperial Systems -->
+        <div class="content-section">
+            <h2>Metric vs Imperial: Which Should You Use?</h2>
+
+            <h3>Metric System Advantages</h3>
+            <ul>
+                <li><strong>Universal adoption:</strong> Used by 95% of the world's population</li>
+                <li><strong>Decimal-based:</strong> Easy conversions using powers of 10</li>
+                <li><strong>Scientific standard:</strong> Standard in scientific research and international trade</li>
+                <li><strong>Consistent units:</strong> Coherent system where units relate logically</li>
+                <li><strong>Easy calculation:</strong> Simple mental math for conversions</li>
+            </ul>
+
+            <h3>Imperial System Considerations</h3>
+            <ul>
+                <li><strong>Traditional use:</strong> Deeply ingrained in US and UK culture</li>
+                <li><strong>Human-scale:</strong> Many units relate to everyday human experiences</li>
+                <li><strong>Industry standards:</strong> Still used in certain US industries</li>
+                <li><strong>Familiar measurements:</strong> Easier for some populations to visualize</li>
+            </ul>
+
+            <h3>Countries Using Different Systems</h3>
+            <ul>
+                <li><strong>Metric only:</strong> Most of Europe, Asia, Africa, South America, Australia</li>
+                <li><strong>Imperial primary:</strong> United States (officially dual system)</li>
+                <li><strong>Mixed systems:</strong> United Kingdom, Canada (officially metric, but imperial still common)</li>
+            </ul>
+        </div>
+
+        <!-- Practical Applications -->
+        <div class="content-section">
+            <h2>Practical Applications of Weight Conversion</h2>
+
+            <h3>Health & Fitness</h3>
+            <ul>
+                <li><strong>Body weight tracking:</strong> Convert between kg and lbs for international fitness programs</li>
+                <li><strong>Nutrition labels:</strong> Understanding serving sizes in different units</li>
+                <li><strong>Medication dosages:</strong> Converting mg dosages based on body weight</li>
+                <li><strong>Weight loss goals:</strong> Tracking progress in preferred units</li>
+            </ul>
+
+            <h3>Cooking & Recipes</h3>
+            <ul>
+                <li><strong>International recipes:</strong> Convert ingredient amounts from foreign cookbooks</li>
+                <li><strong>Precision baking:</strong> Accurate measurements for consistent results</li>
+                <li><strong>Portion control:</strong> Understanding serving sizes in different units</li>
+                <li><strong>Food scaling:</strong> Adjusting recipe quantities accurately</li>
+            </ul>
+
+            <h3>Travel & Shopping</h3>
+            <ul>
+                <li><strong>Luggage weight:</strong> Meeting airline weight restrictions in different countries</li>
+                <li><strong>Product comparisons:</strong> Comparing prices per unit across regions</li>
+                <li><strong>Shipping packages:</strong> Understanding postal weight limits internationally</li>
+                <li><strong>Market shopping:</strong> Buying correct quantities in foreign markets</li>
+            </ul>
+
+            <h3>Science & Engineering</h3>
+            <ul>
+                <li><strong>Laboratory work:</strong> Converting measurements for experiments</li>
+                <li><strong>Material specifications:</strong> Understanding weight ratings and capacities</li>
+                <li><strong>Chemical calculations:</strong> Precise mass measurements for reactions</li>
+                <li><strong>Vehicle specifications:</strong> Understanding payload and towing capacity</li>
+            </ul>
+        </div>
+
+        <!-- Real-World Weight Examples -->
+        <div class="content-section">
+            <h2>Real-World Weight Examples</h2>
+            <p>Visualize different weights with common objects:</p>
+
+            <h3>Light Weights (Grams & Ounces)</h3>
+            <ul>
+                <li><strong>1 gram:</strong> A paper clip or US dollar bill</li>
+                <li><strong>5 grams:</strong> A nickel coin or teaspoon of sugar</li>
+                <li><strong>28 grams (1 oz):</strong> A slice of bread or CD</li>
+                <li><strong>100 grams:</strong> A small apple or deck of cards</li>
+                <li><strong>500 grams:</strong> A bottle of water or large smartphone</li>
+            </ul>
+
+            <h3>Medium Weights (Kilograms & Pounds)</h3>
+            <ul>
+                <li><strong>1 kg (2.2 lbs):</strong> A liter of water or small laptop</li>
+                <li><strong>5 kg (11 lbs):</strong> A newborn baby or bag of flour</li>
+                <li><strong>10 kg (22 lbs):</strong> A car tire or medium dog</li>
+                <li><strong>50 kg (110 lbs):</strong> An adult human or large suitcase</li>
+                <li><strong>70 kg (154 lbs):</strong> Average adult male weight</li>
+            </ul>
+
+            <h3>Heavy Weights (Tons)</h3>
+            <ul>
+                <li><strong>1 metric ton:</strong> A small car or grand piano</li>
+                <li><strong>5 metric tons:</strong> An adult elephant</li>
+                <li><strong>10 metric tons:</strong> A loaded dump truck</li>
+                <li><strong>100 metric tons:</strong> A commercial jetliner</li>
+            </ul>
+        </div>
+
+        <!-- Tips for Accurate Weight Measurement -->
+        <div class="content-section">
+            <h2>Tips for Accurate Weight Measurement</h2>
+
+            <h3>Using Kitchen Scales</h3>
+            <ul>
+                <li><strong>Zero/Tare function:</strong> Always reset to zero before weighing</li>
+                <li><strong>Level surface:</strong> Place scale on flat, stable surface</li>
+                <li><strong>Container weight:</strong> Use tare to exclude bowl or container weight</li>
+                <li><strong>Unit selection:</strong> Choose appropriate unit for what you're measuring</li>
+                <li><strong>Calibration:</strong> Regularly calibrate your scale for accuracy</li>
+            </ul>
+
+            <h3>Body Weight Measurement</h3>
+            <ul>
+                <li><strong>Consistent timing:</strong> Weigh yourself at the same time daily (preferably morning)</li>
+                <li><strong>Same conditions:</strong> Measure before eating and after bathroom use</li>
+                <li><strong>Minimal clothing:</strong> Wear similar light clothing each time</li>
+                <li><strong>Same scale:</strong> Use the same scale for consistent tracking</li>
+                <li><strong>Weekly trends:</strong> Focus on weekly averages, not daily fluctuations</li>
+            </ul>
+
+            <h3>Scientific Measurements</h3>
+            <ul>
+                <li><strong>Significant figures:</strong> Record measurements to appropriate precision</li>
+                <li><strong>Environmental factors:</strong> Consider temperature and humidity effects</li>
+                <li><strong>Multiple readings:</strong> Take several measurements and average them</li>
+                <li><strong>Proper equipment:</strong> Use scales appropriate for the weight range</li>
+                <li><strong>Documentation:</strong> Record units clearly to avoid confusion</li>
+            </ul>
+        </div>
+
+        <!-- Weight Conversion Shortcuts -->
+        <div class="content-section">
+            <h2>Weight Conversion Shortcuts</h2>
+
+            <h3>Quick Mental Math Tips</h3>
+            <ul>
+                <li><strong>Kg to lbs (approximate):</strong> Multiply by 2 and add 10% (1 kg ≈ 2.2 lbs)</li>
+                <li><strong>Lbs to kg (approximate):</strong> Divide by 2 and subtract 10% (1 lb ≈ 0.45 kg)</li>
+                <li><strong>Grams to ounces:</strong> Divide by 30 (close enough for cooking)</li>
+                <li><strong>Ounces to grams:</strong> Multiply by 30</li>
+                <li><strong>Stone to kg:</strong> Multiply by 6.5 (approximately)</li>
+            </ul>
+
+            <h3>Common Cooking Conversions</h3>
+            <ul>
+                <li><strong>1 cup flour:</strong> ≈ 120-125 grams (4.4 oz)</li>
+                <li><strong>1 cup sugar:</strong> ≈ 200 grams (7 oz)</li>
+                <li><strong>1 cup butter:</strong> ≈ 227 grams (8 oz / 1/2 lb)</li>
+                <li><strong>1 tablespoon:</strong> ≈ 15 grams (0.5 oz)</li>
+                <li><strong>1 teaspoon:</strong> ≈ 5 grams (0.17 oz)</li>
+            </ul>
+        </div>
+
+        <!-- Historical Context -->
+        <div class="content-section">
+            <h2>Historical Context of Weight Measurements</h2>
+
+            <h3>Evolution of the Kilogram</h3>
+            <p>For 130 years, the kilogram was defined by a physical object called the International Prototype Kilogram (IPK), a platinum-iridium cylinder stored in France. In 2019, the definition changed to be based on fundamental constants of nature (the Planck constant), making it more precise and universal.</p>
+
+            <h3>Origin of the Pound</h3>
+            <p>The word "pound" comes from the Roman "libra pondo" (pound weight), which is why the abbreviation is "lb". The pound has varied throughout history, with the modern pound (453.6 g) becoming standard in 1959 through international agreement.</p>
+
+            <h3>The Stone Unit</h3>
+            <p>The stone (14 pounds) originated in medieval England as a standard for weighing wool and other commodities. While mostly phased out, it remains popular in the UK and Ireland for measuring human body weight.</p>
+
+            <h3>Troy vs Avoirdupois Ounces</h3>
+            <p>There are actually two types of ounces: the common avoirdupois ounce (28.35 g) used for everyday items, and the troy ounce (31.10 g) used exclusively for precious metals and gemstones. This calculator uses avoirdupois ounces.</p>
+        </div>
+
+        <!-- Frequently Asked Questions -->
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>How do I convert kilograms to pounds?</h3>
+            <p>Multiply the number of kilograms by 2.20462 to get pounds. For example: 5 kg × 2.20462 = 11.02 lbs. For quick mental math, multiply by 2.2 or simply double the kg value and add 10%.</p>
+
+            <h3>How many grams are in a pound?</h3>
+            <p>One pound equals exactly 453.592 grams (often rounded to 454 grams for simplicity). Conversely, one gram equals approximately 0.0022 pounds.</p>
+
+            <h3>Why do some countries use stones to measure weight?</h3>
+            <p>The stone unit (equal to 14 pounds or about 6.35 kg) is primarily used in the UK and Ireland for measuring human body weight. It's a traditional unit that has remained in common use despite official adoption of the metric system.</p>
+
+            <h3>What's the difference between a metric ton and a US ton?</h3>
+            <p>A metric ton (or tonne) equals 1,000 kilograms or about 2,204.6 pounds. A US ton (short ton) equals 2,000 pounds or about 907.2 kilograms. There's also a UK ton (long ton) of 2,240 pounds, rarely used today.</p>
+
+            <h3>How accurate is weight conversion?</h3>
+            <p>Weight conversions can be mathematically exact. However, practical measurements are limited by scale precision. Most kitchen scales are accurate to ±1-2 grams, while high-precision laboratory scales can measure to milligrams or even micrograms.</p>
+
+            <h3>Can I use this converter for precious metals?</h3>
+            <p>This converter uses avoirdupois ounces (28.35 g), which are used for most everyday items. Precious metals use troy ounces (31.10 g). For gold, silver, and gems, make sure to use a troy ounce converter or multiply avoirdupois ounces by 1.097 to get troy ounces.</p>
+
+            <h3>Why is the kilogram the base unit instead of the gram?</h3>
+            <p>When the metric system was developed in the 1790s, the gram was too small to be practical as a base unit for everyday use. The kilogram (1,000 grams) was chosen as the base unit, making it unique among SI base units in having a metric prefix.</p>
+
+            <h3>How do I convert weight for cooking recipes?</h3>
+            <p>For most cooking ingredients, you can use this converter directly. However, remember that some recipes measure by volume (cups, tablespoons) rather than weight, and density varies between ingredients. For precision baking, weighing ingredients in grams is recommended.</p>
+        </div>
+
+        <!-- Related Calculators -->
+        <div class="content-section">
+            <h2>Related Calculators & Converters</h2>
+            <div class="calculator-grid">
+                <a href="bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">📊</div>
+                    <h3 class="calc-title">BMI Calculator</h3>
+                    <p class="calc-description">Calculate Body Mass Index</p>
+                </a>
+
+                <a href="ideal-weight-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Ideal Weight Calculator</h3>
+                    <p class="calc-description">Find your ideal body weight</p>
+                </a>
+
+                <a href="calorie-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calorie Calculator</h3>
+                    <p class="calc-description">Calculate daily caloric needs</p>
+                </a>
+
+                <a href="length-converter.html" class="calc-card">
+                    <div class="calc-icon">📏</div>
+                    <h3 class="calc-title">Length Converter</h3>
+                    <p class="calc-description">Convert distance and length units</p>
+                </a>
+
+                <a href="temperature-converter.html" class="calc-card">
+                    <div class="calc-icon">🌡️</div>
+                    <h3 class="calc-title">Temperature Converter</h3>
+                    <p class="calc-description">Convert temperature units</p>
+                </a>
+
+                <a href="volume-converter.html" class="calc-card">
+                    <div class="calc-icon">🥤</div>
+                    <h3 class="calc-title">Volume Converter</h3>
+                    <p class="calc-description">Convert volume and capacity</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Conversion factors to grams (base unit)
+        const conversionFactors = {
+            'mg': 0.001,           // milligrams to grams
+            'g': 1,                // grams (base)
+            'kg': 1000,            // kilograms to grams
+            't': 1000000,          // metric tons to grams
+            'oz': 28.349523125,    // ounces to grams
+            'lbs': 453.59237,      // pounds to grams
+            'st': 6350.29318,      // stones to grams (14 lbs)
+            'ton': 907184.74       // US tons to grams (2000 lbs)
+        };
+
+        // Unit display names
+        const unitNames = {
+            'mg': 'milligrams',
+            'g': 'grams',
+            'kg': 'kilograms',
+            't': 'metric tons',
+            'oz': 'ounces',
+            'lbs': 'pounds',
+            'st': 'stones',
+            'ton': 'US tons'
+        };
+
+        // Track which field is being edited to avoid circular updates
+        let isUpdating = false;
+
+        // Initialize event listeners
+        document.querySelectorAll('.weight-input').forEach(input => {
+            input.addEventListener('input', function() {
+                if (!isUpdating) {
+                    convertWeight(this);
+                }
+            });
+
+            input.addEventListener('focus', function() {
+                this.select();
+            });
+        });
+
+        function convertWeight(sourceInput) {
+            isUpdating = true;
+
+            const sourceValue = parseFloat(sourceInput.value);
+            const sourceUnit = sourceInput.dataset.unit;
+
+            if (isNaN(sourceValue) || sourceValue === '') {
+                // Clear all fields if input is invalid
+                document.querySelectorAll('.weight-input').forEach(input => {
+                    if (input !== sourceInput) {
+                        input.value = '';
+                    }
+                });
+                isUpdating = false;
+                updateConversionDisplay(0, sourceUnit);
+                return;
+            }
+
+            // Convert source value to grams (base unit)
+            const valueInGrams = sourceValue * conversionFactors[sourceUnit];
+
+            // Convert to all other units
+            document.querySelectorAll('.weight-input').forEach(input => {
+                if (input !== sourceInput) {
+                    const targetUnit = input.dataset.unit;
+                    const convertedValue = valueInGrams / conversionFactors[targetUnit];
+
+                    // Format the output based on magnitude
+                    if (Math.abs(convertedValue) < 0.001) {
+                        input.value = convertedValue.toExponential(4);
+                    } else if (Math.abs(convertedValue) < 1) {
+                        input.value = convertedValue.toFixed(6);
+                    } else if (Math.abs(convertedValue) < 100) {
+                        input.value = convertedValue.toFixed(4);
+                    } else if (Math.abs(convertedValue) < 10000) {
+                        input.value = convertedValue.toFixed(2);
+                    } else {
+                        input.value = convertedValue.toFixed(1);
+                    }
+                }
+            });
+
+            updateConversionDisplay(sourceValue, sourceUnit);
+            isUpdating = false;
+        }
+
+        function updateConversionDisplay(value, unit) {
+            if (value === 0 || isNaN(value)) {
+                document.getElementById('conversionDisplay').innerHTML = `
+                    <strong>1 kg</strong> = 2.205 lbs<br>
+                    <strong>1 kg</strong> = 35.274 oz<br>
+                    <strong>1 kg</strong> = 1000 g
+                `;
+                return;
+            }
+
+            const valueInGrams = value * conversionFactors[unit];
+            const displayLines = [];
+
+            // Show 3 most relevant conversions
+            const relevantUnits = getRelevantUnits(unit);
+            relevantUnits.forEach(targetUnit => {
+                const converted = valueInGrams / conversionFactors[targetUnit];
+                const formattedValue = formatDisplayValue(converted);
+                displayLines.push(
+                    `<strong>${value} ${unit}</strong> = ${formattedValue} ${targetUnit}`
+                );
+            });
+
+            document.getElementById('conversionDisplay').innerHTML = displayLines.join('<br>');
+        }
+
+        function getRelevantUnits(sourceUnit) {
+            // Return 3 most commonly needed conversions for each unit
+            const relevantMap = {
+                'mg': ['g', 'oz', 'lbs'],
+                'g': ['kg', 'oz', 'lbs'],
+                'kg': ['lbs', 'g', 'oz'],
+                't': ['kg', 'lbs', 'ton'],
+                'oz': ['g', 'lbs', 'kg'],
+                'lbs': ['kg', 'oz', 'g'],
+                'st': ['kg', 'lbs', 'g'],
+                'ton': ['t', 'kg', 'lbs']
+            };
+            return relevantMap[sourceUnit] || ['g', 'kg', 'lbs'];
+        }
+
+        function formatDisplayValue(value) {
+            if (Math.abs(value) < 0.001) {
+                return value.toExponential(2);
+            } else if (Math.abs(value) < 1) {
+                return value.toFixed(4);
+            } else if (Math.abs(value) < 100) {
+                return value.toFixed(3);
+            } else if (Math.abs(value) < 1000) {
+                return value.toFixed(2);
+            } else {
+                return value.toFixed(1);
+            }
+        }
+
+        function quickConvert(value, unit) {
+            const input = document.querySelector(`[data-unit="${unit}"]`);
+            input.value = value;
+            convertWeight(input);
+
+            // Scroll to top to show results
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function clearAll() {
+            isUpdating = true;
+            document.querySelectorAll('.weight-input').forEach(input => {
+                input.value = '';
+            });
+            // Set 1 kg as default
+            document.getElementById('kilograms').value = '1';
+            isUpdating = false;
+            convertWeight(document.getElementById('kilograms'));
+        }
+
+        // Initialize with 1 kg
+        window.addEventListener('load', function() {
+            convertWeight(document.getElementById('kilograms'));
+        });
+    </script>
+
+    <style>
+        .quick-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-btn:active {
+            transform: translateY(0);
+        }
+
+        .weight-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 8px !important;
+            }
+        }
+    </style>
+</body>
+</html>

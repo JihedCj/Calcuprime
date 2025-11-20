@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free ideal weight calculator - Calculate your ideal body weight using multiple scientific formulas including Robinson, Miller, Devine, and Hamwi.">
+    <meta name="keywords" content="ideal weight calculator, healthy weight calculator, target weight, ideal body weight, Robinson formula, Devine formula">
+
+    <title>Ideal Weight Calculator - Find Your Target Weight | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/ideal-weight-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Ideal Weight Calculator</h1>
+            <p class="calculator-description">Calculate your ideal body weight using multiple scientific formulas and body frame analysis</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Your Information</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Unit System</label>
+                    <select id="unitSystem" class="form-select">
+                        <option value="metric">Metric (kg, cm)</option>
+                        <option value="imperial">Imperial (lbs, inches)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender" class="form-label">Biological Sex</label>
+                    <select id="gender" class="form-select">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <div id="metricInputs">
+                    <div class="form-group">
+                        <label for="heightCm" class="form-label">Height (cm)</label>
+                        <input type="number" id="heightCm" class="form-input" value="175" min="140" max="230">
+                    </div>
+                </div>
+
+                <div id="imperialInputs" style="display: none;">
+                    <div class="form-group">
+                        <label for="heightFt" class="form-label">Height (feet)</label>
+                        <input type="number" id="heightFt" class="form-input" value="5" min="4" max="7">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="heightIn" class="form-label">Height (inches)</label>
+                        <input type="number" id="heightIn" class="form-input" value="9" min="0" max="11">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bodyFrame" class="form-label">Body Frame Size</label>
+                    <select id="bodyFrame" class="form-select">
+                        <option value="small">Small Frame</option>
+                        <option value="medium" selected>Medium Frame</option>
+                        <option value="large">Large Frame</option>
+                    </select>
+                    <p style="font-size: 0.75rem; color: #6b7280; margin-top: 5px;">Wrist size can help determine frame: Small (&lt;15.5cm), Medium (15.5-17cm), Large (&gt;17cm)</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="age" class="form-label">Age (years) - Optional</label>
+                    <input type="number" id="age" class="form-input" value="30" min="18" max="100">
+                    <p style="font-size: 0.75rem; color: #6b7280; margin-top: 5px;">Helps calculate healthy BMI range</p>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Your Ideal Weight Range</h3>
+
+                <div class="result-item" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 12px; margin-bottom: 20px;">
+                    <div class="result-label" style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Recommended Ideal Weight</div>
+                    <div class="result-value" id="idealWeightRange" style="font-size: 2.5rem; margin: 10px 0;">-</div>
+                    <div id="frameAdjustment" style="font-size: 0.85rem; color: rgba(255,255,255,0.85);">Based on medium frame</div>
+                </div>
+
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                    <h4 style="margin-bottom: 15px; font-size: 1rem;">Formula Comparison</h4>
+
+                    <div style="margin-bottom: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <span style="font-weight: 500; font-size: 0.9rem;">Robinson Formula</span>
+                            <span id="robinsonValue" style="font-weight: 600; color: #2563eb;">-</span>
+                        </div>
+                        <div style="background: #e5e7eb; height: 6px; border-radius: 3px; overflow: hidden;">
+                            <div id="robinsonBar" style="background: #2563eb; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <span style="font-weight: 500; font-size: 0.9rem;">Miller Formula</span>
+                            <span id="millerValue" style="font-weight: 600; color: #10b981;">-</span>
+                        </div>
+                        <div style="background: #e5e7eb; height: 6px; border-radius: 3px; overflow: hidden;">
+                            <div id="millerBar" style="background: #10b981; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <span style="font-weight: 500; font-size: 0.9rem;">Devine Formula</span>
+                            <span id="devineValue" style="font-weight: 600; color: #f59e0b;">-</span>
+                        </div>
+                        <div style="background: #e5e7eb; height: 6px; border-radius: 3px; overflow: hidden;">
+                            <div id="devineBar" style="background: #f59e0b; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <span style="font-weight: 500; font-size: 0.9rem;">Hamwi Formula</span>
+                            <span id="hamwiValue" style="font-weight: 600; color: #8b5cf6;">-</span>
+                        </div>
+                        <div style="background: #e5e7eb; height: 6px; border-radius: 3px; overflow: hidden;">
+                            <div id="hamwiBar" style="background: #8b5cf6; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Healthy BMI Range</div>
+                    <div class="result-value" id="bmiRange" style="font-size: 1.3rem;">18.5 - 24.9</div>
+                    <p style="font-size: 0.75rem; color: #6b7280; margin-top: 5px;">Corresponding weight range</p>
+                    <div id="bmiWeightRange" style="font-size: 1.1rem; color: #10b981; margin-top: 8px; font-weight: 600;">-</div>
+                </div>
+
+                <div style="background: #ecfdf5; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #10b981;">
+                    <p style="margin: 0; font-size: 0.875rem; color: #065f46;"><strong>Remember:</strong> Your ideal weight is a range, not a single number. Focus on how you feel, your energy levels, and overall health rather than just the scale.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Ideal Body Weight</h2>
+            <p>Ideal body weight (IBW) is an estimate of the optimal weight for a person based on their height, gender, and body frame. Unlike BMI, which only considers height and weight, ideal weight formulas provide more specific targets that account for biological differences. However, remember that these are estimates - your personal ideal weight may vary based on muscle mass, bone density, and overall body composition.</p>
+
+            <h2>The Four Scientific Formulas</h2>
+            <p>Our calculator uses four well-established medical formulas to give you a comprehensive view of your ideal weight:</p>
+
+            <h3>1. Robinson Formula (1983)</h3>
+            <p>One of the more recent and widely-accepted formulas:</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem;">
+                <strong>Men:</strong> 52 kg + 1.9 kg per inch over 5 feet<br>
+                <strong>Women:</strong> 49 kg + 1.7 kg per inch over 5 feet
+            </p>
+            <p>The Robinson formula is considered very accurate for average body types and is commonly used in medical settings.</p>
+
+            <h3>2. Miller Formula (1983)</h3>
+            <p>Developed in the same year as Robinson's formula, offering a slightly different perspective:</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem;">
+                <strong>Men:</strong> 56.2 kg + 1.41 kg per inch over 5 feet<br>
+                <strong>Women:</strong> 53.1 kg + 1.36 kg per inch over 5 feet
+            </p>
+            <p>Miller's formula tends to give slightly higher base weights and is particularly useful for taller individuals.</p>
+
+            <h3>3. Devine Formula (1974)</h3>
+            <p>One of the oldest and most widely used formulas, originally developed for dosing medication:</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem;">
+                <strong>Men:</strong> 50 kg + 2.3 kg per inch over 5 feet<br>
+                <strong>Women:</strong> 45.5 kg + 2.3 kg per inch over 5 feet
+            </p>
+            <p>Despite its age, the Devine formula remains popular in clinical practice and is still taught in medical schools.</p>
+
+            <h3>4. Hamwi Formula (1964)</h3>
+            <p>The oldest formula in our calculator, created for quick clinical assessments:</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.85rem;">
+                <strong>Men:</strong> 48 kg + 2.7 kg per inch over 5 feet<br>
+                <strong>Women:</strong> 45.5 kg + 2.2 kg per inch over 5 feet
+            </p>
+            <p>Hamwi's formula is simple and practical, making it useful for quick estimates in clinical settings.</p>
+
+            <h2>Body Frame Size: Why It Matters</h2>
+            <p>Body frame size significantly affects your ideal weight. People with larger frames naturally carry more weight in their bone structure and typically have broader shoulders, wider hips, and larger joints. Our calculator adjusts the ideal weight range based on your frame size:</p>
+
+            <ul>
+                <li><strong>Small Frame:</strong> -10% adjustment to calculated weight</li>
+                <li><strong>Medium Frame:</strong> No adjustment (baseline calculation)</li>
+                <li><strong>Large Frame:</strong> +10% adjustment to calculated weight</li>
+            </ul>
+
+            <h3>How to Determine Your Frame Size</h3>
+            <p>The most accurate method is measuring your wrist circumference at the smallest point:</p>
+            <ul>
+                <li><strong>Women:</strong> Small (&lt;14cm / 5.5"), Medium (14-16.5cm / 5.5-6.5"), Large (&gt;16.5cm / 6.5")</li>
+                <li><strong>Men:</strong> Small (&lt;15.9cm / 6.25"), Medium (15.9-17.8cm / 6.25-7"), Large (&gt;17.8cm / 7")</li>
+            </ul>
+            <p>Alternatively, wrap your thumb and middle finger around your wrist:</p>
+            <ul>
+                <li><strong>Small frame:</strong> Fingers overlap</li>
+                <li><strong>Medium frame:</strong> Fingers just touch</li>
+                <li><strong>Large frame:</strong> Fingers don't meet</li>
+            </ul>
+
+            <h2>Healthy Weight vs. Ideal Weight</h2>
+            <p>It's important to distinguish between "ideal" weight and "healthy" weight:</p>
+
+            <ul>
+                <li><strong>Ideal Weight:</strong> A calculated target based on height, gender, and frame size using established formulas. It's a reference point, not an absolute requirement.</li>
+                <li><strong>Healthy Weight:</strong> Any weight within the healthy BMI range (18.5-24.9) where you feel good, have good energy, and maintain good health markers.</li>
+            </ul>
+
+            <p>Your personal healthy weight might be outside the calculated "ideal" range, especially if you:</p>
+            <ul>
+                <li>Have significant muscle mass (athletes, bodybuilders)</li>
+                <li>Are very active or sedentary</li>
+                <li>Have specific health conditions</li>
+                <li>Are older (adults over 65 may have slightly different healthy ranges)</li>
+                <li>Have ethnic backgrounds with different body composition patterns</li>
+            </ul>
+
+            <h2>Factors Affecting Your Ideal Weight</h2>
+
+            <h3>1. Body Composition</h3>
+            <p>Two people at the same height and weight can look completely different. Muscle is denser than fat, so someone with more muscle mass will weigh more but appear leaner. This is why athletes and active individuals often weigh more than the "ideal" formulas suggest.</p>
+
+            <h3>2. Age</h3>
+            <p>Ideal weight ranges can shift with age. Adults tend to lose muscle mass and gain fat as they age (sarcopenia). Some research suggests slightly higher BMIs (23-27) may be healthier for adults over 65, as it provides reserves during illness.</p>
+
+            <h3>3. Genetics and Ethnicity</h3>
+            <p>Genetic factors influence bone density, muscle distribution, and natural body shape. Additionally, different ethnic groups have varying body composition patterns and health risk thresholds:</p>
+            <ul>
+                <li>Asian populations may have higher health risks at lower BMIs</li>
+                <li>Polynesian populations often have higher bone density and muscle mass</li>
+                <li>African populations typically have higher bone density than European populations</li>
+            </ul>
+
+            <h3>4. Activity Level and Lifestyle</h3>
+            <p>Your activity level significantly impacts your healthy weight range. Highly active individuals typically carry more muscle mass and can maintain health at higher weights. Sedentary individuals may be healthiest at the lower end of the weight range.</p>
+
+            <h3>5. Medical History</h3>
+            <p>Certain medical conditions and medications can affect healthy weight ranges. Always consult healthcare providers if you have:</p>
+            <ul>
+                <li>Chronic conditions (diabetes, heart disease, etc.)</li>
+                <li>Hormonal imbalances</li>
+                <li>History of eating disorders</li>
+                <li>Recent surgery or injury</li>
+            </ul>
+
+            <h2>Beyond the Number: True Health Indicators</h2>
+            <p>While knowing your ideal weight is useful, these factors are equally or more important:</p>
+
+            <ul>
+                <li><strong>Energy Levels:</strong> Do you feel energetic throughout the day?</li>
+                <li><strong>Physical Fitness:</strong> Can you perform daily activities comfortably?</li>
+                <li><strong>Blood Work:</strong> Are your cholesterol, blood sugar, and blood pressure healthy?</li>
+                <li><strong>Sleep Quality:</strong> Do you sleep well and wake refreshed?</li>
+                <li><strong>Mental Health:</strong> Do you have a positive relationship with food and your body?</li>
+                <li><strong>Body Composition:</strong> What's your muscle-to-fat ratio?</li>
+                <li><strong>Waist Circumference:</strong> Central obesity is a key health risk factor</li>
+            </ul>
+
+            <h2>Reaching Your Ideal Weight Healthily</h2>
+
+            <h3>If You're Above Your Ideal Weight</h3>
+            <ul>
+                <li><strong>Set realistic goals:</strong> Aim for 0.5-1 kg (1-2 lbs) weight loss per week</li>
+                <li><strong>Create a moderate calorie deficit:</strong> 500-750 calories below maintenance</li>
+                <li><strong>Prioritize protein:</strong> Helps preserve muscle mass during weight loss</li>
+                <li><strong>Strength train:</strong> Maintains metabolism and muscle during calorie deficit</li>
+                <li><strong>Stay hydrated:</strong> Often mistaken for hunger, supports metabolism</li>
+                <li><strong>Get adequate sleep:</strong> Poor sleep disrupts hunger hormones</li>
+                <li><strong>Manage stress:</strong> High cortisol can promote fat storage</li>
+                <li><strong>Be patient:</strong> Sustainable weight loss takes time</li>
+            </ul>
+
+            <h3>If You're Below Your Ideal Weight</h3>
+            <ul>
+                <li><strong>Increase calories gradually:</strong> Add 300-500 calories above maintenance</li>
+                <li><strong>Eat nutrient-dense foods:</strong> Focus on whole foods, not just empty calories</li>
+                <li><strong>Include strength training:</strong> Builds muscle, not just fat</li>
+                <li><strong>Eat more frequently:</strong> 5-6 smaller meals if large meals are difficult</li>
+                <li><strong>Add healthy fats:</strong> Nuts, avocados, olive oil are calorie-dense</li>
+                <li><strong>Monitor progress:</strong> Aim for 0.25-0.5 kg (0.5-1 lb) gain per week</li>
+                <li><strong>Consult a professional:</strong> Rule out underlying health issues</li>
+            </ul>
+
+            <h3>If You're Within Your Ideal Weight Range</h3>
+            <ul>
+                <li><strong>Focus on maintenance:</strong> Eat at your TDEE (Total Daily Energy Expenditure)</li>
+                <li><strong>Prioritize body composition:</strong> Build muscle, reduce fat if desired</li>
+                <li><strong>Maintain healthy habits:</strong> Regular exercise, balanced nutrition</li>
+                <li><strong>Monitor trends:</strong> Track weight weekly, not daily</li>
+                <li><strong>Enjoy flexibility:</strong> Allow for normal weight fluctuations (1-2 kg)</li>
+            </ul>
+
+            <h2>Common Myths About Ideal Weight</h2>
+
+            <h3>Myth 1: "I must reach the exact calculated number"</h3>
+            <p><strong>Truth:</strong> Ideal weight is a range, not a single number. Being within 5-10% of the calculated value while maintaining good health markers is perfectly fine.</p>
+
+            <h3>Myth 2: "The scale is the only measure that matters"</h3>
+            <p><strong>Truth:</strong> Scale weight doesn't distinguish between muscle, fat, bone, and water. Body composition, how your clothes fit, and how you feel are equally important.</p>
+
+            <h3>Myth 3: "I should weigh what I did in high school"</h3>
+            <p><strong>Truth:</strong> Your body changes with age. Adult bodies naturally have different compositions than teenage bodies. Focus on health now, not past numbers.</p>
+
+            <h3>Myth 4: "Everyone at my height should weigh the same"</h3>
+            <p><strong>Truth:</strong> Frame size, muscle mass, bone density, and genetics all affect healthy weight. Two people at the same height can have very different ideal weights.</p>
+
+            <h3>Myth 5: "If I'm within the ideal range, I'm automatically healthy"</h3>
+            <p><strong>Truth:</strong> Weight is just one health indicator. You can be at an "ideal" weight but have poor fitness, nutrition, or health markers.</p>
+
+            <h2>When to Seek Professional Guidance</h2>
+            <p>Consult a healthcare provider, registered dietitian, or certified nutritionist if:</p>
+            <ul>
+                <li>You're significantly outside your ideal weight range</li>
+                <li>You've tried losing or gaining weight without success</li>
+                <li>You have health conditions affected by weight</li>
+                <li>You're experiencing disordered eating patterns</li>
+                <li>You're pregnant or planning pregnancy</li>
+                <li>You're an athlete seeking performance optimization</li>
+                <li>You're over 65 and experiencing unintended weight changes</li>
+                <li>You're taking medications that affect weight</li>
+            </ul>
+
+            <h2>Tips for Long-Term Weight Management</h2>
+
+            <h3>Build Sustainable Habits</h3>
+            <ul>
+                <li>Make gradual changes rather than drastic overhauls</li>
+                <li>Find physical activities you genuinely enjoy</li>
+                <li>Prepare meals at home when possible</li>
+                <li>Practice mindful eating without distractions</li>
+                <li>Keep a food and mood journal</li>
+                <li>Build a support system</li>
+            </ul>
+
+            <h3>Focus on Nutrition Quality</h3>
+            <ul>
+                <li>Eat plenty of vegetables and fruits (aim for 5-9 servings daily)</li>
+                <li>Choose whole grains over refined grains</li>
+                <li>Include lean proteins at every meal</li>
+                <li>Incorporate healthy fats (fish, nuts, olive oil)</li>
+                <li>Limit processed foods and added sugars</li>
+                <li>Stay properly hydrated (8-10 glasses of water daily)</li>
+            </ul>
+
+            <h3>Stay Active Consistently</h3>
+            <ul>
+                <li>Aim for 150 minutes of moderate activity per week</li>
+                <li>Include strength training 2-3 times per week</li>
+                <li>Add flexibility work (yoga, stretching)</li>
+                <li>Increase daily movement (take stairs, walk more)</li>
+                <li>Find exercise buddies for accountability</li>
+                <li>Track your progress without obsessing</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Why do the four formulas give different results?</h3>
+            <p>Each formula was developed by different researchers at different times using different population samples. They each emphasize slightly different factors. That's why we show all four - your ideal weight is best viewed as a range encompassing these different calculations.</p>
+
+            <h3>Which formula is most accurate?</h3>
+            <p>No single formula is definitively "best" for everyone. The Robinson and Miller formulas are most recent (1983) and often preferred in modern medical practice. However, the average of all four formulas typically provides the most reliable estimate for most people.</p>
+
+            <h3>How much can frame size affect ideal weight?</h3>
+            <p>Frame size typically accounts for a 10-15% variation in ideal weight. For someone 170cm tall, this could mean a 5-8 kg difference between small and large frames. This is significant and shows why frame size matters.</p>
+
+            <h3>I'm very muscular. Will this calculator work for me?</h3>
+            <p>These formulas work best for average body compositions. If you're very muscular (bodybuilder, athlete), you may be healthy well above these ranges. Focus on body fat percentage and health markers instead.</p>
+
+            <h3>How often should I check my weight?</h3>
+            <p>Weigh yourself once per week, same day, same time, same conditions (e.g., Saturday morning before breakfast). Daily weigh-ins can be misleading due to normal fluctuations in water weight, food intake, and digestion.</p>
+
+            <h3>What if I can't reach my ideal weight despite healthy habits?</h3>
+            <p>Your personal healthy weight might be different from the calculated ideal. If you're eating well, exercising regularly, and your doctor confirms your health markers are good, you may already be at your optimal weight.</p>
+
+            <h3>Does height alone determine ideal weight?</h3>
+            <p>Height is the primary factor in these formulas, along with biological sex and frame size. However, age, activity level, muscle mass, and genetics also play important roles in determining your personal healthy weight.</p>
+
+            <h3>Can I use this calculator if I'm pregnant?</h3>
+            <p>These formulas are designed for non-pregnant adults. Pregnancy requires specific weight gain guidelines based on your pre-pregnancy weight. Please consult your obstetrician for personalized guidance.</p>
+
+            <h3>Is it better to be at the lower or higher end of my ideal weight range?</h3>
+            <p>Neither is inherently better. Some people feel and perform best at the lower end, others at the higher end. If you're active and muscular, you'll likely be at the higher end. Listen to your body and focus on overall health.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">BMI Calculator</h3>
+                    <p class="calc-description">Calculate your Body Mass Index</p>
+                </a>
+
+                <a href="calorie-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calorie Calculator</h3>
+                    <p class="calc-description">Find your daily caloric needs</p>
+                </a>
+
+                <a href="body-fat-calculator.html" class="calc-card">
+                    <div class="calc-icon">📊</div>
+                    <h3 class="calc-title">Body Fat Calculator</h3>
+                    <p class="calc-description">Estimate body fat percentage</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Unit system toggle
+        document.getElementById('unitSystem').addEventListener('change', function() {
+            const isMetric = this.value === 'metric';
+            document.getElementById('metricInputs').style.display = isMetric ? 'block' : 'none';
+            document.getElementById('imperialInputs').style.display = isMetric ? 'none' : 'block';
+            calculateIdealWeight();
+        });
+
+        function calculateIdealWeight() {
+            const unitSystem = document.getElementById('unitSystem').value;
+            const gender = document.getElementById('gender').value;
+            const bodyFrame = document.getElementById('bodyFrame').value;
+            const age = parseInt(document.getElementById('age').value) || 30;
+
+            let heightCm, heightInches;
+
+            if (unitSystem === 'metric') {
+                heightCm = parseFloat(document.getElementById('heightCm').value);
+                if (!heightCm || heightCm <= 0) return;
+                heightInches = heightCm / 2.54;
+            } else {
+                const heightFt = parseFloat(document.getElementById('heightFt').value);
+                const heightIn = parseFloat(document.getElementById('heightIn').value) || 0;
+                if (!heightFt || heightFt <= 0) return;
+
+                heightInches = (heightFt * 12) + heightIn;
+                heightCm = heightInches * 2.54;
+            }
+
+            // Calculate using all four formulas (results in kg)
+            const heightM = heightCm / 100;
+            const inchesOver5Feet = heightInches - 60;
+
+            let robinson, miller, devine, hamwi;
+
+            if (gender === 'male') {
+                // Robinson: 52 kg + 1.9 kg per inch over 5 feet
+                robinson = 52 + (1.9 * inchesOver5Feet);
+
+                // Miller: 56.2 kg + 1.41 kg per inch over 5 feet
+                miller = 56.2 + (1.41 * inchesOver5Feet);
+
+                // Devine: 50 kg + 2.3 kg per inch over 5 feet
+                devine = 50 + (2.3 * inchesOver5Feet);
+
+                // Hamwi: 48 kg + 2.7 kg per inch over 5 feet
+                hamwi = 48 + (2.7 * inchesOver5Feet);
+            } else {
+                // Robinson: 49 kg + 1.7 kg per inch over 5 feet
+                robinson = 49 + (1.7 * inchesOver5Feet);
+
+                // Miller: 53.1 kg + 1.36 kg per inch over 5 feet
+                miller = 53.1 + (1.36 * inchesOver5Feet);
+
+                // Devine: 45.5 kg + 2.3 kg per inch over 5 feet
+                devine = 45.5 + (2.3 * inchesOver5Feet);
+
+                // Hamwi: 45.5 kg + 2.2 kg per inch over 5 feet
+                hamwi = 45.5 + (2.2 * inchesOver5Feet);
+            }
+
+            // Handle heights under 5 feet
+            if (inchesOver5Feet < 0) {
+                robinson = Math.max(40, robinson);
+                miller = Math.max(42, miller);
+                devine = Math.max(38, devine);
+                hamwi = Math.max(36, hamwi);
+            }
+
+            // Calculate average of all formulas
+            const averageWeight = (robinson + miller + devine + hamwi) / 4;
+
+            // Adjust for body frame
+            let frameMultiplier = 1.0;
+            let frameText = 'medium frame';
+            if (bodyFrame === 'small') {
+                frameMultiplier = 0.90;
+                frameText = 'small frame';
+            } else if (bodyFrame === 'large') {
+                frameMultiplier = 1.10;
+                frameText = 'large frame';
+            }
+
+            const adjustedWeight = averageWeight * frameMultiplier;
+            const minIdealWeight = adjustedWeight * 0.95;
+            const maxIdealWeight = adjustedWeight * 1.05;
+
+            // Calculate BMI-based healthy weight range
+            const minHealthyWeightBMI = 18.5 * heightM * heightM;
+            const maxHealthyWeightBMI = 24.9 * heightM * heightM;
+
+            // Display ideal weight range
+            let idealRangeText;
+            if (unitSystem === 'metric') {
+                idealRangeText = `${minIdealWeight.toFixed(1)} - ${maxIdealWeight.toFixed(1)} kg`;
+                document.getElementById('bmiWeightRange').textContent =
+                    `${minHealthyWeightBMI.toFixed(1)} - ${maxHealthyWeightBMI.toFixed(1)} kg`;
+            } else {
+                const minLbs = minIdealWeight * 2.20462;
+                const maxLbs = maxIdealWeight * 2.20462;
+                idealRangeText = `${minLbs.toFixed(1)} - ${maxLbs.toFixed(1)} lbs`;
+                document.getElementById('bmiWeightRange').textContent =
+                    `${(minHealthyWeightBMI * 2.20462).toFixed(1)} - ${(maxHealthyWeightBMI * 2.20462).toFixed(1)} lbs`;
+            }
+
+            document.getElementById('idealWeightRange').textContent = idealRangeText;
+            document.getElementById('frameAdjustment').textContent = `Based on ${frameText}`;
+
+            // Display individual formula results
+            const unit = unitSystem === 'metric' ? 'kg' : 'lbs';
+            const converter = unitSystem === 'metric' ? 1 : 2.20462;
+
+            document.getElementById('robinsonValue').textContent = `${(robinson * converter).toFixed(1)} ${unit}`;
+            document.getElementById('millerValue').textContent = `${(miller * converter).toFixed(1)} ${unit}`;
+            document.getElementById('devineValue').textContent = `${(devine * converter).toFixed(1)} ${unit}`;
+            document.getElementById('hamwiValue').textContent = `${(hamwi * converter).toFixed(1)} ${unit}`;
+
+            // Calculate and display comparison bars
+            const weights = [robinson, miller, devine, hamwi];
+            const maxWeight = Math.max(...weights);
+            const minWeight = Math.min(...weights);
+            const range = maxWeight - minWeight;
+
+            // Ensure bars show meaningful differences
+            const minBarWidth = 85; // minimum bar width percentage
+
+            function calculateBarWidth(weight) {
+                if (range === 0) return 100;
+                const normalizedWidth = ((weight - minWeight) / range) * (100 - minBarWidth) + minBarWidth;
+                return normalizedWidth;
+            }
+
+            document.getElementById('robinsonBar').style.width = calculateBarWidth(robinson) + '%';
+            document.getElementById('millerBar').style.width = calculateBarWidth(miller) + '%';
+            document.getElementById('devineBar').style.width = calculateBarWidth(devine) + '%';
+            document.getElementById('hamwiBar').style.width = calculateBarWidth(hamwi) + '%';
+
+            // Animate results
+            animateResults();
+        }
+
+        function animateResults() {
+            const resultElements = document.querySelectorAll('.result-value, .calc-card');
+            resultElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 50);
+            });
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateIdealWeight);
+            input.addEventListener('change', calculateIdealWeight);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', calculateIdealWeight);
+    </script>
+</body>
+</html>
