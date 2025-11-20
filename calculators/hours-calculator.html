@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free hours calculator - Calculate time between hours, work hours, and wages. Time duration and overtime calculator.">
-    <meta name="keywords" content="hours calculator, time calculator, work hours, time duration, hours and minutes calculator">
+    <meta name="description" content="Free hours calculator - Calculate time between hours, work hours, and wages. Time duration calculator with overtime support for accurate payroll calculations.">
+    <meta name="keywords" content="hours calculator, time calculator, work hours, time duration, hours and minutes calculator, wage calculator">
     <title>Hours Calculator | CalcuPrime</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="canonical" href="https://calcuprime.com/calculators/hours-calculator.html">
@@ -20,35 +20,174 @@
     <main class="calculator-container">
         <div class="calculator-header">
             <h1 class="calculator-title">Hours Calculator</h1>
-            <p class="calculator-description">Calculate time duration and wages</p>
+            <p class="calculator-description">Calculate work hours, time duration, and wages accurately</p>
         </div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs">
-                <h3>Enter Values</h3>
-                <div class="form-group"><label for="input1" class="form-label">Input</label><input type="number" id="input1" class="form-input" value="10" min="0"></div>
-                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+                <h3>Time Period</h3>
+                <div class="form-group">
+                    <label for="startTime" class="form-label">Start Time</label>
+                    <input type="time" id="startTime" class="form-input" value="09:00">
+                </div>
+                <div class="form-group">
+                    <label for="endTime" class="form-label">End Time</label>
+                    <input type="time" id="endTime" class="form-input" value="17:00">
+                </div>
+                <div class="form-group">
+                    <label for="breakMinutes" class="form-label">Break Time (minutes)</label>
+                    <input type="number" id="breakMinutes" class="form-input" value="30" min="0" step="15">
+                </div>
+                <h3 style="margin-top: 1.5rem;">Wage Calculation (Optional)</h3>
+                <div class="form-group">
+                    <label for="hourlyRate" class="form-label">Hourly Rate ($)</label>
+                    <input type="number" id="hourlyRate" class="form-input" value="20" min="0" step="0.5">
+                </div>
+                <div class="form-group">
+                    <label for="overtimeRate" class="form-label">Overtime Rate (x multiplier)</label>
+                    <input type="number" id="overtimeRate" class="form-input" value="1.5" min="1" max="3" step="0.1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate Hours</button>
             </div>
             <div class="calculator-results">
-                <h3>Results</h3>
-                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+                <h3>Time Worked</h3>
+                <div class="result-item">
+                    <div class="result-label">Total Hours</div>
+                    <div class="result-value" id="totalHours" style="font-size: 2.5rem; color: #10b981;">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Hours & Minutes</div>
+                    <div class="result-value" id="hoursMinutes">0h 0m</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Regular Hours</div>
+                    <div class="result-value" id="regularHours">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Overtime Hours</div>
+                    <div class="result-value" id="overtimeHours">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Pay</div>
+                    <div class="result-value" id="totalPay" style="font-size: 1.8rem; color: #10b981;">$0.00</div>
+                </div>
             </div>
         </div>
         <div class="content-section">
-            <h2>About This Calculator</h2>
-            <p>Our Hours Calculator provides quick and accurate results. Perfect for students, professionals, and anyone needing reliable calculations.</p>
-            <h2>How It Works</h2>
-            <p>Simply enter your values above and click Calculate. The tool instantly processes your input and displays accurate results.</p>
+            <h2>How to Calculate Work Hours</h2>
+            <p>Calculating work hours accurately is essential for payroll, time tracking, and project management. The basic formula subtracts start time from end time and deducts breaks: Total Hours = (End Time - Start Time) - Break Time. For example, working from 9:00 AM to 5:00 PM with a 30-minute lunch break equals 7.5 hours: 8 hours total minus 0.5 hours break.</p>
+
+            <p>Converting between hours and decimal format simplifies wage calculations. Most payroll systems use decimal hours rather than hours:minutes format. To convert: divide minutes by 60 and add to hours. 7 hours 30 minutes = 7 + (30÷60) = 7.5 hours. Conversely, to convert decimal hours to time: multiply the decimal portion by 60 to get minutes. 7.75 hours = 7 hours + (0.75×60) = 7 hours 45 minutes.</p>
+
+            <h2>Standard Work Hours and Overtime</h2>
+            <p>The Fair Labor Standards Act (FLSA) establishes 40 hours per week as the standard workweek for non-exempt employees in the United States. Hours worked beyond 40 in a single workweek qualify for overtime pay at 1.5 times the regular rate ("time-and-a-half"). Some states have additional overtime laws—California requires overtime for hours over 8 in a single day and double-time for hours over 12 in a day.</p>
+
+            <p><strong>Regular vs. Overtime Hours:</strong> If your standard workweek is Monday-Friday, 8 hours daily, any hours beyond 40 total weekly hours or 8 daily hours (in applicable states) are overtime. Working 10 hours Monday through Thursday (40 hours total) then 6 hours Friday equals 6 overtime hours in California but only regular hours federally since the weekly total is 46 hours (6 overtime federally).</p>
+
+            <p><strong>Overtime Rates:</strong> Standard overtime is 1.5× regular rate. At $20/hour, overtime is $30/hour. Some union contracts or employers offer premium overtime rates—double-time (2×), triple-time (3×)—for holidays, seventh consecutive day worked, or extreme hours. Always verify your employment contract and applicable labor laws for specific overtime rules.</p>
+
+            <h2>Break Time and Unpaid Periods</h2>
+            <p>Federal law doesn't require meal or rest breaks for adult workers, though many states do. When breaks are provided, federal law distinguishes between paid and unpaid breaks:</p>
+
+            <p><strong>Short Breaks (5-20 minutes):</strong> Coffee breaks, restroom breaks, and similar short rest periods are generally paid time. Employers cannot deduct these from work hours.</p>
+
+            <p><strong>Meal Breaks (30+ minutes):</strong> Bona fide meal periods where employees are completely relieved of duties are typically unpaid. If you're required to remain on-site or answer phones during lunch, the break may be compensable. Most employers deduct 30-60 minute unpaid lunch breaks from daily hours.</p>
+
+            <p><strong>State Requirements:</strong> California requires 10-minute paid rest breaks for every 4 hours worked and 30-minute unpaid meal breaks for shifts exceeding 5 hours. New York requires 30-minute meal breaks for shifts over 6 hours. Check your state's labor department for specific break requirements.</p>
+
+            <h2>Time Tracking Best Practices</h2>
+            <p><strong>Clock In/Out Precisely:</strong> Start timing when you begin work, not when you arrive at the workplace. If you arrive at 8:50 AM but start work at 9:00 AM, clock in at 9:00 AM. Similarly, clock out when you stop working, not when you leave the building. Accurate time records protect both employees and employers from disputes.</p>
+
+            <p><strong>Document Break Times:</strong> Track when breaks start and end rather than estimating. Many time tracking systems automatically deduct standard break times (30 minutes), but if your actual break was 45 minutes, report accurately to avoid time theft accusations.</p>
+
+            <p><strong>Round Time Appropriately:</strong> Employers may round time to nearest quarter-hour (15 minutes) using the 7-minute rule: 1-7 minutes rounds down, 8-14 minutes rounds up. Clocking in at 8:07 AM rounds to 8:00 AM; clocking in at 8:08 AM rounds to 8:15 AM. Rounding must be neutral—not systematically biased against employees.</p>
+
+            <p><strong>Weekly Time Summaries:</strong> Calculate weekly hours to identify overtime before it occurs. If you've worked 35 hours Monday-Thursday, Friday's work will include overtime beyond 5 hours. Plan accordingly or communicate with management about schedule adjustments if overtime isn't desired.</p>
+
+            <h2>Calculating Weekly and Annual Hours</h2>
+            <p><strong>Full-Time Equivalent (FTE):</strong> Standard full-time employment is 40 hours weekly, totaling 2,080 hours annually (40 hours × 52 weeks). Part-time employees working 20 hours weekly work 1,040 hours annually (0.5 FTE). These calculations help employers budget and determine benefits eligibility.</p>
+
+            <p><strong>Accounting for Holidays and PTO:</strong> Most full-time employees don't actually work 2,080 hours annually due to paid time off, holidays, and sick days. Typical full-time employee works approximately 1,800-1,960 hours annually after deducting 10 federal holidays, 2 weeks vacation, and occasional sick days. Project planning should account for realistic available hours, not theoretical maximum hours.</p>
+
+            <p><strong>Billable vs. Non-Billable Hours:</strong> Professionals in consulting, legal, and similar fields distinguish billable hours (client-facing work) from non-billable hours (administration, training, business development). Tracking both categories reveals productivity and helps price services appropriately. Target billable utilization rates typically range from 60-80% of total work hours depending on industry.</p>
+
+            <h2>Common Time Calculation Errors</h2>
+            <p><strong>Confusing Decimal Hours with Hours:Minutes:</strong> 7.5 hours equals 7 hours 30 minutes, not 7 hours 5 minutes. This common error occurs when people interpret the decimal as minutes. Always convert properly: decimal × 60 = minutes.</p>
+
+            <p><strong>Forgetting to Deduct Breaks:</strong> Many workers calculate hours by simply subtracting start from end time without deducting unpaid meal breaks. This overstates hours worked and can lead to payroll errors or disputes.</p>
+
+            <p><strong>Misapplying Overtime Rules:</strong> Overtime typically calculates weekly, not daily (except in specific states). Working 12 hours Monday and 4 hours each Tuesday-Friday totals 28 hours—no overtime federally. Understanding when overtime actually triggers prevents unrealistic wage expectations.</p>
+
+            <p><strong>Rounding Errors Accumulation:</strong> Individually small rounding errors compound over pay periods. If time rounds down 5 minutes daily, that's 25 minutes weekly or 21+ hours annually—significant wage loss. Track actual times and verify employer rounding practices comply with regulations.</p>
+
+            <h2>Tools and Technology for Time Tracking</h2>
+            <p><strong>Physical Time Clocks:</strong> Traditional punch clocks using cards or badges provide clear, documented start/end times. Modern versions use biometric scanners (fingerprint, facial recognition) to prevent "buddy punching" where coworkers clock in for absent employees.</p>
+
+            <p><strong>Software Time Tracking:</strong> Digital tools like TSheets, Clockify, Toggl, and Harvest allow employees to clock in/out from computers or smartphones. These systems automatically calculate hours, categorize time by project, generate reports, and integrate with payroll software. Many include GPS verification for remote workers.</p>
+
+            <p><strong>Spreadsheet Tracking:</strong> Simple spreadsheets work for basic time tracking. Create columns for date, start time, end time, break time, total hours, and notes. Formula: =(End-Start)*24-Break/60 converts time to decimal hours. Spreadsheets provide flexibility but require manual data entry and calculation verification.</p>
+
+            <p><strong>Mobile Apps:</strong> Specialized apps offer features like offline tracking, project switching, automated reports, and integration with invoicing systems. Essential for contractors, freelancers, and remote workers who need portable time tracking.</p>
+
+            <h2>The Bottom Line</h2>
+            <p>Accurate time calculation protects workers and employers alike. Workers ensure proper compensation for hours worked including overtime, while employers maintain compliant payroll practices and control labor costs. Whether you're an employee tracking hours for accurate pay, a freelancer billing clients, or a manager overseeing team schedules, understanding time calculations, overtime rules, and proper tracking methods is essential. Use reliable tools, understand applicable labor laws, document time precisely, and verify calculations regularly. Small errors compound over time—30 minutes of untracked overtime weekly equals 26 hours annually, representing significant lost wages or compliance violations. Calculate carefully, track consistently, and review thoroughly.</p>
         </div>
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
     <script src="../js/main.js"></script>
     <script>
         function calculate() {
-            const input1 = parseFloat(document.getElementById('input1').value);
-            const result = input1 * 2;
-            document.getElementById('result').textContent = result.toFixed(2);
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+            const breakMinutes = parseFloat(document.getElementById('breakMinutes').value) || 0;
+            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+            const overtimeRate = parseFloat(document.getElementById('overtimeRate').value) || 1.5;
+
+            if (!startTime || !endTime) {
+                return;
+            }
+
+            // Convert times to minutes since midnight
+            const [startHour, startMin] = startTime.split(':').map(Number);
+            const [endHour, endMin] = endTime.split(':').map(Number);
+
+            let startMinutes = startHour * 60 + startMin;
+            let endMinutes = endHour * 60 + endMin;
+
+            // Handle overnight shifts
+            if (endMinutes < startMinutes) {
+                endMinutes += 24 * 60;
+            }
+
+            // Calculate total minutes worked (minus break)
+            const totalMinutes = endMinutes - startMinutes - breakMinutes;
+            const totalHours = totalMinutes / 60;
+
+            // Calculate regular and overtime hours (assuming 8-hour standard day)
+            const regularHours = Math.min(totalHours, 8);
+            const overtimeHours = Math.max(0, totalHours - 8);
+
+            // Calculate pay
+            const regularPay = regularHours * hourlyRate;
+            const overtimePay = overtimeHours * hourlyRate * overtimeRate;
+            const totalPay = regularPay + overtimePay;
+
+            // Display results
+            document.getElementById('totalHours').textContent = totalHours.toFixed(2);
+
+            const hours = Math.floor(totalHours);
+            const minutes = Math.round((totalHours - hours) * 60);
+            document.getElementById('hoursMinutes').textContent = hours + 'h ' + minutes + 'm';
+
+            document.getElementById('regularHours').textContent = regularHours.toFixed(2);
+            document.getElementById('overtimeHours').textContent = overtimeHours.toFixed(2);
+            document.getElementById('totalPay').textContent = '$' + totalPay.toFixed(2);
         }
-        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+            input.addEventListener('change', calculate);
+        });
+
         window.addEventListener('load', calculate);
     </script>
 </body>
