@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free TDEE calculator - Calculate total daily energy expenditure for weight loss, maintenance, or gain. Accurate calorie needs.">
-    <meta name="keywords" content="tdee calculator, total daily energy expenditure, calorie needs, metabolism calculator, energy expenditure">
+    <meta name="description" content="Free TDEE calculator - Calculate your Total Daily Energy Expenditure for weight loss, maintenance, or muscle gain. Accurate calorie needs calculator.">
+    <meta name="keywords" content="tdee calculator, total daily energy expenditure, calorie calculator, BMR calculator, metabolism calculator">
     <title>TDEE Calculator | CalcuPrime</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="canonical" href="https://calcuprime.com/calculators/tdee-calculator.html">
@@ -20,35 +20,207 @@
     <main class="calculator-container">
         <div class="calculator-header">
             <h1 class="calculator-title">TDEE Calculator</h1>
-            <p class="calculator-description">Calculate total daily energy expenditure</p>
+            <p class="calculator-description">Calculate your Total Daily Energy Expenditure for optimal nutrition planning</p>
         </div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs">
-                <h3>Calculator Input</h3>
-                <div class="form-group"><label for="input1" class="form-label">Value 1</label><input type="number" id="input1" class="form-input" value="100" min="0" step="1"></div>
-                <div class="form-group"><label for="input2" class="form-label">Value 2</label><input type="number" id="input2" class="form-input" value="5" min="0" step="0.1"></div>
-                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+                <h3>Your Information</h3>
+                <div class="form-group">
+                    <label for="age" class="form-label">Age (years)</label>
+                    <input type="number" id="age" class="form-input" value="30" min="15" max="80" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select id="gender" class="form-input">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="weight" class="form-label">Weight (lbs)</label>
+                    <input type="number" id="weight" class="form-input" value="170" min="50" max="500" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="height" class="form-label">Height (inches)</label>
+                    <input type="number" id="height" class="form-input" value="68" min="48" max="96" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="activity" class="form-label">Activity Level</label>
+                    <select id="activity" class="form-input">
+                        <option value="1.2">Sedentary (little or no exercise)</option>
+                        <option value="1.375">Lightly Active (1-3 days/week)</option>
+                        <option value="1.55" selected>Moderately Active (3-5 days/week)</option>
+                        <option value="1.725">Very Active (6-7 days/week)</option>
+                        <option value="1.9">Extremely Active (physical job + training)</option>
+                    </select>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate TDEE</button>
             </div>
             <div class="calculator-results">
-                <h3>Results</h3>
-                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+                <h3>Your Results</h3>
+                <div class="result-item">
+                    <div class="result-label">Basal Metabolic Rate (BMR)</div>
+                    <div class="result-value" id="bmr">0 calories/day</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">TDEE</div>
+                    <div class="result-value" id="tdee" style="font-size: 2.5rem; color: #10b981;">0 calories/day</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Weight Loss (-500 cal/day)</div>
+                    <div class="result-value" id="weightLoss">0 calories/day</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Muscle Gain (+300 cal/day)</div>
+                    <div class="result-value" id="muscleGain">0 calories/day</div>
+                </div>
             </div>
         </div>
         <div class="content-section">
-            <h2>How to Use This Calculator</h2>
-            <p>Enter your values above to get instant, accurate calculations. Our TDEE Calculator provides reliable results for your needs.</p>
-            <h2>Understanding Your Results</h2>
-            <p>The calculator processes your inputs using proven formulas to deliver accurate results you can trust for planning and decision-making.</p>
+            <h2>Understanding TDEE: Your Daily Calorie Needs</h2>
+            <p>Total Daily Energy Expenditure (TDEE) represents the total number of calories your body burns in a 24-hour period, including all activities from sleeping to intense exercise. Understanding your TDEE is fundamental to achieving any body composition goal, whether you want to lose fat, build muscle, or maintain your current weight. Our TDEE calculator uses the scientifically validated Mifflin-St Jeor equation combined with activity multipliers to provide accurate calorie estimates tailored to your individual characteristics.</p>
+
+            <h2>BMR vs. TDEE: Understanding the Difference</h2>
+            <p><strong>Basal Metabolic Rate (BMR)</strong> is the number of calories your body burns at complete rest to maintain vital functions like breathing, circulation, cell production, and nutrient processing. It represents 60-75% of your total daily calorie burn for most people. Think of BMR as the calories you'd burn lying in bed all day doing absolutely nothing.</p>
+
+            <p><strong>TDEE</strong> takes your BMR and multiplies it by an activity factor to account for all the energy you expend through daily activities, exercise, and even the thermic effect of food (the calories burned digesting and processing nutrients). TDEE is your actual daily calorie expenditure and the number you should base your nutrition plan on.</p>
+
+            <p>The relationship is simple: TDEE = BMR × Activity Factor. For example, if your BMR is 1,500 calories and you're moderately active (activity factor 1.55), your TDEE would be approximately 2,325 calories per day.</p>
+
+            <h2>The Science Behind the Calculation</h2>
+            <p>Our calculator uses the <strong>Mifflin-St Jeor equation</strong>, developed in 1990 and considered the most accurate BMR formula by the American Dietetic Association. The equation accounts for the four key factors that determine metabolic rate:</p>
+
+            <p><strong>For Men:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) - (5 × age) + 5</p>
+
+            <p><strong>For Women:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) - (5 × age) - 161</p>
+
+            <p>This formula reveals several important metabolic truths: Muscle mass (reflected in weight) increases metabolism significantly. Taller people burn more calories. Metabolism naturally decreases with age (about 1-2% per decade after age 30). Men typically have higher BMRs than women due to generally higher muscle mass and testosterone levels.</p>
+
+            <h2>Activity Levels Explained</h2>
+            <p>Choosing the correct activity level is crucial for accuracy. Be honest and realistic – most people overestimate their activity level.</p>
+
+            <p><strong>Sedentary (1.2):</strong> Desk job with minimal walking, no regular exercise. You spend most of your day sitting. Daily step count typically under 5,000 steps. This applies to the majority of office workers who don't exercise regularly.</p>
+
+            <p><strong>Lightly Active (1.375):</strong> Light exercise or sports 1-3 days per week, or a job that involves some standing/walking. Daily steps typically 5,000-7,500. Examples include teaching, retail work, or office workers who hit the gym 2-3 times weekly for light workouts.</p>
+
+            <p><strong>Moderately Active (1.55):</strong> Moderate exercise 3-5 days per week. Daily steps typically 7,500-10,000. This describes people with active jobs (nursing, waiting tables) or those doing structured exercise 45-60 minutes most days of the week.</p>
+
+            <p><strong>Very Active (1.725):</strong> Hard exercise 6-7 days per week or a physically demanding job plus regular training. Daily steps over 10,000. Examples include construction workers, personal trainers, or dedicated athletes training 60-90 minutes daily.</p>
+
+            <p><strong>Extremely Active (1.9):</strong> Very hard exercise twice per day or a highly physical job with additional training. This level applies to professional athletes, military personnel in training, or those with labor-intensive jobs who also train intensely. Very few people truly fall into this category.</p>
+
+            <h2>Using TDEE for Weight Loss</h2>
+            <p>Weight loss requires a caloric deficit – consuming fewer calories than your TDEE. The scientifically recommended approach is a deficit of 15-25% below your TDEE, or approximately 300-750 calories per day.</p>
+
+            <p><strong>The 500 Calorie Deficit:</strong> A daily deficit of 500 calories theoretically creates a weekly deficit of 3,500 calories, roughly equivalent to one pound of fat loss per week. This sustainable approach preserves muscle mass and maintains energy levels while promoting steady fat loss.</p>
+
+            <p><strong>Avoid Extreme Deficits:</strong> Cutting calories too aggressively (1,000+ calorie deficit) triggers metabolic adaptation, muscle loss, extreme hunger, hormonal disruption, and often results in rebound weight gain. Women should generally not drop below 1,200 calories daily, and men below 1,500 calories, without medical supervision.</p>
+
+            <p><strong>Adjust as You Lose:</strong> As you lose weight, your TDEE decreases because a smaller body requires fewer calories to maintain. Recalculate your TDEE every 10-15 pounds lost to ensure you maintain an appropriate caloric deficit.</p>
+
+            <h2>Using TDEE for Muscle Gain</h2>
+            <p>Building muscle requires a caloric surplus – consuming more calories than your TDEE. However, the surplus should be modest to maximize muscle gain while minimizing fat gain.</p>
+
+            <p><strong>The Optimal Surplus:</strong> Research suggests 200-400 extra calories per day creates optimal conditions for muscle growth without excessive fat gain. Larger surpluses don't accelerate muscle growth proportionally but do increase fat accumulation. Natural lifters can gain approximately 0.5-2 pounds of muscle per month, depending on training experience and genetics.</p>
+
+            <p><strong>Progressive Overload is Key:</strong> Excess calories alone don't build muscle. You must provide a training stimulus (progressive resistance training) and adequate protein (0.7-1 gram per pound of body weight) for your body to utilize those extra calories for muscle synthesis rather than fat storage.</p>
+
+            <p><strong>Lean Bulking Strategy:</strong> Start with a 250-calorie surplus. Monitor weight weekly. Aim to gain 0.5-1% of body weight per month. If gaining faster, reduce calories slightly. If not gaining, increase by 100-200 calories. This patient approach maximizes muscle-to-fat gain ratio.</p>
+
+            <h2>Factors Affecting TDEE Accuracy</h2>
+            <p>TDEE calculators provide estimates, not exact measurements. Several factors can influence the accuracy:</p>
+
+            <p><strong>Body Composition:</strong> Muscle burns more calories than fat tissue. Two people with identical height, weight, age, and gender but different body compositions will have different TDEEs. Someone with more muscle mass will have a higher TDEE than someone with more body fat.</p>
+
+            <p><strong>Genetic Variation:</strong> Individual metabolic rates can vary by 15-20% from predicted values due to genetic factors. Some people are "hard gainers" with naturally high metabolisms, while others have slower metabolisms.</p>
+
+            <p><strong>NEAT (Non-Exercise Activity Thermogenesis):</strong> Fidgeting, maintaining posture, and other unconscious movements vary significantly between individuals and can account for 100-700 calories daily. Active fidgeters burn substantially more calories than still sitters, even with identical formal exercise levels.</p>
+
+            <p><strong>Metabolic Adaptation:</strong> Prolonged caloric restriction causes the body to adapt by reducing metabolic rate beyond what would be expected from weight loss alone. This adaptive thermogenesis can reduce TDEE by 10-15%, making continued fat loss more challenging.</p>
+
+            <p><strong>Hormonal Factors:</strong> Thyroid function, insulin sensitivity, cortisol levels, and sex hormones all influence metabolic rate. Hypothyroidism, for example, can reduce metabolism by 20-40%. Certain medications (beta-blockers, antidepressants, steroids) also affect metabolic rate.</p>
+
+            <h2>Tracking and Adjusting Your Calories</h2>
+            <p>TDEE calculations are your starting point, not your final answer. Real-world results require tracking and adjustment:</p>
+
+            <p><strong>Week 1-2:</strong> Track weight daily, average weekly. Track calories meticulously using a food scale and tracking app like MyFitnessPal or Cronometer. This initial period establishes your baseline.</p>
+
+            <p><strong>Week 3-4:</strong> Analyze results. Weight stable? Your estimated TDEE is accurate. Gaining weight? Your actual TDEE is lower than estimated – reduce intake by 200 calories. Losing weight? Your TDEE is higher than estimated – increase by 200 calories (unless weight loss is your goal).</p>
+
+            <p><strong>Ongoing:</strong> Make small adjustments (100-200 calories) every 2-3 weeks based on progress toward your goal. Weight should change gradually: 0.5-1% of body weight per week for cutting, 0.5-1% per month for bulking.</p>
+
+            <p><strong>Track Consistently:</strong> Weigh yourself at the same time daily (ideally morning, after bathroom, before eating). Use weekly average weights to identify trends, ignoring daily fluctuations from water retention, food volume, and hormones.</p>
+
+            <h2>Common TDEE Mistakes to Avoid</h2>
+            <p><strong>Overestimating Activity Level:</strong> The most common error. Unless you're exercising vigorously 60+ minutes daily or have a physical job, you're probably less active than you think. When in doubt, choose the lower activity level and adjust based on results.</p>
+
+            <p><strong>Not Tracking Accurately:</strong> Eyeballing portions, forgetting cooking oils and beverages, and not weighing foods leads to consuming 20-50% more calories than estimated. Use a food scale, track everything including condiments and drinks, and log honestly.</p>
+
+            <p><strong>Being Too Aggressive:</strong> Extreme deficits create hormonal disruption, muscle loss, and metabolic adaptation. Extreme surpluses lead to excessive fat gain. Patience with moderate calorie adjustments yields better long-term results than aggressive approaches.</p>
+
+            <p><strong>Ignoring Protein:</strong> TDEE tells you total calories but not macronutrient distribution. Inadequate protein (less than 0.7g per pound body weight) leads to muscle loss during cuts and suboptimal muscle gain during bulks. Aim for 0.7-1g protein per pound of body weight daily.</p>
+
+            <p><strong>Not Recalculating:</strong> Your TDEE changes as your weight, activity level, and body composition change. Recalculate every 10-15 pounds lost or gained, and whenever activity levels change significantly.</p>
+
+            <h2>TDEE for Different Goals</h2>
+            <p><strong>Aggressive Fat Loss:</strong> 25% deficit (TDEE × 0.75). Expect 1-2 pounds lost per week. Only sustainable for 8-12 weeks. Best for those with significant fat to lose (25+ pounds). Higher risk of muscle loss and metabolic adaptation.</p>
+
+            <p><strong>Moderate Fat Loss:</strong> 15-20% deficit (TDEE × 0.80-0.85). Expect 0.5-1 pound lost per week. Sustainable for 3-6 months. Preserves muscle mass well. Recommended for most people. Better adherence due to less extreme restriction.</p>
+
+            <p><strong>Maintenance:</strong> Eat at your TDEE. Weight remains stable. Use this during breaks from cutting/bulking, around holidays, or when life stress is high. Maintenance phases help restore hormones and metabolism after prolonged deficits.</p>
+
+            <p><strong>Lean Bulk:</strong> 5-10% surplus (TDEE × 1.05-1.10). Expect 0.5-1% body weight gain per month. Sustainable for 6-12 months. Maximizes muscle-to-fat gain ratio. Recommended for most lifters. Slower but cleaner gains.</p>
+
+            <p><strong>Aggressive Bulk:</strong> 15-20% surplus (TDEE × 1.15-1.20). Expect 1-2% body weight gain per month. Best for "hard gainers" with fast metabolisms or those far from genetic potential. Significant fat gain accompanies muscle growth. Requires subsequent cutting phase.</p>
+
+            <h2>When to Consult a Professional</h2>
+            <p>While TDEE calculators work well for most people, certain situations warrant professional guidance:</p>
+            <ul>
+                <li>Eating disorders history or disordered eating patterns</li>
+                <li>Metabolic or hormonal conditions (thyroid disorders, PCOS, diabetes)</li>
+                <li>Taking medications that affect metabolism or appetite</li>
+                <li>Pregnancy or breastfeeding (special caloric needs apply)</li>
+                <li>Competitive athletes with specific performance goals</li>
+                <li>Significant weight to lose (100+ pounds) requiring medical supervision</li>
+                <li>Difficulty losing weight despite consistent tracking and appropriate caloric deficit</li>
+            </ul>
+
+            <p>A registered dietitian (RD) or certified sports nutritionist can provide personalized guidance, meal planning, and support. They can also identify underlying issues affecting your metabolism and provide evidence-based solutions tailored to your specific circumstances.</p>
+
+            <h2>The Bottom Line</h2>
+            <p>TDEE is your body's caloric maintenance level – the number of calories you need to maintain your current weight. It's the foundation for any nutrition plan, whether your goal is fat loss, muscle gain, or athletic performance. Calculate your TDEE, set your goal-appropriate calorie target, track consistently, and adjust based on real-world results. Remember that TDEE is an estimate that you'll refine through experience. Focus on sustainable, modest changes rather than extreme approaches for long-term success.</p>
         </div>
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
     <script src="../js/main.js"></script>
     <script>
         function calculate() {
-            const input1 = parseFloat(document.getElementById('input1').value);
-            const input2 = parseFloat(document.getElementById('input2').value);
-            const result = input1 * input2;
-            document.getElementById('result').textContent = result.toFixed(2);
+            const age = parseFloat(document.getElementById('age').value) || 30;
+            const gender = document.getElementById('gender').value;
+            const weightLbs = parseFloat(document.getElementById('weight').value) || 170;
+            const heightInches = parseFloat(document.getElementById('height').value) || 68;
+            const activity = parseFloat(document.getElementById('activity').value) || 1.55;
+
+            // Convert to metric
+            const weightKg = weightLbs * 0.453592;
+            const heightCm = heightInches * 2.54;
+
+            // Mifflin-St Jeor equation
+            let bmr;
+            if (gender === 'male') {
+                bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) + 5;
+            } else {
+                bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
+            }
+
+            const tdee = bmr * activity;
+            const weightLossCals = tdee - 500;
+            const muscleGainCals = tdee + 300;
+
+            document.getElementById('bmr').textContent = Math.round(bmr).toLocaleString() + ' calories/day';
+            document.getElementById('tdee').textContent = Math.round(tdee).toLocaleString() + ' calories/day';
+            document.getElementById('weightLoss').textContent = Math.round(weightLossCals).toLocaleString() + ' calories/day';
+            document.getElementById('muscleGain').textContent = Math.round(muscleGainCals).toLocaleString() + ' calories/day';
         }
         document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
         window.addEventListener('load', calculate);
