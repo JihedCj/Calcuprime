@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free blood pressure calculator - Check if your blood pressure is normal, high, or low. Understand systolic and diastolic readings.">
-    <meta name="keywords" content="blood pressure calculator, bp calculator, hypertension calculator, systolic diastolic, blood pressure chart">
+    <meta name="description" content="Free blood pressure calculator - Check if your blood pressure is normal, elevated, or hypertensive based on AHA guidelines. Understand systolic and diastolic readings and health implications.">
+    <meta name="keywords" content="blood pressure calculator, bp calculator, hypertension calculator, systolic diastolic, blood pressure chart, AHA guidelines">
     <title>Blood Pressure Calculator | CalcuPrime</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="canonical" href="https://calcuprime.com/calculators/blood-pressure-calculator.html">
@@ -20,36 +20,168 @@
     <main class="calculator-container">
         <div class="calculator-header">
             <h1 class="calculator-title">Blood Pressure Calculator</h1>
-            <p class="calculator-description">Calculate and interpret blood pressure readings</p>
+            <p class="calculator-description">Check your blood pressure category and understand your cardiovascular health</p>
         </div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs">
-                <h3>Enter Values</h3>
-                <div class="form-group"><label for="input1" class="form-label">Input 1</label><input type="number" id="input1" class="form-input" value="100" min="0"></div>
-                <div class="form-group"><label for="input2" class="form-label">Input 2</label><input type="number" id="input2" class="form-input" value="10" min="0"></div>
-                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+                <h3>Blood Pressure Reading</h3>
+                <div class="form-group">
+                    <label for="systolic" class="form-label">Systolic (Top Number) mmHg</label>
+                    <input type="number" id="systolic" class="form-input" value="120" min="70" max="200" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="diastolic" class="form-label">Diastolic (Bottom Number) mmHg</label>
+                    <input type="number" id="diastolic" class="form-input" value="80" min="40" max="140" step="1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Check Blood Pressure</button>
             </div>
             <div class="calculator-results">
-                <h3>Results</h3>
-                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+                <h3>Your Blood Pressure Category</h3>
+                <div class="result-item">
+                    <div class="result-label">Reading</div>
+                    <div class="result-value" id="bpReading" style="font-size: 2.5rem; color: #10b981;">120/80</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Category</div>
+                    <div class="result-value" id="category">Normal</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Recommendation</div>
+                    <div class="result-value" id="recommendation" style="font-size: 1rem;">Maintain healthy lifestyle</div>
+                </div>
             </div>
         </div>
         <div class="content-section">
-            <h2>About This Calculator</h2>
-            <p>Use our Blood Pressure Calculator for fast, accurate calculations. Enter your values above and get instant results.</p>
-            <h2>Key Features</h2>
-            <ul><li>Instant calculations</li><li>Accurate results</li><li>Easy to use</li><li>Mobile-friendly</li></ul>
+            <h2>Understanding Blood Pressure</h2>
+            <p>Blood pressure measures the force your blood exerts against artery walls as your heart pumps. Expressed as two numbers—systolic over diastolic (e.g., 120/80 mmHg)—blood pressure serves as a vital indicator of cardiovascular health and disease risk. The systolic number (top) represents pressure when your heart contracts and pumps blood, while the diastolic number (bottom) represents pressure when your heart relaxes between beats. Both numbers matter, and elevated readings in either category increase risk for heart disease, stroke, kidney disease, and other serious health conditions.</p>
+
+            <p>Approximately 48% of American adults have hypertension (high blood pressure), yet many remain undiagnosed because hypertension typically causes no symptoms until it produces serious complications. Regular blood pressure monitoring enables early detection and intervention, preventing the damage hypertension silently inflicts on your heart, brain, kidneys, and blood vessels over years or decades.</p>
+
+            <h2>Blood Pressure Categories (American Heart Association)</h2>
+            <p>The American Heart Association defines five blood pressure categories based on systolic and diastolic measurements:</p>
+
+            <p><strong>Normal:</strong> Systolic less than 120 mmHg AND diastolic less than 80 mmHg. This healthy range indicates low cardiovascular risk. Maintain this level through healthy lifestyle habits—balanced diet, regular exercise, healthy weight, limited alcohol, no smoking, and stress management.</p>
+
+            <p><strong>Elevated:</strong> Systolic 120-129 mmHg AND diastolic less than 80 mmHg. You don't have hypertension yet, but you're likely to develop it without intervention. Elevated blood pressure doubles your risk of cardiovascular complications compared to normal blood pressure. Aggressive lifestyle modification at this stage often prevents progression to hypertension, avoiding the need for medication.</p>
+
+            <p><strong>Stage 1 Hypertension:</strong> Systolic 130-139 mmHg OR diastolic 80-89 mmHg. Your doctor will likely recommend lifestyle changes and may prescribe blood pressure medication depending on your cardiovascular risk factors (diabetes, kidney disease, previous heart attack or stroke). Studies show that treating Stage 1 hypertension reduces heart attack and stroke risk by approximately 25%.</p>
+
+            <p><strong>Stage 2 Hypertension:</strong> Systolic 140 mmHg or higher OR diastolic 90 mmHg or higher. You need blood pressure medication in addition to lifestyle changes. Your doctor will likely prescribe a combination of medications to bring blood pressure under control quickly, reducing your elevated risk for cardiovascular events.</p>
+
+            <p><strong>Hypertensive Crisis:</strong> Systolic higher than 180 mmHg AND/OR diastolic higher than 120 mmHg. This medical emergency requires immediate attention. If you measure blood pressure in this range, wait five minutes and retest. If it remains extremely elevated and you're experiencing symptoms (chest pain, shortness of breath, back pain, numbness/weakness, vision changes, difficulty speaking), call 911 immediately. Even without symptoms, contact your doctor urgently—extremely high blood pressure damages organs and demands immediate medical intervention.</p>
+
+            <h2>What Causes High Blood Pressure?</h2>
+            <p><strong>Primary (Essential) Hypertension (90-95% of cases):</strong> No single identifiable cause. This type develops gradually over years due to complex interactions among genetics, aging, and lifestyle factors. Family history strongly predicts hypertension risk—if both parents have high blood pressure, you face approximately 60% lifetime risk. Age increases risk as arteries stiffen and become less elastic. Lifestyle factors—obesity, high sodium intake, excessive alcohol consumption, physical inactivity, chronic stress, and poor sleep—all contribute independently and cumulatively to blood pressure elevation.</p>
+
+            <p><strong>Secondary Hypertension (5-10% of cases):</strong> Caused by underlying medical conditions or medications. Common causes include kidney disease (most common), sleep apnea, thyroid disorders, adrenal gland tumors, certain medications (birth control pills, decongestants, NSAIDs, some antidepressants), and illegal drugs (cocaine, amphetamines). Secondary hypertension often appears suddenly, causes higher blood pressure than primary hypertension, and doesn't respond well to standard medications. Treating the underlying condition often resolves the high blood pressure.</p>
+
+            <h2>Health Risks of High Blood Pressure</h2>
+            <p>Hypertension earned the nickname "silent killer" because it damages your body for years without symptoms, then suddenly produces catastrophic events. The elevated pressure gradually injures blood vessels and organs:</p>
+
+            <p><strong>Heart Disease and Heart Attack:</strong> High blood pressure forces your heart to work harder, causing the heart muscle to thicken (left ventricular hypertrophy). The thickened muscle requires more oxygen but receives less due to narrowed coronary arteries damaged by hypertension. This mismatch causes chest pain (angina) and increases heart attack risk. Hypertension causes approximately 50% of heart attacks and heart failure cases.</p>
+
+            <p><strong>Stroke:</strong> Elevated pressure damages and weakens blood vessels throughout the brain, making them prone to rupture (hemorrhagic stroke) or blockage (ischemic stroke). Hypertension contributes to approximately 70% of strokes. The higher your blood pressure, the greater your stroke risk—each 20 mmHg increase in systolic pressure or 10 mmHg increase in diastolic pressure doubles stroke risk.</p>
+
+            <p><strong>Kidney Disease:</strong> Your kidneys contain tiny blood vessels that filter waste from blood. High blood pressure damages these delicate vessels, reducing kidney function and potentially leading to kidney failure requiring dialysis or transplant. Hypertension causes approximately 30% of kidney failure cases in the United States.</p>
+
+            <p><strong>Vision Loss:</strong> Hypertension damages the tiny blood vessels supplying your retina, causing hypertensive retinopathy. Severe cases lead to bleeding, blurred vision, and permanent vision loss.</p>
+
+            <p><strong>Cognitive Decline and Dementia:</strong> Chronic hypertension, especially during midlife (ages 40-60), significantly increases risk for vascular dementia and Alzheimer's disease. Blood pressure control during middle age appears protective against cognitive decline in later life.</p>
+
+            <h2>How to Measure Blood Pressure Correctly</h2>
+            <p>Accurate measurement requires proper technique. Incorrect measurements lead to misdiagnosis—overestimating blood pressure results in unnecessary medication; underestimating misses dangerous hypertension.</p>
+
+            <p><strong>Before Measurement:</strong> Avoid caffeine, exercise, and smoking for 30 minutes before measuring. Empty your bladder—a full bladder can increase readings by 10-15 mmHg. Sit quietly for 5 minutes before measurement in a chair with back support, feet flat on the floor, legs uncrossed. Avoid talking during measurement.</p>
+
+            <p><strong>Proper Cuff Placement:</strong> Use appropriate cuff size (a too-small cuff falsely elevates readings; too-large cuff falsely lowers them). Position the cuff on bare skin (not over clothing) on your upper arm at heart level. The cuff's bottom edge should sit one inch above the elbow bend. Rest your arm on a table or armrest at heart level—holding your arm up or letting it hang down produces inaccurate readings.</p>
+
+            <p><strong>Taking the Reading:</strong> Home monitors typically inflate automatically. Remain still and quiet during inflation and deflation. Take 2-3 readings one minute apart and average them. If readings differ by more than 5 mmHg, take additional readings and average all results.</p>
+
+            <p><strong>When to Measure:</strong> Blood pressure fluctuates throughout the day, typically lowest during sleep and highest mid-morning. For consistency, measure at the same time daily. Morning measurements (before medication) and evening measurements provide comprehensive data. Record all readings with date and time to share with your doctor.</p>
+
+            <p><strong>Home vs. Office Readings:</strong> Some people have "white coat hypertension"—elevated readings in medical settings due to anxiety but normal readings at home. Others have "masked hypertension"—normal office readings but elevated readings at home. Home monitoring over weeks provides more accurate assessment than single office visits. The American Heart Association recommends home monitoring for anyone diagnosed with or at risk for hypertension.</p>
+
+            <h2>Lifestyle Changes to Lower Blood Pressure</h2>
+            <p><strong>Weight Loss:</strong> Losing excess weight powerfully lowers blood pressure. Each kilogram (2.2 lbs) lost typically reduces systolic pressure by approximately 1 mmHg. Losing 10 lbs often lowers blood pressure by 5-10 mmHg. Weight loss also improves medication effectiveness—many people reduce or eliminate blood pressure medications after substantial weight loss.</p>
+
+            <p><strong>DASH Diet:</strong> The Dietary Approaches to Stop Hypertension (DASH) diet emphasizes fruits, vegetables, whole grains, lean proteins, and low-fat dairy while limiting saturated fat, cholesterol, and sweets. DASH diet lowers systolic pressure by 8-14 mmHg on average. The diet works by providing high amounts of potassium, calcium, magnesium, and fiber while reducing sodium.</p>
+
+            <p><strong>Sodium Reduction:</strong> Most Americans consume 3,400 mg sodium daily; the ideal target is less than 1,500 mg (less than 2,300 mg minimum). Reducing sodium intake from 3,500 mg to 1,500 mg daily lowers systolic pressure by approximately 6-8 mmHg. Most dietary sodium comes from processed and restaurant foods, not the salt shaker. Read nutrition labels and choose low-sodium options.</p>
+
+            <p><strong>Regular Exercise:</strong> Aerobic exercise (brisk walking, jogging, cycling, swimming) for 30 minutes most days of the week lowers blood pressure by 5-8 mmHg. The blood pressure-lowering effect begins within weeks and persists as long as you remain active. Even without weight loss, exercise independently reduces blood pressure.</p>
+
+            <p><strong>Limit Alcohol:</strong> Drinking more than moderate amounts (more than 2 drinks daily for men, 1 for women) raises blood pressure and reduces medication effectiveness. Heavy drinkers who cut back to moderate levels often reduce systolic pressure by 4-6 mmHg.</p>
+
+            <p><strong>Quit Smoking:</strong> While smoking doesn't directly cause chronic hypertension, each cigarette temporarily spikes blood pressure and damages blood vessels, amplifying hypertension's harmful effects. Quitting smoking dramatically reduces cardiovascular risk at any blood pressure level.</p>
+
+            <p><strong>Manage Stress:</strong> Chronic stress contributes to hypertension through multiple mechanisms—stress hormones, poor coping behaviors (overeating, alcohol use), and disturbed sleep. Stress management techniques (meditation, deep breathing, yoga, regular exercise) modestly reduce blood pressure while improving overall well-being.</p>
+
+            <h2>Blood Pressure Medications</h2>
+            <p>When lifestyle changes alone don't adequately control blood pressure, medications become necessary. Common classes include:</p>
+
+            <p><strong>Diuretics (water pills):</strong> Help kidneys remove sodium and water, reducing blood volume and pressure. Often prescribed first due to effectiveness, low cost, and decades of safety data. Common side effects include increased urination and potassium loss (often addressed with potassium supplements or potassium-sparing diuretics).</p>
+
+            <p><strong>ACE Inhibitors:</strong> Block production of angiotensin II, a hormone that narrows blood vessels. Generally well-tolerated with protective effects on kidneys, making them especially valuable for people with diabetes or kidney disease. Common side effect: dry cough (occurs in 10-15% of users).</p>
+
+            <p><strong>Angiotensin II Receptor Blockers (ARBs):</strong> Block angiotensin II's action rather than its production. Similar benefits to ACE inhibitors without the cough side effect. Often prescribed when ACE inhibitors cause intolerable cough.</p>
+
+            <p><strong>Calcium Channel Blockers:</strong> Prevent calcium from entering heart and blood vessel cells, causing relaxation and dilation. Effective for treating hypertension and angina. Common side effects include ankle swelling and constipation.</p>
+
+            <p><strong>Beta Blockers:</strong> Reduce heart rate and cardiac output. Often prescribed after heart attacks or for people with certain heart rhythm problems. May cause fatigue and aren't typically first-line treatment for uncomplicated hypertension.</p>
+
+            <p>Most people require two or more medications for adequate blood pressure control. Combination therapy often uses lower doses of multiple drugs, minimizing side effects while maximizing blood pressure reduction.</p>
+
+            <h2>When to See a Doctor</h2>
+            <p>See your doctor if you measure blood pressure consistently above 120/80 mmHg. Even elevated blood pressure (120-129 mmHg systolic) warrants medical discussion about lifestyle modifications and cardiovascular risk assessment. If you measure Stage 1 or Stage 2 hypertension (130/80 mmHg or higher), schedule an appointment for evaluation and possible treatment.</p>
+
+            <p>Seek immediate emergency care (call 911) if you measure blood pressure above 180/120 mmHg and experience chest pain, shortness of breath, back pain, numbness/weakness, vision changes, or difficulty speaking. These symptoms suggest acute organ damage requiring emergency intervention.</p>
+
+            <p>Even without symptoms, blood pressure above 180/120 mmHg demands urgent medical attention. Contact your doctor immediately or go to an urgent care facility for evaluation.</p>
+
+            <h2>The Bottom Line</h2>
+            <p>Blood pressure management is one of the most important and effective ways to prevent heart disease, stroke, kidney failure, and premature death. Know your numbers, understand your category, and take appropriate action. Normal blood pressure deserves maintenance through healthy lifestyle choices. Elevated or high blood pressure requires intervention—lifestyle modifications at minimum, medications when necessary. The investment in blood pressure control pays enormous dividends in longevity, quality of life, and freedom from cardiovascular disease. Check your blood pressure regularly, work with your healthcare provider, and commit to the lifestyle changes and treatments needed to keep your pressure in the healthy range.</p>
         </div>
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
     <script src="../js/main.js"></script>
     <script>
         function calculate() {
-            const input1 = parseFloat(document.getElementById('input1').value);
-            const input2 = parseFloat(document.getElementById('input2').value);
-            const result = input1 + input2;
-            document.getElementById('result').textContent = result.toFixed(2);
+            const systolic = parseFloat(document.getElementById('systolic').value) || 120;
+            const diastolic = parseFloat(document.getElementById('diastolic').value) || 80;
+
+            // Display reading
+            document.getElementById('bpReading').textContent = systolic + '/' + diastolic;
+
+            // Determine category and recommendation based on AHA guidelines
+            let category, recommendation, color;
+
+            if (systolic >= 180 || diastolic >= 120) {
+                category = 'Hypertensive Crisis';
+                recommendation = 'SEEK IMMEDIATE MEDICAL ATTENTION - Call 911 if experiencing symptoms';
+                color = '#dc2626'; // red
+            } else if (systolic >= 140 || diastolic >= 90) {
+                category = 'Stage 2 Hypertension';
+                recommendation = 'Consult doctor immediately - Medication and lifestyle changes needed';
+                color = '#ea580c'; // orange-red
+            } else if (systolic >= 130 || diastolic >= 80) {
+                category = 'Stage 1 Hypertension';
+                recommendation = 'See doctor soon - Lifestyle changes and possible medication';
+                color = '#f59e0b'; // orange
+            } else if (systolic >= 120 && diastolic < 80) {
+                category = 'Elevated';
+                recommendation = 'Improve lifestyle to prevent hypertension - Diet, exercise, weight loss';
+                color = '#eab308'; // yellow
+            } else {
+                category = 'Normal';
+                recommendation = 'Maintain healthy lifestyle - Continue monitoring regularly';
+                color = '#10b981'; // green
+            }
+
+            document.getElementById('category').textContent = category;
+            document.getElementById('category').style.color = color;
+            document.getElementById('recommendation').textContent = recommendation;
         }
+
         document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
         window.addEventListener('load', calculate);
     </script>
