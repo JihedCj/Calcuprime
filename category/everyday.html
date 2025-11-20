@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Everyday calculators for daily life: tip calculator, discount calculator, age calculator, date calculator, time calculator, and grade calculator. Make daily calculations easy and accurate.">
+    <meta name="keywords" content="everyday calculator, tip calculator, discount calculator, age calculator, date calculator, time calculator, grade calculator, daily tools">
+    <meta name="author" content="CalcuPrime">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Everyday Calculators - Daily Life Tools | CalcuPrime">
+    <meta property="og:description" content="Essential calculators for everyday life. Calculate tips, discounts, age, dates, times, and grades with ease.">
+    <meta property="og:image" content="assets/og-image.jpg">
+    <meta property="og:url" content="https://calcuprime.com/category/everyday.html">
+
+    <title>Everyday Calculators - Daily Life Tools | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/category/everyday.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        .category-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px var(--spacing-lg);
+            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .category-hero h1 {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .category-hero p {
+            font-size: var(--font-size-lg);
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto var(--spacing-lg);
+            line-height: 1.6;
+        }
+
+        .category-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-2xl);
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            opacity: 0.9;
+        }
+
+        .category-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .overview-section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .overview-section h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-primary);
+        }
+
+        .overview-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-card h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            margin: 0;
+        }
+
+        .calculator-section {
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .section-heading {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-xl);
+            color: var(--text-primary);
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .calculator-card {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .calculator-card.coming-soon {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .calculator-card.coming-soon:hover {
+            transform: none;
+        }
+
+        .icon {
+            font-size: 2.5rem;
+        }
+
+        .card-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: auto;
+        }
+
+        .faq-section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .faq-section h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .faq-item {
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            display: none;
+            padding-left: 24px;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        .related-categories {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .related-categories h2 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .category-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .category-link {
+            background: var(--bg-primary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .category-link:hover {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .benefit-item {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .benefit-item h3 {
+            margin-top: 0;
+            color: var(--text-primary);
+        }
+
+        .benefit-item p {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .category-hero {
+                padding: 40px var(--spacing-lg);
+            }
+
+            .category-hero h1 {
+                font-size: var(--font-size-3xl);
+            }
+
+            .category-stats {
+                gap: var(--spacing-lg);
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                font-size: var(--font-size-xl);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .category-hero {
+                padding: 30px var(--spacing-md);
+            }
+
+            .category-hero h1 {
+                font-size: var(--font-size-2xl);
+            }
+
+            .category-stats {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+
+            .overview-section,
+            .faq-section,
+            .related-categories {
+                padding: var(--spacing-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#everyday">Everyday</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Category Hero Section -->
+    <section class="category-hero">
+        <div class="category-container">
+            <h1>Everyday Calculators</h1>
+            <p>Essential tools for your daily life. From calculating restaurant tips to finding the best deals, our everyday calculators make quick work of common calculations.</p>
+            <div class="category-stats">
+                <div class="stat">
+                    <div class="stat-number">6+</div>
+                    <div class="stat-label">Calculators</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free to Use</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">Fast</div>
+                    <div class="stat-label">Instant Results</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="category-container">
+        <!-- Overview Section -->
+        <section class="overview-section">
+            <h2>About Everyday Calculators</h2>
+            <p>Life is full of quick calculations that can impact your daily decisions. Whether you're dining out, shopping, managing time, or tracking grades, our everyday calculators make it easy to get accurate results instantly.</p>
+            <p>These practical tools are designed for real-world situations you encounter every day. No complicated features, no unnecessary steps—just straightforward calculations that save you time and help you make better decisions.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>⚡ Instant Results</h3>
+                    <p>Get calculations in real-time as you enter values</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 Mobile Friendly</h3>
+                    <p>Use on any device—phone, tablet, or computer</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Accurate</h3>
+                    <p>Precision calculations you can trust</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🆓 Completely Free</h3>
+                    <p>No registration, no ads, no paywalls</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculators Section -->
+        <section class="calculator-section">
+            <h2 class="section-heading">Our Everyday Calculators</h2>
+
+            <div class="calculator-grid">
+                <!-- Tip Calculator -->
+                <a href="../calculators/tip-calculator.html" class="calculator-card">
+                    <div class="icon">💵</div>
+                    <h3 class="card-title">Tip Calculator</h3>
+                    <p class="card-description">Calculate restaurant tips, split bills, and determine fair gratuity amounts with ease</p>
+                </a>
+
+                <!-- Discount Calculator -->
+                <a href="../calculators/discount-calculator.html" class="calculator-card">
+                    <div class="icon">🏷️</div>
+                    <h3 class="card-title">Discount Calculator</h3>
+                    <p class="card-description">Find sale prices, calculate discounts, and see your savings instantly</p>
+                </a>
+
+                <!-- Age Calculator - Coming Soon -->
+                <div class="calculator-card coming-soon">
+                    <div class="icon">🎂</div>
+                    <h3 class="card-title">Age Calculator</h3>
+                    <p class="card-description">Calculate your exact age in years, months, and days</p>
+                    <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+
+                <!-- Date Calculator - Coming Soon -->
+                <div class="calculator-card coming-soon">
+                    <div class="icon">📅</div>
+                    <h3 class="card-title">Date Calculator</h3>
+                    <p class="card-description">Find the number of days between two dates</p>
+                    <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+
+                <!-- Time Calculator - Coming Soon -->
+                <div class="calculator-card coming-soon">
+                    <div class="icon">⏱️</div>
+                    <h3 class="card-title">Time Calculator</h3>
+                    <p class="card-description">Add, subtract, and convert time durations easily</p>
+                    <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+
+                <!-- Grade Calculator - Coming Soon -->
+                <div class="calculator-card coming-soon">
+                    <div class="icon">📊</div>
+                    <h3 class="card-title">Grade Calculator</h3>
+                    <p class="card-description">Calculate your course grade based on assignments and tests</p>
+                    <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Use These Calculators Section -->
+        <section class="overview-section">
+            <h2>Why Use Our Everyday Calculators?</h2>
+            <p>Daily life involves countless small calculations that are easy to get wrong. These calculators help you:</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <h3>Save Time</h3>
+                    <p>Get instant results instead of fumbling with a calculator or mental math</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Avoid Mistakes</h3>
+                    <p>Automated calculations mean fewer arithmetic errors</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Make Smart Decisions</h3>
+                    <p>Get accurate information to help you choose better deals and options</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Save Money</h3>
+                    <p>See discounts and savings clearly to maximize your budget</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Perfect for Everyone</h3>
+                    <p>Simple interfaces anyone can use, no technical knowledge needed</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Always Available</h3>
+                    <p>Access anytime, anywhere—on your phone, tablet, or computer</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-toggle">▶</span>
+                    <span>When should I use the Tip Calculator?</span>
+                </div>
+                <div class="faq-answer">
+                    Use the Tip Calculator whenever you're dining out and need to calculate gratuity. It helps you determine appropriate tip amounts based on service quality, handles bill splitting, and calculates per-person amounts. It's perfect for restaurants, bars, food delivery, and any service where tipping is customary.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-toggle">▶</span>
+                    <span>How does the Discount Calculator work?</span>
+                </div>
+                <div class="faq-answer">
+                    Enter the original price and the discount percentage (or amount), and the calculator instantly shows your savings and the final price you'll pay. It's perfect for sales, coupons, promotional codes, and bulk discounts. You can also use it to calculate what percentage discount you're receiving.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-toggle">▶</span>
+                    <span>Will you add more everyday calculators?</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! We're working on adding Age, Date, Time, and Grade calculators. These tools are coming soon and will follow the same user-friendly design. Check back regularly for updates, or explore our other calculator categories in the meantime.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-toggle">▶</span>
+                    <span>Are these calculators really free?</span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely! All CalcuPrime calculators are 100% free to use. There's no registration required, no ads interrupting your work, and no paywalls or hidden fees. We believe useful tools should be accessible to everyone.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-toggle">▶</span>
+                    <span>Can I use these on my phone?</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! All our calculators are fully responsive and work perfectly on mobile devices, tablets, and desktops. Just open the calculator in your mobile browser and you're ready to go—no app download needed.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-toggle">▶</span>
+                    <span>What's the best tipping percentage?</span>
+                </div>
+                <div class="faq-answer">
+                    Standard tipping in the US is 15-20% for good service. 18% is a solid middle ground, but the percentage can vary based on service quality, restaurant type, and local customs. Our Tip Calculator provides guidance on tipping percentages and helps you make informed decisions.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-toggle">▶</span>
+                    <span>Are the calculations accurate?</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, our calculators use precise mathematical algorithms to ensure accurate results. All calculations are performed in real-time in your browser. However, remember that calculators are tools to assist you—always verify important calculations when needed.
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Categories Section -->
+        <section class="related-categories">
+            <h2>Explore Other Categories</h2>
+            <p>Looking for more calculators? Check out our other popular categories:</p>
+            <div class="category-links">
+                <a href="../category/finance.html" class="category-link">Finance Calculators</a>
+                <a href="../category/health.html" class="category-link">Health Calculators</a>
+                <a href="../category/converters.html" class="category-link">Unit Converters</a>
+                <a href="../index.html#math" class="category-link">Math Calculators</a>
+                <a href="../index.html#chemistry" class="category-link">Chemistry Tools</a>
+                <a href="../index.html" class="category-link">All Calculators</a>
+            </div>
+        </section>
+
+        <!-- SEO Content Section -->
+        <section class="overview-section">
+            <h2>About Everyday Calculations</h2>
+            <p>Everyday calculations are part of modern life. From tipping at restaurants to finding the best deals while shopping, accurate calculations help you make smarter financial decisions and save time.</p>
+
+            <h3>Common Everyday Calculations</h3>
+            <p>People regularly need to calculate:</p>
+            <ul style="margin-left: var(--spacing-xl); color: var(--text-secondary);">
+                <li><strong>Restaurant Tips:</strong> Determining appropriate gratuity amounts for various service levels</li>
+                <li><strong>Discounts and Sales:</strong> Understanding how much you'll save with percentage-based discounts</li>
+                <li><strong>Age and Dates:</strong> Calculating exact age or the number of days between important dates</li>
+                <li><strong>Time Durations:</strong> Adding up work hours, project timelines, or event durations</li>
+                <li><strong>Grades:</strong> Tracking academic performance and understanding final course grades</li>
+                <li><strong>Percentages:</strong> Finding percentage increases, decreases, or portions</li>
+            </ul>
+
+            <h3>Why Mental Math Isn't Always Reliable</h3>
+            <p>While some people are great with mental math, calculators offer several advantages:</p>
+            <ul style="margin-left: var(--spacing-xl); color: var(--text-secondary);">
+                <li>Speed: Instant results without thinking time</li>
+                <li>Accuracy: No arithmetic errors or mistakes</li>
+                <li>Consistency: The same result every time</li>
+                <li>Stress-free: No pressure to calculate in your head</li>
+                <li>Verification: Proof to show others (like splitting bills)</li>
+            </ul>
+
+            <h3>The Importance of Accurate Daily Calculations</h3>
+            <p>Getting your daily calculations right matters because:</p>
+            <ul style="margin-left: var(--spacing-xl); color: var(--text-secondary);">
+                <li><strong>Budget Management:</strong> Knowing exactly how much you're spending helps you stick to your budget</li>
+                <li><strong>Financial Decisions:</strong> Understanding discounts helps you identify real deals vs. marketing tricks</li>
+                <li><strong>Fair Dealings:</strong> Accurate tip calculations and bill splitting avoid confusion with friends</li>
+                <li><strong>Personal Planning:</strong> Age and date calculations help with event planning and milestone tracking</li>
+                <li><strong>Academic Success:</strong> Grade calculators help students understand their academic standing</li>
+            </ul>
+
+            <h3>Using These Calculators Effectively</h3>
+            <p>For best results when using everyday calculators:</p>
+            <ul style="margin-left: var(--spacing-xl); color: var(--text-secondary);">
+                <li>Enter values carefully to avoid input errors</li>
+                <li>Double-check the units if dealing with conversions</li>
+                <li>Use the results as a guide but verify important calculations</li>
+                <li>Take advantage of built-in features like bill splitting and percentage breakdowns</li>
+                <li>Keep the calculator handy on your phone for instant access when needed</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Professional online calculators and converters for all your calculation needs.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="../category/finance.html">Finance</a></li>
+                        <li><a href="../category/health.html">Health</a></li>
+                        <li><a href="../category/converters.html">Converters</a></li>
+                        <li><a href="../category/everyday.html">Everyday</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../index.html">Home</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="../privacy.html">Privacy Policy</a></li>
+                        <li><a href="../terms.html">Terms of Service</a></li>
+                        <li><a href="../cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Close menu when a link is clicked
+        if (navMenu) {
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+
+        // FAQ Toggle Functionality
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
+
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item !== answer) {
+                    item.classList.remove('active');
+                }
+            });
+
+            document.querySelectorAll('.faq-toggle').forEach(t => {
+                if (t !== toggle) {
+                    t.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // Toggle current FAQ
+            answer.classList.toggle('active');
+
+            if (answer.classList.contains('active')) {
+                toggle.style.transform = 'rotate(90deg)';
+            } else {
+                toggle.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+</body>
+</html>

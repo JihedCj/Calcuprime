@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chemistry calculators - Calculate molarity, pH, molecular weight, stoichiometry, and more. Coming soon on CalcuPrime. Free online chemistry tools for students and professionals.">
+    <meta name="keywords" content="chemistry calculator, molarity calculator, pH calculator, molecular weight calculator, stoichiometry calculator, chemistry tools, chemistry converter">
+    <meta name="author" content="CalcuPrime">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Chemistry Calculators - CalcuPrime Coming Soon">
+    <meta property="og:description" content="Professional chemistry calculators for molarity, pH, molecular weight, stoichiometry, and more. Coming soon on CalcuPrime.">
+    <meta property="og:image" content="../assets/og-image.jpg">
+    <meta property="og:url" content="https://calcuprime.com/category/chemistry.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Chemistry Calculators - CalcuPrime">
+    <meta name="twitter:description" content="Professional chemistry calculators coming soon">
+    <meta name="twitter:image" content="../assets/og-image.jpg">
+
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Chemistry Calculators",
+        "url": "https://calcuprime.com/category/chemistry.html",
+        "description": "Collection of professional chemistry calculators for molarity, pH, molecular weight, stoichiometry calculations and more",
+        "publisher": {
+            "@type": "Organization",
+            "name": "CalcuPrime",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://calcuprime.com/assets/logo.png"
+            }
+        }
+    }
+    </script>
+
+    <title>Chemistry Calculators - Molarity, pH, Molecular Weight | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/category/chemistry.html">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+
+    <style>
+        /* Coming Soon Badge */
+        .badge-coming-soon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        .calc-card-coming {
+            position: relative;
+            opacity: 0.85;
+            cursor: not-allowed;
+        }
+
+        .calc-card-coming:hover {
+            opacity: 0.9;
+        }
+
+        .calc-card-coming:after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-lg);
+            pointer-events: none;
+        }
+
+        /* Category Overview Hero */
+        .category-hero {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .category-hero-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.2;
+        }
+
+        .category-hero-subtitle {
+            font-size: var(--font-size-xl);
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto var(--spacing-xl);
+            line-height: 1.6;
+        }
+
+        .category-hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .feature-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feature-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+
+        .feature-text {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            padding: var(--spacing-lg);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-primary);
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-alt);
+        }
+
+        .faq-toggle {
+            font-size: var(--font-size-lg);
+            transition: transform 0.3s;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--bg-alt);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: var(--spacing-lg);
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Email Signup */
+        .signup-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: var(--spacing-3xl) 0;
+            margin: var(--spacing-3xl) 0;
+            border-radius: var(--radius-xl);
+        }
+
+        .signup-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .signup-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .signup-text {
+            font-size: var(--font-size-base);
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.95;
+        }
+
+        .signup-form {
+            display: flex;
+            gap: var(--spacing-sm);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .signup-form input {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-family: var(--font-family);
+            outline: none;
+        }
+
+        .signup-form input::placeholder {
+            color: #ccc;
+        }
+
+        .signup-form button {
+            padding: var(--spacing-md) var(--spacing-xl);
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .signup-form button:hover {
+            background: #f97316;
+            transform: translateY(-2px);
+        }
+
+        /* Related Categories */
+        .related-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .related-cat-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .related-cat-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .related-cat-icon {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .related-cat-name {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .category-hero-title {
+                font-size: var(--font-size-3xl);
+            }
+
+            .category-hero-subtitle {
+                font-size: var(--font-size-lg);
+            }
+
+            .signup-form {
+                flex-direction: column;
+            }
+
+            .signup-form input,
+            .signup-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+                <li><a href="../category/chemistry.html">Chemistry</a></li>
+                <li><a href="../index.html#everyday">Everyday</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">&times;</button>
+            <input type="text" id="searchInput" placeholder="Search calculators..." class="search-input">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Category Hero Section -->
+    <section class="category-hero">
+        <div class="container">
+            <div class="category-hero-badge">
+                <span style="margin-right: 8px;">🔬</span> Chemistry Calculators
+            </div>
+            <h1 class="category-hero-title">Coming Soon: Chemistry Calculators</h1>
+            <p class="category-hero-subtitle">
+                Professional chemistry calculation tools for students, educators, and chemical professionals.
+                Get early access by signing up for updates below.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Overview Section -->
+        <section class="section">
+            <h2 class="section-title">About Chemistry Calculators</h2>
+            <div class="content-section">
+                <p>
+                    Chemistry is the central science, and accurate calculations are essential for success in the lab and classroom.
+                    CalcuPrime is developing a comprehensive suite of chemistry calculators to help you solve complex chemical problems
+                    with speed and precision.
+                </p>
+                <p>
+                    Whether you're balancing chemical equations, calculating molarity concentrations, determining pH levels,
+                    or computing molecular weights, our tools will provide instant, accurate results with detailed explanations.
+                </p>
+                <p>
+                    Our chemistry calculators are designed for:
+                </p>
+                <ul>
+                    <li>High school and college chemistry students</li>
+                    <li>Laboratory technicians and research professionals</li>
+                    <li>Chemistry educators and tutors</li>
+                    <li>Chemical engineers and industrial professionals</li>
+                    <li>Anyone working with chemical calculations</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="section section-alt">
+            <h2 class="section-title">Why Choose Our Chemistry Calculators?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Instant Results</h3>
+                    <p class="feature-text">Get accurate chemical calculations in seconds with real-time computation.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3 class="feature-title">High Accuracy</h3>
+                    <p class="feature-text">Precise calculations using standard chemical constants and formulas.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3 class="feature-title">Educational</h3>
+                    <p class="feature-text">Learn chemistry concepts with step-by-step explanations and formulas.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Mobile Friendly</h3>
+                    <p class="feature-text">Access calculations anywhere on desktop, tablet, or mobile devices.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">100% Free</h3>
+                    <p class="feature-text">All calculators are completely free with no hidden fees or registration.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3 class="feature-title">Advanced Tools</h3>
+                    <p class="feature-text">From basic calculations to complex stoichiometry and equilibrium problems.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Calculators Grid -->
+        <section class="section">
+            <h2 class="section-title">Upcoming Chemistry Calculators</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--spacing-2xl);">
+                These chemistry tools are currently in development and coming soon to CalcuPrime. Sign up below to get notified when they launch!
+            </p>
+
+            <div class="calculator-grid">
+                <!-- Molarity Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">🧪</div>
+                    <h3 class="calc-title">Molarity Calculator</h3>
+                    <p class="calc-description">Calculate molarity (M), moles, and volume of solutions. Perfect for preparing solutions and dilution calculations.</p>
+                </div>
+
+                <!-- pH Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">🧬</div>
+                    <h3 class="calc-title">pH Calculator</h3>
+                    <p class="calc-description">Calculate pH, pOH, hydrogen ion concentration, and hydroxide ion concentration for acids and bases.</p>
+                </div>
+
+                <!-- Molecular Weight Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">⚛️</div>
+                    <h3 class="calc-title">Molecular Weight Calculator</h3>
+                    <p class="calc-description">Calculate molecular weight and molar mass from chemical formulas. Support for complex compounds.</p>
+                </div>
+
+                <!-- Stoichiometry Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">📊</div>
+                    <h3 class="calc-title">Stoichiometry Calculator</h3>
+                    <p class="calc-description">Solve stoichiometric problems with ease. Calculate moles, grams, and limiting reactants.</p>
+                </div>
+
+                <!-- Density Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">🔹</div>
+                    <h3 class="calc-title">Density Calculator</h3>
+                    <p class="calc-description">Calculate density, mass, and volume. Essential for material properties and substance identification.</p>
+                </div>
+
+                <!-- Percent Composition Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Percent Composition Calculator</h3>
+                    <p class="calc-description">Calculate the percentage composition of elements in chemical compounds.</p>
+                </div>
+
+                <!-- Limiting Reactant Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">⚗️</div>
+                    <h3 class="calc-title">Limiting Reactant Calculator</h3>
+                    <p class="calc-description">Determine limiting reactants and calculate theoretical yield in chemical reactions.</p>
+                </div>
+
+                <!-- Dilution Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">💧</div>
+                    <h3 class="calc-title">Dilution Calculator</h3>
+                    <p class="calc-description">Calculate dilution ratios using the M1V1=M2V2 formula for solution preparation.</p>
+                </div>
+
+                <!-- Equilibrium Constant Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Equilibrium Constant Calculator</h3>
+                    <p class="calc-description">Calculate Kc and Kp for chemical equilibrium problems.</p>
+                </div>
+
+                <!-- Electron Configuration Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">🌐</div>
+                    <h3 class="calc-title">Electron Configuration</h3>
+                    <p class="calc-description">Generate electron configurations for elements using the aufbau principle.</p>
+                </div>
+
+                <!-- Half-Life Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">☢️</div>
+                    <h3 class="calc-title">Half-Life Calculator</h3>
+                    <p class="calc-description">Calculate radioactive decay, half-life, and remaining isotope mass.</p>
+                </div>
+
+                <!-- Osmolarity Calculator -->
+                <div class="calc-card calc-card-coming">
+                    <div class="badge-coming-soon">Coming Soon</div>
+                    <div class="calc-icon">🧫</div>
+                    <h3 class="calc-title">Osmolarity Calculator</h3>
+                    <p class="calc-description">Calculate osmolarity and osmolarity of solutions for biological applications.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Signup -->
+        <section class="signup-section">
+            <div class="signup-content">
+                <h2 class="signup-title">Get Early Access & Updates</h2>
+                <p class="signup-text">
+                    Be the first to know when our chemistry calculators launch. Sign up for updates and exclusive tips on using chemistry tools effectively.
+                </p>
+                <form class="signup-form" onsubmit="handleSignup(event)">
+                    <input
+                        type="email"
+                        placeholder="Enter your email address"
+                        required
+                        aria-label="Email address"
+                    >
+                    <button type="submit">Notify Me</button>
+                </form>
+                <p style="font-size: var(--font-size-xs); margin-top: var(--spacing-lg); opacity: 0.8;">
+                    We respect your privacy. Unsubscribe at any time.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section section-alt">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>When will the chemistry calculators be available?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We're working hard to launch the chemistry calculators soon! The exact timeline depends on our development schedule,
+                            but we're aiming for the next few weeks. Sign up for email updates to be notified the moment they go live.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are these calculators accurate for scientific use?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! Our chemistry calculators are designed with precision in mind and use standard chemical constants and formulas.
+                            However, like any calculator tool, results should be verified for critical applications. Each calculator will include
+                            documentation of the formulas and constants used.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Will there be a cost to use these calculators?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            No! All CalcuPrime calculators, including chemistry tools, are 100% free with no registration required.
+                            We believe everyone should have access to useful calculation tools. Our mission is to make chemistry calculations
+                            easier and more accessible for students and professionals.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I use these on mobile devices?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely! All of our chemistry calculators are fully responsive and optimized for mobile devices.
+                            Whether you're using a smartphone, tablet, or desktop computer, you'll have a smooth experience with easy-to-use interfaces.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Will you add more chemistry calculators in the future?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! The chemistry calculator lineup is just the beginning. Based on user feedback and requests,
+                            we plan to add specialized calculators for thermodynamics, kinetics, analytical chemistry, and more.
+                            Let us know what tools you'd like to see.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I suggest a chemistry calculator?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We love hearing from our users! Please visit our <a href="../contact.html" style="color: var(--primary-color); text-decoration: underline;">contact page</a>
+                            to suggest new calculators or share your feedback. Your input helps us build the most useful chemistry tools.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What chemistry topics do you plan to cover?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Our chemistry calculator suite will cover major topics including:
+                            <ul>
+                                <li>General Chemistry (molarity, pH, density, stoichiometry)</li>
+                                <li>Organic Chemistry (molecular weight, structure analysis)</li>
+                                <li>Physical Chemistry (equilibrium, thermodynamics)</li>
+                                <li>Analytical Chemistry (concentration calculations, titrations)</li>
+                                <li>Biochemistry (osmolarity, buffer calculations)</li>
+                                <li>Nuclear Chemistry (radioactive decay, half-life)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Categories -->
+        <section class="section">
+            <h2 class="section-title">Explore Other Categories</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--spacing-2xl);">
+                CalcuPrime offers calculators for many other fields. Check out our other categories:
+            </p>
+
+            <div class="related-categories">
+                <a href="../category/finance.html" class="related-cat-card">
+                    <div class="related-cat-icon">💰</div>
+                    <div class="related-cat-name">Finance</div>
+                </a>
+
+                <a href="../category/health.html" class="related-cat-card">
+                    <div class="related-cat-icon">⚖️</div>
+                    <div class="related-cat-name">Health & Fitness</div>
+                </a>
+
+                <a href="../category/converters.html" class="related-cat-card">
+                    <div class="related-cat-icon">🔄</div>
+                    <div class="related-cat-name">Unit Converters</div>
+                </a>
+
+                <a href="../category/math.html" class="related-cat-card">
+                    <div class="related-cat-icon">🧮</div>
+                    <div class="related-cat-name">Math Calculators</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- SEO Content Section -->
+        <section class="section section-alt">
+            <h2 class="section-title">Chemistry Calculator Guide</h2>
+            <div class="content-section">
+                <h3>Understanding Common Chemistry Calculations</h3>
+
+                <h4 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md); font-weight: 600;">Molarity Calculations</h4>
+                <p>
+                    Molarity (M) is a measure of the concentration of a solute in a solution. It's calculated as the number of moles
+                    of solute per liter of solution. The formula is M = moles / liters. This is one of the most important calculations
+                    in chemistry, especially when preparing solutions in the laboratory.
+                </p>
+
+                <h4 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); font-weight: 600;">pH and pOH</h4>
+                <p>
+                    pH is a logarithmic scale used to specify the acidity or basicity of an aqueous solution. pH = -log[H+], where [H+]
+                    is the concentration of hydrogen ions. The pH scale runs from 0 to 14, with 7 being neutral. Values below 7 indicate
+                    acidity, while values above 7 indicate basicity.
+                </p>
+
+                <h4 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); font-weight: 600;">Molecular Weight</h4>
+                <p>
+                    Molecular weight (or molar mass) is the sum of the atomic weights of all atoms in a molecule. It's expressed in
+                    atomic mass units (amu) or grams per mole (g/mol). Knowing the molecular weight is essential for converting between
+                    moles and grams and for many other chemistry calculations.
+                </p>
+
+                <h4 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); font-weight: 600;">Stoichiometry</h4>
+                <p>
+                    Stoichiometry deals with the quantitative relationships between the reactants and products in a chemical reaction.
+                    It uses balanced chemical equations to determine how much product will be formed from given amounts of reactants,
+                    or to identify the limiting reactant.
+                </p>
+
+                <h4 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); font-weight: 600;">Limiting Reactants</h4>
+                <p>
+                    In any chemical reaction, one reactant will be completely consumed before the others. This is called the limiting
+                    reactant because it limits the amount of product that can be formed. Identifying the limiting reactant and calculating
+                    the theoretical yield is a fundamental skill in chemistry.
+                </p>
+
+                <h4 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-md); font-weight: 600;">Solution Dilution</h4>
+                <p>
+                    Dilution is the process of adding solvent to a solution to decrease its concentration. The dilution formula M₁V₁ = M₂V₂
+                    relates the initial molarity and volume to the final molarity and volume. This is widely used in laboratory work to prepare
+                    solutions of desired concentrations.
+                </p>
+
+                <h3 style="margin-top: var(--spacing-2xl); margin-bottom: var(--spacing-md);">Why Use Online Chemistry Calculators?</h3>
+                <p>
+                    Chemistry calculations can be complex and time-consuming. Online calculators help by:
+                </p>
+                <ul>
+                    <li>Saving time on repetitive calculations</li>
+                    <li>Reducing arithmetic errors and mistakes</li>
+                    <li>Helping students understand chemical concepts better</li>
+                    <li>Providing instant verification of calculations</li>
+                    <li>Supporting laboratory work and research</li>
+                    <li>Making chemistry more accessible to everyone</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Professional online calculators and converters for all your calculation needs. Fast, accurate, and completely free.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="../category/finance.html">Finance</a></li>
+                        <li><a href="../category/health.html">Health</a></li>
+                        <li><a href="../category/converters.html">Converters</a></li>
+                        <li><a href="../category/math.html">Math</a></li>
+                        <li><a href="../category/chemistry.html">Chemistry</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../sitemap.xml">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="../privacy.html">Privacy Policy</a></li>
+                        <li><a href="../terms.html">Terms of Service</a></li>
+                        <li><a href="../cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Email Signup Handler
+        function handleSignup(event) {
+            event.preventDefault();
+            const form = event.target;
+            const email = form.querySelector('input[type="email"]').value;
+
+            // Show success message
+            const button = form.querySelector('button');
+            const originalText = button.textContent;
+            button.textContent = '✓ Email saved!';
+            button.style.background = 'var(--secondary-color)';
+
+            // Reset after 3 seconds
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'var(--accent-color)';
+                form.reset();
+            }, 3000);
+
+            // Here you would normally send the email to your backend
+            console.log('Email signup:', email);
+        }
+
+        // Smooth scroll to sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

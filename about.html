@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about CalcuPrime - your trusted source for free, accurate online calculators and converters. Discover our mission, values, and commitment to providing the best calculation tools.">
+    <meta name="keywords" content="about CalcuPrime, online calculator company, free calculators, calculation tools, about us">
+    <meta name="author" content="CalcuPrime">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="About CalcuPrime - Professional Online Calculators & Converters">
+    <meta property="og:description" content="Learn about our mission to provide free, accurate, and easy-to-use calculators for everyone">
+    <meta property="og:image" content="assets/og-image.jpg">
+
+    <title>About Us - CalcuPrime | Free Online Calculators & Converters</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/about.html">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "CalcuPrime",
+        "url": "https://calcuprime.com",
+        "logo": "https://calcuprime.com/assets/logo.png",
+        "description": "Professional online calculators and converters for finance, health, chemistry, and everyday use",
+        "foundingDate": "2024",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US"
+        },
+        "sameAs": [
+            "https://facebook.com/calcuprime",
+            "https://twitter.com/calcuprime",
+            "https://linkedin.com/company/calcuprime"
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#finance">Finance</a></li>
+                <li><a href="index.html#health">Health</a></li>
+                <li><a href="index.html#converters">Converters</a></li>
+                <li><a href="index.html#math">Math</a></li>
+                <li><a href="index.html#chemistry">Chemistry</a></li>
+                <li><a href="index.html#everyday">Everyday</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">&times;</button>
+            <input type="text" id="searchInput" placeholder="Search calculators..." class="search-input">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">About CalcuPrime</h1>
+            <p class="hero-subtitle">Empowering everyone with free, accurate, and easy-to-use calculation tools</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="calculator-container">
+
+        <!-- Mission & Vision -->
+        <div class="content-section">
+            <h2>Our Mission & Vision</h2>
+            <p>At CalcuPrime, we believe that everyone deserves access to powerful, accurate calculation tools without barriers. Our mission is to democratize access to professional-grade calculators and converters, making complex calculations simple and accessible to all.</p>
+            <p>We envision a world where anyone, anywhere, can make informed decisions backed by accurate calculations - whether they're planning their mortgage, tracking their health goals, converting units for a recipe, or solving complex mathematical problems.</p>
+            <p>Founded in 2024, CalcuPrime was born from a simple observation: while the internet is full of calculators, many are cluttered with ads, require registrations, lack accuracy, or simply don't work well on mobile devices. We set out to change that.</p>
+        </div>
+
+        <!-- Our Story -->
+        <div class="content-section">
+            <h2>Our Story</h2>
+            <p>CalcuPrime started as a passion project by a team of developers, mathematicians, and designers who were frustrated with the state of online calculators. We asked ourselves: "Why should something as simple as calculating a percentage or converting units be so complicated?"</p>
+            <p>From this question, CalcuPrime was born. We started with a handful of essential calculators and a commitment to three principles: accuracy, simplicity, and accessibility. Today, we've grown to offer 16+ specialized calculators and converters across multiple categories, serving users worldwide.</p>
+            <p>Our journey has been guided by user feedback and real-world needs. Every calculator we build is designed with actual use cases in mind, tested rigorously for accuracy, and refined based on how people actually use them.</p>
+        </div>
+
+        <!-- What We Offer -->
+        <div class="content-section">
+            <h2>What CalcuPrime Offers</h2>
+            <p>CalcuPrime provides a comprehensive suite of calculators and converters designed for everyday use, professional applications, and everything in between:</p>
+
+            <h3>Finance Calculators</h3>
+            <p>Make smarter financial decisions with our suite of financial tools including mortgage calculators, loan calculators, investment planners, compound interest calculators, and retirement planning tools. Whether you're buying your first home or planning for retirement, we've got you covered.</p>
+
+            <h3>Health & Fitness Tools</h3>
+            <p>Take control of your health with our BMI calculator, calorie calculator, pregnancy calculator, and ideal weight calculator. These tools help you set realistic health goals and track your progress with scientific accuracy.</p>
+
+            <h3>Unit Converters</h3>
+            <p>Convert between units effortlessly with our length, weight, temperature, and currency converters. Perfect for cooking, travel, international business, or academic work.</p>
+
+            <h3>Math & Everyday Calculators</h3>
+            <p>From percentage calculations to tip calculators and discount calculators, our everyday tools make quick work of common calculations you encounter in daily life.</p>
+
+            <h3>Chemistry & Scientific Tools</h3>
+            <p>Specialized calculators for chemistry students and professionals, helping with molecular calculations, conversions, and more.</p>
+        </div>
+
+        <!-- Why Choose CalcuPrime -->
+        <div class="content-section">
+            <h2>Why Choose CalcuPrime?</h2>
+
+            <h3>100% Free Forever</h3>
+            <p>Every calculator on CalcuPrime is completely free to use with no hidden costs, premium tiers, or subscription fees. We believe calculation tools should be accessible to everyone, regardless of their financial situation.</p>
+
+            <h3>Accuracy You Can Trust</h3>
+            <p>All our calculators are built using verified formulas and industry-standard methodologies. We work with subject matter experts to ensure our calculations are not just correct, but also up-to-date with current standards and best practices.</p>
+
+            <h3>No Registration Required</h3>
+            <p>Start calculating immediately. No accounts, no sign-ups, no emails required. We respect your time and your privacy. Simply visit, calculate, and go.</p>
+
+            <h3>Privacy-First Approach</h3>
+            <p>We don't store your calculation data. All calculations happen in your browser, ensuring your personal and financial information stays private. We don't track individual calculations or sell your data to third parties.</p>
+
+            <h3>Mobile-Optimized Design</h3>
+            <p>Over 60% of our users access CalcuPrime from mobile devices. That's why every calculator is fully responsive and touch-optimized, providing a seamless experience whether you're on a phone, tablet, or desktop.</p>
+
+            <h3>Lightning Fast Performance</h3>
+            <p>Our calculators are built with modern web technologies for instant results. No loading screens, no waiting - just immediate, accurate calculations.</p>
+
+            <h3>Clean, Intuitive Interface</h3>
+            <p>We've obsessed over every detail of our user interface to make calculations as straightforward as possible. Clear labels, helpful tooltips, and logical layouts mean less confusion and faster results.</p>
+
+            <h3>Ad-Light Experience</h3>
+            <p>While we do display minimal, non-intrusive advertising to support our operations, we're committed to keeping CalcuPrime clean and focused on what matters: helping you calculate.</p>
+        </div>
+
+        <!-- Our Values -->
+        <div class="content-section">
+            <h2>Our Core Values</h2>
+
+            <h3>Accessibility First</h3>
+            <p>We design with accessibility in mind, ensuring our tools work for everyone, including users with disabilities. Our calculators follow WCAG guidelines and are compatible with screen readers and other assistive technologies.</p>
+
+            <h3>Continuous Improvement</h3>
+            <p>We're never satisfied with "good enough." We continuously update our calculators based on user feedback, emerging best practices, and changing regulations or standards.</p>
+
+            <h3>Transparency</h3>
+            <p>We believe in being transparent about how our calculators work. Each calculator page includes detailed explanations of formulas, methodologies, and any assumptions made in calculations.</p>
+
+            <h3>User-Centric Design</h3>
+            <p>Every decision we make starts with one question: "Is this good for our users?" From feature prioritization to interface design, user needs come first.</p>
+
+            <h3>Educational Focus</h3>
+            <p>We don't just provide answers - we help users understand the math behind them. Our calculators include explanations, tips, and additional context to help users learn while they calculate.</p>
+        </div>
+
+        <!-- By the Numbers -->
+        <div class="content-section">
+            <h2>CalcuPrime By the Numbers</h2>
+            <div class="calculator-grid">
+                <div class="calc-card">
+                    <div class="calc-icon">🧮</div>
+                    <h3 class="calc-title">16+ Calculators</h3>
+                    <p class="calc-description">Specialized tools across multiple categories</p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="calc-icon">📊</div>
+                    <h3 class="calc-title">5 Categories</h3>
+                    <p class="calc-description">Finance, Health, Converters, Math, and Chemistry</p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="calc-icon">👥</div>
+                    <h3 class="calc-title">1M+ Users</h3>
+                    <p class="calc-description">Trusted by users worldwide</p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="calc-icon">⚡</div>
+                    <h3 class="calc-title">100% Free</h3>
+                    <p class="calc-description">Always free, no premium tiers</p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="calc-icon">🔒</div>
+                    <h3 class="calc-title">Privacy-First</h3>
+                    <p class="calc-description">Your data stays private</p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="calc-icon">📱</div>
+                    <h3 class="calc-title">Mobile-Ready</h3>
+                    <p class="calc-description">Optimized for all devices</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Categories Overview -->
+        <div class="content-section">
+            <h2>Explore Our Calculator Categories</h2>
+            <p>Our calculators are organized into intuitive categories to help you find exactly what you need:</p>
+
+            <h3>Finance & Money</h3>
+            <p>Plan your financial future with mortgage calculators, loan calculators, investment tools, compound interest calculators, and retirement planners. Make informed decisions about major purchases, investments, and long-term financial planning.</p>
+
+            <h3>Health & Wellness</h3>
+            <p>Monitor your health metrics with BMI calculators, calorie calculators, pregnancy calculators, and ideal weight calculators. Set realistic health goals and track your progress with scientifically-backed tools.</p>
+
+            <h3>Unit Conversions</h3>
+            <p>Convert between measurement systems effortlessly. Our converters handle length, weight, temperature, currency, and more. Perfect for international travel, cooking, scientific work, or everyday needs.</p>
+
+            <h3>Math & Percentages</h3>
+            <p>Solve everyday math problems quickly with percentage calculators, tip calculators, and discount calculators. From splitting bills to calculating sales prices, we make math simple.</p>
+
+            <h3>Chemistry & Science</h3>
+            <p>Specialized tools for students and professionals working with chemical calculations, molecular weights, and scientific conversions.</p>
+        </div>
+
+        <!-- Our Commitment -->
+        <div class="content-section">
+            <h2>Our Commitment to You</h2>
+            <p>When you use CalcuPrime, you can count on us for:</p>
+
+            <ul>
+                <li><strong>Accuracy:</strong> Every calculator is thoroughly tested and validated against industry standards and best practices.</li>
+                <li><strong>Privacy:</strong> We don't store your calculations or personal data. All processing happens locally in your browser.</li>
+                <li><strong>Availability:</strong> Our calculators are available 24/7, from anywhere in the world, on any device.</li>
+                <li><strong>Support:</strong> If you encounter issues or have questions, our team is here to help.</li>
+                <li><strong>Transparency:</strong> We're open about our methodologies, formulas, and any limitations of our calculators.</li>
+                <li><strong>Continuous Updates:</strong> We regularly review and update our calculators to ensure they reflect current standards and regulations.</li>
+            </ul>
+
+            <p>Our commitment extends beyond just providing tools. We're building a comprehensive resource that helps people understand the calculations they're performing, make better decisions, and save time on everyday math.</p>
+        </div>
+
+        <!-- Future Plans -->
+        <div class="content-section">
+            <h2>Looking Ahead: Our Future Plans</h2>
+            <p>CalcuPrime is constantly evolving. Here's what we're working on:</p>
+
+            <h3>Expanding Our Calculator Library</h3>
+            <p>We're actively developing new calculators based on user requests and emerging needs. Our roadmap includes advanced financial tools, specialized health calculators, professional engineering tools, and more comprehensive conversion utilities.</p>
+
+            <h3>Enhanced Educational Content</h3>
+            <p>We're creating detailed guides, tutorials, and explainer articles to help users not just calculate, but understand the principles behind the math. Look for expanded "How It Works" sections and step-by-step calculation breakdowns.</p>
+
+            <h3>API Access for Developers</h3>
+            <p>We're exploring the possibility of offering API access to our calculation engines, allowing developers to integrate CalcuPrime's accuracy and reliability into their own applications.</p>
+
+            <h3>Multi-Language Support</h3>
+            <p>To better serve our global user base, we're working on making CalcuPrime available in multiple languages, breaking down language barriers to access quality calculation tools.</p>
+
+            <h3>Advanced Features</h3>
+            <p>We're developing features like calculation history, the ability to save and share calculations, comparison tools, and data visualization to make our calculators even more powerful and useful.</p>
+
+            <h3>Mobile Apps</h3>
+            <p>While our web interface works great on mobile, we're exploring native mobile apps for iOS and Android to provide an even more seamless mobile experience.</p>
+        </div>
+
+        <!-- Community & Feedback -->
+        <div class="content-section">
+            <h2>Join Our Community</h2>
+            <p>CalcuPrime is built for users, by users. We actively listen to feedback and incorporate user suggestions into our development roadmap. Your input helps us prioritize new calculators, improve existing ones, and fix issues quickly.</p>
+
+            <h3>How You Can Help</h3>
+            <ul>
+                <li><strong>Share Feedback:</strong> Tell us what's working and what could be better. Every piece of feedback helps us improve.</li>
+                <li><strong>Request Calculators:</strong> Need a calculator we don't have? Let us know! User requests drive our development priorities.</li>
+                <li><strong>Report Issues:</strong> If you find a bug or inaccuracy, please report it so we can fix it quickly.</li>
+                <li><strong>Spread the Word:</strong> If CalcuPrime has been helpful, share it with friends, colleagues, or on social media.</li>
+            </ul>
+        </div>
+
+        <!-- Technology & Security -->
+        <div class="content-section">
+            <h2>Technology & Security</h2>
+            <p>CalcuPrime is built on modern web technologies designed for speed, security, and reliability:</p>
+
+            <ul>
+                <li><strong>Client-Side Processing:</strong> All calculations happen in your browser, ensuring your data never leaves your device.</li>
+                <li><strong>Secure Connection:</strong> Our site uses HTTPS encryption to protect your connection and prevent data interception.</li>
+                <li><strong>No Data Collection:</strong> We don't store calculation inputs or results. Your privacy is protected by design.</li>
+                <li><strong>Regular Security Audits:</strong> We conduct regular security reviews to ensure our platform remains safe and secure.</li>
+                <li><strong>Standards Compliance:</strong> Our calculators follow web standards and best practices for accessibility, performance, and reliability.</li>
+            </ul>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="content-section" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+            <h2>Ready to Start Calculating?</h2>
+            <p style="color: rgba(255, 255, 255, 0.95); font-size: 1.125rem; margin-bottom: 2rem;">Explore our collection of free, accurate calculators and converters. No registration required.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" class="btn-calculate" style="width: auto; display: inline-block; text-decoration: none;">Browse All Calculators</a>
+                <a href="contact.html" class="btn-calculate" style="width: auto; display: inline-block; text-decoration: none; background: rgba(255, 255, 255, 0.2); border: 2px solid white;">Contact Us</a>
+            </div>
+        </div>
+
+        <!-- Trust Signals -->
+        <div class="content-section">
+            <h2>Why Users Trust CalcuPrime</h2>
+            <div class="calculator-grid">
+                <div class="calc-card">
+                    <div class="calc-icon">✓</div>
+                    <h3 class="calc-title">Verified Formulas</h3>
+                    <p class="calc-description">All calculations use industry-standard, verified mathematical formulas</p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="calc-icon">🔐</div>
+                    <h3 class="calc-title">Secure & Private</h3>
+                    <p class="calc-description">HTTPS encryption and client-side processing keep your data safe</p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="calc-icon">⚡</div>
+                    <h3 class="calc-title">Instant Results</h3>
+                    <p class="calc-description">Modern technology delivers calculations in milliseconds</p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="calc-icon">🌍</div>
+                    <h3 class="calc-title">Global Access</h3>
+                    <p class="calc-description">Available 24/7 from anywhere in the world</p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="calc-icon">📚</div>
+                    <h3 class="calc-title">Educational</h3>
+                    <p class="calc-description">Learn while you calculate with detailed explanations</p>
+                </div>
+
+                <div class="calc-card">
+                    <div class="calc-icon">💯</div>
+                    <h3 class="calc-title">Ad-Free Focus</h3>
+                    <p class="calc-description">Minimal, non-intrusive ads keep the experience clean</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Professional online calculators and converters for all your calculation needs. Free, accurate, and easy to use.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="category/finance.html">Finance</a></li>
+                        <li><a href="category/health.html">Health</a></li>
+                        <li><a href="category/converters.html">Converters</a></li>
+                        <li><a href="category/math.html">Math</a></li>
+                        <li><a href="category/chemistry.html">Chemistry</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

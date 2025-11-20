@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Math Calculators - Free online calculators for percentages, fractions, algebra, geometry, and statistics. Professional tools for students and professionals.">
+    <meta name="keywords" content="math calculator, percentage calculator, fraction calculator, algebra calculator, geometry calculator, statistics calculator, math tools">
+    <meta name="author" content="CalcuPrime">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Math Calculators - Free Online Calculation Tools | CalcuPrime">
+    <meta property="og:description" content="Professional math calculators for percentages, fractions, algebra, geometry, and statistics. Fast, accurate, and completely free.">
+    <meta property="og:url" content="https://calcuprime.com/category/math.html">
+    <meta property="og:image" content="https://calcuprime.com/assets/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Math Calculators - Free Online Calculation Tools">
+    <meta name="twitter:description" content="Professional math calculators for all your calculation needs">
+    <meta name="twitter:image" content="https://calcuprime.com/assets/og-image.jpg">
+
+    <!-- Additional Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="category" content="Calculator Tools">
+    <meta name="distribution" content="global">
+
+    <title>Math Calculators - Free Online Percentage, Fraction & Algebra Tools | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/category/math.html">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+
+    <style>
+        /* Category Page Specific Styles */
+        .category-hero {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 4rem var(--spacing-lg);
+            text-align: center;
+        }
+
+        .category-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .category-hero p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        .category-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item strong {
+            display: block;
+            font-size: 1.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item span {
+            display: block;
+            opacity: 0.9;
+            font-size: 0.875rem;
+        }
+
+        .category-section {
+            padding: 4rem var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .category-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title-large {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .featured-calculator {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 2px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: #f3f4f6;
+            color: #6b7280;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .calc-card.coming-soon {
+            opacity: 0.75;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .calc-card.coming-soon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 0.75rem;
+        }
+
+        .coming-soon-label {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 1;
+        }
+
+        .seo-content {
+            background: var(--bg-secondary);
+            padding: 3rem 2rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .seo-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .seo-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .seo-content ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+
+        .seo-content li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .seo-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+
+        .faq-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-secondary);
+        }
+
+        .faq-toggle {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .related-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .category-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .category-hero {
+                padding: 2rem var(--spacing-lg);
+            }
+
+            .category-hero h1 {
+                font-size: 1.875rem;
+            }
+
+            .category-hero p {
+                font-size: 1rem;
+            }
+
+            .category-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+
+            .category-section {
+                padding: 2rem var(--spacing-lg);
+            }
+
+            .section-title-large {
+                font-size: 1.5rem;
+            }
+
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../category/math.html">Math</a></li>
+                <li><a href="../index.html#chemistry">Chemistry</a></li>
+                <li><a href="../index.html#everyday">Everyday</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">&times;</button>
+            <input type="text" id="searchInput" placeholder="Search calculators..." class="search-input">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Category Hero Section -->
+    <section class="category-hero">
+        <div class="container">
+            <h1>Math Calculators</h1>
+            <p>Professional mathematical calculation tools for students, educators, and professionals. From basic percentages to advanced statistics, we have the calculators you need.</p>
+
+            <div class="category-stats">
+                <div class="stat-item">
+                    <strong>5+</strong>
+                    <span>Math Tools</span>
+                </div>
+                <div class="stat-item">
+                    <strong>100%</strong>
+                    <span>Free & Accurate</span>
+                </div>
+                <div class="stat-item">
+                    <strong>Mobile</strong>
+                    <span>Responsive</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Featured Calculators Section -->
+        <section class="category-section">
+            <div class="container">
+                <h2 class="section-title-large">Available Math Calculators</h2>
+                <p class="section-description">Start with our most popular math calculator and explore our growing collection of mathematical tools.</p>
+
+                <!-- Featured Calculator -->
+                <div class="featured-calculator">
+                    <span class="featured-badge">Featured</span>
+                    <a href="../calculators/percentage-calculator.html" class="calc-card" style="text-decoration: none; color: inherit;">
+                        <div class="calc-icon">%</div>
+                        <h3 class="calc-title">Percentage Calculator</h3>
+                        <p class="calc-description">Calculate percentages, increases, decreases, and more. Includes 5 different percentage calculation modes.</p>
+                        <p style="font-size: 0.875rem; color: var(--primary-color); margin-top: 1rem; font-weight: 600;">Try it now →</p>
+                    </a>
+                </div>
+
+                <!-- Calculator Grid -->
+                <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem; margin-top: 2rem;">Coming Soon</h3>
+                <div class="calculator-grid">
+                    <!-- Fraction Calculator -->
+                    <div class="calc-card coming-soon">
+                        <div class="calc-icon">½</div>
+                        <h3 class="calc-title">Fraction Calculator</h3>
+                        <p class="calc-description">Add, subtract, multiply, and divide fractions. Convert between fractions and decimals.</p>
+                        <div class="coming-soon-label">
+                            <span class="coming-soon-badge">Coming Soon</span>
+                        </div>
+                    </div>
+
+                    <!-- Algebra Calculator -->
+                    <div class="calc-card coming-soon">
+                        <div class="calc-icon">x</div>
+                        <h3 class="calc-title">Algebra Calculator</h3>
+                        <p class="calc-description">Solve equations, simplify expressions, and work with polynomials and variables.</p>
+                        <div class="coming-soon-label">
+                            <span class="coming-soon-badge">Coming Soon</span>
+                        </div>
+                    </div>
+
+                    <!-- Geometry Calculator -->
+                    <div class="calc-card coming-soon">
+                        <div class="calc-icon">▲</div>
+                        <h3 class="calc-title">Geometry Calculator</h3>
+                        <p class="calc-description">Calculate areas, perimeters, volumes, and angles for various geometric shapes.</p>
+                        <div class="coming-soon-label">
+                            <span class="coming-soon-badge">Coming Soon</span>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Calculator -->
+                    <div class="calc-card coming-soon">
+                        <div class="calc-icon">📊</div>
+                        <h3 class="calc-title">Statistics Calculator</h3>
+                        <p class="calc-description">Calculate mean, median, mode, standard deviation, and perform statistical analysis.</p>
+                        <div class="coming-soon-label">
+                            <span class="coming-soon-badge">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Content Section -->
+        <section class="category-section">
+            <div class="container">
+                <h2 class="section-title-large">About Math Calculations</h2>
+
+                <div class="seo-content">
+                    <h3>Why Use Our Math Calculators?</h3>
+                    <p>Mathematical calculations are essential in everyday life, from managing finances to understanding data and solving problems. Our suite of math calculators is designed to make these calculations quick, accurate, and accessible to everyone.</p>
+                    <ul>
+                        <li>Fast and accurate calculations</li>
+                        <li>Step-by-step explanations</li>
+                        <li>Mobile-friendly interface</li>
+                        <li>No installation required</li>
+                        <li>Completely free to use</li>
+                        <li>Works on any device</li>
+                    </ul>
+                </div>
+
+                <div class="seo-content">
+                    <h3>Types of Math Calculations We Support</h3>
+                    <p>Our calculators cover a wide range of mathematical operations:</p>
+                    <ul>
+                        <li><strong>Percentages:</strong> Calculate percentage increase/decrease, find percentages of numbers, and compare values</li>
+                        <li><strong>Fractions:</strong> Perform arithmetic with fractions and convert between fractions and decimals</li>
+                        <li><strong>Algebra:</strong> Solve equations, simplify expressions, and work with variables</li>
+                        <li><strong>Geometry:</strong> Calculate areas, perimeters, volumes, and angles of shapes</li>
+                        <li><strong>Statistics:</strong> Analyze data sets and calculate statistical measures</li>
+                    </ul>
+                </div>
+
+                <div class="seo-content">
+                    <h3>Common Applications of Math Calculations</h3>
+                    <p>Math calculations are used in countless real-world scenarios:</p>
+                    <ul>
+                        <li><strong>Finance:</strong> Interest calculations, investment returns, loan payments, and budgeting</li>
+                        <li><strong>Education:</strong> Homework problems, test preparation, grade calculations, and learning support</li>
+                        <li><strong>Business:</strong> Profit margins, sales analysis, pricing strategies, and financial planning</li>
+                        <li><strong>Science:</strong> Data analysis, statistical testing, and experimental calculations</li>
+                        <li><strong>Daily Life:</strong> Tips, discounts, cooking measurements, and home projects</li>
+                    </ul>
+                </div>
+
+                <div class="seo-content">
+                    <h3>Mathematical Concepts Explained</h3>
+                    <p><strong>Percentages:</strong> A percentage is a way of expressing a number as a fraction of 100. It's used to compare quantities and show how much something has increased or decreased. For example, a 25% increase means the new value is 1.25 times the original.</p>
+                    <p><strong>Fractions:</strong> Fractions represent parts of a whole number. They're used when you need to work with portions or divisions. Understanding fractions is crucial for advanced mathematics and practical applications.</p>
+                    <p><strong>Algebra:</strong> Algebra uses variables and equations to represent relationships and solve for unknown values. It's a fundamental tool in mathematics used to solve practical problems.</p>
+                    <p><strong>Geometry:</strong> Geometry deals with shapes, sizes, and properties of figures. It's essential for architecture, engineering, design, and understanding physical space.</p>
+                    <p><strong>Statistics:</strong> Statistics involves collecting, analyzing, and interpreting data. It helps make informed decisions based on data patterns and trends.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="category-section">
+            <div class="container">
+                <h2 class="section-title-large">Math Calculator Features</h2>
+                <p class="section-description">Compare our calculators and their capabilities:</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Calculator</th>
+                            <th>Status</th>
+                            <th>Features</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Percentage</strong></td>
+                            <td><span style="color: #10b981; font-weight: 600;">Available</span></td>
+                            <td>5 calculation modes</td>
+                            <td>Sales, discounts, tips, growth</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fraction</strong></td>
+                            <td><span style="color: #f59e0b; font-weight: 600;">Coming Soon</span></td>
+                            <td>Arithmetic & conversion</td>
+                            <td>Cooking, measurements, math</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Algebra</strong></td>
+                            <td><span style="color: #f59e0b; font-weight: 600;">Coming Soon</span></td>
+                            <td>Equation solving</td>
+                            <td>Students, professionals</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Geometry</strong></td>
+                            <td><span style="color: #f59e0b; font-weight: 600;">Coming Soon</span></td>
+                            <td>Shapes & measurements</td>
+                            <td>Architecture, design</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Statistics</strong></td>
+                            <td><span style="color: #f59e0b; font-weight: 600;">Coming Soon</span></td>
+                            <td>Data analysis</td>
+                            <td>Research, analysis</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="category-section">
+            <div class="container">
+                <h2 class="section-title-large">Frequently Asked Questions</h2>
+                <p class="section-description">Find answers to common questions about our math calculators:</p>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What are the main types of math calculations?</span>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            The main types of math calculations include arithmetic (addition, subtraction, multiplication, division), percentages, fractions, algebra, geometry, and statistics. Each type has specific applications and uses in different fields. Our calculators help with each of these types to make your calculations faster and more accurate.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How accurate are these calculators?</span>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            Our calculators are designed with precision in mind. They use standard mathematical algorithms and formulas to ensure accuracy. The percentage calculator, for example, uses exact mathematical formulas without rounding errors. Results are typically accurate to many decimal places, which you can adjust based on your needs.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can I use these calculators on my phone?</span>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            Yes! All of our calculators are fully mobile responsive and work great on smartphones, tablets, and computers. You can access them from any device with a web browser, and they work offline once loaded. There's no app to install - just visit our website and start calculating.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Is there a cost to use these calculators?</span>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            All of our calculators are completely free to use. There are no hidden fees, no registration required, and no premium versions. Our goal is to make mathematical calculations accessible to everyone, regardless of their budget.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I use the percentage calculator?</span>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            The percentage calculator is very intuitive. First, select the type of calculation you need (e.g., "What is X% of Y?"). Then enter your numbers in the input fields. The calculator will automatically compute the result as you type. You can also see the formula used for each calculation to understand how the result was calculated.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>When will the other calculators be available?</span>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            We're actively developing the Fraction, Algebra, Geometry, and Statistics calculators. They will be released soon as we ensure they meet our high standards for accuracy and user experience. Check back regularly for updates on their availability.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can these calculators help with homework?</span>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            Absolutely! Our calculators are excellent learning tools. They not only provide answers but also show the formulas and steps used to calculate results. This helps students understand the mathematical concepts better. They're perfect for checking your work or learning how to solve problems.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Do you store my calculation history?</span>
+                            <div class="faq-toggle">+</div>
+                        </div>
+                        <div class="faq-answer">
+                            No, we do not store or log your calculations. All computations happen locally in your browser, and we don't collect or save any data. Your privacy is important to us, so you can use our calculators with complete confidence.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Categories -->
+        <section class="category-section">
+            <div class="container">
+                <h2 class="section-title-large">Explore Other Categories</h2>
+                <p class="section-description">Discover our other calculator categories for different needs:</p>
+
+                <div class="related-categories">
+                    <a href="../category/finance.html" class="category-card">
+                        <div class="category-icon">💰</div>
+                        <h3>Finance Calculators</h3>
+                        <p>Loans, investments, mortgages, and financial planning tools</p>
+                    </a>
+
+                    <a href="../category/health.html" class="category-card">
+                        <div class="category-icon">⚖️</div>
+                        <h3>Health Calculators</h3>
+                        <p>BMI, calories, fitness, and health assessment tools</p>
+                    </a>
+
+                    <a href="../category/converters.html" class="category-card">
+                        <div class="category-icon">🔄</div>
+                        <h3>Unit Converters</h3>
+                        <p>Length, weight, temperature, and currency conversions</p>
+                    </a>
+
+                    <a href="../category/chemistry.html" class="category-card">
+                        <div class="category-icon">⚗️</div>
+                        <h3>Chemistry Calculators</h3>
+                        <p>Molecular weight, molar mass, and chemical calculations</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="category-section" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);">
+            <div class="container" style="text-align: center;">
+                <h2 class="section-title-large">Ready to Calculate?</h2>
+                <p class="section-description">Start with our percentage calculator today. More math tools coming soon!</p>
+                <a href="../calculators/percentage-calculator.html" style="display: inline-block; background: var(--primary-color); color: white; padding: 1rem 2rem; border-radius: 0.75rem; text-decoration: none; font-weight: 600; transition: var(--transition);" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary-color)'">
+                    Use Percentage Calculator Now
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Professional online calculators and converters for all your calculation needs.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="../category/finance.html">Finance</a></li>
+                        <li><a href="../category/health.html">Health</a></li>
+                        <li><a href="../category/converters.html">Converters</a></li>
+                        <li><a href="../category/math.html">Math</a></li>
+                        <li><a href="../category/chemistry.html">Chemistry</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="../privacy.html">Privacy Policy</a></li>
+                        <li><a href="../terms.html">Terms of Service</a></li>
+                        <li><a href="../cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const item = this.parentElement;
+
+                // Close other items
+                document.querySelectorAll('.faq-item.active').forEach(activeItem => {
+                    if (activeItem !== item) {
+                        activeItem.classList.remove('active');
+                    }
+                });
+
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

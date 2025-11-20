@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CalcuPrime Cookie Policy - Learn about how we use cookies, including analytics and advertising cookies, and how to manage your cookie preferences.">
+    <meta name="keywords" content="cookie policy, cookies, privacy, GDPR, CalcuPrime, data protection, cookie consent">
+    <meta name="author" content="CalcuPrime">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cookie Policy - CalcuPrime">
+    <meta property="og:description" content="Information about how CalcuPrime uses cookies and how you can manage them">
+    <meta property="og:image" content="assets/og-image.jpg">
+
+    <title>Cookie Policy - CalcuPrime</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/cookies.html">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+    <style>
+        /* Additional styles for Cookie Policy page */
+        .policy-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+        }
+
+        .policy-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .policy-updated {
+            font-size: var(--font-size-base);
+            opacity: 0.9;
+        }
+
+        .policy-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--spacing-3xl) var(--spacing-lg);
+        }
+
+        .policy-section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .policy-section h2 {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .policy-section h3 {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+        }
+
+        .policy-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .policy-section ul,
+        .policy-section ol {
+            margin-left: var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
+            color: var(--text-secondary);
+        }
+
+        .policy-section li {
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.8;
+        }
+
+        .policy-section strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-lg) 0;
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cookie-table thead {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .cookie-table th {
+            padding: var(--spacing-md);
+            text-align: left;
+            font-weight: 600;
+            font-size: var(--font-size-base);
+        }
+
+        .cookie-table td {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            vertical-align: top;
+        }
+
+        .cookie-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cookie-table tbody tr:hover {
+            background: var(--bg-secondary);
+        }
+
+        .info-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--primary-color);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            border-radius: var(--radius-md);
+        }
+
+        .info-box p {
+            margin-bottom: 0;
+        }
+
+        .info-box strong {
+            color: var(--primary-color);
+        }
+
+        .browser-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .browser-link {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            text-align: center;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .browser-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin-top: var(--spacing-2xl);
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .policy-title {
+                font-size: var(--font-size-3xl);
+            }
+
+            .policy-content {
+                padding: var(--spacing-2xl) var(--spacing-md);
+            }
+
+            .policy-section {
+                padding: var(--spacing-lg);
+            }
+
+            .cookie-table {
+                font-size: var(--font-size-sm);
+            }
+
+            .cookie-table th,
+            .cookie-table td {
+                padding: var(--spacing-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/#finance">Finance</a></li>
+                <li><a href="/#health">Health</a></li>
+                <li><a href="/#converters">Converters</a></li>
+                <li><a href="/#math">Math</a></li>
+                <li><a href="/#chemistry">Chemistry</a></li>
+                <li><a href="/#everyday">Everyday</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">&times;</button>
+            <input type="text" id="searchInput" placeholder="Search calculators..." class="search-input">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Policy Header -->
+    <section class="policy-header">
+        <div class="container">
+            <h1 class="policy-title">Cookie Policy</h1>
+            <p class="policy-updated">Last Updated: November 20, 2024</p>
+        </div>
+    </section>
+
+    <!-- Policy Content -->
+    <div class="policy-content">
+        <!-- Introduction -->
+        <div class="policy-section">
+            <h2>Introduction</h2>
+            <p>Welcome to CalcuPrime's Cookie Policy. This policy explains what cookies are, how we use them on our website, and how you can manage your cookie preferences. By using CalcuPrime, you agree to the use of cookies in accordance with this policy.</p>
+            <p>We are committed to being transparent about how we use cookies and respecting your privacy. This policy complies with the EU General Data Protection Regulation (GDPR) and other applicable data protection laws.</p>
+        </div>
+
+        <!-- What Are Cookies -->
+        <div class="policy-section">
+            <h2>What Are Cookies?</h2>
+            <p>Cookies are small text files that are placed on your device (computer, smartphone, or tablet) when you visit a website. They are widely used to make websites work more efficiently and provide a better user experience.</p>
+            <p>Cookies allow websites to:</p>
+            <ul>
+                <li>Remember your preferences and settings</li>
+                <li>Understand how you use the website</li>
+                <li>Improve website functionality and performance</li>
+                <li>Provide personalized content and advertisements</li>
+                <li>Analyze website traffic and user behavior</li>
+            </ul>
+            <p>Cookies can be set by the website you're visiting (first-party cookies) or by third-party services that the website uses (third-party cookies).</p>
+        </div>
+
+        <!-- Types of Cookies We Use -->
+        <div class="policy-section">
+            <h2>Types of Cookies We Use</h2>
+            <p>CalcuPrime uses different types of cookies to provide you with the best possible experience. Below is a detailed breakdown of the cookies we use:</p>
+
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Cookie Type</th>
+                        <th>Purpose</th>
+                        <th>Duration</th>
+                        <th>Required?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Essential Cookies</strong></td>
+                        <td>These cookies are necessary for the website to function properly. They enable core functionality such as security, network management, and accessibility.</td>
+                        <td>Session / Persistent</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Analytics Cookies</strong></td>
+                        <td>These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.</td>
+                        <td>Up to 2 years</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Advertising Cookies</strong></td>
+                        <td>These cookies are used to deliver advertisements that are relevant to you. They also limit the number of times you see an ad and help measure the effectiveness of advertising campaigns.</td>
+                        <td>Up to 2 years</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Functionality Cookies</strong></td>
+                        <td>These cookies allow the website to remember choices you make (such as your preferred calculator settings) and provide enhanced, personalized features.</td>
+                        <td>Up to 1 year</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance Cookies</strong></td>
+                        <td>These cookies collect information about how you use our website, such as which pages you visit most often, to help us improve website performance.</td>
+                        <td>Up to 2 years</td>
+                        <td>No</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>1. Essential Cookies</h3>
+            <p>These cookies are strictly necessary for the operation of CalcuPrime. They include:</p>
+            <ul>
+                <li><strong>Session cookies:</strong> Keep you logged in during your visit</li>
+                <li><strong>Security cookies:</strong> Protect against malicious activity and ensure secure access</li>
+                <li><strong>Load balancing cookies:</strong> Distribute website traffic across servers</li>
+                <li><strong>Cookie consent cookies:</strong> Remember your cookie preferences</li>
+            </ul>
+            <div class="info-box">
+                <p><strong>Note:</strong> Essential cookies cannot be disabled as they are necessary for the website to function. Disabling them may prevent you from using certain features of CalcuPrime.</p>
+            </div>
+
+            <h3>2. Analytics Cookies</h3>
+            <p>We use analytics cookies to understand how visitors use our website. This helps us improve our services and user experience. These cookies collect information such as:</p>
+            <ul>
+                <li>Number of visitors to our website</li>
+                <li>Which pages are visited most frequently</li>
+                <li>How long visitors spend on each page</li>
+                <li>Which calculators are used most often</li>
+                <li>Geographic location of visitors (country/city level)</li>
+                <li>Browser type and device information</li>
+            </ul>
+            <p>All information collected by analytics cookies is aggregated and anonymous. We cannot identify individual users from this data.</p>
+
+            <h3>3. Advertising Cookies</h3>
+            <p>We use advertising cookies to display relevant advertisements to our visitors. These cookies:</p>
+            <ul>
+                <li>Track your browsing activity across different websites</li>
+                <li>Build a profile of your interests to show relevant ads</li>
+                <li>Limit the number of times you see the same advertisement</li>
+                <li>Measure the effectiveness of advertising campaigns</li>
+                <li>Help us generate revenue to keep CalcuPrime free for all users</li>
+            </ul>
+            <p>These cookies are placed by third-party advertising networks with our permission. You can opt out of personalized advertising by managing your cookie preferences (see "How to Manage Cookies" section below).</p>
+        </div>
+
+        <!-- Google AdSense Cookies -->
+        <div class="policy-section">
+            <h2>Google AdSense Cookies</h2>
+            <p>CalcuPrime uses Google AdSense to display advertisements on our website. Google AdSense uses cookies to serve ads based on your previous visits to our website and other websites on the Internet.</p>
+
+            <h3>How Google AdSense Uses Cookies</h3>
+            <ul>
+                <li><strong>Personalized Advertising:</strong> Google uses cookies to show you ads based on your interests and previous browsing activity</li>
+                <li><strong>Ad Frequency:</strong> Cookies help control how often you see specific ads</li>
+                <li><strong>Performance Measurement:</strong> Track which ads are most effective</li>
+                <li><strong>Fraud Prevention:</strong> Detect and prevent invalid clicks and ad impressions</li>
+            </ul>
+
+            <h3>Google AdSense Cookie Types</h3>
+            <ul>
+                <li><strong>IDE:</strong> Used to measure ad performance and provide relevant ads (Duration: 1-2 years)</li>
+                <li><strong>DSID:</strong> Links your activity across devices if you're signed in to Google (Duration: 2 weeks)</li>
+                <li><strong>__gads:</strong> Registers user actions and targets content based on ad clicks (Duration: 1 year)</li>
+                <li><strong>__gac:</strong> Contains campaign-related information for the user (Duration: 90 days)</li>
+            </ul>
+
+            <h3>Opting Out of Google Ads</h3>
+            <p>You can opt out of personalized advertising by visiting:</p>
+            <div class="browser-links">
+                <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" class="browser-link">Google Ad Settings</a>
+                <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" class="browser-link">Google Ads Preferences</a>
+                <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" class="browser-link">Digital Advertising Alliance</a>
+                <a href="http://www.youronlinechoices.eu/" target="_blank" rel="noopener noreferrer" class="browser-link">European Interactive Digital Advertising Alliance</a>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Important:</strong> Opting out of personalized advertising does not mean you will see fewer ads. It means the ads you see will not be personalized based on your interests. You will still see generic advertisements.</p>
+            </div>
+
+            <p>For more information about how Google uses cookies, please visit <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener noreferrer">Google's Cookie Policy</a>.</p>
+        </div>
+
+        <!-- Google Analytics Cookies -->
+        <div class="policy-section">
+            <h2>Google Analytics Cookies</h2>
+            <p>CalcuPrime uses Google Analytics, a web analytics service provided by Google Inc., to understand how our website is used and to improve user experience. Google Analytics uses cookies to collect information about your use of our website.</p>
+
+            <h3>Information Collected by Google Analytics</h3>
+            <ul>
+                <li>Pages you visit and the order in which you visit them</li>
+                <li>Time spent on each page</li>
+                <li>How you arrived at our website (search engine, direct link, referral, etc.)</li>
+                <li>Your approximate geographic location (country, region, city)</li>
+                <li>Browser type, operating system, and device information</li>
+                <li>Screen resolution and JavaScript support</li>
+                <li>Network provider information</li>
+            </ul>
+
+            <h3>Google Analytics Cookie Types</h3>
+            <ul>
+                <li><strong>_ga:</strong> Distinguishes unique users (Duration: 2 years)</li>
+                <li><strong>_gid:</strong> Distinguishes unique users (Duration: 24 hours)</li>
+                <li><strong>_gat:</strong> Throttles request rate to limit data collection (Duration: 1 minute)</li>
+                <li><strong>_gac_&lt;property-id&gt;:</strong> Contains campaign information (Duration: 90 days)</li>
+                <li><strong>AMP_TOKEN:</strong> Contains a token used to retrieve a Client ID (Duration: 30 seconds to 1 year)</li>
+            </ul>
+
+            <h3>IP Anonymization</h3>
+            <p>We have enabled IP anonymization on Google Analytics, which means your IP address is truncated within EU member states and other parties to the European Economic Area Agreement. Only in exceptional cases is the full IP address sent to Google servers in the USA and shortened there.</p>
+
+            <h3>Data Usage by Google Analytics</h3>
+            <p>The information generated by Google Analytics cookies about your use of CalcuPrime is transmitted to and stored by Google on servers in the United States. Google uses this information to:</p>
+            <ul>
+                <li>Evaluate your use of our website</li>
+                <li>Compile reports on website activity for website operators</li>
+                <li>Provide other services relating to website activity and internet usage</li>
+            </ul>
+
+            <h3>Opting Out of Google Analytics</h3>
+            <p>You can prevent Google Analytics from collecting your data by:</p>
+            <ul>
+                <li>Disabling cookies in your browser settings (see "How to Manage Cookies" section below)</li>
+                <li>Installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a></li>
+                <li>Using browser privacy/incognito mode</li>
+            </ul>
+
+            <p>For more information about Google Analytics and privacy, please visit <a href="https://support.google.com/analytics/answer/6004245" target="_blank" rel="noopener noreferrer">Google Analytics Privacy Policy</a>.</p>
+        </div>
+
+        <!-- Third-Party Cookies -->
+        <div class="policy-section">
+            <h2>Third-Party Cookies</h2>
+            <p>In addition to our own cookies, we may use various third-party cookies to provide you with a better experience and analyze website usage. These third parties have their own privacy policies and cookie policies.</p>
+
+            <h3>Third-Party Services We Use</h3>
+            <ul>
+                <li><strong>Google AdSense:</strong> For displaying advertisements (see dedicated section above)</li>
+                <li><strong>Google Analytics:</strong> For website analytics and performance monitoring (see dedicated section above)</li>
+                <li><strong>Google Fonts:</strong> For loading custom fonts used on our website</li>
+                <li><strong>Social Media Platforms:</strong> If you share content from CalcuPrime on social media, those platforms may set cookies</li>
+                <li><strong>Content Delivery Networks (CDNs):</strong> For faster loading of website resources</li>
+            </ul>
+
+            <h3>Third-Party Cookie Control</h3>
+            <p>We do not control the cookies set by third-party services. We recommend reviewing the privacy and cookie policies of these third parties to understand how they use cookies:</p>
+            <ul>
+                <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a></li>
+                <li><a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener noreferrer">Google Cookie Policy</a></li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Your Rights:</strong> Under GDPR and other privacy laws, you have the right to know which third parties are setting cookies, what data they collect, and how they use it. You can object to third-party cookies at any time by managing your cookie preferences.</p>
+            </div>
+        </div>
+
+        <!-- How to Manage Cookies -->
+        <div class="policy-section">
+            <h2>How to Manage and Disable Cookies</h2>
+            <p>You have the right to decide whether to accept or reject cookies. You can exercise your cookie preferences in several ways:</p>
+
+            <h3>1. Browser Settings</h3>
+            <p>Most web browsers allow you to control cookies through their settings. You can set your browser to:</p>
+            <ul>
+                <li>Block all cookies</li>
+                <li>Accept cookies only from specific websites</li>
+                <li>Delete all cookies when you close your browser</li>
+                <li>Warn you before a cookie is set</li>
+            </ul>
+
+            <h3>Browser-Specific Cookie Management Instructions</h3>
+            <p>Click on your browser below for detailed instructions on managing cookies:</p>
+
+            <div class="browser-links">
+                <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" class="browser-link">Google Chrome</a>
+                <a href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop" target="_blank" rel="noopener noreferrer" class="browser-link">Mozilla Firefox</a>
+                <a href="https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac" target="_blank" rel="noopener noreferrer" class="browser-link">Apple Safari</a>
+                <a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer" class="browser-link">Microsoft Edge</a>
+                <a href="https://help.opera.com/en/latest/web-preferences/#cookies" target="_blank" rel="noopener noreferrer" class="browser-link">Opera</a>
+                <a href="https://support.brave.com/hc/en-us/articles/360022806212-How-do-I-use-Shields-while-browsing" target="_blank" rel="noopener noreferrer" class="browser-link">Brave Browser</a>
+            </div>
+
+            <h3>2. Mobile Device Settings</h3>
+            <p>For mobile devices, you can manage cookies through your device settings:</p>
+            <ul>
+                <li><strong>iOS:</strong> Settings → Safari → Block All Cookies</li>
+                <li><strong>Android:</strong> Settings → Privacy → Clear browsing data</li>
+            </ul>
+
+            <h3>3. Third-Party Cookie Management Tools</h3>
+            <p>You can also use third-party tools to manage cookies:</p>
+            <ul>
+                <li><a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">Digital Advertising Alliance (DAA) Opt-Out Tool</a></li>
+                <li><a href="http://www.youronlinechoices.eu/" target="_blank" rel="noopener noreferrer">European Interactive Digital Advertising Alliance (EDAA)</a></li>
+                <li><a href="http://optout.networkadvertising.org/" target="_blank" rel="noopener noreferrer">Network Advertising Initiative (NAI) Opt-Out Tool</a></li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Warning:</strong> Disabling cookies may affect the functionality of CalcuPrime and other websites you visit. Some features may not work properly, and your user experience may be degraded. Essential cookies are necessary for the website to function and cannot be disabled.</p>
+            </div>
+
+            <h3>4. "Do Not Track" Signals</h3>
+            <p>Some browsers have a "Do Not Track" (DNT) feature that signals to websites that you do not want to be tracked. However, there is currently no industry standard for how to respond to DNT signals. CalcuPrime does not currently respond to DNT signals, but we respect your privacy choices made through browser cookie settings and opt-out tools.</p>
+        </div>
+
+        <!-- Cookie Consent -->
+        <div class="policy-section">
+            <h2>Cookie Consent</h2>
+            <p>When you first visit CalcuPrime, we will ask for your consent to use non-essential cookies (analytics, advertising, and functionality cookies). You can choose to:</p>
+            <ul>
+                <li><strong>Accept All Cookies:</strong> Allow all cookies for the best user experience</li>
+                <li><strong>Accept Only Essential Cookies:</strong> Use only the cookies necessary for website functionality</li>
+                <li><strong>Customize Cookie Preferences:</strong> Choose which types of cookies you want to accept</li>
+            </ul>
+
+            <h3>Your Cookie Consent Rights Under GDPR</h3>
+            <p>Under the EU General Data Protection Regulation (GDPR) and the ePrivacy Directive, you have the following rights regarding cookies:</p>
+            <ul>
+                <li><strong>Right to be Informed:</strong> You have the right to know what cookies are being used and why</li>
+                <li><strong>Right to Choose:</strong> You have the right to accept or reject non-essential cookies</li>
+                <li><strong>Right to Withdraw Consent:</strong> You can change your cookie preferences at any time</li>
+                <li><strong>Right to Access:</strong> You have the right to know what data has been collected via cookies</li>
+                <li><strong>Right to Deletion:</strong> You have the right to request deletion of data collected via cookies</li>
+            </ul>
+
+            <h3>Withdrawing Cookie Consent</h3>
+            <p>You can withdraw your cookie consent at any time by:</p>
+            <ul>
+                <li>Changing your browser cookie settings (see "How to Manage Cookies" section)</li>
+                <li>Clearing your browser cookies</li>
+                <li>Contacting us at the email address provided at the bottom of this page</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Note:</strong> Withdrawing consent for certain cookies may limit your ability to use some features of CalcuPrime. We will always respect your privacy choices while ensuring the website continues to function properly.</p>
+            </div>
+        </div>
+
+        <!-- Updates to Cookie Policy -->
+        <div class="policy-section">
+            <h2>Updates to This Cookie Policy</h2>
+            <p>We may update this Cookie Policy from time to time to reflect changes in our practices, legal requirements, or for other operational, legal, or regulatory reasons. When we make changes, we will:</p>
+            <ul>
+                <li>Update the "Last Updated" date at the top of this policy</li>
+                <li>Notify you of significant changes through a prominent notice on our website</li>
+                <li>Seek your consent again if required by law</li>
+            </ul>
+
+            <h3>Checking for Updates</h3>
+            <p>We encourage you to review this Cookie Policy periodically to stay informed about how we use cookies. The most current version will always be available at this URL: <a href="https://calcuprime.com/cookies.html">https://calcuprime.com/cookies.html</a></p>
+
+            <h3>Version History</h3>
+            <ul>
+                <li><strong>November 20, 2024:</strong> Initial publication of Cookie Policy</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Continued Use:</strong> Your continued use of CalcuPrime after any changes to this Cookie Policy will constitute your acceptance of such changes. If you do not agree to the updated policy, please stop using our website and delete any cookies we have placed.</p>
+            </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="policy-section">
+            <h2>Additional Information and Resources</h2>
+
+            <h3>Related Policies</h3>
+            <p>This Cookie Policy should be read in conjunction with our other policies:</p>
+            <ul>
+                <li><a href="privacy.html">Privacy Policy</a> - How we collect, use, and protect your personal data</li>
+                <li><a href="terms.html">Terms of Service</a> - The terms governing your use of CalcuPrime</li>
+            </ul>
+
+            <h3>Learn More About Cookies</h3>
+            <p>For more information about cookies and online privacy, you may find these resources helpful:</p>
+            <ul>
+                <li><a href="https://www.allaboutcookies.org/" target="_blank" rel="noopener noreferrer">All About Cookies</a> - Comprehensive information about cookies</li>
+                <li><a href="https://ico.org.uk/for-the-public/online/cookies/" target="_blank" rel="noopener noreferrer">UK ICO Guide to Cookies</a> - Information from the UK's data protection authority</li>
+                <li><a href="https://gdpr.eu/cookies/" target="_blank" rel="noopener noreferrer">GDPR and Cookies</a> - How GDPR affects cookie usage</li>
+            </ul>
+
+            <h3>Cookie Categories Explained</h3>
+            <p>Cookies can also be categorized by duration:</p>
+            <ul>
+                <li><strong>Session Cookies:</strong> Temporary cookies that expire when you close your browser</li>
+                <li><strong>Persistent Cookies:</strong> Cookies that remain on your device for a set period or until you delete them</li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h3>Questions About Our Cookie Policy?</h3>
+            <p>If you have any questions, concerns, or requests regarding this Cookie Policy or how we use cookies, please contact us:</p>
+            <p><strong>Email:</strong> <a href="mailto:privacy@calcuprime.com">privacy@calcuprime.com</a></p>
+            <p><strong>Website:</strong> <a href="https://calcuprime.com">https://calcuprime.com</a></p>
+            <p>We will respond to your inquiry within 30 days in accordance with GDPR requirements.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Professional online calculators and converters for all your calculation needs.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="category/finance.html">Finance</a></li>
+                        <li><a href="category/health.html">Health</a></li>
+                        <li><a href="category/converters.html">Converters</a></li>
+                        <li><a href="category/math.html">Math</a></li>
+                        <li><a href="category/chemistry.html">Chemistry</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

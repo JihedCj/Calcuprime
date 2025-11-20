@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Health & Fitness Calculators - Free online tools to calculate BMI, daily calorie needs, pregnancy due date, and ideal weight. Get personalized health insights instantly.">
+    <meta name="keywords" content="health calculator, fitness calculator, BMI calculator, calorie calculator, pregnancy calculator, ideal weight calculator, fitness tools, health tools">
+    <meta name="author" content="CalcuPrime">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Health & Fitness Calculators - Free Online Tools | CalcuPrime">
+    <meta property="og:description" content="Calculate BMI, calorie needs, pregnancy due date, and ideal weight with our free health and fitness calculators. Personalized insights for your wellness journey.">
+    <meta property="og:image" content="../assets/og-image.jpg">
+    <meta property="og:url" content="https://calcuprime.com/category/health.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Health & Fitness Calculators - Free Online Tools | CalcuPrime">
+    <meta name="twitter:description" content="Calculate BMI, calorie needs, pregnancy due date, and ideal weight with our free health and fitness calculators.">
+
+    <title>Health & Fitness Calculators - Free Online Tools | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/category/health.html">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Health & Fitness Calculators",
+        "description": "Free online health and fitness calculators for BMI, calorie needs, pregnancy tracking, and ideal weight calculation",
+        "url": "https://calcuprime.com/category/health.html",
+        "mainEntity": [
+            {
+                "@type": "CalculatorTool",
+                "name": "BMI Calculator",
+                "description": "Calculate your Body Mass Index and health status",
+                "url": "https://calcuprime.com/calculators/bmi-calculator.html"
+            },
+            {
+                "@type": "CalculatorTool",
+                "name": "Calorie Calculator",
+                "description": "Calculate your daily caloric needs and weight goals",
+                "url": "https://calcuprime.com/calculators/calorie-calculator.html"
+            },
+            {
+                "@type": "CalculatorTool",
+                "name": "Pregnancy Calculator",
+                "description": "Calculate your due date and pregnancy weeks",
+                "url": "https://calcuprime.com/calculators/pregnancy-calculator.html"
+            },
+            {
+                "@type": "CalculatorTool",
+                "name": "Ideal Weight Calculator",
+                "description": "Calculate your ideal body weight range",
+                "url": "https://calcuprime.com/calculators/ideal-weight-calculator.html"
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+                <li><a href="../index.html#chemistry">Chemistry</a></li>
+                <li><a href="../index.html#everyday">Everyday</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">&times;</button>
+            <input type="text" id="searchInput" placeholder="Search calculators..." class="search-input">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Health & Fitness Calculators</h1>
+            <p class="hero-subtitle">Free, accurate tools to track your health metrics, monitor fitness goals, and make informed wellness decisions</p>
+        </div>
+    </section>
+
+    <!-- Category Overview -->
+    <section class="section">
+        <div class="container">
+            <div class="content-section">
+                <h2>About Our Health Calculators</h2>
+                <p>Welcome to CalcuPrime's comprehensive collection of health and fitness calculators. Whether you're starting a fitness journey, monitoring your weight, or tracking a pregnancy, our tools provide quick, accurate calculations to help you understand your health better. All calculators are designed with medical best practices in mind and provide scientifically-based results.</p>
+
+                <h3>Why Use Health Calculators?</h3>
+                <ul>
+                    <li><strong>Track Your Progress:</strong> Monitor changes in your health metrics over time to see real results from your efforts</li>
+                    <li><strong>Set Realistic Goals:</strong> Understand your baseline health metrics to establish achievable fitness and wellness objectives</li>
+                    <li><strong>Make Informed Decisions:</strong> Get data-driven insights to support lifestyle choices and health discussions with professionals</li>
+                    <li><strong>Personalized Insights:</strong> Receive tailored recommendations based on your individual health metrics and circumstances</li>
+                    <li><strong>Motivation:</strong> Celebrate progress with measurable data that shows your commitment to wellness paying off</li>
+                    <li><strong>Professional Support:</strong> Share calculator results with doctors and nutritionists for more informed consultations</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Calculators Grid -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 2rem;">Our Health Calculators</h2>
+            <div class="calculator-grid">
+                <!-- BMI Calculator Card -->
+                <a href="../calculators/bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">BMI Calculator</h3>
+                    <p class="calc-description">Calculate your Body Mass Index and discover your health category. Get recommendations for healthy weight ranges.</p>
+                    <div style="margin-top: auto; color: #2563eb; font-weight: 600; font-size: 0.9rem;">Learn more →</div>
+                </a>
+
+                <!-- Calorie Calculator Card -->
+                <a href="../calculators/calorie-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calorie Calculator</h3>
+                    <p class="calc-description">Determine your daily caloric needs based on activity level. Plan nutrition for weight loss, maintenance, or gain.</p>
+                    <div style="margin-top: auto; color: #2563eb; font-weight: 600; font-size: 0.9rem;">Learn more →</div>
+                </a>
+
+                <!-- Pregnancy Calculator Card -->
+                <a href="../calculators/pregnancy-calculator.html" class="calc-card">
+                    <div class="calc-icon">👶</div>
+                    <h3 class="calc-title">Pregnancy Calculator</h3>
+                    <p class="calc-description">Calculate your due date and current pregnancy week. Track your pregnancy progress and important milestones.</p>
+                    <div style="margin-top: auto; color: #2563eb; font-weight: 600; font-size: 0.9rem;">Learn more →</div>
+                </a>
+
+                <!-- Ideal Weight Calculator Card -->
+                <a href="../calculators/ideal-weight-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Ideal Weight Calculator</h3>
+                    <p class="calc-description">Calculate your ideal body weight range based on height and body frame. Get personalized health targets.</p>
+                    <div style="margin-top: auto; color: #2563eb; font-weight: 600; font-size: 0.9rem;">Learn more →</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Calculator Descriptions -->
+    <section class="section">
+        <div class="container">
+            <div class="content-section">
+                <h2>BMI Calculator - Your Body Mass Index</h2>
+                <p>The BMI (Body Mass Index) Calculator is one of the most widely used health metrics. It provides a simple numerical measure of your body weight relative to your height, helping you understand if you're in a healthy weight range. BMI is calculated as your weight in kilograms divided by the square of your height in meters (kg/m²).</p>
+
+                <h3>What BMI Tells You:</h3>
+                <ul>
+                    <li><strong>BMI &lt; 18.5:</strong> Underweight - May need to gain weight</li>
+                    <li><strong>BMI 18.5 - 24.9:</strong> Normal Weight - Healthy range for most adults</li>
+                    <li><strong>BMI 25 - 29.9:</strong> Overweight - May benefit from lifestyle changes</li>
+                    <li><strong>BMI ≥ 30:</strong> Obese - Higher health risks; consider medical consultation</li>
+                </ul>
+
+                <h3>BMI Calculator Features:</h3>
+                <ul>
+                    <li>Support for both metric (kg, cm) and imperial (lbs, inches) units</li>
+                    <li>Personalized healthy weight range calculation</li>
+                    <li>Visual BMI scale for easy understanding</li>
+                    <li>Age and gender-specific considerations</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Calorie Calculator - Your Daily Energy Needs</h2>
+                <p>The Calorie Calculator helps you determine your daily caloric requirements based on your personal data and activity level. This information is essential for weight management, whether your goal is to lose weight, maintain your current weight, or gain muscle mass.</p>
+
+                <h3>How It Works:</h3>
+                <ul>
+                    <li>Calculates your Basal Metabolic Rate (BMR) - calories burned at rest</li>
+                    <li>Applies your activity level to determine Total Daily Energy Expenditure (TDEE)</li>
+                    <li>Suggests caloric intake for different weight goals</li>
+                    <li>Accounts for age, gender, height, weight, and activity level</li>
+                </ul>
+
+                <h3>Activity Levels:</h3>
+                <ul>
+                    <li><strong>Sedentary:</strong> Little or no exercise (BMR × 1.2)</li>
+                    <li><strong>Lightly Active:</strong> Light exercise 1-3 days/week (BMR × 1.375)</li>
+                    <li><strong>Moderately Active:</strong> Moderate exercise 3-5 days/week (BMR × 1.55)</li>
+                    <li><strong>Very Active:</strong> Hard exercise 6-7 days/week (BMR × 1.725)</li>
+                    <li><strong>Extremely Active:</strong> Very hard exercise/physical job (BMR × 1.9)</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Pregnancy Calculator - Tracking Your Journey</h2>
+                <p>The Pregnancy Calculator is designed to help expectant mothers track their pregnancy journey. By entering your last menstrual period or estimated due date, you can instantly learn your current pregnancy week, estimated due date, and important milestones.</p>
+
+                <h3>Key Information:</h3>
+                <ul>
+                    <li>Current pregnancy week and trimester</li>
+                    <li>Estimated due date (calculated as 40 weeks from LMP)</li>
+                    <li>Days until your due date</li>
+                    <li>Fetal development stage information</li>
+                    <li>Recommended prenatal care schedule</li>
+                </ul>
+
+                <h3>Pregnancy Milestones:</h3>
+                <ul>
+                    <li><strong>First Trimester (Weeks 1-13):</strong> Organ development, increased hormones, possible morning sickness</li>
+                    <li><strong>Second Trimester (Weeks 14-27):</strong> Visible bump, baby's movements, reduced nausea</li>
+                    <li><strong>Third Trimester (Weeks 28-40):</strong> Rapid growth, preparation for birth, increased discomfort</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Ideal Weight Calculator - Your Target Weight</h2>
+                <p>The Ideal Weight Calculator uses proven formulas to determine the ideal weight range for your height, age, and body frame. This helps you set realistic and healthy weight goals that are appropriate for your individual characteristics.</p>
+
+                <h3>Calculation Methods:</h3>
+                <ul>
+                    <li><strong>Devine Formula:</strong> Widely used for determining ideal body weight</li>
+                    <li><strong>Robinson Formula:</strong> Updated version accounting for modern population data</li>
+                    <li><strong>BMI-Based Method:</strong> Uses healthy BMI range (18.5-24.9) to calculate weight range</li>
+                </ul>
+
+                <h3>Factors Considered:</h3>
+                <ul>
+                    <li>Height - Primary determinant of ideal weight</li>
+                    <li>Body Frame Size - Small, medium, or large frames have different ideal weights</li>
+                    <li>Age - Muscle mass naturally decreases with age</li>
+                    <li>Gender - Men typically have different ideal weights than women</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health & Fitness Tips -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="content-section">
+                <h2>Health & Fitness Tips</h2>
+
+                <h3>Healthy Weight Management</h3>
+                <ul>
+                    <li><strong>Set Realistic Goals:</strong> Aim for 1-2 pounds per week weight loss - this is sustainable and healthy</li>
+                    <li><strong>Focus on Nutrition:</strong> Eat whole foods, plenty of vegetables, lean proteins, and healthy fats</li>
+                    <li><strong>Stay Consistent:</strong> Regular exercise and healthy eating habits matter more than perfection</li>
+                    <li><strong>Hydration:</strong> Drink at least 8-10 glasses of water daily to support metabolism</li>
+                    <li><strong>Sleep Quality:</strong> Get 7-9 hours of quality sleep per night for optimal health</li>
+                    <li><strong>Manage Stress:</strong> Practice meditation, yoga, or other stress-reduction techniques</li>
+                </ul>
+
+                <h3>Exercise Recommendations</h3>
+                <ul>
+                    <li><strong>Cardio:</strong> 150 minutes of moderate aerobic activity per week (or 75 minutes of vigorous)</li>
+                    <li><strong>Strength Training:</strong> 2-3 sessions per week targeting all major muscle groups</li>
+                    <li><strong>Flexibility:</strong> Daily stretching or yoga for improved mobility</li>
+                    <li><strong>Consistency:</strong> Start with achievable goals and gradually increase intensity</li>
+                    <li><strong>Variety:</strong> Mix different types of exercise to prevent boredom and work all muscle groups</li>
+                </ul>
+
+                <h3>Nutrition Guidelines</h3>
+                <ul>
+                    <li><strong>Balanced Diet:</strong> Include proteins, carbohydrates, and healthy fats in each meal</li>
+                    <li><strong>Portion Control:</strong> Use your calorie calculator to guide appropriate portions</li>
+                    <li><strong>Fruits & Vegetables:</strong> Aim for 5+ servings daily for vitamins and minerals</li>
+                    <li><strong>Limit Processed Foods:</strong> Minimize sugar, sodium, and trans fats</li>
+                    <li><strong>Meal Planning:</strong> Prepare meals in advance to avoid impulsive food choices</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
+
+            <div class="content-section">
+                <h3>General Health Questions</h3>
+
+                <h4 style="margin-top: 1.5rem;">Is BMI accurate for everyone?</h4>
+                <p>BMI is a useful screening tool for most adults, but it has limitations. It may not be accurate for athletes, bodybuilders, elderly individuals, or pregnant women, as it doesn't account for muscle mass or body composition. For these groups, additional health assessments may be necessary.</p>
+
+                <h4>How often should I track my health metrics?</h4>
+                <p>For weight tracking, once per week is typically sufficient. Track your BMI monthly or quarterly to see meaningful changes. For fitness metrics, monthly progress photos and measurements can be motivating and reveal changes the scale might not show.</p>
+
+                <h4>Can I use these calculators if I have a medical condition?</h4>
+                <p>These calculators are for general informational purposes. If you have any medical conditions, are taking medications, or have specific health concerns, always consult with your healthcare provider before making significant lifestyle changes based on calculator results.</p>
+
+                <h4>Are these calculators suitable for teenagers?</h4>
+                <p>The BMI calculator can be used for teens, but BMI-for-age percentile calculations are more appropriate for children and adolescents. Consult a pediatrician for age-specific health metrics. Our calculators are primarily designed for adults.</p>
+
+                <h4>How accurate are these health calculators?</h4>
+                <p>Our calculators use medically-recognized formulas and are as accurate as the information you provide. However, they're screening tools, not diagnostic instruments. For medical diagnosis or personalized health plans, always consult healthcare professionals.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>BMI & Weight Questions</h3>
+
+                <h4>What's the difference between BMI and body fat percentage?</h4>
+                <p>BMI measures weight relative to height and is calculated using a simple formula. Body fat percentage measures the proportion of fat in your body composition. Two people with the same BMI can have very different body fat percentages depending on muscle mass.</p>
+
+                <h4>Why is my BMI high even though I feel healthy?</h4>
+                <p>You might have high muscle mass, which weighs more than fat. Athletes and very fit individuals often have higher BMIs. Body composition analysis would give you a better picture than BMI alone. Consult your doctor if you're concerned.</p>
+
+                <h4>Is there an ideal weight for my height?</h4>
+                <p>Ideal weight varies based on body frame size, age, gender, and muscle mass. Our Ideal Weight Calculator provides a healthy weight range rather than a single "ideal" number. Aim for the range that corresponds to your body frame.</p>
+
+                <h4>How quickly can I expect to lose weight safely?</h4>
+                <p>Healthy weight loss is typically 1-2 pounds per week. This is sustainable and allows you to maintain muscle mass. Faster weight loss often results in muscle loss and is harder to maintain long-term.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>Calorie & Nutrition Questions</h3>
+
+                <h4>What's the difference between BMR and TDEE?</h4>
+                <p>BMR (Basal Metabolic Rate) is the calories you burn at complete rest. TDEE (Total Daily Energy Expenditure) includes BMR plus calories burned through activity and digestion. Our calorie calculator determines your TDEE based on activity level.</p>
+
+                <h4>How do I use my daily calorie number?</h4>
+                <p>For weight loss, eat 300-500 calories below your TDEE. For weight gain, eat 300-500 calories above it. For maintenance, eat at your TDEE. These deficits/surpluses result in about 1 pound of change per week.</p>
+
+                <h4>Should I eat the same calories every day?</h4>
+                <p>While it's not necessary to eat the exact same calories daily, averaging the right calorie intake over a week supports steady progress. Some flexibility helps with long-term adherence and prevents burnout.</p>
+
+                <h4>Are carbs bad for weight loss?</h4>
+                <p>Carbohydrates are not inherently bad for weight loss. What matters most is total calorie intake. Choose complex carbs (whole grains, vegetables, legumes) which provide satiety and nutrients. The key is balance and portion control.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>Pregnancy Questions</h3>
+
+                <h4>How is my due date calculated?</h4>
+                <p>The standard pregnancy is 40 weeks, calculated from the first day of your last menstrual period (LMP). Due dates are estimates, and only about 5% of babies are born on the exact due date. Most births occur within 2 weeks of the due date.</p>
+
+                <h4>What if my due date seems wrong?</h4>
+                <p>If you're unsure about your last menstrual period or have irregular cycles, an ultrasound by your healthcare provider can give you a more accurate due date, especially if done in the first trimester.</p>
+
+                <h4>Should I gain weight during pregnancy?</h4>
+                <p>Yes, healthy weight gain is important for fetal development. Recommended weight gain is 25-35 pounds for normal weight women, 15-25 pounds for overweight women, and 11-20 pounds for obese women. Consult your doctor for personalized recommendations.</p>
+
+                <h4>How do I know if my pregnancy is progressing normally?</h4>
+                <p>Regular prenatal care is essential. Your doctor will monitor your weight, blood pressure, and baby's development through regular checkups and ultrasounds. Always report any concerning symptoms immediately.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Categories -->
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title" style="margin-bottom: 2rem;">Related Categories</h2>
+            <div class="calculator-grid">
+                <a href="finance.html" class="calc-card" style="border-left: 4px solid #2563eb;">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Finance Calculators</h3>
+                    <p class="calc-description">Manage your money with loan, mortgage, and investment calculators</p>
+                </a>
+
+                <a href="converters.html" class="calc-card" style="border-left: 4px solid #2563eb;">
+                    <div class="calc-icon">🔄</div>
+                    <h3 class="calc-title">Unit Converters</h3>
+                    <p class="calc-description">Convert units for length, weight, temperature, and currency</p>
+                </a>
+
+                <a href="math.html" class="calc-card" style="border-left: 4px solid #2563eb;">
+                    <div class="calc-icon">🔢</div>
+                    <h3 class="calc-title">Math Calculators</h3>
+                    <p class="calc-description">Solve math problems from basic to advanced calculations</p>
+                </a>
+
+                <a href="chemistry.html" class="calc-card" style="border-left: 4px solid #2563eb;">
+                    <div class="calc-icon">⚗️</div>
+                    <h3 class="calc-title">Chemistry Calculators</h3>
+                    <p class="calc-description">Calculate molar mass, molarity, and chemical equations</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Resources Section -->
+    <section class="section">
+        <div class="container">
+            <div class="content-section">
+                <h2>Health Resources & Disclaimer</h2>
+                <p><strong>Important:</strong> These calculators are for informational and educational purposes only. They should not be used as a substitute for professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare professional for personalized health guidance.</p>
+
+                <h3>When to Seek Professional Help</h3>
+                <ul>
+                    <li>If your BMI is significantly outside the normal range (below 18.5 or above 30)</li>
+                    <li>If you're experiencing rapid, unexplained weight changes</li>
+                    <li>If you have concerns about your health or fitness level</li>
+                    <li>If you're planning significant dietary or exercise changes</li>
+                    <li>If you have existing health conditions</li>
+                    <li>If you're pregnant and have any complications</li>
+                    <li>If you're taking medications that may affect weight or metabolism</li>
+                </ul>
+
+                <h3>Professional Resources</h3>
+                <ul>
+                    <li><strong>Primary Care Physician:</strong> Your first point of contact for health concerns</li>
+                    <li><strong>Registered Dietitian:</strong> Expert in nutrition and personalized meal planning</li>
+                    <li><strong>Certified Personal Trainer:</strong> Professional guidance for exercise programs</li>
+                    <li><strong>Obstetrician/Gynecologist:</strong> Specialized care during pregnancy</li>
+                    <li><strong>Mental Health Professional:</strong> Support for eating disorders or stress-related issues</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section section-alt">
+        <div class="container" style="text-align: center;">
+            <h2>Ready to Take Control of Your Health?</h2>
+            <p style="font-size: 1.125rem; color: #6b7280; margin: 1.5rem 0 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Start tracking your health metrics today with our free calculators. Get personalized insights to support your wellness journey.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="../calculators/bmi-calculator.html" style="background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 0.75rem; text-decoration: none; font-weight: 600; transition: background 0.3s ease;">Calculate Your BMI</a>
+                <a href="../calculators/calorie-calculator.html" style="background: white; color: #2563eb; border: 2px solid #2563eb; padding: 0.75rem 1.5rem; border-radius: 0.75rem; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Find Your Calorie Needs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Professional online calculators and converters for all your calculation needs. Free, accurate, and easy to use.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="finance.html">Finance</a></li>
+                        <li><a href="health.html">Health</a></li>
+                        <li><a href="converters.html">Converters</a></li>
+                        <li><a href="math.html">Math</a></li>
+                        <li><a href="chemistry.html">Chemistry</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../sitemap.xml">Sitemap</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="../privacy.html">Privacy Policy</a></li>
+                        <li><a href="../terms.html">Terms of Service</a></li>
+                        <li><a href="../cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved. | Health calculators for informational purposes only. Not a substitute for professional medical advice.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

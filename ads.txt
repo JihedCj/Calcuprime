@@ -1,0 +1,14 @@
+# Google AdSense
+# Replace pub-0000000000000000 with your actual AdSense publisher ID
+# Format: google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+
+# Instructions:
+# 1. Get your AdSense Publisher ID from your AdSense account
+# 2. It will look like: pub-1234567890123456
+# 3. Replace pub-0000000000000000 above with your actual ID
+# 4. Upload this file to the root of your website (same level as index.html)
+# 5. Verify it's accessible at: https://calcuprime.com/ads.txt
+
+# The f08c47fec0942fa0 is Google's certification authority ID (do not change)
+# DIRECT means you have a direct relationship with Google AdSense
