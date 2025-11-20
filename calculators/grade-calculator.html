@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free grade calculator - Calculate final grades with weighted assignments, tests, and exams. Plan grades for target score.">
-    <meta name="keywords" content="grade calculator, final grade calculator, weighted grade, test grade calculator, course grade">
+    <meta name="description" content="Free grade calculator - Calculate final course grades with weighted assignments, tests, and exams. Determine what score you need on the final to achieve your target grade.">
+    <meta name="keywords" content="grade calculator, final grade calculator, weighted grade, test grade calculator, course grade, final exam calculator">
     <title>Grade Calculator | CalcuPrime</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="canonical" href="https://calcuprime.com/calculators/grade-calculator.html">
@@ -20,37 +20,252 @@
     <main class="calculator-container">
         <div class="calculator-header">
             <h1 class="calculator-title">Grade Calculator</h1>
-            <p class="calculator-description">Calculate final course grade</p>
+            <p class="calculator-description">Calculate your current grade and plan for final exams</p>
         </div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs">
-                <h3>Enter Values</h3>
-                <div class="form-group"><label for="input1" class="form-label">Input 1</label><input type="number" id="input1" class="form-input" value="100" min="0"></div>
-                <div class="form-group"><label for="input2" class="form-label">Input 2</label><input type="number" id="input2" class="form-input" value="10" min="0"></div>
-                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+                <h3>Grade Components</h3>
+                <div class="grade-row" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <span style="width: 100px; font-size: 0.9rem;">Homework</span>
+                    <input type="number" class="form-input component-score" placeholder="Score %" value="85" min="0" max="100" step="1" style="flex: 1;">
+                    <input type="number" class="form-input component-weight" placeholder="Weight %" value="20" min="0" max="100" step="1" style="flex: 1;">
+                </div>
+                <div class="grade-row" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <span style="width: 100px; font-size: 0.9rem;">Quizzes</span>
+                    <input type="number" class="form-input component-score" placeholder="Score %" value="90" min="0" max="100" step="1" style="flex: 1;">
+                    <input type="number" class="form-input component-weight" placeholder="Weight %" value="15" min="0" max="100" step="1" style="flex: 1;">
+                </div>
+                <div class="grade-row" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <span style="width: 100px; font-size: 0.9rem;">Midterm</span>
+                    <input type="number" class="form-input component-score" placeholder="Score %" value="82" min="0" max="100" step="1" style="flex: 1;">
+                    <input type="number" class="form-input component-weight" placeholder="Weight %" value="25" min="0" max="100" step="1" style="flex: 1;">
+                </div>
+                <div class="grade-row" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <span style="width: 100px; font-size: 0.9rem;">Final Exam</span>
+                    <input type="number" id="finalScore" class="form-input component-score" placeholder="Score %" value="0" min="0" max="100" step="1" style="flex: 1;">
+                    <input type="number" id="finalWeight" class="form-input component-weight" placeholder="Weight %" value="40" min="0" max="100" step="1" style="flex: 1;">
+                </div>
+                <h3 style="margin-top: 1.5rem;">Target Grade Calculator</h3>
+                <div class="form-group">
+                    <label for="targetGrade" class="form-label">Desired Final Grade (%)</label>
+                    <input type="number" id="targetGrade" class="form-input" value="90" min="0" max="100" step="1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate Grade</button>
             </div>
             <div class="calculator-results">
-                <h3>Results</h3>
-                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+                <h3>Your Grade</h3>
+                <div class="result-item">
+                    <div class="result-label">Current Grade</div>
+                    <div class="result-value" id="currentGrade" style="font-size: 2.5rem; color: #10b981;">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Letter Grade</div>
+                    <div class="result-value" id="letterGrade">F</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Final Grade (with current final exam score)</div>
+                    <div class="result-value" id="finalGrade">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Score Needed on Final Exam</div>
+                    <div class="result-value" id="neededScore" style="font-size: 1.5rem;">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Assessment</div>
+                    <div class="result-value" id="assessment" style="font-size: 1rem;">-</div>
+                </div>
             </div>
         </div>
         <div class="content-section">
-            <h2>About This Calculator</h2>
-            <p>Use our Grade Calculator for fast, accurate calculations. Enter your values above and get instant results.</p>
-            <h2>Key Features</h2>
-            <ul><li>Instant calculations</li><li>Accurate results</li><li>Easy to use</li><li>Mobile-friendly</li></ul>
+            <h2>Understanding Weighted Grades</h2>
+            <p>Most courses calculate final grades using weighted averages rather than simple arithmetic means. Weighted grading assigns different percentages of your final grade to different categories—homework might count 20%, tests 30%, projects 25%, and final exam 25%. This system reflects the varying importance of different assessment types and ensures major exams appropriately influence your final grade despite representing fewer assignments than homework or quizzes.</p>
+
+            <p>Understanding weighted grades transforms abstract percentage points into strategic academic planning. If your final exam counts 40% of your grade, that single test matters more than 15 homework assignments collectively worth 15%. This knowledge helps prioritize study time, allocate effort appropriately, and calculate exactly what scores you need to achieve target grades. Rather than feeling lost in uncertainty, weighted grade calculations provide clarity and control over academic outcomes.</p>
+
+            <h2>How to Calculate Weighted Grades</h2>
+            <p>Weighted grade calculation multiplies each component score by its weight, then sums these weighted scores. The formula: Final Grade = (Score1 × Weight1) + (Score2 × Weight2) + (Score3 × Weight3) + ... </p>
+
+            <p><strong>Example:</strong> Your course has four components: Homework (85%, worth 20%), Quizzes (90%, worth 15%), Midterm (82%, worth 25%), Final Exam (88%, worth 40%). Calculate: (85 × 0.20) + (90 × 0.15) + (82 × 0.25) + (88 × 0.40) = 17.0 + 13.5 + 20.5 + 35.2 = 86.2%. Your final grade is 86.2%, typically a B or B+ depending on grading scale.</p>
+
+            <p>Key insight: A component's impact on your final grade equals its score times its weight. Scoring 100% on 5%-weight homework adds 5 points to your final grade. Scoring 100% on a 30%-weight final exam adds 30 points. The final exam's impact is six times greater than homework, even though homework involves dozens of assignments versus one exam.</p>
+
+            <h2>Standard Grading Scales</h2>
+            <p>Most American schools and colleges use letter grades corresponding to percentage ranges. The most common scale:</p>
+
+            <p><strong>A (90-100%):</strong> Excellent work demonstrating mastery of course material. Indicates comprehensive understanding, minimal errors, and ability to apply concepts to new situations. Contributes 4.0 to GPA.</p>
+
+            <p><strong>B (80-89%):</strong> Good work demonstrating solid understanding with minor gaps or errors. Shows competence in most areas with room for improvement. Contributes 3.0 to GPA.</p>
+
+            <p><strong>C (70-79%):</strong> Satisfactory work meeting basic requirements. Demonstrates adequate understanding but significant gaps remain. For many programs, C represents minimum passing grade for major courses. Contributes 2.0 to GPA.</p>
+
+            <p><strong>D (60-69%):</strong> Poor work meeting minimal requirements for course credit (in some institutions). Indicates substantial deficiencies in understanding. Many colleges don't accept D grades for major requirements or prerequisites. Contributes 1.0 to GPA.</p>
+
+            <p><strong>F (Below 60%):</strong> Failing work not meeting course requirements. No credit earned; course must be retaken. Contributes 0.0 to GPA.</p>
+
+            <p>Some institutions use plus/minus grading (A-, B+, B-, C+, etc.) corresponding to more granular percentage ranges: A (93-100), A- (90-92), B+ (87-89), B (83-86), B- (80-82), and so on. Always check your institution's specific grading scale, as standards vary.</p>
+
+            <h2>Calculating What You Need on the Final Exam</h2>
+            <p>One of the most valuable calculations determines the minimum final exam score needed to achieve a target grade. This "what if" analysis helps set realistic goals and prioritize studying.</p>
+
+            <p>Formula: Required Final Exam Score = (Target Grade - Current Weighted Grade) ÷ Final Exam Weight</p>
+
+            <p><strong>Example:</strong> Before the final exam, your weighted average is 84% based on completed work worth 60% of your grade. The final exam is worth 40%. You want an A (90%). Calculate: (90 - 84 × 0.60) ÷ 0.40 = (90 - 50.4) ÷ 0.40 = 39.6 ÷ 0.40 = 99%. You need 99% on the final to achieve 90% overall—possible but challenging.</p>
+
+            <p>This calculation has three possible outcomes: (1) The required score is achievable (0-100%), giving you a clear target. (2) The required score exceeds 100%, meaning your target grade is mathematically impossible—adjust expectations or explore extra credit. (3) The required score is negative or very low, meaning you've already secured your target grade—study to maintain knowledge but reduce stress about grade outcomes.</p>
+
+            <h2>Strategic Grade Management</h2>
+            <p><strong>Front-Load Your Effort:</strong> Strong performance early in the semester builds grade cushion for later challenges. Earning high scores on early, often easier assignments creates room for mistakes on more difficult material later. Students who start strong often maintain that trajectory; students who start poorly rarely recover completely.</p>
+
+            <p><strong>Prioritize High-Weight Components:</strong> If the final exam is worth 40% and homework is worth 10%, an extra hour studying for the final impacts your grade four times more than an extra hour perfecting homework. Allocate study time proportional to component weights. This doesn't mean ignoring low-weight assignments—they build knowledge for high-weight assessments—but when time is limited, prioritize what matters most.</p>
+
+            <p><strong>Calculate Often:</strong> Don't wait until finals to check your grade. After each assignment, quiz, or test, recalculate your current standing and what you need going forward. This regular monitoring identifies problems early when correction is still possible. Many students are shocked by final grades because they never calculated their actual standing during the semester.</p>
+
+            <p><strong>Understand Threshold Effects:</strong> The difference between 89.4% and 89.6% might separate a B from an A if your professor rounds. Similarly, 79.5% might round to 80% (B-) rather than 79% (C+). When you're near grade boundaries, small improvements produce disproportionate results. A few extra points from extra credit, improved homework scores, or stronger test performance can shift your letter grade.</p>
+
+            <p><strong>Communicate with Professors:</strong> If you're borderline between grades, consider discussing your situation with your professor. Some professors appreciate proactive students and may offer extra credit opportunities, allow assignment revisions, or provide guidance for final exam preparation. This isn't begging for grade changes—it's demonstrating engagement and seeking help to earn the grade you want.</p>
+
+            <h2>Extra Credit Strategy</h2>
+            <p>Extra credit opportunities can make the difference between grade levels, but approach them strategically. Extra credit typically falls into three categories:</p>
+
+            <p><strong>Replacement Extra Credit:</strong> Some professors allow extra credit assignments to replace your lowest homework or quiz score. Maximum benefit: the difference between your lowest score and 100%. If your lowest quiz is 70%, extra credit replacing it adds 30% × quiz weight to your final grade. Pursue these opportunities when your lowest scores significantly drag down your grade.</p>
+
+            <p><strong>Additive Extra Credit:</strong> Points added directly to specific assignment categories or your final grade. Common sources: attending optional lectures, participating in research studies, completing supplementary problems. These points directly increase your grade—a 2-point bonus on a 100-point exam raises that test score from 85% to 87%. Additive extra credit provides guaranteed grade improvement and usually requires minimal effort.</p>
+
+            <p><strong>Participation Extra Credit:</strong> Some professors offer small ongoing bonuses for consistent class participation, attendance, or engagement. While individual rewards are small (0.5-1 point per class), they accumulate over the semester. Perfect attendance worth 1% doesn't sound impressive, but 1% can shift 89% to 90% (B+ to A-).</p>
+
+            <h2>Study Strategies for Different Grade Goals</h2>
+            <p><strong>Aiming for A (90-100%):</strong> Requires mastery of all course material including difficult concepts. Begin studying early, attend all classes and office hours, complete all readings and assignments, form study groups, and seek help immediately when confused. Practice beyond assigned work—do extra problems, create your own examples, teach concepts to others. For exams, aim to over-prepare so anxiety and minor mistakes don't drop you below 90%.</p>
+
+            <p><strong>Aiming for B (80-89%):</strong> Requires solid understanding of core concepts with room for gaps in advanced material. Attend most classes, complete all major assignments, study consistently rather than cramming, and seek help for particularly confusing topics. Focus energy on material emphasized by professor and high-weight assessments. For exams, thorough preparation on main concepts usually secures B range even with weaker performance on challenging questions.</p>
+
+            <p><strong>Aiming to Pass (70-79% or 60-69%):</strong> Requires basic competence with minimum effort. If you're just trying to pass a required course outside your interests, calculate minimum necessary effort. Identify highest-weight components and focus there—if the final is 50%, you can underperform on homework and still pass with strong final performance. This isn't recommended for major courses or when learning matters, but strategic minimum effort makes sense for distribution requirements when taking demanding courses in your major simultaneously.</p>
+
+            <h2>When Grades Don't Reflect Learning</h2>
+            <p>Grades measure performance on specific assessments under specific conditions. They don't perfectly measure knowledge, intelligence, ability, or worth. Understanding this distinction matters:</p>
+
+            <p><strong>Test Anxiety:</strong> Some students know material thoroughly but perform poorly under timed testing conditions. If test anxiety affects your grades, seek accommodations (extended time, reduced-distraction environments), work with counseling services on anxiety management, and discuss alternative assessment options with professors. Many schools offer formal testing accommodations for documented anxiety disorders.</p>
+
+            <p><strong>Learning Disabilities:</strong> Conditions like dyslexia, ADHD, dysgraphia, and processing disorders affect academic performance but don't reflect intellectual ability. If you consistently underperform relative to your understanding, consider evaluation for learning disabilities. Formal diagnosis often qualifies you for accommodations (extra time, note-taking services, alternative testing formats) that level the playing field.</p>
+
+            <p><strong>Life Circumstances:</strong> Illness, family emergencies, mental health challenges, financial stress, and other life factors impact grades. Most institutions have policies for incomplete grades, late withdrawals, or grade appeals based on documented extenuating circumstances. Communicate with professors and academic advisors when life interferes with coursework—many schools offer more flexibility than students realize.</p>
+
+            <h2>Grade Appeals and Disputes</h2>
+            <p>If you believe a grade is incorrect, follow your institution's appeal process:</p>
+
+            <p><strong>Informal Discussion First:</strong> Before formal appeals, talk with your professor. Mistakes happen—clerical errors, misgraded assignments, miscalculated totals. Often a simple conversation resolves the issue. Approach respectfully, present specific evidence (your work, the grading rubric, point calculations), and ask for clarification rather than demanding changes.</p>
+
+            <p><strong>Documentation:</strong> Keep all graded work, syllabi, and email communication throughout the semester. If grade disputes arise, you'll need evidence. Many professors discard graded assignments after final grades submit—retain copies of major tests, papers, and projects.</p>
+
+            <p><strong>Formal Appeals:</strong> If informal discussion doesn't resolve the issue, most schools have formal grade appeal processes involving department chairs or academic committees. Appeals typically require documentation showing grading errors, discrimination, deviation from syllabus grading policies, or other procedural violations. Appeals rarely succeed based on "I deserved better"—you need concrete evidence of mistakes or policy violations.</p>
+
+            <h2>The Bottom Line</h2>
+            <p>Grade calculation isn't mysterious—it's straightforward mathematics that empowers strategic academic planning. Understanding how components combine into final grades enables you to set realistic targets, prioritize study time effectively, and make informed decisions about effort allocation across multiple courses. Use grade calculators regularly, understand what scores you need on upcoming assessments, and maintain awareness of your academic standing throughout the semester rather than being surprised by final grades. While grades aren't everything, they matter for GPA, academic standing, scholarships, and future opportunities. Take control of your grades through calculation, planning, and strategic effort. The investment in grade management produces better outcomes with less stress and more confidence.</p>
         </div>
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
     <script src="../js/main.js"></script>
     <script>
         function calculate() {
-            const input1 = parseFloat(document.getElementById('input1').value);
-            const input2 = parseFloat(document.getElementById('input2').value);
-            const result = input1 + input2;
-            document.getElementById('result').textContent = result.toFixed(2);
+            const rows = document.querySelectorAll('.grade-row');
+            const finalScore = parseFloat(document.getElementById('finalScore').value) || 0;
+            const finalWeight = parseFloat(document.getElementById('finalWeight').value) || 0;
+            const targetGrade = parseFloat(document.getElementById('targetGrade').value) || 90;
+
+            let totalWeightedScore = 0;
+            let totalWeight = 0;
+            let totalWeightExcludingFinal = 0;
+            let weightedScoreExcludingFinal = 0;
+
+            // Calculate current grade (excluding final if not entered)
+            rows.forEach((row, index) => {
+                const score = parseFloat(row.querySelector('.component-score').value) || 0;
+                const weight = parseFloat(row.querySelector('.component-weight').value) || 0;
+
+                if (weight > 0) {
+                    if (index < rows.length - 1) { // Not the final exam row
+                        weightedScoreExcludingFinal += (score * weight / 100);
+                        totalWeightExcludingFinal += weight;
+                    }
+
+                    if (score > 0 || index < rows.length - 1) { // Include all non-final, include final only if entered
+                        totalWeightedScore += (score * weight / 100);
+                        totalWeight += weight;
+                    }
+                }
+            });
+
+            // Current grade (work completed so far, excluding final)
+            const currentGrade = totalWeightExcludingFinal > 0 ?
+                (weightedScoreExcludingFinal / totalWeightExcludingFinal) * 100 : 0;
+
+            // Final grade (including final exam score if entered)
+            const finalGrade = totalWeight > 0 ? totalWeightedScore : 0;
+
+            // Calculate needed score on final exam
+            const neededOnFinal = finalWeight > 0 ?
+                ((targetGrade - weightedScoreExcludingFinal) / (finalWeight / 100)) : 0;
+
+            // Display current grade
+            document.getElementById('currentGrade').textContent = currentGrade.toFixed(1) + '%';
+
+            // Display letter grade for current performance
+            const letterGrade = getLetterGrade(finalScore > 0 ? finalGrade : currentGrade);
+            document.getElementById('letterGrade').textContent = letterGrade;
+
+            // Display final grade with current final exam score
+            document.getElementById('finalGrade').textContent = finalGrade.toFixed(1) + '%';
+
+            // Display needed score
+            document.getElementById('neededScore').textContent = neededOnFinal.toFixed(1) + '%';
+
+            // Assessment
+            let assessment, assessmentColor;
+            if (neededOnFinal > 100) {
+                assessment = 'Target grade not achievable with perfect final exam score';
+                assessmentColor = '#dc2626';
+            } else if (neededOnFinal >= 95) {
+                assessment = 'Very challenging - need near-perfect final exam';
+                assessmentColor = '#f97316';
+            } else if (neededOnFinal >= 85) {
+                assessment = 'Challenging but achievable with strong preparation';
+                assessmentColor = '#f59e0b';
+            } else if (neededOnFinal >= 70) {
+                assessment = 'Achievable with solid study and preparation';
+                assessmentColor = '#0891b2';
+            } else if (neededOnFinal >= 50) {
+                assessment = 'Very achievable - good position for target grade';
+                assessmentColor = '#10b981';
+            } else if (neededOnFinal > 0) {
+                assessment = 'Excellent position - minimal final exam score needed';
+                assessmentColor = '#10b981';
+            } else {
+                assessment = 'Target grade already secured!';
+                assessmentColor = '#10b981';
+            }
+
+            document.getElementById('assessment').textContent = assessment;
+            document.getElementById('assessment').style.color = assessmentColor;
         }
-        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+
+        function getLetterGrade(percentage) {
+            if (percentage >= 93) return 'A';
+            if (percentage >= 90) return 'A-';
+            if (percentage >= 87) return 'B+';
+            if (percentage >= 83) return 'B';
+            if (percentage >= 80) return 'B-';
+            if (percentage >= 77) return 'C+';
+            if (percentage >= 73) return 'C';
+            if (percentage >= 70) return 'C-';
+            if (percentage >= 67) return 'D+';
+            if (percentage >= 60) return 'D';
+            return 'F';
+        }
+
+        document.querySelectorAll('.component-score, .component-weight').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+        document.getElementById('targetGrade').addEventListener('input', calculate);
+
         window.addEventListener('load', calculate);
     </script>
 </body>
