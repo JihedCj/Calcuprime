@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CalcuPrime - Free online calculators and converters for finance, health, chemistry, and everyday use. Fast, accurate, and mobile-friendly.">
+    <meta name="keywords" content="calculator, converter, online calculator, finance calculator, health calculator, unit converter">
+    <meta name="author" content="CalcuPrime">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CalcuPrime - Professional Online Calculators & Converters">
+    <meta property="og:description" content="Free calculators and converters for all your needs">
+    <meta property="og:image" content="assets/og-image.jpg">
+    
+    <title>CalcuPrime - Professional Online Calculators & Converters</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#finance">Finance</a></li>
+                <li><a href="#health">Health</a></li>
+                <li><a href="#converters">Converters</a></li>
+                <li><a href="#math">Math</a></li>
+                <li><a href="#chemistry">Chemistry</a></li>
+                <li><a href="#everyday">Everyday</a></li>
+            </ul>
+            
+            <div class="header-actions">
+                <button class="search-btn" id="searchBtn" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close" id="searchClose">&times;</button>
+            <input type="text" id="searchInput" placeholder="Search calculators..." class="search-input">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Professional Calculators & Converters</h1>
+            <p class="hero-subtitle">Fast, accurate, and free tools for finance, health, chemistry, and everyday calculations</p>
+            
+            <div class="hero-search">
+                <input type="text" id="heroSearch" placeholder="Search for a calculator..." class="hero-search-input">
+                <button class="hero-search-btn">Search</button>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Calculators</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Converters</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1M+</span>
+                    <span class="stat-label">Users</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Calculators -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Most Popular</h2>
+            <div class="calculator-grid">
+                <a href="calculators/mortgage-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏠</div>
+                    <h3 class="calc-title">Mortgage Calculator</h3>
+                    <p class="calc-description">Calculate monthly payments, interest, and amortization</p>
+                </a>
+                
+                <a href="calculators/bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">BMI Calculator</h3>
+                    <p class="calc-description">Calculate your Body Mass Index and health status</p>
+                </a>
+                
+                <a href="calculators/percentage-calculator.html" class="calc-card">
+                    <div class="calc-icon">%</div>
+                    <h3 class="calc-title">Percentage Calculator</h3>
+                    <p class="calc-description">Calculate percentages, increases, and decreases</p>
+                </a>
+                
+                <a href="calculators/calorie-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calorie Calculator</h3>
+                    <p class="calc-description">Calculate daily caloric needs and weight goals</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Finance Calculators -->
+    <section class="section section-alt" id="finance">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Finance Calculators</h2>
+                <a href="category/finance.html" class="section-link">View all →</a>
+            </div>
+            <div class="calculator-grid">
+                <a href="calculators/loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Loan Calculator</h3>
+                    <p class="calc-description">Calculate loan payments and total interest</p>
+                </a>
+                
+                <a href="calculators/investment-calculator.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Investment Calculator</h3>
+                    <p class="calc-description">Project investment growth over time</p>
+                </a>
+                
+                <a href="calculators/compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Compound Interest</h3>
+                    <p class="calc-description">Calculate compound interest earnings</p>
+                </a>
+                
+                <a href="calculators/retirement-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏖️</div>
+                    <h3 class="calc-title">Retirement Calculator</h3>
+                    <p class="calc-description">Plan your retirement savings</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Calculators -->
+    <section class="section" id="health">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Health & Fitness Calculators</h2>
+                <a href="category/health.html" class="section-link">View all →</a>
+            </div>
+            <div class="calculator-grid">
+                <a href="calculators/bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">BMI Calculator</h3>
+                    <p class="calc-description">Calculate Body Mass Index</p>
+                </a>
+                
+                <a href="calculators/calorie-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calorie Calculator</h3>
+                    <p class="calc-description">Daily caloric needs</p>
+                </a>
+                
+                <a href="calculators/pregnancy-calculator.html" class="calc-card">
+                    <div class="calc-icon">👶</div>
+                    <h3 class="calc-title">Pregnancy Calculator</h3>
+                    <p class="calc-description">Due date and week calculation</p>
+                </a>
+                
+                <a href="calculators/ideal-weight-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Ideal Weight</h3>
+                    <p class="calc-description">Calculate your ideal body weight</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Converters -->
+    <section class="section section-alt" id="converters">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Unit Converters</h2>
+                <a href="category/converters.html" class="section-link">View all →</a>
+            </div>
+            <div class="calculator-grid">
+                <a href="calculators/length-converter.html" class="calc-card">
+                    <div class="calc-icon">📏</div>
+                    <h3 class="calc-title">Length Converter</h3>
+                    <p class="calc-description">Convert meters, feet, inches, miles</p>
+                </a>
+                
+                <a href="calculators/weight-converter.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Weight Converter</h3>
+                    <p class="calc-description">Convert kg, pounds, ounces</p>
+                </a>
+                
+                <a href="calculators/temperature-converter.html" class="calc-card">
+                    <div class="calc-icon">🌡️</div>
+                    <h3 class="calc-title">Temperature Converter</h3>
+                    <p class="calc-description">Convert Celsius, Fahrenheit, Kelvin</p>
+                </a>
+                
+                <a href="calculators/currency-converter.html" class="calc-card">
+                    <div class="calc-icon">💱</div>
+                    <h3 class="calc-title">Currency Converter</h3>
+                    <p class="calc-description">Real-time currency exchange rates</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title">CalcuPrime</h3>
+                    <p class="footer-description">Professional online calculators and converters for all your calculation needs.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Twitter">TW</a>
+                        <a href="#" aria-label="LinkedIn">LI</a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="category/finance.html">Finance</a></li>
+                        <li><a href="category/health.html">Health</a></li>
+                        <li><a href="category/converters.html">Converters</a></li>
+                        <li><a href="category/math.html">Math</a></li>
+                        <li><a href="category/chemistry.html">Chemistry</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
