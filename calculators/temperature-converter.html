@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free temperature converter - Convert between Celsius, Fahrenheit, and Kelvin instantly. Fast and accurate temperature conversion tool.">
+    <meta name="keywords" content="temperature converter, celsius to fahrenheit, fahrenheit to celsius, celsius to kelvin, temperature conversion, C to F, F to C">
+
+    <title>Temperature Converter - Celsius, Fahrenheit, Kelvin | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/temperature-converter.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Temperature Converter</h1>
+            <p class="calculator-description">Convert between Celsius, Fahrenheit, and Kelvin temperature scales</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Convert Temperature</h3>
+
+                <div class="form-group">
+                    <label for="temperature" class="form-label">Temperature</label>
+                    <input type="number" id="temperature" class="form-input" value="20" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="fromScale" class="form-label">From</label>
+                    <select id="fromScale" class="form-select">
+                        <option value="celsius" selected>Celsius (°C)</option>
+                        <option value="fahrenheit">Fahrenheit (°F)</option>
+                        <option value="kelvin">Kelvin (K)</option>
+                    </select>
+                </div>
+
+                <button onclick="convertTemperature()" class="btn-calculate">Convert</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Conversion Results</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Celsius</div>
+                    <div class="result-value" id="celsiusResult" style="font-size: 2rem; color: #3b82f6;">20.0°C</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Fahrenheit</div>
+                    <div class="result-value" id="fahrenheitResult" style="font-size: 2rem; color: #ef4444;">68.0°F</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Kelvin</div>
+                    <div class="result-value" id="kelvinResult" style="font-size: 2rem; color: #8b5cf6;">293.15 K</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Temperature Reference</h4>
+                    <div style="font-size: 0.9rem;" id="tempReference">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Temperature Scales Explained</h2>
+            <h3>Celsius (°C)</h3>
+            <p>The Celsius scale, also known as centigrade, is based on water's freezing point (0°C) and boiling point (100°C) at standard atmospheric pressure. Used worldwide except in the United States. Named after Swedish astronomer Anders Celsius.</p>
+
+            <h3>Fahrenheit (°F)</h3>
+            <p>The Fahrenheit scale sets water's freezing point at 32°F and boiling point at 212°F. Primarily used in the United States and its territories. Named after German physicist Daniel Gabriel Fahrenheit. The scale's granularity makes it useful for everyday weather temperatures.</p>
+
+            <h3>Kelvin (K)</h3>
+            <p>The Kelvin scale is an absolute temperature scale starting at absolute zero (-273.15°C), the theoretical point where molecular motion stops. Used in scientific contexts. One degree change in Kelvin equals one degree change in Celsius. Note: Kelvin doesn't use degree symbols.</p>
+
+            <h2>Conversion Formulas</h2>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                <strong>Celsius to Fahrenheit:</strong> °F = (°C × 9/5) + 32<br>
+                <strong>Fahrenheit to Celsius:</strong> °C = (°F - 32) × 5/9<br>
+                <strong>Celsius to Kelvin:</strong> K = °C + 273.15<br>
+                <strong>Kelvin to Celsius:</strong> °C = K - 273.15<br>
+                <strong>Fahrenheit to Kelvin:</strong> K = (°F - 32) × 5/9 + 273.15<br>
+                <strong>Kelvin to Fahrenheit:</strong> °F = (K - 273.15) × 9/5 + 32
+            </p>
+
+            <h2>Common Temperature Reference Points</h2>
+            <h3>Freezing & Boiling Points</h3>
+            <ul>
+                <li><strong>Absolute Zero:</strong> -273.15°C / -459.67°F / 0 K</li>
+                <li><strong>Water Freezes:</strong> 0°C / 32°F / 273.15 K</li>
+                <li><strong>Room Temperature:</strong> ~20-22°C / 68-72°F / 293-295 K</li>
+                <li><strong>Human Body:</strong> 37°C / 98.6°F / 310.15 K</li>
+                <li><strong>Water Boils:</strong> 100°C / 212°F / 373.15 K</li>
+            </ul>
+
+            <h3>Weather Temperatures</h3>
+            <ul>
+                <li><strong>Extreme Cold:</strong> -40°C / -40°F (same in both scales!)</li>
+                <li><strong>Very Cold:</strong> -20°C / -4°F</li>
+                <li><strong>Freezing:</strong> 0°C / 32°F</li>
+                <li><strong>Cool:</strong> 10°C / 50°F</li>
+                <li><strong>Mild:</strong> 20°C / 68°F</li>
+                <li><strong>Warm:</strong> 30°C / 86°F</li>
+                <li><strong>Hot:</strong> 40°C / 104°F</li>
+                <li><strong>Extreme Heat:</strong> 50°C / 122°F</li>
+            </ul>
+
+            <h3>Cooking Temperatures</h3>
+            <ul>
+                <li><strong>Simmer:</strong> 85-95°C / 185-203°F</li>
+                <li><strong>Boil:</strong> 100°C / 212°F</li>
+                <li><strong>Low Oven:</strong> 150°C / 300°F</li>
+                <li><strong>Moderate Oven:</strong> 180°C / 350°F</li>
+                <li><strong>Hot Oven:</strong> 200°C / 400°F</li>
+                <li><strong>Very Hot Oven:</strong> 230°C / 450°F</li>
+            </ul>
+
+            <h2>Quick Mental Conversion Tricks</h2>
+            <h3>Celsius to Fahrenheit (Approximate)</h3>
+            <p>Double the Celsius temperature and add 30. For example, 20°C: (20 × 2) + 30 = 70°F (actual: 68°F). Close enough for quick estimates!</p>
+
+            <h3>Fahrenheit to Celsius (Approximate)</h3>
+            <p>Subtract 30 and divide by 2. For example, 80°F: (80 - 30) ÷ 2 = 25°C (actual: 26.7°C).</p>
+
+            <h3>Key Reference Points to Memorize</h3>
+            <ul>
+                <li>0°C = 32°F (freezing point)</li>
+                <li>10°C = 50°F (cool day)</li>
+                <li>20°C = 68°F (room temperature)</li>
+                <li>30°C = 86°F (warm day)</li>
+                <li>37°C = 98.6°F (body temperature)</li>
+                <li>-40°C = -40°F (the crossover point!)</li>
+            </ul>
+
+            <h2>Temperature in Science</h2>
+            <h3>Why Kelvin?</h3>
+            <p>Scientists prefer Kelvin because it's an absolute scale with no negative numbers, making calculations simpler. Many scientific formulas (like the ideal gas law) require absolute temperature. Kelvin is the SI unit for temperature.</p>
+
+            <h3>Absolute Zero</h3>
+            <p>At absolute zero (0 K / -273.15°C / -459.67°F), particles have minimal kinetic energy. It's impossible to reach absolute zero, but scientists have gotten within billionths of a degree using laser cooling techniques.</p>
+
+            <h3>Extreme Temperatures</h3>
+            <ul>
+                <li><strong>Hottest Natural Temperature:</strong> Core of the Sun (~15 million °C)</li>
+                <li><strong>Coldest Natural Temperature:</strong> Boomerang Nebula (~1 K or -272°C)</li>
+                <li><strong>Hottest Man-Made:</strong> Large Hadron Collider (5.5 trillion °C)</li>
+                <li><strong>Coldest Man-Made:</strong> Lab experiments (billionths of a degree above absolute zero)</li>
+            </ul>
+
+            <h2>Historical Context</h2>
+            <h3>Why These Specific Numbers?</h3>
+            <p>Fahrenheit originally set 0°F as the coldest temperature he could create (brine solution), 32°F for water's freezing point, and 96°F for human body temperature (later adjusted to 98.6°F). Celsius chose the more intuitive 0 and 100 for water's phase changes. Kelvin shifted Celsius to start at absolute zero, the fundamental lower limit of temperature.</p>
+
+            <h3>Global Adoption</h3>
+            <p>Most of the world adopted Celsius as part of the metric system. The US still uses Fahrenheit for everyday purposes but Celsius for science. Canada transitioned from Fahrenheit to Celsius in the 1970s. The UK uses both depending on context.</p>
+
+            <h2>Practical Applications</h2>
+            <h3>Cooking</h3>
+            <p>Recipe conversions are crucial when using cookbooks from different regions. Oven temperatures can differ by 50°F (28°C) between recipes using different scales, significantly affecting results.</p>
+
+            <h3>Travel</h3>
+            <p>Understanding local temperature scales helps travelers pack appropriately and interpret weather forecasts. Americans in Europe need to know that 30°C is hot (86°F), not freezing!</p>
+
+            <h3>Science & Engineering</h3>
+            <p>Consistent temperature units are critical in calculations. Many engineering disasters resulted from unit conversion errors, including the Mars Climate Orbiter ($327 million loss) due to mixing metric and imperial units.</p>
+
+            <h3>Medicine</h3>
+            <p>Body temperature monitoring uses both scales. Normal is 37°C / 98.6°F. Fever typically defined as 38°C / 100.4°F or higher. Hypothermia occurs below 35°C / 95°F.</p>
+
+            <h2>Temperature Anomalies</h2>
+            <h3>Supercooling</h3>
+            <p>Pure water can remain liquid below 0°C if undisturbed. Supercooled water immediately freezes when disturbed. This phenomenon occurs in clouds, allowing rain to form.</p>
+
+            <h3>Superheating</h3>
+            <p>Water heated in a microwave can exceed 100°C without boiling due to lack of nucleation sites. Dangerous because it can erupt violently when disturbed. Always use a stirring rod or leave a wooden spoon in microwaved water.</p>
+
+            <h2>Frequently Asked Questions</h2>
+            <h3>Why does -40°C equal -40°F?</h3>
+            <p>This is the unique point where both scales intersect. Below -40°, Fahrenheit temperatures are higher numbers than Celsius (e.g., -50°C = -58°F). Above -40°, Celsius temperatures are higher until they diverge significantly.</p>
+
+            <h3>Why doesn't the US use Celsius?</h3>
+            <p>The US officially adopted the metric system in 1975 but didn't mandate conversion. Changing millions of thermostats, road signs, and recipes was deemed too costly and confusing. Weather forecasts in Fahrenheit have cultural inertia.</p>
+
+            <h3>Which temperature scale is most accurate?</h3>
+            <p>All three scales are equally accurate - they're just different ways of expressing the same physical property. Kelvin is preferred in science because it's absolute (no negative numbers) and directly relates to molecular kinetic energy.</p>
+
+            <h3>Can temperature be negative in Kelvin?</h3>
+            <p>In classical thermodynamics, no - absolute zero (0 K) is the lowest possible temperature. However, in some quantum systems, scientists have achieved "negative Kelvin" temperatures, which are actually hotter than any positive temperature! This seeming paradox relates to entropy rather than our everyday concept of hot and cold.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="currency-converter.html" class="calc-card">
+                    <div class="calc-icon">💱</div>
+                    <h3 class="calc-title">Currency Converter</h3>
+                    <p class="calc-description">Convert currencies</p>
+                </a>
+
+                <a href="percentage-calculator.html" class="calc-card">
+                    <div class="calc-icon">%</div>
+                    <h3 class="calc-title">Percentage Calculator</h3>
+                    <p class="calc-description">Calculate percentages</p>
+                </a>
+
+                <a href="bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">BMI Calculator</h3>
+                    <p class="calc-description">Calculate Body Mass Index</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function convertTemperature() {
+            const temp = parseFloat(document.getElementById('temperature').value);
+            const fromScale = document.getElementById('fromScale').value;
+
+            if (isNaN(temp)) {
+                alert('Please enter a valid temperature');
+                return;
+            }
+
+            let celsius, fahrenheit, kelvin;
+
+            // Convert to Celsius first
+            if (fromScale === 'celsius') {
+                celsius = temp;
+                fahrenheit = (celsius * 9/5) + 32;
+                kelvin = celsius + 273.15;
+            } else if (fromScale === 'fahrenheit') {
+                fahrenheit = temp;
+                celsius = (fahrenheit - 32) * 5/9;
+                kelvin = celsius + 273.15;
+            } else { // kelvin
+                kelvin = temp;
+                celsius = kelvin - 273.15;
+                fahrenheit = (celsius * 9/5) + 32;
+            }
+
+            // Display results
+            document.getElementById('celsiusResult').textContent = celsius.toFixed(1) + '°C';
+            document.getElementById('fahrenheitResult').textContent = fahrenheit.toFixed(1) + '°F';
+            document.getElementById('kelvinResult').textContent = kelvin.toFixed(2) + ' K';
+
+            // Generate reference
+            let reference = '';
+            if (celsius < -200) {
+                reference = 'Cryogenic temperatures - used in scientific research';
+            } else if (celsius < -50) {
+                reference = 'Extremely cold - dangerous exposure conditions';
+            } else if (celsius < 0) {
+                reference = 'Below freezing - water turns to ice';
+            } else if (celsius < 15) {
+                reference = 'Cold - winter coat weather';
+            } else if (celsius < 25) {
+                reference = 'Comfortable - room temperature range';
+            } else if (celsius < 35) {
+                reference = 'Warm - summer weather';
+            } else if (celsius < 45) {
+                reference = 'Hot - heat precautions advised';
+            } else {
+                reference = 'Extremely hot - dangerous conditions';
+            }
+
+            document.getElementById('tempReference').textContent = reference;
+
+            showResult('celsiusResult');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', convertTemperature);
+            input.addEventListener('change', convertTemperature);
+        });
+
+        window.addEventListener('load', convertTemperature);
+    </script>
+</body>
+</html>
