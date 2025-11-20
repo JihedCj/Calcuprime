@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free lease calculator - Calculate monthly car lease payments. Compare lease vs buy options for vehicles.">
-    <meta name="keywords" content="lease calculator, car lease, lease payment, auto lease, lease vs buy calculator">
+    <meta name="description" content="Calculate car lease payments, total cost, and compare leasing vs buying. Make informed vehicle financing decisions.">
+    <meta name="keywords" content="lease calculator, car lease, auto lease, lease payment calculator, vehicle lease">
     <title>Lease Calculator | CalcuPrime</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="canonical" href="https://calcuprime.com/calculators/lease-calculator.html">
@@ -20,35 +20,200 @@
     <main class="calculator-container">
         <div class="calculator-header">
             <h1 class="calculator-title">Lease Calculator</h1>
-            <p class="calculator-description">Calculate car lease payments</p>
+            <p class="calculator-description">Calculate car lease payments, total cost, and compare leasing vs buying</p>
         </div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs">
                 <h3>Calculator Input</h3>
-                <div class="form-group"><label for="input1" class="form-label">Value 1</label><input type="number" id="input1" class="form-input" value="100" min="0" step="1"></div>
-                <div class="form-group"><label for="input2" class="form-label">Value 2</label><input type="number" id="input2" class="form-input" value="5" min="0" step="0.1"></div>
+                <div class="form-group">
+                    <label for="msrp" class="form-label">Vehicle MSRP ($)</label>
+                    <input type="number" id="msrp" class="form-input" value="35000" min="0" step="1000">
+                </div>
+                <div class="form-group">
+                    <label for="salePrice" class="form-label">Negotiated Price ($)</label>
+                    <input type="number" id="salePrice" class="form-input" value="33000" min="0" step="500">
+                </div>
+                <div class="form-group">
+                    <label for="downPayment" class="form-label">Down Payment ($)</label>
+                    <input type="number" id="downPayment" class="form-input" value="3000" min="0" step="500">
+                </div>
+                <div class="form-group">
+                    <label for="leaseTerm" class="form-label">Lease Term (months)</label>
+                    <select id="leaseTerm" class="form-input">
+                        <option value="24">24 months</option>
+                        <option value="36" selected>36 months</option>
+                        <option value="48">48 months</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="residualValue" class="form-label">Residual Value (%)</label>
+                    <input type="number" id="residualValue" class="form-input" value="55" min="0" max="80" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="moneyFactor" class="form-label">Money Factor</label>
+                    <input type="number" id="moneyFactor" class="form-input" value="0.00125" min="0" max="0.01" step="0.00001">
+                </div>
                 <button onclick="calculate()" class="btn-calculate">Calculate</button>
             </div>
             <div class="calculator-results">
                 <h3>Results</h3>
-                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+                <div class="result-item">
+                    <div class="result-label">Monthly Lease Payment</div>
+                    <div class="result-value" id="monthlyPayment" style="font-size: 2.5rem; color: #10b981;">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Lease Cost</div>
+                    <div class="result-value" id="totalCost">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Effective APR</div>
+                    <div class="result-value" id="effectiveAPR">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Depreciation Fee</div>
+                    <div class="result-value" id="depreciationFee">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Finance Fee</div>
+                    <div class="result-value" id="financeFee">$0</div>
+                </div>
             </div>
         </div>
         <div class="content-section">
-            <h2>How to Use This Calculator</h2>
-            <p>Enter your values above to get instant, accurate calculations. Our Lease Calculator provides reliable results for your needs.</p>
-            <h2>Understanding Your Results</h2>
-            <p>The calculator processes your inputs using proven formulas to deliver accurate results you can trust for planning and decision-making.</p>
+            <h2>Understanding Car Leasing</h2>
+            <p>Leasing a vehicle is essentially renting it for a specified period, typically 24-48 months. Instead of paying for the entire vehicle value, you pay for the depreciation during your lease term plus interest charges (called rent charges or finance fees). At lease end, you return the vehicle to the dealer unless you choose to purchase it for the predetermined residual value.</p>
+
+            <p>Approximately 30% of new vehicles in the U.S. are leased rather than purchased. Leasing offers lower monthly payments compared to financing a purchase, access to newer vehicles more frequently, and potentially lower maintenance costs during the warranty period. However, it comes with mileage restrictions, wear-and-tear charges, and no equity building.</p>
+
+            <h2>Key Lease Terms Explained</h2>
+            <p><strong>Capitalized Cost (Cap Cost):</strong> The agreed-upon price of the vehicle, equivalent to the purchase price when buying. Negotiate this like you would when purchasing – dealerships often focus lease negotiations on monthly payments rather than vehicle price, where they have more markup flexibility.</p>
+
+            <p><strong>Residual Value:</strong> The estimated value of the vehicle at lease end, expressed as a percentage of MSRP. Higher residual values mean lower depreciation charges and lower monthly payments. Luxury brands often have higher residuals (55-65%) than economy cars (45-55%). The manufacturer sets residual values based on projected resale values.</p>
+
+            <p><strong>Money Factor:</strong> The interest rate equivalent used in leasing. Convert money factor to APR by multiplying by 2,400. For example, a money factor of 0.00125 equals 3% APR. Lower money factors mean lower finance charges. Good credit scores (720+) typically qualify for the best money factors.</p>
+
+            <p><strong>Disposition Fee:</strong> A fee ($300-500) charged at lease end if you don't lease or purchase another vehicle from the same dealer. This covers the cost of preparing the returned vehicle for resale.</p>
+
+            <p><strong>Acquisition Fee:</strong> An upfront fee ($595-995) charged by the leasing company to initiate the lease. Some dealers roll this into the monthly payment rather than requiring payment at signing.</p>
+
+            <h2>How Lease Payments Are Calculated</h2>
+            <p>Lease payments consist of two main components:</p>
+
+            <p><strong>Depreciation Fee:</strong> (Negotiated Price - Residual Value) ÷ Lease Term. This covers the vehicle's expected value loss during your lease. If you lease a $30,000 car with 60% residual value for 36 months: ($30,000 - $18,000) ÷ 36 = $333.33 monthly depreciation fee.</p>
+
+            <p><strong>Finance Fee (Rent Charge):</strong> (Negotiated Price + Residual Value) × Money Factor. This is the interest charge for financing the depreciation. Using the same example with 0.00125 money factor: ($30,000 + $18,000) × 0.00125 = $60 monthly finance fee.</p>
+
+            <p>Total monthly payment before taxes: $333.33 + $60 = $393.33. Add applicable sales tax (typically charged only on monthly payments, not the full vehicle price – a tax advantage of leasing) and any additional fees for your final payment.</p>
+
+            <h2>Leasing vs. Buying: Making the Right Choice</h2>
+            <p><strong>Choose Leasing If You:</strong></p>
+            <ul>
+                <li>Want lower monthly payments (typically 30-50% less than financing a purchase)</li>
+                <li>Prefer driving a new car every 2-4 years with latest technology and safety features</li>
+                <li>Drive under 12,000-15,000 miles annually (typical lease allowances)</li>
+                <li>Want to avoid the hassle of selling or trading in your vehicle</li>
+                <li>Can deduct vehicle expenses for business use (lease payments are fully deductible; only loan interest is deductible when buying)</li>
+                <li>Value warranty coverage for the entire ownership period</li>
+                <li>Don't want long-term financial commitment to one vehicle</li>
+            </ul>
+
+            <p><strong>Choose Buying If You:</strong></p>
+            <ul>
+                <li>Drive more than 15,000 miles annually (excess mileage charges of $0.15-0.30 per mile add up quickly)</li>
+                <li>Want to build equity and eventually own your vehicle outright</li>
+                <li>Plan to keep your vehicle for 6+ years</li>
+                <li>Want freedom to customize or modify your vehicle</li>
+                <li>Don't want to worry about wear-and-tear charges for dings, scratches, or interior damage</li>
+                <li>Want the option to sell whenever you choose</li>
+                <li>Prefer not having continuous monthly payments</li>
+            </ul>
+
+            <h2>Negotiating a Better Lease Deal</h2>
+            <p><strong>Negotiate Cap Cost, Not Payment:</strong> Dealers often steer lease negotiations to monthly payment rather than vehicle price. Insist on negotiating the capitalized cost just like you would a purchase price. Research fair market value using resources like Kelley Blue Book, Edmunds, or TrueCar before visiting dealerships.</p>
+
+            <p><strong>Shop Money Factors:</strong> Money factors can vary between dealerships and manufacturers. Get quotes from multiple dealers and manufacturers' captive finance companies. Credit unions sometimes offer better lease rates than manufacturer financing.</p>
+
+            <p><strong>Consider Multiple-Security-Deposit (MSD) Programs:</strong> Some manufacturers allow you to prepay up to 7-10 refundable security deposits (typically equal to monthly payment rounded up to $50) to reduce your money factor by 0.00005-0.00010 per deposit. This can save hundreds over the lease term, and you get the deposits back at lease end.</p>
+
+            <p><strong>Timing Matters:</strong> End of month, quarter, and model year are opportune times for better deals. Dealers have sales quotas and manufacturers offer incentives to move outgoing model years. December particularly offers strong incentives as dealers close yearly books.</p>
+
+            <p><strong>Consider Pre-Owned Leases:</strong> Certified pre-owned leases on 1-2 year old vehicles offer significantly lower payments (30-40% less) while still providing nearly new vehicles with remaining warranty coverage.</p>
+
+            <h2>Lease Mileage: Understand the Limits</h2>
+            <p>Standard leases include 10,000-12,000 miles per year, with 15,000-mile options available for higher monthly payments (typically $15-25 more per month per 1,000 additional annual miles). Excess mileage charges at lease end range from $0.15-0.30 per mile depending on the vehicle.</p>
+
+            <p>Calculate your annual mileage before leasing. If you drive 15,000 miles annually, a 36-month lease allows 45,000 miles total. Ending with 50,000 miles costs $750-1,500 in excess mileage charges (5,000 miles × $0.15-0.30). It's usually cheaper to purchase higher mileage allowance upfront than pay excess charges later.</p>
+
+            <p>Track your mileage periodically during the lease. If you're significantly under your allowance, you might reduce mileage on your next lease to lower payments. If over, consider purchasing additional miles before lease end (often at better rates than excess charges) or exploring early trade-in options.</p>
+
+            <h2>End-of-Lease Options</h2>
+            <p><strong>Return the Vehicle:</strong> Simply return it to the dealer, pay any excess mileage or wear-and-tear charges, and walk away. Schedule a pre-inspection 2-3 months before lease end (free service from most manufacturers) to identify and address potential charges before returning.</p>
+
+            <p><strong>Purchase the Vehicle:</strong> Buy it for the predetermined residual value. This makes sense if: market value exceeds residual value (giving you instant equity), you've grown attached to the vehicle, you exceeded mileage significantly (buying removes excess mileage charges), or you modified it and want to keep those modifications.</p>
+
+            <p><strong>Trade It In:</strong> If your vehicle's market value exceeds the residual value, you have equity to use toward your next vehicle. Get trade-in quotes from multiple dealers – they may offer more than the residual value, creating a built-in down payment for your next lease or purchase.</p>
+
+            <p><strong>Transfer Your Lease:</strong> Services like Swapalease or LeaseTrader connect you with people wanting to assume your lease. This works well if you need to exit early, though some manufacturers prohibit transfers or charge transfer fees ($300-500).</p>
+
+            <h2>Wear and Tear: What's Acceptable?</h2>
+            <p>Lease agreements include "normal wear and tear" clauses, but interpretation varies. Generally acceptable:</p>
+            <ul>
+                <li>Small dings under 1 inch diameter</li>
+                <li>Minor scratches that haven't penetrated the paint</li>
+                <li>Small interior stains that can be cleaned</li>
+                <li>Tire tread above 4/32 inch (ideally 5/32+)</li>
+                <li>Minor windshield chips under 1 inch that don't obstruct vision</li>
+            </ul>
+
+            <p>Typically charged as excessive wear:</p>
+            <ul>
+                <li>Dents larger than 2 inches ($50-150 per panel)</li>
+                <li>Scratches through the paint ($50-200 per panel)</li>
+                <li>Cracked or broken glass ($200-500 per piece)</li>
+                <li>Stained, torn, or burned upholstery ($100-500)</li>
+                <li>Bald tires under 4/32 tread ($150-200 per tire)</li>
+                <li>Broken or missing equipment ($100-1,000 depending on item)</li>
+                <li>Odors from smoking or pets ($200-500)</li>
+            </ul>
+
+            <p>Consider fixing obvious damage yourself before return – you'll likely pay less than dealer charges. Get quotes from independent body shops for dings, scratches, and minor repairs. For worn tires, purchasing new ones yourself costs less than dealer charges.</p>
+
+            <h2>Insurance Considerations</h2>
+            <p>Lease agreements require comprehensive and collision coverage with low deductibles ($500-1,000). Additionally, consider gap insurance, which covers the difference between your vehicle's actual cash value and the remaining lease balance if the car is totaled or stolen. Many lease agreements include gap coverage, but verify this – purchasing separate gap insurance costs $400-700 versus $20-40 annually when added to your auto insurance.</p>
+
+            <h2>Tax Benefits of Leasing</h2>
+            <p>Business owners and self-employed individuals can deduct lease payments as a business expense if the vehicle is used for business purposes. With purchases, only loan interest and depreciation are deductible. Additionally, sales tax typically applies only to monthly payments rather than the full vehicle price, providing immediate tax savings.</p>
+
+            <p>For personal use, there are no significant tax advantages to leasing over buying. However, states with high sales tax rates (8%+) benefit from paying tax only on monthly payments rather than the full purchase price upfront.</p>
+
+            <h2>Credit Score Impact</h2>
+            <p>Leasing requires good to excellent credit (scores 680+) for the best money factors. Scores below 620 typically don't qualify for leasing or face significantly higher money factors. A lease appears on your credit report as an installment loan and affects your credit similarly to an auto loan – positive if you make on-time payments, negative if you miss payments.</p>
         </div>
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
     <script src="../js/main.js"></script>
     <script>
         function calculate() {
-            const input1 = parseFloat(document.getElementById('input1').value);
-            const input2 = parseFloat(document.getElementById('input2').value);
-            const result = input1 * input2;
-            document.getElementById('result').textContent = result.toFixed(2);
+            const msrp = parseFloat(document.getElementById('msrp').value) || 0;
+            const salePrice = parseFloat(document.getElementById('salePrice').value) || msrp;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const leaseTerm = parseFloat(document.getElementById('leaseTerm').value) || 36;
+            const residualPercent = parseFloat(document.getElementById('residualValue').value) / 100 || 0.55;
+            const moneyFactor = parseFloat(document.getElementById('moneyFactor').value) || 0.00125;
+
+            const residualValue = msrp * residualPercent;
+            const netCapCost = salePrice - downPayment;
+            const depreciationFee = (netCapCost - residualValue) / leaseTerm;
+            const financeFee = (netCapCost + residualValue) * moneyFactor;
+            const monthlyPayment = depreciationFee + financeFee;
+            const totalCost = downPayment + (monthlyPayment * leaseTerm);
+            const effectiveAPR = (moneyFactor * 2400).toFixed(2);
+
+            document.getElementById('monthlyPayment').textContent = '$' + monthlyPayment.toLocaleString('en-US', {minimumFractionDigits: 2});
+            document.getElementById('totalCost').textContent = '$' + totalCost.toLocaleString('en-US', {minimumFractionDigits: 2});
+            document.getElementById('effectiveAPR').textContent = effectiveAPR + '%';
+            document.getElementById('depreciationFee').textContent = '$' + depreciationFee.toLocaleString('en-US', {minimumFractionDigits: 2});
+            document.getElementById('financeFee').textContent = '$' + financeFee.toLocaleString('en-US', {minimumFractionDigits: 2});
         }
         document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
         window.addEventListener('load', calculate);
