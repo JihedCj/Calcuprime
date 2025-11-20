@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free heart rate calculator - Calculate max heart rate and target training zones. Optimize cardio workouts.">
+    <meta name="description" content="Free heart rate calculator - Calculate max heart rate and target training zones. Optimize cardio workouts with science-based heart rate zones.">
     <meta name="keywords" content="heart rate calculator, max heart rate, target heart rate, training zones, cardio calculator">
     <title>Heart Rate Calculator | CalcuPrime</title>
     <link rel="stylesheet" href="../css/style.css">
@@ -20,35 +20,179 @@
     <main class="calculator-container">
         <div class="calculator-header">
             <h1 class="calculator-title">Heart Rate Calculator</h1>
-            <p class="calculator-description">Calculate target heart rate zones</p>
+            <p class="calculator-description">Calculate your maximum heart rate and personalized training zones for optimal cardiovascular fitness</p>
         </div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs">
-                <h3>Calculator Input</h3>
-                <div class="form-group"><label for="input1" class="form-label">Value 1</label><input type="number" id="input1" class="form-input" value="100" min="0" step="1"></div>
-                <div class="form-group"><label for="input2" class="form-label">Value 2</label><input type="number" id="input2" class="form-input" value="5" min="0" step="0.1"></div>
-                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+                <h3>Your Information</h3>
+                <div class="form-group">
+                    <label for="age" class="form-label">Age (years)</label>
+                    <input type="number" id="age" class="form-input" value="30" min="15" max="80" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="restingHR" class="form-label">Resting Heart Rate (bpm)</label>
+                    <input type="number" id="restingHR" class="form-input" value="60" min="40" max="100" step="1">
+                    <small style="color: #666; font-size: 0.9rem;">Measure first thing in the morning before getting out of bed</small>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate Heart Rate Zones</button>
             </div>
             <div class="calculator-results">
-                <h3>Results</h3>
-                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+                <h3>Your Heart Rate Zones</h3>
+                <div class="result-item">
+                    <div class="result-label">Maximum Heart Rate</div>
+                    <div class="result-value" id="maxHR" style="font-size: 2.5rem; color: #ef4444;">0 bpm</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Zone 1: Recovery (50-60%)</div>
+                    <div class="result-value" id="zone1">0-0 bpm</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Zone 2: Fat Burn (60-70%)</div>
+                    <div class="result-value" id="zone2">0-0 bpm</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Zone 3: Aerobic (70-80%)</div>
+                    <div class="result-value" id="zone3">0-0 bpm</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Zone 4: Threshold (80-90%)</div>
+                    <div class="result-value" id="zone4">0-0 bpm</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Zone 5: Maximum (90-100%)</div>
+                    <div class="result-value" id="zone5">0-0 bpm</div>
+                </div>
             </div>
         </div>
         <div class="content-section">
-            <h2>How to Use This Calculator</h2>
-            <p>Enter your values above to get instant, accurate calculations. Our Heart Rate Calculator provides reliable results for your needs.</p>
-            <h2>Understanding Your Results</h2>
-            <p>The calculator processes your inputs using proven formulas to deliver accurate results you can trust for planning and decision-making.</p>
+            <h2>Understanding Heart Rate Training</h2>
+            <p>Training with heart rate zones provides a scientific, objective method to optimize cardiovascular exercise intensity. Whether your goal is fat loss, endurance building, or performance improvement, understanding and utilizing heart rate zones ensures you're training at the right intensity to achieve your specific objectives efficiently. Our calculator uses both the traditional maximum heart rate formula and the Karvonen method, which accounts for resting heart rate to provide more personalized training zones.</p>
+
+            <h2>Maximum Heart Rate Explained</h2>
+            <p><strong>Maximum heart rate (MHR)</strong> is the highest number of beats per minute your heart can achieve during all-out exertion. While the classic "220 minus age" formula provides a reasonable estimate, individual variation can be ±10-12 beats per minute. More accurate formulas exist, but all estimates should be validated through actual testing when possible.</p>
+
+            <p><strong>Age-Predicted Formula:</strong> MHR = 220 - age. This simple calculation works reasonably well for most people but tends to overestimate MHR in younger individuals and underestimate it in older adults. It's best viewed as a starting point rather than absolute truth.</p>
+
+            <p><strong>Actual Maximum Heart Rate Testing:</strong> The most accurate method involves a graded exercise test to exhaustion under medical supervision. For athletes and serious fitness enthusiasts, lab testing or field tests (like an all-out 3-minute run) can provide more accurate personal maximums, though these should only be performed by those in good cardiovascular health.</p>
+
+            <p><strong>Factors Affecting Maximum Heart Rate:</strong> Genetics play the largest role – some people naturally have higher or lower maximum rates. Cardiovascular fitness doesn't increase MHR but improves efficiency at submaximal intensities. Heat, altitude, and medication (particularly beta-blockers) can also affect heart rate response to exercise.</p>
+
+            <h2>The Five Heart Rate Training Zones</h2>
+            <p>Heart rate zones are typically divided into five levels based on percentage of maximum heart rate, each delivering distinct physiological adaptations and training benefits.</p>
+
+            <p><strong>Zone 1: Recovery Zone (50-60% MHR)</strong></p>
+            <p>This very light intensity zone promotes recovery, increases blood flow for nutrient delivery and waste removal, and builds aerobic base in beginners. Walking, easy cycling, or gentle swimming fall into this zone. Most people can hold conversations easily. Benefits include active recovery between hard sessions, warming up and cooling down, and building foundational fitness for sedentary individuals starting exercise programs.</p>
+
+            <p>Training recommendations: Use liberally between harder workouts, spend 10-20 minutes pre and post-workout in this zone, or dedicate entire sessions to Zone 1 work on recovery days. This zone is impossible to overtrain and supports overall workout volume without adding fatigue.</p>
+
+            <p><strong>Zone 2: Fat Burning Zone (60-70% MHR)</strong></p>
+            <p>Light to moderate intensity where the body primarily oxidizes fat for fuel. This zone builds aerobic base, improves fat metabolism, increases mitochondrial density, and enhances cardiovascular efficiency. Conversation is comfortable but requires slightly more breath control than Zone 1. Activities include brisk walking, easy jogging, or moderate cycling.</p>
+
+            <p>Training recommendations: This should comprise 60-80% of total training volume for endurance athletes and recreational exercisers. Sessions typically last 30-90 minutes. Despite the "fat burning" name, Zone 2 burns fewer total calories than higher zones – the fat-burning benefit comes from training adaptations that improve overall metabolism rather than immediate calorie burn during the session.</p>
+
+            <p><strong>Zone 3: Aerobic Zone (70-80% MHR)</strong></p>
+            <p>Moderate to moderately high intensity that improves cardiovascular efficiency, increases lactate threshold, strengthens the heart muscle, and enhances oxygen delivery. This "tempo" zone feels comfortably hard. You can speak in short sentences but conversation becomes difficult. Common activities include steady-state runs, cycling at moderate-high resistance, or rowing.</p>
+
+            <p>Training recommendations: Limit to 10-20% of weekly training volume. While effective, Zone 3 is often called the "black hole" because it's too hard for easy days but not intense enough to drive maximum adaptations like harder intervals. Many recreational athletes spend too much time here, leading to fatigue without corresponding fitness gains. Use Zone 3 deliberately for tempo runs or threshold work, not as default training intensity.</p>
+
+            <p><strong>Zone 4: Threshold Zone (80-90% MHR)</strong></p>
+            <p>High intensity near or at lactate threshold – the point where lactate accumulates faster than the body can clear it. This zone dramatically improves lactate threshold, increases VO2 max, enhances anaerobic capacity, and provides significant cardiovascular adaptations. Conversation is nearly impossible; you can manage only a few words. Training feels hard and sustainable for only 10-40 minutes.</p>
+
+            <p>Training recommendations: Powerful for performance but highly fatiguing. Limit to 1-2 sessions weekly comprising 5-10% of total volume. Common protocols include 3-5 intervals of 5-8 minutes at threshold with 2-3 minute recoveries, or sustained tempo efforts of 20-30 minutes. Adequate recovery (48-72 hours) is essential between Zone 4 sessions to prevent overtraining.</p>
+
+            <p><strong>Zone 5: Maximum Effort Zone (90-100% MHR)</strong></p>
+            <p>Maximum intensity approaching or at VO2 max – your body's maximum oxygen uptake capacity. This zone maximizes VO2 max, improves neuromuscular power, increases anaerobic capacity, and enhances lactate buffering. Conversation is impossible. Sustainable for only 30 seconds to 5 minutes depending on fitness level. Breathing is labored and uncomfortable.</p>
+
+            <p>Training recommendations: Use sparingly – 1-2 times weekly for athletes, even less for recreational exercisers. Extremely fatiguing and requiring 48-72 hours recovery minimum. Common protocols include 8-12 intervals of 1-3 minutes at 90-95% MHR with equal or longer recovery periods, or all-out sprints of 20-45 seconds with 2-4 minute recoveries. Quality over quantity is critical; once form degrades or times slow significantly, end the session.</p>
+
+            <h2>Resting Heart Rate: A Key Fitness Indicator</h2>
+            <p><strong>Resting heart rate (RHR)</strong> is your heart rate at complete rest, ideally measured first thing in the morning before getting out of bed. RHR serves as an excellent fitness marker and recovery indicator.</p>
+
+            <p><strong>Normal Ranges:</strong> Average adults: 60-100 bpm. Trained endurance athletes: 40-60 bpm. Elite endurance athletes: sometimes below 40 bpm. Higher resting rates aren't necessarily concerning if you're otherwise healthy, though cardiovascular training typically lowers RHR over time as the heart becomes more efficient.</p>
+
+            <p><strong>Using RHR for Recovery Monitoring:</strong> Track RHR daily. An elevated RHR (5-10 beats above baseline) indicates incomplete recovery, illness, dehydration, overtraining, or stress. When RHR is elevated, reduce training intensity or volume for that day. Consistently elevated RHR suggests inadequate recovery between training sessions – take 1-3 days of easy training or complete rest.</p>
+
+            <p><strong>The Karvonen Formula:</strong> This calculator uses the Karvonen method, which incorporates resting heart rate for more personalized zones: Target HR = ((MHR - RHR) × % intensity) + RHR. This accounts for individual fitness differences – two people with identical maximum heart rates but different resting rates have different reserve capacities and should train at different absolute heart rates.</p>
+
+            <h2>How to Measure Heart Rate</h2>
+            <p><strong>Heart Rate Monitors:</strong> Chest strap monitors (like Polar H10) provide the most accurate real-time heart rate data via electrical signal detection. Optical wrist-based monitors (on smartwatches and fitness trackers) are convenient but less accurate, particularly during high-intensity intervals or activities with arm movement. For serious training, invest in a chest strap; for general fitness monitoring, wrist-based devices work adequately.</p>
+
+            <p><strong>Manual Pulse Check:</strong> Find your pulse at the radial artery (wrist) or carotid artery (neck). Count beats for 15 seconds and multiply by 4, or count for 30 seconds and multiply by 2. While free and always available, manual checking interrupts exercise and is less practical during workouts. Best used for resting heart rate measurements.</p>
+
+            <p><strong>Rate of Perceived Exertion (RPE):</strong> On a 1-10 scale, RPE correlates reasonably well with heart rate zones: Zone 1 = 3-4/10, Zone 2 = 4-6/10, Zone 3 = 6-7/10, Zone 4 = 7-8/10, Zone 5 = 9-10/10. Use RPE as a backup when heart rate data is unavailable or to validate that heart rate readings match perceived effort.</p>
+
+            <h2>Training Strategies by Zone</h2>
+            <p><strong>For Fat Loss:</strong> Contrary to popular belief, Zone 2 "fat burning" isn't optimal for fat loss – total calorie burn matters most. However, Zone 2 work improves fat oxidation capacity, making the body more efficient at using fat as fuel. Combine Zone 2 base building (60-70% of training) with Zone 4-5 intervals (10-15% of training) for optimal fat loss. The intervals burn more calories and boost metabolism post-exercise, while Zone 2 allows higher training volume without excessive fatigue.</p>
+
+            <p><strong>For Endurance Building:</strong> The 80/20 rule: 80% of training in Zones 1-2 (easy), 20% in Zones 4-5 (hard). Avoid the Zone 3 "black hole." This polarized approach builds a massive aerobic base while providing sufficient high-intensity stimulus for adaptation. Most recreational athletes do the opposite (too much Zone 3, not enough truly easy or truly hard work), leading to chronic fatigue and plateaus.</p>
+
+            <p><strong>For Performance/Speed:</strong> Include all zones strategically: 70% Zone 1-2, 10% Zone 3, 15% Zone 4, 5% Zone 5. Periodize training with base-building phases emphasizing Zones 1-2, then add Zone 4-5 intensity as events approach. High-intensity intervals (Zones 4-5) provide the greatest performance returns but only when supported by adequate easy volume and recovery.</p>
+
+            <p><strong>For Beginners:</strong> Start with 100% Zone 1-2 training for 4-8 weeks. Build volume gradually (no more than 10% weekly increase). Once comfortable with 30+ minutes of continuous Zone 2 work, add one Zone 3-4 session weekly. Patience during this base-building phase prevents injury and creates a foundation for future progression.</p>
+
+            <h2>Common Heart Rate Training Mistakes</h2>
+            <p><strong>Training Too Hard Too Often:</strong> The most common error. Exceeding Zone 2 on "easy" days accumulates fatigue without allowing adaptation. Easy days should feel easy – conversational pace, able to breathe through your nose. Most people need to slow down significantly on easy days.</p>
+
+            <p><strong>Never Going Hard Enough:</strong> Conversely, some avoid high-intensity work, limiting fitness gains. Intervals in Zones 4-5 are uncomfortable but drive significant adaptations. One to two hard sessions weekly (for trained individuals) significantly improves performance.</p>
+
+            <p><strong>Ignoring Recovery Indicators:</strong> Training through elevated resting heart rate, excessive fatigue, or declining performance leads to overtraining. Recovery is when adaptation occurs – training provides the stimulus, recovery allows the improvement.</p>
+
+            <p><strong>Obsessing Over Heart Rate Numbers:</strong> Heart rate is a guide, not a prison. Factors like heat, stress, caffeine, and sleep quality affect heart rate independent of fitness or effort. If 150 bpm usually feels easy but feels hard today, trust perception over numbers and adjust accordingly.</p>
+
+            <p><strong>Comparing to Others:</strong> Individual maximum and resting heart rates vary dramatically. Someone's Zone 2 might be 130 bpm while yours is 145 bpm despite identical fitness levels. Train based on YOUR zones, not others' data.</p>
+
+            <h2>When to Seek Medical Advice</h2>
+            <p>Consult a physician before beginning heart-rate-based training if you:</p>
+            <ul>
+                <li>Have known or suspected heart disease</li>
+                <li>Experience chest pain, unusual shortness of breath, or dizziness during exercise</li>
+                <li>Have a resting heart rate consistently over 100 bpm</li>
+                <li>Notice irregular heartbeats (palpitations)</li>
+                <li>Take medications that affect heart rate (beta-blockers, calcium channel blockers)</li>
+                <li>Are over 40 (men) or 50 (women) and starting vigorous exercise after being sedentary</li>
+            </ul>
+
+            <p>An exercise stress test under medical supervision can identify cardiovascular issues and provide accurate maximum heart rate data for safe, effective training.</p>
+
+            <h2>The Bottom Line</h2>
+            <p>Heart rate training zones provide an objective, personalized method to optimize cardiovascular exercise. Most people should spend 70-80% of training time in easy Zones 1-2, building aerobic base and allowing recovery. Strategic use of Zones 4-5 intervals (10-15% of training) drives performance adaptations. Avoid excessive Zone 3 training. Monitor resting heart rate daily as a recovery indicator. Remember that heart rate is a valuable tool but not infallible – combine it with perceived exertion and overall how you feel for optimal training decisions.</p>
         </div>
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
     <script src="../js/main.js"></script>
     <script>
         function calculate() {
-            const input1 = parseFloat(document.getElementById('input1').value);
-            const input2 = parseFloat(document.getElementById('input2').value);
-            const result = input1 * input2;
-            document.getElementById('result').textContent = result.toFixed(2);
+            const age = parseFloat(document.getElementById('age').value) || 30;
+            const restingHR = parseFloat(document.getElementById('restingHR').value) || 60;
+
+            // Calculate maximum heart rate using 220-age formula
+            const maxHR = 220 - age;
+
+            // Calculate heart rate reserve (Karvonen method)
+            const hrReserve = maxHR - restingHR;
+
+            // Calculate zones using Karvonen formula: ((MHR - RHR) × %Intensity) + RHR
+            const zone1Min = Math.round((hrReserve * 0.50) + restingHR);
+            const zone1Max = Math.round((hrReserve * 0.60) + restingHR);
+
+            const zone2Min = Math.round((hrReserve * 0.60) + restingHR);
+            const zone2Max = Math.round((hrReserve * 0.70) + restingHR);
+
+            const zone3Min = Math.round((hrReserve * 0.70) + restingHR);
+            const zone3Max = Math.round((hrReserve * 0.80) + restingHR);
+
+            const zone4Min = Math.round((hrReserve * 0.80) + restingHR);
+            const zone4Max = Math.round((hrReserve * 0.90) + restingHR);
+
+            const zone5Min = Math.round((hrReserve * 0.90) + restingHR);
+            const zone5Max = maxHR;
+
+            document.getElementById('maxHR').textContent = maxHR + ' bpm';
+            document.getElementById('zone1').textContent = zone1Min + '-' + zone1Max + ' bpm';
+            document.getElementById('zone2').textContent = zone2Min + '-' + zone2Max + ' bpm';
+            document.getElementById('zone3').textContent = zone3Min + '-' + zone3Max + ' bpm';
+            document.getElementById('zone4').textContent = zone4Min + '-' + zone4Max + ' bpm';
+            document.getElementById('zone5').textContent = zone5Min + '-' + zone5Max + ' bpm';
         }
         document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
         window.addEventListener('load', calculate);
