@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free gas mileage calculator - Calculate MPG, fuel costs, and efficiency. Track vehicle gas consumption and expenses.">
-    <meta name="keywords" content="gas mileage calculator, mpg calculator, fuel economy, fuel cost calculator, mileage tracker">
+    <meta name="description" content="Free gas mileage calculator - Calculate MPG, fuel costs per mile, and annual expenses. Compare fuel economy and plan trip costs accurately.">
+    <meta name="keywords" content="gas mileage calculator, mpg calculator, fuel economy, fuel cost calculator, mileage tracker, trip cost">
     <title>Gas Mileage Calculator | CalcuPrime</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="canonical" href="https://calcuprime.com/calculators/gas-mileage-calculator.html">
@@ -20,37 +20,178 @@
     <main class="calculator-container">
         <div class="calculator-header">
             <h1 class="calculator-title">Gas Mileage Calculator</h1>
-            <p class="calculator-description">Calculate fuel efficiency and costs</p>
+            <p class="calculator-description">Calculate fuel efficiency and trip costs accurately</p>
         </div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs">
-                <h3>Enter Values</h3>
-                <div class="form-group"><label for="input1" class="form-label">Input 1</label><input type="number" id="input1" class="form-input" value="100" min="0"></div>
-                <div class="form-group"><label for="input2" class="form-label">Input 2</label><input type="number" id="input2" class="form-input" value="10" min="0"></div>
+                <h3>Trip Information</h3>
+                <div class="form-group">
+                    <label for="miles" class="form-label">Miles Driven</label>
+                    <input type="number" id="miles" class="form-input" value="300" min="0" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="gallons" class="form-label">Gallons Used</label>
+                    <input type="number" id="gallons" class="form-input" value="10" min="0.1" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="gasPrice" class="form-label">Price per Gallon ($)</label>
+                    <input type="number" id="gasPrice" class="form-input" value="3.50" min="0" step="0.01">
+                </div>
+                <h3 style="margin-top: 1.5rem;">Annual Estimate (Optional)</h3>
+                <div class="form-group">
+                    <label for="annualMiles" class="form-label">Annual Miles Driven</label>
+                    <input type="number" id="annualMiles" class="form-input" value="12000" min="0" step="100">
+                </div>
                 <button onclick="calculate()" class="btn-calculate">Calculate</button>
             </div>
             <div class="calculator-results">
-                <h3>Results</h3>
-                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+                <h3>Fuel Economy</h3>
+                <div class="result-item">
+                    <div class="result-label">Miles Per Gallon (MPG)</div>
+                    <div class="result-value" id="mpg" style="font-size: 2.5rem; color: #10b981;">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Trip Fuel Cost</div>
+                    <div class="result-value" id="tripCost">$0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Cost Per Mile</div>
+                    <div class="result-value" id="costPerMile">$0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Annual Fuel Cost</div>
+                    <div class="result-value" id="annualCost">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Efficiency Rating</div>
+                    <div class="result-value" id="rating" style="font-size: 1.2rem;">-</div>
+                </div>
             </div>
         </div>
         <div class="content-section">
-            <h2>About This Calculator</h2>
-            <p>Use our Gas Mileage Calculator for fast, accurate calculations. Enter your values above and get instant results.</p>
-            <h2>Key Features</h2>
-            <ul><li>Instant calculations</li><li>Accurate results</li><li>Easy to use</li><li>Mobile-friendly</li></ul>
+            <h2>How to Calculate Gas Mileage (MPG)</h2>
+            <p>Miles per gallon (MPG) measures fuel efficiency—how many miles your vehicle travels on one gallon of gasoline. The calculation is simple: MPG = Miles Driven ÷ Gallons Used. For example, if you drive 300 miles and use 10 gallons, your MPG = 300 ÷ 10 = 30 MPG. This straightforward metric enables comparison between vehicles, tracking fuel economy changes over time, and calculating trip costs.</p>
+
+            <p>Accurate MPG calculation requires proper measurement. Fill your tank completely, reset your trip odometer, drive normally until the tank is at least half empty (preferably near empty), refill completely, and note miles driven and gallons added. The gallons added divided into miles driven equals your actual MPG for that tank. Single-tank calculations fluctuate due to driving conditions; track MPG over multiple tanks for accurate averages.</p>
+
+            <h2>Understanding MPG Numbers</h2>
+            <p><strong>Compact Cars (30-40 MPG):</strong> Modern fuel-efficient sedans like Honda Civic, Toyota Corolla, and Mazda3 typically achieve 30-36 MPG combined (city and highway). These vehicles balance practicality with excellent fuel economy, making them economical daily drivers. Highway MPG often reaches 38-42 MPG.</p>
+
+            <p><strong>Midsize Sedans (25-32 MPG):</strong> Family sedans like Honda Accord, Toyota Camry, and Nissan Altima deliver 28-32 MPG combined. Slightly larger and more powerful than compacts, they sacrifice a few MPG for additional space and performance. Highway MPG typically reaches 35-40 MPG.</p>
+
+            <p><strong>Hybrids (45-58 MPG):</strong> Toyota Prius, Honda Insight, and Hyundai Ioniq achieve exceptional efficiency through gas-electric powertrains. The Prius reaches 56 MPG combined—nearly double conventional cars. Hybrids excel in city driving where regenerative braking recovers energy. Highway MPG may only be 10-15% better than conventional cars since regenerative braking provides less benefit.</p>
+
+            <p><strong>SUVs and Trucks (15-28 MPG):</strong> Larger vehicles sacrifice efficiency for space and capability. Compact SUVs like RAV4 and CR-V achieve 27-30 MPG. Midsize SUVs drop to 22-26 MPG. Full-size pickups like F-150 and Silverado manage 18-23 MPG. Heavy-duty trucks with larger engines may get only 12-16 MPG. If you don't need truck capability regularly, the fuel cost difference versus a sedan adds thousands of dollars annually.</p>
+
+            <p><strong>Electric Vehicles (MPGe):</strong> EVs don't use gasoline, so EPA rates them in "MPGe" (miles per gallon equivalent). A Tesla Model 3 achieves 130 MPGe—equivalent to traveling 130 miles on the energy contained in one gallon of gasoline. This translates to approximately $0.03-0.05 per mile in electricity costs versus $0.10-0.15 per mile for gas vehicles.</p>
+
+            <h2>Factors Affecting Fuel Economy</h2>
+            <p><strong>Driving Behavior:</strong> Aggressive acceleration and hard braking dramatically reduce MPG—by up to 33% on highways and 5% in cities. Smooth, gradual acceleration and coasting to stops improves economy. Excessive speeding hurts efficiency; MPG decreases rapidly above 50 mph due to aerodynamic drag. Driving 80 mph versus 65 mph typically reduces MPG by 15-25%.</p>
+
+            <p><strong>Vehicle Maintenance:</strong> Proper maintenance preserves fuel economy. Under-inflated tires reduce MPG by 0.2% for every 1 PSI drop below recommended pressure—significantly under-inflated tires can cost 3-4 MPG. Dirty air filters restrict airflow, reducing MPG by up to 10%. Old spark plugs misfire, wasting fuel. Regular oil changes with recommended viscosity reduce friction and improve economy by 1-2%.</p>
+
+            <p><strong>Cargo and Accessories:</strong> Every 100 pounds of extra weight reduces MPG by about 1%. Roof racks and cargo boxes increase aerodynamic drag, reducing highway MPG by 2-8% when empty and 10-25% when loaded. Remove roof accessories when not needed. Excess items in your trunk waste fuel—clear out unnecessary cargo.</p>
+
+            <p><strong>Climate and Terrain:</strong> Cold weather significantly reduces MPG—engines run less efficiently when cold, oil is thicker, tire pressure drops, and battery capacity decreases. Winter MPG often drops 15-30% below summer MPG. Hilly terrain decreases MPG compared to flat roads since climbing requires more energy than descending recovers. Headwinds reduce efficiency; tailwinds improve it.</p>
+
+            <p><strong>Air Conditioning and Accessories:</strong> AC reduces MPG by 5-25% depending on outside temperature and AC usage intensity. At low speeds, open windows are more efficient than AC. Above 45 mph, open windows create drag exceeding AC's efficiency penalty—use AC on highways, crack windows in the city. Other electrical accessories (heated seats, defroster, lights) have minimal impact—less than 1% combined.</p>
+
+            <h2>Tips to Improve Gas Mileage</h2>
+            <p><strong>Drive Smoothly:</strong> Accelerate gradually, anticipate stops, and coast when possible. Pretend there's an egg under the gas pedal—gentle pressure only. Maintaining steady speed maximizes efficiency. Use cruise control on highways to avoid unconscious speed fluctuations that waste fuel.</p>
+
+            <p><strong>Reduce Speed:</strong> Observe speed limits and resist aggressive highway speeds. Each 5 mph above 50 mph costs approximately $0.15-0.25 per gallon. On a 500-mile trip at $3.50/gallon, reducing speed from 75 to 65 mph saves $10-20 in fuel costs while adding only 30-45 minutes to travel time.</p>
+
+            <p><strong>Minimize Idle Time:</strong> Modern engines don't need prolonged warmup—30 seconds is sufficient even in winter. Idling gets 0 MPG and wastes fuel. If stopped for more than 60 seconds, shut off the engine (unless in traffic). Many new vehicles include auto stop-start systems that do this automatically, improving city MPG by 3-5%.</p>
+
+            <p><strong>Maintain Proper Tire Pressure:</strong> Check tire pressure monthly with an accurate gauge when tires are cold. Inflate to the pressure shown on the driver's door jamb (not the max pressure on the tire sidewall). Proper inflation improves MPG, extends tire life, and enhances safety.</p>
+
+            <p><strong>Combine Trips:</strong> Cold starts consume significantly more fuel than warm-engine driving. Combine errands into one trip rather than multiple short trips from home. Plan routes to minimize backtracking. One 10-mile trip uses less fuel than two 5-mile trips from a cold start.</p>
+
+            <p><strong>Choose Fuel-Efficient Routes:</strong> Highway driving at moderate speeds typically delivers better MPG than city driving with frequent stops. However, if highway route is significantly longer or involves traffic congestion, the shorter city route might be more efficient. Apps like Waze and Google Maps can suggest fuel-efficient routes.</p>
+
+            <h2>EPA Estimates vs. Real-World MPG</h2>
+            <p>EPA fuel economy estimates provide standardized comparison but rarely match real-world results. EPA testing occurs on dynamometers (treadmills for cars) using standardized driving cycles. Real-world driving involves variables EPA tests don't capture—temperature extremes, terrain, traffic, cargo, and driver behavior.</p>
+
+            <p>Most drivers achieve 10-30% lower MPG than EPA combined estimates. Aggressive drivers may fall 30-40% short. Hypermilers (drivers maximizing efficiency through technique) sometimes exceed EPA estimates by 20-40%. Your actual MPG depends on driving style, conditions, and maintenance. Track your real MPG rather than relying solely on EPA numbers.</p>
+
+            <p>The EPA revised testing procedures in 2008 to better reflect real-world conditions by adding high-speed driving, rapid acceleration, AC usage, and cold-weather testing. Pre-2008 EPA estimates often overstate fuel economy by 10-20% compared to post-2008 estimates.</p>
+
+            <h2>Calculating Trip and Annual Fuel Costs</h2>
+            <p><strong>Trip Cost Formula:</strong> (Miles Driven ÷ MPG) × Price Per Gallon = Fuel Cost. For a 500-mile trip at 28 MPG and $3.50/gallon: (500 ÷ 28) × 3.50 = 17.86 × 3.50 = $62.50 in fuel costs.</p>
+
+            <p><strong>Cost Per Mile:</strong> Price Per Gallon ÷ MPG = Cost Per Mile. At 25 MPG and $3.50/gallon: 3.50 ÷ 25 = $0.14 per mile. This metric helps compare vehicles—a vehicle getting 40 MPG costs $0.0875 per mile at the same gas price, saving $0.0525 per mile or $525 per 10,000 miles.</p>
+
+            <p><strong>Annual Cost:</strong> (Annual Miles Driven ÷ MPG) × Price Per Gallon. Driving 12,000 miles annually at 24 MPG and $3.50/gallon: (12,000 ÷ 24) × 3.50 = 500 × 3.50 = $1,750 per year. Improving to 30 MPG saves: (12,000 ÷ 30) × 3.50 = $1,400—a $350 annual savings.</p>
+
+            <h2>Comparing Vehicles: Fuel Cost Analysis</h2>
+            <p>When comparing vehicles, calculate total fuel costs over ownership period rather than focusing solely on purchase price. A $5,000 cheaper truck getting 18 MPG costs more over 5 years (60,000 miles) than a fuel-efficient sedan getting 32 MPG if gas averages $3.50/gallon:</p>
+
+            <p>Truck fuel cost: (60,000 ÷ 18) × 3.50 = $11,667. Sedan fuel cost: (60,000 ÷ 32) × 3.50 = $6,563. Difference: $5,104. The sedan's fuel savings equals or exceeds the truck's lower purchase price, making the sedan cheaper over 5 years despite higher upfront cost. Factor in insurance, maintenance, and depreciation for complete comparison.</p>
+
+            <p>For hybrids versus conventional cars, calculate payback period. If a hybrid costs $4,000 more but saves $600 annually in fuel (12,000 miles at $3.50/gallon, 50 MPG vs 30 MPG), payback occurs in 6.7 years. If you keep cars 10+ years, hybrids save money. If you trade every 3-4 years, you may not recoup the premium.</p>
+
+            <h2>Tracking Fuel Economy Over Time</h2>
+            <p>Declining MPG signals maintenance issues. If your normally-30-MPG car drops to 25 MPG, investigate causes: low tire pressure, dirty air filter, faulty oxygen sensor, worn spark plugs, or more serious engine problems. Addressing issues early prevents costly repairs and maintains efficiency.</p>
+
+            <p>Track MPG using smartphone apps (Fuelio, GasBuddy, Fuelly), spreadsheets, or simple notebooks. Log each fill-up: date, odometer reading, gallons purchased, price per gallon, total cost. Over time, data reveals trends, seasonal variations, and maintenance needs. Many modern vehicles display instant and average MPG on dashboard—useful for feedback but less accurate than calculated MPG from actual fuel consumption.</p>
+
+            <h2>The Bottom Line</h2>
+            <p>Understanding and optimizing fuel economy saves money, reduces environmental impact, and extends vehicle life. Calculate your actual MPG regularly, implement efficiency techniques, maintain your vehicle properly, and make informed decisions when purchasing vehicles. Small changes—proper tire pressure, smooth acceleration, reduced highway speeds—collectively improve MPG by 15-25%, saving hundreds to thousands of dollars annually. Use fuel cost calculations to evaluate trip expenses, compare vehicles, and track whether your efficiency efforts produce results. Knowledge of your vehicle's fuel economy empowers smarter driving decisions and long-term financial savings.</p>
         </div>
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
     <script src="../js/main.js"></script>
     <script>
         function calculate() {
-            const input1 = parseFloat(document.getElementById('input1').value);
-            const input2 = parseFloat(document.getElementById('input2').value);
-            const result = input1 + input2;
-            document.getElementById('result').textContent = result.toFixed(2);
+            const miles = parseFloat(document.getElementById('miles').value) || 0;
+            const gallons = parseFloat(document.getElementById('gallons').value) || 1;
+            const gasPrice = parseFloat(document.getElementById('gasPrice').value) || 3.50;
+            const annualMiles = parseFloat(document.getElementById('annualMiles').value) || 12000;
+
+            // Calculate MPG
+            const mpg = miles / gallons;
+
+            // Calculate costs
+            const tripCost = (miles / mpg) * gasPrice;
+            const costPerMile = gasPrice / mpg;
+            const annualCost = (annualMiles / mpg) * gasPrice;
+
+            // Display results
+            document.getElementById('mpg').textContent = mpg.toFixed(1) + ' MPG';
+            document.getElementById('tripCost').textContent = '$' + tripCost.toFixed(2);
+            document.getElementById('costPerMile').textContent = '$' + costPerMile.toFixed(3);
+            document.getElementById('annualCost').textContent = '$' + annualCost.toFixed(0);
+
+            // Efficiency rating
+            let rating, ratingColor;
+            if (mpg >= 45) {
+                rating = 'Excellent (Hybrid/EV level)';
+                ratingColor = '#10b981';
+            } else if (mpg >= 35) {
+                rating = 'Very Good (Efficient compact)';
+                ratingColor = '#10b981';
+            } else if (mpg >= 28) {
+                rating = 'Good (Average sedan)';
+                ratingColor = '#0891b2';
+            } else if (mpg >= 22) {
+                rating = 'Fair (SUV/Crossover)';
+                ratingColor = '#f59e0b';
+            } else if (mpg >= 18) {
+                rating = 'Below Average (Truck/Large SUV)';
+                ratingColor = '#f97316';
+            } else {
+                rating = 'Poor (Heavy-duty/Performance)';
+                ratingColor = '#dc2626';
+            }
+
+            document.getElementById('rating').textContent = rating;
+            document.getElementById('rating').style.color = ratingColor;
         }
-        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
         window.addEventListener('load', calculate);
     </script>
 </body>
