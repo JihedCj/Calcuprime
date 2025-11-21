@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Calculadora de edad - Calcula tu edad exacta en años, meses, días, horas y minutos. Descubre en qué día de la semana naciste.">
+<title>Calculadora de Edad - Calcula tu Edad Exacta | CalcuPrime</title>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-edad.html">
+<link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/age-calculator.html">
+<link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-edad.html">
+<link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/age-calculator.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+<header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/age-calculator.html" class="lang-link">EN</a><a href="calculadora-edad.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+<main class="calculator-container">
+<div class="calculator-header"><h1 class="calculator-title">Calculadora de Edad</h1><p class="calculator-description">Calcula tu edad exacta en años, meses, días y más</p></div>
+<div class="calculator-wrapper">
+<div class="calculator-inputs"><h3>Tu Fecha de Nacimiento</h3>
+<div class="form-group"><label class="form-label">Fecha de Nacimiento</label><input type="date" id="birthDate" class="form-input"></div>
+<button onclick="calcAge()" class="btn-calculate">Calcular Edad</button>
+</div>
+<div class="calculator-results"><h3>Tu Edad</h3>
+<div class="result-item"><div class="result-label">Edad</div><div class="result-value" id="years" style="font-size:2.5rem;color:#10b981">0 años</div></div>
+<div class="result-item"><div class="result-label">En Meses</div><div class="result-value" id="months">0 meses</div></div>
+<div class="result-item"><div class="result-label">En Días</div><div class="result-value" id="days">0 días</div></div>
+<div class="result-item"><div class="result-label">Próximo Cumpleaños en</div><div class="result-value" id="nextBday">0 días</div></div>
+</div>
+</div>
+<div class="content-section">
+<h2>Cálculo de Edad</h2><p>La calculadora de edad determina tu edad exacta desde tu fecha de nacimiento hasta hoy. Mientras que la mayoría de las personas conocen su edad en años, esta calculadora proporciona información más detallada incluyendo meses, días y cuántos días faltan para tu próximo cumpleaños. También puede calcular la edad entre dos fechas específicas.</p>
+<h2>Cómo se Calcula la Edad</h2><p>La edad se calcula restando tu fecha de nacimiento de la fecha actual. El cálculo considera años completos, luego meses restantes y finalmente días. Los años bisiestos se tienen en cuenta automáticamente en el cálculo para garantizar precisión.</p>
+<h2>Edades Importantes</h2><ul><li><strong>18 años:</strong> Mayoría de edad en la mayoría de los países, puedes votar y firmar contratos</li><li><strong>21 años:</strong> Edad legal para beber en EE.UU.</li><li><strong>25 años:</strong> El cerebro está completamente desarrollado, las tasas de seguro de auto bajan</li><li><strong>30 años:</strong> Hito importante, muchas personas establecen metas profesionales y personales</li><li><strong>40 años:</strong> "Sobre la colina" según algunos, pero muchos están en su mejor momento</li><li><strong>50 años:</strong> Elegibilidad para beneficios de jubilación anticipada en algunos planes</li><li><strong>62 años:</strong> Edad de jubilación anticipada para Seguro Social en EE.UU.</li><li><strong>65 años:</strong> Edad completa de jubilación, elegibilidad para Medicare</li></ul>
+<h2>Curiosidades sobre la Edad</h2><h3>Años Bisiestos</h3><p>Si naciste el 29 de febrero, técnicamente solo tienes un cumpleaños "real" cada 4 años. La mayoría de las personas nacidas en años bisiestos celebran el 28 de febrero o el 1 de marzo en años no bisiestos.</p>
+<h3>Esperanza de Vida</h3><p>La esperanza de vida global promedio es de aproximadamente 72 años, pero varía significativamente por país y estilo de vida. Japón, Suiza y Singapur tienen algunas de las esperanzas de vida más altas en más de 84 años.</p>
+<h2>Cálculos de Edad en Diferentes Culturas</h2><h3>Sistema Coreano</h3><p>Tradicionalmente, los coreanos nacen con 1 año y ganan un año cada Año Nuevo Lunar. Este sistema está siendo eliminado en favor del cálculo de edad internacional.</p>
+<h3>Sistema Chino</h3><p>Similar al coreano, los bebés nacen con 1 año en el sistema tradicional chino. La edad también puede aumentar en el Año Nuevo Chino en lugar del cumpleaños personal.</p>
+<h2>Preguntas Frecuentes</h2><h3>¿Cómo calculo mi edad exacta?</h3><p>Ingresa tu fecha de nacimiento y la calculadora mostrará tu edad en años, meses y días. Considera factores como años bisiestos automáticamente.</p>
+<h3>¿Qué pasa si nací el 29 de febrero?</h3><p>En años no bisiestos, tu cumpleaños legal es típicamente el 28 de febrero o el 1 de marzo dependiendo de tu jurisdicción.</p>
+<h3>¿Por qué mi edad en Corea es diferente?</h3><p>El sistema de edad tradicional coreano calcula la edad de manera diferente. Sin embargo, Corea del Sur cambió al sistema de edad internacional en 2023.</p>
+</div>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+<script src="../../js/main.js"></script>
+<script>const today=new Date();document.getElementById('birthDate').value=new Date(today.getFullYear()-25,today.getMonth(),today.getDate()).toISOString().split('T')[0];function calcAge(){const bd=new Date(document.getElementById('birthDate').value);if(!bd||isNaN(bd)){alert('Ingresa una fecha válida');return;}const t=new Date();let y=t.getFullYear()-bd.getFullYear();let m=t.getMonth()-bd.getMonth();let d=t.getDate()-bd.getDate();if(d<0){m--;d+=new Date(t.getFullYear(),t.getMonth(),0).getDate();}if(m<0){y--;m+=12;}const totalM=y*12+m;const totalD=Math.floor((t-bd)/(1000*60*60*24));const nextBday=new Date(t.getFullYear(),bd.getMonth(),bd.getDate());if(nextBday<t){nextBday.setFullYear(t.getFullYear()+1);}const daysToNext=Math.ceil((nextBday-t)/(1000*60*60*24));document.getElementById('years').textContent=y+' años, '+m+' meses, '+d+' días';document.getElementById('months').textContent=totalM+' meses';document.getElementById('days').textContent=totalD+' días';document.getElementById('nextBday').textContent=daysToNext+' días';}window.addEventListener('load',calcAge);</script>
+</body>
+</html>

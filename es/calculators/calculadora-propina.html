@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de propina - Calcula propinas rápidamente para restaurantes. Divide cuentas entre múltiples personas fácilmente.">
+    <meta name="keywords" content="calculadora propina, propina restaurante, dividir cuenta, calculadora mesero">
+    <title>Calculadora de Propina - Calcula Propinas Fácilmente | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-propina.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/tip-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-propina.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/tip-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/tip-calculator.html" class="lang-link">EN</a><a href="calculadora-propina.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora de Propina</h1><p class="calculator-description">Calcula propinas rápidamente y divide la cuenta entre múltiples personas</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Detalles de la Cuenta</h3>
+                <div class="form-group"><label class="form-label">Total de la Cuenta ($)</label><input type="number" id="billAmount" class="form-input" value="100" min="0" step="0.01"></div>
+                <div class="form-group"><label class="form-label">Porcentaje de Propina (%)</label><input type="number" id="tipPercent" class="form-input" value="15" min="0" max="100" step="1"></div>
+                <div style="display:flex;gap:10px;margin:10px 0"><button onclick="setTip(10)" style="flex:1;padding:8px;border:1px solid #e5e7eb;border-radius:6px;background:white;cursor:pointer">10%</button><button onclick="setTip(15)" style="flex:1;padding:8px;border:1px solid #e5e7eb;border-radius:6px;background:white;cursor:pointer">15%</button><button onclick="setTip(18)" style="flex:1;padding:8px;border:1px solid #e5e7eb;border-radius:6px;background:white;cursor:pointer">18%</button><button onclick="setTip(20)" style="flex:1;padding:8px;border:1px solid #e5e7eb;border-radius:6px;background:white;cursor:pointer">20%</button></div>
+                <div class="form-group"><label class="form-label">Número de Personas</label><input type="number" id="people" class="form-input" value="1" min="1"></div>
+                <button onclick="calcTip()" class="btn-calculate">Calcular</button>
+            </div>
+            <div class="calculator-results"><h3>Resultados</h3>
+                <div class="result-item"><div class="result-label">Monto de Propina</div><div class="result-value" id="tipAmount" style="font-size:2.5rem;color:#10b981">$0.00</div></div>
+                <div class="result-item"><div class="result-label">Total a Pagar</div><div class="result-value" id="total">$0.00</div></div>
+                <div class="result-item"><div class="result-label">Por Persona</div><div class="result-value" id="perPerson">$0.00</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Guía de Propinas</h2><p>Dar propina es una práctica común en muchos países para mostrar aprecio por el buen servicio. En Estados Unidos y algunos otros países, las propinas constituyen una parte significativa del ingreso de los trabajadores de servicio. Saber cuánto dar de propina puede ser confuso, especialmente cuando se viaja o se experimentan diferentes niveles de servicio.</p>
+            <h2>Porcentajes Estándar de Propina</h2><h3>Servicio Pobre (10-12%)</h3><p>Reservado para servicio significativamente por debajo del estándar. Considera hablar con el gerente si el servicio fue verdaderamente inaceptable antes de dar una propina muy baja.</p>
+            <h3>Servicio Aceptable (15%)</h3><p>El estándar mínimo para servicio básico en restaurantes. El mesero cumplió con sus responsabilidades sin ir más allá.</p>
+            <h3>Servicio Bueno (18-20%)</h3><p>Para servicio atento y amigable. El mesero fue proactivo, conocedor y hizo que tu experiencia fuera agradable.</p>
+            <h3>Servicio Excepcional (20-25%+)</h3><p>Para servicio extraordinario que superó tus expectativas. El mesero fue excepcional manejando solicitudes especiales o situaciones difíciles.</p>
+            <h2>Propinas en Diferentes Situaciones</h2><h3>Restaurantes de Servicio Completo</h3><p>15-20% es estándar. Considera 20% o más para servicio excelente o grupos grandes. Algunos restaurantes incluyen automáticamente propina (gratificación) para grupos de 6 o más.</p>
+            <h3>Restaurantes de Comida Rápida Casual</h3><p>10-15% o $1-2 por orden en lugares donde ordenas en el mostrador pero te traen la comida a la mesa.</p>
+            <h3>Cafeterías y Cafés</h3><p>$1-2 por bebida o 15-20% del total. Muchas personas dan propina basándose en la complejidad de la orden.</p>
+            <h3>Bares</h3><p>$1-2 por bebida o 15-20% de la cuenta total. Para servicio excepcional o bebidas complejas, considera más.</p>
+            <h3>Servicio de Entrega a Domicilio</h3><p>15-20% del total o mínimo $3-5, lo que sea mayor. Incrementa por mal clima, grandes pedidos o distancias largas.</p>
+            <h3>Para Llevar</h3><p>10% o unos dólares si el restaurante empacó una orden compleja o personalizada. No obligatorio pero apreciado.</p>
+            <h2>Factores a Considerar al Dar Propina</h2><ul><li><strong>Calidad del Servicio:</strong> Rapidez, amabilidad, atención y conocimiento</li><li><strong>Complejidad de la Orden:</strong> Modificaciones especiales o restricciones dietéticas</li><li><strong>Tamaño del Grupo:</strong> Grupos grandes requieren más trabajo del personal</li><li><strong>Duración de la Comida:</strong> Ocupar una mesa por horas limita las propinas del mesero de otros clientes</li><li><strong>Hora del Día:</strong> El personal del turno de desayuno/almuerzo a menudo recibe propinas menores</li><li><strong>Descuentos/Cupones:</strong> Calcula la propina sobre el monto original antes del descuento</li></ul>
+            <h2>Etiqueta de Propinas</h2><h3>Calculando sobre el Total Antes de Impuestos</h3><p>Tradicionalmente, las propinas se calculan sobre el subtotal antes de impuestos. Sin embargo, muchas personas ahora calculan sobre el total incluyendo impuestos por simplicidad.</p>
+            <h3>Propina en Efectivo vs Tarjeta</h3><p>El efectivo es preferido por muchos trabajadores de servicio ya que lo reciben inmediatamente. Sin embargo, la propina con tarjeta es perfectamente aceptable y más conveniente.</p>
+            <h3>Dividiendo la Cuenta</h3><p>Cuando se divide la cuenta, calcula la propina sobre el total antes de dividir, no después. Esto asegura que el mesero reciba la propina apropiada.</p>
+            <h3>Buffets</h3><p>10% es típico en buffets donde el personal repone bebidas y limpia platos pero no toma órdenes ni sirve comida.</p>
+            <h2>Propinas Alrededor del Mundo</h2><h3>Estados Unidos</h3><p>15-20% es estándar. Las propinas son esperadas ya que los meseros a menudo ganan menos del salario mínimo más propinas.</p>
+            <h3>Canadá</h3><p>Similar a EE.UU., 15-20% es la norma.</p>
+            <h3>Europa</h3><p>Varía por país. En muchos lugares, el cargo por servicio está incluido, pero redondear hacia arriba o agregar 5-10% es común para buen servicio.</p>
+            <h3>México</h3><p>15% es típico en áreas turísticas. Verifica si el servicio ya está incluido en la cuenta.</p>
+            <h3>Japón</h3><p>Dar propina no se practica y puede considerarse ofensivo. El servicio excelente es esperado como estándar.</p>
+            <h3>Australia</h3><p>Las propinas no son obligatorias ya que los trabajadores reciben salarios completos, pero redondear hacia arriba por servicio excepcional está bien.</p>
+            <h2>Preguntas Frecuentes</h2><h3>¿Debo dar propina sobre el impuesto?</h3><p>Tradicionalmente no, pero es común y aceptable calcular sobre el total incluyendo impuestos por conveniencia. La diferencia suele ser mínima.</p>
+            <h3>¿Qué pasa si el servicio fue malo?</h3><p>Aún considera dejar 10-12% a menos que el servicio fuera verdaderamente terrible. Si tienes una queja legítima, habla con el gerente en lugar de solo dejar una propina baja.</p>
+            <h3>¿Las propinas se comparten con el personal de cocina?</h3><p>Depende del restaurante. Algunos tienen "pooling" de propinas donde todo el personal comparte. Otros tienen el personal de servicio dando un porcentaje al personal de cocina.</p>
+            <h3>¿Debo dar propina sobre bebidas alcohólicas?</h3><p>Sí. Calcula tu propina sobre la cuenta total incluyendo alcohol, comida y otros cargos.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function setTip(p){document.getElementById('tipPercent').value=p;calcTip();}function calcTip(){const bill=parseFloat(document.getElementById('billAmount').value)||0;const tip=parseFloat(document.getElementById('tipPercent').value)||0;const people=parseInt(document.getElementById('people').value)||1;const tipAmt=bill*tip/100;const total=bill+tipAmt;const perPerson=total/people;document.getElementById('tipAmount').textContent='$'+tipAmt.toFixed(2);document.getElementById('total').textContent='$'+total.toFixed(2);document.getElementById('perPerson').textContent='$'+perPerson.toFixed(2);}document.querySelectorAll('.form-input').forEach(e=>e.addEventListener('input',calcTip));window.addEventListener('load',calcTip);</script>
+</body>
+</html>

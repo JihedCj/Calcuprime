@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de inversión - Calcula el crecimiento de tu inversión con contribuciones regulares. Visualiza el poder del interés compuesto.">
+    <meta name="keywords" content="calculadora inversión, retorno inversión, interés compuesto, planificación financiera">
+    <title>Calculadora de Inversión - Planifica tu Futuro Financiero | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-inversion.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/investment-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-inversion.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/investment-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/investment-calculator.html" class="lang-link">EN</a><a href="calculadora-inversion.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora de Inversión</h1><p class="calculator-description">Calcula el crecimiento de tu inversión con contribuciones regulares y visualiza el poder del interés compuesto</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Detalles de la Inversión</h3>
+                <div class="form-group"><label class="form-label">Inversión Inicial ($)</label><input type="number" id="initialInvestment" class="form-input" value="10000" min="0" step="100"></div>
+                <div class="form-group"><label class="form-label">Contribución Mensual ($)</label><input type="number" id="monthlyContribution" class="form-input" value="500" min="0" step="50"></div>
+                <div class="form-group"><label class="form-label">Años de Inversión</label><input type="number" id="years" class="form-input" value="20" min="1" max="50"></div>
+                <div class="form-group"><label class="form-label">Retorno Anual Estimado (%)</label><input type="number" id="returnRate" class="form-input" value="7" min="0" max="30" step="0.1"></div>
+                <button onclick="calculate()" class="btn-calculate">Calcular Inversión</button>
+            </div>
+            <div class="calculator-results"><h3>Resultados</h3>
+                <div class="result-item"><div class="result-label">Valor Futuro</div><div class="result-value" id="futureValue" style="font-size:2.5rem;color:#10b981">$0</div></div>
+                <div class="result-item"><div class="result-label">Total Contribuido</div><div class="result-value" id="totalContributed">$0</div></div>
+                <div class="result-item"><div class="result-label">Ganancia por Intereses</div><div class="result-value" id="totalInterest">$0</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Planificación de Inversiones</h2><p>La inversión regular es clave para construir riqueza a largo plazo. Nuestra calculadora te ayuda a visualizar cómo tus contribuciones consistentes más el interés compuesto pueden crecer significativamente con el tiempo. El interés compuesto es una de las fuerzas más poderosas en finanzas, permitiendo que tus ganancias generen aún más ganancias.</p>
+            <h2>Cómo Usar la Calculadora</h2><ol><li><strong>Inversión Inicial:</strong> Ingresa la cantidad que invertirás ahora</li><li><strong>Contribución Mensual:</strong> Cantidad que agregarás cada mes</li><li><strong>Años de Inversión:</strong> Horizonte temporal de tu inversión</li><li><strong>Retorno Anual:</strong> Tasa de retorno esperada (7-10% es típico para el mercado de valores)</li></ol>
+            <h2>Estrategias de Inversión</h2><h3>Dollar-Cost Averaging</h3><p>Invertir cantidades fijas regularmente reduce el riesgo de invertir todo en el momento equivocado. Esta estrategia promedia tu costo de compra a lo largo del tiempo.</p>
+            <h3>Diversificación</h3><p>No pongas todos tus huevos en una canasta. Distribuye tus inversiones entre diferentes activos para reducir el riesgo. Los fondos índice y ETFs ofrecen diversificación instantánea.</p>
+            <h3>Inversión a Largo Plazo</h3><p>El mercado de valores ha retornado históricamente alrededor del 10% anual a largo plazo, a pesar de la volatilidad a corto plazo. El horizonte temporal es tu mejor aliado.</p>
+            <h2>Tipos de Cuentas de Inversión</h2><h3>Cuentas de Jubilación (401k, IRA)</h3><p>Ofrecen ventajas fiscales significativas. Las contribuciones a cuentas tradicionales reducen tu ingreso imponible actual, mientras que las Roth permiten retiros libres de impuestos en la jubilación.</p>
+            <h3>Cuentas de Corretaje</h3><p>Cuentas de inversión flexibles sin restricciones de retiro, pero sin ventajas fiscales. Ideales para objetivos antes de la jubilación.</p>
+            <h3>Cuentas de Ahorro para Educación (529)</h3><p>Diseñadas específicamente para gastos educativos, ofrecen crecimiento libre de impuestos cuando se usan para educación calificada.</p>
+            <h2>Consejos para Inversionistas</h2><ul><li><strong>Empieza Temprano:</strong> El tiempo es tu mayor ventaja. Incluso pequeñas cantidades crecen significativamente</li><li><strong>Maximiza las Contribuciones:</strong> Especialmente si tu empleador iguala contribuciones 401k</li><li><strong>Rebalancea Periódicamente:</strong> Mantén tu asignación de activos objetivo</li><li><strong>Mantén Costos Bajos:</strong> Las comisiones altas pueden erosionar tus retornos</li><li><strong>Evita el Market Timing:</strong> Es extremadamente difícil predecir movimientos del mercado</li><li><strong>Mantén el Curso:</strong> No vendas en pánico durante las caídas del mercado</li></ul>
+            <h2>Preguntas Frecuentes</h2><h3>¿Cuánto debo invertir?</h3><p>Los expertos recomiendan ahorrar al menos el 15% de tus ingresos brutos para la jubilación. Comienza con lo que puedas y aumenta gradualmente.</p>
+            <h3>¿Cuándo debo empezar a invertir?</h3><p>Lo antes posible. Incluso si solo puedes invertir $50 al mes, el interés compuesto trabajará a tu favor a lo largo del tiempo.</p>
+            <h3>¿Es seguro invertir en el mercado de valores?</h3><p>Todas las inversiones conllevan riesgo, pero históricamente el mercado de valores ha sido una de las mejores formas de construir riqueza a largo plazo (10+ años).</p>
+            <h3>¿Qué tasa de retorno debo usar?</h3><p>El mercado de valores de EE.UU. ha retornado aproximadamente 10% anual históricamente. Usar 7-8% es conservador y realista después de inflación.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function calculate(){const initial=parseFloat(document.getElementById('initialInvestment').value)||0;const monthly=parseFloat(document.getElementById('monthlyContribution').value)||0;const years=parseInt(document.getElementById('years').value)||0;const rate=parseFloat(document.getElementById('returnRate').value)||0;const monthlyRate=rate/100/12;const months=years*12;let futureValue=initial*Math.pow(1+monthlyRate,months);if(monthly>0){futureValue+=monthly*(Math.pow(1+monthlyRate,months)-1)/monthlyRate;}const totalContributed=initial+monthly*months;const totalInterest=futureValue-totalContributed;document.getElementById('futureValue').textContent='$'+Math.round(futureValue).toLocaleString();document.getElementById('totalContributed').textContent='$'+Math.round(totalContributed).toLocaleString();document.getElementById('totalInterest').textContent='$'+Math.round(totalInterest).toLocaleString();}document.querySelectorAll('.form-input').forEach(input=>{input.addEventListener('input',calculate);});window.addEventListener('load',calculate);</script>
+</body>
+</html>

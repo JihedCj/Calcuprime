@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Conversor de longitud - Convierte metros, kilómetros, pies, pulgadas, millas y más. Herramienta rápida de conversión de distancia.">
+<title>Conversor de Longitud - Metros, Pies, Millas | CalcuPrime</title>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="canonical" href="https://calcuprime.com/es/calculators/conversor-longitud.html">
+<link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/length-converter.html">
+<link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-longitud.html">
+<link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/length-converter.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+<header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/length-converter.html" class="lang-link">EN</a><a href="conversor-longitud.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+<main class="calculator-container">
+<div class="calculator-header"><h1 class="calculator-title">Conversor de Longitud</h1><p class="calculator-description">Convierte entre unidades métricas e imperiales de longitud y distancia</p></div>
+<div class="calculator-wrapper">
+<div class="calculator-inputs"><h3>Convertir Longitud</h3>
+<div class="form-group"><label class="form-label">Valor</label><input type="number" id="lengthValue" class="form-input" value="1" step="0.01"></div>
+<div class="form-group"><label class="form-label">De</label><select id="fromLen" class="form-select"><option value="meters" selected>Metros (m)</option><option value="kilometers">Kilómetros (km)</option><option value="feet">Pies (ft)</option><option value="inches">Pulgadas (in)</option><option value="miles">Millas (mi)</option><option value="yards">Yardas (yd)</option></select></div>
+<button onclick="convLen()" class="btn-calculate">Convertir</button>
+</div>
+<div class="calculator-results"><h3>Resultados</h3>
+<div class="result-item"><div class="result-label">Metros</div><div class="result-value" id="meters">1 m</div></div>
+<div class="result-item"><div class="result-label">Kilómetros</div><div class="result-value" id="kilometers">0.001 km</div></div>
+<div class="result-item"><div class="result-label">Pies</div><div class="result-value" id="feet">3.28 ft</div></div>
+<div class="result-item"><div class="result-label">Pulgadas</div><div class="result-value" id="inches">39.37 in</div></div>
+<div class="result-item"><div class="result-label">Millas</div><div class="result-value" id="miles">0.00062 mi</div></div>
+</div>
+</div>
+<div class="content-section">
+<h2>Sistemas de Medición de Longitud</h2><p>Existen dos sistemas principales para medir longitud: el Sistema Métrico (o Internacional) y el Sistema Imperial. El sistema métrico es usado por la mayoría de los países del mundo, mientras que el sistema imperial se usa principalmente en Estados Unidos.</p>
+<h2>Unidades Métricas</h2><h3>Metro (m)</h3><p>La unidad base de longitud en el Sistema Internacional. Originalmente definido como una diezmillonésima parte de la distancia del ecuador al Polo Norte. Un metro equivale aproximadamente a 3.28 pies.</p>
+<h3>Kilómetro (km)</h3><p>Igual a 1,000 metros. Usado comúnmente para medir distancias entre ciudades y países. Un kilómetro es aproximadamente 0.62 millas.</p>
+<h3>Centímetro (cm)</h3><p>Una centésima parte de un metro (0.01 m). Usado para medir objetos pequeños y dimensiones corporales. Hay 2.54 centímetros en una pulgada.</p>
+<h3>Milímetro (mm)</h3><p>Una milésima parte de un metro (0.001 m). Usado para mediciones de precisión en ingeniería y manufactura.</p>
+<h2>Unidades Imperiales</h2><h3>Pulgada (in)</h3><p>La unidad más pequeña comúnmente usada, equivale a 2.54 centímetros. Históricamente basada en el ancho de un pulgar humano.</p>
+<h3>Pie (ft)</h3><p>Igual a 12 pulgadas o 30.48 centímetros. Originalmente basado en la longitud del pie humano. Comúnmente usado para medir altura de personas y dimensiones de habitaciones.</p>
+<h3>Yarda (yd)</h3><p>Igual a 3 pies o 36 pulgadas (0.9144 metros). Usado en deportes como fútbol americano y golf.</p>
+<h3>Milla (mi)</h3><p>Igual a 5,280 pies o 1,760 yardas (1.609 kilómetros). Usada para medir distancias largas en carreteras en EE.UU.</p>
+<h2>Conversiones Comunes</h2><ul><li>1 pulgada = 2.54 centímetros</li><li>1 pie = 30.48 centímetros</li><li>1 yarda = 0.9144 metros</li><li>1 milla = 1.609 kilómetros</li><li>1 metro = 3.28084 pies</li><li>1 kilómetro = 0.621371 millas</li></ul>
+<h2>Aplicaciones Prácticas</h2><h3>Construcción</h3><p>Planos y mediciones arquitectónicas requieren conversiones precisas entre sistemas cuando se trabaja con especificaciones internacionales.</p>
+<h3>Viajes</h3><p>Convertir entre millas y kilómetros es esencial para entender distancias y límites de velocidad al viajar internacionalmente.</p>
+<h3>Deportes</h3><p>Diferentes deportes usan diferentes unidades. Las carreras de atletismo a menudo usan metros (100m, 400m), mientras que el fútbol americano usa yardas.</p>
+<h3>Ciencia e Ingeniería</h3><p>El sistema métrico es el estándar en investigación científica e ingeniería debido a su naturaleza decimal lógica.</p>
+<h2>Preguntas Frecuentes</h2><h3>¿Por qué EE.UU. no usa el sistema métrico?</h3><p>Razones históricas y el costo de conversión. Aunque el sistema métrico es legal en EE.UU., el sistema imperial está profundamente arraigado en la infraestructura y cultura.</p>
+<h3>¿Qué tan largo es un metro?</h3><p>Aproximadamente 3.28 pies o un poco más largo que una yarda. Una forma de visualizarlo: aproximadamente la distancia desde tu nariz hasta tu brazo extendido.</p>
+<h3>¿Cuál sistema es mejor?</h3><p>El sistema métrico es generalmente considerado más fácil para cálculos debido a su base decimal (potencias de 10), mientras que el sistema imperial tiene subdivisiones más complejas.</p>
+</div>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+<script src="../../js/main.js"></script>
+<script>const lenRates={'meters':1,'kilometers':0.001,'feet':3.28084,'inches':39.3701,'miles':0.000621371,'yards':1.09361};function convLen(){const val=parseFloat(document.getElementById('lengthValue').value)||0;const from=document.getElementById('fromLen').value;const inMeters=val/lenRates[from];document.getElementById('meters').textContent=(inMeters).toFixed(4)+' m';document.getElementById('kilometers').textContent=(inMeters*lenRates.kilometers).toFixed(6)+' km';document.getElementById('feet').textContent=(inMeters*lenRates.feet).toFixed(2)+' ft';document.getElementById('inches').textContent=(inMeters*lenRates.inches).toFixed(2)+' in';document.getElementById('miles').textContent=(inMeters*lenRates.miles).toFixed(6)+' mi';}document.querySelectorAll('.form-input,.form-select').forEach(e=>e.addEventListener('input',convLen));window.addEventListener('load',convLen);</script>
+</body>
+</html>

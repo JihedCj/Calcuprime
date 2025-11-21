@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de jubilación - Planifica tu retiro y calcula cuánto necesitas ahorrar para una jubilación cómoda. Proyecta tus ahorros futuros.">
+    <meta name="keywords" content="calculadora jubilación, retiro, ahorro jubilación, planificación retiro, pension">
+    <title>Calculadora de Jubilación - Planifica tu Retiro | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-jubilacion.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/retirement-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-jubilacion.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/retirement-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/retirement-calculator.html" class="lang-link">EN</a><a href="calculadora-jubilacion.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora de Jubilación</h1><p class="calculator-description">Planifica tu retiro y calcula cuánto necesitas ahorrar para una jubilación cómoda</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Información Personal</h3>
+                <div class="form-group"><label class="form-label">Edad Actual</label><input type="number" id="currentAge" class="form-input" value="30" min="18" max="80"></div>
+                <div class="form-group"><label class="form-label">Edad de Jubilación Deseada</label><input type="number" id="retirementAge" class="form-input" value="65" min="50" max="80"></div>
+                <div class="form-group"><label class="form-label">Esperanza de Vida</label><input type="number" id="lifeExpectancy" class="form-input" value="90" min="65" max="100"></div>
+                <div class="form-group"><label class="form-label">Ahorros Actuales ($)</label><input type="number" id="currentSavings" class="form-input" value="50000" min="0" step="1000"></div>
+                <div class="form-group"><label class="form-label">Contribución Mensual ($)</label><input type="number" id="monthlyContribution" class="form-input" value="500" min="0" step="50"></div>
+                <div class="form-group"><label class="form-label">Retorno Anual Esperado (%)</label><input type="number" id="returnRate" class="form-input" value="7" min="0" max="15" step="0.1"></div>
+                <div class="form-group"><label class="form-label">Ingreso Mensual Deseado en Retiro ($)</label><input type="number" id="monthlyIncome" class="form-input" value="4000" min="0" step="100"></div>
+                <button onclick="calcRet()" class="btn-calculate">Calcular Jubilación</button>
+            </div>
+            <div class="calculator-results"><h3>Resultados</h3>
+                <div class="result-item"><div class="result-label">Ahorros al Jubilarte</div><div class="result-value" id="totalSavings" style="font-size:2.5rem;color:#10b981">$0</div></div>
+                <div class="result-item"><div class="result-label">Necesitarás</div><div class="result-value" id="needed">$0</div></div>
+                <div class="result-item"><div class="result-label">Déficit/Superávit</div><div class="result-value" id="difference">$0</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Planificación de la Jubilación</h2><p>La jubilación es una de las metas financieras más importantes de tu vida. Requiere planificación cuidadosa y ahorro consistente durante décadas. Esta calculadora te ayuda a determinar si estás en camino de alcanzar tus objetivos de jubilación o si necesitas ajustar tu estrategia de ahorro.</p>
+            <h2>Cuánto Necesitas para Jubilarte</h2><h3>La Regla del 25</h3><p>Una regla simple es que necesitas 25 veces tus gastos anuales para jubilarte. Si gastas $40,000 al año, necesitarás $1 millón. Esta regla asume que retirarás el 4% anualmente, un porcentaje considerado seguro para que tu dinero dure 30+ años.</p>
+            <h3>La Regla del 4%</h3><p>Puedes retirar el 4% de tu portafolio de jubilación cada año con alta probabilidad de que tu dinero dure 30 años o más. Esta regla está basada en datos históricos del mercado y es ampliamente utilizada por planificadores financieros.</p>
+            <h2>Maximizando tus Ahorros para Jubilación</h2><ul><li><strong>Empieza Temprano:</strong> Empezar a los 25 vs 35 años puede significar cientos de miles de dólares de diferencia</li><li><strong>Maximiza Contribuciones al 401(k):</strong> Especialmente si tu empleador iguala aportes - es dinero gratis</li><li><strong>Abre un IRA:</strong> Tradicional o Roth, dependiendo de tu situación fiscal</li><li><strong>Aumenta Contribuciones con Aumentos Salariales:</strong> Cada vez que recibas un aumento, incrementa tu tasa de ahorro</li><li><strong>Diversifica tus Inversiones:</strong> No pongas todos tus ahorros de jubilación en un solo tipo de inversión</li><li><strong>Reduce Gastos en Jubilación:</strong> Muchos gastos disminuyen en jubilación (transporte al trabajo, ropa profesional)</li><li><strong>Considera Trabajo a Tiempo Parcial:</strong> Puede suplementar ingresos y retrasar retiros de ahorros</li></ul>
+            <h2>Fuentes de Ingreso en Jubilación</h2><h3>Seguro Social</h3><p>Para la mayoría de los estadounidenses, el Seguro Social proporciona una base de ingresos en jubilación. El beneficio promedio es alrededor de $1,800 mensuales, pero varía según tu historial de ganancias y edad de retiro.</p>
+            <h3>Planes de Empleador (401k, 403b)</h3><p>Cuentas de jubilación patrocinadas por empleador con ventajas fiscales. Muchos empleadores igualan contribuciones hasta cierto porcentaje.</p>
+            <h3>IRA (Traditional y Roth)</h3><p>Cuentas de jubilación individuales con beneficios fiscales. Traditional reduce impuestos ahora; Roth ofrece retiros libres de impuestos más tarde.</p>
+            <h3>Pensiones</h3><p>Cada vez menos comunes, pero algunos empleadores aún ofrecen pensiones de beneficio definido que pagan una cantidad fija mensualmente de por vida.</p>
+            <h3>Ahorros e Inversiones Personales</h3><p>Cuentas de corretaje, bienes raíces de inversión, negocios y otros activos pueden suplementar ingresos de jubilación.</p>
+            <h2>Riesgos Comunes de Jubilación</h2><h3>Longevidad</h3><p>Vivir más de lo esperado puede agotar tus ahorros. Considera planificar para vivir hasta los 90-95 años o más.</p>
+            <h3>Inflación</h3><p>El costo de vida típicamente aumenta 2-3% anualmente. Tu plan debe considerar que necesitarás más dinero con el tiempo.</p>
+            <h3>Gastos de Salud</h3><p>Los costos médicos tienden a aumentar con la edad. Medicare no cubre todo; considera un seguro complementario o Medicare Advantage.</p>
+            <h3>Riesgo de Secuencia de Retornos</h3><p>Si el mercado cae justo después de jubilarte y estás retirando fondos, puede impactar severamente la longevidad de tu portafolio.</p>
+            <h2>Estrategias de Retiro</h2><h3>Estrategia de Cubetas</h3><p>Divide tus ahorros en "cubetas" por horizonte temporal: efectivo para gastos inmediatos (1-3 años), bonos para mediano plazo (4-10 años), acciones para largo plazo (10+ años).</p>
+            <h3>Orden de Retiro</h3><p>Generalmente, retira primero de cuentas imponibles, luego tradicionales (401k/IRA tradicional), finalmente Roth IRAs. Esta estrategia puede minimizar impuestos de por vida.</p>
+            <h2>Preguntas Frecuentes</h2><h3>¿Cuánto debo tener ahorrado a los 30?</h3><p>Una guía general es tener 1x tu salario anual ahorrado para jubilación a los 30. Por ejemplo, si ganas $50,000, deberías tener $50,000 ahorrados.</p>
+            <h3>¿Es demasiado tarde para empezar a ahorrar a los 40?</h3><p>Nunca es demasiado tarde. Aunque empezar temprano es ideal, ahorrar agresivamente en tus 40s y 50s aún puede resultar en una jubilación cómoda.</p>
+            <h3>¿Cuándo puedo retirar de mi 401(k) sin penalidad?</h3><p>Generalmente a los 59.5 años. Retiros antes de esa edad típicamente incurren en una penalidad del 10% más impuestos sobre la renta, con algunas excepciones.</p>
+            <h3>¿Debo elegir Traditional o Roth IRA?</h3><p>Si esperas estar en un rango fiscal más alto en jubilación, elige Roth. Si esperas un rango fiscal más bajo en jubilación, elige Traditional. Considera hacer ambos para diversificación fiscal.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function calcRet(){const ca=parseInt(document.getElementById('currentAge').value)||30;const ra=parseInt(document.getElementById('retirementAge').value)||65;const le=parseInt(document.getElementById('lifeExpectancy').value)||90;const cs=parseFloat(document.getElementById('currentSavings').value)||0;const mc=parseFloat(document.getElementById('monthlyContribution').value)||0;const rr=parseFloat(document.getElementById('returnRate').value)/100||0.07;const mi=parseFloat(document.getElementById('monthlyIncome').value)||0;const ytr=ra-ca;const rir=le-ra;const mr=rr/12;const m=ytr*12;let fs=cs*Math.pow(1+mr,m);if(mc>0){fs+=mc*(Math.pow(1+mr,m)-1)/mr;}const needed=mi*12*rir;const diff=fs-needed;document.getElementById('totalSavings').textContent='$'+Math.round(fs).toLocaleString();document.getElementById('needed').textContent='$'+Math.round(needed).toLocaleString();document.getElementById('difference').textContent='$'+Math.round(diff).toLocaleString();document.getElementById('difference').style.color=diff>=0?'#10b981':'#ef4444';}document.querySelectorAll('.form-input').forEach(e=>e.addEventListener('input',calcRet));window.addEventListener('load',calcRet);</script>
+</body>
+</html>

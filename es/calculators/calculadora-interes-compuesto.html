@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de interés compuesto - Calcula el crecimiento de tu dinero con el poder del interés compuesto. Compara diferentes frecuencias de capitalización.">
+    <meta name="keywords" content="interés compuesto, calculadora interés, inversión, ahorro, capitalización">
+    <title>Calculadora de Interés Compuesto - Calcula tu Crecimiento | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-interes-compuesto.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/compound-interest-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-interes-compuesto.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/compound-interest-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/compound-interest-calculator.html" class="lang-link">EN</a><a href="calculadora-interes-compuesto.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora de Interés Compuesto</h1><p class="calculator-description">Descubre el poder del interés compuesto y cómo tu dinero puede crecer exponencialmente con el tiempo</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Datos de la Inversión</h3>
+                <div class="form-group"><label class="form-label">Capital Inicial ($)</label><input type="number" id="principal" class="form-input" value="1000" min="1"></div>
+                <div class="form-group"><label class="form-label">Tasa de Interés Anual (%)</label><input type="number" id="rate" class="form-input" value="5" step="0.1"></div>
+                <div class="form-group"><label class="form-label">Años</label><input type="number" id="time" class="form-input" value="10" min="1"></div>
+                <div class="form-group"><label class="form-label">Frecuencia de Capitalización</label><select id="compound" class="form-select"><option value="365">Diaria</option><option value="12" selected>Mensual</option><option value="4">Trimestral</option><option value="1">Anual</option></select></div>
+                <button onclick="calc()" class="btn-calculate">Calcular</button>
+            </div>
+            <div class="calculator-results"><h3>Resultados</h3>
+                <div class="result-item"><div class="result-label">Valor Final</div><div class="result-value" id="final" style="font-size:2.5rem;color:#10b981">$0</div></div>
+                <div class="result-item"><div class="result-label">Capital Inicial</div><div class="result-value" id="init">$0</div></div>
+                <div class="result-item"><div class="result-label">Interés Ganado</div><div class="result-value" id="interest">$0</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>¿Qué es el Interés Compuesto?</h2><p>El interés compuesto es el interés calculado sobre el capital inicial más todos los intereses acumulados. A diferencia del interés simple que solo se calcula sobre el capital original, el interés compuesto genera "intereses sobre intereses", creando un efecto de bola de nieve que acelera significativamente el crecimiento de tu dinero. Albert Einstein supuestamente lo llamó "la octava maravilla del mundo".</p>
+            <h2>Fórmula del Interés Compuesto</h2><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">A = P(1 + r/n)^(nt)<br><br>Donde:<br>A = Monto final<br>P = Principal (capital inicial)<br>r = Tasa de interés anual (decimal)<br>n = Número de veces que se capitaliza por año<br>t = Tiempo en años</p>
+            <h2>Frecuencia de Capitalización</h2><h3>Diaria (365)</h3><p>El interés se calcula y se añade al capital cada día. Genera el mayor crecimiento debido a la frecuente capitalización.</p>
+            <h3>Mensual (12)</h3><p>El interés se capitaliza cada mes. Es común en cuentas de ahorro y certificados de depósito.</p>
+            <h3>Trimestral (4)</h3><p>Capitalización cada tres meses. Típico en algunos bonos y cuentas de inversión.</p>
+            <h3>Anual (1)</h3><p>El interés se capitaliza una vez al año. La opción más simple pero con menor crecimiento comparado a capitalizaciones más frecuentes.</p>
+            <h2>Interés Simple vs Compuesto</h2><h3>Interés Simple</h3><p>Con interés simple, ganas el mismo monto de interés cada año basado solo en tu inversión original. $1,000 al 5% gana $50 cada año: $1,050, $1,100, $1,150...</p>
+            <h3>Interés Compuesto</h3><p>Con interés compuesto, ganas interés sobre tu inversión original más todos los intereses previamente ganados. $1,000 al 5% compuesto anualmente: $1,050, $1,102.50, $1,157.63...</p>
+            <h2>Maximizando el Interés Compuesto</h2><ul><li><strong>Empieza Temprano:</strong> El tiempo es el factor más poderoso. Empezar 10 años antes puede duplicar o triplicar tu resultado final</li><li><strong>Contribuye Regularmente:</strong> Añade dinero consistentemente para acelerar el crecimiento</li><li><strong>Busca Tasas Más Altas:</strong> Incluso 1-2% de diferencia puede significar decenas de miles de dólares a largo plazo</li><li><strong>Mayor Frecuencia:</strong> Capitalización diaria o mensual crece más que anual</li><li><strong>Reinvierte Dividendos:</strong> En inversiones, reinvierte las ganancias para maximizar el compuesto</li><li><strong>Sé Paciente:</strong> El crecimiento exponencial toma tiempo para acelerarse notablemente</li></ul>
+            <h2>Ejemplos Prácticos</h2><h3>Ejemplo 1: Ahorro para Jubilación</h3><p>Una persona de 25 años invierte $5,000 al año al 8% durante 40 años. Con interés compuesto, tendrá aproximadamente $1.3 millones al retirarse a los 65 años, habiendo contribuido solo $200,000.</p>
+            <h3>Ejemplo 2: Fondo de Emergencia</h3><p>$10,000 en una cuenta de ahorros de alto rendimiento al 4% capitalizado mensualmente crece a $14,918 en 10 años sin contribuciones adicionales.</p>
+            <h3>Ejemplo 3: Educación Universitaria</h3><p>Los padres que ahorran $200 mensuales desde el nacimiento de su hijo al 6% tendrán más de $75,000 para la universidad en 18 años.</p>
+            <h2>La Regla del 72</h2><p>Una forma rápida de estimar cuánto tiempo tomará duplicar tu dinero: divide 72 por tu tasa de interés anual. Por ejemplo, al 6% tu dinero se duplicará en aproximadamente 12 años (72 ÷ 6 = 12). Esta regla simple te ayuda a visualizar el poder del interés compuesto.</p>
+            <h2>Preguntas Frecuentes</h2><h3>¿Cuál es mejor: interés simple o compuesto?</h3><p>El interés compuesto siempre genera más ganancias que el interés simple a lo largo del tiempo. Para inversionistas, el compuesto es preferible. Para prestatarios, el simple es mejor.</p>
+            <h3>¿Con qué frecuencia debo capitalizar?</h3><p>Mayor frecuencia es mejor para el inversionista. La capitalización diaria genera ligeramente más que mensual, que genera más que anual.</p>
+            <h3>¿Afecta la inflación mis ganancias por interés compuesto?</h3><p>Sí. Para calcular el crecimiento "real", resta la tasa de inflación (típicamente 2-3%) de tu tasa de interés. Un 7% de retorno es aproximadamente 4-5% de crecimiento real después de inflación.</p>
+            <h3>¿Cuándo empiezo a ver resultados significativos?</h3><p>El interés compuesto es lento al principio pero se acelera con el tiempo. Típicamente, los efectos dramáticos se notan después de 10-15 años.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function calc(){const p=parseFloat(document.getElementById('principal').value)||0;const r=parseFloat(document.getElementById('rate').value)/100||0;const t=parseInt(document.getElementById('time').value)||0;const n=parseInt(document.getElementById('compound').value)||12;const a=p*Math.pow(1+r/n,n*t);const interest=a-p;document.getElementById('final').textContent='$'+a.toFixed(2);document.getElementById('init').textContent='$'+p.toFixed(2);document.getElementById('interest').textContent='$'+interest.toFixed(2);}document.querySelectorAll('.form-input,.form-select').forEach(e=>e.addEventListener('input',calc));window.addEventListener('load',calc);</script>
+</body>
+</html>

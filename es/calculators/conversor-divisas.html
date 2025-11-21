@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Conversor de divisas - Convierte entre las principales monedas mundiales. Tasas de cambio actualizadas para USD, EUR, GBP, JPY y más.">
+<title>Conversor de Divisas - Cambio de Moneda | CalcuPrime</title>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="canonical" href="https://calcuprime.com/es/calculators/conversor-divisas.html">
+<link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/currency-converter.html">
+<link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-divisas.html">
+<link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/currency-converter.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+<header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/currency-converter.html" class="lang-link">EN</a><a href="conversor-divisas.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+<main class="calculator-container">
+<div class="calculator-header"><h1 class="calculator-title">Conversor de Divisas</h1><p class="calculator-description">Convierte entre las principales monedas mundiales con tasas actualizadas</p></div>
+<div class="calculator-wrapper">
+<div class="calculator-inputs"><h3>Convertir Moneda</h3>
+<div class="form-group"><label class="form-label">Cantidad</label><input type="number" id="amount" class="form-input" value="100" min="0" step="0.01"></div>
+<div class="form-group"><label class="form-label">De</label><select id="from" class="form-select"><option value="USD" selected>USD - Dólar Estadounidense</option><option value="EUR">EUR - Euro</option><option value="GBP">GBP - Libra Esterlina</option><option value="JPY">JPY - Yen Japonés</option><option value="MXN">MXN - Peso Mexicano</option></select></div>
+<div class="form-group"><label class="form-label">A</label><select id="to" class="form-select"><option value="USD">USD - Dólar Estadounidense</option><option value="EUR" selected>EUR - Euro</option><option value="GBP">GBP - Libra Esterlina</option><option value="JPY">JPY - Yen Japonés</option><option value="MXN">MXN - Peso Mexicano</option></select></div>
+<button onclick="convCurr()" class="btn-calculate">Convertir</button>
+</div>
+<div class="calculator-results"><h3>Resultado</h3>
+<div class="result-item"><div class="result-value" id="result" style="font-size:2.5rem;color:#10b981">€0.00</div></div>
+<div class="result-item"><div class="result-label">Tasa de Cambio</div><div class="result-value" id="rate">1 USD = 0 EUR</div></div>
+</div>
+</div>
+<div class="content-section">
+<h2>Conversión de Divisas</h2><p>La conversión de moneda permite intercambiar valor entre diferentes sistemas monetarios nacionales. Las tasas de cambio fluctúan constantemente basándose en oferta y demanda, condiciones económicas, políticas gubernamentales y eventos geopolíticos. Entender cómo funcionan las conversiones de divisas es esencial para viajes internacionales, comercio global e inversiones.</p>
+<h2>Principales Monedas Mundiales</h2><h3>Dólar Estadounidense (USD)</h3><p>La moneda de reserva mundial más dominante, utilizada en aproximadamente el 60% de las reservas de divisas globales. El dólar es la moneda más comerciada en el mundo y se usa como referencia para fijar precios de materias primas como petróleo y oro.</p>
+<h3>Euro (EUR)</h3><p>La segunda moneda más comerciada, utilizada por 19 países de la Unión Europea. El euro es importante en el comercio internacional y representa aproximadamente el 20% de las reservas mundiales.</p>
+<h3>Libra Esterlina (GBP)</h3><p>Una de las monedas más antiguas aún en uso, la libra es la cuarta moneda más comerciada mundialmente. Reino Unido mantiene su propia moneda en lugar de adoptar el euro.</p>
+<h3>Yen Japonés (JPY)</h3><p>La tercera moneda más comerciada, el yen es importante en los mercados asiáticos y se utiliza ampliamente en el comercio internacional.</p>
+<h2>Factores que Afectan las Tasas de Cambio</h2><ul><li><strong>Tasas de Interés:</strong> Tasas más altas atraen inversión extranjera, aumentando la demanda de la moneda</li><li><strong>Inflación:</strong> Inflación más baja generalmente fortalece una moneda</li><li><strong>Estabilidad Política:</strong> Incertidumbre política puede debilitar una moneda</li><li><strong>Deuda Gubernamental:</strong> Alta deuda puede desalentar inversión extranjera</li><li><strong>Términos de Intercambio:</strong> Relación entre precios de exportación e importación</li><li><strong>Especulación:</strong> Si se espera que una moneda se fortalezca, se aumentará la demanda</li></ul>
+<h2>Tipos de Tasas de Cambio</h2><h3>Tasa Spot</h3><p>La tasa de cambio actual para entrega inmediata de moneda. Es la tasa que ves en conversores en línea y bancos.</p>
+<h3>Tasa Forward</h3><p>Una tasa acordada hoy para una transacción futura. Usada por empresas para protegerse contra fluctuaciones de moneda.</p>
+<h3>Tasa de Compra y Venta</h3><p>Los bancos y casas de cambio compran moneda a un precio (bid) y la venden a otro más alto (ask). La diferencia es su ganancia.</p>
+<h2>Consejos para Cambio de Moneda</h2><ul><li><strong>Evita Aeropuertos:</strong> Típicamente tienen las tasas más desfavorables</li><li><strong>Usa Cajeros Automáticos:</strong> Generalmente ofrecen mejores tasas que casas de cambio</li><li><strong>Tarjetas de Crédito:</strong> A menudo tienen mejores tasas, pero verifica comisiones por transacción extranjera</li><li><strong>Compara Tasas:</strong> Diferentes proveedores ofrecen tasas diferentes</li><li><strong>Evita Cambio Dinámico:</strong> Siempre paga en moneda local, no en tu moneda doméstica</li><li><strong>Planifica con Anticipación:</strong> Las tasas fluctúan, cambiar cuando las tasas son favorables</li></ul>
+<h2>Preguntas Frecuentes</h2><h3>¿Por qué fluctúan las tasas de cambio?</h3><p>Las tasas cambian constantemente debido a factores económicos, políticos y especulativos. La oferta y demanda en mercados globales determinan el valor relativo de las monedas.</p>
+<h3>¿Cuál es la mejor forma de cambiar moneda?</h3><p>Generalmente, usar cajeros automáticos en el país de destino o tarjetas de crédito sin comisión por transacción extranjera ofrece las mejores tasas.</p>
+<h3>¿Debo cambiar dinero antes de viajar?</h3><p>Cambia una pequeña cantidad para gastos inmediatos a tu llegada, pero obtén la mayor parte en el país de destino donde las tasas suelen ser mejores.</p>
+</div>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+<script src="../../js/main.js"></script>
+<script>const rates={'USD':1,'EUR':0.92,'GBP':0.79,'JPY':149.5,'MXN':17.2};function convCurr(){const amt=parseFloat(document.getElementById('amount').value)||0;const from=document.getElementById('from').value;const to=document.getElementById('to').value;const result=amt*(rates[to]/rates[from]);const rate=(rates[to]/rates[from]).toFixed(4);document.getElementById('result').textContent=result.toFixed(2)+' '+to;document.getElementById('rate').textContent='1 '+from+' = '+rate+' '+to;}document.querySelectorAll('.form-input,.form-select').forEach(e=>e.addEventListener('input',convCurr));window.addEventListener('load',convCurr);</script>
+</body>
+</html>

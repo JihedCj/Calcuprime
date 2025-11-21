@@ -25,6 +25,41 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: 16px;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -51,6 +86,14 @@
             </ul>
             
             <div class="header-actions">
+                <div class="language-switcher">
+                    <a href="index.html" class="lang-link active">
+                        <span>🇺🇸</span> EN
+                    </a>
+                    <a href="es/index.html" class="lang-link">
+                        <span>🇪🇸</span> ES
+                    </a>
+                </div>
                 <button class="search-btn" id="searchBtn" aria-label="Search">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>

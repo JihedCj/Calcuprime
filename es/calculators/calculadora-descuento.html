@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de descuento - Calcula precios con descuento y ahorros. Encuentra el precio final después de descuentos y cupones.">
+    <meta name="keywords" content="calculadora descuento, precio con descuento, ahorro, rebajas, ofertas">
+    <title>Calculadora de Descuento - Calcula Precios Rebajados | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-descuento.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/discount-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-descuento.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/discount-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/discount-calculator.html" class="lang-link">EN</a><a href="calculadora-descuento.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora de Descuento</h1><p class="calculator-description">Calcula precios con descuento, ahorros y precio final después de rebajas</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Detalles del Producto</h3>
+                <div class="form-group"><label class="form-label">Precio Original ($)</label><input type="number" id="originalPrice" class="form-input" value="100" min="0" step="0.01"></div>
+                <div class="form-group"><label class="form-label">Porcentaje de Descuento (%)</label><input type="number" id="discountPercent" class="form-input" value="25" min="0" max="100" step="0.01"></div>
+                <div class="form-group"><label class="form-label">Impuesto sobre Ventas (%) - Opcional</label><input type="number" id="salesTax" class="form-input" value="0" min="0" max="30" step="0.1"></div>
+                <button onclick="calcDisc()" class="btn-calculate">Calcular</button>
+            </div>
+            <div class="calculator-results"><h3>Resultados</h3>
+                <div class="result-item"><div class="result-label">Precio Final</div><div class="result-value" id="finalPrice" style="font-size:2.5rem;color:#10b981">$0.00</div></div>
+                <div class="result-item"><div class="result-label">Ahorras</div><div class="result-value" id="savings">$0.00</div></div>
+                <div class="result-item"><div class="result-label">Precio con Impuesto</div><div class="result-value" id="priceWithTax">$0.00</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Guía de Descuentos y Ahorros</h2><p>Los descuentos son reducciones temporales en el precio de productos o servicios. Entender cómo calcular descuentos te ayuda a determinar el verdadero valor de las ofertas y maximizar tus ahorros. Esta guía te ayudará a convertirte en un comprador más inteligente y aprovechar al máximo las ventas y promociones.</p>
+            <h2>Cómo Calcular Descuentos</h2><h3>Fórmula Básica</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Precio Final = Precio Original × (1 - Porcentaje de Descuento / 100)<br>Ahorro = Precio Original × (Porcentaje de Descuento / 100)</p>
+            <h3>Ejemplo</h3><p>Un artículo de $100 con 25% de descuento:<br>Precio Final = $100 × (1 - 25/100) = $100 × 0.75 = $75<br>Ahorro = $100 × 0.25 = $25</p>
+            <h2>Tipos Comunes de Descuentos</h2><h3>Descuentos Porcentuales</h3><p>El tipo más común. "25% de descuento" significa que pagarás el 75% del precio original. Son fáciles de calcular y comparar entre tiendas.</p>
+            <h3>Descuentos en Monto Fijo</h3><p>"$20 de descuento" resta una cantidad específica del precio. Estos son más valiosos en artículos de precio más bajo.</p>
+            <h3>Compra Uno Lleva Otro (BOGO)</h3><p>"Compra uno, lleva el segundo a mitad de precio" equivale a aproximadamente 25% de descuento en ambos artículos. BOGO gratis es 50% de descuento en ambos.</p>
+            <h3>Rebajas por Liquidación</h3><p>Descuentos pronunciados (50-75%+) en mercancía de temporada pasada, artículos discontinuados o productos ligeramente dañados.</p>
+            <h3>Descuentos con Cupones</h3><p>Pueden combinarse con ventas para ahorros máximos. Lee la letra pequeña - algunos cupones excluyen artículos en oferta.</p>
+            <h2>Estrategias para Maximizar Ahorros</h2><ul><li><strong>Acumula Descuentos:</strong> Combina ventas, cupones y cashback cuando sea posible</li><li><strong>Compra Fuera de Temporada:</strong> Compra ropa de invierno en verano y viceversa para mejores descuentos</li><li><strong>Usa Alertas de Precio:</strong> Apps como Honey o CamelCamelCamel rastrean historiales de precios</li><li><strong>Inscríbete en Programas de Lealtad:</strong> Recibe descuentos exclusivos y recompensas</li><li><strong>Sigue en Redes Sociales:</strong> Muchas marcas publican códigos de descuento exclusivos</li><li><strong>Compara Antes de Comprar:</strong> Asegúrate que el "descuento" es realmente un buen precio</li><li><strong>Evita Compras Impulsivas:</strong> Un descuento no es ahorro si no necesitabas el artículo</li></ul>
+            <h2>Psicología de los Descuentos</h2><h3>Precios Ancla</h3><p>Los minoristas muestran el precio original para hacer que el descuento parezca mejor. Investiga si el "precio original" era el precio de venta real.</p>
+            <h3>Urgencia Artificial</h3><p>"¡Solo por hoy!" crea presión para comprar. Los buenos descuentos a menudo vuelven. Toma tu tiempo para decidir si realmente lo necesitas.</p>
+            <h3>El Efecto de los Porcentajes</h3><p>30% de descuento suena mejor que "ahorra $30 en $100", aunque es lo mismo. Los minoristas usan lo que suene más atractivo.</p>
+            <h2>Cuándo los Descuentos No Son Buenos</h2><ul><li>El precio "original" estaba inflado y nunca se vendió a ese precio</li><li>El descuento es sobre un artículo de baja calidad que no durar</li><li>Te hace gastar en cosas que no necesitas solo por el "buen precio"</li><li>El "descuento" es similar al precio de competidores</li><li>Requiere comprar múltiples artículos que no necesitas</li></ul>
+            <h2>Mejores Épocas para Comprar</h2><h3>Black Friday/Cyber Monday</h3><p>Finales de noviembre. Los mayores descuentos del año en electrónicos, juguetes y muchos otros artículos.</p>
+            <h3>Día del Presidente</h3><p>Febrero. Grandes descuentos en colchones, electrodomésticos y muebles.</p>
+            <h3>Día de los Caídos</h3><p>Mayo. Buenos descuentos en ropa, muebles de patio y electrodomésticos.</p>
+            <h3>Regreso a Clases</h3><p>Agosto-Septiembre. Descuentos en electrónicos, ropa y útiles escolares.</p>
+            <h3>Fin de Temporada</h3><p>Enero (invierno), Julio (verano). Liquidaciones de ropa de temporada.</p>
+            <h2>Preguntas Frecuentes</h2><h3>¿Debo calcular impuestos sobre el precio original o el precio con descuento?</h3><p>Los impuestos se calculan sobre el precio final después del descuento. Algunos estados eximen ciertos artículos de impuestos.</p>
+            <h3>¿Puedo combinar múltiples cupones?</h3><p>Depende de la política de la tienda. Muchas permiten un cupón del fabricante más uno de la tienda, pero no múltiples del mismo tipo.</p>
+            <h3>¿Qué es mejor: 25% de descuento o $25 de descuento?</h3><p>En un artículo de $100, son iguales. En artículos más caros, el porcentaje ahorra más. En artículos más baratos, el monto fijo es mejor.</p>
+            <h3>¿Las tiendas realmente venden al "precio original" antes de rebajar?</h3><p>No siempre. Algunos "precios originales" son inflados específicamente para hacer que los descuentos parezcan mejores. Investiga los precios de venta típicos.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function calcDisc(){const orig=parseFloat(document.getElementById('originalPrice').value)||0;const disc=parseFloat(document.getElementById('discountPercent').value)||0;const tax=parseFloat(document.getElementById('salesTax').value)||0;const final=orig*(1-disc/100);const savings=orig-final;const withTax=final*(1+tax/100);document.getElementById('finalPrice').textContent='$'+final.toFixed(2);document.getElementById('savings').textContent='$'+savings.toFixed(2);document.getElementById('priceWithTax').textContent='$'+withTax.toFixed(2);}document.querySelectorAll('.form-input').forEach(e=>e.addEventListener('input',calcDisc));window.addEventListener('load',calcDisc);</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de embarazo - Calcula tu fecha probable de parto, semanas de embarazo y trimestre actual. Herramienta precisa para futuras mamás.">
+    <meta name="keywords" content="calculadora embarazo, fecha parto, semanas embarazo, trimestre embarazo, gestación">
+    <title>Calculadora de Embarazo - Fecha Probable de Parto | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-embarazo.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/pregnancy-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-embarazo.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/pregnancy-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/pregnancy-calculator.html" class="lang-link">EN</a><a href="calculadora-embarazo.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora de Embarazo</h1><p class="calculator-description">Calcula tu fecha probable de parto, semanas de embarazo y trimestre actual</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Información del Embarazo</h3>
+                <div class="form-group"><label class="form-label">Primer Día de tu Último Período Menstrual</label><input type="date" id="lmpDate" class="form-input"></div>
+                <button onclick="calcPreg()" class="btn-calculate">Calcular</button>
+            </div>
+            <div class="calculator-results"><h3>Resultados</h3>
+                <div class="result-item"><div class="result-label">Fecha Probable de Parto</div><div class="result-value" id="dueDate" style="font-size:2rem;color:#10b981">-</div></div>
+                <div class="result-item"><div class="result-label">Semanas de Embarazo</div><div class="result-value" id="weeks">-</div></div>
+                <div class="result-item"><div class="result-label">Trimestre</div><div class="result-value" id="trimester">-</div></div>
+                <div class="result-item"><div class="result-label">Días Restantes</div><div class="result-value" id="daysLeft">-</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Cómo Funciona el Cálculo de Embarazo</h2><p>El embarazo dura aproximadamente 40 semanas (280 días) desde el primer día de tu último período menstrual (FUM). Esta calculadora utiliza la regla de Naegele, el método estándar utilizado por médicos para estimar la fecha probable de parto. Es importante recordar que solo el 5% de los bebés nacen exactamente en su fecha probable de parto - cualquier día entre 37 y 42 semanas se considera a término completo.</p>
+            <h2>Método de Cálculo</h2><h3>Regla de Naegele</h3><p>La fecha probable de parto se calcula agregando 280 días (40 semanas) a tu FUM. La fórmula tradicional es: FUM + 7 días - 3 meses + 1 año. Este método asume un ciclo menstrual regular de 28 días con ovulación en el día 14.</p>
+            <h2>Los Tres Trimestres</h2><h3>Primer Trimestre (Semanas 1-13)</h3><p>El primer trimestre es un período crítico de desarrollo. El embrión se implanta en el útero, se forman todos los órganos principales y el corazón comienza a latir. Muchas mujeres experimentan náuseas matutinas, fatiga extrema y cambios emocionales. Es crucial tomar ácido fólico y evitar alcohol, tabaco y ciertos medicamentos.</p>
+            <h3>Segundo Trimestre (Semanas 14-27)</h3><p>Considerado el trimestre más cómodo. Las náuseas típicamente disminuyen y los niveles de energía aumentan. El bebé comienza a moverse (generalmente alrededor de las 18-20 semanas para el primer embarazo). El vientre se hace notablemente más grande y muchas mujeres se sienten mejor que en el primer trimestre.</p>
+            <h3>Tercer Trimestre (Semanas 28-40)</h3><p>El bebé crece rápidamente, ganando la mayor parte de su peso. La madre puede experimentar dificultad para respirar, dolor de espalda, hinchazón y dificultad para dormir. Las contracciones de Braxton Hicks (contracciones de práctica) son comunes. Las visitas prenatales se vuelven más frecuentes para monitorear el bienestar de mamá y bebé.</p>
+            <h2>Hitos del Desarrollo Fetal</h2><ul><li><strong>Semana 4:</strong> El embrión se implanta en el útero. Puedes confirmar el embarazo con una prueba</li><li><strong>Semana 8:</strong> Todos los órganos principales están formándose. El corazón late y los brazos/piernas se están desarrollando</li><li><strong>Semana 12:</strong> Los órganos sexuales se están desarrollando. El bebé puede mover brazos y piernas</li><li><strong>Semana 20:</strong> Punto medio del embarazo. El bebé puede escuchar sonidos. Ultrasonido de anatomía</li><li><strong>Semana 28:</strong> El bebé puede abrir y cerrar los ojos. Los pulmones continúan madurando</li><li><strong>Semana 36:</strong> El bebé está casi a término. Probablemente está cabeza abajo preparándose para el nacimiento</li><li><strong>Semana 40:</strong> Fecha probable de parto. El bebé está completamente desarrollado y listo para nacer</li></ul>
+            <h2>Cuidado Prenatal</h2><h3>Visitas Médicas Regulares</h3><p>Las visitas prenatales típicas son: mensualmente hasta las 28 semanas, cada 2 semanas hasta las 36 semanas, y semanalmente hasta el parto. Estas visitas monitorean el crecimiento del bebé, la presión arterial de la madre, y detectan cualquier complicación potencial.</p>
+            <h3>Nutrición</h3><p>Necesitas aproximadamente 300 calorías extra al día. Enfócate en proteínas magras, frutas, verduras, granos enteros y lácteos. Evita pescados altos en mercurio, carne/huevos crudos, quesos blandos no pasteurizados y demasiada cafeína.</p>
+            <h3>Ejercicio</h3><p>El ejercicio moderado es beneficioso para la mayoría de los embarazos. Caminar, nadar y yoga prenatal son excelentes opciones. Evita deportes de contacto, actividades con riesgo de caídas y ejercicios acostada boca arriba después del primer trimestre.</p>
+            <h3>Suplementos</h3><p>Ácido fólico (400-800 mcg diario) es crucial, especialmente en el primer trimestre, para prevenir defectos del tubo neural. La mayoría de las mujeres también necesitan hierro, calcio y vitamina D adicionales.</p>
+            <h2>Señales de Advertencia</h2><p>Contacta a tu médico inmediatamente si experimentas:</p><ul><li>Sangrado vaginal o pérdida de líquido</li><li>Dolor abdominal severo o calambres</li><li>Fiebre alta (más de 38.3°C)</li><li>Cambios visuales o dolores de cabeza severos</li><li>Disminución notable en el movimiento del bebé</li><li>Contracciones regulares antes de las 37 semanas</li><li>Hinchazón severa y repentina de manos/cara</li></ul>
+            <h2>Preparándose para el Parto</h2><h3>Clases de Parto</h3><p>Las clases de preparación para el parto generalmente se toman en el tercer trimestre. Enseñan técnicas de respiración, posiciones de trabajo de parto, manejo del dolor y qué esperar durante el parto.</p>
+            <h3>Plan de Parto</h3><p>Considera tus preferencias para el trabajo de parto y parto: opciones de manejo del dolor, quién estará presente, posiciones para el parto, y cuidado inmediato del bebé. Comparte tu plan con tu equipo médico pero mantén flexibilidad.</p>
+            <h3>Preparando el Hogar</h3><p>Antes de que llegue el bebé: instala el asiento de auto, prepara el área de cambio de pañales, lava la ropa del bebé, empaca tu bolsa para el hospital y congela comidas para después del parto.</p>
+            <h2>Preguntas Frecuentes</h2><h3>¿Qué tan precisa es la fecha probable de parto?</h3><p>Solo alrededor del 5% de los bebés nacen exactamente en su fecha probable de parto. Es normal que el parto ocurra en cualquier momento entre las 37 y 42 semanas. Tu fecha probable de parto es una estimación, no una garantía.</p>
+            <h3>¿Cuándo puedo saber el sexo de mi bebé?</h3><p>Generalmente en el ultrasonido de anatomía alrededor de las 18-20 semanas, aunque algunos lugares ofrecen pruebas de sangre que pueden determinar el sexo tan temprano como a las 10 semanas.</p>
+            <h3>¿Cuándo sentiré que el bebé se mueve?</h3><p>Las madres primerizas típicamente sienten los primeros movimientos entre las 18-20 semanas. Las madres que han estado embarazadas antes pueden sentir movimiento tan temprano como a las 16 semanas.</p>
+            <h3>¿Puedo cambiar mi fecha probable de parto?</h3><p>Sí. El ultrasonido del primer trimestre (especialmente antes de las 13 semanas) es el método más preciso para datar un embarazo y puede cambiar tu fecha probable de parto si difiere significativamente del cálculo basado en tu FUM.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>const today=new Date();document.getElementById('lmpDate').value=new Date(today.getFullYear(),today.getMonth()-2,today.getDate()).toISOString().split('T')[0];function calcPreg(){const lmp=new Date(document.getElementById('lmpDate').value);if(!lmp||isNaN(lmp)){alert('Ingresa una fecha válida');return;}const dd=new Date(lmp);dd.setDate(dd.getDate()+280);const t=new Date();const diff=Math.floor((t-lmp)/(1000*60*60*24));const weeks=Math.floor(diff/7);const days=diff%7;let tri='Primer Trimestre';if(weeks>=14&&weeks<28)tri='Segundo Trimestre';else if(weeks>=28)tri='Tercer Trimestre';const left=280-diff;document.getElementById('dueDate').textContent=dd.toLocaleDateString('es-ES',{year:'numeric',month:'long',day:'numeric'});document.getElementById('weeks').textContent=weeks+' semanas, '+days+' días';document.getElementById('trimester').textContent=tri;document.getElementById('daysLeft').textContent=left>0?left+' días':'¡Ya pasó la fecha!';}window.addEventListener('load',calcPreg);</script>
+</body>
+</html>

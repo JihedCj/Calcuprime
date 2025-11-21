@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Calculadora de grasa corporal - Calcula tu porcentaje de grasa corporal usando múltiples métodos. Descubre tu composición corporal.">
+<title>Calculadora de Grasa Corporal - Porcentaje de Grasa | CalcuPrime</title>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-grasa-corporal.html">
+<link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/body-fat-calculator.html">
+<link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-grasa-corporal.html">
+<link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/body-fat-calculator.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+<header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/body-fat-calculator.html" class="lang-link">EN</a><a href="calculadora-grasa-corporal.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+<main class="calculator-container">
+<div class="calculator-header"><h1 class="calculator-title">Calculadora de Grasa Corporal</h1><p class="calculator-description">Calcula tu porcentaje de grasa corporal y descubre tu composición corporal</p></div>
+<div class="calculator-wrapper">
+<div class="calculator-inputs"><h3>Tu Información</h3>
+<div class="form-group"><label class="form-label">Sexo</label><select id="gender" class="form-select"><option value="male">Masculino</option><option value="female">Femenino</option></select></div>
+<div class="form-group"><label class="form-label">Edad (años)</label><input type="number" id="age" class="form-input" value="30" min="18" max="100"></div>
+<div class="form-group"><label class="form-label">Peso (kg)</label><input type="number" id="weight" class="form-input" value="75" min="30" max="300" step="0.1"></div>
+<div class="form-group"><label class="form-label">Altura (cm)</label><input type="number" id="height" class="form-input" value="175" min="100" max="250"></div>
+<div class="form-group"><label class="form-label">Circunferencia de Cuello (cm)</label><input type="number" id="neck" class="form-input" value="38" min="20" max="60" step="0.1"></div>
+<div class="form-group"><label class="form-label">Circunferencia de Cintura (cm)</label><input type="number" id="waist" class="form-input" value="85" min="40" max="150" step="0.1"></div>
+<div class="form-group" id="hipGroup"><label class="form-label">Circunferencia de Cadera (cm)</label><input type="number" id="hip" class="form-input" value="95" min="50" max="150" step="0.1"></div>
+<button onclick="calcBF()" class="btn-calculate">Calcular Grasa Corporal</button>
+</div>
+<div class="calculator-results"><h3>Resultados</h3>
+<div class="result-item"><div class="result-label">Porcentaje de Grasa Corporal</div><div class="result-value" id="bfp" style="font-size:2.5rem;color:#10b981">0%</div></div>
+<div class="result-item"><div class="result-label">Categoría</div><div class="result-value" id="category">Normal</div></div>
+<div class="result-item"><div class="result-label">Masa Grasa</div><div class="result-value" id="fatMass">0 kg</div></div>
+<div class="result-item"><div class="result-label">Masa Magra</div><div class="result-value" id="leanMass">0 kg</div></div>
+</div>
+</div>
+<div class="content-section">
+<h2>¿Qué es el Porcentaje de Grasa Corporal?</h2><p>El porcentaje de grasa corporal es la proporción de tu peso que es grasa versus masa magra (músculos, huesos, órganos, agua). A diferencia del IMC que solo considera peso y altura, el porcentaje de grasa corporal proporciona una imagen más precisa de tu salud y composición corporal. Dos personas con el mismo peso e IMC pueden tener composiciones corporales muy diferentes.</p>
+<h2>Rangos Saludables</h2><h3>Hombres</h3><ul><li><strong>Esencial:</strong> 2-5% (solo para atletas, peligroso para la mayoría)</li><li><strong>Atletas:</strong> 6-13%</li><li><strong>Fitness:</strong> 14-17%</li><li><strong>Promedio:</strong> 18-24%</li><li><strong>Obeso:</strong> 25%+</li></ul>
+<h3>Mujeres</h3><ul><li><strong>Esencial:</strong> 10-13% (mínimo para salud reproductiva)</li><li><strong>Atletas:</strong> 14-20%</li><li><strong>Fitness:</strong> 21-24%</li><li><strong>Promedio:</strong> 25-31%</li><li><strong>Obeso:</strong> 32%+</li></ul>
+<h2>Métodos de Medición</h2><h3>Método de la Marina de EE.UU.</h3><p>Usa circunferencias de cuello, cintura y cadera. Es el método utilizado por esta calculadora. Es razonablemente preciso y solo requiere una cinta métrica.</p>
+<h3>Calibradores de Pliegues Cutáneos</h3><p>Miden el grosor de la grasa subcutánea en ubicaciones específicas. Requiere entrenamiento pero es bastante preciso cuando se hace correctamente.</p>
+<h3>Análisis de Impedancia Bioeléctrica (BIA)</h3><p>Envía una corriente eléctrica pequeña a través del cuerpo. Conveniente pero puede ser afectado por hidratación.</p>
+<h3>Escaneo DEXA</h3><p>El estándar de oro. Usa rayos X de baja dosis para medir grasa, músculo y hueso. Muy preciso pero costoso.</p>
+<h2>Por Qué Importa la Grasa Corporal</h2><ul><li><strong>Salud Cardiovascular:</strong> El exceso de grasa corporal aumenta el riesgo de enfermedades cardíacas</li><li><strong>Riesgo de Diabetes:</strong> Mayor grasa corporal, especialmente abdominal, aumenta el riesgo de diabetes tipo 2</li><li><strong>Función Hormonal:</strong> Tanto muy poca como mucha grasa afectan las hormonas</li><li><strong>Rendimiento Atlético:</strong> Menor grasa corporal generalmente mejora el rendimiento en deportes</li><li><strong>Calidad de Vida:</strong> Grasa corporal saludable mejora la movilidad y energía</li></ul>
+<h2>Reducir la Grasa Corporal</h2><h3>Déficit Calórico</h3><p>Come menos calorías de las que quemas. Un déficit de 500 calorías diarias resulta en aproximadamente 0.5 kg de pérdida por semana.</p>
+<h3>Entrenamiento de Fuerza</h3><p>Construye y mantiene músculo mientras pierdes grasa. El músculo es metabólicamente activo y quema calorías en reposo.</p>
+<h3>Proteína Adecuada</h3><p>Consume 1.6-2.2g de proteína por kg de peso corporal para preservar músculo durante la pérdida de grasa.</p>
+<h3>Entrenamiento Cardiovascular</h3><p>El cardio quema calorías y mejora la salud cardiovascular. Combina entrenamiento de intensidad moderada y alta.</p>
+<h2>Preguntas Frecuentes</h2><h3>¿Es el porcentaje de grasa corporal mejor que el IMC?</h3><p>Sí, proporciona una imagen más precisa de la salud. El IMC no distingue entre músculo y grasa, por lo que atletas pueden clasificarse como "sobrepeso".</p>
+<h3>¿Puedo tener baja grasa corporal y ser poco saludable?</h3><p>Sí. Muy poca grasa corporal (menos del 10% para mujeres, 5% para hombres) puede causar problemas hormonales, inmunidad reducida y otros problemas de salud.</p>
+<h3>¿Con qué frecuencia debo medir mi grasa corporal?</h3><p>Cada 4-6 semanas es suficiente. Los cambios en la composición corporal toman tiempo y las fluctuaciones diarias son normales.</p>
+</div>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+<script src="../../js/main.js"></script>
+<script>document.getElementById('gender').addEventListener('change',function(){document.getElementById('hipGroup').style.display=this.value==='female'?'block':'none';});function calcBF(){const g=document.getElementById('gender').value;const age=parseInt(document.getElementById('age').value);const weight=parseFloat(document.getElementById('weight').value);const height=parseFloat(document.getElementById('height').value);const neck=parseFloat(document.getElementById('neck').value);const waist=parseFloat(document.getElementById('waist').value);const hip=g==='female'?parseFloat(document.getElementById('hip').value):0;let bfp;if(g==='male'){bfp=495/(1.0324-0.19077*Math.log10(waist-neck)+0.15456*Math.log10(height))-450;}else{bfp=495/(1.29579-0.35004*Math.log10(waist+hip-neck)+0.22100*Math.log10(height))-450;}let cat='Normal';let color='#10b981';if(g==='male'){if(bfp<6)cat='Esencial';else if(bfp<14){cat='Atleta';color='#3b82f6';}else if(bfp<18){cat='Fitness';color='#10b981';}else if(bfp<25)cat='Promedio';else{cat='Obeso';color='#ef4444';}}else{if(bfp<14)cat='Esencial';else if(bfp<21){cat='Atleta';color='#3b82f6';}else if(bfp<25){cat='Fitness';color='#10b981';}else if(bfp<32)cat='Promedio';else{cat='Obeso';color='#ef4444';}}const fatMass=weight*bfp/100;const leanMass=weight-fatMass;document.getElementById('bfp').textContent=bfp.toFixed(1)+'%';document.getElementById('bfp').style.color=color;document.getElementById('category').textContent=cat;document.getElementById('fatMass').textContent=fatMass.toFixed(1)+' kg';document.getElementById('leanMass').textContent=leanMass.toFixed(1)+' kg';}document.querySelectorAll('.form-input,.form-select').forEach(e=>e.addEventListener('input',calcBF));window.addEventListener('load',calcBF);</script>
+</body>
+</html>

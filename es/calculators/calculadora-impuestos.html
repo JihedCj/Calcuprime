@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Calculadora de impuestos - Calcula impuestos sobre ventas, IVA y precio total. Calcula precio antes de impuestos y monto de impuesto.">
+<meta name="keywords" content="calculadora impuestos, IVA, impuesto ventas, calcular impuesto">
+<title>Calculadora de Impuestos - IVA y Precio Total | CalcuPrime</title>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-impuestos.html">
+<link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/tax-calculator.html">
+<link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-impuestos.html">
+<link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/tax-calculator.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+<header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/tax-calculator.html" class="lang-link">EN</a><a href="calculadora-impuestos.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+<main class="calculator-container">
+<div class="calculator-header"><h1 class="calculator-title">Calculadora de Impuestos</h1><p class="calculator-description">Calcula impuestos sobre ventas, IVA y precio total con impuestos incluidos</p></div>
+<div class="calculator-wrapper">
+<div class="calculator-inputs"><h3>Cálculo de Impuestos</h3>
+<div class="form-group"><label class="form-label">Precio (sin impuesto) ($)</label><input type="number" id="price" class="form-input" value="100" min="0" step="0.01"></div>
+<div class="form-group"><label class="form-label">Tasa de Impuesto (%)</label><input type="number" id="taxRate" class="form-input" value="8" min="0" max="30" step="0.1"></div>
+<button onclick="calcTax()" class="btn-calculate">Calcular</button>
+</div>
+<div class="calculator-results"><h3>Resultados</h3>
+<div class="result-item"><div class="result-label">Precio Total (con impuesto)</div><div class="result-value" id="total" style="font-size:2.5rem;color:#10b981">$0.00</div></div>
+<div class="result-item"><div class="result-label">Monto del Impuesto</div><div class="result-value" id="taxAmount">$0.00</div></div>
+<div class="result-item"><div class="result-label">Precio sin Impuesto</div><div class="result-value" id="preTax">$0.00</div></div>
+</div>
+</div>
+<div class="content-section">
+<h2>Impuestos sobre Ventas y IVA</h2><p>Los impuestos sobre ventas y el IVA (Impuesto al Valor Agregado) son impuestos sobre el consumo que se añaden al precio de bienes y servicios. Mientras que el impuesto sobre ventas se aplica solo en el punto de venta final, el IVA se cobra en cada etapa de producción y distribución. Entender cómo calcular estos impuestos es esencial para compras, presupuestos empresariales y planificación financiera.</p>
+<h2>Tipos de Impuestos sobre Consumo</h2><h3>Impuesto sobre Ventas (Sales Tax)</h3><p>Común en Estados Unidos. Se añade al precio de venta al momento de la compra. Las tasas varían por estado y ciudad, típicamente entre 4-10%. Algunos artículos como alimentos básicos pueden estar exentos.</p>
+<h3>IVA (Impuesto al Valor Agregado)</h3><p>Usado en más de 160 países, incluidos todos los de la Unión Europea y la mayoría de América Latina. El IVA generalmente ya está incluido en el precio mostrado. Las tasas varían ampliamente: Europa 15-27%, México 16%, Canadá 5-15%.</p>
+<h3>Impuesto sobre Servicios</h3><p>Algunos lugares cobran impuestos especiales sobre servicios como hotelería, restaurantes o telecomunicaciones. Estas tasas pueden ser diferentes al impuesto sobre ventas general.</p>
+<h2>Cálculo de Impuestos</h2><h3>Añadir Impuesto</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Precio Total = Precio × (1 + Tasa de Impuesto / 100)<br>Monto de Impuesto = Precio × (Tasa de Impuesto / 100)</p>
+<h3>Quitar Impuesto</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Precio sin Impuesto = Precio Total / (1 + Tasa de Impuesto / 100)<br>Monto de Impuesto = Precio Total - Precio sin Impuesto</p>
+<h2>Tasas de Impuesto por País</h2><h3>Estados Unidos</h3><p>No hay impuesto federal sobre ventas. Las tasas estatales varían de 0% (Alaska, Delaware, Montana, New Hampshire, Oregon) hasta 7.25% (California). Las tasas locales pueden agregar 2-5% adicionales.</p>
+<h3>México</h3><p>IVA estándar del 16% en la mayoría de bienes y servicios. Tasa reducida del 0% en alimentos básicos y medicinas. Zona fronteriza tiene tasa del 8%.</p>
+<h3>España</h3><p>IVA estándar del 21%. Tasa reducida del 10% para alimentos, transporte y hotelería. Tasa súper reducida del 4% para productos básicos.</p>
+<h3>Canadá</h3><p>GST (Impuesto sobre Bienes y Servicios) federal del 5%, más impuestos provinciales que varían del 0% al 10%. Algunos artículos están exentos.</p>
+<h3>Reino Unido</h3><p>IVA del 20% para la mayoría de bienes. Tasa reducida del 5% para artículos como energía doméstica. Muchos alimentos y libros están exentos (0%).</p>
+<h2>Artículos Exentos de Impuestos</h2><h3>Comúnmente Exentos</h3><ul><li>Alimentos básicos no preparados (varía por ubicación)</li><li>Medicamentos recetados</li><li>Servicios médicos</li><li>Servicios educativos</li><li>Muchos servicios financieros</li></ul>
+<h3>Sujetos a Impuesto Especial</h3><ul><li>Alcohol y tabaco (impuestos adicionales)</li><li>Gasolina (impuestos especiales sobre combustible)</li><li>Servicios de alojamiento (impuestos hoteleros)</li><li>Alquiler de autos</li><li>Telecomunicaciones</li></ul>
+<h2>Impuestos para Empresas</h2><h3>Recaudación de Impuestos</h3><p>Los negocios actúan como recolectores de impuestos, cobrando impuesto sobre ventas/IVA de los clientes y remitiéndolo al gobierno. Deben registrarse, rastrear transacciones y presentar declaraciones periódicamente.</p>
+<h3>Créditos de IVA para Empresas</h3><p>En sistemas de IVA, las empresas pueden reclamar créditos por el IVA pagado en compras comerciales. Esto evita la doble tributación y asegura que el impuesto solo se pague sobre el valor agregado.</p>
+<h3>Nexo de Impuesto sobre Ventas</h3><p>En EE.UU., las empresas deben recaudar impuesto sobre ventas en estados donde tienen "nexo" - presencia física o económica significativa. Las reglas de nexo económico se han expandido con el comercio electrónico.</p>
+<h2>Consejos para Consumidores</h2><ul><li><strong>Presupuesta con Impuestos Incluidos:</strong> En países con impuesto sobre ventas (como EE.UU.), recuerda que el precio de etiqueta no es el precio final</li><li><strong>Compara Precios Totales:</strong> Al comparar entre países o tiendas, usa el precio total con impuestos</li><li><strong>Aprovecha Días sin Impuestos:</strong> Algunos estados de EE.UU. tienen días de "tax holiday" para compras escolares o de emergencia</li><li><strong>Compras Internacionales:</strong> Los viajeros a menudo pueden reclamar reembolsos de IVA en compras llevadas fuera del país</li><li><strong>Compras en Línea:</strong> Muchas compras en línea ahora requieren impuesto sobre ventas incluso si el vendedor no tiene presencia física en tu estado</li></ul>
+<h2>Reembolsos de IVA para Turistas</h2><p>Muchos países permiten a los visitantes reclamar reembolsos de IVA en compras llevadas fuera del país. Típicamente, necesitas comprar un mínimo, obtener formularios de devolución de impuestos en tiendas participantes y presentar recibos en el aeropuerto al salir. El proceso puede tomar tiempo y puede haber comisiones, pero vale la pena para compras grandes.</p>
+<h2>Preguntas Frecuentes</h2><h3>¿Por qué los precios en EE.UU. no incluyen impuestos?</h3><p>Por tradición y porque las tasas de impuesto varían ampliamente por estado y localidad. Los precios nacionales en publicidad serían confusos si incluyeran impuestos.</p>
+<h3>¿Qué es mejor: IVA o impuesto sobre ventas?</h3><p>Cada uno tiene ventajas. El IVA es más difícil de evadir y recauda ingresos de manera más eficiente. El impuesto sobre ventas es más simple y transparente para los consumidores.</p>
+<h3>¿Tengo que pagar impuestos sobre compras en línea?</h3><p>Generalmente sí. Después de decisiones judiciales recientes en EE.UU., la mayoría de los vendedores en línea ahora recaudan impuesto sobre ventas. Incluso si no lo hacen, técnicamente debes pagarlo como "impuesto sobre uso".</p>
+<h3>¿Puedo deducir impuesto sobre ventas en mis impuestos federales?</h3><p>En EE.UU., puedes deducir impuestos estatales y locales sobre ventas o impuestos sobre la renta (pero no ambos) si detallas las deducciones. La deducción está limitada a $10,000 total para impuestos estatales y locales.</p>
+</div>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+<script src="../../js/main.js"></script>
+<script>function calcTax(){const price=parseFloat(document.getElementById('price').value)||0;const rate=parseFloat(document.getElementById('taxRate').value)||0;const taxAmt=price*(rate/100);const total=price+taxAmt;document.getElementById('total').textContent='$'+total.toFixed(2);document.getElementById('taxAmount').textContent='$'+taxAmt.toFixed(2);document.getElementById('preTax').textContent='$'+price.toFixed(2);}document.querySelectorAll('.form-input').forEach(e=>e.addEventListener('input',calcTax));window.addEventListener('load',calcTax);</script>
+</body>
+</html>

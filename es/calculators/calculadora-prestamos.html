@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de préstamos gratuita - Calcula pagos mensuales, intereses totales y tabla de amortización. Compara opciones de préstamos y encuentra las mejores tasas.">
+    <meta name="keywords" content="calculadora préstamos, préstamo personal, pago mensual, calculadora interés, tabla amortización">
+
+    <title>Calculadora de Préstamos - Calcula Pagos Mensuales e Intereses | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-prestamos.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/loan-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-prestamos.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/loan-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/loan-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-prestamos.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Préstamos</h1>
+            <p class="calculator-description">Calcula pagos mensuales, intereses totales y visualiza la tabla de amortización detallada</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Detalles del Préstamo</h3>
+
+                <div class="form-group">
+                    <label for="loanAmount" class="form-label">Monto del Préstamo ($)</label>
+                    <input type="number" id="loanAmount" class="form-input" value="10000" min="100" max="10000000" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="interestRate" class="form-label">Tasa de Interés Anual (%)</label>
+                    <input type="number" id="interestRate" class="form-input" value="5.5" min="0" max="30" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="loanTerm" class="form-label">Plazo del Préstamo (años)</label>
+                    <input type="number" id="loanTerm" class="form-input" value="5" min="1" max="30">
+                </div>
+
+                <button onclick="calculateLoan()" class="btn-calculate">Calcular Pago</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Pago Mensual</div>
+                    <div class="result-value" id="monthlyPayment" style="font-size: 2.5rem; color: #10b981;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Intereses Totales</div>
+                    <div class="result-value" id="totalInterest" style="font-size: 1.5rem;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Monto Total</div>
+                    <div class="result-value" id="totalAmount" style="font-size: 1.5rem;">$0.00</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Desglose del Pago</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Capital:</span>
+                        <span id="principalPercent" style="font-weight: 600;">0%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Interés:</span>
+                        <span id="interestPercent" style="font-weight: 600;">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es un Préstamo?</h2>
+            <p>Un préstamo es una cantidad de dinero que un prestamista proporciona a un prestatario con el acuerdo de que será devuelto con intereses durante un período específico. Los préstamos pueden ser para diversos propósitos como compras personales, vehículos, educación o negocios. El prestatario realiza pagos regulares (generalmente mensuales) que cubren tanto el capital prestado como los intereses acumulados.</p>
+
+            <h2>Cómo Usar la Calculadora de Préstamos</h2>
+            <ol>
+                <li><strong>Ingresa el Monto del Préstamo:</strong> La cantidad total que deseas pedir prestada</li>
+                <li><strong>Define la Tasa de Interés:</strong> Ingresa la tasa de interés anual (APR) ofrecida por tu prestamista</li>
+                <li><strong>Elige el Plazo:</strong> Selecciona el número de años que tardarás en pagar el préstamo</li>
+                <li><strong>Calcula:</strong> Haz clic en el botón para ver tu pago mensual y costos totales</li>
+            </ol>
+
+            <h2>Tipos de Préstamos</h2>
+            <h3>Préstamos Personales</h3>
+            <p>Préstamos sin garantía típicamente desde $1,000 hasta $50,000 con plazos de 2-7 años. Las tasas de interés varían según el puntaje crediticio, generalmente entre 6-36%.</p>
+
+            <h3>Préstamos para Vehículos</h3>
+            <p>Préstamos garantizados para compra de vehículos, típicamente 3-7 años con tasas entre 3-10%. El vehículo sirve como garantía.</p>
+
+            <h3>Préstamos Estudiantiles</h3>
+            <p>Préstamos federales y privados para gastos educativos. Los préstamos federales ofrecen tasas fijas y opciones de pago flexibles.</p>
+
+            <h2>Fórmula de Cálculo del Préstamo</h2>
+            <p>El pago mensual se calcula usando esta fórmula:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                M = P × [r(1 + r)^n] / [(1 + r)^n - 1]<br><br>
+                Donde:<br>
+                M = Pago mensual<br>
+                P = Monto principal del préstamo<br>
+                r = Tasa de interés mensual (tasa anual / 12)<br>
+                n = Número total de pagos (años × 12)
+            </p>
+
+            <h2>Factores que Afectan tu Tasa de Préstamo</h2>
+            <ul>
+                <li><strong>Puntaje Crediticio:</strong> Puntajes más altos (700+) califican para mejores tasas</li>
+                <li><strong>Ingresos:</strong> Ingresos estables mejoran las probabilidades de aprobación y tasas</li>
+                <li><strong>Relación Deuda-Ingreso:</strong> Menor deuda relativa al ingreso indica mejor capacidad de pago</li>
+                <li><strong>Plazo del Préstamo:</strong> Plazos más cortos tienen tasas más bajas pero pagos mensuales más altos</li>
+                <li><strong>Historial Laboral:</strong> Empleo estable demuestra ingresos confiables para el pago</li>
+                <li><strong>Garantía:</strong> Los préstamos garantizados ofrecen tasas más bajas que los no garantizados</li>
+            </ul>
+
+            <h2>Consejos para Obtener la Mejor Tasa</h2>
+            <ul>
+                <li><strong>Mejora tu Puntaje Crediticio:</strong> Paga las cuentas a tiempo antes de solicitar</li>
+                <li><strong>Compara Ofertas:</strong> Compara al menos 3-5 prestamistas</li>
+                <li><strong>Considera un Codeudor:</strong> Alguien con mejor crédito puede ayudarte a calificar para tasas más bajas</li>
+                <li><strong>Elige Plazos Más Cortos:</strong> Si puedes permitirte pagos mensuales más altos</li>
+                <li><strong>Negocia:</strong> No aceptes la primera oferta, especialmente si tienes ofertas competitivas</li>
+            </ul>
+
+            <h2>Estrategias de Pago del Préstamo</h2>
+            <h3>Hacer Pagos Adicionales</h3>
+            <p>Los pagos adicionales hacia el capital reducen el interés total y acortan el plazo del préstamo. Incluso $50-100 extra al mes pueden ahorrar miles a lo largo del tiempo.</p>
+
+            <h3>Pagos Quincenales</h3>
+            <p>Pagar la mitad del pago mensual cada dos semanas resulta en 13 pagos completos al año en lugar de 12, acelerando el pago.</p>
+
+            <h3>Refinanciamiento</h3>
+            <p>Si las tasas bajan o tu crédito mejora significativamente, refinanciar a una tasa más baja puede reducir los pagos mensuales o el interés total.</p>
+
+            <h2>Preguntas Frecuentes</h2>
+            <h3>¿Qué es una buena tasa de interés para un préstamo personal?</h3>
+            <p>Para prestatarios con buen crédito (690+), las tasas entre 6-12% son típicas. El crédito excelente (720+) puede calificar para tasas menores al 8%.</p>
+
+            <h3>¿Puedo pagar mi préstamo anticipadamente?</h3>
+            <p>La mayoría de los préstamos permiten el pago anticipado, pero verifica las penalidades por pago anticipado.</p>
+
+            <h3>¿Cuánto puedo pedir prestado?</h3>
+            <p>Depende de tus ingresos, puntaje crediticio y deudas existentes. Los prestamistas típicamente limitan los pagos de deuda mensuales al 36-43% del ingreso bruto mensual.</p>
+
+            <h3>¿Debo elegir un plazo más corto o más largo?</h3>
+            <p>Los plazos más cortos tienen pagos mensuales más altos pero menor interés total. Elige según tu presupuesto asegurándote de poder pagar cómodamente el pago mensual.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculateLoan() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            const annualRate = parseFloat(document.getElementById('interestRate').value);
+            const years = parseFloat(document.getElementById('loanTerm').value);
+
+            if (!loanAmount || !annualRate || !years || loanAmount <= 0 || annualRate < 0 || years <= 0) {
+                alert('Por favor ingresa detalles válidos del préstamo');
+                return;
+            }
+
+            const monthlyRate = annualRate / 100 / 12;
+            const numberOfPayments = years * 12;
+
+            let monthlyPayment;
+            if (monthlyRate === 0) {
+                monthlyPayment = loanAmount / numberOfPayments;
+            } else {
+                monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
+                                (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+            }
+
+            const totalAmount = monthlyPayment * numberOfPayments;
+            const totalInterest = totalAmount - loanAmount;
+
+            document.getElementById('monthlyPayment').textContent = '$' + monthlyPayment.toFixed(2);
+            document.getElementById('totalInterest').textContent = '$' + totalInterest.toFixed(2);
+            document.getElementById('totalAmount').textContent = '$' + totalAmount.toFixed(2);
+
+            const principalPercent = (loanAmount / totalAmount * 100).toFixed(1);
+            const interestPercent = (totalInterest / totalAmount * 100).toFixed(1);
+
+            document.getElementById('principalPercent').textContent = principalPercent + '%';
+            document.getElementById('interestPercent').textContent = interestPercent + '%';
+
+            showResult('monthlyPayment');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateLoan);
+        });
+
+        window.addEventListener('load', calculateLoan);
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Conversor de temperatura - Convierte entre Celsius, Fahrenheit y Kelvin instantly. Fórmulas de conversión y guía completa.">
+<meta name="keywords" content="conversor temperatura, celsius fahrenheit, kelvin, conversión temperatura">
+<title>Conversor de Temperatura - Celsius, Fahrenheit, Kelvin | CalcuPrime</title>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="canonical" href="https://calcuprime.com/es/calculators/conversor-temperatura.html">
+<link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/temperature-converter.html">
+<link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-temperatura.html">
+<link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/temperature-converter.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+<header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/temperature-converter.html" class="lang-link">EN</a><a href="conversor-temperatura.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+<main class="calculator-container">
+<div class="calculator-header"><h1 class="calculator-title">Conversor de Temperatura</h1><p class="calculator-description">Convierte entre Celsius, Fahrenheit y Kelvin instantáneamente</p></div>
+<div class="calculator-wrapper">
+<div class="calculator-inputs"><h3>Convertir Temperatura</h3>
+<div class="form-group"><label class="form-label">Valor</label><input type="number" id="tempValue" class="form-input" value="25" step="0.01"></div>
+<div class="form-group"><label class="form-label">De</label><select id="fromUnit" class="form-select"><option value="celsius">Celsius (°C)</option><option value="fahrenheit">Fahrenheit (°F)</option><option value="kelvin">Kelvin (K)</option></select></div>
+<button onclick="conv()" class="btn-calculate">Convertir</button>
+</div>
+<div class="calculator-results"><h3>Resultados</h3>
+<div class="result-item"><div class="result-label">Celsius</div><div class="result-value" id="celsius">25°C</div></div>
+<div class="result-item"><div class="result-label">Fahrenheit</div><div class="result-value" id="fahrenheit">77°F</div></div>
+<div class="result-item"><div class="result-label">Kelvin</div><div class="result-value" id="kelvin">298.15K</div></div>
+</div>
+</div>
+<div class="content-section">
+<h2>Escalas de Temperatura</h2><p>Las tres escalas de temperatura principales son Celsius (°C), Fahrenheit (°F) y Kelvin (K). Cada escala tiene diferentes puntos de referencia y aplicaciones específicas en ciencia, clima y vida diaria.</p>
+<h2>Fórmulas de Conversión</h2>
+<h3>Celsius a Fahrenheit</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">°F = (°C × 9/5) + 32</p>
+<h3>Fahrenheit a Celsius</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">°C = (°F - 32) × 5/9</p>
+<h3>Celsius a Kelvin</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">K = °C + 273.15</p>
+<h3>Kelvin a Celsius</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">°C = K - 273.15</p>
+<h2>Escala Celsius</h2><p>También conocida como centígrada. Ampliamente utilizada en todo el mundo excepto EE.UU. El punto de congelación del agua es 0°C y el punto de ebullición es 100°C al nivel del mar. Desarrollada por Anders Celsius en 1742.</p>
+<h2>Escala Fahrenheit</h2><p>Utilizada principalmente en Estados Unidos. El agua se congela a 32°F y hierve a 212°F. Desarrollada por Daniel Gabriel Fahrenheit en 1724. Aunque menos común globalmente, sigue siendo el estándar en EE.UU. para clima y temperatura diaria.</p>
+<h2>Escala Kelvin</h2><p>La escala de temperatura absoluta utilizada en ciencia. No usa el símbolo de grado (°). El cero absoluto es 0K (-273.15°C), la temperatura más baja teóricamente posible donde todo movimiento molecular cesa. El agua se congela a 273.15K y hierve a 373.15K.</p>
+<h2>Temperaturas Comunes de Referencia</h2><ul><li><strong>Cero Absoluto:</strong> -273.15°C, -459.67°F, 0K</li><li><strong>Congelación del Agua:</strong> 0°C, 32°F, 273.15K</li><li><strong>Temperatura Corporal:</strong> 37°C, 98.6°F, 310.15K</li><li><strong>Temperatura Ambiente:</strong> ~20-25°C, ~68-77°F, ~293-298K</li><li><strong>Ebullición del Agua:</strong> 100°C, 212°F, 373.15K</li></ul>
+<h2>Preguntas Frecuentes</h2>
+<h3>¿Por qué EE.UU. usa Fahrenheit?</h3><p>Razones históricas. Cuando se desarrolló el sistema métrico, EE.UU. ya había establecido Fahrenheit. Cambiar sería costoso y complicado para un país entero.</p>
+<h3>¿Cuál es más preciso?</h3><p>Todas son igualmente precisas. Kelvin se prefiere en ciencia porque es una escala absoluta sin valores negativos.</p>
+<h3>¿A qué temperatura son iguales Celsius y Fahrenheit?</h3><p>A -40 grados. -40°C = -40°F.</p>
+</div>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+<script src="../../js/main.js"></script>
+<script>function conv(){const val=parseFloat(document.getElementById('tempValue').value);const from=document.getElementById('fromUnit').value;let c,f,k;if(from==='celsius'){c=val;f=val*9/5+32;k=val+273.15;}else if(from==='fahrenheit'){f=val;c=(val-32)*5/9;k=c+273.15;}else{k=val;c=val-273.15;f=c*9/5+32;}document.getElementById('celsius').textContent=c.toFixed(2)+'°C';document.getElementById('fahrenheit').textContent=f.toFixed(2)+'°F';document.getElementById('kelvin').textContent=k.toFixed(2)+'K';}document.querySelectorAll('.form-input,.form-select').forEach(e=>e.addEventListener('input',conv));window.addEventListener('load',conv);</script>
+</body>
+</html>

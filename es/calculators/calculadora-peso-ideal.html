@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de peso ideal - Calcula tu peso ideal basado en altura, edad, sexo y constitución. Múltiples fórmulas reconocidas médicamente.">
+    <meta name="keywords" content="peso ideal, peso saludable, calculadora peso, peso corporal ideal">
+    <title>Calculadora de Peso Ideal - Encuentra tu Peso Saludable | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-peso-ideal.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/ideal-weight-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-peso-ideal.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/ideal-weight-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/ideal-weight-calculator.html" class="lang-link">EN</a><a href="calculadora-peso-ideal.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora de Peso Ideal</h1><p class="calculator-description">Calcula tu peso ideal basado en múltiples fórmulas médicas reconocidas</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Tu Información</h3>
+                <div class="form-group"><label class="form-label">Sexo</label><select id="gender" class="form-select"><option value="male">Masculino</option><option value="female">Femenino</option></select></div>
+                <div class="form-group"><label class="form-label">Altura (cm)</label><input type="number" id="height" class="form-input" value="170" min="100" max="250"></div>
+                <div class="form-group"><label class="form-label">Peso Actual (kg)</label><input type="number" id="weight" class="form-input" value="70" min="30" max="300" step="0.1"></div>
+                <button onclick="calcIdeal()" class="btn-calculate">Calcular Peso Ideal</button>
+            </div>
+            <div class="calculator-results"><h3>Resultados</h3>
+                <div class="result-item"><div class="result-label">Peso Ideal (Promedio)</div><div class="result-value" id="avgIdeal" style="font-size:2.5rem;color:#10b981">0 kg</div></div>
+                <div class="result-item"><div class="result-label">Rango Saludable (IMC)</div><div class="result-value" id="range">0 kg</div></div>
+                <div class="result-item"><div class="result-label">Diferencia</div><div class="result-value" id="diff">0 kg</div></div>
+                <div style="margin-top:20px;padding:20px;background:#f9fafb;border-radius:8px"><h4 style="margin-bottom:15px">Fórmulas Utilizadas</h4><div id="formulas"></div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>¿Qué es el Peso Ideal?</h2><p>El peso ideal es el rango de peso corporal asociado con menor riesgo de enfermedades y mejor salud general. No existe un único número "perfecto" - el peso ideal varía según múltiples factores como altura, edad, sexo, constitución ósea, masa muscular y composición corporal. Esta calculadora utiliza varias fórmulas médicas reconocidas para proporcionar un rango estimado de peso saludable.</p>
+            <h2>Fórmulas de Peso Ideal</h2><h3>Fórmula de Robinson (1983)</h3><p>Hombres: 52 kg + 1.9 kg por cada pulgada sobre 5 pies<br>Mujeres: 49 kg + 1.7 kg por cada pulgada sobre 5 pies<br>Esta fórmula moderna es ampliamente utilizada por profesionales de la salud.</p>
+            <h3>Fórmula de Miller (1983)</h3><p>Hombres: 56.2 kg + 1.41 kg por cada pulgada sobre 5 pies<br>Mujeres: 53.1 kg + 1.36 kg por cada pulgada sobre 5 pies<br>Desarrollada usando datos más recientes que las fórmulas anteriores.</p>
+            <h3>Fórmula de Devine (1974)</h3><p>Hombres: 50 kg + 2.3 kg por cada pulgada sobre 5 pies<br>Mujeres: 45.5 kg + 2.3 kg por cada pulgada sobre 5 pies<br>Originalmente desarrollada para calcular dosis de medicamentos, pero ampliamente utilizada.</p>
+            <h3>Fórmula de Hamwi (1964)</h3><p>Hombres: 48 kg + 2.7 kg por cada pulgada sobre 5 pies<br>Mujeres: 45.5 kg + 2.2 kg por cada pulgada sobre 5 pies<br>Una de las fórmulas más antiguas aún en uso clínico.</p>
+            <h2>Factores que Afectan el Peso Ideal</h2><h3>Altura</h3><p>Las personas más altas naturalmente pesan más. Las fórmulas de peso ideal están diseñadas para ajustarse según la altura.</p>
+            <h3>Sexo</h3><p>Los hombres típicamente tienen más masa muscular y menos grasa corporal que las mujeres de la misma altura, resultando en diferentes pesos ideales.</p>
+            <h3>Constitución Ósea</h3><p>Las personas con estructura ósea más grande naturalmente pesan más que aquellas con estructura pequeña, incluso con la misma altura y composición corporal.</p>
+            <h3>Masa Muscular</h3><p>El músculo pesa más que la grasa por volumen. Los atletas y personas muy activas pueden pesar más que su "peso ideal" sin tener sobrepeso.</p>
+            <h3>Edad</h3><p>El peso tiende a aumentar con la edad debido a cambios metabólicos y disminución de masa muscular. Los rangos de peso saludable pueden ser ligeramente más altos para adultos mayores.</p>
+            <h2>Más Allá del Peso: Otras Mediciones Importantes</h2><h3>Índice de Masa Corporal (IMC)</h3><p>Calcula la relación entre peso y altura. El rango saludable es 18.5-24.9. El IMC es útil pero no diferencia entre músculo y grasa.</p>
+            <h3>Circunferencia de la Cintura</h3><p>La grasa abdominal es particularmente peligrosa. Para hombres, mayor de 102 cm; para mujeres, mayor de 88 cm indica mayor riesgo de salud.</p>
+            <h3>Porcentaje de Grasa Corporal</h3><p>Mide qué porcentaje de tu peso es grasa. Rangos saludables: hombres 10-20%, mujeres 18-28%. Proporciona mejor imagen de salud que peso solo.</p>
+            <h3>Relación Cintura-Cadera</h3><p>Divide circunferencia de cintura por circunferencia de cadera. Ratios más altos se asocian con mayor riesgo de enfermedades cardíacas y diabetes.</p>
+            <h2>Limitaciones del Peso Ideal</h2><ul><li><strong>No Considera Composición Corporal:</strong> Dos personas del mismo peso pueden tener composiciones corporales muy diferentes</li><li><strong>Fórmulas Generalizadas:</strong> Basadas en poblaciones amplias, pueden no ser precisas para todos los individuos</li><li><strong>No Considera Etnicidad:</strong> Diferentes grupos étnicos tienen diferentes distribuciones de grasa y músculo</li><li><strong>Ignora el Historial de Salud:</strong> El peso ideal puede variar según condiciones médicas existentes</li><li><strong>Enfoque Único en Peso:</strong> La salud involucra muchos factores más allá del número en la báscula</li></ul>
+            <h2>Alcanzando y Manteniendo un Peso Saludable</h2><h3>Alimentación Balanceada</h3><p>Enfócate en alimentos integrales: frutas, verduras, proteínas magras, granos enteros y grasas saludables. Evita alimentos ultraprocesados, azúcares añadidos y grasas trans.</p>
+            <h3>Ejercicio Regular</h3><p>Combina cardio (150 minutos semanales de actividad moderada) con entrenamiento de fuerza (2-3 veces por semana) para mantener peso saludable y masa muscular.</p>
+            <h3>Control de Porciones</h3><p>Incluso alimentos saludables pueden contribuir al aumento de peso si se comen en exceso. Aprende a reconocer porciones apropiadas.</p>
+            <h3>Hidratación</h3><p>Bebe suficiente agua diariamente. La sed a menudo se confunde con hambre. El agua también ayuda a la digestión y metabolismo.</p>
+            <h3>Sueño Adecuado</h3><p>La falta de sueño afecta las hormonas del hambre, aumentando el apetito y los antojos. Busca 7-9 horas de sueño de calidad.</p>
+            <h3>Manejo del Estrés</h3><p>El estrés crónico puede llevar a comer emocionalmente y aumento de peso. Practica técnicas de relajación como meditación, yoga o ejercicio.</p>
+            <h2>Cuándo Buscar Ayuda Profesional</h2><p>Consulta con un profesional de la salud si:</p><ul><li>Tu peso está significativamente fuera del rango saludable</li><li>Has intentado perder peso sin éxito</li><li>Experimentas síntomas relacionados con el peso (dificultad para respirar, dolor articular)</li><li>Tienes antecedentes familiares de enfermedades relacionadas con el peso</li><li>Estás considerando cambios importantes en dieta o ejercicio</li><li>Sospechas que podrías tener un trastorno alimentario</li></ul>
+            <h2>Preguntas Frecuentes</h2><h3>¿Qué tan preciso es el peso ideal calculado?</h3><p>El peso ideal es una estimación general. Tu peso saludable real puede variar según tu composición corporal, estructura ósea y otros factores individuales. Usa estas calculadoras como guía, no como objetivo absoluto.</p>
+            <h3>¿Por qué diferentes fórmulas dan resultados diferentes?</h3><p>Cada fórmula fue desarrollada usando diferentes poblaciones y métodos. Las diferencias suelen ser pequeñas. Usar un promedio de múltiples fórmulas proporciona una mejor estimación.</p>
+            <h3>¿El músculo realmente pesa más que la grasa?</h3><p>Por volumen, sí. El músculo es más denso que la grasa. Una persona musculosa puede pesar más que alguien menos musculoso de la misma altura pero tener mejor salud y composición corporal.</p>
+            <h3>¿Debo pesar lo mismo que pesaba en la secundaria?</h3><p>No necesariamente. Es normal ganar algo de peso con la edad. El enfoque debe estar en mantener un peso saludable para tu edad y nivel de actividad actual, no en alcanzar tu peso de adolescente.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function calcIdeal(){const g=document.getElementById('gender').value;const h=parseFloat(document.getElementById('height').value);const w=parseFloat(document.getElementById('weight').value);if(!h||h<=0){alert('Ingresa una altura válida');return;}const hIn=(h/2.54)-60;const robinson=g==='male'?52+1.9*hIn:49+1.7*hIn;const miller=g==='male'?56.2+1.41*hIn:53.1+1.36*hIn;const devine=g==='male'?50+2.3*hIn:45.5+2.3*hIn;const hamwi=g==='male'?48+2.7*hIn:45.5+2.2*hIn;const avg=(robinson+miller+devine+hamwi)/4;const hM=h/100;const minH=18.5*hM*hM;const maxH=24.9*hM*hM;const diff=w-avg;document.getElementById('avgIdeal').textContent=avg.toFixed(1)+' kg';document.getElementById('range').textContent=minH.toFixed(1)+' - '+maxH.toFixed(1)+' kg';document.getElementById('diff').textContent=(diff>0?'+':'')+diff.toFixed(1)+' kg';document.getElementById('diff').style.color=Math.abs(diff)<3?'#10b981':'#ef4444';document.getElementById('formulas').innerHTML='<div style="margin-bottom:8px">Robinson: '+robinson.toFixed(1)+' kg</div><div style="margin-bottom:8px">Miller: '+miller.toFixed(1)+' kg</div><div style="margin-bottom:8px">Devine: '+devine.toFixed(1)+' kg</div><div>Hamwi: '+hamwi.toFixed(1)+' kg</div>';}document.querySelectorAll('.form-input,.form-select').forEach(e=>e.addEventListener('input',calcIdeal));window.addEventListener('load',calcIdeal);</script>
+</body>
+</html>
