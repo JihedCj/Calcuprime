@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free retirement calculator - Plan your retirement savings and see if you're on track to meet your goals.">
+    <meta name="keywords" content="retirement calculator, retirement planning, 401k calculator, retirement savings">
+
+    <title>Retirement Calculator - Plan Your Retirement Savings | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/retirement-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Retirement Calculator</h1>
+            <p class="calculator-description">Plan your retirement savings and estimate your nest egg</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Retirement Details</h3>
+
+                <div class="form-group">
+                    <label for="currentAge" class="form-label">Current Age</label>
+                    <input type="number" id="currentAge" class="form-input" value="30" min="18" max="80">
+                </div>
+
+                <div class="form-group">
+                    <label for="retirementAge" class="form-label">Planned Retirement Age</label>
+                    <input type="number" id="retirementAge" class="form-input" value="65" min="50" max="80">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentSavings" class="form-label">Current Retirement Savings ($)</label>
+                    <input type="number" id="currentSavings" class="form-input" value="50000" min="0" step="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyContribution" class="form-label">Monthly Contribution ($)</label>
+                    <input type="number" id="monthlyContribution" class="form-input" value="500" min="0" step="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="returnRate" class="form-label">Expected Annual Return (%)</label>
+                    <input type="number" id="returnRate" class="form-input" value="7" min="0" max="20" step="0.1">
+                </div>
+
+                <button onclick="calculateRetirement()" class="btn-calculate">Calculate</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Results</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Retirement Savings at Age <span id="retirementAgeDisplay">65</span></div>
+                    <div class="result-value" id="totalSavings">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Contributions</div>
+                    <div class="result-value" id="totalContributions" style="font-size: 1.5rem;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Investment Earnings</div>
+                    <div class="result-value" id="earnings" style="font-size: 1.5rem; color: #10b981;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Years Until Retirement</div>
+                    <div class="result-value" id="yearsLeft" style="font-size: 1.5rem;">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use the Retirement Calculator</h2>
+            <p>This calculator helps you estimate how much you'll have saved for retirement based on your current savings, regular contributions, and expected investment returns.</p>
+
+            <h2>Retirement Planning Tips</h2>
+            <ul>
+                <li>Start saving as early as possible to maximize compound growth</li>
+                <li>Take full advantage of employer 401(k) matching</li>
+                <li>Aim to save 15% of your income for retirement</li>
+                <li>Diversify your retirement portfolio</li>
+                <li>Increase contributions when you get raises</li>
+                <li>Consider both traditional and Roth retirement accounts</li>
+            </ul>
+
+            <h2>How Much Do You Need?</h2>
+            <p>Financial experts typically recommend having 10-12 times your final salary saved by retirement. The 4% rule suggests you can safely withdraw 4% of your retirement savings annually without running out of money.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="investment-calculator.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Investment Calculator</h3>
+                    <p class="calc-description">Project investment growth</p>
+                </a>
+
+                <a href="compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Compound Interest</h3>
+                    <p class="calc-description">Calculate compound interest</p>
+                </a>
+
+                <a href="loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Loan Calculator</h3>
+                    <p class="calc-description">Calculate loan payments</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function calculateRetirement() {
+            const currentAge = parseInt(document.getElementById('currentAge').value) || 30;
+            const retirementAge = parseInt(document.getElementById('retirementAge').value) || 65;
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value) || 0;
+            const monthly = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const annualRate = parseFloat(document.getElementById('returnRate').value) || 7;
+
+            const yearsLeft = retirementAge - currentAge;
+            if (yearsLeft <= 0) {
+                alert('Retirement age must be greater than current age');
+                return;
+            }
+
+            const months = yearsLeft * 12;
+            const monthlyRate = annualRate / 100 / 12;
+
+            // Future value of current savings
+            const fvCurrent = currentSavings * Math.pow(1 + monthlyRate, months);
+
+            // Future value of monthly contributions
+            let fvContributions = 0;
+            if (monthlyRate > 0) {
+                fvContributions = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+            } else {
+                fvContributions = monthly * months;
+            }
+
+            const totalSavings = fvCurrent + fvContributions;
+            const totalContributions = currentSavings + (monthly * months);
+            const earnings = totalSavings - totalContributions;
+
+            document.getElementById('retirementAgeDisplay').textContent = retirementAge;
+            document.getElementById('totalSavings').textContent = formatCurrency(totalSavings);
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions);
+            document.getElementById('earnings').textContent = formatCurrency(earnings);
+            document.getElementById('yearsLeft').textContent = yearsLeft + ' years';
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(num);
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateRetirement);
+        });
+
+        window.addEventListener('load', calculateRetirement);
+    </script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free loan calculator - Calculate monthly loan payments, total interest, and amortization schedule for any type of loan.">
+    <meta name="keywords" content="loan calculator, personal loan calculator, monthly payment calculator, loan interest calculator">
+
+    <title>Loan Calculator - Calculate Loan Payments & Interest | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/loan-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Loan Calculator</h1>
+            <p class="calculator-description">Calculate monthly payments and total interest for any loan</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Loan Details</h3>
+
+                <div class="form-group">
+                    <label for="loanAmount" class="form-label">Loan Amount ($)</label>
+                    <input type="number" id="loanAmount" class="form-input" value="20000" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="interestRate" class="form-label">Interest Rate (% per year)</label>
+                    <input type="number" id="interestRate" class="form-input" value="5.5" min="0" max="30" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="loanTerm" class="form-label">Loan Term</label>
+                    <select id="loanTerm" class="form-select">
+                        <option value="12">1 year</option>
+                        <option value="24">2 years</option>
+                        <option value="36" selected>3 years</option>
+                        <option value="48">4 years</option>
+                        <option value="60">5 years</option>
+                        <option value="72">6 years</option>
+                        <option value="84">7 years</option>
+                        <option value="120">10 years</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateLoan()" class="btn-calculate">Calculate</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Results</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Monthly Payment</div>
+                    <div class="result-value" id="monthlyPayment">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Paid</div>
+                    <div class="result-value" id="totalPaid" style="font-size: 1.5rem;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Interest</div>
+                    <div class="result-value" id="totalInterest" style="font-size: 1.5rem;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Principal Amount</div>
+                    <div class="result-value" id="principalAmount" style="font-size: 1.5rem;">$0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use the Loan Calculator</h2>
+            <p>Our loan calculator helps you determine your monthly payment, total interest, and overall cost for any type of loan including personal loans, auto loans, student loans, and more.</p>
+            <ol>
+                <li><strong>Loan Amount:</strong> Enter the total amount you need to borrow</li>
+                <li><strong>Interest Rate:</strong> Enter the annual interest rate (APR)</li>
+                <li><strong>Loan Term:</strong> Select how many months or years you'll take to repay</li>
+                <li><strong>Calculate:</strong> View your monthly payment and total loan cost</li>
+            </ol>
+
+            <h2>Loan Payment Formula</h2>
+            <p>The monthly payment is calculated using the following formula:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                M = P × [r(1+r)^n] / [(1+r)^n-1]<br><br>
+                Where:<br>
+                M = Monthly payment<br>
+                P = Principal loan amount<br>
+                r = Monthly interest rate (annual rate ÷ 12)<br>
+                n = Number of payments (months)
+            </p>
+
+            <h2>Types of Loans</h2>
+            <h3>Personal Loans</h3>
+            <p>Unsecured loans that can be used for any purpose. Typically range from $1,000 to $50,000 with terms of 2-7 years.</p>
+
+            <h3>Auto Loans</h3>
+            <p>Secured loans for vehicle purchases. Terms typically range from 3-7 years with the vehicle serving as collateral.</p>
+
+            <h3>Student Loans</h3>
+            <p>Education financing with terms of 10-25 years. Federal student loans often have lower rates and more flexible repayment options.</p>
+
+            <h3>Home Equity Loans</h3>
+            <p>Secured loans using your home's equity as collateral. Terms typically range from 5-30 years.</p>
+
+            <h2>Tips for Getting the Best Loan</h2>
+            <ul>
+                <li>Check your credit score before applying - higher scores get better rates</li>
+                <li>Compare offers from multiple lenders</li>
+                <li>Consider the total cost, not just the monthly payment</li>
+                <li>Avoid extending the loan term just to lower payments</li>
+                <li>Make extra payments when possible to reduce interest</li>
+                <li>Read all terms and conditions carefully before signing</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+            <h3>What's a good interest rate for a personal loan?</h3>
+            <p>Personal loan rates typically range from 6% to 36% depending on your credit score. Those with excellent credit (720+) can get rates as low as 6-10%.</p>
+
+            <h3>Should I choose a shorter or longer loan term?</h3>
+            <p>Shorter terms have higher monthly payments but lower total interest. Longer terms have lower monthly payments but cost more overall. Choose based on your budget and financial goals.</p>
+
+            <h3>Can I pay off my loan early?</h3>
+            <p>Many loans allow early repayment, but some have prepayment penalties. Check your loan agreement before making extra payments.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="mortgage-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏠</div>
+                    <h3 class="calc-title">Mortgage Calculator</h3>
+                    <p class="calc-description">Calculate home loan payments</p>
+                </a>
+
+                <a href="compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Compound Interest</h3>
+                    <p class="calc-description">Calculate interest earnings</p>
+                </a>
+
+                <a href="investment-calculator.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Investment Calculator</h3>
+                    <p class="calc-description">Project investment growth</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function calculateLoan() {
+            const principal = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const months = parseInt(document.getElementById('loanTerm').value) || 12;
+
+            if (principal <= 0 || annualRate < 0) {
+                alert('Please enter valid values');
+                return;
+            }
+
+            // Convert annual rate to monthly rate
+            const monthlyRate = annualRate / 100 / 12;
+
+            // Calculate monthly payment
+            let monthlyPayment;
+            if (monthlyRate === 0) {
+                monthlyPayment = principal / months;
+            } else {
+                monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                                (Math.pow(1 + monthlyRate, months) - 1);
+            }
+
+            // Calculate totals
+            const totalPaid = monthlyPayment * months;
+            const totalInterest = totalPaid - principal;
+
+            // Display results
+            document.getElementById('monthlyPayment').textContent = formatCurrency(monthlyPayment);
+            document.getElementById('totalPaid').textContent = formatCurrency(totalPaid);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('principalAmount').textContent = formatCurrency(principal);
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(num);
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateLoan);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', calculateLoan);
+    </script>
+</body>
+</html>

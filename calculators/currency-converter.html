@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Currency Converter</h1>
+            <p class="calculator-description">Convert between major world currencies</p>
+        </div>
+        <div class="calculator-wrapper" style="grid-template-columns: 1fr;">
+            <div class="calculator-inputs">
+                <div class="form-group">
+                    <label class="form-label">From</label>
+                    <input type="number" id="fromValue" class="form-input" value="1" step="any">
+                    <select id="fromUnit" class="form-select" style="margin-top: 10px;">
+                        <option value="1">USD</option>
+                        <option value="0.85">EUR</option>
+                        <option value="0.73">GBP</option>
+                        <option value="110">JPY</option>
+                        <option value="1.35">CAD</option>
+                        <option value="1.50">AUD</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">To</label>
+                    <div class="result-value" id="result" style="font-size: 2rem; color: #2563eb;">0</div>
+                    <select id="toUnit" class="form-select" style="margin-top: 10px;">
+                        <option value="1">USD</option>
+                        <option value="0.85" selected>EUR</option>
+                        <option value="0.73">GBP</option>
+                        <option value="110">JPY</option>
+                        <option value="1.35">CAD</option>
+                        <option value="1.50">AUD</option>
+                    </select>
+                </div>
+                <p style="font-size: 0.875rem; color: #6b7280; margin-top: 10px;">Note: Exchange rates are approximate and for demonstration purposes.</p>
+            </div>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function convert() {
+            const value = parseFloat(document.getElementById('fromValue').value) || 0;
+            const from = parseFloat(document.getElementById('fromUnit').value);
+            const to = parseFloat(document.getElementById('toUnit').value);
+            const usd = value / from;
+            const result = usd * to;
+            document.getElementById('result').textContent = result.toFixed(2);
+        }
+        ['fromValue','fromUnit','toUnit'].forEach(id=>document.getElementById(id).addEventListener('change',convert));
+        convert();
+    </script>
+</body>
+</html>

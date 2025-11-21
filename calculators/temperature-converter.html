@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Temperature Converter</h1>
+            <p class="calculator-description">Convert between Celsius, Fahrenheit, and Kelvin</p>
+        </div>
+        <div class="calculator-wrapper" style="grid-template-columns: 1fr;">
+            <div class="calculator-inputs">
+                <div class="form-group">
+                    <label class="form-label">From</label>
+                    <input type="number" id="fromValue" class="form-input" value="0" step="any">
+                    <select id="fromUnit" class="form-select" style="margin-top: 10px;">
+                        <option value="c">Celsius</option>
+                        <option value="f">Fahrenheit</option>
+                        <option value="k">Kelvin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">To</label>
+                    <div class="result-value" id="result" style="font-size: 2rem; color: #2563eb;">0</div>
+                    <select id="toUnit" class="form-select" style="margin-top: 10px;">
+                        <option value="c">Celsius</option>
+                        <option value="f" selected>Fahrenheit</option>
+                        <option value="k">Kelvin</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function convert() {
+            const value = parseFloat(document.getElementById('fromValue').value) || 0;
+            const from = document.getElementById('fromUnit').value;
+            const to = document.getElementById('toUnit').value;
+            let celsius;
+            if(from==='c')celsius=value;
+            else if(from==='f')celsius=(value-32)*5/9;
+            else celsius=value-273.15;
+            let result;
+            if(to==='c')result=celsius;
+            else if(to==='f')result=celsius*9/5+32;
+            else result=celsius+273.15;
+            document.getElementById('result').textContent = result.toFixed(2);
+        }
+        ['fromValue','fromUnit','toUnit'].forEach(id=>document.getElementById(id).addEventListener('change',convert));
+        convert();
+    </script>
+</body>
+</html>

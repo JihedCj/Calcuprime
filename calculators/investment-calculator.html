@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free investment calculator - Project your investment growth over time with regular contributions and compound interest.">
+    <meta name="keywords" content="investment calculator, compound interest, investment growth, portfolio calculator">
+
+    <title>Investment Calculator - Calculate Investment Growth | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/investment-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Investment Calculator</h1>
+            <p class="calculator-description">Project your investment growth over time</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Investment Details</h3>
+
+                <div class="form-group">
+                    <label for="initialInvestment" class="form-label">Initial Investment ($)</label>
+                    <input type="number" id="initialInvestment" class="form-input" value="10000" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyContribution" class="form-label">Monthly Contribution ($)</label>
+                    <input type="number" id="monthlyContribution" class="form-input" value="500" min="0" step="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="years" class="form-label">Time Period (years)</label>
+                    <input type="number" id="years" class="form-input" value="20" min="1" max="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="returnRate" class="form-label">Expected Annual Return (%)</label>
+                    <input type="number" id="returnRate" class="form-input" value="8" min="0" max="30" step="0.1">
+                </div>
+
+                <button onclick="calculateInvestment()" class="btn-calculate">Calculate</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Results</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Future Value</div>
+                    <div class="result-value" id="futureValue">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Contributions</div>
+                    <div class="result-value" id="totalContributions" style="font-size: 1.5rem;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Interest Earned</div>
+                    <div class="result-value" id="totalInterest" style="font-size: 1.5rem; color: #10b981;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Return on Investment</div>
+                    <div class="result-value" id="roi" style="font-size: 1.5rem; color: #10b981;">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use the Investment Calculator</h2>
+            <p>This investment calculator helps you project how much your investments could grow over time with regular contributions and compound interest.</p>
+
+            <h2>Investment Growth Formula</h2>
+            <p>The future value is calculated using the compound interest formula with regular contributions:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                FV = P(1+r)^n + PMT × [((1+r)^n - 1) / r]<br><br>
+                Where:<br>
+                FV = Future Value<br>
+                P = Initial Investment<br>
+                PMT = Monthly Contribution<br>
+                r = Monthly interest rate<br>
+                n = Number of months
+            </p>
+
+            <h2>Investment Tips</h2>
+            <ul>
+                <li>Start investing as early as possible to maximize compound growth</li>
+                <li>Contribute regularly to take advantage of dollar-cost averaging</li>
+                <li>Diversify your portfolio across different asset classes</li>
+                <li>Keep fees low by choosing index funds or ETFs</li>
+                <li>Don't try to time the market - stay invested long-term</li>
+                <li>Rebalance your portfolio periodically</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Compound Interest</h3>
+                    <p class="calc-description">Calculate compound interest</p>
+                </a>
+
+                <a href="retirement-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏖️</div>
+                    <h3 class="calc-title">Retirement Calculator</h3>
+                    <p class="calc-description">Plan retirement savings</p>
+                </a>
+
+                <a href="loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Loan Calculator</h3>
+                    <p class="calc-description">Calculate loan payments</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function calculateInvestment() {
+            const initial = parseFloat(document.getElementById('initialInvestment').value) || 0;
+            const monthly = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const years = parseInt(document.getElementById('years').value) || 1;
+            const annualRate = parseFloat(document.getElementById('returnRate').value) || 0;
+
+            const months = years * 12;
+            const monthlyRate = annualRate / 100 / 12;
+
+            // Calculate future value of initial investment
+            const fvInitial = initial * Math.pow(1 + monthlyRate, months);
+
+            // Calculate future value of monthly contributions
+            let fvContributions = 0;
+            if (monthlyRate > 0) {
+                fvContributions = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+            } else {
+                fvContributions = monthly * months;
+            }
+
+            const futureValue = fvInitial + fvContributions;
+            const totalContributions = initial + (monthly * months);
+            const totalInterest = futureValue - totalContributions;
+            const roi = totalContributions > 0 ? ((totalInterest / totalContributions) * 100) : 0;
+
+            document.getElementById('futureValue').textContent = formatCurrency(futureValue);
+            document.getElementById('totalContributions').textContent = formatCurrency(totalContributions);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('roi').textContent = roi.toFixed(2) + '%';
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(num);
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateInvestment);
+        });
+
+        window.addEventListener('load', calculateInvestment);
+    </script>
+</body>
+</html>

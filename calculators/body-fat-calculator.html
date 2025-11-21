@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free body fat calculator - Estimate your body fat percentage using Navy method.">
+    <title>Body Fat Calculator | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Body Fat Calculator</h1>
+            <p class="calculator-description">Estimate your body fat percentage</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Your Information</h3>
+                <div class="form-group">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select id="gender" class="form-select">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="age" class="form-label">Age (years)</label>
+                    <input type="number" id="age" class="form-input" value="30" min="18" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="weightKg" class="form-label">Weight (kg)</label>
+                    <input type="number" id="weightKg" class="form-input" value="70" min="30" max="200">
+                </div>
+                <div class="form-group">
+                    <label for="heightCm" class="form-label">Height (cm)</label>
+                    <input type="number" id="heightCm" class="form-input" value="170" min="120" max="220">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Results</h3>
+                <div class="result-item">
+                    <div class="result-label">Body Fat Percentage</div>
+                    <div class="result-value" id="result">0%</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const weight = parseFloat(document.getElementById('weightKg').value);
+            const height = parseFloat(document.getElementById('heightCm').value);
+            const bmi = weight / Math.pow(height/100, 2);
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+            let bodyFat;
+            if (gender === 'male') {
+                bodyFat = 1.20 * bmi + 0.23 * age - 16.2;
+            } else {
+                bodyFat = 1.20 * bmi + 0.23 * age - 5.4;
+            }
+            document.getElementById('result').textContent = bodyFat.toFixed(1) + '%';
+        }
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>
