@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | CalcuPrime</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .error-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            color: #4F46E5;
+            line-height: 1;
+            margin: 0;
+        }
+        .error-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 1rem 0;
+        }
+        .error-description {
+            font-size: 1.125rem;
+            color: #6b7280;
+            max-width: 500px;
+            margin: 1rem auto 2rem;
+        }
+        .error-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #4F46E5;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #4338CA;
+        }
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+        .popular-links {
+            margin-top: 3rem;
+            max-width: 600px;
+        }
+        .popular-links h3 {
+            font-size: 1.25rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+        }
+        .link-item {
+            padding: 0.5rem;
+            text-align: left;
+        }
+        .link-item a {
+            color: #4F46E5;
+            text-decoration: none;
+        }
+        .link-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Error Content -->
+    <div class="error-container">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Page Not Found</h2>
+        <p class="error-description">
+            Oops! The calculator or page you're looking for doesn't exist.
+            It might have been moved or the URL might be incorrect.
+        </p>
+
+        <div class="error-buttons">
+            <a href="/" class="btn btn-primary">Go to Homepage</a>
+            <a href="/sitemap.html" class="btn btn-secondary">View Sitemap</a>
+        </div>
+
+        <div class="popular-links">
+            <h3>Popular Calculators</h3>
+            <div class="links-grid">
+                <div class="link-item">
+                    <a href="/calculators/mortgage-calculator.html">🏠 Mortgage Calculator</a>
+                </div>
+                <div class="link-item">
+                    <a href="/calculators/bmi-calculator.html">⚖️ BMI Calculator</a>
+                </div>
+                <div class="link-item">
+                    <a href="/calculators/calorie-calculator.html">🔥 Calorie Calculator</a>
+                </div>
+                <div class="link-item">
+                    <a href="/calculators/loan-calculator.html">💰 Loan Calculator</a>
+                </div>
+                <div class="link-item">
+                    <a href="/calculators/percentage-calculator.html">% Percentage Calculator</a>
+                </div>
+                <div class="link-item">
+                    <a href="/calculators/retirement-calculator.html">🏖️ Retirement Calculator</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
