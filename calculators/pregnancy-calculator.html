@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free pregnancy calculator - Calculate your due date and track pregnancy progress.">
+    <title>Pregnancy Calculator | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Pregnancy Calculator</h1>
+            <p class="calculator-description">Calculate your due date and pregnancy progress</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Information</h3>
+                <div class="form-group">
+                    <label for="lmpDate" class="form-label">First Day of Last Period</label>
+                    <input type="date" id="lmpDate" class="form-input">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Results</h3>
+                <div class="result-item">
+                    <div class="result-label">Due Date</div>
+                    <div class="result-value" id="dueDate" style="font-size: 1.5rem;">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Current Week</div>
+                    <div class="result-value" id="currentWeek" style="font-size: 1.5rem;">-</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('lmpDate').valueAsDate = new Date(Date.now() - 60*24*60*60*1000);
+        function calculate() {
+            const lmpDate = new Date(document.getElementById('lmpDate').value);
+            if (!lmpDate || isNaN(lmpDate)) return;
+            const dueDate = new Date(lmpDate.getTime() + 280*24*60*60*1000);
+            const today = new Date();
+            const weeksPassed = Math.floor((today - lmpDate) / (7*24*60*60*1000));
+            document.getElementById('dueDate').textContent = dueDate.toLocaleDateString();
+            document.getElementById('currentWeek').textContent = weeksPassed + ' weeks';
+        }
+        calculate();
+    </script>
+</body>
+</html>

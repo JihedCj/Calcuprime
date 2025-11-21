@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Grade Calculator</h1>
+            <p class="calculator-description">Calculate test scores and grades</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <div class="form-group">
+                    <label for="earned" class="form-label">Points Earned</label>
+                    <input type="number" id="earned" class="form-input" value="45" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="possible" class="form-label">Points Possible</label>
+                    <input type="number" id="possible" class="form-input" value="50" min="1">
+                </div>
+                <button onclick="calc()" class="btn-calculate">Calculate</button>
+            </div>
+            <div class="calculator-results">
+                <div class="result-item">
+                    <div class="result-label">Percentage</div>
+                    <div class="result-value" id="pct">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Letter Grade</div>
+                    <div class="result-value" id="grade" style="font-size: 2rem;">-</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calc(){const e=parseFloat(document.getElementById('earned').value)||0;const p=parseFloat(document.getElementById('possible').value)||1;const pct=(e/p)*100;let g='F';if(pct>=90)g='A';else if(pct>=80)g='B';else if(pct>=70)g='C';else if(pct>=60)g='D';document.getElementById('pct').textContent=pct.toFixed(1)+'%';document.getElementById('grade').textContent=g;}
+        document.querySelectorAll('.form-input').forEach(i=>i.addEventListener('input',calc));
+        window.addEventListener('load',calc);
+    </script>
+</body>
+</html>
