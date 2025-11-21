@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free retirement calculator - Calculate how much you need to save for retirement. Plan your retirement savings with detailed projections and analysis.">
+    <meta name="keywords" content="retirement calculator, retirement planning, 401k calculator, retirement savings, pension calculator, retirement age">
+    <title>Retirement Calculator - Plan Your Retirement Savings | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/retirement-calculator.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Retirement Calculator</h1>
+            <p class="calculator-description">Calculate how much you need to save for a comfortable retirement</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Retirement Planning</h3>
+                <div class="form-group">
+                    <label for="currentAge" class="form-label">Current Age</label>
+                    <input type="number" id="currentAge" class="form-input" value="30" min="18" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="retirementAge" class="form-label">Planned Retirement Age</label>
+                    <input type="number" id="retirementAge" class="form-input" value="65" min="50" max="80">
+                </div>
+                <div class="form-group">
+                    <label for="currentSavings" class="form-label">Current Retirement Savings ($)</label>
+                    <input type="number" id="currentSavings" class="form-input" value="50000" min="0" step="1000">
+                </div>
+                <div class="form-group">
+                    <label for="monthlyContribution" class="form-label">Monthly Contribution ($)</label>
+                    <input type="number" id="monthlyContribution" class="form-input" value="500" min="0" step="50">
+                </div>
+                <div class="form-group">
+                    <label for="annualReturn" class="form-label">Expected Annual Return (%)</label>
+                    <input type="number" id="annualReturn" class="form-input" value="7" min="0" max="20" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="lifeExpectancy" class="form-label">Life Expectancy</label>
+                    <input type="number" id="lifeExpectancy" class="form-input" value="85" min="60" max="120">
+                </div>
+                <div class="form-group">
+                    <label for="annualRetirementIncome" class="form-label">Desired Annual Retirement Income ($)</label>
+                    <input type="number" id="annualRetirementIncome" class="form-input" value="60000" min="0" step="5000">
+                </div>
+                <button onclick="calculateRetirement()" class="btn-calculate">Calculate Retirement Plan</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Retirement Projection</h3>
+                <div class="result-item">
+                    <div class="result-label">Total at Retirement</div>
+                    <div class="result-value" id="retirementTotal" style="font-size: 2.5rem; color: #10b981;">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Monthly Income Available</div>
+                    <div class="result-value" id="monthlyIncome" style="font-size: 1.5rem;">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Years Until Retirement</div>
+                    <div class="result-value" id="yearsUntil" style="font-size: 1.3rem;">0 years</div>
+                </div>
+                <div style="margin-top: 20px; padding: 20px; background: #f0fdf4; border-radius: 8px;" id="statusBox">
+                    <div id="statusMessage" style="font-weight: 600; margin-bottom: 10px;"></div>
+                    <div id="recommendationMessage" style="font-size: 0.9rem;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Retirement Planning Guide</h2>
+            <p>Planning for retirement requires understanding how much you need to save and how your investments will grow over time. The earlier you start, the more time compound interest has to work in your favor.</p>
+            <h2>Key Retirement Planning Principles</h2>
+            <h3>Start Early</h3>
+            <p>Time is your greatest asset. Starting at 25 vs. 35 can result in hundreds of thousands more at retirement due to compound growth.</p>
+            <h3>Maximize Employer Match</h3>
+            <p>Always contribute enough to get full employer 401(k) match - it's free money, typically 50-100% return immediately.</p>
+            <h3>The 4% Rule</h3>
+            <p>A common guideline: withdraw 4% of retirement savings annually. $1 million provides $40,000/year. Adjust based on market conditions and life expectancy.</p>
+            <h2>Retirement Account Types</h2>
+            <h3>401(k) Plans</h3>
+            <p>Employer-sponsored with pre-tax contributions. 2024 limit: $23,000 ($30,500 if 50+). Employer match is bonus. Tax-deferred growth until withdrawal.</p>
+            <h3>Traditional IRA</h3>
+            <p>Tax-deductible contributions, tax-deferred growth. 2024 limit: $7,000 ($8,000 if 50+). Withdrawals taxed as ordinary income.</p>
+            <h3>Roth IRA</h3>
+            <p>After-tax contributions, tax-free growth and withdrawals. Same limits as Traditional IRA. Best for those expecting higher tax rates in retirement.</p>
+            <h3>Roth 401(k)</h3>
+            <p>Combines high contribution limits of 401(k) with tax-free growth of Roth. Available through some employers.</p>
+            <h2>Common Retirement Mistakes</h2>
+            <ul>
+                <li><strong>Starting Too Late:</strong> Delaying 10 years can cost hundreds of thousands in lost compound growth</li>
+                <li><strong>Not Maximizing Match:</strong> Leaving employer matching on table is declining free money</li>
+                <li><strong>Too Conservative Young:</strong> Being 50% bonds at 30 severely limits growth potential</li>
+                <li><strong>Cashing Out Early:</strong> Taking 401(k) distributions before 59½ incurs 10% penalty plus taxes</li>
+                <li><strong>Underestimating Needs:</strong> Most need 70-90% of pre-retirement income, not 50%</li>
+            </ul>
+            <h2>Frequently Asked Questions</h2>
+            <h3>How much do I need to retire?</h3>
+            <p>Common rule: 25x your annual expenses (4% withdrawal rule). For $60,000/year, you'd need $1.5 million. Factor in Social Security and pensions.</p>
+            <h3>When should I retire?</h3>
+            <p>Full Social Security: 66-67 depending on birth year. Can claim at 62 with reduced benefits or wait until 70 for maximum benefits.</p>
+            <h3>What return should I expect?</h3>
+            <p>Historically, stock markets return 10% nominal, 7% after inflation. Bonds return 5-6%. Balanced portfolios typically assume 6-8% long-term.</p>
+        </div>
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="investment-calculator.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Investment Calculator</h3>
+                    <p class="calc-description">Calculate investment returns</p>
+                </a>
+                <a href="compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Compound Interest</h3>
+                    <p class="calc-description">Calculate compound growth</p>
+                </a>
+                <a href="loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Loan Calculator</h3>
+                    <p class="calc-description">Calculate loan payments</p>
+                </a>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculateRetirement() {
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const retirementAge = parseInt(document.getElementById('retirementAge').value);
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value);
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) / 100;
+            const lifeExpectancy = parseInt(document.getElementById('lifeExpectancy').value);
+            const desiredAnnualIncome = parseFloat(document.getElementById('annualRetirementIncome').value);
+
+            const yearsUntilRetirement = retirementAge - currentAge;
+            const yearsInRetirement = lifeExpectancy - retirementAge;
+            const monthlyRate = annualReturn / 12;
+            const totalMonths = yearsUntilRetirement * 12;
+
+            // Future value calculation
+            let futureValue = currentSavings * Math.pow(1 + monthlyRate, totalMonths);
+            for (let month = 0; month < totalMonths; month++) {
+                const monthsRemaining = totalMonths - month;
+                futureValue += monthlyContribution * Math.pow(1 + monthlyRate, monthsRemaining);
+            }
+
+            // Calculate sustainable monthly income using 4% rule
+            const sustainableAnnualIncome = futureValue * 0.04;
+            const sustainableMonthlyIncome = sustainableAnnualIncome / 12;
+
+            // Display results
+            document.getElementById('retirementTotal').textContent = '$' + futureValue.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('monthlyIncome').textContent = '$' + sustainableMonthlyIncome.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('yearsUntil').textContent = yearsUntilRetirement + ' years';
+
+            // Status message
+            const statusBox = document.getElementById('statusBox');
+            const statusMsg = document.getElementById('statusMessage');
+            const recMsg = document.getElementById('recommendationMessage');
+
+            if (sustainableAnnualIncome >= desiredAnnualIncome) {
+                statusBox.style.background = '#d1fae5';
+                statusMsg.textContent = '✓ On track for retirement goals!';
+                statusMsg.style.color = '#065f46';
+                recMsg.textContent = `Your projected savings will provide $${sustainableAnnualIncome.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} annually, meeting your goal of $${desiredAnnualIncome.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} per year.`;
+            } else {
+                const shortfall = desiredAnnualIncome - sustainableAnnualIncome;
+                const additionalNeeded = shortfall / 0.04;
+                const additionalMonthly = (additionalNeeded - futureValue) / ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate);
+
+                statusBox.style.background = '#fef3c7';
+                statusMsg.textContent = '⚠ Below retirement goal';
+                statusMsg.style.color = '#92400e';
+                recMsg.textContent = `You're projected to have $${sustainableAnnualIncome.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} annually, short of your $${desiredAnnualIncome.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} goal by $${shortfall.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}. Consider increasing monthly contributions by $${Math.max(0, additionalMonthly).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}.`;
+            }
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateRetirement);
+        });
+
+        window.addEventListener('load', calculateRetirement);
+    </script>
+</body>
+</html>

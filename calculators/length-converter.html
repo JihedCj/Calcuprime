@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free length converter - Convert meters, feet, inches, centimeters, kilometers, and miles. Fast and accurate length conversion.">
+    <meta name="keywords" content="length converter, distance converter, meters to feet, inches to cm, km to miles, unit converter">
+    <title>Length Converter | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/length-converter.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html#converters">Converters</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Length Converter</h1>
+            <p class="calculator-description">Convert between length units</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Calculator</h3>
+                <div class="form-group"><label for="value" class="form-label">Value</label><input type="number" id="value" class="form-input" value="1"></div>
+                <div class="form-group"><label for="from" class="form-label">From</label><select id="from" class="form-select"><option value="1">Meters</option><option value="1000">Kilometers</option><option value="0.01">Centimeters</option><option value="0.001">Millimeters</option><option value="1609.34">Miles</option><option value="0.9144">Yards</option><option value="0.3048">Feet</option><option value="0.0254">Inches</option></select></div>
+                <div class="form-group"><label for="to" class="form-label">To</label><select id="to" class="form-select"><option value="1">Meters</option><option value="1000">Kilometers</option><option value="0.01">Centimeters</option><option value="0.001">Millimeters</option><option value="1609.34">Miles</option><option value="0.9144">Yards</option><option value="0.3048">Feet</option><option value="0.0254">Inches</option></select></div>
+                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Results</h3>
+                <div class="result-item"><div class="result-value" id="result" style="font-size: 2rem; color: #10b981;">-</div></div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            
+            const value = parseFloat(document.getElementById('value').value);
+            const fromUnit = parseFloat(document.getElementById('from').value);
+            const toUnit = parseFloat(document.getElementById('to').value);
+            const result = (value * fromUnit) / toUnit;
+            document.getElementById('result').textContent = result.toFixed(4);
+        
+        }
+        document.querySelectorAll('input, select').forEach(el => el.addEventListener('change', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

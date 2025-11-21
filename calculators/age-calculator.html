@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free age calculator - Calculate age in years, months, days, hours, and minutes. Find out how old you are or calculate age difference between dates.">
+    <meta name="keywords" content="age calculator, calculate age, age difference, days until birthday, exact age, age in days, date calculator">
+
+    <title>Age Calculator - Calculate Your Exact Age | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/age-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Age Calculator</h1>
+            <p class="calculator-description">Calculate your exact age or the time between any two dates</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Calculate Age</h3>
+
+                <div class="form-group">
+                    <label for="birthDate" class="form-label">Date of Birth</label>
+                    <input type="date" id="birthDate" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="currentDate" class="form-label">Calculate Age As Of</label>
+                    <input type="date" id="currentDate" class="form-input">
+                </div>
+
+                <button onclick="calculateAge()" class="btn-calculate">Calculate Age</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Your Age</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Exact Age</div>
+                    <div class="result-value" id="exactAge" style="font-size: 2.5rem; color: #8b5cf6;">-</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f5f3ff; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Detailed Breakdown</h4>
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Total Months:</span>
+                            <span id="totalMonths" style="font-weight: 600;">-</span>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Total Weeks:</span>
+                            <span id="totalWeeks" style="font-weight: 600;">-</span>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Total Days:</span>
+                            <span id="totalDays" style="font-weight: 600;">-</span>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Total Hours:</span>
+                            <span id="totalHours" style="font-weight: 600;">-</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Total Minutes:</span>
+                            <span id="totalMinutes" style="font-weight: 600;">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="birthdaySection" style="margin-top: 15px; padding: 15px; background: #fef3c7; border-radius: 8px;">
+                    <div style="font-size: 0.9rem; font-weight: 500; margin-bottom: 5px;">Next Birthday</div>
+                    <div id="nextBirthday" style="font-size: 1.3rem; font-weight: 600; color: #d97706; margin-bottom: 5px;">-</div>
+                    <div id="daysUntilBirthday" style="font-size: 1rem; color: #92400e;">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How Age is Calculated</h2>
+            <p>Age is calculated by finding the difference between two dates. The calculator accounts for leap years and varying month lengths to give you an exact age in years, months, and days. It also calculates your age in smaller units like weeks, days, hours, and minutes for a comprehensive view.</p>
+
+            <h2>Understanding Age Calculations</h2>
+            <h3>Years, Months, and Days</h3>
+            <p>Your age in years is the number of full years that have passed since your birth. Months and days represent the additional time beyond complete years. For example, if you were born on March 15, 1990, and today is May 20, 2024, you are 34 years, 2 months, and 5 days old.</p>
+
+            <h3>Leap Years</h3>
+            <p>Leap years occur every 4 years (with exceptions for century years). February 29th only exists in leap years. If you were born on February 29th, your birthday is typically celebrated on February 28th or March 1st in non-leap years.</p>
+
+            <h3>Time Zones</h3>
+            <p>This calculator uses your local date and time. If calculating age for someone in a different time zone, consider that they may technically be a day older or younger depending on the time zone difference.</p>
+
+            <h2>Common Age Calculation Uses</h2>
+            <h3>Legal Age Verification</h3>
+            <p>Determine if someone meets age requirements for voting (18+), drinking (21+ in US), senior discounts (55 or 65+), or other age-restricted activities.</p>
+
+            <h3>Retirement Planning</h3>
+            <p>Calculate how many years until retirement age. In the US, full Social Security retirement age is 66-67 depending on birth year. Early retirement possible at 62 with reduced benefits.</p>
+
+            <h3>School Enrollment</h3>
+            <p>Schools have age cutoffs for enrollment. Kindergarten typically requires children to be 5 years old by a specific date (often September 1st).</p>
+
+            <h3>Relationship Age Gaps</h3>
+            <p>Calculate age difference between partners, siblings, or friends. The "half your age plus seven" rule is a common guideline for socially acceptable relationship age gaps.</p>
+
+            <h3>Event Planning</h3>
+            <p>Calculate exact age for milestone birthdays (Sweet 16, 18th, 21st, 30th, 40th, 50th, etc.) or anniversaries.</p>
+
+            <h2>Age Milestones</h2>
+            <h3>Childhood & Adolescence</h3>
+            <ul>
+                <li><strong>Age 1:</strong> Toddler stage begins</li>
+                <li><strong>Age 5-6:</strong> School age, kindergarten</li>
+                <li><strong>Age 13:</strong> Teenager</li>
+                <li><strong>Age 16:</strong> Sweet 16, driving age in most US states</li>
+                <li><strong>Age 18:</strong> Legal adult, voting age</li>
+            </ul>
+
+            <h3>Adulthood</h3>
+            <ul>
+                <li><strong>Age 21:</strong> Legal drinking age in US</li>
+                <li><strong>Age 25:</strong> Full brain development, lower car insurance rates</li>
+                <li><strong>Age 30-40:</strong> Prime career and family years</li>
+                <li><strong>Age 50:</strong> AARP eligibility, some senior discounts begin</li>
+            </ul>
+
+            <h3>Senior Years</h3>
+            <ul>
+                <li><strong>Age 55:</strong> Many senior discounts available</li>
+                <li><strong>Age 62:</strong> Early Social Security eligibility (US)</li>
+                <li><strong>Age 65:</strong> Medicare eligibility (US), traditional retirement age</li>
+                <li><strong>Age 66-67:</strong> Full Social Security retirement age (US)</li>
+                <li><strong>Age 70:</strong> Maximum Social Security benefits (US)</li>
+            </ul>
+
+            <h2>Interesting Age Facts</h2>
+            <h3>Life Expectancy</h3>
+            <p>Global average life expectancy is about 72 years. In developed countries, it's often 78-83 years. Factors affecting longevity include genetics, lifestyle, healthcare access, and socioeconomic status.</p>
+
+            <h3>Generations</h3>
+            <ul>
+                <li><strong>Greatest Generation:</strong> Born 1901-1927</li>
+                <li><strong>Silent Generation:</strong> Born 1928-1945</li>
+                <li><strong>Baby Boomers:</strong> Born 1946-1964</li>
+                <li><strong>Generation X:</strong> Born 1965-1980</li>
+                <li><strong>Millennials:</strong> Born 1981-1996</li>
+                <li><strong>Generation Z:</strong> Born 1997-2012</li>
+                <li><strong>Generation Alpha:</strong> Born 2013-present</li>
+            </ul>
+
+            <h3>Age in Other Cultures</h3>
+            <p>In South Korea, babies are considered 1 year old at birth, and everyone ages one year on New Year's Day (not on their birthday). In traditional Chinese culture, age is also calculated differently, adding a year during the Lunar New Year.</p>
+
+            <h2>Age and Time Perception</h2>
+            <h3>Why Time Seems to Speed Up</h3>
+            <p>Many people feel time passes faster as they age. This may be because each year represents a smaller fraction of your total life. At age 10, one year is 10% of your life. At age 50, it's only 2%. Novel experiences and strong memories also make time feel slower, which happens more often in youth.</p>
+
+            <h3>Making the Most of Your Years</h3>
+            <ul>
+                <li><strong>Set goals:</strong> Having milestones gives structure and purpose to time</li>
+                <li><strong>Try new things:</strong> Novel experiences create more memorable moments</li>
+                <li><strong>Stay present:</strong> Mindfulness helps you appreciate current moments</li>
+                <li><strong>Maintain relationships:</strong> Social connections provide fulfillment at any age</li>
+                <li><strong>Keep learning:</strong> Continuous learning keeps your mind sharp and engaged</li>
+                <li><strong>Stay active:</strong> Physical activity improves both health span and life span</li>
+            </ul>
+
+            <h2>Calculating Age for Documents</h2>
+            <h3>Passport Applications</h3>
+            <p>Passports require proof of birth date. Minor passports (under 16) valid 5 years. Adult passports valid 10 years. Calculate when yours expires and plan renewals 6+ months ahead for international travel.</p>
+
+            <h3>Insurance Applications</h3>
+            <p>Life insurance and health insurance premiums vary significantly by age. Applying at younger ages typically secures lower rates that remain fixed. Calculate milestone ages (30, 40, 50) to time applications strategically.</p>
+
+            <h3>Employment</h3>
+            <p>Some jobs have age requirements (minimum 18 for many positions, 21 for alcohol service). Mandatory retirement ages exist in some professions (pilots at 65, some government positions). Age discrimination in employment is illegal in many jurisdictions.</p>
+
+            <h2>Frequently Asked Questions</h2>
+            <h3>What if I was born on February 29th?</h3>
+            <p>People born on leap day (February 29) technically have a birthday only every 4 years. Legally, they age on either February 28 or March 1 in non-leap years, depending on jurisdiction. For celebrations, they often choose either date or celebrate both!</p>
+
+            <h3>How accurate is the age calculator?</h3>
+            <p>This calculator is precise to the day. It accounts for leap years and varying month lengths. For applications requiring hour-minute precision (like calculating exactly 18 years for legal purposes), consider the specific time of birth.</p>
+
+            <h3>Can I calculate someone else's age?</h3>
+            <p>Yes! Simply enter their birth date and the date you want to calculate their age as of. This is useful for verifying ages for various purposes.</p>
+
+            <h3>Why does my age in days seem so large?</h3>
+            <p>There are 365 days in a year (366 in leap years). A 30-year-old person has lived approximately 10,950 days! When you break it down into hours (262,800) or minutes (15,768,000), the numbers become truly impressive.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="pregnancy-calculator.html" class="calc-card">
+                    <div class="calc-icon">👶</div>
+                    <h3 class="calc-title">Pregnancy Calculator</h3>
+                    <p class="calc-description">Calculate due date and weeks</p>
+                </a>
+
+                <a href="percentage-calculator.html" class="calc-card">
+                    <div class="calc-icon">%</div>
+                    <h3 class="calc-title">Percentage Calculator</h3>
+                    <p class="calc-description">Calculate percentages</p>
+                </a>
+
+                <a href="bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">BMI Calculator</h3>
+                    <p class="calc-description">Calculate Body Mass Index</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Set default dates
+        const today = new Date();
+        document.getElementById('currentDate').value = today.toISOString().split('T')[0];
+
+        const defaultBirthDate = new Date(today.getFullYear() - 25, today.getMonth(), today.getDate());
+        document.getElementById('birthDate').value = defaultBirthDate.toISOString().split('T')[0];
+
+        function calculateAge() {
+            const birthDateInput = document.getElementById('birthDate').value;
+            const currentDateInput = document.getElementById('currentDate').value;
+
+            if (!birthDateInput || !currentDateInput) {
+                alert('Please enter both dates');
+                return;
+            }
+
+            const birthDate = new Date(birthDateInput);
+            const currentDate = new Date(currentDateInput);
+
+            if (birthDate > currentDate) {
+                alert('Birth date cannot be in the future');
+                return;
+            }
+
+            // Calculate exact age
+            let years = currentDate.getFullYear() - birthDate.getFullYear();
+            let months = currentDate.getMonth() - birthDate.getMonth();
+            let days = currentDate.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            // Calculate totals
+            const diffMs = currentDate - birthDate;
+            const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const totalWeeks = Math.floor(totalDays / 7);
+            const totalMonths = years * 12 + months;
+            const totalHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const totalMinutes = Math.floor(diffMs / (1000 * 60));
+
+            // Calculate next birthday
+            let nextBirthday = new Date(currentDate.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+            if (nextBirthday <= currentDate) {
+                nextBirthday.setFullYear(currentDate.getFullYear() + 1);
+            }
+
+            const daysUntilBirthday = Math.floor((nextBirthday - currentDate) / (1000 * 60 * 60 * 24));
+            const nextAge = nextBirthday.getFullYear() - birthDate.getFullYear();
+
+            // Format and display results
+            document.getElementById('exactAge').textContent =
+                `${years} years, ${months} months, ${days} days`;
+
+            document.getElementById('totalMonths').textContent = totalMonths.toLocaleString();
+            document.getElementById('totalWeeks').textContent = totalWeeks.toLocaleString();
+            document.getElementById('totalDays').textContent = totalDays.toLocaleString();
+            document.getElementById('totalHours').textContent = totalHours.toLocaleString();
+            document.getElementById('totalMinutes').textContent = totalMinutes.toLocaleString();
+
+            const nextBirthdayFormatted = nextBirthday.toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+            });
+
+            document.getElementById('nextBirthday').textContent = nextBirthdayFormatted;
+            document.getElementById('daysUntilBirthday').textContent =
+                daysUntilBirthday === 0
+                    ? '🎉 Happy Birthday!'
+                    : `${daysUntilBirthday} days until you turn ${nextAge}`;
+
+            showResult('exactAge');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateAge);
+        });
+
+        window.addEventListener('load', calculateAge);
+    </script>
+</body>
+</html>

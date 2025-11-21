@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free GPA calculator - Calculate semester and cumulative GPA on 4.0 scale. Add multiple courses with credit hours and letter grades for accurate GPA calculation.">
+    <meta name="keywords" content="gpa calculator, grade point average, cumulative gpa, semester gpa, college gpa calculator, 4.0 scale">
+    <title>GPA Calculator | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/gpa-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html">Home</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">GPA Calculator</h1>
+            <p class="calculator-description">Calculate your semester and cumulative GPA with ease</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Current Semester Courses</h3>
+                <div id="courses">
+                    <div class="course-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <select class="form-input course-grade" style="flex: 1;">
+                            <option value="4.0">A (4.0)</option>
+                            <option value="3.7">A- (3.7)</option>
+                            <option value="3.3">B+ (3.3)</option>
+                            <option value="3.0">B (3.0)</option>
+                            <option value="2.7">B- (2.7)</option>
+                            <option value="2.3">C+ (2.3)</option>
+                            <option value="2.0">C (2.0)</option>
+                            <option value="1.7">C- (1.7)</option>
+                            <option value="1.3">D+ (1.3)</option>
+                            <option value="1.0">D (1.0)</option>
+                            <option value="0.0">F (0.0)</option>
+                        </select>
+                        <input type="number" class="form-input course-credits" placeholder="Credits" value="3" min="1" max="6" step="0.5" style="flex: 0.6;">
+                    </div>
+                    <div class="course-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <select class="form-input course-grade" style="flex: 1;">
+                            <option value="4.0">A (4.0)</option>
+                            <option value="3.7">A- (3.7)</option>
+                            <option value="3.3" selected>B+ (3.3)</option>
+                            <option value="3.0">B (3.0)</option>
+                            <option value="2.7">B- (2.7)</option>
+                            <option value="2.3">C+ (2.3)</option>
+                            <option value="2.0">C (2.0)</option>
+                            <option value="1.7">C- (1.7)</option>
+                            <option value="1.3">D+ (1.3)</option>
+                            <option value="1.0">D (1.0)</option>
+                            <option value="0.0">F (0.0)</option>
+                        </select>
+                        <input type="number" class="form-input course-credits" placeholder="Credits" value="4" min="1" max="6" step="0.5" style="flex: 0.6;">
+                    </div>
+                    <div class="course-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <select class="form-input course-grade" style="flex: 1;">
+                            <option value="4.0">A (4.0)</option>
+                            <option value="3.7">A- (3.7)</option>
+                            <option value="3.3">B+ (3.3)</option>
+                            <option value="3.0" selected>B (3.0)</option>
+                            <option value="2.7">B- (2.7)</option>
+                            <option value="2.3">C+ (2.3)</option>
+                            <option value="2.0">C (2.0)</option>
+                            <option value="1.7">C- (1.7)</option>
+                            <option value="1.3">D+ (1.3)</option>
+                            <option value="1.0">D (1.0)</option>
+                            <option value="0.0">F (0.0)</option>
+                        </select>
+                        <input type="number" class="form-input course-credits" placeholder="Credits" value="3" min="1" max="6" step="0.5" style="flex: 0.6;">
+                    </div>
+                    <div class="course-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <select class="form-input course-grade" style="flex: 1;">
+                            <option value="4.0">A (4.0)</option>
+                            <option value="3.7" selected>A- (3.7)</option>
+                            <option value="3.3">B+ (3.3)</option>
+                            <option value="3.0">B (3.0)</option>
+                            <option value="2.7">B- (2.7)</option>
+                            <option value="2.3">C+ (2.3)</option>
+                            <option value="2.0">C (2.0)</option>
+                            <option value="1.7">C- (1.7)</option>
+                            <option value="1.3">D+ (1.3)</option>
+                            <option value="1.0">D (1.0)</option>
+                            <option value="0.0">F (0.0)</option>
+                        </select>
+                        <input type="number" class="form-input course-credits" placeholder="Credits" value="3" min="1" max="6" step="0.5" style="flex: 0.6;">
+                    </div>
+                </div>
+                <h3 style="margin-top: 1.5rem;">Previous GPA (Optional)</h3>
+                <div class="form-group">
+                    <label for="prevGPA" class="form-label">Previous Cumulative GPA</label>
+                    <input type="number" id="prevGPA" class="form-input" value="0" min="0" max="4" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="prevCredits" class="form-label">Previous Total Credits</label>
+                    <input type="number" id="prevCredits" class="form-input" value="0" min="0" max="200" step="1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate GPA</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Your GPA</h3>
+                <div class="result-item">
+                    <div class="result-label">Semester GPA</div>
+                    <div class="result-value" id="semesterGPA" style="font-size: 2.5rem; color: #10b981;">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Semester Credits</div>
+                    <div class="result-value" id="semesterCredits">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Cumulative GPA</div>
+                    <div class="result-value" id="cumulativeGPA">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Credits</div>
+                    <div class="result-value" id="totalCredits">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Academic Standing</div>
+                    <div class="result-value" id="standing" style="font-size: 1.2rem;">-</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>What is GPA?</h2>
+            <p>Grade Point Average (GPA) is a standardized numerical representation of your academic performance, calculated by converting letter grades to numerical values, weighting them by credit hours, and averaging the results. The most common scale in American education is the 4.0 scale, where A = 4.0, B = 3.0, C = 2.0, D = 1.0, and F = 0.0. GPA serves as the primary academic metric for college admissions, scholarship eligibility, academic honors, graduate school applications, and even some employment opportunities.</p>
+
+            <p>Understanding GPA calculation empowers strategic academic planning. Knowing how each grade impacts your GPA helps prioritize study time, make informed decisions about course difficulty, and set realistic goals for academic achievement. Whether you're a high school student planning for college or a college student targeting graduate school, GPA awareness is essential for maximizing opportunities.</p>
+
+            <h2>How GPA is Calculated</h2>
+            <p>GPA calculation follows a straightforward weighted average formula. Each course contributes to your GPA proportionally to its credit hours:</p>
+
+            <p><strong>Step 1: Convert Letter Grades to Points.</strong> Standard 4.0 scale: A = 4.0, A- = 3.7, B+ = 3.3, B = 3.0, B- = 2.7, C+ = 2.3, C = 2.0, C- = 1.7, D+ = 1.3, D = 1.0, F = 0.0. Some schools use simpler scales (A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0.0) without plus/minus distinctions.</p>
+
+            <p><strong>Step 2: Multiply Grade Points by Credit Hours.</strong> A 4-credit course with an A (4.0) earns 4 × 4.0 = 16.0 quality points. A 3-credit course with a B+ (3.3) earns 3 × 3.3 = 9.9 quality points. Calculate quality points for each course.</p>
+
+            <p><strong>Step 3: Sum Quality Points and Credit Hours.</strong> Add up all quality points from all courses. Add up all credit hours from all courses.</p>
+
+            <p><strong>Step 4: Divide Total Quality Points by Total Credit Hours.</strong> GPA = Total Quality Points ÷ Total Credit Hours. Example: If you earned 45.5 quality points across 14 credit hours, your GPA = 45.5 ÷ 14 = 3.25.</p>
+
+            <p><strong>Cumulative GPA Calculation:</strong> To update cumulative GPA with new semester grades, calculate total quality points from all semesters (previous quality points + new semester quality points), divide by total credit hours from all semesters (previous credits + new semester credits). This weighted approach means strong performance in high-credit courses matters more than strong performance in low-credit courses.</p>
+
+            <h2>Different GPA Scales</h2>
+            <p><strong>Unweighted 4.0 Scale:</strong> The standard scale where A = 4.0 represents the maximum. This treats all courses equally regardless of difficulty. Most colleges use unweighted GPA for admissions calculations, even when high schools report weighted GPAs.</p>
+
+            <p><strong>Weighted GPA Scale:</strong> Many high schools use weighted scales that award extra points for Advanced Placement (AP), International Baccalaureate (IB), or honors courses. Common weighted scale: Regular A = 4.0, Honors A = 4.5, AP/IB A = 5.0. Weighted GPAs can exceed 4.0, sometimes reaching 5.0 or higher. Weighted GPA rewards academic rigor and course difficulty.</p>
+
+            <p><strong>Percentage to GPA Conversion:</strong> Some schools use percentage grades rather than letters. Common conversions: 93-100% = A (4.0), 90-92% = A- (3.7), 87-89% = B+ (3.3), 83-86% = B (3.0), 80-82% = B- (2.7), and so on. However, conversion scales vary significantly by institution, so always check your school's specific policy.</p>
+
+            <p><strong>College vs. High School GPA:</strong> High school GPAs often include all courses (including electives, PE, arts). College GPAs typically include only courses counting toward your degree. Many colleges also calculate major GPA (courses in your major) separately from overall GPA. Graduate programs often weigh major GPA more heavily than overall GPA.</p>
+
+            <h2>Why GPA Matters</h2>
+            <p><strong>College Admissions:</strong> GPA is the single most important factor in college admissions decisions. A study of admissions factors ranked GPA in college prep courses as the top consideration, ahead of standardized test scores, extracurriculars, and essays. Selective colleges typically admit students with GPAs of 3.7-4.0 (unweighted), while less selective institutions accept GPAs of 2.5-3.5. Many colleges publish admitted student GPA ranges—research target schools to understand requirements.</p>
+
+            <p><strong>Scholarships and Financial Aid:</strong> Merit-based scholarships establish minimum GPA requirements, typically 3.0-3.5 for institutional scholarships and 3.5-4.0 for competitive national scholarships. Maintaining GPA above threshold levels qualifies you for renewable scholarships worth tens of thousands of dollars over four years. Many scholarships require maintaining a minimum GPA annually to renew funding.</p>
+
+            <p><strong>Graduate School Admissions:</strong> Graduate programs, especially competitive ones (medical school, law school, MBA programs, Ph.D. programs), heavily weight undergraduate GPA. Medical schools typically require 3.5+ GPA with science course GPA (biology, chemistry, physics, math) of 3.5+ for competitive candidacy. Law schools and MBA programs similarly emphasize GPA alongside standardized test scores (LSAT, GMAT, GRE).</p>
+
+            <p><strong>Employment Opportunities:</strong> Many employers, particularly for entry-level positions and competitive fields (consulting, finance, tech), establish minimum GPA requirements (typically 3.0-3.5) for resume screening. While GPA matters less after gaining work experience, strong undergraduate GPA opens doors for first jobs and internships.</p>
+
+            <p><strong>Academic Standing and Eligibility:</strong> Colleges enforce minimum GPA requirements for good academic standing (typically 2.0), athletic eligibility (typically 2.3), study abroad programs (typically 2.5-3.0), and major declaration (varies by program). Falling below thresholds triggers academic probation, potentially leading to dismissal.</p>
+
+            <h2>How to Improve Your GPA</h2>
+            <p><strong>Strategic Course Selection:</strong> Balance challenging courses that impress admissions committees with courses where you can excel. A mix of rigorous classes (AP, honors, challenging major requirements) with manageable electives optimizes GPA while demonstrating academic ambition. Avoid overloading semesters with multiple extremely difficult courses simultaneously.</p>
+
+            <p><strong>Master Time Management:</strong> Successful students allocate study time proportional to credit hours and course difficulty. A common rule: spend 2-3 hours outside class for every credit hour. A 15-credit semester requires 30-45 hours weekly study time. Use calendars, planners, or apps to schedule study sessions, track assignments, and plan for exams.</p>
+
+            <p><strong>Attend Class Consistently:</strong> Studies show strong correlation between class attendance and grades. Professors often provide exam hints, clarify confusing concepts, and emphasize important material during lectures. Missing classes creates gaps in understanding that compound over the semester.</p>
+
+            <p><strong>Utilize Office Hours and Tutoring:</strong> Professors and teaching assistants hold office hours specifically to help students. Attending office hours demonstrates engagement, clarifies difficult concepts, and builds relationships that lead to better letters of recommendation. Free tutoring services, study groups, and writing centers provide additional support.</p>
+
+            <p><strong>Start Assignments Early:</strong> Procrastination produces rushed, lower-quality work and creates unnecessary stress. Starting assignments when assigned allows time for research, drafts, revision, and questions. This approach typically improves grades by 0.3-0.5 points per assignment compared to last-minute efforts.</p>
+
+            <p><strong>Study Effectively, Not Just More:</strong> Active study techniques (practice problems, self-quizzing, teaching concepts to others, making connections between ideas) produce better retention than passive methods (re-reading notes, highlighting). Focus on understanding concepts rather than memorizing facts.</p>
+
+            <p><strong>Seek Extra Credit Opportunities:</strong> Many professors offer extra credit for attending lectures, writing additional papers, or completing supplementary assignments. These opportunities can raise borderline grades (B+ to A-) that significantly impact GPA.</p>
+
+            <h2>GPA Recovery Strategies</h2>
+            <p><strong>The Math of GPA Recovery:</strong> Low early-semester or early-college GPAs are difficult but not impossible to raise. GPA improvement requires higher grades in future courses, but the impact diminishes as you accumulate credits. Raising a 2.5 GPA after 30 credits to 3.0 by graduation (120 credits) requires approximately 3.2 GPA in remaining 90 credits. Use GPA calculators to model scenarios and set realistic goals.</p>
+
+            <p><strong>Grade Replacement Policies:</strong> Some colleges allow retaking courses with grade replacement—the new grade replaces the old grade in GPA calculation (though both grades may appear on transcripts). Strategically retaking courses where you earned C- or below can significantly boost GPA, especially if retaking high-credit courses.</p>
+
+            <p><strong>Grade Forgiveness Programs:</strong> Some institutions offer academic fresh start programs allowing students to petition to exclude certain semesters (typically due to medical issues, family emergencies, or other extenuating circumstances) from GPA calculation. Requirements and limitations vary, but these programs provide recovery opportunities for students who experienced temporary setbacks.</p>
+
+            <p><strong>Focus on Major GPA:</strong> If overall GPA is mediocre but major GPA is strong, emphasize major GPA on applications and resumes. Many employers and graduate programs value major GPA more than overall GPA, as it better reflects competence in your field.</p>
+
+            <h2>Common GPA Mistakes to Avoid</h2>
+            <p><strong>Ignoring Early Grades:</strong> Many students don't take freshman year seriously, assuming they have time to improve later. However, early poor grades create a GPA hole difficult to escape. Every course matters from day one.</p>
+
+            <p><strong>Taking Too Many Difficult Courses Simultaneously:</strong> Overambitious course loads often backfire. Taking five challenging major courses in one semester while working part-time and participating in extracurriculars spreads time too thin, resulting in mediocre grades across all classes. Better to take 4-5 courses and excel than take 6-7 courses and struggle.</p>
+
+            <p><strong>Not Calculating GPA Regularly:</strong> Many students don't track GPA until grade reports arrive, missing opportunities to identify problems early. Calculate GPA after each assignment and exam to understand standing before finals. This awareness enables strategic studying and informed decisions about dropping courses if necessary.</p>
+
+            <p><strong>Misunderstanding Withdrawal Policies:</strong> Withdrawing from courses (W grade) typically doesn't impact GPA but counts toward credit hour limits and may affect financial aid. Understand withdrawal deadlines and implications before dropping courses. Sometimes accepting a C is better than withdrawing if you've already invested significant time.</p>
+
+            <h2>GPA and Class Rank</h2>
+            <p>Class rank expresses your GPA relative to classmates—top 10%, top 25%, etc. While some high schools still report class rank, many have eliminated it due to competitiveness concerns. Colleges that receive class rank use it to contextualize GPA. A 3.8 GPA ranking in top 1% of class at a competitive high school may impress more than a 4.0 GPA ranking in top 20% of class at a less competitive school.</p>
+
+            <p>For colleges that don't receive class rank, they rely on your high school's profile (document describing grading policies, course rigor, historical college admissions data) to interpret your GPA. This is why course rigor matters—admissions officers evaluate GPAs in context of available opportunities.</p>
+
+            <h2>The Bottom Line</h2>
+            <p>GPA is a powerful academic metric that opens or closes doors throughout your educational and early professional career. Understanding GPA calculation enables strategic academic planning, realistic goal-setting, and informed decisions about courses, majors, and study time allocation. While GPA isn't everything—standardized tests, extracurriculars, leadership, work experience, and personal qualities all matter—it remains the foundational academic credential. Calculate your GPA regularly, understand how each grade impacts your standing, set ambitious but achievable targets, and commit to the habits and strategies that produce academic success. Strong GPA creates options; weak GPA limits them. The investment in GPA management pays dividends in scholarships, admissions offers, and career opportunities.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const courseRows = document.querySelectorAll('.course-row');
+            let totalQualityPoints = 0;
+            let totalCredits = 0;
+
+            // Calculate semester GPA
+            courseRows.forEach(row => {
+                const grade = parseFloat(row.querySelector('.course-grade').value);
+                const credits = parseFloat(row.querySelector('.course-credits').value) || 0;
+
+                if (credits > 0) {
+                    totalQualityPoints += grade * credits;
+                    totalCredits += credits;
+                }
+            });
+
+            const semesterGPA = totalCredits > 0 ? totalQualityPoints / totalCredits : 0;
+
+            // Calculate cumulative GPA
+            const prevGPA = parseFloat(document.getElementById('prevGPA').value) || 0;
+            const prevCredits = parseFloat(document.getElementById('prevCredits').value) || 0;
+            const prevQualityPoints = prevGPA * prevCredits;
+
+            const cumulativeQualityPoints = prevQualityPoints + totalQualityPoints;
+            const cumulativeTotalCredits = prevCredits + totalCredits;
+            const cumulativeGPA = cumulativeTotalCredits > 0 ? cumulativeQualityPoints / cumulativeTotalCredits : semesterGPA;
+
+            // Display results
+            document.getElementById('semesterGPA').textContent = semesterGPA.toFixed(2);
+            document.getElementById('semesterCredits').textContent = totalCredits.toFixed(1);
+            document.getElementById('cumulativeGPA').textContent = cumulativeGPA.toFixed(2);
+            document.getElementById('totalCredits').textContent = cumulativeTotalCredits.toFixed(1);
+
+            // Determine academic standing
+            const gpaToCheck = cumulativeTotalCredits > 0 ? cumulativeGPA : semesterGPA;
+            let standing, standingColor;
+
+            if (gpaToCheck >= 3.8) {
+                standing = 'Summa Cum Laude Range';
+                standingColor = '#10b981';
+            } else if (gpaToCheck >= 3.5) {
+                standing = 'Magna Cum Laude Range';
+                standingColor = '#10b981';
+            } else if (gpaToCheck >= 3.2) {
+                standing = 'Cum Laude Range';
+                standingColor = '#059669';
+            } else if (gpaToCheck >= 3.0) {
+                standing = 'Dean\'s List Range';
+                standingColor = '#0891b2';
+            } else if (gpaToCheck >= 2.5) {
+                standing = 'Good Standing';
+                standingColor = '#6366f1';
+            } else if (gpaToCheck >= 2.0) {
+                standing = 'Satisfactory';
+                standingColor = '#f59e0b';
+            } else if (gpaToCheck >= 1.5) {
+                standing = 'Academic Warning';
+                standingColor = '#f97316';
+            } else {
+                standing = 'Academic Probation';
+                standingColor = '#dc2626';
+            }
+
+            document.getElementById('standing').textContent = standing;
+            document.getElementById('standing').style.color = standingColor;
+        }
+
+        // Add event listeners to all inputs
+        document.querySelectorAll('.course-grade, .course-credits').forEach(input => {
+            input.addEventListener('change', calculate);
+        });
+        document.getElementById('prevGPA').addEventListener('input', calculate);
+        document.getElementById('prevCredits').addEventListener('input', calculate);
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

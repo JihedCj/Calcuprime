@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free time zone converter - Convert time between world time zones instantly. Schedule meetings across global time zones with accurate conversions.">
+    <meta name="keywords" content="time zone converter, world time, timezone calculator, time converter, world clock converter, GMT, UTC">
+    <title>Time Zone Converter | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/time-zone-converter.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html">Home</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Time Zone Converter</h1>
+            <p class="calculator-description">Convert time between global time zones instantly</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>From</h3>
+                <div class="form-group">
+                    <label for="fromZone" class="form-label">Time Zone</label>
+                    <select id="fromZone" class="form-input">
+                        <option value="-8">PST (UTC-8) - Los Angeles</option>
+                        <option value="-7">MST (UTC-7) - Denver</option>
+                        <option value="-6">CST (UTC-6) - Chicago</option>
+                        <option value="-5" selected>EST (UTC-5) - New York</option>
+                        <option value="0">GMT/UTC (UTC+0) - London</option>
+                        <option value="1">CET (UTC+1) - Paris</option>
+                        <option value="2">EET (UTC+2) - Cairo</option>
+                        <option value="3">MSK (UTC+3) - Moscow</option>
+                        <option value="5.5">IST (UTC+5:30) - India</option>
+                        <option value="8">CST (UTC+8) - Beijing</option>
+                        <option value="9">JST (UTC+9) - Tokyo</option>
+                        <option value="10">AEST (UTC+10) - Sydney</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fromTime" class="form-label">Time</label>
+                    <input type="time" id="fromTime" class="form-input" value="12:00">
+                </div>
+                <h3 style="margin-top: 1.5rem;">To</h3>
+                <div class="form-group">
+                    <label for="toZone" class="form-label">Time Zone</label>
+                    <select id="toZone" class="form-input">
+                        <option value="-8">PST (UTC-8) - Los Angeles</option>
+                        <option value="-7">MST (UTC-7) - Denver</option>
+                        <option value="-6">CST (UTC-6) - Chicago</option>
+                        <option value="-5">EST (UTC-5) - New York</option>
+                        <option value="0">GMT/UTC (UTC+0) - London</option>
+                        <option value="1">CET (UTC+1) - Paris</option>
+                        <option value="2">EET (UTC+2) - Cairo</option>
+                        <option value="3">MSK (UTC+3) - Moscow</option>
+                        <option value="5.5">IST (UTC+5:30) - India</option>
+                        <option value="8" selected>CST (UTC+8) - Beijing</option>
+                        <option value="9">JST (UTC+9) - Tokyo</option>
+                        <option value="10">AEST (UTC+10) - Sydney</option>
+                    </select>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Convert Time</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Converted Time</h3>
+                <div class="result-item">
+                    <div class="result-label">Time in Destination</div>
+                    <div class="result-value" id="convertedTime" style="font-size: 2.5rem; color: #10b981;">--:--</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Time Difference</div>
+                    <div class="result-value" id="timeDiff">0 hours</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Day Adjustment</div>
+                    <div class="result-value" id="dayAdjust">Same day</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Understanding Time Zones</h2>
+            <p>Time zones divide the world into 24 regions, each typically spanning 15 degrees of longitude and representing one hour of time difference. The system originated in 1884 to standardize railroad schedules and has since become essential for global communication and commerce. The Prime Meridian at Greenwich, England serves as the reference point (UTC+0), with zones numbered positively eastward and negatively westward.</p>
+
+            <p>Converting between time zones requires adding or subtracting hours based on UTC offsets. If New York (UTC-5) is 12:00 PM, London (UTC+0) is 5:00 PM (5 hours ahead), while Los Angeles (UTC-8) is 9:00 AM (3 hours behind New York). Understanding these conversions is critical for scheduling international calls, coordinating remote teams, planning travel, and managing global business operations.</p>
+
+            <h2>UTC and GMT</h2>
+            <p>Coordinated Universal Time (UTC) serves as the world's time standard. Despite the acronym not matching in English (due to compromise between English "CUT" and French "TUC"), UTC replaced Greenwich Mean Time (GMT) as the official reference. For practical purposes, UTC and GMT are identical—both represent time at 0° longitude. However, UTC is more precise, using atomic clocks rather than astronomical observations.</p>
+
+            <p>All time zones express themselves relative to UTC using positive or negative hour offsets. Tokyo operates at UTC+9, meaning when UTC is 00:00 (midnight), Tokyo is 09:00 (9 AM). Sydney at UTC+10 is one hour ahead of Tokyo. Understanding UTC offsets enables quick mental time zone calculations without memorizing every zone relationship.</p>
+
+            <h2>Daylight Saving Time</h2>
+            <p>Daylight Saving Time (DST) complicates time zone conversions. Many regions shift clocks forward one hour in spring and back in autumn to extend evening daylight. The United States observes DST from the second Sunday in March through the first Sunday in November. During DST, Eastern Standard Time (EST, UTC-5) becomes Eastern Daylight Time (EDT, UTC-4).</p>
+
+            <p>Not all regions observe DST. Arizona (except Navajo Nation), Hawaii, and most of Saskatchewan remain on standard time year-round. International variations create confusion—Europe changes on different dates than North America. Australia observes DST during opposite months (October-April) since seasons are reversed in the Southern Hemisphere. Always verify whether DST applies when scheduling across time zones.</p>
+
+            <h2>Scheduling International Meetings</h2>
+            <p>Finding convenient meeting times across multiple time zones requires considering work hours in each location. A 10:00 AM meeting in New York (EST) occurs at 3:00 PM in London (GMT) and 11:00 PM in Tokyo (JST)—outside normal business hours for Tokyo. Tools like World Time Buddy or time zone converters help identify overlapping business hours.</p>
+
+            <p>For US-Europe coordination, mornings in the US overlap afternoons in Europe (3:00 PM London = 10:00 AM EST). For US-Asia coordination, evenings in the US overlap mornings in Asia (8:00 PM EST = 9:00 AM JST). Global teams often rotate meeting times to share inconvenience fairly rather than always favoring one region.</p>
+
+            <h2>Common Time Zone Mistakes</h2>
+            <p>Assuming consistent hour differences fails when DST changes occur. The US switches DST before Europe, creating a week where New York-London is 4 hours instead of the usual 5 hours. Calendar invitations should specify time zones explicitly (10:00 AM EST) rather than assuming recipients share your zone. Many calendar applications automatically adjust for recipient time zones when zones are properly specified.</p>
+
+            <p>Confusing 12-hour and 24-hour time formats causes errors. "6:00" could mean morning or evening—specify 6:00 AM or 6:00 PM, or use 24-hour format (06:00 or 18:00). International colleagues often prefer 24-hour format to eliminate AM/PM ambiguity. When scheduling, always confirm whether others interpret times in their local zone or a specified standard (UTC, company headquarters time, etc.).</p>
+
+            <h2>The Bottom Line</h2>
+            <p>Time zone conversion is essential in our globally connected world. Whether coordinating business calls, planning travel, or managing remote teams, accurate time conversion prevents missed meetings and frustration. Understand UTC offsets, account for daylight saving variations, and use reliable converters for complex calculations. When scheduling, specify time zones explicitly and confirm critical appointments with all participants. Effective time zone management demonstrates professionalism and respects colleagues' time across the globe.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const fromZone = parseFloat(document.getElementById('fromZone').value);
+            const toZone = parseFloat(document.getElementById('toZone').value);
+            const fromTime = document.getElementById('fromTime').value;
+
+            if (!fromTime) return;
+
+            const [hours, minutes] = fromTime.split(':').map(Number);
+
+            // Convert to UTC
+            let utcHours = hours - fromZone;
+
+            // Convert from UTC to target zone
+            let targetHours = utcHours + toZone;
+
+            // Handle day overflow
+            let dayAdjust = 0;
+            while (targetHours >= 24) {
+                targetHours -= 24;
+                dayAdjust++;
+            }
+            while (targetHours < 0) {
+                targetHours += 24;
+                dayAdjust--;
+            }
+
+            // Format time
+            const targetTime = String(Math.floor(targetHours)).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
+
+            // Calculate time difference
+            const diff = toZone - fromZone;
+            const diffHours = Math.abs(diff);
+            const diffText = diff > 0 ? diffHours + ' hours ahead' : diff < 0 ? diffHours + ' hours behind' : 'Same time';
+
+            // Day adjustment text
+            let dayText = 'Same day';
+            if (dayAdjust > 0) dayText = 'Next day (+' + dayAdjust + ')';
+            if (dayAdjust < 0) dayText = 'Previous day (' + dayAdjust + ')';
+
+            document.getElementById('convertedTime').textContent = targetTime;
+            document.getElementById('timeDiff').textContent = diffText;
+            document.getElementById('dayAdjust').textContent = dayText;
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+            input.addEventListener('change', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

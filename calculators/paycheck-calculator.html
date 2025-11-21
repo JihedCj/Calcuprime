@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free paycheck calculator - Calculate take-home pay after taxes and deductions. Accurate paycheck and salary calculator.">
+    <meta name="keywords" content="paycheck calculator, salary calculator, net pay, take home pay, payroll calculator, wage calculator">
+    <title>Paycheck Calculator | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/paycheck-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html">Home</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Paycheck Calculator</h1>
+            <p class="calculator-description">Calculate your net pay from gross salary after taxes and deductions</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Salary Information</h3>
+                <div class="form-group">
+                    <label for="salary" class="form-label">Annual Salary ($)</label>
+                    <input type="number" id="salary" class="form-input" value="60000" min="0" step="1000">
+                </div>
+                <div class="form-group">
+                    <label for="payFrequency" class="form-label">Pay Frequency</label>
+                    <select id="payFrequency" class="form-input">
+                        <option value="26">Bi-weekly (26 paychecks)</option>
+                        <option value="24">Semi-monthly (24 paychecks)</option>
+                        <option value="12">Monthly (12 paychecks)</option>
+                        <option value="52">Weekly (52 paychecks)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="federalAllowances" class="form-label">Federal Tax Rate (%)</label>
+                    <input type="number" id="federalAllowances" class="form-input" value="15" min="0" max="40" step="0.5">
+                </div>
+                <div class="form-group">
+                    <label for="stateTax" class="form-label">State Tax Rate (%)</label>
+                    <input type="number" id="stateTax" class="form-input" value="5" min="0" max="15" step="0.5">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate Paycheck</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Paycheck Breakdown</h3>
+                <div class="result-item">
+                    <div class="result-label">Gross Pay (per paycheck)</div>
+                    <div class="result-value" id="grossPay">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Federal Tax</div>
+                    <div class="result-value" id="federalTax">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">State Tax</div>
+                    <div class="result-value" id="stateTaxAmount">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">FICA (7.65%)</div>
+                    <div class="result-value" id="ficaTax">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Net Pay (Take Home)</div>
+                    <div class="result-value" id="netPay" style="font-size: 2.5rem; color: #10b981;">$0</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Understanding Your Paycheck</h2>
+            <p>Your paycheck represents more than just your hourly wage or annual salary divided by pay periods. Understanding the various deductions and how they're calculated empowers you to make informed financial decisions, plan your budget accurately, and ensure you're being paid correctly. This comprehensive guide will help you understand every line item on your pay stub.</p>
+
+            <h2>Gross Pay vs. Net Pay</h2>
+            <p><strong>Gross pay</strong> is your total earnings before any deductions. It's calculated by dividing your annual salary by the number of pay periods in a year. For hourly employees, it's the number of hours worked multiplied by the hourly rate, plus any overtime pay at time-and-a-half (or double time for special circumstances).</p>
+
+            <p><strong>Net pay</strong> or "take-home pay" is what you actually receive after all mandatory and voluntary deductions. The difference between gross and net pay can be substantial – typically 20-30% or more of your gross earnings, depending on your tax bracket, state of residence, and benefit elections.</p>
+
+            <h2>Pay Frequency and Its Impact</h2>
+            <p>How often you're paid significantly affects your cash flow management:</p>
+
+            <p><strong>Weekly (52 paychecks):</strong> Provides the most frequent cash flow, which can be helpful for managing weekly expenses like groceries and gas. However, individual paychecks are smaller, making it harder to save large amounts at once. This frequency is common in hourly, construction, and manufacturing jobs.</p>
+
+            <p><strong>Bi-weekly (26 paychecks):</strong> The most common pay frequency in the United States. Employees receive two paychecks most months, with two months per year having three paychecks – a nice bonus opportunity for extra savings or debt paydown. This schedule typically follows a consistent day of the week (like every other Friday).</p>
+
+            <p><strong>Semi-monthly (24 paychecks):</strong> Typically paid on the 15th and last day of the month. This frequency is easier for monthly budgeting since amounts are consistent and align with monthly bills. However, it can complicate overtime calculations and doesn't fall on consistent weekdays.</p>
+
+            <p><strong>Monthly (12 paychecks):</strong> Less common in the U.S. but standard in many other countries. Requires more disciplined budgeting throughout the month but simplifies monthly expense planning and typically results in lower administrative costs for employers.</p>
+
+            <h2>Federal Income Tax Withholding</h2>
+            <p>Your employer withholds federal income tax from each paycheck based on the information you provided on Form W-4. The amount withheld depends on several key factors:</p>
+
+            <ul>
+                <li><strong>Filing Status:</strong> Single filers have narrower tax brackets than married filing jointly</li>
+                <li><strong>Number of Dependents:</strong> Each dependent reduces your withholding</li>
+                <li><strong>Additional Income:</strong> Income from other jobs, investments, or side businesses</li>
+                <li><strong>Deductions and Credits:</strong> Mortgage interest, student loan interest, IRA contributions</li>
+                <li><strong>Extra Withholding:</strong> Additional amounts you voluntarily request to be withheld</li>
+            </ul>
+
+            <p>The goal is to withhold the right amount throughout the year. Withholding too much means giving the government an interest-free loan, while withholding too little can result in a tax bill and potential penalties when you file. Review your W-4 annually and after major life changes like marriage, divorce, or having children.</p>
+
+            <h2>FICA Taxes: Social Security and Medicare</h2>
+            <p>FICA (Federal Insurance Contributions Act) taxes fund Social Security and Medicare programs. In 2024, the breakdown is:</p>
+
+            <p><strong>Social Security Tax:</strong> 6.2% of gross pay up to the annual wage base limit of $168,600. Both employee and employer each contribute 6.2%, for a combined total of 12.4%. Once you earn above the wage base limit in a calendar year, no additional Social Security tax is withheld from subsequent paychecks.</p>
+
+            <p><strong>Medicare Tax:</strong> 1.45% of all gross pay with no income limit. Employers match this 1.45%, bringing the total to 2.9%. High earners (over $200,000 for single filers, $250,000 for married filing jointly) pay an additional 0.9% Medicare surtax on earnings above these thresholds. The employer does not match this additional surtax.</p>
+
+            <p>Combined, most employees pay 7.65% in FICA taxes. Self-employed individuals pay both the employee and employer portions (15.3% total) but can deduct half as a business expense on their tax return.</p>
+
+            <h2>State and Local Income Taxes</h2>
+            <p>State income tax rates vary dramatically across the country. Nine states have no income tax: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. Other states range from 1% to over 13% in California.</p>
+
+            <p>Some states use progressive tax brackets similar to federal taxes, while others impose a flat rate regardless of income. Additionally, some cities and counties levy local income taxes (common in Ohio, Pennsylvania, and Maryland). If you work in one state but live in another, you may need to file returns in both states, though many states have reciprocal agreements to prevent double taxation.</p>
+
+            <h2>Pre-Tax Deductions: Reducing Your Tax Burden</h2>
+            <p>Pre-tax deductions are subtracted from your gross pay before taxes are calculated, effectively reducing your taxable income and overall tax burden. Common pre-tax deductions include:</p>
+
+            <p><strong>Retirement Contributions:</strong> Contributions to traditional 401(k), 403(b), and 457 plans reduce your current taxable income while building retirement savings. For 2024, you can contribute up to $23,000 annually ($30,500 if you're 50 or older with catch-up contributions). This can save you thousands in taxes annually while securing your financial future.</p>
+
+            <p><strong>Health Insurance Premiums:</strong> Employer-sponsored health insurance premiums are typically deducted pre-tax, reducing both income tax and FICA taxes. This triple tax benefit makes employer health coverage extremely valuable.</p>
+
+            <p><strong>Health Savings Account (HSA):</strong> If you have a qualifying high-deductible health plan, HSA contributions offer triple tax advantages – tax-deductible contributions, tax-free growth, and tax-free withdrawals for qualified medical expenses. For 2024, you can contribute up to $4,150 for individual coverage or $8,300 for family coverage.</p>
+
+            <p><strong>Flexible Spending Accounts (FSA):</strong> Healthcare FSAs allow up to $3,200 (2024) in pre-tax contributions for medical expenses. Dependent Care FSAs allow up to $5,000 annually for childcare expenses. Remember that standard Healthcare FSAs follow "use it or lose it" rules, though some employers offer grace periods or small carryover amounts.</p>
+
+            <p><strong>Commuter Benefits:</strong> Up to $315 per month (2024) can be set aside pre-tax for qualified parking and transit expenses, saving commuters hundreds annually in taxes.</p>
+
+            <h2>Post-Tax Deductions</h2>
+            <p>These deductions come from your pay after taxes have been calculated. Common post-tax deductions include:</p>
+            <ul>
+                <li><strong>Roth 401(k) Contributions:</strong> Unlike traditional 401(k), these contributions don't reduce current taxes but grow tax-free and aren't taxed upon withdrawal in retirement</li>
+                <li><strong>Supplemental Insurance:</strong> Life insurance premiums beyond employer-provided coverage</li>
+                <li><strong>Disability Insurance:</strong> Short-term or long-term disability coverage</li>
+                <li><strong>Union Dues:</strong> Membership fees for labor unions</li>
+                <li><strong>Charitable Contributions:</strong> Payroll deductions for workplace giving campaigns</li>
+                <li><strong>Wage Garnishments:</strong> Court-ordered deductions for child support, back taxes, or unpaid debts</li>
+            </ul>
+
+            <h2>Maximizing Your Take-Home Pay</h2>
+            <p><strong>Optimize Your W-4:</strong> Review and update your W-4 annually or after major life changes (marriage, birth of a child, buying a home). Use the IRS Tax Withholding Estimator to determine the right withholding level. Aim to break even rather than receiving a large refund or owing a large payment.</p>
+
+            <p><strong>Leverage Pre-Tax Benefits:</strong> Maximize contributions to employer-sponsored retirement plans, especially if your employer offers matching contributions (that's free money!). Take advantage of HSAs if eligible – they're one of the best tax-advantaged accounts available.</p>
+
+            <p><strong>Understand Your Benefits Value:</strong> Your total compensation includes more than just salary. Employer-paid health insurance, retirement matching, and other benefits can add 20-30% to your effective compensation.</p>
+
+            <p><strong>Negotiate Strategically:</strong> When negotiating compensation, consider the full package including pre-tax benefits, which provide tax-advantaged value beyond their dollar amount.</p>
+
+            <h2>Reading Your Pay Stub</h2>
+            <p>Your pay stub contains crucial information beyond just your net pay. Understanding each section helps you verify accuracy and plan financially:</p>
+
+            <p><strong>Year-to-Date (YTD) Totals:</strong> Track your cumulative earnings and taxes paid throughout the year. These numbers are essential for tax planning and verifying your W-2 at year-end.</p>
+
+            <p><strong>Hours Breakdown:</strong> Regular hours, overtime, double-time, and any paid time off (vacation, sick leave). Verify these numbers match your timesheet to catch errors early.</p>
+
+            <p><strong>Tax Withholdings:</strong> Federal, state, local, and FICA taxes withheld. Both current period and YTD amounts help you track whether you're on pace with your expected annual tax liability.</p>
+
+            <p><strong>Pre-Tax and Post-Tax Deductions:</strong> All benefit deductions with both current period and YTD amounts. Review annually to ensure you're enrolled in intended benefits and not paying for unwanted coverage.</p>
+
+            <h2>Common Paycheck Errors and How to Spot Them</h2>
+            <p>Payroll errors happen more frequently than you might think. According to studies, approximately 1 in 6 paychecks contains some error. Watch for:</p>
+
+            <ul>
+                <li><strong>Incorrect hours or overtime calculations:</strong> Compare your pay stub to your timecard</li>
+                <li><strong>Wrong tax filing status:</strong> Verify your W-4 information is correctly entered</li>
+                <li><strong>Missing overtime premium:</strong> Ensure you're receiving time-and-a-half after 40 hours</li>
+                <li><strong>Incorrect benefit deductions:</strong> Check that deduction amounts match your benefit elections</li>
+                <li><strong>Not receiving earned bonuses or commissions:</strong> Track promised payments separately</li>
+                <li><strong>Expired garnishments:</strong> Ensure garnishments stop once the obligation is fulfilled</li>
+            </ul>
+
+            <p>Always review your pay stub carefully each pay period. Report discrepancies to HR or payroll immediately – some states limit how far back you can claim unpaid wages, so prompt action is important.</p>
+
+            <h2>Special Considerations for Different Employment Types</h2>
+            <p><strong>Hourly Non-Exempt Employees:</strong> Track your hours meticulously. Federal law requires overtime pay (1.5x regular rate) for hours over 40 per week. Some states (like California) also require overtime for hours over 8 in a day and double-time for hours over 12 in a day.</p>
+
+            <p><strong>Salaried Exempt Employees:</strong> Not entitled to overtime pay under FLSA. Your paycheck should be consistent regardless of hours worked, though some deductions (like benefits) may vary.</p>
+
+            <p><strong>Tipped Employees:</strong> Employers can pay a lower base wage ($2.13 federal minimum for tipped employees) if tips bring total compensation to at least the standard minimum wage. All tips are taxable income and must be reported. Many employees underestimate their tax liability on tips.</p>
+
+            <p><strong>Contract Workers (1099):</strong> Receive gross pay without any withholdings. You're responsible for paying both employee and employer portions of FICA (15.3% self-employment tax) plus income taxes. Make quarterly estimated tax payments to avoid penalties.</p>
+
+            <h2>Your Paycheck and Financial Planning</h2>
+            <p>Understanding your paycheck is foundational to effective financial planning. Use this knowledge to:</p>
+
+            <ul>
+                <li>Create an accurate monthly budget based on your actual take-home pay</li>
+                <li>Plan tax-advantaged retirement contributions to maximize long-term wealth</li>
+                <li>Optimize tax withholding to keep more money in your pocket throughout the year</li>
+                <li>Evaluate job offers by comparing total compensation, not just base salary</li>
+                <li>Identify opportunities to increase take-home pay through benefit optimization</li>
+                <li>Plan for major purchases by understanding your true available income</li>
+            </ul>
+
+            <p>Remember that your paycheck is more than just a number – it's a financial planning tool that, when fully understood, empowers better money management and wealth building decisions.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const salary = parseFloat(document.getElementById('salary').value) || 0;
+            const frequency = parseFloat(document.getElementById('payFrequency').value) || 26;
+            const federalRate = parseFloat(document.getElementById('federalAllowances').value) / 100 || 0.15;
+            const stateRate = parseFloat(document.getElementById('stateTax').value) / 100 || 0.05;
+
+            const grossPay = salary / frequency;
+            const federalTax = grossPay * federalRate;
+            const stateTax = grossPay * stateRate;
+            const ficaTax = grossPay * 0.0765; // Social Security (6.2%) + Medicare (1.45%)
+            const netPay = grossPay - federalTax - stateTax - ficaTax;
+
+            document.getElementById('grossPay').textContent = '$' + grossPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('federalTax').textContent = '-$' + federalTax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('stateTaxAmount').textContent = '-$' + stateTax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('ficaTax').textContent = '-$' + ficaTax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('netPay').textContent = '$' + netPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

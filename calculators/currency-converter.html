@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free currency converter - Convert between major world currencies with up-to-date exchange rates. Calculate currency exchange for USD, EUR, GBP, and more.">
+    <meta name="keywords" content="currency converter, exchange rate, currency exchange, USD to EUR, forex calculator, money converter, international currency">
+
+    <title>Currency Converter - Live Exchange Rates | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/currency-converter.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Currency Converter</h1>
+            <p class="calculator-description">Convert between major world currencies with current exchange rates</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Convert Currency</h3>
+
+                <div class="form-group">
+                    <label for="amount" class="form-label">Amount</label>
+                    <input type="number" id="amount" class="form-input" value="100" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="fromCurrency" class="form-label">From</label>
+                    <select id="fromCurrency" class="form-select">
+                        <option value="USD" selected>USD - US Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                        <option value="CHF">CHF - Swiss Franc</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                        <option value="INR">INR - Indian Rupee</option>
+                        <option value="MXN">MXN - Mexican Peso</option>
+                        <option value="BRL">BRL - Brazilian Real</option>
+                        <option value="KRW">KRW - South Korean Won</option>
+                        <option value="SGD">SGD - Singapore Dollar</option>
+                        <option value="NZD">NZD - New Zealand Dollar</option>
+                        <option value="ZAR">ZAR - South African Rand</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="toCurrency" class="form-label">To</label>
+                    <select id="toCurrency" class="form-select">
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="EUR" selected>EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                        <option value="CHF">CHF - Swiss Franc</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                        <option value="INR">INR - Indian Rupee</option>
+                        <option value="MXN">MXN - Mexican Peso</option>
+                        <option value="BRL">BRL - Brazilian Real</option>
+                        <option value="KRW">KRW - South Korean Won</option>
+                        <option value="SGD">SGD - Singapore Dollar</option>
+                        <option value="NZD">NZD - New Zealand Dollar</option>
+                        <option value="ZAR">ZAR - South African Rand</option>
+                    </select>
+                </div>
+
+                <button onclick="convertCurrency()" class="btn-calculate">Convert</button>
+                <button onclick="swapCurrencies()" class="btn-calculate" style="margin-top: 10px; background: #6b7280;">Swap Currencies</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Conversion Result</h3>
+
+                <div class="result-item">
+                    <div class="result-label" id="conversionLabel">100 USD =</div>
+                    <div class="result-value" id="convertedAmount" style="font-size: 3rem; color: #059669;">0.00 EUR</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Exchange Rate</div>
+                    <div class="result-value" id="exchangeRate" style="font-size: 1.3rem;">1 USD = 0.00 EUR</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f0fdf4; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Quick Conversions</h4>
+                    <div id="quickConversions" style="font-size: 0.9rem;">
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px; padding: 10px; background: #fef3c7; border-radius: 8px; font-size: 0.85rem; color: #92400e;">
+                    <strong>Note:</strong> Exchange rates are approximate and for reference only. Actual rates may vary by provider.
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Currency Exchange</h2>
+            <p>Currency exchange rates fluctuate constantly based on market demand, economic conditions, political stability, and international trade. The rates shown here are mid-market rates (the midpoint between buy and sell rates). Banks and exchange services typically add a markup of 2-5% or charge transaction fees.</p>
+
+            <h2>Major World Currencies</h2>
+            <h3>USD - United States Dollar</h3>
+            <p>The world's primary reserve currency and most traded currency. Used in international transactions and held by central banks worldwide. Symbol: $</p>
+
+            <h3>EUR - Euro</h3>
+            <p>Official currency of 20 European Union countries. Second most traded currency after USD. Symbol: €</p>
+
+            <h3>GBP - British Pound Sterling</h3>
+            <p>One of the oldest currencies still in use. Official currency of the United Kingdom. Symbol: £</p>
+
+            <h3>JPY - Japanese Yen</h3>
+            <p>Third most traded currency. Often used as a safe-haven currency during market uncertainty. Symbol: ¥</p>
+
+            <h3>CHF - Swiss Franc</h3>
+            <p>Known for stability, backed by Switzerland's strong economy and neutrality. Popular safe-haven currency. Symbol: Fr</p>
+
+            <h2>Factors Affecting Exchange Rates</h2>
+            <h3>Interest Rates</h3>
+            <p>Higher interest rates attract foreign capital, increasing currency demand and value. Central banks (Federal Reserve, ECB, etc.) influence rates through monetary policy.</p>
+
+            <h3>Inflation</h3>
+            <p>Countries with lower inflation rates see currency appreciation. Higher inflation reduces purchasing power, making currency less valuable internationally.</p>
+
+            <h3>Economic Growth</h3>
+            <p>Strong GDP growth attracts investors, increasing currency demand. Weak growth or recession typically weakens currency.</p>
+
+            <h3>Political Stability</h3>
+            <p>Political uncertainty, elections, or policy changes can cause currency volatility. Stable governments with sound fiscal policies support stronger currencies.</p>
+
+            <h3>Trade Balance</h3>
+            <p>Countries with trade surpluses (exporting more than importing) typically have stronger currencies as foreign buyers need their currency to purchase exports.</p>
+
+            <h2>Best Practices for Currency Exchange</h2>
+            <h3>Compare Exchange Services</h3>
+            <p>Banks, airports, hotels, and specialized exchange services offer different rates. Airport kiosks typically have worst rates. Online services often offer best rates but may have transfer delays.</p>
+
+            <h3>Avoid Dynamic Currency Conversion</h3>
+            <p>When traveling abroad, always choose to pay in local currency, not your home currency. Merchants offering to convert at point of sale typically use unfavorable rates.</p>
+
+            <h3>Use Credit Cards Wisely</h3>
+            <p>Credit cards with no foreign transaction fees (typically 2-3%) can offer competitive exchange rates. Debit cards may have additional ATM fees.</p>
+
+            <h3>Timing Matters</h3>
+            <p>For large transactions, monitor rates over time. Set rate alerts to exchange when rates are favorable. Consider forward contracts to lock in rates for future needs.</p>
+
+            <h3>Beware of Fees</h3>
+            <p>Even with good exchange rates, fees can erode savings. Ask about all fees: transaction fees, service charges, commission, markup on exchange rate.</p>
+
+            <h2>Common Currency Exchange Scenarios</h2>
+            <h3>International Travel</h3>
+            <p>Exchange small amounts for immediate needs at airport. Use ATMs in destination country for better rates on larger withdrawals. Notify bank of travel to avoid card blocks.</p>
+
+            <h3>Online Shopping</h3>
+            <p>Many international retailers display prices in your currency but charge in theirs. Your credit card processes the conversion. Check if paying in local currency saves money after fees.</p>
+
+            <h3>Sending Money Abroad</h3>
+            <p>Wire transfers, PayPal, Western Union, and services like Wise (TransferWise) or Revolut offer different rates and speeds. Compare total cost including fees.</p>
+
+            <h3>Receiving Foreign Payments</h3>
+            <p>Freelancers and businesses receiving international payments should compare services. PayPal charges 2.5-4% for currency conversion. Wise often offers better rates.</p>
+
+            <h2>Currency Trading Basics</h2>
+            <h3>Forex Market</h3>
+            <p>The foreign exchange market trades $7+ trillion daily. It's decentralized, operating 24/5 across time zones. Major trading centers: London, New York, Tokyo, Singapore.</p>
+
+            <h3>Currency Pairs</h3>
+            <p>Currencies trade in pairs (e.g., EUR/USD). Major pairs include USD, minor pairs exclude USD, exotic pairs include emerging market currencies.</p>
+
+            <h3>Bid-Ask Spread</h3>
+            <p>Difference between buying price (ask) and selling price (bid). Wider spreads mean higher costs. Liquid major pairs have tighter spreads than exotic pairs.</p>
+
+            <h2>Protecting Against Currency Risk</h2>
+            <h3>For Businesses</h3>
+            <p>Companies with international operations face currency risk. Strategies include hedging with futures/options, natural hedging (matching revenue/expenses in same currency), and pricing in stable currencies.</p>
+
+            <h3>For Investors</h3>
+            <p>International investments face currency risk beyond investment performance. Diversifying across currencies can reduce risk. Currency-hedged ETFs available for those wanting to eliminate currency exposure.</p>
+
+            <h3>For Travelers</h3>
+            <p>Budget a buffer for currency fluctuations on extended trips. Consider travel money cards that lock in exchange rates. Monitor rates before major expenses.</p>
+
+            <h2>Frequently Asked Questions</h2>
+            <h3>Why do rates differ between sources?</h3>
+            <p>Each provider adds their margin (markup) to the mid-market rate. Banks typically add 3-5%, exchange bureaus 5-10%, airports 10-15%. Online services often have lowest markups (1-2%).</p>
+
+            <h3>What's the best time to exchange currency?</h3>
+            <p>For large amounts, monitor trends. Generally avoid exchanging at airports, hotels, or tourist areas. For travel, exchange 1-2 weeks before departure when you find favorable rates. Avoid last-minute exchanges.</p>
+
+            <h3>Should I exchange all my money at once?</h3>
+            <p>Diversify your exchange timing to average out rate fluctuations (similar to dollar-cost averaging). For travel, exchange enough for immediate needs, use ATMs abroad for the rest as needed.</p>
+
+            <h3>Are online currency converters accurate?</h3>
+            <p>They show mid-market rates, which are accurate for reference but not what you'll pay. Actual exchange rates will be less favorable due to markups and fees. Use converter results as a starting point for comparison.</p>
+
+            <h3>How much currency should I exchange for travel?</h3>
+            <p>Exchange enough for 2-3 days of immediate needs (taxi, meals, tips). Use ATMs at destination for remaining needs - often better rates than pre-exchanging large amounts. Keep some emergency cash.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="percentage-calculator.html" class="calc-card">
+                    <div class="calc-icon">%</div>
+                    <h3 class="calc-title">Percentage Calculator</h3>
+                    <p class="calc-description">Calculate percentages</p>
+                </a>
+
+                <a href="tip-calculator.html" class="calc-card">
+                    <div class="calc-icon">💵</div>
+                    <h3 class="calc-title">Tip Calculator</h3>
+                    <p class="calc-description">Calculate tips and split bills</p>
+                </a>
+
+                <a href="loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Loan Calculator</h3>
+                    <p class="calc-description">Calculate loan payments</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Approximate exchange rates (relative to USD)
+        const exchangeRates = {
+            USD: 1.00,
+            EUR: 0.92,
+            GBP: 0.79,
+            JPY: 149.50,
+            CAD: 1.36,
+            AUD: 1.53,
+            CHF: 0.88,
+            CNY: 7.24,
+            INR: 83.12,
+            MXN: 17.08,
+            BRL: 4.97,
+            KRW: 1319.50,
+            SGD: 1.35,
+            NZD: 1.67,
+            ZAR: 18.76
+        };
+
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+
+            if (!amount || amount < 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+
+            // Convert to USD first, then to target currency
+            const amountInUSD = amount / exchangeRates[fromCurrency];
+            const convertedAmount = amountInUSD * exchangeRates[toCurrency];
+
+            // Calculate exchange rate
+            const rate = exchangeRates[toCurrency] / exchangeRates[fromCurrency];
+
+            // Display results
+            document.getElementById('conversionLabel').textContent = `${amount.toFixed(2)} ${fromCurrency} =`;
+            document.getElementById('convertedAmount').textContent = `${convertedAmount.toFixed(2)} ${toCurrency}`;
+            document.getElementById('exchangeRate').textContent = `1 ${fromCurrency} = ${rate.toFixed(4)} ${toCurrency}`;
+
+            // Generate quick conversions
+            const quickAmounts = [1, 10, 100, 1000];
+            const quickHTML = quickAmounts.map(amt => {
+                const converted = (amt / exchangeRates[fromCurrency]) * exchangeRates[toCurrency];
+                return `<div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <span>${amt} ${fromCurrency} =</span>
+                    <span style="font-weight: 600;">${converted.toFixed(2)} ${toCurrency}</span>
+                </div>`;
+            }).join('');
+
+            document.getElementById('quickConversions').innerHTML = quickHTML;
+
+            showResult('convertedAmount');
+        }
+
+        function swapCurrencies() {
+            const fromSelect = document.getElementById('fromCurrency');
+            const toSelect = document.getElementById('toCurrency');
+
+            const temp = fromSelect.value;
+            fromSelect.value = toSelect.value;
+            toSelect.value = temp;
+
+            convertCurrency();
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', convertCurrency);
+            input.addEventListener('change', convertCurrency);
+        });
+
+        window.addEventListener('load', convertCurrency);
+    </script>
+</body>
+</html>

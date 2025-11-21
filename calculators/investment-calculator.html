@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free investment calculator - Project investment returns, track portfolio growth, and plan your financial future with detailed projections and analysis.">
+    <meta name="keywords" content="investment calculator, portfolio calculator, ROI calculator, stock returns, investment growth, retirement planning">
+
+    <title>Investment Calculator - Calculate Returns & Portfolio Growth | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/investment-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Investment Calculator</h1>
+            <p class="calculator-description">Calculate investment returns and project portfolio growth over time</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Investment Parameters</h3>
+
+                <div class="form-group">
+                    <label for="initialInvestment" class="form-label">Initial Investment ($)</label>
+                    <input type="number" id="initialInvestment" class="form-input" value="10000" min="0" max="10000000" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalContribution" class="form-label">Additional Contribution ($)</label>
+                    <input type="number" id="additionalContribution" class="form-input" value="500" min="0" max="100000" step="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="contributionFrequency" class="form-label">Contribution Frequency</label>
+                    <select id="contributionFrequency" class="form-select">
+                        <option value="12">Monthly</option>
+                        <option value="4">Quarterly</option>
+                        <option value="1">Annually</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="returnRate" class="form-label">Expected Return Rate (%)</label>
+                    <input type="number" id="returnRate" class="form-input" value="8" min="-50" max="50" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="investmentYears" class="form-label">Investment Period (years)</label>
+                    <input type="number" id="investmentYears" class="form-input" value="20" min="1" max="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="inflationRate" class="form-label">Inflation Rate (%) - Optional</label>
+                    <input type="number" id="inflationRate" class="form-input" value="3" min="0" max="20" step="0.1">
+                </div>
+
+                <button onclick="calculateInvestment()" class="btn-calculate">Calculate Returns</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Projected Results</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Future Value</div>
+                    <div class="result-value" id="futureValue" style="font-size: 2.5rem; color: #10b981;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Invested</div>
+                    <div class="result-value" id="totalInvested" style="font-size: 1.3rem;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Earnings</div>
+                    <div class="result-value" id="totalEarnings" style="font-size: 1.3rem;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">ROI (Return on Investment)</div>
+                    <div class="result-value" id="roi" style="font-size: 1.3rem;">0%</div>
+                </div>
+
+                <div id="inflationAdjusted" style="margin-top: 15px; padding: 15px; background: #fef3c7; border-radius: 8px;">
+                    <div style="font-size: 0.9rem; font-weight: 500; margin-bottom: 5px;">Inflation-Adjusted Value</div>
+                    <div id="realValue" style="font-size: 1.5rem; font-weight: 600; color: #d97706;">$0.00</div>
+                    <div style="font-size: 0.8rem; color: #92400e; margin-top: 5px;">In today's purchasing power</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Investment Returns</h2>
+            <p>Investment calculators help you project how your money will grow over time based on expected return rates, contributions, and time horizons. These projections are estimates - actual returns will vary based on market performance, fees, and investment choices.</p>
+
+            <h2>How to Use the Investment Calculator</h2>
+            <ol>
+                <li><strong>Initial Investment:</strong> Enter the starting amount you're investing today</li>
+                <li><strong>Additional Contributions:</strong> Set regular amounts you'll add to your investment</li>
+                <li><strong>Contribution Frequency:</strong> Choose how often you'll make additional investments</li>
+                <li><strong>Expected Return:</strong> Enter your anticipated annual return rate (7-10% is typical for stocks)</li>
+                <li><strong>Investment Period:</strong> How many years you plan to stay invested</li>
+                <li><strong>Inflation Rate:</strong> Typically 2-3%, this shows your real purchasing power</li>
+            </ol>
+
+            <h2>Expected Returns by Asset Class</h2>
+            <h3>Stocks / Equity Funds (8-10% annually)</h3>
+            <p>Historically, stock markets have returned 9-10% annually before inflation. This includes both growth and dividends. Individual stocks are more volatile, while diversified funds tend toward market averages.</p>
+
+            <h3>Bonds / Fixed Income (3-5% annually)</h3>
+            <p>Government and corporate bonds offer lower but more stable returns. Returns vary based on bond quality, duration, and interest rate environment.</p>
+
+            <h3>Balanced Portfolios (6-8% annually)</h3>
+            <p>A mix of 60% stocks and 40% bonds typically returns 6-8% annually. This balanced approach reduces volatility while maintaining growth potential.</p>
+
+            <h3>Real Estate Investment Trusts (7-9% annually)</h3>
+            <p>REITs provide exposure to real estate markets with liquidity. Returns include both price appreciation and dividend income.</p>
+
+            <h3>Savings Accounts (0.5-4% annually)</h3>
+            <p>High-yield savings accounts offer safety and liquidity but minimal growth. Best for emergency funds, not long-term investing.</p>
+
+            <h2>Maximizing Investment Returns</h2>
+            <ul>
+                <li><strong>Start Early:</strong> Time in the market beats timing the market. Every year you delay costs you compounding opportunities.</li>
+                <li><strong>Contribute Consistently:</strong> Regular contributions through market ups and downs (dollar-cost averaging) reduce risk and build discipline.</li>
+                <li><strong>Minimize Fees:</strong> A 1% annual fee can reduce your final balance by 25%+ over 30 years. Choose low-cost index funds.</li>
+                <li><strong>Diversify:</strong> Don't put all eggs in one basket. Spread investments across different asset classes, sectors, and geographies.</li>
+                <li><strong>Reinvest Dividends:</strong> Automatically reinvesting dividends and distributions maximizes compounding.</li>
+                <li><strong>Rebalance Annually:</strong> Periodically adjust your portfolio back to target allocations to maintain desired risk levels.</li>
+                <li><strong>Stay Invested:</strong> Resist the urge to sell during downturns. Markets recover, and missing the best days destroys returns.</li>
+            </ul>
+
+            <h2>Investment Strategies</h2>
+            <h3>Buy and Hold</h3>
+            <p>Purchasing quality investments and holding long-term. This passive strategy minimizes taxes and fees while capturing market growth.</p>
+
+            <h3>Dollar-Cost Averaging</h3>
+            <p>Investing fixed amounts regularly regardless of market conditions. This reduces timing risk and can lower average purchase prices.</p>
+
+            <h3>Value Investing</h3>
+            <p>Buying undervalued assets trading below intrinsic worth. Requires research but can outperform if done well.</p>
+
+            <h3>Growth Investing</h3>
+            <p>Focusing on companies with above-average growth potential. Higher risk but potential for greater returns.</p>
+
+            <h3>Index Investing</h3>
+            <p>Buying funds that track market indexes. Low-cost, diversified, and historically beats most active managers long-term.</p>
+
+            <h2>Risk Considerations</h2>
+            <h3>Market Risk</h3>
+            <p>All investments can decline in value. Stocks are volatile short-term but have strong long-term track records. Diversification reduces but doesn't eliminate risk.</p>
+
+            <h3>Inflation Risk</h3>
+            <p>Money losing purchasing power over time. Keeping too much in cash or low-return investments means your real wealth decreases.</p>
+
+            <h3>Timing Risk</h3>
+            <p>Investing all at once right before a downturn can be painful. Dollar-cost averaging spreads out timing risk.</p>
+
+            <h3>Longevity Risk</h3>
+            <p>Outliving your money. Being too conservative in retirement accounts can result in insufficient funds in later years.</p>
+
+            <h2>Tax-Advantaged Investment Accounts</h2>
+            <h3>401(k) / 403(b)</h3>
+            <p>Employer-sponsored retirement accounts with pre-tax contributions. Many employers match contributions (free money!). Contribution limits: $22,500 in 2024 ($30,000 if 50+).</p>
+
+            <h3>Traditional IRA</h3>
+            <p>Individual retirement account with tax-deductible contributions. Growth is tax-deferred until withdrawal. Contribution limits: $6,500 in 2024 ($7,500 if 50+).</p>
+
+            <h3>Roth IRA</h3>
+            <p>After-tax contributions but tax-free growth and withdrawals in retirement. Powerful for young investors who expect higher future tax rates. Same contribution limits as traditional IRA.</p>
+
+            <h3>HSA (Health Savings Account)</h3>
+            <p>Triple tax advantage: deductible contributions, tax-free growth, tax-free withdrawals for medical expenses. Can be used as retirement account if you save receipts.</p>
+
+            <h3>529 College Savings Plan</h3>
+            <p>Tax-advantaged account for education expenses. State tax deductions in most states. Withdrawals tax-free when used for qualified education expenses.</p>
+
+            <h2>Investment Mistakes to Avoid</h2>
+            <ul>
+                <li><strong>Trying to Time the Market:</strong> Even professionals can't consistently predict market movements. Missing the 10 best days over 20 years cuts returns in half.</li>
+                <li><strong>Emotional Investing:</strong> Buying high (when excited) and selling low (when fearful) destroys wealth. Have a plan and stick to it.</li>
+                <li><strong>Not Diversifying:</strong> Concentrated positions in single stocks or sectors expose you to unnecessary risk.</li>
+                <li><strong>Chasing Past Performance:</strong> Last year's best performer often underperforms next year. Focus on fundamentals and strategy.</li>
+                <li><strong>Ignoring Fees:</strong> High fees guaranteed reduce returns. Low fees give you a better chance at good returns.</li>
+                <li><strong>Too Conservative When Young:</strong> Having 50% bonds at age 25 severely limits growth potential. You can handle volatility with decades to invest.</li>
+                <li><strong>Too Aggressive Near Retirement:</strong> Can't afford major losses when you're about to need the money. Gradually shift to more conservative allocations.</li>
+            </ul>
+
+            <h2>Rebalancing Your Portfolio</h2>
+            <p>As different assets grow at different rates, your portfolio drifts from target allocations. For example, if stocks perform well, you might shift from 60/40 stocks/bonds to 70/30. Rebalancing means selling some winners and buying underperformers to return to your target. Do this annually or when allocations drift by 5+ percentage points. This disciplined approach forces you to "buy low, sell high."</p>
+
+            <h2>The Importance of Asset Allocation</h2>
+            <p>Studies show asset allocation (how you divide between stocks, bonds, and other assets) determines 90%+ of portfolio performance variability. Individual security selection matters much less. A good rule of thumb: subtract your age from 110 to get your stock percentage (30-year-old = 80% stocks, 60-year-old = 50% stocks). Adjust based on risk tolerance and goals.</p>
+
+            <h2>Frequently Asked Questions</h2>
+            <h3>How much should I invest each month?</h3>
+            <p>Financial advisors recommend 15-20% of gross income. If your employer matches 401(k) contributions, contribute at least enough to get the full match - it's free money. Start with what you can afford and increase as income grows.</p>
+
+            <h3>Is 8% a realistic return?</h3>
+            <p>The S&P 500 has averaged about 10% annually (7% after inflation) over the past century. While past performance doesn't guarantee future results, 7-8% is a reasonable conservative estimate for diversified stock portfolios long-term.</p>
+
+            <h3>Should I invest in a downturn?</h3>
+            <p>Yes! Downturns are when assets go "on sale." If you're decades from retirement, market drops are opportunities to buy more shares at lower prices. Continue regular contributions regardless of market conditions.</p>
+
+            <h3>When should I sell my investments?</h3>
+            <p>Ideally, only when you need the money (retirement, major purchase) or to rebalance. Avoid selling due to market fear - this locks in losses and misses recoveries. Time in market beats timing the market.</p>
+
+            <h3>What's better - lump sum or dollar-cost averaging?</h3>
+            <p>Statistically, lump sum investing performs better 2/3 of the time because markets generally rise. However, dollar-cost averaging reduces timing risk and feels safer psychologically. If you're nervous about a lump sum, DCA over 6-12 months.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Compound Interest</h3>
+                    <p class="calc-description">Calculate compound growth</p>
+                </a>
+
+                <a href="loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Loan Calculator</h3>
+                    <p class="calc-description">Calculate loan payments</p>
+                </a>
+
+                <a href="mortgage-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏠</div>
+                    <h3 class="calc-title">Mortgage Calculator</h3>
+                    <p class="calc-description">Calculate home loan payments</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function calculateInvestment() {
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value);
+            const additionalContribution = parseFloat(document.getElementById('additionalContribution').value);
+            const contributionFreq = parseInt(document.getElementById('contributionFrequency').value);
+            const returnRate = parseFloat(document.getElementById('returnRate').value) / 100;
+            const years = parseFloat(document.getElementById('investmentYears').value);
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+
+            if (initialInvestment < 0 || additionalContribution < 0 || years <= 0) {
+                alert('Please enter valid investment parameters');
+                return;
+            }
+
+            // Calculate future value
+            const monthlyRate = returnRate / 12;
+            const totalMonths = years * 12;
+            const contributionsPerYear = contributionFreq;
+            const monthsBetweenContributions = 12 / contributionFreq;
+
+            // Future value of initial investment
+            let futureValue = initialInvestment * Math.pow(1 + monthlyRate, totalMonths);
+
+            // Future value of regular contributions
+            let totalContributed = initialInvestment;
+            for (let month = monthsBetweenContributions; month <= totalMonths; month += monthsBetweenContributions) {
+                const monthsRemaining = totalMonths - month;
+                futureValue += additionalContribution * Math.pow(1 + monthlyRate, monthsRemaining);
+                totalContributed += additionalContribution;
+            }
+
+            const totalEarnings = futureValue - totalContributed;
+            const roi = (totalEarnings / totalContributed) * 100;
+
+            // Calculate inflation-adjusted value
+            const realValue = futureValue / Math.pow(1 + inflationRate, years);
+
+            // Display results
+            document.getElementById('futureValue').textContent = '$' + futureValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('totalInvested').textContent = '$' + totalContributed.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('totalEarnings').textContent = '$' + totalEarnings.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById('roi').textContent = roi.toFixed(1) + '%';
+            document.getElementById('realValue').textContent = '$' + realValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+            showResult('futureValue');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateInvestment);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', calculateInvestment);
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free weight converter - Convert kg, pounds, ounces, grams, and tons. Fast weight conversion tool.">
+    <meta name="keywords" content="weight converter, kg to lbs, pounds to kg, grams to ounces, weight conversion, mass converter">
+    <title>Weight Converter | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/weight-converter.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html#finance">Finance</a></li><li><a href="../index.html#health">Health</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Weight Converter</h1>
+            <p class="calculator-description">Convert between weight units</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Calculator Input</h3>
+                <div class="form-group"><label for="input1" class="form-label">Value 1</label><input type="number" id="input1" class="form-input" value="100"></div>
+                <div class="form-group"><label for="input2" class="form-label">Value 2</label><input type="number" id="input2" class="form-input" value="50"></div>
+                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Results</h3>
+                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>About This Calculator</h2>
+            <p>Use this calculator for quick and accurate calculations. Enter your values above and get instant results.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const input1 = parseFloat(document.getElementById('input1').value);
+            const input2 = parseFloat(document.getElementById('input2').value);
+            const result = input1 + input2;
+            document.getElementById('result').textContent = result.toFixed(2);
+        }
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

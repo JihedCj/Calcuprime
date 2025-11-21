@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free pregnancy calculator - Calculate due date, current week, trimester, and important pregnancy milestones. Track your pregnancy journey week by week.">
+    <meta name="keywords" content="pregnancy calculator, due date calculator, pregnancy week calculator, conception date, pregnancy milestones, trimester calculator">
+
+    <title>Pregnancy Calculator - Calculate Due Date & Weeks | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/pregnancy-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Pregnancy Calculator</h1>
+            <p class="calculator-description">Calculate your due date, current pregnancy week, and important milestones</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Calculate By</h3>
+
+                <div class="form-group">
+                    <label for="calcMethod" class="form-label">Calculation Method</label>
+                    <select id="calcMethod" class="form-select">
+                        <option value="lmp">Last Menstrual Period (LMP)</option>
+                        <option value="conception">Conception/Ovulation Date</option>
+                        <option value="duedate">Known Due Date</option>
+                    </select>
+                </div>
+
+                <div id="lmpInput" class="form-group">
+                    <label for="lmpDate" class="form-label">First Day of Last Period</label>
+                    <input type="date" id="lmpDate" class="form-input">
+                </div>
+
+                <div id="conceptionInput" class="form-group" style="display: none;">
+                    <label for="conceptionDate" class="form-label">Conception/Ovulation Date</label>
+                    <input type="date" id="conceptionDate" class="form-input">
+                </div>
+
+                <div id="duedateInput" class="form-group" style="display: none;">
+                    <label for="dueDateInput" class="form-label">Due Date</label>
+                    <input type="date" id="dueDateInput" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="cycleLength" class="form-label">Average Cycle Length (days)</label>
+                    <input type="number" id="cycleLength" class="form-input" value="28" min="21" max="35">
+                </div>
+
+                <button onclick="calculatePregnancy()" class="btn-calculate">Calculate Pregnancy</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Your Pregnancy Details</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Due Date</div>
+                    <div class="result-value" id="dueDate" style="font-size: 2rem; color: #ec4899;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Current Week</div>
+                    <div class="result-value" id="currentWeek" style="font-size: 1.5rem;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Trimester</div>
+                    <div class="result-value" id="trimester" style="font-size: 1.3rem;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Days Until Due Date</div>
+                    <div class="result-value" id="daysRemaining" style="font-size: 1.3rem;">-</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #fdf2f8; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Important Dates</h4>
+                    <div style="margin-bottom: 8px; font-size: 0.9rem;">
+                        <strong>Conception Date:</strong> <span id="conceptionEstimate">-</span>
+                    </div>
+                    <div style="margin-bottom: 8px; font-size: 0.9rem;">
+                        <strong>End of 1st Trimester:</strong> <span id="trim1End">-</span>
+                    </div>
+                    <div style="margin-bottom: 8px; font-size: 0.9rem;">
+                        <strong>End of 2nd Trimester:</strong> <span id="trim2End">-</span>
+                    </div>
+                    <div style="font-size: 0.9rem;">
+                        <strong>Full Term (37 weeks):</strong> <span id="fullTerm">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How Pregnancy is Calculated</h2>
+            <p>Pregnancy is typically calculated from the first day of your last menstrual period (LMP), not from conception. This means you're considered "2 weeks pregnant" at conception. A full-term pregnancy lasts about 40 weeks (280 days) from the LMP, or 38 weeks from conception.</p>
+
+            <h2>Pregnancy Trimesters</h2>
+            <h3>First Trimester (Weeks 1-13)</h3>
+            <p>Major organs and body systems develop. Morning sickness, fatigue, and breast tenderness are common. First prenatal visit typically occurs around week 8-12. First ultrasound often at 8-12 weeks.</p>
+
+            <h3>Second Trimester (Weeks 14-27)</h3>
+            <p>Often called the "honeymoon period" - energy returns, morning sickness usually subsides. You'll feel baby's first movements ("quickening") around weeks 16-25. Anatomy scan typically at 18-22 weeks reveals baby's sex and checks development.</p>
+
+            <h3>Third Trimester (Weeks 28-40)</h3>
+            <p>Baby grows rapidly. Back pain, swelling, and frequent urination common. Braxton Hicks contractions may begin. Final preparations for birth. Weekly prenatal visits begin around week 36.</p>
+
+            <h2>Important Pregnancy Milestones</h2>
+            <ul>
+                <li><strong>Week 4-5:</strong> Positive pregnancy test possible</li>
+                <li><strong>Week 6-8:</strong> Heartbeat detectable on ultrasound</li>
+                <li><strong>Week 10-13:</strong> First trimester screening, nuchal translucency scan</li>
+                <li><strong>Week 18-22:</strong> Anatomy scan (morphology ultrasound)</li>
+                <li><strong>Week 24-28:</strong> Glucose tolerance test for gestational diabetes</li>
+                <li><strong>Week 35-37:</strong> Group B strep test</li>
+                <li><strong>Week 37:</strong> Considered full term, baby could arrive anytime</li>
+                <li><strong>Week 39-40:</strong> Optimal time for delivery</li>
+            </ul>
+
+            <h2>Due Date Accuracy</h2>
+            <p>Only about 5% of babies arrive exactly on their due date. Most babies arrive within 2 weeks before or after the due date. First-time mothers often deliver slightly past their due date, while those who've had children before may deliver earlier. Ultrasound measurements in the first trimester can help refine your due date.</p>
+
+            <h2>Signs of Labor</h2>
+            <ul>
+                <li><strong>Regular contractions:</strong> Every 5-10 minutes lasting 30-70 seconds</li>
+                <li><strong>Water breaking:</strong> Gush or trickle of amniotic fluid</li>
+                <li><strong>Bloody show:</strong> Pink or bloody mucus discharge</li>
+                <li><strong>Lower back pain:</strong> Constant, intense lower back pain</li>
+                <li><strong>Diarrhea:</strong> Body's natural way of clearing the system</li>
+            </ul>
+
+            <h2>When to Call Your Doctor</h2>
+            <p>Contact your healthcare provider immediately if you experience:</p>
+            <ul>
+                <li>Severe abdominal pain or cramping</li>
+                <li>Heavy vaginal bleeding</li>
+                <li>Severe headache or vision changes</li>
+                <li>Sudden swelling of hands, face, or feet</li>
+                <li>Decreased fetal movement</li>
+                <li>Signs of preterm labor before 37 weeks</li>
+                <li>Fever over 100.4°F (38°C)</li>
+            </ul>
+
+            <h2>Prenatal Care Schedule</h2>
+            <ul>
+                <li><strong>Weeks 4-28:</strong> Visit every 4 weeks</li>
+                <li><strong>Weeks 28-36:</strong> Visit every 2 weeks</li>
+                <li><strong>Weeks 36-40:</strong> Visit every week</li>
+            </ul>
+
+            <h2>Healthy Pregnancy Tips</h2>
+            <ul>
+                <li><strong>Take prenatal vitamins:</strong> Start with 400-800 mcg folic acid daily before conception if possible</li>
+                <li><strong>Eat a balanced diet:</strong> Focus on fruits, vegetables, whole grains, lean protein, and healthy fats</li>
+                <li><strong>Stay hydrated:</strong> Drink 8-12 glasses of water daily</li>
+                <li><strong>Exercise regularly:</strong> 30 minutes of moderate exercise most days (if approved by doctor)</li>
+                <li><strong>Get enough rest:</strong> Sleep 7-9 hours nightly, nap when tired</li>
+                <li><strong>Avoid harmful substances:</strong> No alcohol, smoking, or recreational drugs</li>
+                <li><strong>Limit caffeine:</strong> Under 200mg daily (about one 12 oz coffee)</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+            <h3>How accurate is my due date?</h3>
+            <p>Due dates are estimates. Only 5% of babies arrive on the exact date. Your doctor may adjust the due date based on first-trimester ultrasound measurements, which are accurate to within 3-5 days.</p>
+
+            <h3>Can I find out baby's sex?</h3>
+            <p>Baby's sex can typically be determined via ultrasound around 18-22 weeks. Non-invasive prenatal testing (NIPT) blood tests can reveal sex as early as 10 weeks with high accuracy.</p>
+
+            <h3>What if I don't know my LMP?</h3>
+            <p>Your doctor can estimate gestational age through ultrasound measurements. First-trimester ultrasounds are most accurate for dating pregnancies.</p>
+
+            <h3>How much weight should I gain?</h3>
+            <p>Recommendations based on pre-pregnancy BMI: Underweight (BMI <18.5): 28-40 lbs, Normal weight (BMI 18.5-24.9): 25-35 lbs, Overweight (BMI 25-29.9): 15-25 lbs, Obese (BMI ≥30): 11-20 lbs.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">BMI Calculator</h3>
+                    <p class="calc-description">Calculate Body Mass Index</p>
+                </a>
+
+                <a href="age-calculator.html" class="calc-card">
+                    <div class="calc-icon">📅</div>
+                    <h3 class="calc-title">Age Calculator</h3>
+                    <p class="calc-description">Calculate age and dates</p>
+                </a>
+
+                <a href="calorie-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calorie Calculator</h3>
+                    <p class="calc-description">Calculate daily calories</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('calcMethod').addEventListener('change', function() {
+            const method = this.value;
+            document.getElementById('lmpInput').style.display = method === 'lmp' ? 'block' : 'none';
+            document.getElementById('conceptionInput').style.display = method === 'conception' ? 'block' : 'none';
+            document.getElementById('duedateInput').style.display = method === 'duedate' ? 'block' : 'none';
+        });
+
+        // Set default dates
+        const today = new Date();
+        const defaultLMP = new Date(today.getTime() - (8 * 7 * 24 * 60 * 60 * 1000)); // 8 weeks ago
+        document.getElementById('lmpDate').value = defaultLMP.toISOString().split('T')[0];
+        document.getElementById('conceptionDate').value = today.toISOString().split('T')[0];
+        document.getElementById('dueDateInput').value = new Date(today.getTime() + (32 * 7 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0];
+
+        function calculatePregnancy() {
+            const method = document.getElementById('calcMethod').value;
+            const cycleLength = parseInt(document.getElementById('cycleLength').value);
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
+            let lmpDate, dueDate;
+
+            if (method === 'lmp') {
+                const lmpInput = document.getElementById('lmpDate').value;
+                if (!lmpInput) {
+                    alert('Please enter your last menstrual period date');
+                    return;
+                }
+                lmpDate = new Date(lmpInput);
+                // Due date is 280 days from LMP
+                dueDate = new Date(lmpDate.getTime() + (280 * 24 * 60 * 60 * 1000));
+            } else if (method === 'conception') {
+                const conceptionInput = document.getElementById('conceptionDate').value;
+                if (!conceptionInput) {
+                    alert('Please enter your conception date');
+                    return;
+                }
+                const conceptionDate = new Date(conceptionInput);
+                // LMP is conception date minus 2 weeks
+                lmpDate = new Date(conceptionDate.getTime() - (14 * 24 * 60 * 60 * 1000));
+                dueDate = new Date(conceptionDate.getTime() + (266 * 24 * 60 * 60 * 1000));
+            } else {
+                const dueDateInputValue = document.getElementById('dueDateInput').value;
+                if (!dueDateInputValue) {
+                    alert('Please enter your due date');
+                    return;
+                }
+                dueDate = new Date(dueDateInputValue);
+                lmpDate = new Date(dueDate.getTime() - (280 * 24 * 60 * 60 * 1000));
+            }
+
+            // Calculate current week
+            const daysSinceLMP = Math.floor((today - lmpDate) / (24 * 60 * 60 * 1000));
+            const weeksPassed = Math.floor(daysSinceLMP / 7);
+            const daysPassed = daysSinceLMP % 7;
+
+            // Calculate days remaining
+            const daysRemaining = Math.floor((dueDate - today) / (24 * 60 * 60 * 1000));
+
+            // Determine trimester
+            let trimester;
+            if (weeksPassed < 13) {
+                trimester = 'First Trimester';
+            } else if (weeksPassed < 27) {
+                trimester = 'Second Trimester';
+            } else {
+                trimester = 'Third Trimester';
+            }
+
+            // Calculate conception date estimate
+            const conceptionEstimate = new Date(lmpDate.getTime() + (14 * 24 * 60 * 60 * 1000));
+
+            // Calculate trimester end dates
+            const trim1End = new Date(lmpDate.getTime() + (13 * 7 * 24 * 60 * 60 * 1000));
+            const trim2End = new Date(lmpDate.getTime() + (27 * 7 * 24 * 60 * 60 * 1000));
+            const fullTerm = new Date(lmpDate.getTime() + (37 * 7 * 24 * 60 * 60 * 1000));
+
+            // Format dates
+            const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+            // Display results
+            document.getElementById('dueDate').textContent = formatDate(dueDate);
+            document.getElementById('currentWeek').textContent = weeksPassed >= 0 && weeksPassed <= 42
+                ? `Week ${weeksPassed} + ${daysPassed} days`
+                : weeksPassed < 0 ? 'Not yet pregnant' : 'Past due date';
+            document.getElementById('trimester').textContent = trimester;
+            document.getElementById('daysRemaining').textContent = daysRemaining >= 0
+                ? `${daysRemaining} days`
+                : `${Math.abs(daysRemaining)} days overdue`;
+
+            document.getElementById('conceptionEstimate').textContent = formatDate(conceptionEstimate);
+            document.getElementById('trim1End').textContent = formatDate(trim1End);
+            document.getElementById('trim2End').textContent = formatDate(trim2End);
+            document.getElementById('fullTerm').textContent = formatDate(fullTerm);
+
+            showResult('dueDate');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculatePregnancy);
+        });
+
+        window.addEventListener('load', calculatePregnancy);
+    </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free protein calculator - Calculate optimal daily protein intake for muscle building, weight loss, or maintenance. Science-based recommendations.">
+    <meta name="keywords" content="protein calculator, daily protein, protein intake, protein needs, muscle building protein">
+    <title>Protein Calculator | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/protein-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html">Home</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Protein Calculator</h1>
+            <p class="calculator-description">Calculate your optimal daily protein intake based on your goals and activity level</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Your Information</h3>
+                <div class="form-group">
+                    <label for="weight" class="form-label">Body Weight (lbs)</label>
+                    <input type="number" id="weight" class="form-input" value="170" min="50" max="500" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="goal" class="form-label">Primary Goal</label>
+                    <select id="goal" class="form-input">
+                        <option value="sedentary">Sedentary / General Health</option>
+                        <option value="active">Active / Fitness</option>
+                        <option value="athlete">Athlete / Intense Training</option>
+                        <option value="muscle">Muscle Building</option>
+                        <option value="cutting">Fat Loss / Cutting</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bodyFat" class="form-label">Body Composition</label>
+                    <select id="bodyFat" class="form-input">
+                        <option value="lean">Lean (10-18% men, 18-25% women)</option>
+                        <option value="average" selected>Average (18-25% men, 25-32% women)</option>
+                        <option value="overweight">Overweight (25%+ men, 32%+ women)</option>
+                    </select>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate Protein</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Daily Protein Target</h3>
+                <div class="result-item">
+                    <div class="result-label">Recommended Protein</div>
+                    <div class="result-value" id="protein" style="font-size: 2.5rem; color: #10b981;">0g</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Protein per Pound</div>
+                    <div class="result-value" id="perPound">0g/lb</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Minimum Protein</div>
+                    <div class="result-value" id="minProtein">0g</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Maximum Protein</div>
+                    <div class="result-value" id="maxProtein">0g</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Protein Calories</div>
+                    <div class="result-value" id="proteinCals">0 calories</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Understanding Protein Requirements</h2>
+            <p>Protein is the most important macronutrient for building and preserving muscle mass, supporting immune function, and maintaining optimal health. Your protein needs vary significantly based on your activity level, body composition goals, and training intensity. Our protein calculator uses current sports nutrition research to provide evidence-based recommendations tailored to your specific situation, ensuring you consume enough protein to support your goals without unnecessary excess.</p>
+
+            <h2>How Much Protein Do You Really Need?</h2>
+            <p>The Recommended Dietary Allowance (RDA) of 0.36 grams per pound (0.8g per kilogram) body weight prevents deficiency in sedentary adults but falls far short of optimal intake for active individuals or those seeking body composition changes. Research consistently shows that higher protein intakes benefit muscle growth, fat loss, and metabolic health.</p>
+
+            <p><strong>Sedentary Adults:</strong> 0.36-0.5 grams per pound (0.8-1.1g/kg) maintains basic health. This baseline prevents muscle loss in inactive individuals but provides no margin for enhanced recovery, body composition improvements, or increased physical activity.</p>
+
+            <p><strong>Active Individuals:</strong> 0.6-0.8 grams per pound (1.4-1.8g/kg) supports regular exercise and general fitness goals. This range accommodates 3-5 workouts weekly and promotes recovery from moderate training stress while supporting lean mass maintenance during weight stability.</p>
+
+            <p><strong>Athletes and Intense Trainers:</strong> 0.7-1.0 grams per pound (1.6-2.2g/kg) optimizes performance and recovery from high-volume training. Endurance athletes, team sport players, and those training 6+ days weekly benefit from the higher end of this range to offset training-induced protein breakdown and support adaptation.</p>
+
+            <p><strong>Muscle Building:</strong> 0.8-1.0 grams per pound (1.8-2.2g/kg) maximizes muscle protein synthesis when combined with progressive resistance training. While gains occur at lower intakes, research suggests this range optimizes hypertrophy response, particularly for natural lifters operating at a caloric surplus.</p>
+
+            <p><strong>Fat Loss / Cutting:</strong> 0.8-1.2 grams per pound (1.8-2.7g/kg) preserves lean mass during caloric restriction. Higher protein intakes during cuts provide greater satiety, preserve metabolism, prevent muscle loss, and provide cushion against imperfect adherence. The leaner you get, the more protein helps protect hard-earned muscle.</p>
+
+            <h2>Protein and Muscle Building</h2>
+            <p>Muscle protein synthesis (MPS) – the process of building new muscle proteins – requires three conditions: adequate protein intake, sufficient calories, and progressive mechanical tension (resistance training). Protein provides the amino acid building blocks, but without training stimulus and energy surplus, excess protein converts to glucose or oxidizes for energy rather than building muscle.</p>
+
+            <p><strong>The Anabolic Window Myth:</strong> Earlier research suggested immediate post-workout protein was critical for gains. Current evidence shows total daily protein intake matters far more than precise timing. Consuming protein within several hours of training works well, but obsessing over 30-minute windows is unnecessary. Distribute protein across 3-5 meals throughout the day for optimal MPS stimulation.</p>
+
+            <p><strong>Protein Per Meal:</strong> Studies indicate 20-40 grams protein per meal maximally stimulates MPS for most people, with larger individuals benefiting from amounts toward the higher end. Consuming 60+ grams in one sitting doesn't triple MPS compared to 30 grams; the excess is oxidized or converted to other compounds. Spread protein intake across multiple meals rather than loading it into one or two large servings.</p>
+
+            <p><strong>Protein Quality Matters:</strong> Complete proteins containing all nine essential amino acids (particularly leucine) most effectively stimulate MPS. Animal sources (meat, fish, eggs, dairy) provide complete protein profiles. Plant proteins often lack one or more essential amino acids but can be combined (rice + beans, hummus + pita) to create complete profiles. Vegans and vegetarians should consume 10-20% more total protein to compensate for lower digestibility and incomplete amino acid profiles in plant sources.</p>
+
+            <h2>Protein and Fat Loss</h2>
+            <p>Protein is the most important macronutrient during caloric restriction for several compelling reasons:</p>
+
+            <p><strong>Muscle Preservation:</strong> Caloric deficits create a catabolic environment where the body breaks down tissue for energy. Higher protein intakes (0.8-1.2g per pound) signal the body to preferentially use fat stores while sparing lean mass. Studies show dieters consuming higher protein retain significantly more muscle than those on lower protein intakes, even with identical calorie deficits.</p>
+
+            <p><strong>Satiety and Appetite Control:</strong> Protein is the most satiating macronutrient, increasing fullness hormones (GLP-1, peptide YY) while reducing hunger hormone ghrelin. High-protein diets naturally reduce overall calorie intake by 15-20% without conscious restriction. Dieters report less hunger, fewer cravings, and better diet adherence when protein intake is optimized.</p>
+
+            <p><strong>Thermic Effect:</strong> Digesting and processing protein burns 20-30% of its calories compared to 5-10% for carbs and 0-3% for fats. A 30-gram protein meal requires 6-9 calories just for digestion and absorption. Over time, this metabolic advantage adds up – high-protein diets burn an extra 80-100 calories daily compared to low-protein diets with equivalent calories.</p>
+
+            <p><strong>Metabolic Rate Protection:</strong> Weight loss naturally decreases metabolic rate through smaller body mass and adaptive thermogenesis. High protein intake attenuates this metabolic slowdown, helping maintain higher calorie burn during and after dieting. This makes subsequent fat loss easier and reduces rebound weight gain risk.</p>
+
+            <h2>Adjusting for Body Composition</h2>
+            <p>Body fat doesn't require protein for maintenance – skeletal muscle and organs do. Extremely overweight individuals calculating protein based on total body weight may get recommendations far exceeding their actual needs.</p>
+
+            <p><strong>Lean Individuals:</strong> Calculate protein based on total body weight. With low body fat percentages, most weight is lean mass requiring protein support.</p>
+
+            <p><strong>Average Body Composition:</strong> Use total body weight. The standard recommendations account for typical body fat percentages (15-22% men, 22-30% women).</p>
+
+            <p><strong>Overweight/Obese:</strong> Calculate based on goal body weight or lean body mass rather than total weight. A 300-pound person at 35% body fat (105 pounds fat, 195 pounds lean mass) needs protein for 195 pounds of metabolically active tissue, not all 300 pounds. Using goal weight (perhaps 220 pounds) or lean mass provides more appropriate targets without protein excess.</p>
+
+            <h2>Protein Sources and Quality</h2>
+            <p><strong>Complete Protein Sources:</strong> Contain all nine essential amino acids in optimal ratios.</p>
+            <ul>
+                <li><strong>Chicken, Turkey, Lean Beef, Pork:</strong> 25-30g protein per 4oz serving, low fat, versatile</li>
+                <li><strong>Fish and Seafood:</strong> 20-25g per 4oz, rich in omega-3 fatty acids</li>
+                <li><strong>Eggs:</strong> 6-7g per egg, perfect amino acid profile, affordable</li>
+                <li><strong>Greek Yogurt:</strong> 15-20g per cup, probiotics, high calcium</li>
+                <li><strong>Cottage Cheese:</strong> 25-28g per cup, casein for sustained release</li>
+                <li><strong>Whey Protein:</strong> 20-30g per scoop, fastest absorption, convenient</li>
+                <li><strong>Casein Protein:</strong> 20-25g per scoop, slow-digesting, ideal before bed</li>
+            </ul>
+
+            <p><strong>Plant-Based Protein Sources:</strong> Often incomplete but can be combined strategically.</p>
+            <ul>
+                <li><strong>Soy Products (tofu, tempeh, edamame):</strong> Complete protein, 15-20g per serving</li>
+                <li><strong>Legumes (lentils, chickpeas, black beans):</strong> 15-18g per cup, high fiber</li>
+                <li><strong>Quinoa:</strong> Complete protein, 8g per cup cooked, versatile grain alternative</li>
+                <li><strong>Nuts and Seeds:</strong> 5-7g per ounce, healthy fats but calorie-dense</li>
+                <li><strong>Plant-Based Protein Powders (pea, rice, hemp):</strong> 15-25g per scoop, improving quality</li>
+            </ul>
+
+            <h2>Practical Protein Distribution</h2>
+            <p>For a 170-pound individual targeting 140 grams protein daily (0.82g/lb), here's an optimal distribution:</p>
+
+            <p><strong>Breakfast (35g):</strong> 3 eggs + 1 cup Greek yogurt with berries = 35g protein, sets satiety for the day, stabilizes blood sugar</p>
+
+            <p><strong>Lunch (35g):</strong> 6oz grilled chicken breast on salad with olive oil = 36g protein, keeps energy high through afternoon</p>
+
+            <p><strong>Snack (20g):</strong> Protein shake (1 scoop whey) = 24g protein, convenient and quickly absorbed</p>
+
+            <p><strong>Dinner (40g):</strong> 8oz salmon with vegetables and quinoa = 48g protein, omega-3s support recovery overnight</p>
+
+            <p><strong>Pre-Bed (10g):</strong> Casein shake or cottage cheese = 25g slow-digesting protein, sustains MPS during sleep</p>
+
+            <p>This distribution provides 168g protein across five feedings, stimulating MPS regularly throughout the day while preventing large amino acid boluses that exceed the body's anabolic capacity per meal.</p>
+
+            <h2>Common Protein Myths</h2>
+            <p><strong>Myth: "High Protein Damages Kidneys"</strong><br>Reality: No evidence shows high protein intake damages healthy kidneys. People with pre-existing kidney disease should moderate protein, but healthy individuals handle high intakes without issue. Studies on bodybuilders consuming 2-3g per pound show no kidney function decline.</p>
+
+            <p><strong>Myth: "You Can Only Absorb 30g Protein Per Meal"</strong><br>Reality: Your body absorbs essentially all dietary protein, just at varying rates. While 30-40g per meal optimizes MPS, consuming more doesn't waste protein; it serves other functions (energy, gluconeogenesis, immune support).</p>
+
+            <p><strong>Myth: "Plant Protein Is Inferior to Animal Protein"</strong><br>Reality: While animal proteins are more complete and bioavailable, properly combined plant proteins support muscle growth effectively. Vegans building muscle successfully simply need 10-20% more total protein and strategic food combining.</p>
+
+            <p><strong>Myth: "More Protein Always Equals More Muscle"</strong><br>Reality: Protein requirements plateau around 0.8-1.0g per pound for natural lifters. Consuming 2-3g per pound doesn't accelerate muscle growth; it's simply more expensive calories. Focus on optimal amounts (0.8-1.0g/lb) rather than excessive amounts.</p>
+
+            <h2>Tracking Protein Intake</h2>
+            <p><strong>Use a Food Tracking App:</strong> Apps like MyFitnessPal, Cronometer, or MacroFactor simplify tracking. Weigh food initially to understand portions, then you can eyeball more accurately over time.</p>
+
+            <p><strong>Focus on Whole Foods First:</strong> Meet most protein needs through whole food sources (chicken, fish, eggs, legumes) for vitamins, minerals, and satiety. Supplements are convenient but shouldn't replace real food entirely.</p>
+
+            <p><strong>Protein Supplements Are Tools, Not Magic:</strong> Whey and casein powder are convenient, affordable protein sources but offer no special muscle-building properties beyond their amino acid content. Use them to hit protein targets when whole foods are impractical, not as primary protein sources.</p>
+
+            <p><strong>Consistency Matters More Than Perfection:</strong> Hitting protein targets 80-90% of days matters far more than occasional perfect days amid many low-protein days. Aim for your target daily but don't stress over being 10-15g short occasionally.</p>
+
+            <h2>When to Adjust Protein Intake</h2>
+            <p>Increase protein if:</p>
+            <ul>
+                <li>Starting a fat loss phase (move from 0.7g to 0.9-1.0g per pound)</li>
+                <li>Increasing training volume or intensity significantly</li>
+                <li>Aging (protein needs increase slightly with age to preserve muscle)</li>
+                <li>Recovering from injury or illness</li>
+                <li>Experiencing excessive hunger during a diet</li>
+            </ul>
+
+            <p>Decrease protein if:</p>
+            <ul>
+                <li>Experiencing digestive issues from very high intakes</li>
+                <li>Needing more calories for carbs/fats without increasing total calories</li>
+                <li>Budget constraints make high-protein intake difficult</li>
+            </ul>
+
+            <h2>The Bottom Line</h2>
+            <p>Optimal protein intake for active individuals ranges from 0.7-1.0 grams per pound body weight, with the higher end benefiting those building muscle or losing fat. This level supports muscle growth, preserves lean mass during cuts, enhances satiety, and optimizes recovery from training. Distribute protein across 3-5 meals daily, emphasizing quality sources, and track intake initially to ensure you're hitting targets consistently. Remember that protein is essential but works synergistically with adequate calories, quality training, and sufficient sleep to produce results.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const weight = parseFloat(document.getElementById('weight').value) || 170;
+            const goal = document.getElementById('goal').value;
+            const bodyFat = document.getElementById('bodyFat').value;
+
+            let gramsPerPound;
+
+            // Determine protein multiplier based on goal
+            switch(goal) {
+                case 'sedentary':
+                    gramsPerPound = 0.45;
+                    break;
+                case 'active':
+                    gramsPerPound = 0.7;
+                    break;
+                case 'athlete':
+                    gramsPerPound = 0.85;
+                    break;
+                case 'muscle':
+                    gramsPerPound = 0.9;
+                    break;
+                case 'cutting':
+                    gramsPerPound = 1.0;
+                    break;
+                default:
+                    gramsPerPound = 0.7;
+            }
+
+            // Adjust for body composition
+            let adjustedWeight = weight;
+            if (bodyFat === 'overweight') {
+                adjustedWeight = weight * 0.85; // Use 85% of body weight for overweight individuals
+            }
+
+            const protein = Math.round(adjustedWeight * gramsPerPound);
+            const minProtein = Math.round(adjustedWeight * (gramsPerPound - 0.1));
+            const maxProtein = Math.round(adjustedWeight * (gramsPerPound + 0.1));
+            const proteinCals = protein * 4; // 4 calories per gram of protein
+
+            document.getElementById('protein').textContent = protein + 'g';
+            document.getElementById('perPound').textContent = gramsPerPound.toFixed(2) + 'g/lb';
+            document.getElementById('minProtein').textContent = minProtein + 'g';
+            document.getElementById('maxProtein').textContent = maxProtein + 'g';
+            document.getElementById('proteinCals').textContent = proteinCals.toLocaleString() + ' calories';
+        }
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

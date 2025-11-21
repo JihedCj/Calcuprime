@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free tip calculator - Calculate tip amounts and split bills easily. Find out how much to tip for restaurants, delivery, and services.">
+    <meta name="keywords" content="tip calculator, gratuity calculator, bill splitter, restaurant tip, tip percentage, split bill calculator">
+
+    <title>Tip Calculator - Calculate Tips & Split Bills | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/tip-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Tip Calculator</h1>
+            <p class="calculator-description">Calculate tips and split bills among multiple people</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Bill Details</h3>
+
+                <div class="form-group">
+                    <label for="billAmount" class="form-label">Bill Amount ($)</label>
+                    <input type="number" id="billAmount" class="form-input" value="100" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="tipPercentage" class="form-label">Tip Percentage (%)</label>
+                    <input type="number" id="tipPercentage" class="form-input" value="18" min="0" max="100" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Quick Tip Percentages</label>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="setTipPercentage(15)" class="btn-calculate" style="flex: 1; min-width: 60px; padding: 10px; font-size: 0.9rem;">15%</button>
+                        <button onclick="setTipPercentage(18)" class="btn-calculate" style="flex: 1; min-width: 60px; padding: 10px; font-size: 0.9rem;">18%</button>
+                        <button onclick="setTipPercentage(20)" class="btn-calculate" style="flex: 1; min-width: 60px; padding: 10px; font-size: 0.9rem;">20%</button>
+                        <button onclick="setTipPercentage(25)" class="btn-calculate" style="flex: 1; min-width: 60px; padding: 10px; font-size: 0.9rem;">25%</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="numPeople" class="form-label">Number of People</label>
+                    <input type="number" id="numPeople" class="form-input" value="1" min="1" max="100">
+                </div>
+
+                <button onclick="calculateTip()" class="btn-calculate">Calculate Tip</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tip Breakdown</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Tip Amount</div>
+                    <div class="result-value" id="tipAmount" style="font-size: 2.5rem; color: #10b981;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total Bill</div>
+                    <div class="result-value" id="totalBill" style="font-size: 2rem;">$0.00</div>
+                </div>
+
+                <div id="splitSection" style="margin-top: 20px; padding: 20px; background: #f0fdf4; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Per Person</h4>
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Bill Amount:</span>
+                            <span id="perPersonBill" style="font-weight: 600;">$0.00</span>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Tip Amount:</span>
+                            <span id="perPersonTip" style="font-weight: 600;">$0.00</span>
+                        </div>
+                    </div>
+                    <div style="border-top: 2px solid #d1fae5; padding-top: 10px; margin-top: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="font-weight: 600; font-size: 1.1rem;">Total Per Person:</span>
+                            <span id="perPersonTotal" style="font-weight: 700; font-size: 1.2rem; color: #059669;">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Tipping Etiquette Guide</h2>
+            <p>Tipping customs vary by country, service type, and situation. In the United States, tipping is customary and often expected as service workers receive lower base wages. Here's a comprehensive guide to tipping in different scenarios.</p>
+
+            <h2>Restaurant Tipping Guidelines</h2>
+            <h3>Full-Service Restaurants</h3>
+            <ul>
+                <li><strong>Standard Service (15-18%):</strong> Adequate, attentive service</li>
+                <li><strong>Good Service (18-20%):</strong> Friendly, prompt, knowledgeable service</li>
+                <li><strong>Exceptional Service (20-25%+):</strong> Outstanding service, special accommodations</li>
+                <li><strong>Poor Service (10-15%):</strong> Below standard but not egregious (consider speaking with manager)</li>
+            </ul>
+
+            <h3>Special Considerations</h3>
+            <ul>
+                <li><strong>Large Parties:</strong> 18-20% (often automatically added for 6+ people)</li>
+                <li><strong>Fine Dining:</strong> 20%+ is standard for elevated service</li>
+                <li><strong>Buffets:</strong> 10% is typical for drink service and table clearing</li>
+                <li><strong>Bar Service:</strong> $1-2 per drink or 15-20% of bar tab</li>
+            </ul>
+
+            <h2>Food Delivery Tipping</h2>
+            <h3>Delivery Apps (DoorDash, Uber Eats, Grubhub)</h3>
+            <ul>
+                <li><strong>Standard:</strong> 15-20% or minimum $3-5</li>
+                <li><strong>Bad Weather:</strong> 20-25% for rain, snow, extreme heat</li>
+                <li><strong>Large Orders:</strong> 20%+ for multiple bags or heavy items</li>
+                <li><strong>Long Distance:</strong> Add $1-2 per mile beyond 5 miles</li>
+            </ul>
+
+            <h3>Pizza Delivery</h3>
+            <ul>
+                <li><strong>Standard Order:</strong> $3-5 or 15-20%</li>
+                <li><strong>Large Orders:</strong> $5-10 minimum</li>
+                <li><strong>Bad Weather:</strong> Add $2-5 extra</li>
+            </ul>
+
+            <h2>Service Industry Tipping</h2>
+            <h3>Hair Salon / Barber</h3>
+            <ul>
+                <li><strong>Stylist:</strong> 15-20% of service cost</li>
+                <li><strong>Shampoo Person:</strong> $3-5</li>
+                <li><strong>Colorist:</strong> 15-20% (separate from stylist if different person)</li>
+                <li><strong>Owner:</strong> Tipping optional but appreciated</li>
+            </ul>
+
+            <h3>Spa Services</h3>
+            <ul>
+                <li><strong>Massage Therapist:</strong> 15-20%</li>
+                <li><strong>Esthetician:</strong> 15-20%</li>
+                <li><strong>Nail Technician:</strong> 15-20%</li>
+                <li><strong>Multiple Services:</strong> Tip each provider individually</li>
+            </ul>
+
+            <h3>Hotel Staff</h3>
+            <ul>
+                <li><strong>Housekeeping:</strong> $2-5 per night (leave daily, not at end)</li>
+                <li><strong>Bellhop:</strong> $1-2 per bag</li>
+                <li><strong>Concierge:</strong> $5-20 depending on service complexity</li>
+                <li><strong>Valet:</strong> $2-5 when car is returned</li>
+                <li><strong>Room Service:</strong> 15-20% if not already added</li>
+            </ul>
+
+            <h3>Transportation</h3>
+            <ul>
+                <li><strong>Taxi:</strong> 15-20% of fare</li>
+                <li><strong>Uber/Lyft:</strong> 15-20% (app makes it easy)</li>
+                <li><strong>Airport Shuttle:</strong> $2-3 per bag</li>
+                <li><strong>Valet Parking:</strong> $2-5</li>
+            </ul>
+
+            <h2>When NOT to Tip</h2>
+            <ul>
+                <li><strong>Fast Food:</strong> Counter service with no table service</li>
+                <li><strong>Coffee Shop Pickup:</strong> Optional for takeout (tip jar appreciated)</li>
+                <li><strong>Carryout Orders:</strong> Optional, 10% if complex order or exceptional service</li>
+                <li><strong>Self-Service:</strong> Buffets where you serve yourself completely</li>
+            </ul>
+
+            <h2>International Tipping Customs</h2>
+            <h3>Countries Where Tipping is Expected</h3>
+            <ul>
+                <li><strong>United States:</strong> 15-20% standard</li>
+                <li><strong>Canada:</strong> 15-20% standard</li>
+                <li><strong>Mexico:</strong> 10-15% common, often not included</li>
+            </ul>
+
+            <h3>Countries Where Tipping is Less Common</h3>
+            <ul>
+                <li><strong>Japan:</strong> Tipping can be seen as insulting, exceptional service is expected</li>
+                <li><strong>Australia:</strong> Tipping not expected, 10% for exceptional service</li>
+                <li><strong>New Zealand:</strong> Similar to Australia, tipping becoming more common</li>
+            </ul>
+
+            <h3>Countries Where Service is Usually Included</h3>
+            <ul>
+                <li><strong>United Kingdom:</strong> 10-15% if service not included, check bill</li>
+                <li><strong>France:</strong> Service compris (included), small additional tip optional</li>
+                <li><strong>Germany:</strong> Round up or add 5-10%</li>
+                <li><strong>Italy:</strong> Coperto (cover charge) common, small additional tip appreciated</li>
+            </ul>
+
+            <h2>Tip Calculation Tips</h2>
+            <h3>Quick Mental Math</h3>
+            <ul>
+                <li><strong>15%:</strong> Take 10% (move decimal left one place), then add half of that</li>
+                <li><strong>20%:</strong> Take 10%, then double it</li>
+                <li><strong>18%:</strong> Take 10%, add that to the original, then subtract 2% (or just use calculator)</li>
+            </ul>
+
+            <h3>Example: $86 Bill</h3>
+            <ul>
+                <li><strong>10%:</strong> $8.60</li>
+                <li><strong>15%:</strong> $8.60 + $4.30 = $12.90</li>
+                <li><strong>20%:</strong> $8.60 × 2 = $17.20</li>
+            </ul>
+
+            <h2>Tipping Etiquette Do's and Don'ts</h2>
+            <h3>Do:</h3>
+            <ul>
+                <li>Tip on the pre-tax amount (or total if you prefer to be generous)</li>
+                <li>Tip in cash when possible (servers receive it immediately)</li>
+                <li>Leave daily tips for housekeeping, not just at checkout</li>
+                <li>Tip extra for special requests or accommodations</li>
+                <li>Adjust tip based on service quality, not food quality</li>
+            </ul>
+
+            <h3>Don't:</h3>
+            <ul>
+                <li>Withhold tip for kitchen mistakes (not server's fault)</li>
+                <li>Tip on gift certificate value (tip on the full meal value)</li>
+                <li>Assume service charge is a tip (often goes to house, not server)</li>
+                <li>Leave loose change only (appears thoughtless)</li>
+                <li>Skip tipping for poor service without speaking to management first</li>
+            </ul>
+
+            <h2>Special Situations</h2>
+            <h3>Split Checks</h3>
+            <p>When splitting bills, each person should tip on their portion. Use this calculator's "Number of People" feature to split evenly, or calculate individual portions based on what each person ordered.</p>
+
+            <h3>Comped Meals</h3>
+            <p>If your meal is comped or you're using a gift certificate, always tip on the full original value. The server still provided full service.</p>
+
+            <h3>Coupons and Discounts</h3>
+            <p>Tip on the pre-discount amount. The server did the same work whether you paid full price or used a discount.</p>
+
+            <h3>Poor Service</h3>
+            <p>If service is genuinely poor, speak with the manager first. Withholding tip without explanation doesn't help the server improve. If service was terrible despite management intervention, 10% is acceptable minimum.</p>
+
+            <h2>Frequently Asked Questions</h2>
+            <h3>Should I tip on tax?</h3>
+            <p>Either way is acceptable. Tipping on the pre-tax amount is traditional and mathematically correct, but tipping on the total (including tax) is simpler and slightly more generous. Most people round up anyway.</p>
+
+            <h3>What if service charge is already added?</h3>
+            <p>Check your receipt carefully. "Service charge" often goes to the house, not the server. If you want to ensure your server gets tipped, add 5-10% extra. For automatic gratuity (18-20% for large parties), additional tipping is optional but appreciated for great service.</p>
+
+            <h3>How much to tip on a gift card?</h3>
+            <p>Tip on the full value of the meal before the gift card discount. If your $100 meal is covered by a gift card, tip $15-20, not zero.</p>
+
+            <h3>Should I tip at the counter?</h3>
+            <p>For counter service (coffee shops, fast casual), tipping is optional but appreciated. $1 or rounding up is typical. For complex orders or exceptional service, 10-15% is generous.</p>
+
+            <h3>Is it rude to tip less than 15%?</h3>
+            <p>In the US, 15% is considered the minimum for adequate service. Tipping less signals dissatisfaction. If service was truly poor, speak with management and consider 10%. Never stiff completely unless service was egregiously bad.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="percentage-calculator.html" class="calc-card">
+                    <div class="calc-icon">%</div>
+                    <h3 class="calc-title">Percentage Calculator</h3>
+                    <p class="calc-description">Calculate percentages</p>
+                </a>
+
+                <a href="currency-converter.html" class="calc-card">
+                    <div class="calc-icon">💱</div>
+                    <h3 class="calc-title">Currency Converter</h3>
+                    <p class="calc-description">Convert currencies</p>
+                </a>
+
+                <a href="loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Loan Calculator</h3>
+                    <p class="calc-description">Calculate loan payments</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function setTipPercentage(percentage) {
+            document.getElementById('tipPercentage').value = percentage;
+            calculateTip();
+        }
+
+        function calculateTip() {
+            const billAmount = parseFloat(document.getElementById('billAmount').value);
+            const tipPercentage = parseFloat(document.getElementById('tipPercentage').value);
+            const numPeople = parseInt(document.getElementById('numPeople').value);
+
+            if (!billAmount || billAmount < 0 || !tipPercentage || tipPercentage < 0 || !numPeople || numPeople < 1) {
+                alert('Please enter valid values');
+                return;
+            }
+
+            // Calculate tip and total
+            const tipAmount = billAmount * (tipPercentage / 100);
+            const totalBill = billAmount + tipAmount;
+
+            // Calculate per person amounts
+            const perPersonBill = billAmount / numPeople;
+            const perPersonTip = tipAmount / numPeople;
+            const perPersonTotal = totalBill / numPeople;
+
+            // Display results
+            document.getElementById('tipAmount').textContent = '$' + tipAmount.toFixed(2);
+            document.getElementById('totalBill').textContent = '$' + totalBill.toFixed(2);
+            document.getElementById('perPersonBill').textContent = '$' + perPersonBill.toFixed(2);
+            document.getElementById('perPersonTip').textContent = '$' + perPersonTip.toFixed(2);
+            document.getElementById('perPersonTotal').textContent = '$' + perPersonTotal.toFixed(2);
+
+            showResult('tipAmount');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateTip);
+        });
+
+        window.addEventListener('load', calculateTip);
+    </script>
+</body>
+</html>

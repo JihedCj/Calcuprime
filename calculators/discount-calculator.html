@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free discount calculator - Calculate sale prices, discounts, and savings instantly. Find out how much you save with percentage off.">
+    <meta name="keywords" content="discount calculator, sale price calculator, percent off calculator, savings calculator, coupon calculator">
+    <title>Discount Calculator - Calculate Sale Prices & Savings | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/discount-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html#finance">Finance</a></li><li><a href="../index.html#health">Health</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Discount Calculator</h1>
+            <p class="calculator-description">Calculate sale prices and savings from discounts</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Price & Discount</h3>
+                <div class="form-group"><label for="original" class="form-label">Original Price ($)</label><input type="number" id="original" class="form-input" value="100" min="0" step="0.01"></div>
+                <div class="form-group"><label for="discount" class="form-label">Discount (%)</label><input type="number" id="discount" class="form-input" value="20" min="0" max="100" step="1"></div>
+                <div class="form-group"><label for="tax" class="form-label">Sales Tax (%) - Optional</label><input type="number" id="tax" class="form-input" value="0" min="0" max="20" step="0.1"></div>
+                <button onclick="calculate()" class="btn-calculate">Calculate Price</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Results</h3>
+                <div class="result-item"><div class="result-label">Final Price</div><div class="result-value" id="final" style="font-size: 2.5rem; color: #10b981;">$0.00</div></div>
+                <div class="result-item"><div class="result-label">You Save</div><div class="result-value" id="savings" style="color: #ef4444;">$0.00</div></div>
+                <div class="result-item"><div class="result-label">Discount Amount</div><div class="result-value" id="discountAmt">$0.00</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Understanding Discounts</h2>
+            <p>Discounts reduce the original price by a percentage. A 20% discount on $100 saves you $20, making the final price $80.</p>
+            <h2>Common Discount Scenarios</h2>
+            <ul><li><strong>Seasonal Sales:</strong> 20-50% off during major holidays</li><li><strong>Clearance:</strong> 50-70% off end-of-season items</li><li><strong>Bundle Discounts:</strong> Buy more, save more promotions</li><li><strong>Loyalty Programs:</strong> Member-exclusive discounts</li></ul>
+            <h2>Shopping Tips</h2>
+            <ul><li>Compare final prices after discount, not just percentages</li><li>Stack coupons when allowed for maximum savings</li><li>Consider quality - sometimes full price is better value</li><li>Watch for "fake" discounts with inflated original prices</li></ul>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const original = parseFloat(document.getElementById('original').value);
+            const discountPct = parseFloat(document.getElementById('discount').value);
+            const taxPct = parseFloat(document.getElementById('tax').value);
+            
+            const discountAmt = original * (discountPct / 100);
+            const priceAfterDiscount = original - discountAmt;
+            const taxAmt = priceAfterDiscount * (taxPct / 100);
+            const finalPrice = priceAfterDiscount + taxAmt;
+            
+            document.getElementById('final').textContent = '$' + finalPrice.toFixed(2);
+            document.getElementById('savings').textContent = '$' + discountAmt.toFixed(2);
+            document.getElementById('discountAmt').textContent = '$' + discountAmt.toFixed(2);
+        }
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

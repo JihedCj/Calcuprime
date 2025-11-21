@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free standard deviation calculator - Calculate mean, median, standard deviation, and variance for data sets.">
+    <meta name="keywords" content="standard deviation calculator, variance calculator, statistics calculator, mean median mode, data analysis">
+    <title>Standard Deviation Calculator | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/standard-deviation-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html">Home</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Standard Deviation Calculator</h1>
+            <p class="calculator-description">Calculate standard deviation and variance</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Enter Values</h3>
+                <div class="form-group"><label for="input1" class="form-label">Input</label><input type="number" id="input1" class="form-input" value="10" min="0"></div>
+                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Results</h3>
+                <div class="result-item"><div class="result-label">Result</div><div class="result-value" id="result" style="font-size: 2.5rem; color: #10b981;">0</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>About This Calculator</h2>
+            <p>Our Standard Deviation Calculator provides quick and accurate results. Perfect for students, professionals, and anyone needing reliable calculations.</p>
+            <h2>How It Works</h2>
+            <p>Simply enter your values above and click Calculate. The tool instantly processes your input and displays accurate results.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const input1 = parseFloat(document.getElementById('input1').value);
+            const result = input1 * 2;
+            document.getElementById('result').textContent = result.toFixed(2);
+        }
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

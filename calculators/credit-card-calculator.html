@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate credit card payoff time, total interest, and monthly payments. Plan your debt elimination strategy.">
+    <meta name="keywords" content="credit card calculator, payoff calculator, credit card payoff, interest calculator, debt payoff">
+    <title>Credit Card Calculator | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/credit-card-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html">Home</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Credit Card Calculator</h1>
+            <p class="calculator-description">Calculate credit card payoff time, total interest, and monthly payments</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Calculator Input</h3>
+                <div class="form-group">
+                    <label for="balance" class="form-label">Credit Card Balance ($)</label>
+                    <input type="number" id="balance" class="form-input" value="5000" min="0" step="100">
+                </div>
+                <div class="form-group">
+                    <label for="apr" class="form-label">Annual Interest Rate (APR %)</label>
+                    <input type="number" id="apr" class="form-input" value="18" min="0" max="35" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="payment" class="form-label">Monthly Payment ($)</label>
+                    <input type="number" id="payment" class="form-input" value="150" min="0" step="10">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Results</h3>
+                <div class="result-item">
+                    <div class="result-label">Payoff Time</div>
+                    <div class="result-value" id="payoffTime" style="font-size: 2.5rem; color: #ef4444;">0 months</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Interest Paid</div>
+                    <div class="result-value" id="totalInterest">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Amount Paid</div>
+                    <div class="result-value" id="totalPaid">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Monthly Interest Charge</div>
+                    <div class="result-value" id="monthlyInterest">$0</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Understanding Credit Card Debt</h2>
+            <p>Credit card debt affects millions of Americans, with the average household carrying over $6,000 in credit card balances. High interest rates, often 15-25% APR, make credit cards one of the most expensive forms of debt. Understanding how credit card interest compounds and how payments are applied is crucial for developing an effective payoff strategy.</p>
+
+            <h2>How Credit Card Interest Works</h2>
+            <p>Credit card companies calculate interest using your Annual Percentage Rate (APR) divided by 365 (daily periodic rate) or 12 (monthly periodic rate). Interest compounds daily on most cards, meaning you pay interest on your interest. This compounding effect causes balances to grow quickly if you only make minimum payments.</p>
+
+            <p>For example, a $5,000 balance at 18% APR costs approximately $75 per month in interest charges. If you only pay the minimum (usually 2-3% of balance), most of your payment goes toward interest, barely touching the principal. This is why $5,000 in credit card debt can take 15+ years to pay off with minimum payments, costing thousands in interest.</p>
+
+            <h2>The Minimum Payment Trap</h2>
+            <p>Credit card companies typically calculate minimum payments as the greater of $25-35 or 2-3% of your balance. While tempting to pay only this amount, minimum payments keep you in debt for years or decades. Consider these examples:</p>
+
+            <ul>
+                <li>$5,000 balance at 18% APR with 2% minimum payments: 25 years to pay off, $6,923 in interest</li>
+                <li>Same balance with $150 monthly payment: 4 years to pay off, $1,978 in interest</li>
+                <li>Same balance with $250 monthly payment: 2 years to pay off, $1,012 in interest</li>
+            </ul>
+
+            <p>Even modest increases in monthly payments dramatically reduce both payoff time and total interest paid.</p>
+
+            <h2>Effective Credit Card Payoff Strategies</h2>
+            <p><strong>Debt Avalanche Method:</strong> Pay minimum payments on all cards except the one with the highest interest rate. Direct all extra money to the highest-rate card. Once paid off, roll that payment to the next highest-rate card. This method saves the most money on interest.</p>
+
+            <p><strong>Debt Snowball Method:</strong> Pay minimums on all cards except the one with the smallest balance. Pay off the smallest balance first, regardless of interest rate. Once paid off, roll that payment to the next smallest balance. This method provides psychological wins that help maintain momentum, though it may cost slightly more in interest.</p>
+
+            <p><strong>Balance Transfer Strategy:</strong> Transfer high-interest balances to a card offering 0% APR for 12-21 months. Pay aggressively during the promotional period to eliminate debt interest-free. Watch for balance transfer fees (typically 3-5%) and ensure you can pay off the balance before the promotional rate expires.</p>
+
+            <p><strong>Debt Consolidation Loan:</strong> Take a personal loan at a lower rate (typically 7-15%) to pay off high-interest credit cards. This simplifies payments and reduces interest, but requires discipline to avoid running up new credit card balances.</p>
+
+            <h2>How to Accelerate Debt Payoff</h2>
+            <p><strong>Stop New Charges:</strong> The single most important step is stopping new charges on cards you're paying off. Consider freezing cards in ice or removing them from digital wallets to create friction against impulse purchases.</p>
+
+            <p><strong>Find Extra Money:</strong> Review your budget for savings opportunities. Common sources include eating out less, canceling unused subscriptions, reducing entertainment spending, or taking a side gig. Even an extra $50-100 monthly makes a significant difference over time.</p>
+
+            <p><strong>Automate Payments:</strong> Set up automatic payments for more than the minimum to ensure consistency and avoid late fees. Late payments not only incur $25-40 fees but can trigger penalty APRs up to 29.99%.</p>
+
+            <p><strong>Use Windfalls Wisely:</strong> Direct tax refunds, work bonuses, or other unexpected money toward credit card debt. These lump sum payments dramatically reduce principal and future interest charges.</p>
+
+            <p><strong>Negotiate Lower Rates:</strong> Call credit card companies and request lower interest rates, especially if you have good payment history. Many cardholders successfully negotiate 2-5% rate reductions, saving hundreds in interest.</p>
+
+            <h2>Understanding Your Credit Card Statement</h2>
+            <p>Your monthly statement contains critical information for managing debt:</p>
+
+            <p><strong>New Balance:</strong> Total amount owed including new purchases, interest, and fees.</p>
+
+            <p><strong>Minimum Payment Due:</strong> The least you must pay to avoid late fees and maintain account standing. Never pay just this amount if you can afford more.</p>
+
+            <p><strong>Payment Due Date:</strong> Missing this date triggers late fees and potentially penalty APR. Set reminders or automate payments.</p>
+
+            <p><strong>Interest Charged:</strong> The cost of carrying a balance. This number should motivate you to pay more than the minimum.</p>
+
+            <p><strong>Available Credit:</strong> Your remaining credit line. Using more than 30% of available credit hurts your credit score.</p>
+
+            <h2>Impact on Credit Score</h2>
+            <p>Credit card debt affects your credit score in multiple ways:</p>
+
+            <p><strong>Credit Utilization (30% of score):</strong> The ratio of credit card balances to credit limits. Keeping utilization below 30% is good; below 10% is excellent. High balances relative to limits significantly damage scores.</p>
+
+            <p><strong>Payment History (35% of score):</strong> Late payments severely impact your score and remain on your credit report for seven years. Set up auto-pay to never miss a payment.</p>
+
+            <p><strong>Account Age (15% of score):</strong> Keep older credit card accounts open (even if unused) to maintain average account age, which helps your score.</p>
+
+            <h2>When to Seek Professional Help</h2>
+            <p>Consider professional assistance if you:</p>
+            <ul>
+                <li>Can only afford minimum payments on multiple cards</li>
+                <li>Have been contacted by collection agencies</li>
+                <li>Are considering bankruptcy</li>
+                <li>Face wage garnishment or legal action</li>
+                <li>Have tried unsuccessfully to manage debt for 2+ years</li>
+            </ul>
+
+            <p>Non-profit credit counseling agencies (look for NFCC members) offer free consultations and can set up debt management plans that negotiate lower interest rates with creditors. Avoid for-profit debt settlement companies that charge high fees and can damage your credit.</p>
+
+            <h2>Life After Credit Card Debt</h2>
+            <p>Once you've paid off credit cards, redirect those payment amounts to building an emergency fund (3-6 months of expenses), saving for retirement, or other financial goals. Consider keeping one or two cards active with small recurring charges (like subscriptions) that you pay in full monthly to maintain credit history without carrying debt.</p>
+
+            <p>The average American pays over $1,000 annually in credit card interest. Eliminating this expense frees up significant money for building wealth, taking vacations, or achieving other financial goals. The discipline developed paying off debt serves you well in all future financial decisions.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const balance = parseFloat(document.getElementById('balance').value) || 0;
+            const apr = parseFloat(document.getElementById('apr').value) / 100 || 0;
+            const payment = parseFloat(document.getElementById('payment').value) || 0;
+
+            const monthlyRate = apr / 12;
+            const monthlyInterest = balance * monthlyRate;
+
+            if (payment <= monthlyInterest) {
+                document.getElementById('payoffTime').textContent = 'Never (payment too small)';
+                document.getElementById('totalInterest').textContent = 'N/A';
+                document.getElementById('totalPaid').textContent = 'N/A';
+            } else {
+                const months = Math.ceil(Math.log(payment / (payment - balance * monthlyRate)) / Math.log(1 + monthlyRate));
+                const totalPaid = payment * months;
+                const totalInterest = totalPaid - balance;
+
+                document.getElementById('payoffTime').textContent = months + ' months (' + Math.floor(months/12) + ' years, ' + (months%12) + ' months)';
+                document.getElementById('totalInterest').textContent = '$' + totalInterest.toLocaleString('en-US', {minimumFractionDigits: 2});
+                document.getElementById('totalPaid').textContent = '$' + totalPaid.toLocaleString('en-US', {minimumFractionDigits: 2});
+            }
+
+            document.getElementById('monthlyInterest').textContent = '$' + monthlyInterest.toLocaleString('en-US', {minimumFractionDigits: 2});
+        }
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

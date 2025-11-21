@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free sales tax calculator - Calculate sales tax amount, total price with tax, and reverse calculate price before tax for accurate purchase budgeting.">
+    <meta name="keywords" content="sales tax calculator, tax calculator, calculate tax, price with tax, tax amount calculator, reverse tax calculator">
+    <title>Sales Tax Calculator | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/sales-tax-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html">Home</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Sales Tax Calculator</h1>
+            <p class="calculator-description">Calculate sales tax and total price instantly</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Purchase Information</h3>
+                <div class="form-group">
+                    <label for="price" class="form-label">Price Before Tax ($)</label>
+                    <input type="number" id="price" class="form-input" value="100" min="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="taxRate" class="form-label">Sales Tax Rate (%)</label>
+                    <input type="number" id="taxRate" class="form-input" value="7.5" min="0" max="15" step="0.1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate Tax</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Tax Breakdown</h3>
+                <div class="result-item">
+                    <div class="result-label">Sales Tax Amount</div>
+                    <div class="result-value" id="taxAmount" style="font-size: 2.5rem; color: #10b981;">$0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Price (with tax)</div>
+                    <div class="result-value" id="totalPrice">$0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Price Before Tax</div>
+                    <div class="result-value" id="priceBeforeTax">$0.00</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>How Sales Tax Works</h2>
+            <p>Sales tax is a consumption tax imposed by governments on the sale of goods and services. In the United States, sales tax is primarily a state and local tax—45 states plus Washington D.C. collect sales tax, while five states (Alaska, Delaware, Montana, New Hampshire, and Oregon) have no statewide sales tax. Rates vary dramatically, from as low as 2.9% in Colorado to as high as 9.56% combined state and average local tax in Tennessee.</p>
+
+            <p>The sales tax calculation is straightforward: multiply the purchase price by the tax rate. For a $100 item with 7.5% tax: $100 × 0.075 = $7.50 in tax, for a total price of $107.50. This simple formula applies to most purchases, though exemptions exist for certain categories like groceries, prescription medications, and sometimes clothing depending on the state.</p>
+
+            <h2>State Sales Tax Rates</h2>
+            <p>State base sales tax rates range from 2.9% to 7.25%, but the total tax you pay often includes local additions. California has a 7.25% state rate, but when combined with local district taxes, shoppers in Los Angeles pay 9.5% total. New York's state rate is 4%, but New York City adds 4.5% for 8.5% combined. Texas charges 6.25% state tax plus up to 2% local for a potential 8.25% total.</p>
+
+            <p><strong>Highest Combined Rates:</strong> Louisiana (avg 9.55%), Tennessee (9.547%), Arkansas (9.48%), Washington (9.29%), Alabama (9.24%). These states combine moderate state rates with significant local additions.</p>
+
+            <p><strong>Lowest Combined Rates:</strong> Alaska (1.76%, no state tax but some localities charge tax), Hawaii (4.44%), Wyoming (5.36%), Wisconsin (5.43%), Maine (5.5%). These states either have low state rates, minimal local additions, or both.</p>
+
+            <p><strong>No State Sales Tax:</strong> Alaska, Delaware, Montana, New Hampshire, Oregon. However, Alaska allows local sales taxes, so some jurisdictions charge tax despite no state-level tax. The other four have neither state nor local sales taxes, though they compensate with higher income or property taxes.</p>
+
+            <h2>What's Taxed and What's Not</h2>
+            <p><strong>Generally Taxable:</strong> Most tangible goods—clothing, electronics, furniture, vehicles, appliances, toys, and similar items—are subject to sales tax. Services increasingly face taxation in many states, including repair services, personal care services, and entertainment.</p>
+
+            <p><strong>Food and Groceries:</strong> 32 states exempt unprepared groceries from sales tax, recognizing food as a necessity. However, 13 states tax groceries at full or reduced rates. Prepared food (restaurant meals, hot deli items) is taxable in all states with sales tax. The distinction between "grocery" and "prepared food" sometimes creates confusion—a cold deli sandwich might be exempt while a hot sandwich is taxable.</p>
+
+            <p><strong>Prescription Medications:</strong> Nearly all states exempt prescription drugs from sales tax, though over-the-counter medications are usually taxable. This exemption reflects recognition of medications as health necessities rather than discretionary purchases.</p>
+
+            <p><strong>Clothing:</strong> Most states tax clothing, but six states (Massachusetts, Minnesota, New Jersey, New York, Pennsylvania, Rhode Island, Vermont) provide exemptions for clothing under certain price thresholds. For example, New York exempts clothing and footwear under $110 per item. During back-to-school periods, many states offer sales tax holidays where clothing, school supplies, and sometimes computers are temporarily tax-exempt.</p>
+
+            <h2>Online Sales and E-Commerce Tax</h2>
+            <p>The 2018 Supreme Court decision in South Dakota v. Wayfair revolutionized online sales tax. Previously, businesses only collected sales tax in states where they had physical presence ("nexus"). The ruling allowed states to require sales tax collection from out-of-state sellers meeting certain thresholds—typically $100,000 in annual sales or 200 transactions in the state.</p>
+
+            <p>Now, when you shop online, you'll usually pay sales tax based on your shipping address rather than the seller's location. Amazon, Walmart, Target, and other major retailers collect tax for all applicable states. Smaller sellers may not collect tax for every state, but you're technically required to remit "use tax" for untaxed purchases when filing state income tax returns (though compliance is low).</p>
+
+            <p>Digital products (software downloads, streaming subscriptions, e-books) face inconsistent taxation. Some states tax them as goods, others exempt them as services, and many are still developing policies. As digital commerce grows, expect more states to extend sales tax to these products to protect revenue.</p>
+
+            <h2>Sales Tax for Businesses</h2>
+            <p>Businesses collecting sales tax must obtain a sales tax permit (also called seller's permit or resale certificate) from their state. They collect tax from customers, file regular sales tax returns (monthly, quarterly, or annually depending on sales volume), and remit collected tax to state and local authorities.</p>
+
+            <p><strong>Resale Exemptions:</strong> Businesses purchasing inventory for resale don't pay sales tax on those purchases—they provide their resale certificate to suppliers. Sales tax is collected only at final sale to end consumers. This prevents "tax pyramiding" where tax is charged multiple times through the supply chain.</p>
+
+            <p><strong>Nexus Requirements:</strong> Businesses must collect sales tax in states where they have nexus—physical presence (office, warehouse, employees) or economic presence (exceeding sales thresholds). Multi-state businesses must track nexus in all states and comply with varying rules, creating significant compliance complexity.</p>
+
+            <p><strong>Filing and Penalties:</strong> Late or incorrect sales tax filings trigger penalties and interest. Penalties typically range from 5-25% of unpaid tax plus interest at 5-12% annually. Businesses should remit sales tax even if facing cash flow issues since failure to remit collected tax is viewed seriously by states—it's not the business's money but tax held in trust for the government.</p>
+
+            <h2>Calculating Sales Tax Manually</h2>
+            <p>Formula: Sales Tax = Price × Tax Rate (expressed as decimal). Example: $50 item with 8% tax: $50 × 0.08 = $4 in tax. Total price = $50 + $4 = $54.</p>
+
+            <p><strong>Quick Mental Math:</strong> For 10% tax, simply move the decimal point one place ($50 becomes $5 tax). For 5%, calculate 10% and divide by two. For 7.5%, calculate 10% and subtract one-quarter of that amount. For $50 at 7.5%: 10% = $5, quarter of $5 = $1.25, $5 - $1.25 = $3.75 tax.</p>
+
+            <p><strong>Reverse Calculation (Finding Price Before Tax):</strong> If you know the total price with tax and need to determine pre-tax price: Price Before Tax = Total Price ÷ (1 + Tax Rate). Example: Total is $108 with 8% tax: $108 ÷ 1.08 = $100 pre-tax price. This calculation helps when comparing prices or budgeting when some prices include tax and others don't.</p>
+
+            <h2>Sales Tax Strategies for Consumers</h2>
+            <p><strong>Shop Tax-Free Holidays:</strong> Many states offer sales tax holidays during back-to-school season (typically early August), providing 3-7 days of tax-free shopping for clothing, school supplies, and sometimes computers. Timing major purchases during these holidays saves 5-10% immediately. Check your state's department of revenue website for annual holiday dates and qualifying items.</p>
+
+            <p><strong>Consider Cross-Border Shopping:</strong> If you live near a state with lower or no sales tax, large purchases (furniture, appliances, vehicles) might justify the drive. However, you're technically required to pay "use tax" in your home state for items purchased elsewhere for use at home, though enforcement is minimal except for vehicles.</p>
+
+            <p><strong>Understand Business Purchases:</strong> If you operate a business with a resale certificate, you can purchase qualifying inventory and business supplies tax-free. Keep detailed records and only use exemption certificates for legitimate business purchases to avoid penalties for misuse.</p>
+
+            <h2>The Bottom Line</h2>
+            <p>Sales tax significantly impacts purchasing power—a 9% combined rate means $90 in tax on a $1,000 purchase. Understanding your local tax rate, what items are exempt, and strategies to minimize tax burden helps stretch your budget. For businesses, proper sales tax compliance avoids penalties while resale exemptions reduce costs on inventory purchases. Use sales tax calculators to accurately budget for large purchases, understand price comparisons between locations, and ensure proper tax collection if you're selling. In states with high combined rates, that extra 8-10% on major purchases adds up quickly over time, making tax awareness a valuable component of financial planning.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const price = parseFloat(document.getElementById('price').value) || 0;
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+
+            const taxAmount = price * (taxRate / 100);
+            const totalPrice = price + taxAmount;
+
+            document.getElementById('taxAmount').textContent = '$' + taxAmount.toFixed(2);
+            document.getElementById('totalPrice').textContent = '$' + totalPrice.toFixed(2);
+            document.getElementById('priceBeforeTax').textContent = '$' + price.toFixed(2);
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

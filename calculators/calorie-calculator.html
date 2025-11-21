@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free calorie calculator - Calculate daily caloric needs for weight loss, maintenance, or muscle gain. Get personalized TDEE and macros recommendations.">
+    <meta name="keywords" content="calorie calculator, TDEE calculator, daily calories, weight loss calculator, BMR calculator, calories per day, macro calculator">
+
+    <title>Calorie Calculator - Calculate Daily Caloric Needs | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/calorie-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#finance">Finance</a></li>
+                <li><a href="../index.html#health">Health</a></li>
+                <li><a href="../index.html#converters">Converters</a></li>
+                <li><a href="../index.html#math">Math</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calorie Calculator</h1>
+            <p class="calculator-description">Calculate your daily caloric needs based on age, gender, activity level, and goals</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Your Information</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Unit System</label>
+                    <select id="unitSystem" class="form-select">
+                        <option value="metric">Metric (kg, cm)</option>
+                        <option value="imperial">Imperial (lbs, inches)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="age" class="form-label">Age (years)</label>
+                    <input type="number" id="age" class="form-input" value="30" min="15" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select id="gender" class="form-select">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <div id="metricInputs">
+                    <div class="form-group">
+                        <label for="heightCm" class="form-label">Height (cm)</label>
+                        <input type="number" id="heightCm" class="form-input" value="175" min="100" max="250">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weightKg" class="form-label">Weight (kg)</label>
+                        <input type="number" id="weightKg" class="form-input" value="75" min="30" max="300" step="0.1">
+                    </div>
+                </div>
+
+                <div id="imperialInputs" style="display: none;">
+                    <div class="form-group">
+                        <label for="heightFt" class="form-label">Height (feet)</label>
+                        <input type="number" id="heightFt" class="form-input" value="5" min="4" max="7">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="heightIn" class="form-label">Height (inches)</label>
+                        <input type="number" id="heightIn" class="form-input" value="9" min="0" max="11">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weightLbs" class="form-label">Weight (lbs)</label>
+                        <input type="number" id="weightLbs" class="form-input" value="165" min="66" max="660" step="0.1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="activityLevel" class="form-label">Activity Level</label>
+                    <select id="activityLevel" class="form-select">
+                        <option value="1.2">Sedentary (little or no exercise)</option>
+                        <option value="1.375">Lightly active (exercise 1-3 days/week)</option>
+                        <option value="1.55" selected>Moderately active (exercise 3-5 days/week)</option>
+                        <option value="1.725">Very active (exercise 6-7 days/week)</option>
+                        <option value="1.9">Extremely active (physical job or training)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="goal" class="form-label">Goal</label>
+                    <select id="goal" class="form-select">
+                        <option value="lose2">Lose 1 kg / 2 lbs per week (aggressive)</option>
+                        <option value="lose1">Lose 0.5 kg / 1 lb per week (recommended)</option>
+                        <option value="maintain" selected>Maintain weight</option>
+                        <option value="gain1">Gain 0.5 kg / 1 lb per week (lean bulk)</option>
+                        <option value="gain2">Gain 1 kg / 2 lbs per week (bulk)</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateCalories()" class="btn-calculate">Calculate Calories</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Your Daily Calorie Needs</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Calories per Day</div>
+                    <div class="result-value" id="dailyCalories" style="font-size: 3rem; color: #10b981;">0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">BMR (Basal Metabolic Rate)</div>
+                    <div class="result-value" id="bmr" style="font-size: 1.3rem;">0 calories</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">TDEE (Total Daily Energy Expenditure)</div>
+                    <div class="result-value" id="tdee" style="font-size: 1.3rem;">0 calories</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Macronutrient Breakdown</h4>
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Protein</span>
+                            <span id="protein" style="font-weight: 600;">0g (0%)</span>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Carbs</span>
+                            <span id="carbs" style="font-weight: 600;">0g (0%)</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Fats</span>
+                            <span id="fats" style="font-weight: 600;">0g (0%)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="weightPrediction" style="margin-top: 15px; padding: 15px; background: #e0f2fe; border-radius: 8px;">
+                    <div style="font-size: 0.9rem; font-weight: 500; margin-bottom: 5px;">Weight in 30 Days</div>
+                    <div id="predictedWeight" style="font-size: 1.5rem; font-weight: 600; color: #0284c7;">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Calorie Calculations</h2>
+            <p>This calculator uses the Mifflin-St Jeor equation, considered one of the most accurate formulas for calculating basal metabolic rate (BMR). Your BMR is multiplied by an activity factor to determine your Total Daily Energy Expenditure (TDEE) - the total calories you burn each day.</p>
+
+            <h2>How to Use the Calorie Calculator</h2>
+            <ol>
+                <li><strong>Choose Unit System:</strong> Select metric (kg, cm) or imperial (lbs, inches)</li>
+                <li><strong>Enter Personal Details:</strong> Provide your age, gender, height, and current weight</li>
+                <li><strong>Select Activity Level:</strong> Choose how active you are throughout the week</li>
+                <li><strong>Set Your Goal:</strong> Weight loss, maintenance, or weight gain</li>
+                <li><strong>Calculate:</strong> See your personalized calorie target and macronutrient breakdown</li>
+            </ol>
+
+            <h2>What is BMR?</h2>
+            <p>Basal Metabolic Rate (BMR) is the number of calories your body burns at rest to maintain vital functions like breathing, circulation, and cell production. It represents 60-75% of your total daily calorie burn. Factors affecting BMR include age, gender, body composition, and genetics.</p>
+
+            <h3>Mifflin-St Jeor Formula</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                <strong>Men:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age + 5<br>
+                <strong>Women:</strong> BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age - 161
+            </p>
+
+            <h2>What is TDEE?</h2>
+            <p>Total Daily Energy Expenditure (TDEE) is your BMR multiplied by an activity factor. It represents the total calories you burn in a day including exercise and daily activities. To lose weight, eat below TDEE. To gain weight, eat above it. To maintain, eat at TDEE.</p>
+
+            <h3>Activity Level Multipliers</h3>
+            <ul>
+                <li><strong>Sedentary (1.2):</strong> Desk job, minimal exercise, mostly sitting</li>
+                <li><strong>Lightly Active (1.375):</strong> Light exercise 1-3 days/week, some walking</li>
+                <li><strong>Moderately Active (1.55):</strong> Moderate exercise 3-5 days/week, active lifestyle</li>
+                <li><strong>Very Active (1.725):</strong> Hard exercise 6-7 days/week, physically demanding job</li>
+                <li><strong>Extremely Active (1.9):</strong> Very hard exercise daily, athletic training, or physical labor</li>
+            </ul>
+
+            <h2>Macronutrient Guidelines</h2>
+            <h3>Protein (30% of calories)</h3>
+            <p>Essential for muscle maintenance and growth. Aim for 1.6-2.2g per kg of body weight (0.7-1g per lb) if exercising regularly. Protein has 4 calories per gram. Good sources: chicken, fish, eggs, legumes, dairy.</p>
+
+            <h3>Carbohydrates (40% of calories)</h3>
+            <p>Primary energy source for brain and muscles. Focus on complex carbs: whole grains, vegetables, fruits. Carbs have 4 calories per gram. Adjust based on activity level - athletes need more.</p>
+
+            <h3>Fats (30% of calories)</h3>
+            <p>Critical for hormone production, vitamin absorption, and satiety. Prioritize unsaturated fats: nuts, avocado, olive oil, fatty fish. Fats have 9 calories per gram.</p>
+
+            <h2>Weight Loss Guidelines</h2>
+            <h3>Sustainable Weight Loss</h3>
+            <p>Aim for 0.5-1% of body weight per week (0.5-1 kg / 1-2 lbs for most people). Faster weight loss often results in muscle loss, metabolic adaptation, and is harder to sustain. A 500-calorie daily deficit leads to about 0.5 kg / 1 lb loss per week.</p>
+
+            <h3>Creating a Calorie Deficit</h3>
+            <ul>
+                <li><strong>Eat Less:</strong> Reduce calorie intake by 300-500 calories below TDEE</li>
+                <li><strong>Move More:</strong> Increase activity to burn an extra 200-300 calories daily</li>
+                <li><strong>Combination:</strong> Best approach - moderate calorie reduction plus increased activity</li>
+            </ul>
+
+            <h3>Tips for Weight Loss Success</h3>
+            <ul>
+                <li><strong>Track Your Food:</strong> Use apps like MyFitnessPal to monitor intake accurately</li>
+                <li><strong>Eat Protein at Every Meal:</strong> Reduces hunger, preserves muscle, increases metabolism</li>
+                <li><strong>Stay Hydrated:</strong> Drink 2-3 liters of water daily. Thirst is often mistaken for hunger</li>
+                <li><strong>Sleep 7-9 Hours:</strong> Poor sleep disrupts hunger hormones and increases cravings</li>
+                <li><strong>Prioritize Whole Foods:</strong> They're more filling and nutritious per calorie</li>
+                <li><strong>Strength Train:</strong> Preserves muscle during weight loss, maintaining metabolism</li>
+                <li><strong>Be Patient:</strong> Focus on sustainable habits, not quick fixes</li>
+            </ul>
+
+            <h2>Weight Gain Guidelines</h2>
+            <h3>Healthy Weight Gain</h3>
+            <p>For muscle gain, aim for 0.25-0.5 kg (0.5-1 lb) per week with strength training. A 250-500 calorie daily surplus is ideal. Faster gains result in more fat gain. Prioritize protein (2g per kg body weight) and progressive overload training.</p>
+
+            <h3>Lean Bulking Strategy</h3>
+            <ul>
+                <li><strong>Small Surplus:</strong> 200-300 calories above TDEE minimizes fat gain</li>
+                <li><strong>High Protein:</strong> 1.6-2.2g per kg body weight for muscle synthesis</li>
+                <li><strong>Strength Training:</strong> Progressive overload 3-5 times per week</li>
+                <li><strong>Monitor Progress:</strong> Track weight and measurements weekly</li>
+                <li><strong>Quality Calories:</strong> Focus on nutrient-dense foods, not junk food</li>
+            </ul>
+
+            <h2>Common Mistakes</h2>
+            <ul>
+                <li><strong>Underestimating Intake:</strong> People typically underestimate calories by 20-30%. Weigh and track food accurately</li>
+                <li><strong>Overestimating Activity:</strong> Exercise burns fewer calories than most think. Don't eat back all "earned" calories</li>
+                <li><strong>Too Aggressive Deficit:</strong> Large deficits (1000+ calories) cause muscle loss, metabolic slowdown, and burnout</li>
+                <li><strong>Not Adjusting:</strong> As you lose weight, your TDEE decreases. Recalculate every 5-10 lbs lost</li>
+                <li><strong>Weekend Overeating:</strong> Being strict weekdays then overeating weekends erases your deficit</li>
+                <li><strong>Neglecting Protein:</strong> Low protein during deficit causes excessive muscle loss</li>
+                <li><strong>Quitting Too Soon:</strong> Weight fluctuates daily due to water, food, etc. Track trends over weeks</li>
+            </ul>
+
+            <h2>Adjusting Your Calories</h2>
+            <h3>Weight Loss Plateau</h3>
+            <p>If weight loss stalls for 2-3 weeks, reduce calories by 100-200 or increase activity. As you lose weight, your BMR decreases, requiring periodic adjustments. Alternatively, take a 1-2 week diet break at maintenance calories.</p>
+
+            <h3>Not Losing Despite Deficit</h3>
+            <p>You're likely eating more than you think. Common culprits: not weighing food, forgetting cooking oils, weekend splurges, liquid calories (alcohol, juice, fancy coffees). Track meticulously for 2 weeks.</p>
+
+            <h3>Metabolic Adaptation</h3>
+            <p>Extended deficits can reduce metabolic rate by 10-15% beyond what weight loss alone predicts. Combat this with: adequate protein, strength training, diet breaks, and avoiding excessively large deficits.</p>
+
+            <h2>Special Considerations</h2>
+            <h3>Athletes and Active Individuals</h3>
+            <p>May need significantly more calories and different macro ratios. Endurance athletes benefit from higher carbs (50-60% of calories). Strength athletes need more protein (2-2.5g per kg).</p>
+
+            <h3>Older Adults</h3>
+            <p>BMR decreases with age, but muscle loss is preventable with strength training and adequate protein. Focus on nutrient-dense foods as calorie needs decrease but nutrient needs don't.</p>
+
+            <h3>Medical Conditions</h3>
+            <p>Thyroid disorders, PCOS, diabetes, and some medications affect metabolism. Consult healthcare providers for personalized guidance. These conditions don't break thermodynamics but may affect hunger, TDEE, or water retention.</p>
+
+            <h2>Frequently Asked Questions</h2>
+            <h3>How accurate are calorie calculators?</h3>
+            <p>Calculators provide estimates within ±10-15%. Individual metabolic rate varies. Use the calculator as a starting point, then adjust based on your real-world results over 2-4 weeks.</p>
+
+            <h3>Should I eat the same calories every day?</h3>
+            <p>Your weekly average matters most. Some prefer calorie cycling (higher on training days, lower on rest days), while others like consistency. Both work if weekly totals match your goal.</p>
+
+            <h3>Do I need to count calories forever?</h3>
+            <p>No. Tracking helps you learn portion sizes and food composition. Many people eventually maintain weight intuitively after 3-6 months of tracking. But it's a useful tool to return to when needed.</p>
+
+            <h3>What about cheat meals?</h3>
+            <p>Built-in flexibility makes diets sustainable. An occasional 500-calorie over-maintenance meal won't derail progress. But weekly 2000+ calorie binges will. Consider working treats into your daily allowance instead.</p>
+
+            <h3>Can I lose weight without counting calories?</h3>
+            <p>Yes, by using other methods: intermittent fasting, portion control, eliminating processed foods, eating more protein and vegetables. But tracking gives more precision and understanding.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Related Calculators</h2>
+            <div class="calculator-grid">
+                <a href="bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">BMI Calculator</h3>
+                    <p class="calc-description">Calculate Body Mass Index</p>
+                </a>
+
+                <a href="ideal-weight-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎯</div>
+                    <h3 class="calc-title">Ideal Weight Calculator</h3>
+                    <p class="calc-description">Find your ideal weight</p>
+                </a>
+
+                <a href="percentage-calculator.html" class="calc-card">
+                    <div class="calc-icon">%</div>
+                    <h3 class="calc-title">Percentage Calculator</h3>
+                    <p class="calc-description">Calculate percentages</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Unit system toggle
+        document.getElementById('unitSystem').addEventListener('change', function() {
+            const isMetric = this.value === 'metric';
+            document.getElementById('metricInputs').style.display = isMetric ? 'block' : 'none';
+            document.getElementById('imperialInputs').style.display = isMetric ? 'none' : 'block';
+        });
+
+        function calculateCalories() {
+            const unitSystem = document.getElementById('unitSystem').value;
+            const age = parseInt(document.getElementById('age').value);
+            const gender = document.getElementById('gender').value;
+            const activityLevel = parseFloat(document.getElementById('activityLevel').value);
+            const goal = document.getElementById('goal').value;
+
+            let heightCm, weightKg;
+
+            if (unitSystem === 'metric') {
+                heightCm = parseFloat(document.getElementById('heightCm').value);
+                weightKg = parseFloat(document.getElementById('weightKg').value);
+
+                if (!heightCm || !weightKg || heightCm <= 0 || weightKg <= 0) {
+                    alert('Please enter valid height and weight');
+                    return;
+                }
+            } else {
+                const heightFt = parseFloat(document.getElementById('heightFt').value);
+                const heightIn = parseFloat(document.getElementById('heightIn').value);
+                const weightLbs = parseFloat(document.getElementById('weightLbs').value);
+
+                if (!heightFt || !weightLbs || heightFt <= 0 || weightLbs <= 0) {
+                    alert('Please enter valid height and weight');
+                    return;
+                }
+
+                const totalInches = (heightFt * 12) + heightIn;
+                heightCm = totalInches * 2.54;
+                weightKg = weightLbs * 0.453592;
+            }
+
+            // Calculate BMR using Mifflin-St Jeor Equation
+            let bmr;
+            if (gender === 'male') {
+                bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
+            } else {
+                bmr = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+            }
+
+            // Calculate TDEE
+            const tdee = bmr * activityLevel;
+
+            // Adjust based on goal
+            let dailyCalories = tdee;
+            let weeklyWeightChange = 0;
+
+            switch(goal) {
+                case 'lose2':
+                    dailyCalories = tdee - 1000;
+                    weeklyWeightChange = -1;
+                    break;
+                case 'lose1':
+                    dailyCalories = tdee - 500;
+                    weeklyWeightChange = -0.5;
+                    break;
+                case 'maintain':
+                    dailyCalories = tdee;
+                    weeklyWeightChange = 0;
+                    break;
+                case 'gain1':
+                    dailyCalories = tdee + 300;
+                    weeklyWeightChange = 0.5;
+                    break;
+                case 'gain2':
+                    dailyCalories = tdee + 500;
+                    weeklyWeightChange = 1;
+                    break;
+            }
+
+            // Calculate macros (30% protein, 40% carbs, 30% fat)
+            const proteinCalories = dailyCalories * 0.30;
+            const carbCalories = dailyCalories * 0.40;
+            const fatCalories = dailyCalories * 0.30;
+
+            const proteinGrams = proteinCalories / 4;
+            const carbGrams = carbCalories / 4;
+            const fatGrams = fatCalories / 9;
+
+            // Predict weight in 30 days
+            const totalWeightChange = (weeklyWeightChange * 4.3); // 4.3 weeks in a month
+            const predictedWeightKg = weightKg + totalWeightChange;
+            const predictedWeightDisplay = unitSystem === 'metric'
+                ? `${predictedWeightKg.toFixed(1)} kg`
+                : `${(predictedWeightKg * 2.20462).toFixed(1)} lbs`;
+
+            // Display results
+            document.getElementById('dailyCalories').textContent = Math.round(dailyCalories);
+            document.getElementById('bmr').textContent = Math.round(bmr) + ' calories';
+            document.getElementById('tdee').textContent = Math.round(tdee) + ' calories';
+
+            document.getElementById('protein').textContent = `${Math.round(proteinGrams)}g (30%)`;
+            document.getElementById('carbs').textContent = `${Math.round(carbGrams)}g (40%)`;
+            document.getElementById('fats').textContent = `${Math.round(fatGrams)}g (30%)`;
+
+            document.getElementById('predictedWeight').textContent = predictedWeightDisplay;
+
+            showResult('dailyCalories');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateCalories);
+        });
+
+        // Calculate on page load
+        window.addEventListener('load', calculateCalories);
+    </script>
+</body>
+</html>

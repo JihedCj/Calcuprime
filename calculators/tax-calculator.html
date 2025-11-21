@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free tax calculator - Calculate federal and state income tax, deductions, and take-home pay. Tax planning tool for 2024.">
+    <meta name="keywords" content="tax calculator, income tax, federal tax, state tax, tax deductions, income tax calculator">
+    <title>Tax Calculator | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/tax-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html">Home</a></li></ul>
+        </nav>
+    </header>
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Tax Calculator</h1>
+            <p class="calculator-description">Calculate federal and state income taxes</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Income Information</h3>
+                <div class="form-group">
+                    <label for="annualIncome" class="form-label">Annual Income ($)</label>
+                    <input type="number" id="annualIncome" class="form-input" value="75000" min="0" step="1000">
+                </div>
+                <div class="form-group">
+                    <label for="filingStatus" class="form-label">Filing Status</label>
+                    <select id="filingStatus" class="form-input">
+                        <option value="single">Single</option>
+                        <option value="married">Married Filing Jointly</option>
+                        <option value="head">Head of Household</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="deductions" class="form-label">Total Deductions ($)</label>
+                    <input type="number" id="deductions" class="form-input" value="13850" min="0" step="500">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate Tax</button>
+            </div>
+            <div class="calculator-results">
+                <h3>Tax Results</h3>
+                <div class="result-item">
+                    <div class="result-label">Taxable Income</div>
+                    <div class="result-value" id="taxableIncome">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Federal Tax</div>
+                    <div class="result-value" id="federalTax" style="font-size: 2.5rem; color: #ef4444;">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Effective Tax Rate</div>
+                    <div class="result-value" id="effectiveRate">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">After-Tax Income</div>
+                    <div class="result-value" id="afterTaxIncome" style="font-size: 2rem; color: #10b981;">$0</div>
+                </div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Understanding Federal Income Tax</h2>
+            <p>The U.S. federal income tax system is progressive, meaning tax rates increase as income rises. Our tax calculator helps you estimate your federal tax liability based on your annual income, filing status, and deductions. Understanding how taxes are calculated is essential for financial planning and maximizing your take-home pay.</p>
+
+            <h2>How Federal Tax Brackets Work</h2>
+            <p>Many people misunderstand tax brackets. The U.S. uses a marginal tax rate system, which means different portions of your income are taxed at different rates. For example, if you're single and earn $50,000 in 2024, you don't pay 22% on the entire amount. Instead:</p>
+            <ul>
+                <li>The first $11,000 is taxed at 10%</li>
+                <li>Income from $11,001 to $44,725 is taxed at 12%</li>
+                <li>Income from $44,726 to $50,000 is taxed at 22%</li>
+            </ul>
+            <p>This progressive system ensures lower-income earners pay less while higher earners contribute proportionally more.</p>
+
+            <h2>Standard Deduction vs. Itemized Deductions</h2>
+            <p>The standard deduction is a fixed dollar amount that reduces your taxable income. For 2024, it's $13,850 for single filers and $27,700 for married couples filing jointly. You can instead choose to itemize deductions if your qualifying expenses exceed the standard deduction amount.</p>
+
+            <p>Common itemized deductions include:</p>
+            <ul>
+                <li><strong>Mortgage Interest:</strong> Interest paid on home loans up to $750,000</li>
+                <li><strong>State and Local Taxes:</strong> Up to $10,000 in property and income taxes</li>
+                <li><strong>Charitable Contributions:</strong> Donations to qualified organizations</li>
+                <li><strong>Medical Expenses:</strong> Expenses exceeding 7.5% of your AGI</li>
+            </ul>
+
+            <h2>Filing Status and Its Impact</h2>
+            <p>Your filing status significantly affects your tax liability. The five filing statuses are:</p>
+
+            <p><strong>Single:</strong> Unmarried individuals with no dependents typically use this status, which has the narrowest tax brackets.</p>
+
+            <p><strong>Married Filing Jointly:</strong> Married couples who file together benefit from wider tax brackets and often pay less tax overall. This is usually the most advantageous status for married couples.</p>
+
+            <p><strong>Married Filing Separately:</strong> Rarely beneficial, this status may be used when spouses want to be responsible only for their own tax or when one spouse has significant medical expenses.</p>
+
+            <p><strong>Head of Household:</strong> Unmarried individuals who pay more than half the cost of maintaining a home for a qualifying dependent receive more favorable rates than single filers.</p>
+
+            <p><strong>Qualifying Widow(er):</strong> Available for two years after a spouse's death if you have a dependent child, providing the same benefits as married filing jointly.</p>
+
+            <h2>Tax Planning Strategies</h2>
+            <p>Strategic tax planning can significantly reduce your tax liability:</p>
+
+            <p><strong>Maximize Retirement Contributions:</strong> Traditional 401(k) and IRA contributions reduce your taxable income dollar-for-dollar. For 2024, you can contribute up to $23,000 to a 401(k) and $7,000 to an IRA (with catch-up contributions available for those 50+).</p>
+
+            <p><strong>Utilize Tax Credits:</strong> Tax credits directly reduce your tax bill and are more valuable than deductions. Common credits include the Earned Income Tax Credit, Child Tax Credit ($2,000 per qualifying child), and education credits.</p>
+
+            <p><strong>Harvest Tax Losses:</strong> Selling investments at a loss can offset capital gains and up to $3,000 of ordinary income annually.</p>
+
+            <p><strong>Bunch Deductions:</strong> Consolidating itemizable expenses into alternating years can help exceed the standard deduction threshold.</p>
+
+            <h2>Common Tax Mistakes to Avoid</h2>
+            <p>Many taxpayers inadvertently pay more than necessary due to common errors:</p>
+            <ul>
+                <li>Not claiming all available deductions and credits</li>
+                <li>Failing to adjust withholding after major life changes</li>
+                <li>Missing the standard deduction increase available after age 65</li>
+                <li>Forgetting to deduct home office expenses for remote workers</li>
+                <li>Not keeping adequate records for deductions</li>
+            </ul>
+
+            <h2>Understanding Effective vs. Marginal Tax Rates</h2>
+            <p>Your <strong>marginal tax rate</strong> is the rate you pay on your last dollar of income – your tax bracket. Your <strong>effective tax rate</strong> is your average rate across all income. For example, someone in the 24% bracket might have an effective rate of only 15% because lower income portions were taxed at lower rates.</p>
+
+            <p>Understanding this distinction is crucial for financial decisions. When evaluating whether to earn additional income, consider your marginal rate. When assessing your overall tax burden, use your effective rate.</p>
+
+            <h2>State and Local Taxes</h2>
+            <p>Don't forget that most states also impose income taxes, ranging from 0% in states like Texas and Florida to over 13% in California. Additionally, you may owe local city or county income taxes. Our calculator focuses on federal taxes, but remember to account for state and local obligations in your planning.</p>
+
+            <h2>When to Consult a Tax Professional</h2>
+            <p>While calculators provide helpful estimates, consider professional help if you:</p>
+            <ul>
+                <li>Own a business or have self-employment income</li>
+                <li>Have complex investments or rental properties</li>
+                <li>Experienced major life changes (marriage, divorce, inheritance)</li>
+                <li>Have foreign income or assets</li>
+                <li>Face an IRS audit or owe back taxes</li>
+            </ul>
+
+            <p>A qualified tax professional can identify deductions you might miss and ensure compliance with ever-changing tax laws.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const income = parseFloat(document.getElementById('annualIncome').value) || 0;
+            const status = document.getElementById('filingStatus').value;
+            const deductions = parseFloat(document.getElementById('deductions').value) || 0;
+
+            const taxableIncome = Math.max(0, income - deductions);
+
+            // 2024 Tax brackets (simplified federal rates)
+            let federalTax = 0;
+            if (status === 'single') {
+                if (taxableIncome <= 11000) federalTax = taxableIncome * 0.10;
+                else if (taxableIncome <= 44725) federalTax = 1100 + (taxableIncome - 11000) * 0.12;
+                else if (taxableIncome <= 95375) federalTax = 5147 + (taxableIncome - 44725) * 0.22;
+                else if (taxableIncome <= 182100) federalTax = 16290 + (taxableIncome - 95375) * 0.24;
+                else if (taxableIncome <= 231250) federalTax = 37104 + (taxableIncome - 182100) * 0.32;
+                else if (taxableIncome <= 578125) federalTax = 52832 + (taxableIncome - 231250) * 0.35;
+                else federalTax = 174238.25 + (taxableIncome - 578125) * 0.37;
+            } else if (status === 'married') {
+                // Married filing jointly (doubled brackets)
+                if (taxableIncome <= 22000) federalTax = taxableIncome * 0.10;
+                else if (taxableIncome <= 89050) federalTax = 2200 + (taxableIncome - 22000) * 0.12;
+                else if (taxableIncome <= 190750) federalTax = 10294 + (taxableIncome - 89050) * 0.22;
+                else if (taxableIncome <= 364200) federalTax = 32580 + (taxableIncome - 190750) * 0.24;
+                else if (taxableIncome <= 462500) federalTax = 74208 + (taxableIncome - 364200) * 0.32;
+                else if (taxableIncome <= 693750) federalTax = 105664 + (taxableIncome - 462500) * 0.35;
+                else federalTax = 186601.5 + (taxableIncome - 693750) * 0.37;
+            } else {
+                // Head of household (intermediate brackets)
+                if (taxableIncome <= 15700) federalTax = taxableIncome * 0.10;
+                else if (taxableIncome <= 59850) federalTax = 1570 + (taxableIncome - 15700) * 0.12;
+                else if (taxableIncome <= 95350) federalTax = 6868 + (taxableIncome - 59850) * 0.22;
+                else if (taxableIncome <= 182100) federalTax = 14678 + (taxableIncome - 95350) * 0.24;
+                else if (taxableIncome <= 231250) federalTax = 35498 + (taxableIncome - 182100) * 0.32;
+                else if (taxableIncome <= 578100) federalTax = 51226 + (taxableIncome - 231250) * 0.35;
+                else federalTax = 172624 + (taxableIncome - 578100) * 0.37;
+            }
+
+            const effectiveRate = income > 0 ? (federalTax / income * 100).toFixed(2) : 0;
+            const afterTaxIncome = income - federalTax;
+
+            document.getElementById('taxableIncome').textContent = '$' + taxableIncome.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('federalTax').textContent = '$' + federalTax.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('effectiveRate').textContent = effectiveRate + '%';
+            document.getElementById('afterTaxIncome').textContent = '$' + afterTaxIncome.toLocaleString('en-US', {maximumFractionDigits: 0});
+        }
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>
