@@ -1,12 +1,19 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Sitemap locations
 Sitemap: https://calcuprime.com/sitemap.xml
+Sitemap: https://calcuprime.com/sitemap-es.xml
+
+# Allow all calculators
+Allow: /calculators/
+Allow: /es/calculators/
+Allow: /category/
+Allow: /es/category/
+
+# Disallow admin or private directories
+# Disallow: /admin/
+# Disallow: /private/
 
 # Crawl delay (polite to servers)
 Crawl-delay: 1
-
-# Disallow admin or private directories (if any)
-# Disallow: /admin/
-# Disallow: /private/
