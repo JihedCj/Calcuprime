@@ -55,9 +55,123 @@
             background: #f3f4f6;
         }
         .lang-link.active {
-            background: #4F46E5;
+            background: #1d1d1f;
             color: white;
-            border-color: #4F46E5;
+            border-color: #1d1d1f;
+        }
+
+        /* Apple-inspired Category Cards */
+        .categories-section {
+            padding: 80px 0;
+            background: #fbfbfd;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .category-card {
+            background: white;
+            border-radius: 18px;
+            padding: 40px 32px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+        .category-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+        .category-desc {
+            font-size: 15px;
+            color: #86868b;
+            line-height: 1.5;
+        }
+        .category-count {
+            font-size: 13px;
+            color: #06c;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        /* Apple-inspired Hero */
+        .hero {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f7 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+        .hero-subtitle {
+            font-size: 21px;
+            color: #86868b;
+            max-width: 720px;
+            margin: 0 auto 40px;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+        .cta-button {
+            display: inline-block;
+            background: #06c;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 8px;
+        }
+        .cta-button:hover {
+            background: #0077ed;
+            transform: scale(1.02);
+        }
+        .cta-button.secondary {
+            background: white;
+            color: #06c;
+            border: 2px solid #06c;
+        }
+        .cta-button.secondary:hover {
+            background: #f5f5f7;
+        }
+
+        /* Popular Section */
+        .popular-section {
+            padding: 80px 0;
+            background: white;
+        }
+        .section-header-main {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .section-title-main {
+            font-size: 40px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+        .section-subtitle {
+            font-size: 19px;
+            color: #86868b;
         }
 
         /* Cookie Consent Banner */
@@ -176,20 +290,20 @@
             </button>
             
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#finance">Finance</a></li>
-                <li><a href="#health">Health</a></li>
-                <li><a href="#converters">Converters</a></li>
-                <li><a href="#math">Math</a></li>
-                <li><a href="#chemistry">Chemistry</a></li>
-                <li><a href="#everyday">Everyday</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="all-calculators.html">All Calculators</a></li>
+                <li><a href="category/finance.html">Finance</a></li>
+                <li><a href="category/health.html">Health</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
             
             <div class="header-actions">
                 <div class="language-switcher">
-                    <a href="index.html" class="lang-link active">
+                    <a href="index.html" class="lang-link active" onclick="sessionStorage.setItem('language-selected', 'en')">
                         <span>🇺🇸</span> EN
                     </a>
-                    <a href="es/index.html" class="lang-link">
+                    <a href="es/index.html" class="lang-link" onclick="sessionStorage.setItem('language-selected', 'es')">
                         <span>🇪🇸</span> ES
                     </a>
                 </div>
@@ -215,35 +329,77 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1 class="hero-title">Professional Calculators & Converters</h1>
-            <p class="hero-subtitle">Fast, accurate, and free tools for finance, health, chemistry, and everyday calculations</p>
-            
-            <div class="hero-search">
-                <input type="text" id="heroSearch" placeholder="Search for a calculator..." class="hero-search-input">
-                <button class="hero-search-btn">Search</button>
+            <h1 class="hero-title">Calculate Anything.<br>Instantly.</h1>
+            <p class="hero-subtitle">Professional calculators and converters for finance, health, chemistry, and more. Free, fast, and always accurate.</p>
+
+            <div style="margin-top: 32px;">
+                <a href="#categories" class="cta-button">Explore Categories</a>
+                <a href="all-calculators.html" class="cta-button secondary">View All Calculators</a>
             </div>
-            
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">60+</span>
-                    <span class="stat-label">Calculators</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">6</span>
-                    <span class="stat-label">Categories</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">Free</span>
-                    <span class="stat-label">Always</span>
-                </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <div class="section-header-main">
+                <h2 class="section-title-main">Browse by Category</h2>
+                <p class="section-subtitle">Choose from six specialized categories with powerful tools</p>
+            </div>
+
+            <div class="categories-grid">
+                <a href="category/finance.html" class="category-card">
+                    <span class="category-icon">💰</span>
+                    <h3 class="category-title">Finance</h3>
+                    <p class="category-desc">Loans, mortgages, investments, and retirement planning</p>
+                    <span class="category-count">15+ calculators →</span>
+                </a>
+
+                <a href="category/health.html" class="category-card">
+                    <span class="category-icon">❤️</span>
+                    <h3 class="category-title">Health & Fitness</h3>
+                    <p class="category-desc">BMI, calories, pregnancy, and ideal weight calculations</p>
+                    <span class="category-count">12+ calculators →</span>
+                </a>
+
+                <a href="category/converters.html" class="category-card">
+                    <span class="category-icon">🔄</span>
+                    <h3 class="category-title">Converters</h3>
+                    <p class="category-desc">Units, currency, temperature, and measurement conversion</p>
+                    <span class="category-count">14+ calculators →</span>
+                </a>
+
+                <a href="category/math.html" class="category-card">
+                    <span class="category-icon">📐</span>
+                    <h3 class="category-title">Math</h3>
+                    <p class="category-desc">Percentages, fractions, geometry, and algebra tools</p>
+                    <span class="category-count">10+ calculators →</span>
+                </a>
+
+                <a href="category/chemistry.html" class="category-card">
+                    <span class="category-icon">⚗️</span>
+                    <h3 class="category-title">Chemistry</h3>
+                    <p class="category-desc">Molar mass, dilution, pH, and solution calculations</p>
+                    <span class="category-count">6+ calculators →</span>
+                </a>
+
+                <a href="category/everyday.html" class="category-card">
+                    <span class="category-icon">🏠</span>
+                    <h3 class="category-title">Everyday</h3>
+                    <p class="category-desc">Time, date, age, fuel, and practical calculations</p>
+                    <span class="category-count">9+ calculators →</span>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Popular Calculators -->
-    <section class="section">
+    <section class="popular-section">
         <div class="container">
-            <h2 class="section-title">Most Popular</h2>
+            <div class="section-header-main">
+                <h2 class="section-title-main">Most Popular</h2>
+                <p class="section-subtitle">Our most frequently used calculators</p>
+            </div>
             <div class="calculator-grid">
                 <a href="calculators/mortgage-calculator.html" class="calc-card">
                     <div class="calc-icon">🏠</div>
@@ -262,116 +418,29 @@
                     <h3 class="calc-title">Percentage Calculator</h3>
                     <p class="calc-description">Calculate percentages, increases, and decreases</p>
                 </a>
-                
+
                 <a href="calculators/calorie-calculator.html" class="calc-card">
                     <div class="calc-icon">🔥</div>
                     <h3 class="calc-title">Calorie Calculator</h3>
                     <p class="calc-description">Calculate daily caloric needs and weight goals</p>
                 </a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Finance Calculators -->
-    <section class="section section-alt" id="finance">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Finance Calculators</h2>
-                <a href="category/finance.html" class="section-link">View all →</a>
-            </div>
-            <div class="calculator-grid">
                 <a href="calculators/loan-calculator.html" class="calc-card">
                     <div class="calc-icon">💰</div>
                     <h3 class="calc-title">Loan Calculator</h3>
                     <p class="calc-description">Calculate loan payments and total interest</p>
                 </a>
-                
-                <a href="calculators/investment-calculator.html" class="calc-card">
-                    <div class="calc-icon">📈</div>
-                    <h3 class="calc-title">Investment Calculator</h3>
-                    <p class="calc-description">Project investment growth over time</p>
-                </a>
-                
-                <a href="calculators/compound-interest-calculator.html" class="calc-card">
-                    <div class="calc-icon">💹</div>
-                    <h3 class="calc-title">Compound Interest</h3>
-                    <p class="calc-description">Calculate compound interest earnings</p>
-                </a>
-                
-                <a href="calculators/retirement-calculator.html" class="calc-card">
-                    <div class="calc-icon">🏖️</div>
-                    <h3 class="calc-title">Retirement Calculator</h3>
-                    <p class="calc-description">Plan your retirement savings</p>
-                </a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Health Calculators -->
-    <section class="section" id="health">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Health & Fitness Calculators</h2>
-                <a href="category/health.html" class="section-link">View all →</a>
-            </div>
-            <div class="calculator-grid">
-                <a href="calculators/bmi-calculator.html" class="calc-card">
-                    <div class="calc-icon">⚖️</div>
-                    <h3 class="calc-title">BMI Calculator</h3>
-                    <p class="calc-description">Calculate Body Mass Index</p>
-                </a>
-                
-                <a href="calculators/calorie-calculator.html" class="calc-card">
-                    <div class="calc-icon">🔥</div>
-                    <h3 class="calc-title">Calorie Calculator</h3>
-                    <p class="calc-description">Daily caloric needs</p>
-                </a>
-                
-                <a href="calculators/pregnancy-calculator.html" class="calc-card">
-                    <div class="calc-icon">👶</div>
-                    <h3 class="calc-title">Pregnancy Calculator</h3>
-                    <p class="calc-description">Due date and week calculation</p>
-                </a>
-                
-                <a href="calculators/ideal-weight-calculator.html" class="calc-card">
-                    <div class="calc-icon">🎯</div>
-                    <h3 class="calc-title">Ideal Weight</h3>
-                    <p class="calc-description">Calculate your ideal body weight</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Converters -->
-    <section class="section section-alt" id="converters">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Unit Converters</h2>
-                <a href="category/converters.html" class="section-link">View all →</a>
-            </div>
-            <div class="calculator-grid">
-                <a href="calculators/length-converter.html" class="calc-card">
-                    <div class="calc-icon">📏</div>
-                    <h3 class="calc-title">Length Converter</h3>
-                    <p class="calc-description">Convert meters, feet, inches, miles</p>
-                </a>
-                
-                <a href="calculators/weight-converter.html" class="calc-card">
-                    <div class="calc-icon">⚖️</div>
-                    <h3 class="calc-title">Weight Converter</h3>
-                    <p class="calc-description">Convert kg, pounds, ounces</p>
-                </a>
-                
-                <a href="calculators/temperature-converter.html" class="calc-card">
-                    <div class="calc-icon">🌡️</div>
-                    <h3 class="calc-title">Temperature Converter</h3>
-                    <p class="calc-description">Convert Celsius, Fahrenheit, Kelvin</p>
-                </a>
-                
                 <a href="calculators/currency-converter.html" class="calc-card">
                     <div class="calc-icon">💱</div>
                     <h3 class="calc-title">Currency Converter</h3>
                     <p class="calc-description">Real-time currency exchange rates</p>
+                </a>
+
+                <a href="calculators/age-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎂</div>
+                    <h3 class="calc-title">Age Calculator</h3>
+                    <p class="calc-description">Calculate age and time differences</p>
                 </a>
             </div>
         </div>
@@ -451,6 +520,21 @@
 
     <script src="js/main.js"></script>
     <script>
+        // Auto Language Detection and Redirect
+        (function() {
+            // Only run if user hasn't manually selected a language
+            if (!sessionStorage.getItem('language-selected')) {
+                const userLang = navigator.language || navigator.userLanguage;
+                // If browser language is Spanish, redirect to Spanish version
+                if (userLang && userLang.toLowerCase().startsWith('es')) {
+                    sessionStorage.setItem('language-selected', 'es');
+                    window.location.href = '/es/';
+                } else {
+                    sessionStorage.setItem('language-selected', 'en');
+                }
+            }
+        })();
+
         // Cookie Consent Management
         const COOKIE_CONSENT_KEY = 'calcuprime_cookie_consent';
         const COOKIE_CONSENT_DATE_KEY = 'calcuprime_cookie_consent_date';

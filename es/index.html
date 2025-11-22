@@ -54,9 +54,123 @@
             background: #f3f4f6;
         }
         .lang-link.active {
-            background: #4F46E5;
+            background: #1d1d1f;
             color: white;
-            border-color: #4F46E5;
+            border-color: #1d1d1f;
+        }
+
+        /* Apple-inspired Category Cards */
+        .categories-section {
+            padding: 80px 0;
+            background: #fbfbfd;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .category-card {
+            background: white;
+            border-radius: 18px;
+            padding: 40px 32px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+        .category-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+        .category-desc {
+            font-size: 15px;
+            color: #86868b;
+            line-height: 1.5;
+        }
+        .category-count {
+            font-size: 13px;
+            color: #06c;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        /* Apple-inspired Hero */
+        .hero {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f7 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+        .hero-subtitle {
+            font-size: 21px;
+            color: #86868b;
+            max-width: 720px;
+            margin: 0 auto 40px;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+        .cta-button {
+            display: inline-block;
+            background: #06c;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 8px;
+        }
+        .cta-button:hover {
+            background: #0077ed;
+            transform: scale(1.02);
+        }
+        .cta-button.secondary {
+            background: white;
+            color: #06c;
+            border: 2px solid #06c;
+        }
+        .cta-button.secondary:hover {
+            background: #f5f5f7;
+        }
+
+        /* Popular Section */
+        .popular-section {
+            padding: 80px 0;
+            background: white;
+        }
+        .section-header-main {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .section-title-main {
+            font-size: 40px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+        .section-subtitle {
+            font-size: 19px;
+            color: #86868b;
         }
     </style>
 </head>
@@ -76,20 +190,20 @@
             </button>
 
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#finanzas">Finanzas</a></li>
-                <li><a href="#salud">Salud</a></li>
-                <li><a href="#conversores">Conversores</a></li>
-                <li><a href="#matematicas">Matemáticas</a></li>
-                <li><a href="#quimica">Química</a></li>
-                <li><a href="#cotidiano">Cotidiano</a></li>
+                <li><a href="#categorias">Categorías</a></li>
+                <li><a href="todas-calculadoras.html">Todas las Calculadoras</a></li>
+                <li><a href="category/finanzas.html">Finanzas</a></li>
+                <li><a href="category/salud.html">Salud</a></li>
+                <li><a href="acerca.html">Acerca de</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
             </ul>
 
             <div class="header-actions">
                 <div class="language-switcher">
-                    <a href="../index.html" class="lang-link">
+                    <a href="../index.html" class="lang-link" onclick="sessionStorage.setItem('language-selected', 'en')">
                         <span>🇺🇸</span> EN
                     </a>
-                    <a href="index.html" class="lang-link active">
+                    <a href="index.html" class="lang-link active" onclick="sessionStorage.setItem('language-selected', 'es')">
                         <span>🇪🇸</span> ES
                     </a>
                 </div>
@@ -115,35 +229,77 @@
     <!-- Sección Hero -->
     <section class="hero">
         <div class="container">
-            <h1 class="hero-title">Calculadoras y Conversores Profesionales</h1>
-            <p class="hero-subtitle">Herramientas rápidas, precisas y gratuitas para finanzas, salud, química y cálculos cotidianos</p>
+            <h1 class="hero-title">Calcula lo que sea.<br>Al instante.</h1>
+            <p class="hero-subtitle">Calculadoras y conversores profesionales para finanzas, salud, química y más. Gratis, rápidas y siempre precisas.</p>
 
-            <div class="hero-search">
-                <input type="text" id="heroSearch" placeholder="Buscar una calculadora..." class="hero-search-input">
-                <button class="hero-search-btn">Buscar</button>
+            <div style="margin-top: 32px;">
+                <a href="#categorias" class="cta-button">Explorar Categorías</a>
+                <a href="todas-calculadoras.html" class="cta-button secondary">Ver Todas las Calculadoras</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Categorías -->
+    <section class="categories-section" id="categorias">
+        <div class="container">
+            <div class="section-header-main">
+                <h2 class="section-title-main">Explorar por Categoría</h2>
+                <p class="section-subtitle">Elige entre seis categorías especializadas con herramientas potentes</p>
             </div>
 
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">60+</span>
-                    <span class="stat-label">Calculadoras</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">6</span>
-                    <span class="stat-label">Categorías</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">Gratis</span>
-                    <span class="stat-label">Siempre</span>
-                </div>
+            <div class="categories-grid">
+                <a href="category/finanzas.html" class="category-card">
+                    <span class="category-icon">💰</span>
+                    <h3 class="category-title">Finanzas</h3>
+                    <p class="category-desc">Préstamos, hipotecas, inversiones y planificación de jubilación</p>
+                    <span class="category-count">15+ calculadoras →</span>
+                </a>
+
+                <a href="category/salud.html" class="category-card">
+                    <span class="category-icon">❤️</span>
+                    <h3 class="category-title">Salud y Fitness</h3>
+                    <p class="category-desc">IMC, calorías, embarazo y cálculos de peso ideal</p>
+                    <span class="category-count">12+ calculadoras →</span>
+                </a>
+
+                <a href="category/conversores.html" class="category-card">
+                    <span class="category-icon">🔄</span>
+                    <h3 class="category-title">Conversores</h3>
+                    <p class="category-desc">Conversión de unidades, divisas, temperatura y medidas</p>
+                    <span class="category-count">14+ calculadoras →</span>
+                </a>
+
+                <a href="category/matematicas.html" class="category-card">
+                    <span class="category-icon">📐</span>
+                    <h3 class="category-title">Matemáticas</h3>
+                    <p class="category-desc">Porcentajes, fracciones, geometría y herramientas de álgebra</p>
+                    <span class="category-count">10+ calculadoras →</span>
+                </a>
+
+                <a href="category/quimica.html" class="category-card">
+                    <span class="category-icon">⚗️</span>
+                    <h3 class="category-title">Química</h3>
+                    <p class="category-desc">Masa molar, dilución, pH y cálculos de soluciones</p>
+                    <span class="category-count">6+ calculadoras →</span>
+                </a>
+
+                <a href="category/cotidiano.html" class="category-card">
+                    <span class="category-icon">🏠</span>
+                    <h3 class="category-title">Cotidiano</h3>
+                    <p class="category-desc">Tiempo, fecha, edad, combustible y cálculos prácticos</p>
+                    <span class="category-count">9+ calculadoras →</span>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Calculadoras Populares -->
-    <section class="section">
+    <section class="popular-section">
         <div class="container">
-            <h2 class="section-title">Más Populares</h2>
+            <div class="section-header-main">
+                <h2 class="section-title-main">Más Populares</h2>
+                <p class="section-subtitle">Nuestras calculadoras más utilizadas</p>
+            </div>
             <div class="calculator-grid">
                 <a href="calculators/calculadora-hipoteca.html" class="calc-card">
                     <div class="calc-icon">🏠</div>
@@ -168,110 +324,23 @@
                     <h3 class="calc-title">Calculadora de Calorías</h3>
                     <p class="calc-description">Calcula necesidades calóricas diarias y objetivos de peso</p>
                 </a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Calculadoras de Finanzas -->
-    <section class="section section-alt" id="finanzas">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Calculadoras de Finanzas</h2>
-                <a href="category/finanzas.html" class="section-link">Ver todas →</a>
-            </div>
-            <div class="calculator-grid">
                 <a href="calculators/calculadora-prestamos.html" class="calc-card">
                     <div class="calc-icon">💰</div>
                     <h3 class="calc-title">Calculadora de Préstamos</h3>
                     <p class="calc-description">Calcula pagos de préstamos e intereses totales</p>
                 </a>
 
-                <a href="calculators/calculadora-inversion.html" class="calc-card">
-                    <div class="calc-icon">📈</div>
-                    <h3 class="calc-title">Calculadora de Inversión</h3>
-                    <p class="calc-description">Proyecta el crecimiento de inversiones</p>
-                </a>
-
-                <a href="calculators/calculadora-interes-compuesto.html" class="calc-card">
-                    <div class="calc-icon">💹</div>
-                    <h3 class="calc-title">Interés Compuesto</h3>
-                    <p class="calc-description">Calcula ganancias por interés compuesto</p>
-                </a>
-
-                <a href="calculators/calculadora-jubilacion.html" class="calc-card">
-                    <div class="calc-icon">🏖️</div>
-                    <h3 class="calc-title">Calculadora de Jubilación</h3>
-                    <p class="calc-description">Planifica tus ahorros para el retiro</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Calculadoras de Salud -->
-    <section class="section" id="salud">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Calculadoras de Salud y Fitness</h2>
-                <a href="category/salud.html" class="section-link">Ver todas →</a>
-            </div>
-            <div class="calculator-grid">
-                <a href="calculators/calculadora-imc.html" class="calc-card">
-                    <div class="calc-icon">⚖️</div>
-                    <h3 class="calc-title">Calculadora de IMC</h3>
-                    <p class="calc-description">Calcula Índice de Masa Corporal</p>
-                </a>
-
-                <a href="calculators/calculadora-calorias.html" class="calc-card">
-                    <div class="calc-icon">🔥</div>
-                    <h3 class="calc-title">Calculadora de Calorías</h3>
-                    <p class="calc-description">Necesidades calóricas diarias</p>
-                </a>
-
-                <a href="calculators/calculadora-embarazo.html" class="calc-card">
-                    <div class="calc-icon">👶</div>
-                    <h3 class="calc-title">Calculadora de Embarazo</h3>
-                    <p class="calc-description">Fecha de parto y cálculo de semanas</p>
-                </a>
-
-                <a href="calculators/calculadora-peso-ideal.html" class="calc-card">
-                    <div class="calc-icon">🎯</div>
-                    <h3 class="calc-title">Peso Ideal</h3>
-                    <p class="calc-description">Calcula tu peso corporal ideal</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Conversores -->
-    <section class="section section-alt" id="conversores">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Conversores de Unidades</h2>
-                <a href="category/conversores.html" class="section-link">Ver todos →</a>
-            </div>
-            <div class="calculator-grid">
-                <a href="calculators/conversor-longitud.html" class="calc-card">
-                    <div class="calc-icon">📏</div>
-                    <h3 class="calc-title">Conversor de Longitud</h3>
-                    <p class="calc-description">Convierte metros, pies, pulgadas, millas</p>
-                </a>
-
-                <a href="calculators/conversor-peso.html" class="calc-card">
-                    <div class="calc-icon">⚖️</div>
-                    <h3 class="calc-title">Conversor de Peso</h3>
-                    <p class="calc-description">Convierte kg, libras, onzas</p>
-                </a>
-
-                <a href="calculators/conversor-temperatura.html" class="calc-card">
-                    <div class="calc-icon">🌡️</div>
-                    <h3 class="calc-title">Conversor de Temperatura</h3>
-                    <p class="calc-description">Convierte Celsius, Fahrenheit, Kelvin</p>
-                </a>
-
                 <a href="calculators/conversor-divisas.html" class="calc-card">
                     <div class="calc-icon">💱</div>
                     <h3 class="calc-title">Conversor de Divisas</h3>
                     <p class="calc-description">Tasas de cambio de moneda en tiempo real</p>
+                </a>
+
+                <a href="calculators/calculadora-edad.html" class="calc-card">
+                    <div class="calc-icon">🎂</div>
+                    <h3 class="calc-title">Calculadora de Edad</h3>
+                    <p class="calc-description">Calcula diferencias de edad y tiempo</p>
                 </a>
             </div>
         </div>
@@ -325,19 +394,21 @@
 
     <script src="../js/main.js"></script>
 
-    <!-- Auto-detect language script -->
+    <!-- Auto Language Detection and Redirect -->
     <script>
-        // Auto-redirect English speakers to English version if they land on Spanish by accident
-        if (window.location.pathname.includes('/es/') && !sessionStorage.getItem('language-selected')) {
-            const userLang = navigator.language || navigator.userLanguage;
-            if (userLang && !userLang.toLowerCase().startsWith('es')) {
-                const englishPath = window.location.pathname.replace('/es/', '/');
-                if (confirm('This page is available in English. Switch to English version?')) {
+        // Auto-redirect non-Spanish speakers to English version
+        (function() {
+            if (!sessionStorage.getItem('language-selected')) {
+                const userLang = navigator.language || navigator.userLanguage;
+                // If browser language is NOT Spanish, redirect to English version
+                if (userLang && !userLang.toLowerCase().startsWith('es')) {
                     sessionStorage.setItem('language-selected', 'en');
-                    window.location.href = englishPath;
+                    window.location.href = '/';
+                } else {
+                    sessionStorage.setItem('language-selected', 'es');
                 }
             }
-        }
+        })();
     </script>
 </body>
 </html>
