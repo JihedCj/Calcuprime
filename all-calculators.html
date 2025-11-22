@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse all 69 professional calculators and converters at CalcuPrime. Finance, health, chemistry, math, and more - all free and easy to use.">
+    <title>All Calculators - CalcuPrime</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/all-calculators.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <style>
+        .all-calculators-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        .all-calculators-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .all-calculators-subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        .calculators-section {
+            padding: 60px 0;
+        }
+        .calculators-count {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .search-input-box {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .search-input-box:focus {
+            border-color: #667eea;
+        }
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#categories">Categories</a></li>
+                <li><a href="all-calculators.html">All Calculators</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="all-calculators-header">
+        <div class="container">
+            <h1 class="all-calculators-title">All Calculators</h1>
+            <p class="all-calculators-subtitle">Browse our complete collection of 69 professional calculators</p>
+        </div>
+    </div>
+
+    <section class="calculators-section">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" id="searchCalc" class="search-input-box" placeholder="🔍 Search calculators...">
+            </div>
+            
+            <p class="calculators-count">Showing <strong id="calcCount">69</strong> calculators</p>
+            
+            <div class="calculator-grid" id="calcGrid">
+                <a href="calculators/age-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎂</div>
+                    <h3 class="calc-title">Age Calculator</h3>
+                </a>
+                <a href="calculators/amortization-calculator.html" class="calc-card">
+                    <div class="calc-icon">📅</div>
+                    <h3 class="calc-title">Amortization Calculator</h3>
+                </a>
+                <a href="calculators/apr-calculator.html" class="calc-card">
+                    <div class="calc-icon">💯</div>
+                    <h3 class="calc-title">Apr Calculator</h3>
+                </a>
+                <a href="calculators/area-converter.html" class="calc-card">
+                    <div class="calc-icon">📐</div>
+                    <h3 class="calc-title">Area Converter</h3>
+                </a>
+                <a href="calculators/average-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎂</div>
+                    <h3 class="calc-title">Average Calculator</h3>
+                </a>
+                <a href="calculators/bill-split-calculator.html" class="calc-card">
+                    <div class="calc-icon">🧾</div>
+                    <h3 class="calc-title">Bill Split Calculator</h3>
+                </a>
+                <a href="calculators/blood-pressure-calculator.html" class="calc-card">
+                    <div class="calc-icon">🩺</div>
+                    <h3 class="calc-title">Blood Pressure Calculator</h3>
+                </a>
+                <a href="calculators/bmi-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Bmi Calculator</h3>
+                </a>
+                <a href="calculators/bmr-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔢</div>
+                    <h3 class="calc-title">Bmr Calculator</h3>
+                </a>
+                <a href="calculators/body-fat-calculator.html" class="calc-card">
+                    <div class="calc-icon">📏</div>
+                    <h3 class="calc-title">Body Fat Calculator</h3>
+                </a>
+                <a href="calculators/body-surface-area-calculator.html" class="calc-card">
+                    <div class="calc-icon">📐</div>
+                    <h3 class="calc-title">Body Surface Area Calculator</h3>
+                </a>
+                <a href="calculators/calorie-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔥</div>
+                    <h3 class="calc-title">Calorie Calculator</h3>
+                </a>
+                <a href="calculators/car-loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Car Loan Calculator</h3>
+                </a>
+                <a href="calculators/compound-interest-calculator.html" class="calc-card">
+                    <div class="calc-icon">💹</div>
+                    <h3 class="calc-title">Compound Interest Calculator</h3>
+                </a>
+                <a href="calculators/concrete-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏗️</div>
+                    <h3 class="calc-title">Concrete Calculator</h3>
+                </a>
+                <a href="calculators/credit-card-calculator.html" class="calc-card">
+                    <div class="calc-icon">💳</div>
+                    <h3 class="calc-title">Credit Card Calculator</h3>
+                </a>
+                <a href="calculators/currency-converter.html" class="calc-card">
+                    <div class="calc-icon">💱</div>
+                    <h3 class="calc-title">Currency Converter</h3>
+                </a>
+                <a href="calculators/date-difference-calculator.html" class="calc-card">
+                    <div class="calc-icon">📅</div>
+                    <h3 class="calc-title">Date Difference Calculator</h3>
+                </a>
+                <a href="calculators/debt-consolidation-calculator.html" class="calc-card">
+                    <div class="calc-icon">📉</div>
+                    <h3 class="calc-title">Debt Consolidation Calculator</h3>
+                </a>
+                <a href="calculators/debt-payoff-calculator.html" class="calc-card">
+                    <div class="calc-icon">📉</div>
+                    <h3 class="calc-title">Debt Payoff Calculator</h3>
+                </a>
+                <a href="calculators/discount-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏷️</div>
+                    <h3 class="calc-title">Discount Calculator</h3>
+                </a>
+                <a href="calculators/fraction-calculator.html" class="calc-card">
+                    <div class="calc-icon">½</div>
+                    <h3 class="calc-title">Fraction Calculator</h3>
+                </a>
+                <a href="calculators/fuel-cost-calculator.html" class="calc-card">
+                    <div class="calc-icon">⛽</div>
+                    <h3 class="calc-title">Fuel Cost Calculator</h3>
+                </a>
+                <a href="calculators/gas-mileage-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎂</div>
+                    <h3 class="calc-title">Gas Mileage Calculator</h3>
+                </a>
+                <a href="calculators/gcd-lcm-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔢</div>
+                    <h3 class="calc-title">Gcd Lcm Calculator</h3>
+                </a>
+                <a href="calculators/gpa-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎓</div>
+                    <h3 class="calc-title">Gpa Calculator</h3>
+                </a>
+                <a href="calculators/grade-calculator.html" class="calc-card">
+                    <div class="calc-icon">📝</div>
+                    <h3 class="calc-title">Grade Calculator</h3>
+                </a>
+                <a href="calculators/heart-rate-calculator.html" class="calc-card">
+                    <div class="calc-icon">❤️</div>
+                    <h3 class="calc-title">Heart Rate Calculator</h3>
+                </a>
+                <a href="calculators/home-affordability-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏡</div>
+                    <h3 class="calc-title">Home Affordability Calculator</h3>
+                </a>
+                <a href="calculators/hours-calculator.html" class="calc-card">
+                    <div class="calc-icon">⏱️</div>
+                    <h3 class="calc-title">Hours Calculator</h3>
+                </a>
+                <a href="calculators/ideal-weight-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Ideal Weight Calculator</h3>
+                </a>
+                <a href="calculators/inflation-calculator.html" class="calc-card">
+                    <div class="calc-icon">📊</div>
+                    <h3 class="calc-title">Inflation Calculator</h3>
+                </a>
+                <a href="calculators/investment-calculator.html" class="calc-card">
+                    <div class="calc-icon">📈</div>
+                    <h3 class="calc-title">Investment Calculator</h3>
+                </a>
+                <a href="calculators/lease-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔑</div>
+                    <h3 class="calc-title">Lease Calculator</h3>
+                </a>
+                <a href="calculators/length-converter.html" class="calc-card">
+                    <div class="calc-icon">📏</div>
+                    <h3 class="calc-title">Length Converter</h3>
+                </a>
+                <a href="calculators/loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Loan Calculator</h3>
+                </a>
+                <a href="calculators/macro-calculator.html" class="calc-card">
+                    <div class="calc-icon">🍽️</div>
+                    <h3 class="calc-title">Macro Calculator</h3>
+                </a>
+                <a href="calculators/mortgage-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏠</div>
+                    <h3 class="calc-title">Mortgage Calculator</h3>
+                </a>
+                <a href="calculators/net-worth-calculator.html" class="calc-card">
+                    <div class="calc-icon">💎</div>
+                    <h3 class="calc-title">Net Worth Calculator</h3>
+                </a>
+                <a href="calculators/one-rep-max-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏋️</div>
+                    <h3 class="calc-title">One Rep Max Calculator</h3>
+                </a>
+                <a href="calculators/ovulation-calculator.html" class="calc-card">
+                    <div class="calc-icon">🌸</div>
+                    <h3 class="calc-title">Ovulation Calculator</h3>
+                </a>
+                <a href="calculators/paint-calculator.html" class="calc-card">
+                    <div class="calc-icon">🎨</div>
+                    <h3 class="calc-title">Paint Calculator</h3>
+                </a>
+                <a href="calculators/paycheck-calculator.html" class="calc-card">
+                    <div class="calc-icon">💵</div>
+                    <h3 class="calc-title">Paycheck Calculator</h3>
+                </a>
+                <a href="calculators/percent-change-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔢</div>
+                    <h3 class="calc-title">Percent Change Calculator</h3>
+                </a>
+                <a href="calculators/percentage-calculator.html" class="calc-card">
+                    <div class="calc-icon">%</div>
+                    <h3 class="calc-title">Percentage Calculator</h3>
+                </a>
+                <a href="calculators/pregnancy-calculator.html" class="calc-card">
+                    <div class="calc-icon">👶</div>
+                    <h3 class="calc-title">Pregnancy Calculator</h3>
+                </a>
+                <a href="calculators/protein-calculator.html" class="calc-card">
+                    <div class="calc-icon">🥩</div>
+                    <h3 class="calc-title">Protein Calculator</h3>
+                </a>
+                <a href="calculators/quadratic-equation-solver.html" class="calc-card">
+                    <div class="calc-icon">📐</div>
+                    <h3 class="calc-title">Quadratic Equation Solver</h3>
+                </a>
+                <a href="calculators/refinance-calculator.html" class="calc-card">
+                    <div class="calc-icon">🔄</div>
+                    <h3 class="calc-title">Refinance Calculator</h3>
+                </a>
+                <a href="calculators/rent-vs-buy-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏘️</div>
+                    <h3 class="calc-title">Rent Vs Buy Calculator</h3>
+                </a>
+                <a href="calculators/retirement-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏖️</div>
+                    <h3 class="calc-title">Retirement Calculator</h3>
+                </a>
+                <a href="calculators/roi-calculator.html" class="calc-card">
+                    <div class="calc-icon">📊</div>
+                    <h3 class="calc-title">Roi Calculator</h3>
+                </a>
+                <a href="calculators/running-pace-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏃</div>
+                    <h3 class="calc-title">Running Pace Calculator</h3>
+                </a>
+                <a href="calculators/salary-to-hourly-calculator.html" class="calc-card">
+                    <div class="calc-icon">⏰</div>
+                    <h3 class="calc-title">Salary To Hourly Calculator</h3>
+                </a>
+                <a href="calculators/sales-tax-calculator.html" class="calc-card">
+                    <div class="calc-icon">📋</div>
+                    <h3 class="calc-title">Sales Tax Calculator</h3>
+                </a>
+                <a href="calculators/savings-calculator.html" class="calc-card">
+                    <div class="calc-icon">🏦</div>
+                    <h3 class="calc-title">Savings Calculator</h3>
+                </a>
+                <a href="calculators/speed-converter.html" class="calc-card">
+                    <div class="calc-icon">🚀</div>
+                    <h3 class="calc-title">Speed Converter</h3>
+                </a>
+                <a href="calculators/square-root-calculator.html" class="calc-card">
+                    <div class="calc-icon">²</div>
+                    <h3 class="calc-title">Square Root Calculator</h3>
+                </a>
+                <a href="calculators/student-loan-calculator.html" class="calc-card">
+                    <div class="calc-icon">💰</div>
+                    <h3 class="calc-title">Student Loan Calculator</h3>
+                </a>
+                <a href="calculators/tax-calculator.html" class="calc-card">
+                    <div class="calc-icon">📋</div>
+                    <h3 class="calc-title">Tax Calculator</h3>
+                </a>
+                <a href="calculators/tdee-calculator.html" class="calc-card">
+                    <div class="calc-icon">⚡</div>
+                    <h3 class="calc-title">Tdee Calculator</h3>
+                </a>
+                <a href="calculators/temperature-converter.html" class="calc-card">
+                    <div class="calc-icon">🌡️</div>
+                    <h3 class="calc-title">Temperature Converter</h3>
+                </a>
+                <a href="calculators/time-zone-converter.html" class="calc-card">
+                    <div class="calc-icon">⏰</div>
+                    <h3 class="calc-title">Time Zone Converter</h3>
+                </a>
+                <a href="calculators/tip-calculator.html" class="calc-card">
+                    <div class="calc-icon">💵</div>
+                    <h3 class="calc-title">Tip Calculator</h3>
+                </a>
+                <a href="calculators/unit-price-calculator.html" class="calc-card">
+                    <div class="calc-icon">🛒</div>
+                    <h3 class="calc-title">Unit Price Calculator</h3>
+                </a>
+                <a href="calculators/vo2-max-calculator.html" class="calc-card">
+                    <div class="calc-icon">💪</div>
+                    <h3 class="calc-title">Vo2 Max Calculator</h3>
+                </a>
+                <a href="calculators/volume-converter.html" class="calc-card">
+                    <div class="calc-icon">🧪</div>
+                    <h3 class="calc-title">Volume Converter</h3>
+                </a>
+                <a href="calculators/water-intake-calculator.html" class="calc-card">
+                    <div class="calc-icon">💧</div>
+                    <h3 class="calc-title">Water Intake Calculator</h3>
+                </a>
+                <a href="calculators/weight-converter.html" class="calc-card">
+                    <div class="calc-icon">⚖️</div>
+                    <h3 class="calc-title">Weight Converter</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchCalc');
+        const calcGrid = document.getElementById('calcGrid');
+        const calcCount = document.getElementById('calcCount');
+        const allCards = calcGrid.querySelectorAll('.calc-card');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            let visibleCount = 0;
+
+            allCards.forEach(card => {
+                const title = card.querySelector('.calc-title').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            calcCount.textContent = visibleCount;
+        });
+    </script>
+</body>
+</html>

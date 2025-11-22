@@ -3,21 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | CalcuPrime</title>
+    <meta name="description" content="CalcuPrime Blog - Articles, guides, and tips about calculators and mathematical tools.">
+    <title>Blog - CalcuPrime</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/blog.html">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .blog-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        .blog-title { font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .blog-subtitle { font-size: 20px; opacity: 0.9; }
+        .blog-section { padding: 80px 0; min-height: 400px; text-align: center; }
+        .coming-soon { font-size: 32px; color: #666; margin-top: 60px; }
+    </style>
 </head>
 <body>
     <header class="header">
         <nav class="nav container">
             <a href="index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#categories">Categories</a></li>
+                <li><a href="all-calculators.html">All Calculators</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </nav>
     </header>
-    <section class="section"><div class="container">
-        <h1 class="section-title">Blog</h1>
-        <p style="color: #6b7280; text-align: center;">Blog posts coming soon! Stay tuned for helpful guides and calculator tips.</p>
-    </div></section>
-    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+
+    <div class="blog-header">
+        <div class="container">
+            <h1 class="blog-title">CalcuPrime Blog</h1>
+            <p class="blog-subtitle">Guides, tips, and insights about calculators</p>
+        </div>
+    </div>
+
+    <section class="blog-section">
+        <div class="container">
+            <p class="coming-soon">📝 Coming Soon</p>
+            <p style="font-size: 18px; color: #666; margin-top: 24px;">We're working on bringing you helpful articles and guides.<br>Check back soon for updates!</p>
+            <p style="margin-top: 40px;"><a href="index.html" style="color: #667eea; font-weight: 500;">← Back to Home</a></p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
     <script src="js/main.js"></script>
 </body>
 </html>
