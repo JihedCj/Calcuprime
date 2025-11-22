@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMR Calculator - Basal Metabolic Rate & Daily Calorie Needs</title>
+    <meta name="description" content="Calculate your Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE). Determine how many calories you burn at rest and with activity for weight loss or muscle gain.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>BMR Calculator</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calculate your Basal Metabolic Rate and discover how many calories you burn each day based on your activity level.</p>
+
+        <div class="input-group">
+            <label for="gender" class="form-label">Biological Sex</label>
+            <select id="gender" class="form-input">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="age" class="form-label">Age (years)</label>
+            <input type="number" id="age" class="form-input" placeholder="e.g., 30" min="1" max="120" step="1" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="heightUnit" class="form-label">Height Unit</label>
+            <select id="heightUnit" class="form-input">
+                <option value="imperial" selected>Feet & Inches</option>
+                <option value="metric">Centimeters</option>
+            </select>
+        </div>
+
+        <div id="imperialHeight">
+            <div class="input-group">
+                <label for="heightFeet" class="form-label">Height (feet)</label>
+                <input type="number" id="heightFeet" class="form-input" placeholder="e.g., 5" min="0" max="8" step="1" value="">
+            </div>
+            <div class="input-group">
+                <label for="heightInches" class="form-label">Height (inches)</label>
+                <input type="number" id="heightInches" class="form-input" placeholder="e.g., 10" min="0" max="11" step="1" value="">
+            </div>
+        </div>
+
+        <div id="metricHeight" style="display: none;">
+            <div class="input-group">
+                <label for="heightCm" class="form-label">Height (cm)</label>
+                <input type="number" id="heightCm" class="form-input" placeholder="e.g., 175" min="0" max="250" step="1" value="">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="weightUnit" class="form-label">Weight Unit</label>
+            <select id="weightUnit" class="form-input">
+                <option value="lbs" selected>Pounds (lbs)</option>
+                <option value="kg">Kilograms (kg)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="weight" class="form-label">Weight</label>
+            <input type="number" id="weight" class="form-input" placeholder="e.g., 165" min="0" step="0.1" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="activityLevel" class="form-label">Activity Level</label>
+            <select id="activityLevel" class="form-input">
+                <option value="1.2">Sedentary (little or no exercise)</option>
+                <option value="1.375">Lightly Active (exercise 1-3 days/week)</option>
+                <option value="1.55" selected>Moderately Active (exercise 3-5 days/week)</option>
+                <option value="1.725">Very Active (exercise 6-7 days/week)</option>
+                <option value="1.9">Extremely Active (physical job + daily exercise)</option>
+            </select>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Basal Metabolic Rate (BMR)</span>
+                <span class="result-value" style="font-size: 32px; font-weight: bold; color: #2563eb;"><span id="bmr">0</span> calories/day</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Total Daily Energy Expenditure (TDEE)</span>
+                <span class="result-value" style="font-size: 32px; font-weight: bold; color: #059669;"><span id="tdee">0</span> calories/day</span>
+            </div>
+        </div>
+
+        <div style="margin: 30px 0; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;">
+            <h3 style="margin: 0 0 20px 0; font-size: 22px;">Your Calorie Targets by Goal</h3>
+
+            <div style="display: grid; gap: 15px;">
+                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px; backdrop-filter: blur(10px);">
+                    <div style="font-weight: 600; margin-bottom: 5px; font-size: 16px;">🔥 Weight Loss (Moderate)</div>
+                    <div style="font-size: 28px; font-weight: bold;"><span id="weightLoss">0</span> calories/day</div>
+                    <div style="font-size: 13px; opacity: 0.9; margin-top: 3px;">-500 cal/day = 1 lb/week loss</div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px; backdrop-filter: blur(10px);">
+                    <div style="font-weight: 600; margin-bottom: 5px; font-size: 16px;">⚡ Maintenance</div>
+                    <div style="font-size: 28px; font-weight: bold;"><span id="maintenance">0</span> calories/day</div>
+                    <div style="font-size: 13px; opacity: 0.9; margin-top: 3px;">Maintain current weight</div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px; backdrop-filter: blur(10px);">
+                    <div style="font-weight: 600; margin-bottom: 5px; font-size: 16px;">💪 Muscle Gain (Lean Bulk)</div>
+                    <div style="font-size: 28px; font-weight: bold;"><span id="muscleGain">0</span> calories/day</div>
+                    <div style="font-size: 13px; opacity: 0.9; margin-top: 3px;">+300 cal/day = 0.5-1 lb/week gain</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>What is BMR (Basal Metabolic Rate)?</h2>
+            <p>Basal Metabolic Rate (BMR) is the number of calories your body burns at complete rest—the energy needed just to stay alive. Your heart beating, lungs breathing, brain functioning, cells regenerating—all require energy even when you're sleeping. BMR accounts for 60-75% of your total daily calorie burn.</p>
+
+            <p><strong>What BMR includes:</strong> Basic organ function, circulation, breathing, cell production, nutrient processing, protein synthesis, ion transport across cell membranes.</p>
+
+            <p><strong>What BMR excludes:</strong> Digestion (thermic effect of food), physical activity, fidgeting (NEAT - Non-Exercise Activity Thermogenesis), intentional exercise.</p>
+
+            <h3>BMR vs RMR (Resting Metabolic Rate)</h3>
+            <p>RMR is slightly higher than BMR (typically 100-200 calories more) because it's measured under less restrictive conditions. BMR requires true basal state: fasted, completely rested, temperature-controlled environment. RMR allows normal waking state measurement. For practical purposes, they're nearly identical—most calculators (including this one) use BMR formulas but apply to RMR context.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>What is TDEE (Total Daily Energy Expenditure)?</h2>
+            <p>TDEE represents your total calorie burn including all activity throughout the day. TDEE = BMR × Activity Multiplier. This is the number you use for calorie planning—not your raw BMR.</p>
+
+            <h3>TDEE Components Breakdown</h3>
+            <p><strong>BMR (60-75%):</strong> Baseline calorie burn at rest. Largest component for most people.</p>
+            <p><strong>Thermic Effect of Food (10%):</strong> Calories burned digesting and processing food. Protein requires most energy (20-30% of protein calories burned in digestion), carbs moderate (5-10%), fat minimal (0-3%).</p>
+            <p><strong>Exercise Activity (5-15%):</strong> Intentional workouts, sports, structured exercise. Highly variable by individual.</p>
+            <p><strong>NEAT (15-30%):</strong> Non-Exercise Activity Thermogenesis. Fidgeting, standing, walking around office, household chores. Office workers have low NEAT; construction workers have high NEAT.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>How BMR is Calculated</h2>
+            <p>This calculator uses the <strong>Mifflin-St Jeor Equation</strong>, recognized as the most accurate BMR formula for modern populations (validated in 2005 study, 96% accuracy). It replaced the older Harris-Benedict equation which overestimated BMR by 5-10%.</p>
+
+            <h3>Mifflin-St Jeor Formula</h3>
+            <p><strong>For Men:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) - (5 × age) + 5</p>
+            <p><strong>For Women:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) - (5 × age) - 161</p>
+
+            <p><strong>Example (30-year-old male, 6'0", 180 lbs):</strong></p>
+            <ul>
+                <li>Weight: 180 lbs = 81.6 kg</li>
+                <li>Height: 6'0" = 183 cm</li>
+                <li>BMR = (10 × 81.6) + (6.25 × 183) - (5 × 30) + 5 = 816 + 1,144 - 150 + 5 = 1,815 calories/day</li>
+            </ul>
+
+            <h3>Activity Multipliers for TDEE</h3>
+            <p>TDEE = BMR × Activity Factor</p>
+            <ul>
+                <li><strong>Sedentary (1.2):</strong> Desk job, no intentional exercise, minimal walking. 2,000-5,000 steps/day.</li>
+                <li><strong>Lightly Active (1.375):</strong> Light exercise 1-3 days/week or active job. 5,000-7,500 steps/day.</li>
+                <li><strong>Moderately Active (1.55):</strong> Exercise 3-5 days/week, moderate intensity. 7,500-10,000 steps/day.</li>
+                <li><strong>Very Active (1.725):</strong> Intense exercise 6-7 days/week or physical job + exercise. 10,000-12,500 steps/day.</li>
+                <li><strong>Extremely Active (1.9):</strong> Athlete training twice daily or very physical job + daily training. 12,500+ steps/day.</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Using BMR & TDEE for Weight Goals</h2>
+
+            <h3>Weight Loss: Calorie Deficit</h3>
+            <p>To lose weight, eat fewer calories than your TDEE. One pound of fat = 3,500 calories. Creating a daily 500-calorie deficit produces 1 lb/week loss (500 × 7 days = 3,500 calories).</p>
+
+            <p><strong>Recommended deficits:</strong></p>
+            <ul>
+                <li><strong>Slow cut (250 cal deficit):</strong> 0.5 lb/week loss. Preserves muscle mass, sustainable long-term, minimal hunger. Best for those close to goal weight.</li>
+                <li><strong>Moderate cut (500 cal deficit):</strong> 1 lb/week loss. Balanced approach, good muscle retention, manageable hunger. Most popular choice.</li>
+                <li><strong>Aggressive cut (750-1,000 cal deficit):</strong> 1.5-2 lbs/week loss. Risk of muscle loss, low energy, hard to sustain. Only for those with significant weight to lose.</li>
+            </ul>
+
+            <p><strong>Never go below:</strong> 1,500 cal/day for men, 1,200 cal/day for women. Eating below BMR risks muscle loss, metabolic slowdown, nutrient deficiencies, low energy, hormonal disruption.</p>
+
+            <h3>Maintenance: Staying Same Weight</h3>
+            <p>Eat exactly your TDEE. Useful when happy with current weight or taking a diet break. "Reverse dieting" gradually increases calories from deficit to maintenance to rebuild metabolism without rapid fat gain.</p>
+
+            <h3>Muscle Gain: Calorie Surplus</h3>
+            <p>Building muscle requires surplus calories to support protein synthesis and recovery. Unlike fat loss, muscle gain is slow even with perfect training and nutrition.</p>
+
+            <p><strong>Lean bulk (recommended):</strong> +200-300 calories above TDEE. Gain 0.5-1 lb/week (mix of muscle and minimal fat). Maximize muscle:fat ratio. Slower but cleaner results.</p>
+
+            <p><strong>Aggressive bulk:</strong> +500+ calories. Gain 1-2 lbs/week but much more fat gain. Requires longer cutting phase later. Not recommended unless underweight or hardgainer.</p>
+
+            <p><strong>Realistic muscle gain rates:</strong> Beginners can gain 1-2 lbs muscle/month. Intermediates: 0.5-1 lb/month. Advanced: 0.25-0.5 lb/month. Women typically half these rates. Don't chase rapid weight gain—most will be fat.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Factors That Affect BMR</h2>
+
+            <h3>Body Composition (Biggest Factor)</h3>
+            <p>Muscle tissue burns ~6 calories per pound per day at rest. Fat burns ~2 calories per pound per day. Two people same weight and height can have different BMRs based on muscle vs fat ratio.</p>
+            <p><strong>Example:</strong> 180 lb person with 150 lbs lean mass vs 180 lb person with 120 lbs lean mass—first person burns ~180 more calories daily from muscle alone.</p>
+
+            <h3>Age</h3>
+            <p>BMR decreases ~1-2% per decade after age 20, primarily from muscle loss (sarcopenia), not "slow metabolism." A 20-year-old and 50-year-old with identical muscle mass have nearly identical BMRs. Preserve muscle through strength training to maintain BMR as you age.</p>
+
+            <h3>Sex</h3>
+            <p>Men have 5-10% higher BMR than women of same size due to higher muscle mass and testosterone. Women have essential body fat requirements (breasts, reproductive organs) that lower relative lean mass. This accounts for the -161 vs +5 adjustment in BMR formulas.</p>
+
+            <h3>Height & Weight</h3>
+            <p>Larger bodies require more energy. Taller people have more tissue to maintain. Heavier people burn more calories even at rest (more mass to move and maintain). This is why BMR decreases as you lose weight—you literally have less body to fuel.</p>
+
+            <h3>Genetics</h3>
+            <p>Thyroid hormones, mitochondrial density, and genetic factors account for ~10-15% BMR variance. Some people are true "fast metabolizers" but difference is typically only 100-300 calories/day—meaningful but not insurmountable. Can't blame genetics for all weight issues.</p>
+
+            <h3>Medical Conditions</h3>
+            <p><strong>Hypothyroidism:</strong> Underactive thyroid decreases BMR by 200-400 calories/day. Treatable with medication.</p>
+            <p><strong>Hyperthyroidism:</strong> Overactive thyroid increases BMR significantly. People may eat more but still lose weight.</p>
+            <p><strong>PCOS:</strong> Can lower BMR and increase insulin resistance. Makes weight loss harder but not impossible.</p>
+            <p><strong>Medications:</strong> Antidepressants, antipsychotics, steroids, beta-blockers can affect metabolism.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Common BMR & TDEE Mistakes</h2>
+
+            <h3>Mistake 1: Overestimating Activity Level</h3>
+            <p>Most people select "moderately active" or "very active" when they're actually sedentary or lightly active. Going to the gym 3 times per week for 1 hour doesn't make you "very active" if you sit at a desk the other 165 hours.</p>
+            <p><strong>Fix:</strong> Be honest. Most office workers are sedentary even with 3-4 gym sessions weekly. Use step count: under 5,000 steps = sedentary. Track for a week to determine true activity level.</p>
+
+            <h3>Mistake 2: Eating at or Below BMR</h3>
+            <p>Some think eating at BMR creates maximum fat loss. Wrong—this is extreme deficit leading to muscle loss, metabolic adaptation, hormonal issues, low energy. TDEE is your maintenance—create deficit from TDEE, not BMR.</p>
+            <p><strong>Fix:</strong> Never eat below BMR for extended periods. Take 500 calories off TDEE, not BMR. If TDEE is 2,200, eat 1,700 for weight loss, not 1,400.</p>
+
+            <h3>Mistake 3: Not Recalculating as Weight Changes</h3>
+            <p>As you lose weight, BMR decreases—you have less body mass to fuel. A 200 lb person needs more calories than 170 lb person. Using original TDEE after losing 30 lbs will stall progress.</p>
+            <p><strong>Fix:</strong> Recalculate BMR/TDEE every 10-15 lbs lost. Adjust calorie intake accordingly. Expect weight loss to slow as you get lighter—this is normal physics, not "starvation mode."</p>
+
+            <h3>Mistake 4: Trusting Calculator 100%</h3>
+            <p>BMR calculators estimate within ±10% for most people. Your actual TDEE might be 200-300 calories higher or lower than calculated. Use calculator as starting point, not gospel.</p>
+            <p><strong>Fix:</strong> Track calories and weight for 2-3 weeks. If not losing on calculated deficit, reduce by 100-200 calories. If losing too fast (>2 lbs/week), increase slightly. Let real results guide adjustments.</p>
+
+            <h3>Mistake 5: Ignoring NEAT</h3>
+            <p>Non-Exercise Activity Thermogenesis varies hugely person to person. High-NEAT individuals (fidgeters, pacers, always moving) burn 300-500 more calories daily than low-NEAT people. When dieting, NEAT often decreases unconsciously (less fidgeting, more sitting).</p>
+            <p><strong>Fix:</strong> Track daily steps. When dieting, maintain or increase step count to preserve TDEE. Add 2,000-3,000 steps/day for extra 100-150 calorie burn without structured exercise.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Metabolic Adaptation ("Starvation Mode")</h2>
+
+            <h3>What Actually Happens</h3>
+            <p>During calorie restriction, body adapts to conserve energy. BMR can decrease 5-15% beyond what's expected from weight loss alone. Reduced NEAT, lower thyroid output, decreased body temperature, less spontaneous movement all contribute.</p>
+
+            <p><strong>Real adaptation:</strong> 200 lb person with 2,500 TDEE loses to 170 lbs. Expected TDEE: ~2,200 (300 cal decrease from lost mass). Actual TDEE after adaptation: ~2,000 (500 cal decrease). Extra 200 calories is metabolic adaptation.</p>
+
+            <h3>Preventing Metabolic Slowdown</h3>
+            <ul>
+                <li><strong>Don't cut too aggressively:</strong> Larger deficits = more adaptation. 500 cal deficit is sweet spot.</li>
+                <li><strong>Preserve muscle:</strong> Strength training + adequate protein (0.8-1g per lb bodyweight) maintains muscle mass. Muscle preservation = BMR preservation.</li>
+                <li><strong>Take diet breaks:</strong> Every 8-12 weeks, eat at maintenance for 1-2 weeks. Resets hormones (leptin, thyroid), restores NEAT, psychological break.</li>
+                <li><strong>Keep activity up:</strong> Maintain or increase steps, don't reduce exercise volume unless necessary.</li>
+                <li><strong>Reverse diet slowly:</strong> After reaching goal, add 100-150 calories every 2 weeks back to maintenance. Rebuilds metabolism with minimal fat regain.</li>
+            </ul>
+
+            <h3>"Starvation Mode" Myths Debunked</h3>
+            <p><strong>Myth:</strong> "Eating too few calories stops fat loss completely."</p>
+            <p><strong>Truth:</strong> Adaptation slows fat loss but never stops it. You can't break thermodynamics. Holocaust victims, anorexics, and starvation study participants all lost weight despite severe metabolic adaptation. Adaptation makes you burn fewer calories, but deficit still produces fat loss.</p>
+
+            <p><strong>Myth:</strong> "Eating more speeds up metabolism for fat loss."</p>
+            <p><strong>Truth:</strong> Eating more increases TDEE slightly (thermic effect of food) but not enough to create deficit. 1,200 → 1,800 calories might increase TDEE by 60-100 calories, not 600. You'll gain weight eating more, not lose it. Reverse dieting works by slowly increasing without rapid fat gain, not by "speeding up metabolism."</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Tracking & Adjusting Your Calories</h2>
+
+            <h3>How to Track Accurately</h3>
+            <p><strong>Use food scale:</strong> Measuring cups are inaccurate. "1 cup of rice" varies 50-100 calories based on packing. Digital food scale provides precision. Weigh raw ingredients when possible.</p>
+
+            <p><strong>Log everything:</strong> Cooking oils, condiments, beverages, "bites and tastes" add up. 1 tablespoon oil = 120 calories. Coffee creamer = 40 calories per tablespoon. These "hidden" calories derail progress.</p>
+
+            <p><strong>Use database apps:</strong> MyFitnessPal, Cronometer, LoseIt make tracking easy. Scan barcodes, save meals, see macros. Consistency matters more than perfection—don't stress over 10-20 calories here or there.</p>
+
+            <h3>When to Adjust Calorie Intake</h3>
+            <p><strong>Weight loss stalls 2+ weeks:</strong> Reduce by 100-200 calories or increase activity. Weight fluctuates daily from water, food volume, hormones—look at 2-week trend, not daily scale.</p>
+
+            <p><strong>Losing too fast (>2 lbs/week):</strong> Increase calories by 100-200. Rapid loss = more muscle loss. Aim for 1% bodyweight loss per week maximum.</p>
+
+            <p><strong>Low energy, poor recovery:</strong> Deficit too large. Increase calories by 200-300 or take diet break at maintenance for 1-2 weeks.</p>
+
+            <p><strong>Extreme hunger, cravings:</strong> May need higher protein or more volume from vegetables. Or deficit too aggressive. Small increase (100-150 cal) can improve adherence without stopping progress.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Should I eat my exercise calories back?</h3>
+            <p>If using TDEE method (which includes exercise in activity level), no—exercise already factored in. Eat same calories every day. If using NEAT method (sedentary TDEE + logging each workout), yes—add 50-75% of exercise calories burned (fitness trackers overestimate by 20-50%).</p>
+
+            <h3>Why am I not losing weight on a deficit?</h3>
+            <p>Most likely tracking errors. Underestimating portions, forgetting ingredients, "hidden" calories. Or not enough time—weight loss isn't linear. Water retention, hormones, digestion cause fluctuations. Give any calorie level 2-3 weeks before adjusting. If truly accurate and no loss after 3 weeks, reduce by 100-200 calories.</p>
+
+            <h3>Can I eat whatever I want within my calorie limit?</h3>
+            <p>For pure weight loss, yes—calories in vs out determines fat loss regardless of food sources. For health, satiety, and muscle preservation, no—protein, micronutrients, fiber matter. 1,500 calories of candy will produce weight loss but terrible health, extreme hunger, muscle loss. Balance is key.</p>
+
+            <h3>How much protein do I need?</h3>
+            <p>0.8-1.0g per pound of bodyweight for muscle preservation during fat loss or muscle building. Higher end (1.0g) if aggressive deficit or very active. Lower end (0.8g) if moderate deficit. Protein has highest thermic effect (20-30% calories burned in digestion) and best satiety.</p>
+
+            <h3>Do meal timing and frequency matter?</h3>
+            <p>For total fat loss, no—24-hour calorie total determines weight change. For performance, recovery, hunger, yes—spacing protein throughout day optimizes muscle protein synthesis. Eating pre/post workout supports performance and recovery. 3-6 meals daily helps most people manage hunger. Find schedule that works for you.</p>
+
+            <h3>Does metabolism slow permanently after dieting?</h3>
+            <p>No. Most adaptation is temporary and reverses when returning to maintenance calories for several months. Small permanent decrease occurs from lost body mass (less mass = less calories needed), not damaged metabolism. Reverse dieting, maintaining muscle, and metabolic resets restore most adaptive changes.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleHeightInputs() {
+            const heightUnit = document.getElementById('heightUnit').value;
+
+            if (heightUnit === 'imperial') {
+                document.getElementById('imperialHeight').style.display = 'block';
+                document.getElementById('metricHeight').style.display = 'none';
+            } else {
+                document.getElementById('imperialHeight').style.display = 'none';
+                document.getElementById('metricHeight').style.display = 'block';
+            }
+
+            calculate();
+        }
+
+        function calculate() {
+            const gender = document.getElementById('gender').value;
+            const age = parseFloat(document.getElementById('age').value) || 0;
+            const heightUnit = document.getElementById('heightUnit').value;
+            const weightUnit = document.getElementById('weightUnit').value;
+            let weight = parseFloat(document.getElementById('weight').value) || 0;
+            const activityLevel = parseFloat(document.getElementById('activityLevel').value);
+
+            // Get height in cm
+            let heightCm = 0;
+            if (heightUnit === 'imperial') {
+                const feet = parseFloat(document.getElementById('heightFeet').value) || 0;
+                const inches = parseFloat(document.getElementById('heightInches').value) || 0;
+                const totalInches = (feet * 12) + inches;
+                heightCm = totalInches * 2.54;
+            } else {
+                heightCm = parseFloat(document.getElementById('heightCm').value) || 0;
+            }
+
+            // Convert weight to kg if needed
+            let weightKg = weight;
+            if (weightUnit === 'lbs') {
+                weightKg = weight * 0.453592;
+            }
+
+            // Validate inputs
+            if (age === 0 || heightCm === 0 || weightKg === 0) {
+                document.getElementById('bmr').textContent = '0';
+                document.getElementById('tdee').textContent = '0';
+                document.getElementById('weightLoss').textContent = '0';
+                document.getElementById('maintenance').textContent = '0';
+                document.getElementById('muscleGain').textContent = '0';
+                return;
+            }
+
+            // Calculate BMR using Mifflin-St Jeor Equation
+            let bmr;
+            if (gender === 'male') {
+                bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) + 5;
+            } else {
+                bmr = (10 * weightKg) + (6.25 * heightCm) - (5 * age) - 161;
+            }
+
+            // Calculate TDEE
+            const tdee = bmr * activityLevel;
+
+            // Calculate calorie targets
+            const weightLoss = tdee - 500; // 1 lb per week loss
+            const maintenance = tdee;
+            const muscleGain = tdee + 300; // Lean bulk
+
+            // Display results
+            document.getElementById('bmr').textContent = Math.round(bmr);
+            document.getElementById('tdee').textContent = Math.round(tdee);
+            document.getElementById('weightLoss').textContent = Math.round(weightLoss);
+            document.getElementById('maintenance').textContent = Math.round(maintenance);
+            document.getElementById('muscleGain').textContent = Math.round(muscleGain);
+        }
+
+        // Event listeners
+        document.getElementById('gender').addEventListener('change', calculate);
+        document.getElementById('age').addEventListener('input', calculate);
+        document.getElementById('heightUnit').addEventListener('change', toggleHeightInputs);
+        document.getElementById('heightFeet').addEventListener('input', calculate);
+        document.getElementById('heightInches').addEventListener('input', calculate);
+        document.getElementById('heightCm').addEventListener('input', calculate);
+        document.getElementById('weightUnit').addEventListener('change', calculate);
+        document.getElementById('weight').addEventListener('input', calculate);
+        document.getElementById('activityLevel').addEventListener('change', calculate);
+    </script>
+</body>
+</html>
