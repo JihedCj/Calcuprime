@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Ecuaciones Cuadráticas - Resuelve ax² + bx + c = 0</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Ecuaciones Cuadráticas</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Resuelve ecuaciones cuadráticas en la forma ax² + bx + c = 0.</p>
+        
+        <div style="margin-bottom: 25px; padding: 20px; background: #f3f4f6; border-radius: 8px;">
+            <h3 style="margin: 0 0 15px 0; color: #1f2937;">Coeficientes: ax² + bx + c = 0</h3>
+            <div class="input-group">
+                <label class="form-label">Coeficiente a (término x²)</label>
+                <input type="number" id="a" class="form-input" placeholder="ej. 1" value="">
+            </div>
+            <div class="input-group">
+                <label class="form-label">Coeficiente b (término x)</label>
+                <input type="number" id="b" class="form-input" placeholder="ej. -5" value="">
+            </div>
+            <div class="input-group" style="margin: 0;">
+                <label class="form-label">Coeficiente c (constante)</label>
+                <input type="number" id="c" class="form-input" placeholder="ej. 6" value="">
+            </div>
+        </div>
+
+        <div id="equation" style="text-align: center; font-size: 24px; font-weight: 600; margin: 20px 0; padding: 15px; background: white; border-radius: 8px; border: 2px solid #e5e7eb;">
+            Ingresa coeficientes arriba
+        </div>
+
+        <div id="results" style="display: none;">
+            <div class="result-card">
+                <div class="result-row">
+                    <span class="result-label">Discriminante (Δ)</span>
+                    <span class="result-value" id="discriminant">0</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Soluciones Reales</span>
+                    <span class="result-value" id="solutionCount">—</span>
+                </div>
+            </div>
+
+            <div id="solutions" style="margin: 25px 0; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;">
+                <h3 style="margin: 0 0 20px 0;">Soluciones</h3>
+                <div id="solutionText"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calc() {
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value) || 0;
+            const c = parseFloat(document.getElementById('c').value) || 0;
+
+            if (isNaN(a) || a === 0) {
+                document.getElementById('equation').textContent = 'Ingresa coeficientes arriba';
+                document.getElementById('results').style.display = 'none';
+                return;
+            }
+
+            // Display equation
+            let eq = '';
+            if (a === 1) eq += 'x²';
+            else if (a === -1) eq += '-x²';
+            else eq += a + 'x²';
+
+            if (b !== 0) {
+                eq += b > 0 ? ' + ' : ' - ';
+                const absB = Math.abs(b);
+                eq += absB === 1 ? 'x' : absB + 'x';
+            }
+
+            if (c !== 0) {
+                eq += c > 0 ? ' + ' + c : ' - ' + Math.abs(c);
+            }
+
+            eq += ' = 0';
+            document.getElementById('equation').textContent = eq;
+
+            // Calculate
+            const disc = b * b - 4 * a * c;
+            document.getElementById('discriminant').textContent = disc.toFixed(2);
+
+            let solCount, solText, solColor;
+            if (disc > 0) {
+                solCount = 'Dos soluciones distintas';
+                solColor = '#059669';
+                const x1 = (-b + Math.sqrt(disc)) / (2 * a);
+                const x2 = (-b - Math.sqrt(disc)) / (2 * a);
+                solText = `<div style="font-size: 20px; margin: 10px 0;"><strong>x₁ = ${x1.toFixed(4)}</strong></div>` +
+                         `<div style="font-size: 20px; margin: 10px 0;"><strong>x₂ = ${x2.toFixed(4)}</strong></div>`;
+            } else if (disc === 0) {
+                solCount = 'Una solución repetida';
+                solColor = '#2563eb';
+                const x = -b / (2 * a);
+                solText = `<div style="font-size: 24px;"><strong>x = ${x.toFixed(4)}</strong></div>` +
+                         `<div style="font-size: 14px; opacity: 0.9;">(raíz doble)</div>`;
+            } else {
+                solCount = 'Sin soluciones reales';
+                solColor = '#dc2626';
+                solText = `<div style="font-size: 18px;">No existen soluciones reales.<br>` +
+                         `<span style="font-size: 14px; opacity: 0.9;">(El discriminante es negativo)</span></div>`;
+            }
+
+            document.getElementById('solutionCount').textContent = solCount;
+            document.getElementById('solutionCount').style.color = solColor;
+            document.getElementById('solutionText').innerHTML = solText;
+            document.getElementById('results').style.display = 'block';
+        }
+
+        ['a','b','c'].forEach(id => document.getElementById(id).addEventListener('input', calc));
+    </script>
+</body>
+</html>

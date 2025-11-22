@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora TMB - Tasa Metabólica Basal y Calorías Diarias</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de TMB (Tasa Metabólica Basal)</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calcula cuántas calorías quemas al día según tu actividad.</p>
+        <div class="input-group">
+            <label class="form-label">Sexo</label>
+            <select id="gender" class="form-input"><option value="male">Hombre</option><option value="female">Mujer</option></select>
+        </div>
+        <div class="input-group">
+            <label class="form-label">Edad (años)</label>
+            <input type="number" id="age" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Altura (cm)</label>
+            <input type="number" id="height" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Peso (kg)</label>
+            <input type="number" id="weight" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Nivel de Actividad</label>
+            <select id="activity" class="form-input">
+                <option value="1.2">Sedentario</option>
+                <option value="1.375">Ligero</option>
+                <option value="1.55" selected>Moderado</option>
+                <option value="1.725">Activo</option>
+                <option value="1.9">Muy Activo</option>
+            </select>
+        </div>
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">TMB</span>
+                <span class="result-value" style="font-size: 32px; font-weight: bold; color: #2563eb;"><span id="bmr">0</span> cal/día</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">TDEE (Gasto Total)</span>
+                <span class="result-value" style="font-size: 32px; font-weight: bold; color: #059669;"><span id="tdee">0</span> cal/día</span>
+            </div>
+        </div>
+        <div style="margin: 25px 0; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;">
+            <h3 style="margin: 0 0 15px 0;">Objetivos Calóricos</h3>
+            <p style="margin: 8px 0;"><strong>Pérdida de Peso:</strong> <span id="weightLoss">0</span> cal/día (-500 cal)</p>
+            <p style="margin: 8px 0;"><strong>Mantenimiento:</strong> <span id="maintenance">0</span> cal/día</p>
+            <p style="margin: 8px 0;"><strong>Ganancia Muscular:</strong> <span id="muscleGain">0</span> cal/día (+300 cal)</p>
+        </div>
+    </div>
+    <script>
+        function calc() {
+            const gender = document.getElementById('gender').value;
+            const age = parseFloat(document.getElementById('age').value) || 0;
+            const height = parseFloat(document.getElementById('height').value) || 0;
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+            const activity = parseFloat(document.getElementById('activity').value);
+            if (!age || !height || !weight) return;
+
+            let bmr;
+            if (gender === 'male') {
+                bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+            } else {
+                bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+            }
+
+            const tdee = bmr * activity;
+            document.getElementById('bmr').textContent = Math.round(bmr);
+            document.getElementById('tdee').textContent = Math.round(tdee);
+            document.getElementById('weightLoss').textContent = Math.round(tdee - 500);
+            document.getElementById('maintenance').textContent = Math.round(tdee);
+            document.getElementById('muscleGain').textContent = Math.round(tdee + 300);
+        }
+        ['gender','age','height','weight','activity'].forEach(id => 
+            document.getElementById(id).addEventListener(id==='gender'||id==='activity'?'change':'input', calc));
+    </script>
+</body>
+</html>

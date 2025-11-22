@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Patrimonio Neto - Calcula Tu Riqueza Total</title>
+    <meta name="description" content="Calcula tu patrimonio neto sumando activos y restando pasivos. Rastrea tu progreso financiero y compara con promedios por edad.">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Patrimonio Neto</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calcula tu riqueza total: Activos - Pasivos = Patrimonio Neto</p>
+
+        <div class="input-group">
+            <label for="age" class="form-label">Tu Edad</label>
+            <input type="number" id="age" class="form-input" placeholder="ej. 35" value="">
+        </div>
+
+        <h3 style="margin: 25px 0 15px 0; color: #059669;">Activos</h3>
+        <div class="input-group">
+            <label class="form-label">Efectivo y Ahorros ($)</label>
+            <input type="number" id="cash" class="form-input" placeholder="ej. 15000" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Inversiones/Retiro ($)</label>
+            <input type="number" id="investments" class="form-input" placeholder="ej. 45000" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Bienes Raíces ($)</label>
+            <input type="number" id="realestate" class="form-input" placeholder="ej. 250000" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Vehículos ($)</label>
+            <input type="number" id="vehicles" class="form-input" placeholder="ej. 18000" value="">
+        </div>
+
+        <h3 style="margin: 25px 0 15px 0; color: #dc2626;">Pasivos</h3>
+        <div class="input-group">
+            <label class="form-label">Hipoteca ($)</label>
+            <input type="number" id="mortgage" class="form-input" placeholder="ej. 180000" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Préstamos Estudiantiles ($)</label>
+            <input type="number" id="student" class="form-input" placeholder="ej. 25000" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Tarjetas de Crédito ($)</label>
+            <input type="number" id="credit" class="form-input" placeholder="ej. 5000" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Otros Préstamos ($)</label>
+            <input type="number" id="other" class="form-input" placeholder="ej. 10000" value="">
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Total Activos</span>
+                <span class="result-value" style="color: #059669;">$<span id="totalAssets">0</span></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Total Pasivos</span>
+                <span class="result-value" style="color: #dc2626;">$<span id="totalLiabilities">0</span></span>
+            </div>
+            <div class="result-row" style="border-top: 3px solid #e5e7eb; padding-top: 15px;">
+                <span class="result-label">Patrimonio Neto</span>
+                <span class="result-value" style="font-size: 36px; font-weight: bold; color: #2563eb;">$<span id="netWorth">0</span></span>
+            </div>
+        </div>
+
+        <div id="benchmark" style="margin: 25px 0; padding: 20px; background: #f0f9ff; border-radius: 8px; display: none;">
+            <h3 style="margin: 0 0 10px 0; color: #1e40af;">Comparación por Edad</h3>
+            <p id="benchmarkText" style="margin: 0;"></p>
+        </div>
+    </div>
+
+    <script>
+        function calc() {
+            const age = parseInt(document.getElementById('age').value) || 0;
+            const assets = ['cash','investments','realestate','vehicles']
+                .reduce((sum, id) => sum + (parseFloat(document.getElementById(id).value) || 0), 0);
+            const liabilities = ['mortgage','student','credit','other']
+                .reduce((sum, id) => sum + (parseFloat(document.getElementById(id).value) || 0), 0);
+            const netWorth = assets - liabilities;
+
+            document.getElementById('totalAssets').textContent = assets.toFixed(0);
+            document.getElementById('totalLiabilities').textContent = liabilities.toFixed(0);
+            document.getElementById('netWorth').textContent = netWorth.toFixed(0);
+
+            if (age > 0) {
+                const expected = (age - 25) * 20000; // Rough benchmark
+                const bench = document.getElementById('benchmark');
+                bench.style.display = 'block';
+                if (netWorth >= expected) {
+                    bench.style.background = '#f0fdf4';
+                    document.getElementById('benchmarkText').innerHTML = 
+                        `<strong style="color: #059669;">¡Excelente!</strong> Tu patrimonio supera el promedio para tu edad.`;
+                } else {
+                    bench.style.background = '#fffbeb';
+                    document.getElementById('benchmarkText').innerHTML = 
+                        `<strong style="color: #b45309;">Continúa trabajando:</strong> El promedio para ${age} años es ~$${expected.toFixed(0)}.`;
+                }
+            }
+        }
+
+        ['age','cash','investments','realestate','vehicles','mortgage','student','credit','other'].forEach(id => {
+            document.getElementById(id).addEventListener('input', calc);
+        });
+    </script>
+</body>
+</html>

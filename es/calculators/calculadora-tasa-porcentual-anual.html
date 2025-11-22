@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de APR - Tasa de Porcentaje Anual Real</title>
+    <meta name="description" content="Calcula la Tasa de Porcentaje Anual (APR) verdadera de un préstamo incluyendo todos los cargos y comisiones.">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de APR</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calcula el APR verdadero incluyendo todas las comisiones.</p>
+
+        <div class="input-group">
+            <label for="loanAmount" class="form-label">Monto del Préstamo ($)</label>
+            <input type="number" id="loanAmount" class="form-input" placeholder="ej. 20000" value="">
+        </div>
+        <div class="input-group">
+            <label for="statedRate" class="form-label">Tasa de Interés (%)</label>
+            <input type="number" id="statedRate" class="form-input" placeholder="ej. 8.5" value="">
+        </div>
+        <div class="input-group">
+            <label for="loanTerm" class="form-label">Plazo (meses)</label>
+            <input type="number" id="loanTerm" class="form-input" placeholder="ej. 60" value="">
+        </div>
+        <div class="input-group">
+            <label for="totalFees" class="form-label">Comisiones Totales ($)</label>
+            <input type="number" id="totalFees" class="form-input" placeholder="ej. 750" value="">
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">APR Verdadero</span>
+                <span class="result-value" style="font-size: 36px; font-weight: bold; color: #dc2626;"><span id="trueAPR">0.00</span>%</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Pago Mensual</span>
+                <span class="result-value">$<span id="monthlyPayment">0</span></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const loan = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const rate = parseFloat(document.getElementById('statedRate').value) || 0;
+            const term = parseFloat(document.getElementById('loanTerm').value) || 0;
+            const fees = parseFloat(document.getElementById('totalFees').value) || 0;
+            if (!loan || !rate || !term) return;
+
+            const mr = rate / 100 / 12;
+            const pmt = loan * (mr * Math.pow(1 + mr, term)) / (Math.pow(1 + mr, term) - 1);
+            const financed = loan - fees;
+            
+            let apr = rate / 100;
+            for (let i = 0; i < 50; i++) {
+                const ma = apr / 12;
+                const pv = pmt * ((1 - Math.pow(1 + ma, -term)) / ma);
+                apr -= (pv - financed) / financed * 0.1;
+            }
+
+            document.getElementById('trueAPR').textContent = (apr * 100).toFixed(2);
+            document.getElementById('monthlyPayment').textContent = pmt.toFixed(2);
+        }
+
+        ['loanAmount', 'statedRate', 'loanTerm', 'totalFees'].forEach(id => {
+            document.getElementById(id).addEventListener('input', calculate);
+        });
+    </script>
+</body>
+</html>

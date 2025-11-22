@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Grasa Corporal - Método US Navy</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Grasa Corporal</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Estima tu porcentaje de grasa corporal usando medidas de circunferencia.</p>
+        <div class="input-group">
+            <label class="form-label">Sexo</label>
+            <select id="gender" class="form-input"><option value="male">Hombre</option><option value="female">Mujer</option></select>
+        </div>
+        <div class="input-group">
+            <label class="form-label">Altura (cm)</label>
+            <input type="number" id="height" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Peso (kg)</label>
+            <input type="number" id="weight" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Cuello (cm)</label>
+            <input type="number" id="neck" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Cintura (cm)</label>
+            <input type="number" id="waist" class="form-input" value="">
+        </div>
+        <div class="input-group" id="hipSection" style="display:none;">
+            <label class="form-label">Cadera (cm)</label>
+            <input type="number" id="hip" class="form-input" value="">
+        </div>
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Grasa Corporal</span>
+                <span class="result-value" style="font-size: 36px; font-weight: bold; color: #2563eb;"><span id="bodyFat">0.0</span>%</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Categoría</span>
+                <span class="result-value" id="category">—</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('gender').addEventListener('change', function() {
+            document.getElementById('hipSection').style.display = this.value === 'female' ? 'block' : 'none';
+            calc();
+        });
+
+        function calc() {
+            const gender = document.getElementById('gender').value;
+            const height = parseFloat(document.getElementById('height').value) || 0;
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+            const neck = parseFloat(document.getElementById('neck').value) || 0;
+            const waist = parseFloat(document.getElementById('waist').value) || 0;
+            const hip = parseFloat(document.getElementById('hip').value) || 0;
+            if (!height || !weight || !neck || !waist) return;
+            if (gender === 'female' && !hip) return;
+
+            let bf;
+            if (gender === 'male') {
+                bf = 86.010 * Math.log10(waist - neck) - 70.041 * Math.log10(height) + 36.76;
+            } else {
+                bf = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(height) - 78.387;
+            }
+
+            document.getElementById('bodyFat').textContent = bf.toFixed(1);
+            
+            let cat = '', color = '';
+            if (gender === 'male') {
+                if (bf < 6) { cat = 'Esencial'; color = '#dc2626'; }
+                else if (bf < 14) { cat = 'Atleta'; color = '#059669'; }
+                else if (bf < 18) { cat = 'Fitness'; color = '#2563eb'; }
+                else if (bf < 25) { cat = 'Promedio'; color = '#7c3aed'; }
+                else { cat = 'Obeso'; color = '#dc2626'; }
+            } else {
+                if (bf < 14) { cat = 'Esencial'; color = '#dc2626'; }
+                else if (bf < 21) { cat = 'Atleta'; color = '#059669'; }
+                else if (bf < 25) { cat = 'Fitness'; color = '#2563eb'; }
+                else if (bf < 32) { cat = 'Promedio'; color = '#7c3aed'; }
+                else { cat = 'Obeso'; color = '#dc2626'; }
+            }
+            const catEl = document.getElementById('category');
+            catEl.textContent = cat;
+            catEl.style.color = color;
+        }
+
+        ['gender','height','weight','neck','waist','hip'].forEach(id => 
+            document.getElementById(id).addEventListener(id==='gender'?'change':'input', calc));
+    </script>
+</body>
+</html>

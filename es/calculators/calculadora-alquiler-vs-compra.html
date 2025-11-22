@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Alquiler vs Compra - ¿Qué es Mejor Financieramente?</title>
+    <meta name="description" content="Compara el costo real de alquilar vs comprar una vivienda. Analiza pagos mensuales, costos de cierre, mantenimiento, plusvalía e impuestos para tomar la mejor decisión.">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora: Alquiler vs Compra de Vivienda</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Compara el costo total de alquilar vs comprar una casa. Descubre qué opción es mejor para tu situación financiera.</p>
+
+        <div style="margin-bottom: 25px; padding: 20px; background: #fef3c7; border-radius: 8px;">
+            <h3 style="margin: 0 0 15px 0; color: #78350f;">Información Básica</h3>
+            <div class="input-group">
+                <label for="homePrice" class="form-label">Precio de la Casa ($)</label>
+                <input type="number" id="homePrice" class="form-input" placeholder="ej. 300000" min="0" step="1000" value="">
+            </div>
+            <div class="input-group">
+                <label for="downPayment" class="form-label">Enganche/Inicial ($)</label>
+                <input type="number" id="downPayment" class="form-input" placeholder="ej. 60000" min="0" step="1000" value="">
+            </div>
+            <div class="input-group">
+                <label for="interestRate" class="form-label">Tasa de Interés Hipotecaria (%)</label>
+                <input type="number" id="interestRate" class="form-input" placeholder="ej. 6.5" min="0" max="20" step="0.01" value="">
+            </div>
+            <div class="input-group">
+                <label for="monthlyRent" class="form-label">Alquiler Mensual ($)</label>
+                <input type="number" id="monthlyRent" class="form-input" placeholder="ej. 1800" min="0" step="50" value="">
+            </div>
+            <div class="input-group">
+                <label for="yearsToStay" class="form-label">Años que Planeas Quedarte</label>
+                <input type="number" id="yearsToStay" class="form-input" placeholder="ej. 7" min="1" max="30" step="1" value="">
+            </div>
+            <div class="input-group">
+                <label for="homeAppreciation" class="form-label">Apreciación Anual de la Casa (%)</label>
+                <input type="number" id="homeAppreciation" class="form-input" placeholder="ej. 3" min="-10" max="20" step="0.1" value="">
+            </div>
+            <div class="input-group" style="margin: 0;">
+                <label for="investmentReturn" class="form-label">Retorno de Inversión Alternativa (%)</label>
+                <input type="number" id="investmentReturn" class="form-input" placeholder="ej. 7" min="0" max="20" step="0.1" value="">
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 25px 0;">
+            <div class="result-card" id="rentCard" style="border: 3px solid #e5e7eb;">
+                <h3 style="margin: 0 0 20px 0; color: #1f2937;">💰 Alquilar</h3>
+                <div class="result-row">
+                    <span class="result-label">Costo Mensual</span>
+                    <span class="result-value">$<span id="rentMonthly">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Costo Total</span>
+                    <span class="result-value" style="font-size: 24px; font-weight: bold; color: #dc2626;">$<span id="rentTotal">0</span></span>
+                </div>
+            </div>
+
+            <div class="result-card" id="buyCard" style="border: 3px solid #e5e7eb;">
+                <h3 style="margin: 0 0 20px 0; color: #1f2937;">🏠 Comprar</h3>
+                <div class="result-row">
+                    <span class="result-label">Pago Mensual</span>
+                    <span class="result-value">$<span id="buyMonthly">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Costo Total</span>
+                    <span class="result-value" style="font-size: 24px; font-weight: bold; color: #2563eb;">$<span id="buyTotal">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="recommendation" style="margin: 25px 0; padding: 20px; border-radius: 8px;"></div>
+
+        <div class="content-section">
+            <h2>Factores Clave en la Decisión</h2>
+            
+            <h3>Cuándo Comprar Tiene Sentido</h3>
+            <ul>
+                <li><strong>Planeas quedarte 5+ años:</strong> Los costos de cierre se amortizan con el tiempo</li>
+                <li><strong>Ingresos estables:</strong> Puedes costear pago hipotecario consistentemente</li>
+                <li><strong>Mercado favorable:</strong> Tasas de interés razonables, precios no inflados</li>
+                <li><strong>Quieres construir patrimonio:</strong> Cada pago aumenta tu capital</li>
+                <li><strong>Beneficios fiscales:</strong> Puedes deducir interés hipotecario</li>
+            </ul>
+
+            <h3>Cuándo Alquilar es Mejor</h3>
+            <ul>
+                <li><strong>Corto plazo (menos de 3 años):</strong> Costos de compra/venta demasiado altos</li>
+                <li><strong>Flexibilidad laboral:</strong> Posible reubicación por trabajo</li>
+                <li><strong>Sin enganche:</strong> Necesitas más tiempo para ahorrar 20%</li>
+                <li><strong>Mercado costoso:</strong> Precio de compra 20x+ el alquiler anual</li>
+                <li><strong>Quieres invertir diferencia:</strong> Menor costo de alquiler invertido puede superar plusvalía</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Costos Ocultos de Comprar</h2>
+            <p>Muchos olvidan estos costos al comparar:</p>
+            <ul>
+                <li><strong>Costos de cierre:</strong> 2-5% del precio ($6,000-15,000 en casa de $300K)</li>
+                <li><strong>Mantenimiento:</strong> 1-2% del valor anual ($3,000-6,000/año)</li>
+                <li><strong>Seguro de propietario:</strong> $1,000-2,500/año</li>
+                <li><strong>Impuestos prediales:</strong> 0.5-2.5% del valor anual</li>
+                <li><strong>HOA:</strong> $200-500/mes en condominios</li>
+                <li><strong>Servicios:</strong> $200-400/mes (agua, basura, etc.)</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>El Punto de Equilibrio</h2>
+            <p>Generalmente toma 3-7 años para que comprar supere a alquilar, dependiendo de:</p>
+            <ul>
+                <li>Tasa de apreciación de la vivienda</li>
+                <li>Tasa de interés de la hipoteca</li>
+                <li>Costos de cierre y transacción</li>
+                <li>Diferencia entre pago hipotecario y alquiler</li>
+            </ul>
+            <p>Usa esta calculadora con tus números reales para encontrar tu punto de equilibrio específico.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const homePrice = parseFloat(document.getElementById('homePrice').value) || 0;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const monthlyRent = parseFloat(document.getElementById('monthlyRent').value) || 0;
+            const years = parseFloat(document.getElementById('yearsToStay').value) || 0;
+            const appreciation = parseFloat(document.getElementById('homeAppreciation').value) || 0;
+            const investmentReturn = parseFloat(document.getElementById('investmentReturn').value) || 0;
+
+            if (homePrice === 0 || monthlyRent === 0 || years === 0) {
+                return;
+            }
+
+            // Calculate buying costs
+            const loanAmount = homePrice - downPayment;
+            const monthlyRate = interestRate / 100 / 12;
+            const numPayments = 30 * 12;
+            const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
+                                  (Math.pow(1 + monthlyRate, numPayments) - 1);
+            
+            const closingCosts = homePrice * 0.03;
+            const monthlyMaintenance = homePrice * 0.01 / 12;
+            const monthlyPropertyTax = homePrice * 0.012 / 12;
+            const monthlyInsurance = 150;
+
+            const totalMonthlyBuy = monthlyPayment + monthlyMaintenance + monthlyPropertyTax + monthlyInsurance;
+            const totalBuyCost = downPayment + closingCosts + (totalMonthlyBuy * years * 12);
+            
+            const futureHomeValue = homePrice * Math.pow(1 + appreciation / 100, years);
+            const equity = futureHomeValue - loanAmount;
+            const netBuyCost = totalBuyCost - equity;
+
+            // Calculate renting costs
+            const totalRent = monthlyRent * years * 12 * 1.03; // 3% annual increase
+            const investmentGrowth = downPayment * Math.pow(1 + investmentReturn / 100, years);
+            const netRentCost = totalRent - (investmentGrowth - downPayment);
+
+            // Display results
+            document.getElementById('rentMonthly').textContent = monthlyRent.toFixed(0);
+            document.getElementById('rentTotal').textContent = netRentCost.toFixed(0);
+            document.getElementById('buyMonthly').textContent = totalMonthlyBuy.toFixed(0);
+            document.getElementById('buyTotal').textContent = netBuyCost.toFixed(0);
+
+            // Recommendation
+            const recDiv = document.getElementById('recommendation');
+            const buyCard = document.getElementById('buyCard');
+            const rentCard = document.getElementById('rentCard');
+
+            if (netBuyCost < netRentCost) {
+                recDiv.innerHTML = `<h3 style="margin: 0 0 10px 0; color: #166534;">✅ Recomendación: COMPRAR</h3>
+                    <p style="margin: 0;">Comprar te ahorraría <strong>$${(netRentCost - netBuyCost).toFixed(0)}</strong> durante ${years} años comparado con alquilar.</p>`;
+                recDiv.style.background = '#f0fdf4';
+                recDiv.style.border = '2px solid #059669';
+                buyCard.style.border = '3px solid #059669';
+                buyCard.classList.add('winner');
+                rentCard.style.border = '3px solid #e5e7eb';
+            } else {
+                recDiv.innerHTML = `<h3 style="margin: 0 0 10px 0; color: #991b1b;">📊 Recomendación: ALQUILAR</h3>
+                    <p style="margin: 0;">Alquilar te ahorraría <strong>$${(netBuyCost - netRentCost).toFixed(0)}</strong> durante ${years} años comparado con comprar.</p>`;
+                recDiv.style.background = '#fef2f2';
+                recDiv.style.border = '2px solid #dc2626';
+                rentCard.style.border = '3px solid #dc2626';
+                rentCard.classList.add('winner');
+                buyCard.style.border = '3px solid #e5e7eb';
+            }
+        }
+
+        document.getElementById('homePrice').addEventListener('input', calculate);
+        document.getElementById('downPayment').addEventListener('input', calculate);
+        document.getElementById('interestRate').addEventListener('input', calculate);
+        document.getElementById('monthlyRent').addEventListener('input', calculate);
+        document.getElementById('yearsToStay').addEventListener('input', calculate);
+        document.getElementById('homeAppreciation').addEventListener('input', calculate);
+        document.getElementById('investmentReturn').addEventListener('input', calculate);
+    </script>
+</body>
+</html>

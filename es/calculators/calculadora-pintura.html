@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Pintura - Galones Necesarios para Habitaciones</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Pintura</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calcula cuánta pintura necesitas para tus paredes.</p>
+        <div class="input-group">
+            <label class="form-label">Largo (metros/pies)</label>
+            <input type="number" id="length" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Ancho (metros/pies)</label>
+            <input type="number" id="width" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Altura (metros/pies)</label>
+            <input type="number" id="height" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Capas</label>
+            <select id="coats" class="form-input"><option>1</option><option selected>2</option></select>
+        </div>
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Pintura Necesaria</span>
+                <span class="result-value" style="font-size: 32px; font-weight: bold; color: #2563eb;"><span id="gallons">0.00</span> galones</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calc() {
+            const l = parseFloat(document.getElementById('length').value) || 0;
+            const w = parseFloat(document.getElementById('width').value) || 0;
+            const h = parseFloat(document.getElementById('height').value) || 0;
+            const coats = parseInt(document.getElementById('coats').value) || 2;
+            if (!l || !w || !h) return;
+            const area = 2 * (l + w) * h * coats;
+            const gallons = area / 350; // 350 sq ft per gallon
+            document.getElementById('gallons').textContent = gallons.toFixed(2);
+        }
+        ['length','width','height','coats'].forEach(id => document.getElementById(id).addEventListener(id==='coats'?'change':'input', calc));
+    </script>
+</body>
+</html>

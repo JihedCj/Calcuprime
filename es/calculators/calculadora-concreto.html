@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Concreto - Yardas Cúbicas Necesarias</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Concreto</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calcula concreto necesario para losas y cimientos.</p>
+        <div class="input-group">
+            <label class="form-label">Largo (pies)</label>
+            <input type="number" id="length" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Ancho (pies)</label>
+            <input type="number" id="width" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Espesor (pulgadas)</label>
+            <input type="number" id="thickness" class="form-input" value="">
+        </div>
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Yardas Cúbicas</span>
+                <span class="result-value" style="font-size: 32px; font-weight: bold; color: #059669;"><span id="yards">0.00</span> yd³</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calc() {
+            const l = parseFloat(document.getElementById('length').value) || 0;
+            const w = parseFloat(document.getElementById('width').value) || 0;
+            const t = parseFloat(document.getElementById('thickness').value) || 0;
+            if (!l || !w || !t) return;
+            const cubicFeet = l * w * (t / 12);
+            const yards = cubicFeet / 27;
+            document.getElementById('yards').textContent = yards.toFixed(2);
+        }
+        ['length','width','thickness'].forEach(id => document.getElementById(id).addEventListener('input', calc));
+    </script>
+</body>
+</html>

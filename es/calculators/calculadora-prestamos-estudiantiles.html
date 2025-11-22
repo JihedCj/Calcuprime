@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Préstamos Estudiantiles - Calcula Pagos y Planes de Pago</title>
+    <meta name="description" content="Calcula pagos de préstamos estudiantiles federales y privados. Compara planes estándar, graduados, basados en ingresos y PSLF. Planifica el pago de tu deuda educativa.">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Préstamos Estudiantiles</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calcula tus pagos mensuales de préstamos estudiantiles y compara diferentes planes de pago. Descubre la mejor estrategia para tu situación.</p>
+
+        <div class="input-group">
+            <label for="loanAmount" class="form-label">Saldo del Préstamo ($)</label>
+            <input type="number" id="loanAmount" class="form-input" placeholder="ej. 35000" min="0" step="100" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="interestRate" class="form-label">Tasa de Interés Anual (%)</label>
+            <input type="number" id="interestRate" class="form-input" placeholder="ej. 5.5" min="0" max="20" step="0.01" value="">
+        </div>
+
+        <div style="margin: 25px 0;">
+            <h3 style="margin: 0 0 15px 0; color: #1f2937;">Selecciona Plan de Pago</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                <button class="loan-tab active" id="standardTab" onclick="setLoanType('standard')">Plan Estándar</button>
+                <button class="loan-tab" id="graduatedTab" onclick="setLoanType('graduated')">Plan Graduado</button>
+                <button class="loan-tab" id="extendedTab" onclick="setLoanType('extended')">Plan Extendido</button>
+                <button class="loan-tab" id="incomeTab" onclick="setLoanType('income')">Basado en Ingresos</button>
+            </div>
+        </div>
+
+        <div id="incomeInputs" style="display: none; margin: 20px 0; padding: 20px; background: #f0f9ff; border-radius: 8px;">
+            <h4 style="margin: 0 0 15px 0; color: #1e40af;">Información de Ingresos (para plan basado en ingresos)</h4>
+            <div class="input-group">
+                <label for="annualIncome" class="form-label">Ingreso Bruto Anual ($)</label>
+                <input type="number" id="annualIncome" class="form-input" placeholder="ej. 45000" min="0" step="1000" value="">
+            </div>
+            <div class="input-group" style="margin: 0;">
+                <label for="familySize" class="form-label">Tamaño de Familia</label>
+                <input type="number" id="familySize" class="form-input" placeholder="ej. 1" min="1" max="10" step="1" value="1">
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Pago Mensual</span>
+                <span class="result-value" style="font-size: 36px; font-weight: bold; color: #2563eb;">$<span id="monthlyPayment">0</span></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Plazo de Pago</span>
+                <span class="result-value"><span id="payoffTime">0</span> años</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Interés Total Pagado</span>
+                <span class="result-value">$<span id="totalInterest">0</span></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Costo Total</span>
+                <span class="result-value">$<span id="totalCost">0</span></span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Planes de Pago de Préstamos Estudiantiles Federales</h2>
+
+            <h3>Plan Estándar (10 años)</h3>
+            <p>Pago fijo mensual durante 10 años. Pagas menos interés total que otros planes pero pagos mensuales más altos.</p>
+            <p><strong>Mejor para:</strong> Quienes pueden costear pagos más altos y quieren pagar la deuda rápidamente.</p>
+
+            <h3>Plan Graduado (10 años)</h3>
+            <p>Pagos comienzan bajos y aumentan cada 2 años. Diseñado para quienes esperan ingresos crecientes.</p>
+            <p><strong>Mejor para:</strong> Recién graduados con salario inicial bajo pero con expectativas de aumentos.</p>
+
+            <h3>Plan Extendido (25 años)</h3>
+            <p>Disponible si debes $30,000+. Pagos mensuales más bajos pero interés total mucho mayor.</p>
+            <p><strong>Mejor para:</strong> Necesitas pago bajo absoluto, comprendes que pagarás más interés.</p>
+
+            <h3>Planes Basados en Ingresos (20-25 años)</h3>
+            <p>Pago = 10-15% de ingreso discrecional. Perdón de saldo restante después de 20-25 años.</p>
+            <p><strong>Tipos:</strong> IBR, PAYE, REPAYE, ICR</p>
+            <p><strong>Mejor para:</strong> Ingresos bajos relativos a deuda, trabajo de servicio público, incertidumbre laboral.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Perdón de Préstamos por Servicio Público (PSLF)</h2>
+            <p>Si trabajas para gobierno o organización sin fines de lucro 501(c)(3), puedes calificar para perdón después de 120 pagos (10 años) bajo plan basado en ingresos.</p>
+
+            <h3>Requisitos PSLF</h3>
+            <ul>
+                <li>Empleador calificado (gobierno, sin fines de lucro 501(c)(3))</li>
+                <li>Préstamos federales Direct (consolida si tienes FFEL o Perkins)</li>
+                <li>Plan de pago basado en ingresos</li>
+                <li>120 pagos mensuales calificados</li>
+                <li>Tiempo completo (30+ horas/semana)</li>
+            </ul>
+
+            <h3>Estrategia PSLF</h3>
+            <p><strong>Minimiza pagos durante 10 años,</strong> luego recibe perdón del saldo restante libre de impuestos. Con $100,000 en deuda e ingresos de $50,000, podrías pagar solo $40,000-50,000 total y obtener perdón de $50,000-60,000.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Refinanciamiento vs Consolidación</h2>
+
+            <h3>Consolidación Federal</h3>
+            <p>Combina múltiples préstamos federales en uno. Tasa = promedio ponderado (no ahorra en interés).</p>
+            <p><strong>Beneficios:</strong> Un pago, acceso a planes basados en ingresos, califica préstamos antiguos para PSLF.</p>
+            <p><strong>Cuándo hacerlo:</strong> Simplificar pagos, acceder a planes basados en ingresos, calificar para PSLF.</p>
+
+            <h3>Refinanciamiento Privado</h3>
+            <p>Prestamista privado paga tus préstamos federales/privados, emite nuevo préstamo a tasa más baja.</p>
+            <p><strong>Pros:</strong> Tasas de 3-7% (vs 5-8% federal), ahorra miles en interés, pago mensual más bajo.</p>
+            <p><strong>Contras:</strong> Pierdes protecciones federales (diferimiento, perdón, planes basados en ingresos), irrevocable.</p>
+            <p><strong>Cuándo hacerlo:</strong> Buen crédito (720+), ingresos estables, NO buscas PSLF, deuda privada de alto interés.</p>
+
+            <h3>Nunca Refinancies Si</h3>
+            <ul>
+                <li>Buscas PSLF (pierdes elegibilidad)</li>
+                <li>Trabajo inestable (necesitas diferimiento)</li>
+                <li>Ingresos bajos (necesitas plan basado en ingresos)</li>
+                <li>Crédito bajo (no obtendrás buena tasa)</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Estrategias de Pago Acelerado</h2>
+
+            <h3>Método Avalancha</h3>
+            <p>Paga mínimo en todos los préstamos, ataca el de mayor interés con pagos extra. Matemáticamente óptimo.</p>
+            <p><strong>Ejemplo:</strong> 3 préstamos a 3%, 5%, 7%. Paga mínimos en 3% y 5%, todos los extra al 7%.</p>
+
+            <h3>Método Bola de Nieve</h3>
+            <p>Paga mínimo en todos, ataca el saldo más pequeño. Victoria psicológica rápida.</p>
+            <p><strong>Mejor para:</strong> Necesitas motivación de progreso visible.</p>
+
+            <h3>Pagos Quincenales</h3>
+            <p>En lugar de pago mensual de $500, paga $250 cada dos semanas. Resulta en 13 pagos/año en vez de 12 = 1 pago extra anual. Reduce años del préstamo.</p>
+
+            <h3>Bono y Reembolsos de Impuestos</h3>
+            <p>Aplica bonos, reembolsos de impuestos, regalos de dinero directamente al principal. Pago único de $3,000 en préstamo de $40,000 al 6% ahorra $4,800 en intereses.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Cuánto debo pedir prestado para la universidad?</h3>
+            <p>Regla general: No pidas más que tu salario esperado del primer año. Ingeniero que ganará $70,000 → máximo $70,000 en préstamos. Maestro que ganará $40,000 → máximo $40,000.</p>
+
+            <h3>¿Debo pagar mientras estoy en la escuela?</h3>
+            <p>Sí si puedes. Pagar interés evita capitalización (interés sobre interés). $100/mes durante 4 años de universidad ahorra $2,000-3,000 en interés total.</p>
+
+            <h3>¿Qué pasa si no puedo pagar?</h3>
+            <p>Opciones: Diferimiento (pausa temporal, interés se acumula), Indulgencia (pausa temporal para dificultad), Plan basado en ingresos (reduce pago), Consolidación. NO ignores—daña crédito y puede resultar en embargo de salario.</p>
+
+            <h3>¿Se perdonan los préstamos estudiantiles en bancarrota?</h3>
+            <p>Raramente. Debes probar "dificultad indebida" (estándar muy alto). 99% de casos, préstamos estudiantiles sobreviven bancarrota. No cuentes con esto.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentLoanType = 'standard';
+
+        function setLoanType(type) {
+            currentLoanType = type;
+
+            document.querySelectorAll('.loan-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(type + 'Tab').classList.add('active');
+
+            if (type === 'income') {
+                document.getElementById('incomeInputs').style.display = 'block';
+            } else {
+                document.getElementById('incomeInputs').style.display = 'none';
+            }
+
+            calculate();
+        }
+
+        function calculate() {
+            const principal = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const annualIncome = parseFloat(document.getElementById('annualIncome').value) || 0;
+            const familySize = parseInt(document.getElementById('familySize').value) || 1;
+
+            if (principal === 0 || annualRate === 0) {
+                resetResults();
+                return;
+            }
+
+            const monthlyRate = annualRate / 100 / 12;
+            let monthlyPayment, months;
+
+            if (currentLoanType === 'standard') {
+                months = 120; // 10 years
+                monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                                (Math.pow(1 + monthlyRate, months) - 1);
+            } else if (currentLoanType === 'graduated') {
+                months = 120; // 10 years
+                monthlyPayment = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                                (Math.pow(1 + monthlyRate, months) - 1) * 0.7; // Start at 70% of standard
+            } else if (currentLoanType === 'extended') {
+                months = 300; // 25 years
+                monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                                (Math.pow(1 + monthlyRate, months) - 1);
+            } else if (currentLoanType === 'income') {
+                if (annualIncome === 0) {
+                    resetResults();
+                    return;
+                }
+                // Simplified IBR calculation: 10% of discretionary income
+                const povertyLine = 15000 + (familySize - 1) * 5000; // Approximate
+                const discretionaryIncome = Math.max(0, annualIncome - povertyLine * 1.5);
+                monthlyPayment = (discretionaryIncome * 0.10) / 12;
+                months = 240; // 20 years then forgiveness
+            }
+
+            const totalPaid = monthlyPayment * months;
+            const totalInterest = totalPaid - principal;
+            const years = (months / 12).toFixed(1);
+
+            document.getElementById('monthlyPayment').textContent = monthlyPayment.toFixed(2);
+            document.getElementById('payoffTime').textContent = years;
+            document.getElementById('totalInterest').textContent = totalInterest.toFixed(2);
+            document.getElementById('totalCost').textContent = totalPaid.toFixed(2);
+        }
+
+        function resetResults() {
+            document.getElementById('monthlyPayment').textContent = '0';
+            document.getElementById('payoffTime').textContent = '0';
+            document.getElementById('totalInterest').textContent = '0';
+            document.getElementById('totalCost').textContent = '0';
+        }
+
+        // Event listeners
+        document.getElementById('loanAmount').addEventListener('input', calculate);
+        document.getElementById('interestRate').addEventListener('input', calculate);
+        document.getElementById('annualIncome').addEventListener('input', calculate);
+        document.getElementById('familySize').addEventListener('input', calculate);
+
+        // Styles for tabs
+        const style = document.createElement('style');
+        style.textContent = `
+            .loan-tab {
+                padding: 12px 20px;
+                background: #f3f4f6;
+                border: 2px solid #e5e7eb;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                color: #6b7280;
+                transition: all 0.2s;
+            }
+            .loan-tab:hover {
+                background: #e5e7eb;
+            }
+            .loan-tab.active {
+                background: #2563eb;
+                color: white;
+                border-color: #2563eb;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

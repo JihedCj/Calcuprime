@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Raíz Cuadrada - √x con Explicación</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Raíz Cuadrada</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calcula la raíz cuadrada de cualquier número con explicación detallada.</p>
+        <div class="input-group">
+            <label class="form-label">Número</label>
+            <input type="number" id="number" class="form-input" placeholder="ej. 144" min="0" value="">
+        </div>
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">√<span id="inputDisplay">0</span> =</span>
+                <span class="result-value" style="font-size: 36px; font-weight: bold; color: #2563eb;"><span id="result">0</span></span>
+            </div>
+            <div class="result-row" id="perfectRow" style="display: none;">
+                <span class="result-label">Cuadrado Perfecto</span>
+                <span class="result-value" style="color: #059669;">✓ Sí</span>
+            </div>
+        </div>
+        <div id="explanation" style="display: none; margin: 25px 0; padding: 20px; background: #f0f9ff; border-left: 4px solid #2563eb; border-radius: 8px;">
+            <h3 style="margin: 0 0 10px 0; color: #1e40af;">Explicación</h3>
+            <p id="explainText" style="margin: 0; color: #1e3a8a;"></p>
+        </div>
+    </div>
+    <script>
+        function calc() {
+            const num = parseFloat(document.getElementById('number').value);
+            if (isNaN(num) || num < 0) {
+                document.getElementById('result').textContent = '0';
+                document.getElementById('explanation').style.display = 'none';
+                return;
+            }
+
+            const result = Math.sqrt(num);
+            document.getElementById('inputDisplay').textContent = num;
+            document.getElementById('result').textContent = result.toFixed(4);
+
+            const isPerfect = Number.isInteger(result);
+            document.getElementById('perfectRow').style.display = isPerfect ? 'flex' : 'none';
+
+            let explain;
+            if (isPerfect) {
+                explain = `${num} es un cuadrado perfecto. ${result} × ${result} = ${num}, por lo tanto √${num} = ${result}.`;
+            } else {
+                const lower = Math.floor(result);
+                const upper = lower + 1;
+                explain = `${num} no es un cuadrado perfecto. Está entre ${lower}² = ${lower * lower} y ${upper}² = ${upper * upper}. El valor preciso es aproximadamente ${result.toFixed(4)}.`;
+            }
+
+            document.getElementById('explainText').textContent = explain;
+            document.getElementById('explanation').style.display = 'block';
+        }
+
+        document.getElementById('number').addEventListener('input', calc);
+    </script>
+</body>
+</html>

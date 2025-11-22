@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Costo de Combustible - Calcula Gastos de Gasolina</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Costo de Combustible</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calcula el costo de gasolina para viajes y trayectos diarios.</p>
+        <div class="input-group">
+            <label class="form-label">Distancia (km o millas)</label>
+            <input type="number" id="distance" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Consumo (km/L o MPG)</label>
+            <input type="number" id="efficiency" class="form-input" value="">
+        </div>
+        <div class="input-group">
+            <label class="form-label">Precio por Litro/Galón ($)</label>
+            <input type="number" id="price" class="form-input" value="">
+        </div>
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Costo Total</span>
+                <span class="result-value" style="font-size: 32px; font-weight: bold; color: #059669;">$<span id="totalCost">0.00</span></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Combustible Necesario</span>
+                <span class="result-value"><span id="fuelNeeded">0.00</span> L/gal</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calc() {
+            const dist = parseFloat(document.getElementById('distance').value) || 0;
+            const eff = parseFloat(document.getElementById('efficiency').value) || 0;
+            const price = parseFloat(document.getElementById('price').value) || 0;
+            if (!dist || !eff || !price) return;
+            const fuel = dist / eff;
+            const cost = fuel * price;
+            document.getElementById('totalCost').textContent = cost.toFixed(2);
+            document.getElementById('fuelNeeded').textContent = fuel.toFixed(2);
+        }
+        ['distance','efficiency','price'].forEach(id => document.getElementById(id).addEventListener('input', calc));
+    </script>
+</body>
+</html>
