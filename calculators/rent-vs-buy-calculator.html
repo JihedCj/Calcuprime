@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent vs Buy Calculator - Should I Rent or Buy a Home?</title>
+    <meta name="description" content="Compare renting vs buying a home. Calculate total costs, break-even point, and see which option saves more money over time. Make an informed housing decision.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 30px 0;
+        }
+        .option-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .option-card.winner {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+        .option-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1d1d1f;
+        }
+        .cost-breakdown {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        .breakeven-box {
+            background: #dbeafe;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 24px;
+            border-left: 4px solid #3b82f6;
+        }
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Rent vs Buy Calculator</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Compare the total costs of renting versus buying a home to make an informed decision about which is better for your financial situation.</p>
+
+        <div style="background: #f9fafb; padding: 20px; border-radius: 12px; margin-bottom: 30px;">
+            <h3 style="margin-top: 0;">Buying Details</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div class="input-group" style="margin: 0;">
+                    <label for="homePrice" class="form-label">Home Price ($)</label>
+                    <input type="number" id="homePrice" class="form-input" placeholder="e.g., 350000" min="0" step="10000" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="downPayment" class="form-label">Down Payment (%)</label>
+                    <input type="number" id="downPayment" class="form-input" placeholder="20" min="0" max="100" step="1" value="20">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="mortgageRate" class="form-label">Mortgage Rate (%)</label>
+                    <input type="number" id="mortgageRate" class="form-input" placeholder="6.5" min="0" max="15" step="0.1" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="propertyTax" class="form-label">Property Tax (% of price)</label>
+                    <input type="number" id="propertyTax" class="form-input" placeholder="1.2" min="0" max="5" step="0.1" value="1.2">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="homeInsurance" class="form-label">Home Insurance ($/year)</label>
+                    <input type="number" id="homeInsurance" class="form-input" placeholder="1200" min="0" step="100" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="maintenance" class="form-label">Maintenance (% of price)</label>
+                    <input type="number" id="maintenance" class="form-input" placeholder="1" min="0" max="5" step="0.1" value="1">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="hoaFees" class="form-label">HOA Fees ($/month)</label>
+                    <input type="number" id="hoaFees" class="form-input" placeholder="0" min="0" step="50" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="appreciation" class="form-label">Home Appreciation (%/year)</label>
+                    <input type="number" id="appreciation" class="form-input" placeholder="3" min="-10" max="20" step="0.5" value="3">
+                </div>
+            </div>
+        </div>
+
+        <div style="background: #f3f4f6; padding: 20px; border-radius: 12px; margin-bottom: 30px;">
+            <h3 style="margin-top: 0;">Renting Details</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div class="input-group" style="margin: 0;">
+                    <label for="monthlyRent" class="form-label">Monthly Rent ($)</label>
+                    <input type="number" id="monthlyRent" class="form-input" placeholder="e.g., 2000" min="0" step="100" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="rentIncrease" class="form-label">Annual Rent Increase (%)</label>
+                    <input type="number" id="rentIncrease" class="form-input" placeholder="3" min="0" max="20" step="0.5" value="3">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="rentersInsurance" class="form-label">Renters Insurance ($/year)</label>
+                    <input type="number" id="rentersInsurance" class="form-input" placeholder="200" min="0" step="50" value="200">
+                </div>
+            </div>
+        </div>
+
+        <div style="background: #fef3c7; padding: 20px; border-radius: 12px; margin-bottom: 30px;">
+            <h3 style="margin-top: 0;">Comparison Settings</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div class="input-group" style="margin: 0;">
+                    <label for="yearsToStay" class="form-label">Years to Stay</label>
+                    <input type="number" id="yearsToStay" class="form-input" placeholder="7" min="1" max="30" step="1" value="7">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="investmentReturn" class="form-label">Investment Return (%/year)</label>
+                    <input type="number" id="investmentReturn" class="form-input" placeholder="7" min="0" max="20" step="0.5" value="7">
+                    <small style="color: #92400e; display: block; margin-top: 5px;">Return on money NOT used for down payment</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison-container" id="results" style="display: none;">
+            <div class="option-card" id="buyCard">
+                <div class="option-title">🏠 Buy</div>
+                <div class="result-row">
+                    <span class="result-label">Total Cost</span>
+                    <span class="result-value">$<span id="buyTotalCost">0</span></span>
+                </div>
+                <div class="cost-breakdown">
+                    <div class="cost-item">
+                        <span>Down Payment</span>
+                        <span>$<span id="buyDownPayment">0</span></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Mortgage Payments</span>
+                        <span>$<span id="buyMortgage">0</span></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Property Taxes</span>
+                        <span>$<span id="buyTaxes">0</span></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Insurance + HOA + Maintenance</span>
+                        <span>$<span id="buyOther">0</span></span>
+                    </div>
+                    <div class="cost-item" style="border-top: 1px solid #e5e7eb; margin-top: 8px; padding-top: 8px; font-weight: 600; color: #10b981;">
+                        <span>Home Value (at sale)</span>
+                        <span>-$<span id="buyHomeValue">0</span></span>
+                    </div>
+                    <div class="cost-item" style="color: #6b7280;">
+                        <span>Remaining Mortgage Balance</span>
+                        <span>+$<span id="buyRemainingMortgage">0</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="option-card" id="rentCard">
+                <div class="option-title">🔑 Rent</div>
+                <div class="result-row">
+                    <span class="result-label">Total Cost</span>
+                    <span class="result-value">$<span id="rentTotalCost">0</span></span>
+                </div>
+                <div class="cost-breakdown">
+                    <div class="cost-item">
+                        <span>Rent Payments</span>
+                        <span>$<span id="rentPayments">0</span></span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Renters Insurance</span>
+                        <span>$<span id="rentInsurance">0</span></span>
+                    </div>
+                    <div class="cost-item" style="border-top: 1px solid #e5e7eb; margin-top: 8px; padding-top: 8px; font-weight: 600; color: #10b981;">
+                        <span>Investment Growth</span>
+                        <span>-$<span id="rentInvestment">0</span></span>
+                    </div>
+                    <div class="cost-item" style="color: #6b7280; font-size: 13px;">
+                        <span>(Down payment $ invested instead)</span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="breakeven-box" id="breakevenBox" style="display: none;">
+            <h3 style="margin-top: 0; color: #1e40af;">💡 Analysis</h3>
+            <div class="result-row">
+                <span class="result-label">Recommendation</span>
+                <span class="result-value" id="recommendation" style="font-weight: 700;"></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Cost Difference</span>
+                <span class="result-value" id="costDifference"></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Break-Even Point</span>
+                <span class="result-value" id="breakeven"></span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>The Rent vs Buy Decision</h2>
+            <p>Should you rent or buy a home? This is one of the biggest financial decisions you'll make, often involving hundreds of thousands of dollars and decades of your life. The conventional wisdom that "renting is throwing money away" or "buying always builds wealth" is overly simplistic and often wrong.</p>
+            
+            <p>The truth is that the best choice depends on your specific situation: local housing market conditions, how long you plan to stay, interest rates, your financial stability, investment alternatives, and lifestyle priorities. In some scenarios, renting and investing the difference can build more wealth than buying. In others, homeownership offers financial and lifestyle benefits that renting can't match.</p>
+            
+            <p>This calculator helps you compare the true financial costs of both options over your expected time horizon. It accounts for all the hidden costs of homeownership (taxes, maintenance, insurance, opportunity cost of down payment) and the wealth-building potential of investing money you don't sink into a house. The results might surprise you.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Total Cost of Owning vs Renting</h2>
+            
+            <h3>Costs of Buying a Home</h3>
+            <p><strong>Down Payment:</strong> Typically 20% of home price to avoid PMI ($70,000 on a $350,000 home). This is cash you can't invest elsewhere—opportunity cost.</p>
+            
+            <p><strong>Mortgage Principal & Interest:</strong> Your monthly payment to the bank. On a $280,000 loan at 6.5% over 30 years, that's $1,770/month or $21,240/year. Over 7 years, you'd pay $148,680 total, but only reduce the loan balance by about $40,000 (most goes to interest early on).</p>
+            
+            <p><strong>Property Taxes:</strong> Average 1-1.5% of home value annually, paid to local government. $350,000 home = $3,500-5,250/year. Increases over time as home appreciates. Over 7 years at 1.2%: ~$27,000.</p>
+            
+            <p><strong>Home Insurance:</strong> $1,000-2,000/year typical. Required by mortgage lender. Covers dwelling, not contents (that's separate). Increases annually. 7 years: ~$9,000.</p>
+            
+            <p><strong>Maintenance & Repairs:</strong> Rule of thumb: 1% of home value annually. $350,000 home = $3,500/year. New roof ($10k), HVAC replacement ($8k), plumbing issues, appliance failures add up fast. Over 7 years: $24,500+.</p>
+            
+            <p><strong>HOA Fees:</strong> If applicable, $100-500/month common ($1,200-6,000/year). Covers common area maintenance, amenities. Can increase 3-5% annually. Over 7 years at $200/month: $16,800.</p>
+            
+            <p><strong>Closing Costs (Buy):</strong> 2-5% of purchase price. On $350,000: $7,000-17,500. Includes appraisal, title insurance, origination fees, inspections, attorney fees. NOT recovered when selling.</p>
+            
+            <p><strong>Closing Costs (Sell):</strong> Typically 8-10% of sale price. Realtor commission (5-6%), title fees, repairs for sale readiness, staging, inspections. On $400,000 sale: $32,000-40,000.</p>
+            
+            <h3>Costs of Renting</h3>
+            <p><strong>Monthly Rent:</strong> Your primary expense. $2,000/month = $24,000/year. Increases 2-5% annually typical (more in hot markets, less in soft markets). 7 years at 3% annual increase: ~$185,000 total.</p>
+            
+            <p><strong>Renters Insurance:</strong> $150-300/year typical. Covers your belongings, liability. Much cheaper than homeowners insurance. Over 7 years: $1,400-2,100.</p>
+            
+            <p><strong>Security Deposit:</strong> Usually 1 month rent, refundable. Not a cost unless you lose it due to damage.</p>
+            
+            <p>That's it. No property taxes, no maintenance, no HOA, no insurance, no surprise $10,000 roof replacement. When something breaks, landlord pays.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>The Break-Even Analysis</h2>
+            <p>The "break-even point" is how long you need to own before buying becomes cheaper than renting. This varies dramatically by market and scenario but understanding it is crucial.</p>
+            
+            <h3>Short-Term (1-3 Years): Renting Almost Always Wins</h3>
+            <p>Buying has massive upfront costs: closing costs, down payment opportunity cost, moving expenses. In years 1-3, you're mostly paying mortgage interest with little principal reduction. Meanwhile, transaction costs to sell (8-10%) eat any appreciation.</p>
+            
+            <p>Example: Buy $350k home with 20% down, sell after 2 years. Even if home appreciates 3%/year to $372k, after 8% selling costs ($29,760), you net $342,240. You paid ~$100k in mortgage/taxes/insurance/maintenance. Total cost: ~$107,760. Renting the equivalent for $2,000/month with 3% annual increases: $49,800. Renting saved $57,960.</p>
+            
+            <h3>Medium-Term (4-7 Years): It Depends</h3>
+            <p>This is where break-even typically occurs in average markets. You've paid down some principal, enjoyed some appreciation, and spread closing costs over more years. But rental costs have compounded too.</p>
+            
+            <p>Key factors: appreciation rate (3%+ favors buying, 0-2% favors renting), rent vs buy price ratio (high rent relative to home prices favors buying), interest rates (low rates favor buying), property taxes (high property taxes favor renting), expected rent increases (high increases favor buying to lock in costs).</p>
+            
+            <h3>Long-Term (10+ Years): Buying Usually Wins</h3>
+            <p>Over 10+ years, homeownership generally comes out ahead financially if you stay put. You've paid down significant principal (on a 30-year mortgage, you've paid ~23% of principal in first 10 years). Home has appreciated (even at modest 3% annually, $350k becomes $470k in 10 years). You've spread transaction costs over many years. Meanwhile, rent has compounded relentlessly.</p>
+            
+            <p>However, this assumes: you stay the full time (moving restarts transaction costs), home appreciates (not guaranteed—ask 2008 buyers), you don't overleveraging yourself (house poor), you maintain employment (can afford payments), no major financial shocks force sale.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>When Buying Makes More Sense</h2>
+            
+            <h3>You Plan to Stay 5+ Years</h3>
+            <p>The longer your time horizon, the more buying favors you. Break-even is typically 5-7 years in normal markets. If you're certain you'll be in the same area for at least 5 years (stable job, love the location, family roots), buying is worth considering. If there's any chance you'll relocate in 3 years, renting provides flexibility without financial penalty.</p>
+            
+            <h3>Rent-to-Price Ratio is High</h3>
+            <p>If monthly rent is more than 0.5-0.7% of home purchase price, buying is often better. Example: $350k home, monthly rent $2,500. That's 0.71% ratio—high, favors buying. If rent is only $1,400 (0.4%), renting is likely better. In expensive markets (SF, NYC), ratios are low (0.2-0.3%), making renting economically rational.</p>
+            
+            <h3>Interest Rates are Low</h3>
+            <p>When mortgages are 3-4%, borrowing is cheap and buying is attractive. At 7-8%, renting becomes more competitive. Your mortgage rate determines how much goes to interest vs principal—lower rates mean faster equity building.</p>
+            
+            <h3>Rent Increases are High and Volatile</h3>
+            <p>If your area has seen 5-8% annual rent increases and this trend is expected to continue (limited housing supply, high demand), buying locks in your housing cost (fixed-rate mortgage). Your payment stays the same while neighbors' rent skyrockets. In stable or soft rental markets with 2-3% increases, this advantage is less compelling.</p>
+            
+            <h3>Tax Benefits are Significant for You</h3>
+            <p>If you itemize deductions (less common after 2018 tax law changes), you can deduct mortgage interest and property taxes up to certain limits. For high earners in high-tax states, this can be meaningful. However, the 2018 tax law raised standard deduction so much that most homeowners don't itemize anymore, reducing this benefit.</p>
+            
+            <h3>You Want Stability and Control</h3>
+            <p>Beyond pure financials: homeownership offers stability (can't be forced to move), control (renovate as you wish), pride of ownership, forced savings (building equity even if you're not disciplined to save otherwise), and certainty (know your housing cost for 30 years). These intangibles have value even if financially it's a wash.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>When Renting Makes More Sense</h2>
+            
+            <h3>You Value Flexibility and Mobility</h3>
+            <p>Career changes, relationship changes, desire to try different neighborhoods/cities—renting lets you move in 30-60 days with minimal cost. Homeowners face months-long sales, tens of thousands in transaction costs, and timing complexity. If you're in your 20s-30s, exploring careers, or uncertain about long-term location, renting preserves optionality.</p>
+            
+            <h3>Your Career Might Require Relocation</h3>
+            <p>If there's even a 30-40% chance you'll need to relocate in next 5 years (consulting, military, corporate ladder climbing), buying is risky. Forced to sell within 3 years, you'll likely lose money on transaction costs alone, even if home appreciated.</p>
+            
+            <h3>You Can Invest the Difference Profitably</h3>
+            <p>Opportunity cost is real. If you'd put $70k down on a house but instead invest it in index funds returning 8-10% annually, over 10 years that $70k becomes $151k-$182k. Plus, your lower monthly rent vs mortgage payment (say $500/month) invested monthly at 8% becomes $91k in 10 years. Total: $242k-$273k from not buying.</p>
+            
+            <p>Meanwhile, homeownership isn't guaranteed to build comparable wealth. If home appreciates 3% annually, $350k becomes $470k in 10 years ($120k gain) minus $40k in selling costs = $80k net gain. But you paid ~$100k more in mortgage/taxes/insurance/maintenance vs renting over those 10 years. Net: actually lost $20k vs renting and investing. This isn't hypothetical—it's how the math works in low-appreciation markets or high-expense scenarios.</p>
+            
+            <h3>Local Market is Overpriced</h3>
+            <p>If your market has price-to-rent ratios above 20-25 (purchase price divided by annual rent), it's generally overpriced and favors renting. San Francisco: homes $1.5M, rent $3k/month ($36k/year) = 42 ratio. Absurdly expensive, renting is rational. Cleveland: homes $180k, rent $1,200/month ($14.4k/year) = 12.5 ratio. Buying makes sense. Know your market's ratio.</p>
+            
+            <h3>You Lack Financial Stability</h3>
+            <p>Homeownership requires financial cushion. If you'd drain your entire savings for a down payment, have unstable income, lack emergency fund, or have significant debt, don't buy. One job loss, medical emergency, or major home repair could force foreclosure. Rent until you have: 20% down payment + 6 months expenses emergency fund + no high-interest debt + stable income.</p>
+            
+            <h3>You Don't Want Maintenance Burden</h3>
+            <p>Some people don't want to deal with mowing lawns, fixing toilets, replacing roofs, dealing with contractors, or spending weekends on home projects. This is valid. Renting outsources all this to landlord. Your furnace dies at 2am? Call landlord. Homeowner? You're finding an emergency HVAC tech and paying $300+ just for the visit, plus thousands for repair/replacement.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Market Conditions that Favor Each Option</h2>
+            
+            <h3>Rising Interest Rate Environment</h3>
+            <p>When rates are rising (like 2022-2023), buying before further increases locks in current rate. However, rising rates also pressure home prices down (affordability decreases), so waiting might get you a lower price at higher rate. Complicated trade-off. Renting gives you flexibility to wait and see.</p>
+            
+            <h3>Falling Home Prices</h3>
+            <p>If your market is declining (oversupply, economic downturn), renting lets you wait for better buying opportunity. Buying into a falling market means potential negative equity (owe more than home is worth), which traps you. Wait for stabilization.</p>
+            
+            <h3>Hot Seller's Market</h3>
+            <p>Bidding wars, waived contingencies, offers above asking—signs of overheated market. Buying in this environment often means overpaying. Rent and wait for market to cool unless you absolutely must buy and can afford potential short-term loss.</p>
+            
+            <h3>Buyer's Market</h3>
+            <p>High inventory, homes sitting unsold, sellers offering concessions—favorable for buyers. You have negotiating power, can get good price, can ask for seller to cover closing costs or do repairs. If you're financially ready and committed to area, this is ideal buying time.</p>
+            
+            <h3>High Property Tax Areas</h3>
+            <p>States like NJ, IL, TX, NH have property taxes 2-3% of home value annually ($7,000-10,000+ on $350k home). This is non-recoverable cost that significantly favors renting. Compare to states with 0.3-0.5% property tax—buying is much more attractive there.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Hidden Costs People Forget</h2>
+            
+            <h3>Buying: PMI if You Put Down Less Than 20%</h3>
+            <p>Private Mortgage Insurance costs 0.5-1.5% of loan amount annually until you reach 20% equity. On $280k loan: $1,400-4,200/year of pure waste protecting the lender (not you). This dramatically changes the rent vs buy equation. Solution: save 20% down or use piggyback loan (80-10-10) to avoid PMI.</p>
+            
+            <h3>Buying: Opportunity Cost of Down Payment</h3>
+            <p>$70k down payment could have been invested in stocks, bonds, business, or other assets. At 8% annual return, that's $5,600 lost in year one alone, compounding over time. By year 10, you've foregone $76,000+ in potential gains. This isn't hypothetical loss—it's real economic cost of tying money up in a house.</p>
+            
+            <h3>Buying: Time Costs</h3>
+            <p>Homeowners spend 10-20 hours monthly on maintenance, repairs, improvements, lawn care, dealing with contractors. At $50/hour opportunity cost (time you could spend on side business, family, hobbies), that's $500-1,000/month ($6,000-12,000/year) not captured in financial calculations but very real.</p>
+            
+            <h3>Renting: No Equity Building</h3>
+            <p>Most obvious renting downside: rent payment is 100% gone forever. Mortgage payment builds equity (partially—most of early payments are still interest). Over 30 years, you'll own a $350k+ asset free and clear. Renter: $0 equity after 30 years.</p>
+            
+            <h3>Renting: Rent Increase Risk</h3>
+            <p>Your rent can jump significantly year-to-year (except rent-controlled areas). Landlord could increase $500/month with 60 days notice in many states. Homeowner with fixed-rate mortgage: payment never increases (though property taxes and insurance will). This predictability has value, especially for retirees on fixed income.</p>
+            
+            <h3>Renting: Limited Control</h3>
+            <p>Can't renovate, paint without permission, have pets (or limited pet options), may face non-renewal of lease forcing move, subject to building rules, landlord could sell building. Some people find this stressful or limiting. Others appreciate not having to make decisions or spend money on maintenance.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Alternative: House Hacking</h2>
+            <p>Can't decide between renting and buying? House hacking offers a middle path: buy a property and rent out part of it to reduce your housing cost.</p>
+            
+            <h3>Buy a Duplex, Triplex, or Fourplex</h3>
+            <p>Live in one unit, rent out others. Your tenants pay most or all of your mortgage. On a $400k triplex, you might live in one unit (worth $1,500/month rental value) and rent other two for $1,500 each = $3,000 income. Mortgage is $2,500, property taxes $400, insurance $150, maintenance $200 = $3,250 expenses. You live essentially rent-free while building equity.</p>
+            
+            <p>Advantages: FHA loan requires only 3.5% down on owner-occupied multi-unit (way less than 20% on investment property), rental income counts toward mortgage qualification, learn landlording while living on-site, property taxes/insurance/repairs are tax-deductible for rental portion.</p>
+            
+            <h3>Buy a Single-Family Home, Rent Rooms</h3>
+            <p>Buy 3-4 bedroom house, live in one room, rent others to roommates. On $350k house with $2,200 mortgage, rent 3 rooms at $800 each = $2,400 income. You live for free or even cash-flow positive. Common in expensive markets where even professionals need roommates to afford housing.</p>
+            
+            <h3>Buy with Accessory Dwelling Unit (ADU)</h3>
+            <p>Properties with basement apartment, converted garage, or separate casita let you live in main house and rent smaller unit. Rents for $800-1,500 depending on market. Can significantly offset your housing cost while maintaining more privacy than roommates.</p>
+            
+            <p>The downside: being a landlord is work (dealing with tenants, maintenance, rent collection), less privacy than living alone, potential for problem tenants, must stay long enough to make buying worthwhile. But for young professionals or families comfortable with this trade-off, house hacking can accelerate wealth building faster than either pure renting or buying.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>Is a home a good investment?</h3>
+            <p>It's complicated. Homes appreciate historically at 3-4% annually long-term—roughly matching inflation, not beating it dramatically. They're illiquid (can't quickly sell for cash), have high transaction costs (8-10%), require ongoing expenses (2-3% annually), and tie up large capital (down payment). Compared to stocks (10% average annual return, liquid, no maintenance, no transaction costs to hold), homes are mediocre investments financially. HOWEVER, homes offer leverage (mortgage lets you control $350k asset with $70k down, amplifying gains), forced savings (build equity even if you're bad at saving), inflation hedge (fixed mortgage payment while income rises), and tax benefits. Plus the utility value of having shelter. So: good investment? Debatable. Good personal finance move if done right? Often yes.</p>
+            
+            <h3>How much home can I afford?</h3>
+            <p>Lenders use 28/36 rule: housing costs (mortgage, taxes, insurance, HOA) shouldn't exceed 28% of gross monthly income, total debts shouldn't exceed 36%. But just because you qualify doesn't mean you should buy at the max. Conservative rule: housing costs should be 25% or less of gross income, 30% max of net income. If you make $80k ($6,667/month gross), keep total housing under $1,867/month. With 20% down, 6.5% rate, 1.2% property tax, $100/month insurance, that's a $250k-275k home. Lender might approve you for $350k+, but that'd be house poor.</p>
+            
+            <h3>Should I wait for the market to crash before buying?</h3>
+            <p>Timing the market is hard and often backfires. Waiting for a crash that never comes while rents increase 5%/year costs you. Meanwhile, if you wait and rates rise (often happens when home prices fall—2008 exception not rule), higher rates offset lower prices. Better approach: buy when YOU are financially ready (20% saved, stable job, emergency fund, committed to area for 5+ years) regardless of what market is doing. If you're ready in 2024 and it's not a crazy hot market, buy. Don't try to perfectly time the bottom.</p>
+            
+            <h3>What if I need to move before the break-even point?</h3>
+            <p>You'll likely lose money vs renting. Selling costs 8-10% of home value. If home hasn't appreciated enough to cover those costs plus what you paid above rent, you lose. Options: rent your home if moving temporarily (become landlord, covers mortgage), time sale carefully to get best price (spring/summer usually better), negotiate with buyer to cover some costs, keep home as investment property if financially feasible. Worst case: short sale or strategic default if truly underwater, though these destroy credit. This is why knowing you'll stay 5+ years is crucial before buying.</p>
+            
+            <h3>Should I rent and invest the difference, or buy?</h3>
+            <p>Run the numbers in this calculator. Generally: if you can invest the down payment + monthly savings at 8-10% and your home appreciates at only 2-3%, investing wins financially. But this assumes: (1) You'll actually invest disciplinedly (most people don't—they spend it), (2) Market returns 8-10% consistently (it's volatile), (3) You don't value homeownership intangibles (stability, control, forced savings). If you're disciplined investor, renting + investing often builds more wealth. If you need forced savings, buying might be better despite lower returns. Know yourself honestly.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const homePrice = parseFloat(document.getElementById('homePrice').value) || 0;
+            const downPaymentPct = parseFloat(document.getElementById('downPayment').value) || 20;
+            const mortgageRate = parseFloat(document.getElementById('mortgageRate').value) || 0;
+            const propertyTaxPct = parseFloat(document.getElementById('propertyTax').value) || 1.2;
+            const homeInsurance = parseFloat(document.getElementById('homeInsurance').value) || 0;
+            const maintenancePct = parseFloat(document.getElementById('maintenance').value) || 1;
+            const hoaFees = parseFloat(document.getElementById('hoaFees').value) || 0;
+            const appreciationPct = parseFloat(document.getElementById('appreciation').value) || 3;
+            
+            const monthlyRent = parseFloat(document.getElementById('monthlyRent').value) || 0;
+            const rentIncreasePct = parseFloat(document.getElementById('rentIncrease').value) || 3;
+            const rentersInsurance = parseFloat(document.getElementById('rentersInsurance').value) || 200;
+            
+            const yearsToStay = parseInt(document.getElementById('yearsToStay').value) || 7;
+            const investmentReturnPct = parseFloat(document.getElementById('investmentReturn').value) || 7;
+
+            if (homePrice === 0 || monthlyRent === 0 || mortgageRate === 0) {
+                document.getElementById('results').style.display = 'none';
+                document.getElementById('breakevenBox').style.display = 'none';
+                return;
+            }
+
+            // Calculate buying costs
+            const downPayment = homePrice * (downPaymentPct / 100);
+            const loanAmount = homePrice - downPayment;
+            const monthlyRate = mortgageRate / 100 / 12;
+            const numPayments = 30 * 12;
+            const monthlyMortgage = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
+                                   (Math.pow(1 + monthlyRate, numPayments) - 1);
+            
+            let totalMortgagePaid = 0;
+            let remainingBalance = loanAmount;
+            let totalPropertyTax = 0;
+            let currentHomeValue = homePrice;
+            
+            for (let year = 0; year < yearsToStay; year++) {
+                totalMortgagePaid += monthlyMortgage * 12;
+                totalPropertyTax += currentHomeValue * (propertyTaxPct / 100);
+                currentHomeValue *= (1 + appreciationPct / 100);
+                
+                // Calculate remaining balance
+                for (let month = 0; month < 12; month++) {
+                    const interestPayment = remainingBalance * monthlyRate;
+                    const principalPayment = monthlyMortgage - interestPayment;
+                    remainingBalance -= principalPayment;
+                }
+            }
+            
+            const totalInsurance = homeInsurance * yearsToStay;
+            const totalMaintenance = homePrice * (maintenancePct / 100) * yearsToStay;
+            const totalHOA = hoaFees * 12 * yearsToStay;
+            const closingCostsBuy = homePrice * 0.03;
+            const closingCostsSell = currentHomeValue * 0.08;
+            
+            const buyTotalCost = downPayment + totalMortgagePaid + totalPropertyTax + totalInsurance + 
+                               totalMaintenance + totalHOA + closingCostsBuy + closingCostsSell - 
+                               (currentHomeValue - remainingBalance);
+
+            // Calculate renting costs
+            let totalRent = 0;
+            let currentRent = monthlyRent;
+            
+            for (let year = 0; year < yearsToStay; year++) {
+                totalRent += currentRent * 12;
+                currentRent *= (1 + rentIncreasePct / 100);
+            }
+            
+            const totalRentersInsurance = rentersInsurance * yearsToStay;
+            
+            // Calculate investment growth of down payment
+            const investmentGrowth = downPayment * Math.pow(1 + investmentReturnPct / 100, yearsToStay);
+            
+            const rentTotalCost = totalRent + totalRentersInsurance - (investmentGrowth - downPayment);
+
+            // Display results
+            document.getElementById('buyDownPayment').textContent = downPayment.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('buyMortgage').textContent = totalMortgagePaid.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('buyTaxes').textContent = totalPropertyTax.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('buyOther').textContent = (totalInsurance + totalMaintenance + totalHOA).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('buyHomeValue').textContent = (currentHomeValue - remainingBalance).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('buyRemainingMortgage').textContent = remainingBalance.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('buyTotalCost').textContent = buyTotalCost.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+
+            document.getElementById('rentPayments').textContent = totalRent.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('rentInsurance').textContent = totalRentersInsurance.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('rentInvestment').textContent = (investmentGrowth - downPayment).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('rentTotalCost').textContent = rentTotalCost.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+
+            // Determine winner
+            const costDiff = Math.abs(buyTotalCost - rentTotalCost);
+            
+            if (buyTotalCost < rentTotalCost) {
+                document.getElementById('buyCard').classList.add('winner');
+                document.getElementById('rentCard').classList.remove('winner');
+                document.getElementById('recommendation').textContent = '✅ Buying is Better';
+                document.getElementById('costDifference').textContent = `Save $${costDiff.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})} by buying`;
+            } else {
+                document.getElementById('rentCard').classList.add('winner');
+                document.getElementById('buyCard').classList.remove('winner');
+                document.getElementById('recommendation').textContent = '✅ Renting is Better';
+                document.getElementById('costDifference').textContent = `Save $${costDiff.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})} by renting`;
+            }
+
+            // Simple break-even estimation
+            let breakevenYears = 0;
+            for (let testYears = 1; testYears <= 30; testYears++) {
+                // Simplified calculation for break-even
+                const testBuyCost = downPayment + monthlyMortgage * 12 * testYears + 
+                                  homePrice * (propertyTaxPct / 100) * testYears +
+                                  homeInsurance * testYears;
+                const testRentCost = monthlyRent * 12 * testYears * Math.pow(1 + rentIncreasePct / 100, testYears / 2);
+                
+                if (testBuyCost < testRentCost && breakevenYears === 0) {
+                    breakevenYears = testYears;
+                    break;
+                }
+            }
+            
+            if (breakevenYears > 0 && breakevenYears <= 30) {
+                document.getElementById('breakeven').textContent = `~${breakevenYears} years`;
+            } else {
+                document.getElementById('breakeven').textContent = 'Beyond 30 years or never';
+            }
+
+            document.getElementById('results').style.display = 'grid';
+            document.getElementById('breakevenBox').style.display = 'block';
+        }
+
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('input', calculate);
+            input.addEventListener('change', calculate);
+        });
+    </script>
+</body>
+</html>
