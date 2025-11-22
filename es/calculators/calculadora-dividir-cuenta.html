@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora para Dividir Cuenta - Calculadora de Propinas y División de Cuenta</title>
+    <meta name="description" content="Divida cuentas de restaurante de manera justa entre amigos. Calcule propinas, impuestos y monto por persona instantáneamente. Herramienta gratuita para salir a comer.">
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .tip-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tip-button {
+            padding: 12px;
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+        .tip-button:hover {
+            background: #e5e7eb;
+            border-color: #3b82f6;
+        }
+        .tip-button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora para Dividir Cuenta</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Divida cuentas de restaurante de manera justa, calcule propinas y vea cuánto debe cada persona.</p>
+
+        <div class="input-group">
+            <label for="billAmount" class="form-label">Monto Total de la Cuenta ($)</label>
+            <input type="number" id="billAmount" class="form-input" placeholder="ej., 120.00" min="0" step="0.01" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="numPeople" class="form-label">Número de Personas</label>
+            <input type="number" id="numPeople" class="form-input" placeholder="ej., 4" min="1" step="1" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="tipPercent" class="form-label">Porcentaje de Propina (%)</label>
+            <div class="tip-buttons">
+                <div class="tip-button" onclick="setTip(15)">15%</div>
+                <div class="tip-button" onclick="setTip(18)">18%</div>
+                <div class="tip-button" onclick="setTip(20)">20%</div>
+                <div class="tip-button" onclick="setTip(25)">25%</div>
+            </div>
+            <input type="number" id="tipPercent" class="form-input" placeholder="ej., 20" min="0" max="100" step="0.1" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="taxPercent" class="form-label">Impuesto (%) - Opcional</label>
+            <input type="number" id="taxPercent" class="form-input" placeholder="ej., 8" min="0" max="100" step="0.1" value="">
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Por Persona</span>
+                <span class="result-value">$<span id="perPerson">0.00</span></span>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <div class="result-row">
+                    <span class="result-label">Subtotal</span>
+                    <span class="result-value">$<span id="displaySubtotal">0.00</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Monto de Impuesto</span>
+                    <span class="result-value">$<span id="taxAmount">0.00</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Propina (<span id="tipPercentDisplay">0</span>%)</span>
+                    <span class="result-value">$<span id="tipAmount">0.00</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Total General</span>
+                    <span class="result-value">$<span id="grandTotal">0.00</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es una Calculadora para Dividir Cuenta?</h2>
+            <p>Una Calculadora para Dividir Cuenta es una herramienta esencial para salir a comer que calcula rápidamente cuánto debe cada persona cuando se comparte una comida en un restaurante. Ya sea que esté cenando con amigos, familia o colegas, dividir la cuenta de manera justa puede ser sorprendentemente complicado cuando se factoriza la propina, impuesto sobre ventas y múltiples comensales.</p>
+            <p>Nuestra calculadora elimina las conjeturas y los incómodos cálculos en la mesa. Simplemente ingrese el monto total de la cuenta, cuántas personas están dividiendo el costo, el porcentaje de propina que desea dejar y cualquier impuesto sobre ventas (si no está incluido en la cuenta). La calculadora muestra instantáneamente cuánto debe contribuir cada persona, incluyendo su parte de la propina y el impuesto.</p>
+            <p>Ya sea una cena casual, un almuerzo de negocios o una celebración grupal, esta herramienta garantiza que todos paguen su parte justa y que su servidor reciba una propina apropiada. No más estimaciones de servilletas, ninguna app de calculadora confusa, solo divisiones de cuenta rápidas y precisas.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar Esta Calculadora</h2>
+            <p><strong>Paso 1:</strong> Ingrese el monto total de la cuenta del restaurante. Este es el subtotal antes de propina, o el total completo si el impuesto ya está incluido (ajuste el campo de impuesto en consecuencia).</p>
+            <p><strong>Paso 2:</strong> Ingrese el número de personas que dividen la cuenta. Esto incluye a todos los que comparten el costo de la comida por igual.</p>
+            <p><strong>Paso 3:</strong> Seleccione o ingrese el porcentaje de propina. Use los botones de acceso rápido para porcentajes comunes (15%, 18%, 20%, 25%) o ingrese un monto personalizado.</p>
+            <p><strong>Paso 4:</strong> Si el impuesto sobre ventas no está incluido en su cuenta, ingréselo en el campo de impuesto. La mayoría de las cuentas de restaurantes ya incluyen impuestos, así que déjelo en 0 si es así.</p>
+            <p><strong>Paso 5:</strong> Revise el monto "Por Persona": esto es exactamente lo que cada persona debe contribuir, incluyendo su parte de la cuenta, propina e impuesto.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Pautas de Propina: ¿Cuánto Debe Dejar de Propina?</h2>
+            
+            <h3>Servicio Estándar: 15-20%</h3>
+            <p>Para servicio promedio en restaurantes de servicio completo en EE. UU., 15-20% es estándar. Muchos comensales ahora consideran que el 18-20% es el nuevo estándar, especialmente en áreas urbanas. El 15% está bien para servicio básico, mientras que el 20% muestra aprecio por un buen servicio.</p>
+
+            <h3>Servicio Excelente: 20-25%+</h3>
+            <p>Cuando su servidor hace un esfuerzo adicional (excelentes recomendaciones, servicio atento sin ser intrusivo, maneja solicitudes especiales con gracia, hace que una ocasión especial sea memorable), recompénselo con un 20-25% o más. El buen servicio merece reconocimiento.</p>
+
+            <h3>Servicio Deficiente: 10-15%</h3>
+            <p>Incluso con un servicio deficiente, considere dejar al menos el 10-15%. Los servidores dependen de las propinas como su ingreso principal. Sin embargo, si el servicio fue verdaderamente inaceptable (grosero, negligente, no solo lento debido a circunstancias fuera de su control), puede reducir más y hablar con un gerente.</p>
+
+            <h3>Consideraciones Especiales</h3>
+            <p><strong>Grupos Grandes:</strong> Muchos restaurantes añaden automáticamente un 18-20% de propina para grupos de 6 o más. Verifique su cuenta antes de dejar propina adicional para evitar dar propina doble.</p>
+            <p><strong>Servicio de Buffet:</strong> 10% es típico ya que el servidor hace menos, pero aún les deja propina por bebidas, limpiar platos y mantener su mesa.</p>
+            <p><strong>Servicio de Bar:</strong> $1-2 por bebida o 15-20% de su cuenta de bar total</p>
+            <p><strong>Entrega de Comida:</strong> 15-20% con un mínimo de $3-5, más en mal tiempo</p>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Debería Dejar Propina Antes o Después de Impuestos?</h2>
+            <p>Esta es una pregunta común con opiniones variables:</p>
+            
+            <h3>El Enfoque Pre-Impuesto</h3>
+            <p>Muchos expertos en etiqueta recomiendan calcular propinas en el subtotal antes de impuestos. El razonamiento: su servidor no proporciona el impuesto sobre ventas, así que ¿por qué incluirlo en su propina? Esto es más común en estados con impuesto sobre ventas alto (8-10%) donde la diferencia es significativa.</p>
+            <p><strong>Ejemplo:</strong> Cuenta de $100, impuesto del 10% = $110 total</p>
+            <p>Propina del 20% pre-impuesto: $20 (20% de $100)</p>
+            <p>Propina del 20% después de impuesto: $22 (20% de $110)</p>
+            <p>Diferencia: $2 en esta cuenta, pero se acumula en cuentas más grandes</p>
+
+            <h3>El Enfoque Después de Impuesto</h3>
+            <p>Algunos argumentan que dar propina sobre el total después de impuesto es más simple: solo mire el monto final y calcule su porcentaje. Para propinas del 18-20%, la diferencia es típicamente solo unos pocos dólares, y redondear hacia arriba compensa la diferencia de todos modos.</p>
+
+            <h3>El Enfoque Pragmático</h3>
+            <p>La mayoría de la gente simplemente mira el número total final (después de impuesto) y calcula de allí porque es más fácil. Si le preocupa ser económico, calcule pre-impuesto. Si quiere dejar propina generosamente o no quiere hacer matemáticas extra, use el total después de impuesto. Cualquiera está bien, siempre y cuando esté dando propina apropiadamente.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Escenarios Comunes de División de Cuenta</h2>
+            
+            <h3>División Equitativa (Método Simple)</h3>
+            <p>Todos ordenaron artículos con precios similares, o están de acuerdo en dividir por igual independientemente de quién ordenó qué. Este es el enfoque más rápido y fácil, perfecto para amigos que comen fuera regularmente juntos donde todo sale parejo con el tiempo. Use esta calculadora para este escenario.</p>
+
+            <h3>División de Artículos (División Proporcional)</h3>
+            <p>Una persona ordenó langosta de $45 mientras otros comieron sándwiches de $12. La división equitativa se siente injusta. Solución: Cada persona calcula su total de artículos más su parte del impuesto y propina compartidos. O use apps como Splitwise o Venmo que permiten asignar artículos específicos a personas específicas.</p>
+
+            <h3>División con No Bebedores</h3>
+            <p>Cuando algunas personas ordenaron alcohol y otras no: calcule los totales de bebidas por separado y haga que solo los bebedores dividan ese costo, luego divida la comida por igual entre todos. O ajuste las partes en consecuencia (por ejemplo, "Pedí $30 en vino, así que pagaré mi parte de comida más $30 adicionales").</p>
+
+            <h3>Invitado de Cumpleaños</h3>
+            <p>Tradición común: el cumpleañero no paga. Reste su comida del total, luego divida el resto (incluyendo su parte de la propina e impuesto) entre todos los demás. Asegúrese de que todos estén de acuerdo con este plan de antemano para evitar sorpresas.</p>
+
+            <h3>División de Pareja (División Impía)</h3>
+            <p>Cuando las parejas salen juntas, a menudo divide por pareja en lugar de por individuo. Simplemente ingrese "2" como número de personas si dos parejas están dividiendo, o "3" para tres parejas, etc.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Apps de Pago y Etiqueta de División</h2>
+            
+            <h3>Apps de Pago (Venmo, Cash App, Zelle)</h3>
+            <p><strong>Ventajas:</strong> Nadie necesita tener cambio exacto, transferencias instantáneas, fácil dividir montos impares</p>
+            <p><strong>Desventajas:</strong> Requiere que todos tengan la misma app, necesita conexión a internet, algunos lugares solo aceptan efectivo/tarjeta</p>
+            <p><strong>Mejor práctica:</strong> Una persona paga la cuenta completa con tarjeta de crédito (ganando puntos de recompensas), otros reembolsan a esa persona a través de pago digital. Más rápido que dividir cheques, un lugar obtiene puntos de tarjeta de crédito.</p>
+
+            <h3>División de Cheques en el Restaurante</h3>
+            <p><strong>Pregunte temprano:</strong> Si sabe que querrá cheques separados, informe a su servidor al hacer el pedido. Dividir cheques después de la comida crea trabajo extra.</p>
+            <p><strong>Sea específico:</strong> "Cheques separados por persona" vs. "Divide este cheque por la mitad" vs. "Estos tres en un cheque, estos dos en otro"</p>
+            <p><strong>Límites:</strong> Algunos restaurantes no dividen cheques para grupos grandes (6+) o durante horas pico. Respete sus políticas.</p>
+
+            <h3>Método de Efectivo</h3>
+            <p>Todos ponen efectivo basado en el cálculo de división más propina. Si hay extra, déjelo como propina adicional (su servidor lo apreciará). Si hay escasez, alguien cubre la diferencia. Este método es cada vez más raro pero aún funciona cuando la tecnología falla.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Errores Comunes de División de Cuenta</h2>
+            
+            <h3>Olvidar Incluir Propina en la División</h3>
+            <p>Error: Dividir solo el monto de la cuenta y luego cada persona añade propina individualmente a menudo resulta en propina insuficiente porque la gente calcula mal o redondea hacia abajo. Solución: Calcule el monto total de propina primero, añádalo a la cuenta, luego divida todo.</p>
+
+            <h3>Matemáticas de Propina Incorrectas</h3>
+            <p>Error: Calcular 20% de $47.50 en su cabeza a menudo lleva a resultados incorrectos. Solución: Use esta calculadora o la calculadora de su teléfono. Para propina aproximada del 20%: divida la cuenta por 5. Para 15%: divida por 10, luego añada la mitad de eso.</p>
+
+            <h3>No Tener en Cuenta Propina Automática</h3>
+            <p>Error: Muchos restaurantes añaden automáticamente 18-20% de propina para grupos de 6+. No revisar su recibo lleva a dar propina doble. Solución: Siempre revise el recibo cuidadosamente antes de añadir propina adicional.</p>
+
+            <h3>Dividir Basado en Tamaño de Porción en Lugar de Precio</h3>
+            <p>Error: "Solo comí ensalada, así que pagaré menos" cuando la ensalada costó $18 pero el sándwich de otra persona era $14. Solución: Los precios en el menú importan, no el tamaño de la porción. Revise la cuenta si quiere dividir proporcionalidad.</p>
+
+            <h3>La Persona de "No Tengo Cambio"</h3>
+            <p>Error: Alguien pone un billete de $20 para una parte de $17.50 diciendo que "no tengo cambio exacto", obligando a otros a cubrir su déficit. Solución: Apps de pago resuelven esto, o la persona paga un poco extra como compensación.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Consejos Internacionales de Propina</h2>
+            <p>Las costumbres de propina varían dramáticamente por país. Aquí está una guía rápida para viajeros:</p>
+            
+            <h3>Sin Propina Esperada</h3>
+            <p><strong>Japón:</strong> Dar propina puede ser insultante. El servicio excelente está incluido.</p>
+            <p><strong>Corea del Sur:</strong> No se espera dar propina excepto en algunos hoteles de alto nivel.</p>
+            <p><strong>China:</strong> Generalmente sin propinas, aunque algunos lugares turísticos ahora las aceptan.</p>
+
+            <h3>Cargo de Servicio Incluido</h3>
+            <p><strong>Francia:</strong> Cargo de servicio del 15% incluido por ley. Redondear o dejar 5-10% extra es apreciado pero no requerido.</p>
+            <p><strong>Reino Unido:</strong> A menudo se añade cargo de servicio del 10-12%. Verifique su cuenta; si no está incluido, 10-15% es apropiado.</p>
+            <p><strong>Italia:</strong> "Coperto" (cargo de cubierto) cubre el servicio. Dejar 1-2 euros extra es cortés pero opcional.</p>
+
+            <h3>Propina Esperada Como en EE.UU.</h3>
+            <p><strong>Canadá:</strong> 15-20% estándar, similar a EE.UU.</p>
+            <p><strong>México:</strong> 10-15% típico, 15-20% en áreas turísticas</p>
+            <p><strong>Egipto:</strong> La propina (baksheesh) es esperada para casi todos los servicios</p>
+
+            <h3>Consejo de Viajero</h3>
+            <p>Siempre investigue las costumbres locales de propina antes de viajar internacionalmente. Lo que es generoso en un país puede ser insultante en otro. Cuando esté en duda, pregunte a locales o a la recepción de su hotel cuál es la práctica apropiada.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+            
+            <h3>¿Debo dar propina sobre todo el monto de la cuenta o solo sobre los alimentos y bebidas?</h3>
+            <p>Dé propina sobre el total de alimentos y bebidas, antes o después de impuestos (su preferencia). No dé propina sobre certificados de regalo utilizados: si su cuenta era de $100 pero usó un certificado de regalo de $25, dé propina sobre el total de $100, no los $75 que realmente pagó.</p>
+
+            <h3>¿Qué pasa si el servicio fue terrible?</h3>
+            <p>Primero, determine si fue verdaderamente culpa de su servidor o problemas de cocina/gestión. Si el servidor fue grosero o negligente, déle propina del 10% o menos y hable con un gerente. Si la comida era mala o lenta pero el servidor fue atento y se disculpó, aún le da propina del 15-20%: no es su culpa. Considere escribir una reseña para alertar a otros en lugar de castigar al servidor por problemas del sistema.</p>
+
+            <h3>¿Cómo divido la cuenta cuando las personas ordenaron cantidades muy diferentes?</h3>
+            <p>Enfoque 1: Use una app de división de cuenta (Splitwise, Tab, Plates) que le permite asignar artículos específicos a personas. Enfoque 2: Cada persona suma sus artículos del recibo, calcula su parte del impuesto (su porcentaje del subtotal × impuesto total), añade su porcentaje de propina, y paga esa cantidad. Enfoque 3: Si está cerca, haga que la persona que ordenó significativamente más solo pague $X extra sobre una división equitativa.</p>
+
+            <h3>¿Debería dar propina de menos si uso un cupón o código de descuento?</h3>
+            <p>No, siempre dé propina sobre el precio completo pre-descuento. Su servidor hizo el mismo trabajo independientemente de su descuento. Si su cuenta era de $50 pero tenía un cupón de $10 de descuento, dé propina sobre $50, no $40. Su servidor no debería ganar menos porque usted obtuvo un buen trato.</p>
+
+            <h3>¿Es grosero pedir cheques separados?</h3>
+            <p>No, si lo hace de la manera correcta: (1) Pregunte al comienzo de la comida, no al final, (2) Sea específico sobre cómo desea dividir, (3) Entienda que algunos restaurantes tienen políticas contra dividir cheques para grupos grandes o durante horas pico, (4) Dé propina generosamente si causó trabajo extra. El momento es clave: preguntar cuando ordena es cortés; preguntar cuando está pagando es inconveniente.</p>
+
+            <h3>¿Cuánto debo dar propina a la entrega en comparación con comer en el lugar?</h3>
+            <p>Entrega: 15-20% con un mínimo de $3-5, más en mal tiempo o pedidos grandes. Para llevar: 10% o redondear hacia arriba es cortés, especialmente si alguien empacó cuidadosamente su pedido y verificó dos veces su precisión. Comer en el lugar: 15-20% estándar, 20-25%+ para un servicio excelente. Diferentes niveles de servicio merecen diferentes propinas.</p>
+        </div>
+    </div>
+
+    <script>
+        function setTip(percent) {
+            document.getElementById('tipPercent').value = percent;
+            calculateSplit();
+        }
+
+        function calculateSplit() {
+            const billAmount = parseFloat(document.getElementById('billAmount').value) || 0;
+            const numPeople = parseInt(document.getElementById('numPeople').value) || 1;
+            const tipPercent = parseFloat(document.getElementById('tipPercent').value) || 0;
+            const taxPercent = parseFloat(document.getElementById('taxPercent').value) || 0;
+
+            if (billAmount <= 0 || numPeople <= 0) {
+                document.getElementById('perPerson').textContent = '0.00';
+                document.getElementById('displaySubtotal').textContent = '0.00';
+                document.getElementById('taxAmount').textContent = '0.00';
+                document.getElementById('tipPercentDisplay').textContent = '0';
+                document.getElementById('tipAmount').textContent = '0.00';
+                document.getElementById('grandTotal').textContent = '0.00';
+                return;
+            }
+
+            const taxAmount = billAmount * (taxPercent / 100);
+            const tipAmount = billAmount * (tipPercent / 100);
+            const grandTotal = billAmount + taxAmount + tipAmount;
+            const perPerson = grandTotal / numPeople;
+
+            document.getElementById('perPerson').textContent = perPerson.toFixed(2);
+            document.getElementById('displaySubtotal').textContent = billAmount.toFixed(2);
+            document.getElementById('taxAmount').textContent = taxAmount.toFixed(2);
+            document.getElementById('tipPercentDisplay').textContent = tipPercent;
+            document.getElementById('tipAmount').textContent = tipAmount.toFixed(2);
+            document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateSplit);
+        });
+    </script>
+</body>
+</html>

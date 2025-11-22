@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Amortización - Tabla de Amortización de Préstamos</title>
+    <meta name="description" content="Genere tablas de amortización completas para préstamos. Vea cómo cada pago divide entre capital e interés a lo largo del tiempo.">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Amortización</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Genere una tabla completa de amortización de préstamos que muestre cómo cada pago reduce su saldo.</p>
+
+        <div class="input-group">
+            <label for="loanAmount" class="form-label">Monto del Préstamo ($)</label>
+            <input type="number" id="loanAmount" class="form-input" placeholder="ej., 250000" min="0" step="1000" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="interestRate" class="form-label">Tasa de Interés Anual (%)</label>
+            <input type="number" id="interestRate" class="form-input" placeholder="ej., 6.5" min="0" max="30" step="0.1" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="loanTerm" class="form-label">Plazo del Préstamo (años)</label>
+            <input type="number" id="loanTerm" class="form-input" placeholder="ej., 30" min="1" max="50" step="1" value="30">
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Pago Mensual</span>
+                <span class="result-value">$<span id="monthlyPayment">0.00</span></span>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <div class="result-row">
+                    <span class="result-label">Total Pagado</span>
+                    <span class="result-value">$<span id="totalPaid">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Interés Total</span>
+                    <span class="result-value">$<span id="totalInterest">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Número de Pagos</span>
+                    <span class="result-value"><span id="numPayments">0</span> pagos</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="scheduleContainer" style="display: none; margin-top: 30px;">
+            <h3 style="margin-bottom: 15px;">Tabla de Amortización</h3>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 8px;">
+                    <thead>
+                        <tr style="background: #f3f4f6; border-bottom: 2px solid #e5e7eb;">
+                            <th style="padding: 12px; text-align: left; font-weight: 600;">#</th>
+                            <th style="padding: 12px; text-align: right; font-weight: 600;">Pago</th>
+                            <th style="padding: 12px; text-align: right; font-weight: 600;">Capital</th>
+                            <th style="padding: 12px; text-align: right; font-weight: 600;">Interés</th>
+                            <th style="padding: 12px; text-align: right; font-weight: 600;">Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es la Amortización?</h2>
+            <p>La amortización es el proceso de pagar un préstamo con el tiempo a través de pagos regulares. Cada pago cubre tanto una porción del capital original prestado como el interés acumulado. En préstamos totalmente amortizados como hipotecas, al final del plazo del préstamo, habrá pagado el préstamo completamente.</p>
+            <p>Lo que hace que la amortización sea interesante, y a veces sorprendente, es cómo cada pago se divide entre capital e interés. En los primeros años de un préstamo a largo plazo, la gran mayoría de cada pago va a interés, con solo una pequeña porción reduciendo el capital. A medida que avanza el préstamo, esta proporción cambia gradualmente hasta que, en los últimos años, casi todos los pagos van a capital.</p>
+            <p>Entender la amortización es crucial para tomar decisiones financieras inteligentes sobre préstamos. Le ayuda a visualizar cuánto interés pagará, cuán rápido construye capital, y cómo los pagos extra pueden acortar dramáticamente su préstamo y ahorrar decenas de miles en intereses.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Leer Su Tabla de Amortización</h2>
+            
+            <h3>Número de Pago</h3>
+            <p>Esto simplemente cuenta sus pagos desde 1 hasta el número total (360 para una hipoteca de 30 años, 180 para una de 15 años, etc.). Cada pago típicamente ocurre mensualmente, por lo que el pago #12 es un año después del préstamo, el pago #60 es cinco años después, y así sucesivamente.</p>
+
+            <h3>Monto del Pago</h3>
+            <p>Esta es su pago mensual consistente, calculado para pagar completamente el préstamo durante el plazo especificado. Este número permanece constante para préstamos de tasa fija (es por eso que se llaman "fijos"). Para una hipoteca de $250,000 a 30 años al 6.5%, su pago es de aproximadamente $1,580/mes durante todos los 360 pagos.</p>
+
+            <h3>Capital Pagado</h3>
+            <p>Esta columna muestra cuánto del capital original del préstamo pagó con ese pago específico. En los primeros pagos, esto podría ser solo $200-300 de un pago de $1,580. A medida que el préstamo madura, más y más de cada pago va a capital. Su pago final será casi completamente capital.</p>
+
+            <h3>Interés Pagado</h3>
+            <p>Esto muestra cuánto interés cobró el prestamista para ese período. En los primeros pagos de un préstamo grande, el interés puede consumir $1,200-1,300 de un pago de $1,580. Esto es por qué los primeros años de un préstamo se sienten como si estuviera "tirando dinero": la mayor parte va a interés, no a construir capital.</p>
+
+            <h3>Saldo Restante</h3>
+            <p>El capital del préstamo que aún debe después de ese pago. Esto comienza en su monto completo del préstamo y disminuye gradualmente a $0 para su pago final. Ver este número caer puede ser motivador, aunque puede sentirse lento en los primeros años cuando los pagos de capital son pequeños.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Por Qué los Primeros Pagos Son Principalmente Interés</h2>
+            <p>Muchas personas se sorprenden al aprender que su primer pago podría ser 80-90% interés. Esto no es un truco bancario: es matemática simple.</p>
+            <p>El interés se calcula sobre su saldo pendiente actual. Al principio, debe el monto completo del préstamo, por lo que el interés es alto. Por ejemplo, en un préstamo de $250,000 al 6.5%:</p>
+            <p><strong>Pago 1:</strong> Debe $250,000. Interés mensual: $250,000 × 6.5% ÷ 12 = $1,354. Su pago es $1,580, por lo que $1,354 va a interés, solo $226 va a capital. Nuevo saldo: $249,774.</p>
+            <p><strong>Pago 2:</strong> Ahora debe $249,774. Interés mensual: $249,774 × 6.5% ÷ 12 = $1,353. Su pago aún es $1,580, así que $1,353 va a interés, $227 va a capital. Nuevo saldo: $249,547.</p>
+            <p><strong>Pago 180 (15 años después):</strong> Ahora debe $161,000. Interés mensual: $161,000 × 6.5% ÷ 12 = $872. Su pago aún es $1,580, así que $872 va a interés, $708 va a capital: ¡más del doble del pago de capital que en los primeros pagos!</p>
+            <p><strong>Pago 360 (pago final):</strong> Debe aproximadamente $1,570. Interés mensual: $1,570 × 6.5% ÷ 12 = $8.50. Su pago es $1,580, así que $8.50 va a interés, $1,571.50 va a capital, llevando su saldo a cero.</p>
+            <p>A medida que el saldo disminuye, la porción de interés de cada pago se encoge y la porción de capital crece, incluso aunque su pago total permanezca constante.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Tipos de Préstamos Amortizados</h2>
+            
+            <h3>Hipotecas</h3>
+            <p>Las hipotecas son el ejemplo más común de préstamos totalmente amortizados. Los términos típicos son de 15, 20 o 30 años. Una hipoteca de 30 años tiene pagos mensuales más bajos pero paga significativamente más interés total durante la vida del préstamo. Una hipoteca de 15 años tiene pagos más altos pero construye capital mucho más rápido y ahorra enormemente en interés total.</p>
+
+            <h3>Préstamos de Auto</h3>
+            <p>Los préstamos de vehículos típicamente van de 24 a 84 meses. Como el término es mucho más corto que las hipotecas, el efecto de capital temprano bajo es menos pronunciado, pero aún presente. Términos de préstamo de auto más largos (72-84 meses) significan que podría estar "bajo el agua" (debe más que el valor del auto) durante años debido a la depreciación del auto.</p>
+
+            <h3>Préstamos Personales</h3>
+            <p>Los préstamos personales típicamente se amortizan durante 2-7 años. Con términos más cortos y a menudo tasas de interés más altas, estos préstamos acumulan menos interés total que las hipotecas a largo plazo, pero las tasas de interés más altas significan que aún paga sustancialmente más que el capital original.</p>
+
+            <h3>Préstamos Estudiantiles</h3>
+            <p>Los préstamos estudiantiles federales típicamente se amortizan durante 10 años (plan de pago estándar), aunque están disponibles términos más largos. Los préstamos privados para estudiantes pueden tener períodos de amortización variables. Los préstamos estudiantiles a menudo tienen la complejidad añadida de períodos de gracia y múltiples saldos de préstamos con diferentes tasas.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Impacto de la Tasa de Interés en la Amortización</h2>
+            
+            <h3>Comparación de Hipoteca de $250,000 a 30 Años</h3>
+            <p><strong>Al 3% de interés:</strong></p>
+            <p>Pago mensual: $1,054 | Interés total: $129,443 | Pago total: $379,443</p>
+            
+            <p><strong>Al 5% de interés:</strong></p>
+            <p>Pago mensual: $1,342 | Interés total: $233,139 | Pago total: $483,139</p>
+            
+            <p><strong>Al 7% de interés:</strong></p>
+            <p>Pago mensual: $1,663 | Interés total: $348,772 | Pago total: $598,772</p>
+            
+            <p><strong>Al 9% de interés:</strong></p>
+            <p>Pago mensual: $2,011 | Interés total: $474,085 | Pago total: $724,085</p>
+            
+            <h3>Las Conclusiones Clave</h3>
+            <p>Una hipoteca del 9% vs. una del 3% significa: (1) Un pago mensual un 91% más alto ($957 más por mes), (2) $344,642 más pagado en interés durante la vida del préstamo: ¡casi un préstamo completo adicional!, (3) Los primeros años que son casi completamente interés (95%+ de cada pago temprano al 9%).</p>
+            <p>Esto es por qué las tasas de interés importan tanto y por qué vale la pena refinanciar cuando las tasas bajan. Incluso una reducción del 1% en una hipoteca grande puede ahorrar decenas de miles de dólares durante la vida del préstamo.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Hipoteca de 15 Años vs. 30 Años</h2>
+            <p>Esta es una de las decisiones más grandes en la financiación de vivienda. Comparemos un préstamo de $250,000 al 6% de interés:</p>
+            
+            <h3>Hipoteca de 30 Años</h3>
+            <p><strong>Pago mensual:</strong> $1,499</p>
+            <p><strong>Total pagado:</strong> $539,595</p>
+            <p><strong>Interés total:</strong> $289,595</p>
+            <p><strong>Capital después de 5 años:</strong> $23,000 (9.2% del préstamo)</p>
+            <p><strong>Ventajas:</strong> Pago mensual mucho más bajo, más flujo de efectivo mensual, flexibilidad para invertir la diferencia</p>
+            <p><strong>Desventajas:</strong> Interés total masivo, construye capital lentamente, pagando durante la jubilación</p>
+            
+            <h3>Hipoteca de 15 Años</h3>
+            <p><strong>Pago mensual:</strong> $2,109</p>
+            <p><strong>Total pagado:</strong> $379,673</p>
+            <p><strong>Interés total:</strong> $129,673</p>
+            <p><strong>Capital después de 5 años:</strong> $70,000 (28% del préstamo)</p>
+            <p><strong>Ventajas:</strong> Ahorra $159,922 en interés, construye capital 3x más rápido, libre de deuda 15 años antes</p>
+            <p><strong>Desventajas:</strong> Pago $610/mes más alto, menos flexibilidad mensual, más difícil calificar</p>
+            
+            <h3>La Decisión Correcta Depende De</h3>
+            <p><strong>Elija 15 años si:</strong> Puede cómodamente pagar el pago más alto, prioriza estar libre de deuda, quiere maximizar ahorros de interés, planea estar en la casa a largo plazo</p>
+            <p><strong>Elija 30 años si:</strong> Necesita un pago mensual más bajo, tiene otras deudas de alto interés para pagar, quiere flexibilidad para invertir la diferencia, ingresos variables/inciertos</p>
+            <p><strong>Opción híbrida:</strong> Obtenga una hipoteca de 30 años pero haga pagos extra como si fuera de 15 años. Esto proporciona flexibilidad: si hay emergencias, puede volver a caer al pago más bajo, pero en tiempos buenos, paga extra y ahorra en interés.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Impacto de Pagos Extra</h2>
+            <p>Hacer pagos extra es una de las estrategias financieras más poderosas para préstamos amortizados. Como los primeros años son principalmente interés, los pagos extra directamente al capital tienen un impacto desproporcionado.</p>
+            
+            <h3>Ejemplo: Hipoteca de $250,000 a 30 Años al 6%</h3>
+            <p><strong>Pago estándar:</strong> $1,499/mes, $289,595 interés total, pagado en 360 meses</p>
+            
+            <p><strong>+ $100 extra mensual:</strong></p>
+            <p>Pagado en 299 meses (24.9 años) | Ahorra $67,816 en interés | Libre de deuda 5.1 años antes</p>
+            
+            <p><strong>+ $250 extra mensual:</strong></p>
+            <p>Pagado en 246 meses (20.5 años) | Ahorra $114,943 en interés | Libre de deuda 9.5 años antes</p>
+            
+            <p><strong>+ $500 extra mensual:</strong></p>
+            <p>Pagado en 197 meses (16.4 años) | Ahorra $156,060 en interés | Libre de deuda 13.6 años antes</p>
+            
+            <h3>Estrategias de Pago Extra</h3>
+            <p><strong>Pago bimensual:</strong> En lugar de un pago mensual, pague la mitad cada dos semanas. Esto resulta en 26 medios pagos (13 pagos completos) por año en lugar de 12, ahorrando años y mucho interés.</p>
+            <p><strong>Bonificaciones/devoluciones de impuestos:</strong> Aplique pagos únicos inesperados directamente al capital del préstamo. Incluso pagos extra infrecuentes tienen un impacto.</p>
+            <p><strong>Aumentar con aumentos:</strong> Cuando obtenga un aumento, aumente su pago de préstamo en $50-100. No sentirá la diferencia (sus ingresos netos aún aumentaron), pero el impacto en el préstamo es significativo.</p>
+            <p><strong>Redondear hacia arriba:</strong> Si su pago es $1,342, redondee a $1,400 o $1,500. Los $58-158 extra al mes se suman con el tiempo.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Tasa Fija vs. Variable en Amortización</h2>
+            
+            <h3>Préstamos de Tasa Fija</h3>
+            <p>La tasa de interés nunca cambia durante la vida del préstamo, por lo que su pago mensual permanece constante. Esto hace que la presupuestación sea fácil y proporciona protección contra el aumento de tasas. La tabla de amortización que calcula al inicio del préstamo es exacta para toda la vida del préstamo.</p>
+            
+            <h3>Préstamos de Tasa Ajustable (ARM)</h3>
+            <p>La tasa de interés puede cambiar periódicamente basado en condiciones de mercado. Los ARM típicamente comienzan con una tasa más baja que los préstamos fijos, pero pueden aumentar más tarde. Términos comunes son 5/1 ARM (tasa fija por 5 años, luego ajusta anualmente) o 7/1 ARM (tasa fija por 7 años).</p>
+            <p><strong>Ventajas:</strong> Tasa inicial más baja, pagos iniciales más bajos, bueno si planea vender/refinanciar antes del ajuste</p>
+            <p><strong>Desventajas:</strong> Incertidumbre en pagos futuros, podrían aumentar significativamente si las tasas de mercado suben, difícil de presupuestar a largo plazo</p>
+            <p><strong>Cuándo considerar un ARM:</strong> Planea moverse dentro del período fijo, espera que sus ingresos aumenten significativamente, cree que las tasas bajarán, planea refinanciar antes del ajuste</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Errores Comunes de Amortización</h2>
+            
+            <h3>No Entender la División Capital/Interés</h3>
+            <p>Error: Asumir que cada pago es 50/50 capital e interés, o que reduce el capital de manera uniforme. Realidad: Los primeros años son principalmente interés. Si vende su casa después de 5 años en una hipoteca de 30 años, podría haber pagado solo el 10-15% del capital.</p>
+
+            <h3>Ignorar el Impacto de Pagos Extra</h3>
+            <p>Error: Pensar que pagos extra no hacen mucha diferencia. Realidad: Incluso $50-100 extra mensuales pueden ahorrar decenas de miles en interés y años fuera del préstamo. Los pagos extra aplicados al capital en los primeros años tienen un impacto masivo.</p>
+
+            <h3>No Especificar "Aplicar a Capital"</h3>
+            <p>Error: Hacer pagos extra sin instruir al prestamista que los aplique al capital. Realidad: Algunos prestamistas pueden aplicar pagos extra a interés futuro o mantenerlos en depósito a menos que especifique "aplicar a capital". Siempre indique explícitamente que los fondos extra deben reducir el saldo de capital.</p>
+
+            <h3>Refinanciamiento Excesivo</h3>
+            <p>Error: Refinanciar repetidamente a términos de 30 años cada pocos años. Realidad: Si refinancia de una hipoteca de 30 años de 5 años a una nueva de 30 años, reinicia el reloj de amortización. Terminará pagando durante 35+ años totales y principalmente interés durante todo el tiempo. Al refinanciar, intente mantener o acortar su período de pago restante.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+            
+            <h3>¿Por qué pago tanto interés en los primeros años?</h3>
+            <p>El interés se calcula sobre su saldo pendiente actual. Al principio, debe el monto completo del préstamo, por lo que el interés es alto. A medida que el capital disminuye lentamente, el cargo de interés también disminuye, permitiendo que más de cada pago vaya a capital. Esto es matemática simple, no un truco bancario: es cómo funcionan los préstamos amortizados.</p>
+
+            <h3>¿Debería pagar mi hipoteca temprano o invertir en su lugar?</h3>
+            <p>Depende de las tasas de interés y el retorno de inversión. Si su hipoteca es del 6% y puede ganar de manera confiable el 8% en inversiones, matemáticamente es mejor invertir. Sin embargo, pagar su hipoteca es un retorno garantizado libre de riesgo, proporciona paz mental y reduce el riesgo financiero general. Muchos expertos recomiendan equilibrar: contribuir a cuentas de jubilación (especialmente si el empleador iguala) mientras también hace algunos pagos extra de hipoteca.</p>
+
+            <h3>¿Cuánto capital necesito para evitar PMI?</h3>
+            <p>El seguro hipotecario privado (PMI) típicamente se requiere cuando tiene menos del 20% de capital. Una vez que alcanza el 20% de capital (debe el 80% o menos), puede solicitar que se elimine el PMI. Usar una tabla de amortización le muestra exactamente cuándo alcanzará este umbral. Los pagos extra pueden ayudarlo a alcanzar el 20% más rápido y eliminar el PMI antes.</p>
+
+            <h3>¿Qué sucede si hago pagos extra?</h3>
+            <p>Los pagos extra aplicados al capital reducen su saldo pendiente más rápido de lo que la tabla de amortización original muestra. Esto significa que cada pago futuro tendrá una porción de interés más baja y una porción de capital más alta. Pagos extra constantes pueden acortar significativamente su préstamo y ahorrar enormemente en interés, pero su pago mensual requerido permanece igual (a menos que refinancie).</p>
+
+            <h3>¿Puedo usar esto para préstamos solo de interés?</h3>
+            <p>No, esta calculadora es para préstamos totalmente amortizados. Los préstamos solo de interés no se amortizan durante el período solo de interés: usted paga solo interés sin reducir el capital. Después de que expira el período solo de interés (típicamente 5-10 años), el préstamo se reamortiza sobre el término restante, a menudo resultando en aumentos dramáticos de pago.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculateAmortization() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const years = parseInt(document.getElementById('loanTerm').value) || 0;
+
+            if (loanAmount <= 0 || years <= 0) {
+                document.getElementById('monthlyPayment').textContent = '0.00';
+                document.getElementById('totalPaid').textContent = '0';
+                document.getElementById('totalInterest').textContent = '0';
+                document.getElementById('numPayments').textContent = '0';
+                document.getElementById('scheduleContainer').style.display = 'none';
+                return;
+            }
+
+            const monthlyRate = annualRate / 100 / 12;
+            const numPayments = years * 12;
+
+            let monthlyPayment;
+            if (annualRate === 0) {
+                monthlyPayment = loanAmount / numPayments;
+            } else {
+                monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
+                                (Math.pow(1 + monthlyRate, numPayments) - 1);
+            }
+
+            const totalPaid = monthlyPayment * numPayments;
+            const totalInterest = totalPaid - loanAmount;
+
+            document.getElementById('monthlyPayment').textContent = monthlyPayment.toFixed(2);
+            document.getElementById('totalPaid').textContent = totalPaid.toLocaleString('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('totalInterest').textContent = totalInterest.toLocaleString('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('numPayments').textContent = numPayments;
+
+            let balance = loanAmount;
+            let scheduleHTML = '';
+
+            for (let i = 1; i <= numPayments; i++) {
+                const interestPayment = balance * monthlyRate;
+                const principalPayment = monthlyPayment - interestPayment;
+                balance -= principalPayment;
+
+                if (balance < 0) balance = 0;
+
+                if (i <= 12 || i > numPayments - 12 || i % 12 === 0) {
+                    scheduleHTML += `<tr style="border-bottom: 1px solid #e5e7eb;">
+                        <td style="padding: 12px;">${i}</td>
+                        <td style="padding: 12px; text-align: right;">$${monthlyPayment.toFixed(2)}</td>
+                        <td style="padding: 12px; text-align: right;">$${principalPayment.toFixed(2)}</td>
+                        <td style="padding: 12px; text-align: right;">$${interestPayment.toFixed(2)}</td>
+                        <td style="padding: 12px; text-align: right;">$${balance.toFixed(2)}</td>
+                    </tr>`;
+                } else if (i === 13) {
+                    scheduleHTML += `<tr><td colspan="5" style="padding: 12px; text-align: center; color: #6b7280; font-style: italic;">... (mostrando primer año, hitos anuales y año final) ...</td></tr>`;
+                }
+            }
+
+            document.getElementById('scheduleBody').innerHTML = scheduleHTML;
+            document.getElementById('scheduleContainer').style.display = 'block';
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateAmortization);
+        });
+    </script>
+</body>
+</html>

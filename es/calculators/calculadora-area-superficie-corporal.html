@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Área de Superficie Corporal (ASC) - Calculadora de Fórmula ASC Médica</title>
+    <meta name="description" content="Calcule el área de superficie corporal (ASC) usando múltiples fórmulas médicas incluyendo Mosteller, DuBois, Haycock y más. Esencial para dosificación de medicamentos y evaluaciones médicas.">
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .formula-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .formula-tab {
+            padding: 10px 16px;
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .formula-tab.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        .formula-tab:hover {
+            border-color: #3b82f6;
+        }
+        .unit-toggle {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            background: #f3f4f6;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .unit-option {
+            flex: 1;
+            padding: 10px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .unit-option.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Área de Superficie Corporal (ASC)</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calcule su área de superficie corporal usando fórmulas médicas científicamente validadas para dosificación precisa de medicamentos y evaluaciones clínicas.</p>
+
+        <div class="unit-toggle">
+            <div class="unit-option active" onclick="setUnit('metric')" id="metricBtn">
+                <strong>Métrico</strong><br>
+                <small>cm / kg</small>
+            </div>
+            <div class="unit-option" onclick="setUnit('imperial')" id="imperialBtn">
+                <strong>Imperial</strong><br>
+                <small>pies/pulg / lbs</small>
+            </div>
+        </div>
+
+        <div id="metricInputs" style="display: block;">
+            <div class="input-group">
+                <label for="heightCm" class="form-label">Altura (cm)</label>
+                <input type="number" id="heightCm" class="form-input" placeholder="ej., 175" min="0" step="0.1" value="">
+            </div>
+            <div class="input-group">
+                <label for="weightKg" class="form-label">Peso (kg)</label>
+                <input type="number" id="weightKg" class="form-input" placeholder="ej., 70" min="0" step="0.1" value="">
+            </div>
+        </div>
+
+        <div id="imperialInputs" style="display: none;">
+            <div class="input-group">
+                <label for="heightFt" class="form-label">Altura (pies)</label>
+                <input type="number" id="heightFt" class="form-input" placeholder="ej., 5" min="0" step="1" value="">
+            </div>
+            <div class="input-group">
+                <label for="heightIn" class="form-label">Altura (pulgadas)</label>
+                <input type="number" id="heightIn" class="form-input" placeholder="ej., 9" min="0" max="11" step="1" value="">
+            </div>
+            <div class="input-group">
+                <label for="weightLbs" class="form-label">Peso (lbs)</label>
+                <input type="number" id="weightLbs" class="form-input" placeholder="ej., 154" min="0" step="0.1" value="">
+            </div>
+        </div>
+
+        <div style="margin: 30px 0;">
+            <h3 style="margin-bottom: 15px; font-size: 16px;">Seleccionar Fórmula:</h3>
+            <div class="formula-tabs">
+                <div class="formula-tab active" onclick="selectFormula('mosteller')" id="mostellerTab">Mosteller</div>
+                <div class="formula-tab" onclick="selectFormula('dubois')" id="duboisTab">DuBois & DuBois</div>
+                <div class="formula-tab" onclick="selectFormula('haycock')" id="haycockTab">Haycock</div>
+                <div class="formula-tab" onclick="selectFormula('gehan')" id="gehanTab">Gehan & George</div>
+                <div class="formula-tab" onclick="selectFormula('all')" id="allTab">Todas las Fórmulas</div>
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Área de Superficie Corporal (ASC)</span>
+                <span class="result-value" id="bsaValue">0.00 m²</span>
+            </div>
+            <div id="additionalResults" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <h4 style="margin-bottom: 15px; font-size: 14px; color: #6b7280;">Comparación de Todas las Fórmulas:</h4>
+                <div style="display: grid; gap: 10px;">
+                    <div class="result-row">
+                        <span class="result-label">Mosteller</span>
+                        <span class="result-value" id="mostellerResult">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">DuBois & DuBois</span>
+                        <span class="result-value" id="duboisResult">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Haycock</span>
+                        <span class="result-value" id="haycockResult">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Gehan & George</span>
+                        <span class="result-value" id="gehanResult">-</span>
+                    </div>
+                    <div class="result-row" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e5e7eb;">
+                        <span class="result-label"><strong>ASC Promedio</strong></span>
+                        <span class="result-value" id="averageResult"><strong>-</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 8px;">
+            <p style="margin: 0; font-size: 14px; color: #92400e;"><strong>Descargo Médico:</strong> Esta calculadora es solo para fines informativos. Siempre consulte a profesionales de la salud para dosificación de medicamentos y decisiones médicas.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el Área de Superficie Corporal (ASC)?</h2>
+            <p>El Área de Superficie Corporal (ASC) es una medida de la superficie total del cuerpo humano, típicamente expresada en metros cuadrados (m²). El ASC es uno de los parámetros fisiológicos más importantes en medicina, utilizado extensamente en la práctica clínica para calcular dosis apropiadas de medicamentos, determinar tratamientos de quimioterapia, evaluar la función cardíaca y evaluar la gravedad de quemaduras.</p>
+            <p>A diferencia de los cálculos simples basados en peso, el ASC tiene en cuenta tanto la altura como el peso, proporcionando una representación más precisa de la masa metabólica. Esto es crucial porque muchos procesos fisiológicos, incluyendo la tasa metabólica, el aclaramiento de medicamentos y la función orgánica, se correlacionan más estrechamente con el área de superficie corporal que solo con el peso.</p>
+            <p>El ASC adulto promedio varía de 1.6 a 2.0 m², con variaciones basadas en altura, peso, edad y sexo. Entender su ASC puede ser importante para varios contextos médicos, desde asegurar la dosificación segura de medicamentos hasta evaluar métricas de salud general.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Fórmulas de Cálculo de ASC</h2>
+            <p>Durante el siglo pasado, investigadores médicos han desarrollado varias fórmulas para calcular el ASC, cada una con su propia metodología y nivel de precisión. Nuestra calculadora incluye las cuatro fórmulas más utilizadas y científicamente validadas:</p>
+            
+            <h3>1. Fórmula de Mosteller (1987)</h3>
+            <p>La fórmula de Mosteller es la más comúnmente utilizada en la práctica médica moderna debido a su simplicidad y precisión. Es la más fácil de calcular manualmente y es recomendada por muchas guías clínicas:</p>
+            <p><strong>ASC (m²) = √[(Altura en cm × Peso en kg) / 3600]</strong></p>
+            <p>Esta fórmula es particularmente favorecida en oncología para cálculos de dosificación de quimioterapia y se considera el estándar de oro en muchos entornos clínicos.</p>
+
+            <h3>2. Fórmula de DuBois & DuBois (1916)</h3>
+            <p>La fórmula más antigua y establecida, desarrollada por Eugene DuBois y su colega. A pesar de tener más de un siglo, permanece altamente precisa y aún se usa ampliamente:</p>
+            <p><strong>ASC (m²) = 0.007184 × Altura^0.725 × Peso^0.425</strong></p>
+            <p>Esta fórmula se derivó de solo nueve sujetos pero ha sido validada extensamente y muestra una correlación excelente con mediciones reales.</p>
+
+            <h3>3. Fórmula de Haycock (1978)</h3>
+            <p>Desarrollada específicamente para pacientes pediátricos pero aplicable a adultos también. Tiende a dar valores ligeramente más altos para bebés y niños:</p>
+            <p><strong>ASC (m²) = 0.024265 × Altura^0.3964 × Peso^0.5378</strong></p>
+            <p>Esta fórmula es particularmente útil en medicina pediátrica y cuidado neonatal.</p>
+
+            <h3>4. Fórmula de Gehan & George (1970)</h3>
+            <p>Desarrollada con un rango más amplio de tamaños corporales, incluyendo tanto niños como adultos. Es particularmente precisa para pacientes con tamaños corporales extremos:</p>
+            <p><strong>ASC (m²) = 0.0235 × Altura^0.42246 × Peso^0.51456</strong></p>
+            <p>Esta fórmula se usa a menudo al tratar pacientes con obesidad o muy bajo peso corporal.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Aplicaciones Médicas del ASC</h2>
+            
+            <h3>Dosificación de Quimioterapia</h3>
+            <p>El ASC se usa más críticamente en oncología para calcular dosis de medicamentos de quimioterapia. La mayoría de los protocolos de quimioterapia especifican dosis en mg/m² de ASC en lugar de mg/kg de peso corporal. Esto es porque el ASC proporciona una mejor estimación de la masa metabólica y las tasas de aclaramiento de medicamentos, ayudando a maximizar el beneficio terapéutico mientras se minimizan los efectos secundarios tóxicos.</p>
+
+            <h3>Dosificación de Medicamentos en Pediatría</h3>
+            <p>Para niños, la dosificación basada en ASC es a menudo más precisa que la dosificación basada en peso, especialmente para medicamentos con ventanas terapéuticas estrechas. Muchos medicamentos pediátricos, incluyendo inmunosupresores, ciertos antibióticos y medicamentos cardíacos, se prescriben basándose en el ASC para asegurar la dosificación apropiada en diferentes edades y tamaños.</p>
+
+            <h3>Evaluación del Índice Cardíaco</h3>
+            <p>El índice cardíaco (IC), que mide la eficiencia de bombeo del corazón, se calcula dividiendo el gasto cardíaco por el ASC. El índice cardíaco normal varía de 2.5 a 4.0 L/min/m². Esta estandarización permite a los médicos comparar la función cardíaca entre pacientes de diferentes tamaños y evaluar el rendimiento del corazón relativo al tamaño corporal.</p>
+
+            <h3>Evaluación de Quemaduras</h3>
+            <p>En medicina de quemaduras, la "Regla de los Nueves" y los gráficos de Lund-Browder usan porcentajes de ASC para determinar la extensión de las quemaduras. Este cálculo es crucial para protocolos de reanimación con fluidos (como la fórmula de Parkland), que calculan las necesidades de reemplazo de fluidos basadas en el porcentaje de ASC quemado.</p>
+
+            <h3>Función Renal (TFG)</h3>
+            <p>La Tasa de Filtración Glomerular (TFG), un indicador clave de la función renal, se normaliza típicamente al ASC (reportada como mL/min/1.73 m²). Esto permite una comparación significativa de la función renal entre pacientes de diferentes tamaños.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar Esta Calculadora de ASC</h2>
+            <p><strong>Paso 1:</strong> Elija su sistema de unidades preferido (Métrico o Imperial) usando el interruptor en la parte superior de la calculadora.</p>
+            <p><strong>Paso 2:</strong> Ingrese su altura. Para métrico, ingrese centímetros. Para imperial, ingrese pies y pulgadas por separado.</p>
+            <p><strong>Paso 3:</strong> Ingrese su peso en kilogramos (métrico) o libras (imperial).</p>
+            <p><strong>Paso 4:</strong> Seleccione qué fórmula desea usar, o elija "Todas las Fórmulas" para ver resultados de los cuatro métodos y su promedio.</p>
+            <p><strong>Paso 5:</strong> Su ASC se calculará automáticamente a medida que escribe. El resultado aparece en metros cuadrados (m²).</p>
+            <p>La calculadora realiza todas las conversiones de unidades automáticamente, por lo que puede cambiar entre métrico e imperial en cualquier momento para verificar sus medidas.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo Su Resultado de ASC</h2>
+            <p>Su resultado de Área de Superficie Corporal proporciona información sobre su tamaño fisiológico y tiene implicaciones para varios tratamientos médicos y evaluaciones:</p>
+            
+            <h3>Rangos Típicos de ASC</h3>
+            <p><strong>Hombres Adultos:</strong> El ASC promedio varía de 1.9 a 2.0 m², con individuos más grandes alcanzando 2.5 m² o más.</p>
+            <p><strong>Mujeres Adultas:</strong> El ASC promedio varía de 1.6 a 1.7 m², típicamente más bajo que los hombres debido a una estatura generalmente más pequeña.</p>
+            <p><strong>Niños:</strong> El ASC varía significativamente con la edad. Los recién nacidos tienen un ASC de alrededor de 0.25 m², que aumenta a aproximadamente 1.0 m² a los 10 años.</p>
+            <p><strong>Adolescentes:</strong> El ASC se acerca a valores adultos durante la adolescencia, con variación individual significativa.</p>
+
+            <h3>Significado Clínico</h3>
+            <p>Si está recibiendo tratamiento médico que involucra dosificación basada en ASC, su proveedor de atención médica usará su medición exacta de ASC para calcular cantidades apropiadas de medicamentos. Nunca intente ajustar medicamentos prescritos basándose en cálculos de ASC sin consultar a su médico.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Por Qué Múltiples Fórmulas de ASC?</h2>
+            <p>Podría preguntarse por qué hay múltiples fórmulas para calcular la misma medición. La razón es que medir directamente el área de superficie corporal real es extremadamente difícil e impráctico en entornos clínicos.</p>
+            <p>Cada fórmula representa un enfoque matemático diferente para estimar el ASC basado en altura y peso. Las fórmulas se desarrollaron usando diferentes poblaciones y metodologías, lo que lleva a resultados ligeramente diferentes. En la práctica, las diferencias entre fórmulas suelen ser pequeñas (típicamente dentro del 5-10% entre sí) y rara vez son clínicamente significativas para la mayoría de las aplicaciones.</p>
+            <p>La práctica médica moderna tiende a favorecer la fórmula de Mosteller por su simplicidad y facilidad de cálculo, pero muchas instituciones continúan usando la fórmula DuBois debido a su larga historia y validación extensa.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>ASC en Poblaciones Especiales</h2>
+            
+            <h3>Obesidad e IMC Alto</h3>
+            <p>Para individuos con obesidad (IMC > 30), los cálculos de ASC se vuelven más complejos. Algunos medicamentos pueden dosificarse en peso corporal ajustado o peso corporal ideal en lugar del ASC real para evitar sobredosificación.</p>
+
+            <h3>Pacientes Pediátricos</h3>
+            <p>El ASC de los niños cambia rápidamente durante los estirones de crecimiento, requiriendo recálculo frecuente para tratamientos continuos. La fórmula de Haycock se prefiere a menudo para aplicaciones pediátricas, aunque la fórmula de Mosteller también se usa ampliamente.</p>
+
+            <h3>Pacientes Ancianos</h3>
+            <p>A medida que las personas envejecen, la composición corporal cambia con pérdida de masa muscular y cambios en la distribución de grasa. Mientras que los cálculos de ASC permanecen iguales, los pacientes ancianos pueden requerir ajustes de dosis basados en la función renal y otros factores más allá del ASC solo.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Desarrollo Histórico del ASC</h2>
+            <p>El concepto de área de superficie corporal surgió a finales del siglo XIX y principios del XX cuando médicos y fisiólogos buscaban entender las tasas metabólicas y la dosificación de medicamentos. Los primeros investigadores reconocieron que la tasa metabólica no se correlacionaba directamente con el peso corporal: los animales más grandes tenían tasas metabólicas más bajas por kilogramo que los animales más pequeños.</p>
+            <p>En 1916, Eugene DuBois y su colega desarrollaron la primera fórmula de ASC ampliamente aceptada midiendo el área de superficie corporal real de nueve sujetos usando un método de recubrimiento. Su fórmula demostró ser notablemente precisa y permaneció como el estándar clínico durante décadas.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Limitaciones y Consideraciones</h2>
+            <p>Aunque el ASC es una herramienta clínica extremadamente útil, tiene limitaciones que los proveedores de atención médica deben considerar:</p>
+            
+            <h3>Variaciones en la Composición Corporal</h3>
+            <p>Las fórmulas de ASC asumen una composición corporal promedio. Los individuos con porcentajes de grasa corporal muy altos o muy bajos pueden tener áreas de superficie reales que difieren de los valores calculados.</p>
+
+            <h3>Diferencias Metabólicas Individuales</h3>
+            <p>Dos personas con ASC idéntico pueden metabolizar medicamentos de manera diferente debido a factores genéticos, función orgánica, edad o estados de enfermedad. El ASC es un punto de partida para la dosificación, no el único factor considerado.</p>
+
+            <h3>Precisión de la Medición</h3>
+            <p>La precisión del cálculo de ASC depende completamente de mediciones precisas de altura y peso. Los errores en estas mediciones básicas se compararán en el cálculo final de ASC.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>ASC vs. IMC: Entendiendo la Diferencia</h2>
+            <p>El Área de Superficie Corporal (ASC) y el Índice de Masa Corporal (IMC) se confunden frecuentemente pero miden cosas completamente diferentes:</p>
+            <p><strong>ASC (Área de Superficie Corporal):</strong> Mide el área de superficie total del cuerpo en metros cuadrados. Se usa principalmente para cálculos de dosificación médica y evaluaciones fisiológicas.</p>
+            <p><strong>IMC (Índice de Masa Corporal):</strong> Una relación de peso a altura (kg/m²) utilizada para categorizar a los individuos como bajo peso, peso normal, sobrepeso u obeso. El IMC es una herramienta de detección para categorías de peso y riesgos de salud.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+            
+            <h3>¿Qué fórmula de ASC es más precisa?</h3>
+            <p>Las cuatro fórmulas incluidas en esta calculadora están científicamente validadas y clínicamente aceptadas. La fórmula de Mosteller es actualmente la más utilizada debido a su simplicidad. Para la mayoría de las personas, todas las fórmulas darán resultados muy similares (dentro del 5-10%).</p>
+
+            <h3>¿Por qué mi ASC es diferente de lo que calculó mi médico?</h3>
+            <p>Las diferencias pueden surgir de: (1) Uso de diferentes fórmulas, (2) Ligeras variaciones en las mediciones de altura o peso, (3) Diferencias de redondeo en los cálculos. Las pequeñas diferencias (dentro de 0.05 m²) generalmente no son clínicamente significativas.</p>
+
+            <h3>¿Puedo usar el ASC para calcular mis propias dosis de medicamentos?</h3>
+            <p>No. Aunque el ASC se usa para la dosificación de medicamentos, muchos otros factores afectan las dosis apropiadas, incluyendo la función renal, función hepática, edad, otros medicamentos y estados de enfermedad específicos. Nunca ajuste medicamentos sin consultar a su proveedor de atención médica.</p>
+
+            <h3>¿Con qué frecuencia debe recalcularse el ASC?</h3>
+            <p>Para adultos con peso estable, el recálculo anual suele ser suficiente a menos que se esté sometiendo a tratamiento que requiera dosificación basada en ASC. Para niños, el ASC debe recalcularse cada pocos meses durante períodos de crecimiento rápido.</p>
+
+            <h3>¿Es mejor o peor un ASC más alto?</h3>
+            <p>El ASC es simplemente una medición: no es inherentemente bueno ni malo. Las personas más altas y pesadas naturalmente tienen un ASC más alto, mientras que las personas más bajas y ligeras tienen un ASC más bajo. Lo que importa es si su ASC es apropiado para su altura y constitución.</p>
+
+            <h3>¿Por qué las dosis de quimioterapia usan ASC en lugar de peso?</h3>
+            <p>Los medicamentos de quimioterapia son a menudo altamente tóxicos con ventanas terapéuticas estrechas: la diferencia entre una dosis efectiva y una dosis peligrosa es pequeña. El ASC proporciona una mejor estimación de la masa metabólica y el aclaramiento de medicamentos que el peso solo, especialmente para pacientes en los extremos del tamaño corporal.</p>
+        </div>
+
+        <div style="margin-top: 50px; padding-top: 30px; border-top: 2px solid #e5e7eb;">
+            <p style="text-align: center; color: #6b7280; font-size: 14px;">
+                <strong>Descargo Médico:</strong> Esta calculadora de ASC está destinada solo para fines educativos e informativos. No debe usarse como sustituto del consejo, diagnóstico o tratamiento médico profesional. Siempre consulte a profesionales de la salud calificados para decisiones médicas, dosificación de medicamentos y evaluaciones de salud.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let currentUnit = 'metric';
+        let currentFormula = 'mosteller';
+
+        function setUnit(unit) {
+            currentUnit = unit;
+            
+            if (unit === 'metric') {
+                document.getElementById('metricInputs').style.display = 'block';
+                document.getElementById('imperialInputs').style.display = 'none';
+                document.getElementById('metricBtn').classList.add('active');
+                document.getElementById('imperialBtn').classList.remove('active');
+            } else {
+                document.getElementById('metricInputs').style.display = 'none';
+                document.getElementById('imperialInputs').style.display = 'block';
+                document.getElementById('metricBtn').classList.remove('active');
+                document.getElementById('imperialBtn').classList.add('active');
+            }
+            
+            calculateBSA();
+        }
+
+        function selectFormula(formula) {
+            currentFormula = formula;
+            
+            document.querySelectorAll('.formula-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(formula + 'Tab').classList.add('active');
+            
+            if (formula === 'all') {
+                document.getElementById('additionalResults').style.display = 'block';
+            } else {
+                document.getElementById('additionalResults').style.display = 'none';
+            }
+            
+            calculateBSA();
+        }
+
+        function calculateBSA() {
+            let heightCm, weightKg;
+            
+            if (currentUnit === 'metric') {
+                heightCm = parseFloat(document.getElementById('heightCm').value) || 0;
+                weightKg = parseFloat(document.getElementById('weightKg').value) || 0;
+            } else {
+                const heightFt = parseFloat(document.getElementById('heightFt').value) || 0;
+                const heightIn = parseFloat(document.getElementById('heightIn').value) || 0;
+                const weightLbs = parseFloat(document.getElementById('weightLbs').value) || 0;
+                
+                heightCm = (heightFt * 12 + heightIn) * 2.54;
+                weightKg = weightLbs * 0.453592;
+            }
+            
+            if (heightCm <= 0 || weightKg <= 0) {
+                document.getElementById('bsaValue').textContent = '0.00 m²';
+                return;
+            }
+            
+            const mosteller = Math.sqrt((heightCm * weightKg) / 3600);
+            const dubois = 0.007184 * Math.pow(heightCm, 0.725) * Math.pow(weightKg, 0.425);
+            const haycock = 0.024265 * Math.pow(heightCm, 0.3964) * Math.pow(weightKg, 0.5378);
+            const gehan = 0.0235 * Math.pow(heightCm, 0.42246) * Math.pow(weightKg, 0.51456);
+            
+            if (currentFormula === 'mosteller') {
+                document.getElementById('bsaValue').textContent = mosteller.toFixed(2) + ' m²';
+            } else if (currentFormula === 'dubois') {
+                document.getElementById('bsaValue').textContent = dubois.toFixed(2) + ' m²';
+            } else if (currentFormula === 'haycock') {
+                document.getElementById('bsaValue').textContent = haycock.toFixed(2) + ' m²';
+            } else if (currentFormula === 'gehan') {
+                document.getElementById('bsaValue').textContent = gehan.toFixed(2) + ' m²';
+            } else if (currentFormula === 'all') {
+                const average = (mosteller + dubois + haycock + gehan) / 4;
+                document.getElementById('bsaValue').textContent = average.toFixed(2) + ' m²';
+                
+                document.getElementById('mostellerResult').textContent = mosteller.toFixed(3) + ' m²';
+                document.getElementById('duboisResult').textContent = dubois.toFixed(3) + ' m²';
+                document.getElementById('haycockResult').textContent = haycock.toFixed(3) + ' m²';
+                document.getElementById('gehanResult').textContent = gehan.toFixed(3) + ' m²';
+                document.getElementById('averageResult').textContent = average.toFixed(3) + ' m²';
+            }
+        }
+
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('input', calculateBSA);
+        });
+    </script>
+</body>
+</html>

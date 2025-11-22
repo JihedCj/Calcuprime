@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Surface Area (BSA) Calculator - Medical BSA Formula Calculator</title>
+    <meta name="description" content="Calculate body surface area (BSA) using multiple medical formulas including Mosteller, DuBois, Haycock, and more. Essential for medication dosing and medical assessments.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .formula-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .formula-tab {
+            padding: 10px 16px;
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .formula-tab.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        .formula-tab:hover {
+            border-color: #3b82f6;
+        }
+        .unit-toggle {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            background: #f3f4f6;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .unit-option {
+            flex: 1;
+            padding: 10px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .unit-option.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Body Surface Area (BSA) Calculator</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calculate your body surface area using scientifically validated medical formulas for accurate medication dosing and clinical assessments.</p>
+
+        <div class="unit-toggle">
+            <div class="unit-option active" onclick="setUnit('metric')" id="metricBtn">
+                <strong>Metric</strong><br>
+                <small>cm / kg</small>
+            </div>
+            <div class="unit-option" onclick="setUnit('imperial')" id="imperialBtn">
+                <strong>Imperial</strong><br>
+                <small>ft/in / lbs</small>
+            </div>
+        </div>
+
+        <div id="metricInputs" style="display: block;">
+            <div class="input-group">
+                <label for="heightCm" class="form-label">Height (cm)</label>
+                <input type="number" id="heightCm" class="form-input" placeholder="e.g., 175" min="0" step="0.1" value="">
+            </div>
+            <div class="input-group">
+                <label for="weightKg" class="form-label">Weight (kg)</label>
+                <input type="number" id="weightKg" class="form-input" placeholder="e.g., 70" min="0" step="0.1" value="">
+            </div>
+        </div>
+
+        <div id="imperialInputs" style="display: none;">
+            <div class="input-group">
+                <label for="heightFt" class="form-label">Height (feet)</label>
+                <input type="number" id="heightFt" class="form-input" placeholder="e.g., 5" min="0" step="1" value="">
+            </div>
+            <div class="input-group">
+                <label for="heightIn" class="form-label">Height (inches)</label>
+                <input type="number" id="heightIn" class="form-input" placeholder="e.g., 9" min="0" max="11" step="1" value="">
+            </div>
+            <div class="input-group">
+                <label for="weightLbs" class="form-label">Weight (lbs)</label>
+                <input type="number" id="weightLbs" class="form-input" placeholder="e.g., 154" min="0" step="0.1" value="">
+            </div>
+        </div>
+
+        <div style="margin: 30px 0;">
+            <h3 style="margin-bottom: 15px; font-size: 16px;">Select Formula:</h3>
+            <div class="formula-tabs">
+                <div class="formula-tab active" onclick="selectFormula('mosteller')" id="mostellerTab">Mosteller</div>
+                <div class="formula-tab" onclick="selectFormula('dubois')" id="duboisTab">DuBois & DuBois</div>
+                <div class="formula-tab" onclick="selectFormula('haycock')" id="haycockTab">Haycock</div>
+                <div class="formula-tab" onclick="selectFormula('gehan')" id="gehanTab">Gehan & George</div>
+                <div class="formula-tab" onclick="selectFormula('all')" id="allTab">All Formulas</div>
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Body Surface Area (BSA)</span>
+                <span class="result-value" id="bsaValue">0.00 m²</span>
+            </div>
+            <div id="additionalResults" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <h4 style="margin-bottom: 15px; font-size: 14px; color: #6b7280;">Comparison of All Formulas:</h4>
+                <div style="display: grid; gap: 10px;">
+                    <div class="result-row">
+                        <span class="result-label">Mosteller</span>
+                        <span class="result-value" id="mostellerResult">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">DuBois & DuBois</span>
+                        <span class="result-value" id="duboisResult">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Haycock</span>
+                        <span class="result-value" id="haycockResult">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Gehan & George</span>
+                        <span class="result-value" id="gehanResult">-</span>
+                    </div>
+                    <div class="result-row" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e5e7eb;">
+                        <span class="result-label"><strong>Average BSA</strong></span>
+                        <span class="result-value" id="averageResult"><strong>-</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 8px;">
+            <p style="margin: 0; font-size: 14px; color: #92400e;"><strong>Medical Disclaimer:</strong> This calculator is for informational purposes only. Always consult healthcare professionals for medication dosing and medical decisions.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>What is Body Surface Area (BSA)?</h2>
+            <p>Body Surface Area (BSA) is a measurement of the total surface area of the human body, typically expressed in square meters (m²). BSA is one of the most important physiological parameters in medicine, used extensively in clinical practice for calculating appropriate medication dosages, determining chemotherapy treatments, assessing cardiac function, and evaluating burn severity.</p>
+            <p>Unlike simple weight-based calculations, BSA takes into account both height and weight, providing a more accurate representation of metabolic mass. This is crucial because many physiological processes—including metabolic rate, drug clearance, and organ function—correlate more closely with body surface area than with weight alone.</p>
+            <p>The average adult BSA ranges from 1.6 to 2.0 m², with variations based on height, weight, age, and sex. Understanding your BSA can be important for various medical contexts, from ensuring safe medication dosing to assessing overall health metrics.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>BSA Calculation Formulas</h2>
+            <p>Over the past century, medical researchers have developed several formulas to calculate BSA, each with its own methodology and level of accuracy. Our calculator includes the four most widely used and scientifically validated formulas:</p>
+            
+            <h3>1. Mosteller Formula (1987)</h3>
+            <p>The Mosteller formula is the most commonly used in modern medical practice due to its simplicity and accuracy. It's the easiest to calculate manually and is recommended by many clinical guidelines:</p>
+            <p><strong>BSA (m²) = √[(Height in cm × Weight in kg) / 3600]</strong></p>
+            <p>This formula is particularly favored in oncology for chemotherapy dosing calculations and is considered the gold standard in many clinical settings.</p>
+
+            <h3>2. DuBois & DuBois Formula (1916)</h3>
+            <p>The oldest and most established formula, developed by Eugene DuBois and his colleague. Despite being over a century old, it remains highly accurate and is still widely used:</p>
+            <p><strong>BSA (m²) = 0.007184 × Height^0.725 × Weight^0.425</strong></p>
+            <p>This formula was derived from only nine subjects but has been validated extensively and shows excellent correlation with actual measurements.</p>
+
+            <h3>3. Haycock Formula (1978)</h3>
+            <p>Developed specifically for pediatric patients but applicable to adults as well. It tends to give slightly higher values for infants and children:</p>
+            <p><strong>BSA (m²) = 0.024265 × Height^0.3964 × Weight^0.5378</strong></p>
+            <p>This formula is particularly useful in pediatric medicine and neonatal care.</p>
+
+            <h3>4. Gehan & George Formula (1970)</h3>
+            <p>Developed with a broader range of body sizes, including both children and adults. It's particularly accurate for patients with extreme body sizes:</p>
+            <p><strong>BSA (m²) = 0.0235 × Height^0.42246 × Weight^0.51456</strong></p>
+            <p>This formula is often used when treating patients with obesity or very low body weight.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Medical Applications of BSA</h2>
+            
+            <h3>Chemotherapy Dosing</h3>
+            <p>BSA is most critically used in oncology for calculating chemotherapy drug dosages. Most chemotherapy protocols specify doses in mg/m² of BSA rather than mg/kg of body weight. This is because BSA provides a better estimate of metabolic mass and drug clearance rates, helping to maximize therapeutic benefit while minimizing toxic side effects. Even small errors in BSA calculation can lead to underdosing (reducing treatment effectiveness) or overdosing (increasing toxicity risk).</p>
+
+            <h3>Medication Dosing in Pediatrics</h3>
+            <p>For children, BSA-based dosing is often more accurate than weight-based dosing, especially for medications with narrow therapeutic windows. Many pediatric medications, including immunosuppressants, certain antibiotics, and cardiac medications, are prescribed based on BSA to ensure appropriate dosing across different ages and sizes.</p>
+
+            <h3>Cardiac Index Assessment</h3>
+            <p>The cardiac index (CI), which measures the heart's pumping efficiency, is calculated by dividing cardiac output by BSA. Normal cardiac index ranges from 2.5 to 4.0 L/min/m². This standardization allows doctors to compare cardiac function between patients of different sizes and assess heart performance relative to body size.</p>
+
+            <h3>Burn Assessment</h3>
+            <p>In burn medicine, the "Rule of Nines" and Lund-Browder charts use BSA percentages to determine the extent of burns. This calculation is crucial for fluid resuscitation protocols (like the Parkland formula), which calculate fluid replacement needs based on percentage of BSA burned.</p>
+
+            <h3>Kidney Function (GFR)</h3>
+            <p>Glomerular Filtration Rate (GFR), a key indicator of kidney function, is typically normalized to BSA (reported as mL/min/1.73 m²). This allows for meaningful comparison of kidney function across patients of different sizes.</p>
+
+            <h3>Hemodialysis Prescription</h3>
+            <p>Dialysis adequacy is often calculated using BSA to determine appropriate treatment times and dialyzer sizes, ensuring effective removal of waste products relative to body size.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use This BSA Calculator</h2>
+            <p><strong>Step 1:</strong> Choose your preferred unit system (Metric or Imperial) using the toggle at the top of the calculator.</p>
+            <p><strong>Step 2:</strong> Enter your height. For metric, enter centimeters. For imperial, enter feet and inches separately.</p>
+            <p><strong>Step 3:</strong> Enter your weight in kilograms (metric) or pounds (imperial).</p>
+            <p><strong>Step 4:</strong> Select which formula you want to use, or choose "All Formulas" to see results from all four methods and their average.</p>
+            <p><strong>Step 5:</strong> Your BSA will be calculated automatically as you type. The result appears in square meters (m²).</p>
+            <p>The calculator performs all unit conversions automatically, so you can switch between metric and imperial at any time to verify your measurements.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Your BSA Result</h2>
+            <p>Your Body Surface Area result provides insight into your physiological size and has implications for various medical treatments and assessments:</p>
+            
+            <h3>Typical BSA Ranges</h3>
+            <p><strong>Adult Males:</strong> Average BSA ranges from 1.9 to 2.0 m², with larger individuals reaching 2.5 m² or more.</p>
+            <p><strong>Adult Females:</strong> Average BSA ranges from 1.6 to 1.7 m², typically lower than males due to generally smaller stature.</p>
+            <p><strong>Children:</strong> BSA varies significantly with age. Newborns have a BSA around 0.25 m², which increases to approximately 1.0 m² by age 10.</p>
+            <p><strong>Adolescents:</strong> BSA approaches adult values during teenage years, with significant individual variation.</p>
+
+            <h3>Clinical Significance</h3>
+            <p>If you're undergoing medical treatment that involves BSA-based dosing, your healthcare provider will use your exact BSA measurement to calculate appropriate medication amounts. Never attempt to adjust prescribed medications based on BSA calculations without consulting your doctor.</p>
+            <p>Athletes and bodybuilders may have higher BSA values due to increased muscle mass, while individuals with obesity may also show elevated BSA. These variations are normal and are accounted for in medical calculations.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Why Multiple BSA Formulas?</h2>
+            <p>You might wonder why there are multiple formulas for calculating the same measurement. The reason is that directly measuring actual body surface area is extremely difficult and impractical in clinical settings. Early researchers attempted to measure BSA by coating bodies with materials and calculating coverage, but this was time-consuming and inexact.</p>
+            <p>Each formula represents a different mathematical approach to estimating BSA based on height and weight. The formulas were developed using different populations and methodologies, leading to slightly different results. In practice, the differences between formulas are usually small (typically within 5-10% of each other) and rarely clinically significant for most applications.</p>
+            <p>Modern medical practice tends to favor the Mosteller formula for its simplicity and ease of calculation, but many institutions continue to use the DuBois formula due to its long history and extensive validation. Our calculator shows all major formulas, allowing healthcare professionals to use whichever is preferred in their clinical setting.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>BSA in Special Populations</h2>
+            
+            <h3>Obesity and High BMI</h3>
+            <p>For individuals with obesity (BMI > 30), BSA calculations become more complex. Some medications may be dosed on adjusted body weight or ideal body weight rather than actual BSA to avoid overdosing. Healthcare providers often use special dosing protocols for patients with extreme body weights.</p>
+
+            <h3>Pediatric Patients</h3>
+            <p>Children's BSA changes rapidly during growth spurts, requiring frequent recalculation for ongoing treatments. The Haycock formula is often preferred for pediatric applications, though the Mosteller formula is also widely used. Premature infants and neonates require special consideration, as their BSA-to-weight ratio differs significantly from older children and adults.</p>
+
+            <h3>Elderly Patients</h3>
+            <p>As people age, body composition changes with loss of muscle mass and changes in fat distribution. While BSA calculations remain the same, elderly patients may require dose adjustments based on kidney function and other factors beyond BSA alone.</p>
+
+            <h3>Athletes and Bodybuilders</h3>
+            <p>Individuals with high muscle mass may have elevated BSA relative to typical populations. This is a normal variation and is accounted for in medical dosing calculations. However, some performance-enhancing drugs that are dosed by BSA require special monitoring in this population.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Historical Development of BSA</h2>
+            <p>The concept of body surface area emerged in the late 19th and early 20th centuries as physicians and physiologists sought to understand metabolic rates and drug dosing. Early researchers recognized that metabolic rate didn't correlate directly with body weight—larger animals had lower metabolic rates per kilogram than smaller animals.</p>
+            <p>In 1916, Eugene DuBois and his colleague developed the first widely accepted BSA formula by measuring actual body surface area of nine subjects using a coating method. Their formula proved remarkably accurate and remained the clinical standard for decades.</p>
+            <p>As medicine advanced, particularly with the development of chemotherapy in the mid-20th century, the need for accurate BSA calculations became critical. This led to the development of alternative formulas like Haycock (1978) and Mosteller (1987), each attempting to improve accuracy or simplify calculations.</p>
+            <p>Today, BSA calculation is instantaneous with digital calculators, but the underlying mathematical formulas remain essentially unchanged from their original development, testament to the accuracy of the original research.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Limitations and Considerations</h2>
+            <p>While BSA is an extremely useful clinical tool, it has limitations that healthcare providers must consider:</p>
+            
+            <h3>Body Composition Variations</h3>
+            <p>BSA formulas assume average body composition. Individuals with very high or very low body fat percentages may have actual surface areas that differ from calculated values. Extreme muscularity or obesity can affect the accuracy of BSA estimates.</p>
+
+            <h3>Individual Metabolic Differences</h3>
+            <p>Two people with identical BSA may metabolize medications differently due to genetic factors, organ function, age, or disease states. BSA is a starting point for dosing, not the only factor considered.</p>
+
+            <h3>Age-Related Changes</h3>
+            <p>Newborns and infants have disproportionately large heads relative to body size, affecting actual BSA distribution. This is why specialized pediatric formulas were developed.</p>
+
+            <h3>Measurement Accuracy</h3>
+            <p>The accuracy of BSA calculation depends entirely on accurate height and weight measurements. Errors in these basic measurements will compound in the final BSA calculation. Always use calibrated scales and stadiometers in clinical settings.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>BSA vs. BMI: Understanding the Difference</h2>
+            <p>Body Surface Area (BSA) and Body Mass Index (BMI) are frequently confused but measure entirely different things:</p>
+            <p><strong>BSA (Body Surface Area):</strong> Measures the total surface area of the body in square meters. Used primarily for medical dosing calculations and physiological assessments. Takes into account both height and weight to estimate total body surface.</p>
+            <p><strong>BMI (Body Mass Index):</strong> A ratio of weight to height (kg/m²) used to categorize individuals as underweight, normal weight, overweight, or obese. BMI is a screening tool for weight categories and health risks, not a measurement of actual body dimensions.</p>
+            <p>While BMI tells you if your weight is appropriate for your height from a health perspective, BSA tells you your approximate total surface area for medical calculations. Both are useful, but for entirely different purposes. You cannot convert between BSA and BMI—they are independent measurements.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>Which BSA formula is most accurate?</h3>
+            <p>All four formulas included in this calculator are scientifically validated and clinically accepted. The Mosteller formula is currently the most widely used due to its simplicity, but the DuBois formula has the longest history of validation. For most people, all formulas will give very similar results (within 5-10%). If your healthcare provider specifies a particular formula, use that one; otherwise, Mosteller is a safe default choice.</p>
+
+            <h3>Why is my BSA different from what my doctor calculated?</h3>
+            <p>Differences can arise from: (1) Use of different formulas, (2) Slight variations in height or weight measurements, (3) Rounding differences in calculations, or (4) Use of different units (some medical software may display in different units). Small differences (within 0.05 m²) are generally not clinically significant, but always use your doctor's official measurement for medical purposes.</p>
+
+            <h3>Can I use BSA to calculate my own medication doses?</h3>
+            <p>No. While BSA is used for medication dosing, many other factors affect appropriate doses, including kidney function, liver function, age, other medications, and specific disease states. Never adjust medications without consulting your healthcare provider. This calculator is for educational purposes and to understand your medical measurements, not for self-prescribing.</p>
+
+            <h3>How often should BSA be recalculated?</h3>
+            <p>For adults with stable weight, annual recalculation is usually sufficient unless undergoing treatment that requires BSA-based dosing. For children, BSA should be recalculated every few months during periods of rapid growth. For patients undergoing chemotherapy or other BSA-dosed treatments, healthcare providers typically recalculate BSA at each treatment cycle or whenever weight changes by more than 10%.</p>
+
+            <h3>Is a higher BSA better or worse?</h3>
+            <p>BSA is simply a measurement—it's neither inherently good nor bad. Taller and heavier people naturally have higher BSA, while shorter and lighter people have lower BSA. What matters is whether your BSA is appropriate for your height and build. Extremely low BSA might indicate malnutrition or growth issues, while extremely high BSA might reflect obesity, but BSA alone doesn't indicate health status.</p>
+
+            <h3>Does BSA change with exercise or muscle gain?</h3>
+            <p>Yes, as you gain muscle mass or overall weight, your BSA will increase. Similarly, losing weight will decrease BSA. However, these changes are typically gradual. A bodybuilder gaining 10 kg of muscle might see their BSA increase by 0.1-0.2 m², which could be significant for medication dosing purposes.</p>
+
+            <h3>Can I use BSA to estimate calorie needs?</h3>
+            <p>While basal metabolic rate does correlate with BSA (the original purpose of BSA research), modern calorie calculators use more sophisticated formulas that account for age, sex, and activity level in addition to height and weight. BSA alone is not recommended for calculating caloric needs.</p>
+
+            <h3>Why do chemotherapy doses use BSA instead of weight?</h3>
+            <p>Chemotherapy drugs are often highly toxic with narrow therapeutic windows—the difference between an effective dose and a dangerous dose is small. BSA provides a better estimate of metabolic mass and drug clearance than weight alone, especially for patients at the extremes of body size. This helps ensure maximum effectiveness while minimizing toxicity. Research has shown that BSA-based dosing reduces side effects and improves outcomes compared to simple weight-based dosing for many chemotherapy agents.</p>
+        </div>
+
+        <div style="margin-top: 50px; padding-top: 30px; border-top: 2px solid #e5e7eb;">
+            <p style="text-align: center; color: #6b7280; font-size: 14px;">
+                <strong>Medical Disclaimer:</strong> This BSA calculator is intended for educational and informational purposes only. It should not be used as a substitute for professional medical advice, diagnosis, or treatment. Always consult qualified healthcare professionals for medical decisions, medication dosing, and health assessments. The calculations provided are estimates based on established formulas but should be verified by healthcare providers for clinical use.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let currentUnit = 'metric';
+        let currentFormula = 'mosteller';
+
+        function setUnit(unit) {
+            currentUnit = unit;
+            
+            if (unit === 'metric') {
+                document.getElementById('metricInputs').style.display = 'block';
+                document.getElementById('imperialInputs').style.display = 'none';
+                document.getElementById('metricBtn').classList.add('active');
+                document.getElementById('imperialBtn').classList.remove('active');
+            } else {
+                document.getElementById('metricInputs').style.display = 'none';
+                document.getElementById('imperialInputs').style.display = 'block';
+                document.getElementById('metricBtn').classList.remove('active');
+                document.getElementById('imperialBtn').classList.add('active');
+            }
+            
+            calculateBSA();
+        }
+
+        function selectFormula(formula) {
+            currentFormula = formula;
+            
+            // Update active tab
+            document.querySelectorAll('.formula-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(formula + 'Tab').classList.add('active');
+            
+            // Show/hide additional results
+            if (formula === 'all') {
+                document.getElementById('additionalResults').style.display = 'block';
+            } else {
+                document.getElementById('additionalResults').style.display = 'none';
+            }
+            
+            calculateBSA();
+        }
+
+        function calculateBSA() {
+            let heightCm, weightKg;
+            
+            if (currentUnit === 'metric') {
+                heightCm = parseFloat(document.getElementById('heightCm').value) || 0;
+                weightKg = parseFloat(document.getElementById('weightKg').value) || 0;
+            } else {
+                const heightFt = parseFloat(document.getElementById('heightFt').value) || 0;
+                const heightIn = parseFloat(document.getElementById('heightIn').value) || 0;
+                const weightLbs = parseFloat(document.getElementById('weightLbs').value) || 0;
+                
+                heightCm = (heightFt * 12 + heightIn) * 2.54;
+                weightKg = weightLbs * 0.453592;
+            }
+            
+            if (heightCm <= 0 || weightKg <= 0) {
+                document.getElementById('bsaValue').textContent = '0.00 m²';
+                return;
+            }
+            
+            // Calculate using different formulas
+            const mosteller = Math.sqrt((heightCm * weightKg) / 3600);
+            const dubois = 0.007184 * Math.pow(heightCm, 0.725) * Math.pow(weightKg, 0.425);
+            const haycock = 0.024265 * Math.pow(heightCm, 0.3964) * Math.pow(weightKg, 0.5378);
+            const gehan = 0.0235 * Math.pow(heightCm, 0.42246) * Math.pow(weightKg, 0.51456);
+            
+            // Display results based on selected formula
+            if (currentFormula === 'mosteller') {
+                document.getElementById('bsaValue').textContent = mosteller.toFixed(2) + ' m²';
+            } else if (currentFormula === 'dubois') {
+                document.getElementById('bsaValue').textContent = dubois.toFixed(2) + ' m²';
+            } else if (currentFormula === 'haycock') {
+                document.getElementById('bsaValue').textContent = haycock.toFixed(2) + ' m²';
+            } else if (currentFormula === 'gehan') {
+                document.getElementById('bsaValue').textContent = gehan.toFixed(2) + ' m²';
+            } else if (currentFormula === 'all') {
+                const average = (mosteller + dubois + haycock + gehan) / 4;
+                document.getElementById('bsaValue').textContent = average.toFixed(2) + ' m²';
+                
+                // Show all formulas
+                document.getElementById('mostellerResult').textContent = mosteller.toFixed(3) + ' m²';
+                document.getElementById('duboisResult').textContent = dubois.toFixed(3) + ' m²';
+                document.getElementById('haycockResult').textContent = haycock.toFixed(3) + ' m²';
+                document.getElementById('gehanResult').textContent = gehan.toFixed(3) + ' m²';
+                document.getElementById('averageResult').textContent = average.toFixed(3) + ' m²';
+            }
+        }
+
+        // Add event listeners for auto-calculation
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('input', calculateBSA);
+        });
+    </script>
+</body>
+</html>

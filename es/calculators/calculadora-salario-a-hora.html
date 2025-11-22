@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Salario Anual a Tarifa por Hora - Convertidor de Salario</title>
+    <meta name="description" content="Convierta su salario anual a tarifa por hora instantáneamente. Incluye vacaciones, días festivos y cálculos freelance. Herramienta esencial para negociaciones salariales.">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Salario Anual a Tarifa por Hora</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Convierta su salario anual a su tarifa equivalente por hora con precisión. Perfecto para comparaciones salariales, trabajo freelance y negociaciones.</p>
+
+        <div class="input-group">
+            <label for="annualSalary" class="form-label">Salario Anual ($)</label>
+            <input type="number" id="annualSalary" class="form-input" placeholder="ej., 60000" min="0" step="1000" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="hoursPerWeek" class="form-label">Horas por Semana</label>
+            <input type="number" id="hoursPerWeek" class="form-input" placeholder="40" min="1" max="168" step="1" value="40">
+        </div>
+
+        <div class="input-group">
+            <label for="weeksPerYear" class="form-label">Semanas Trabajadas por Año</label>
+            <input type="number" id="weeksPerYear" class="form-input" placeholder="52" min="1" max="52" step="1" value="52">
+        </div>
+
+        <div class="input-group">
+            <label for="vacationDays" class="form-label">Días de Vacaciones Pagadas</label>
+            <input type="number" id="vacationDays" class="form-input" placeholder="0" min="0" max="365" step="1" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="holidays" class="form-label">Días Festivos Pagados</label>
+            <input type="number" id="holidays" class="form-input" placeholder="0" min="0" max="365" step="1" value="">
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Tarifa por Hora</span>
+                <span class="result-value">$<span id="hourlyRate">0.00</span></span>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <div class="result-row">
+                    <span class="result-label">Salario Anual</span>
+                    <span class="result-value">$<span id="displayAnnual">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Pago Mensual</span>
+                    <span class="result-value">$<span id="monthlyPay">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Pago Semanal</span>
+                    <span class="result-value">$<span id="weeklyPay">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Pago Diario (8 horas)</span>
+                    <span class="result-value">$<span id="dailyPay">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Horas de Trabajo Anuales</span>
+                    <span class="result-value"><span id="workHours">0</span> horas</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es la Calculadora de Salario Anual a Tarifa por Hora?</h2>
+            <p>La Calculadora de Salario Anual a Tarifa por Hora es una herramienta financiera esencial que convierte su salario anual total en su tarifa equivalente por hora. Esta conversión es crucial para comparar ofertas de trabajo, entender su verdadero valor de tiempo y establecer tarifas de consultoría o freelance.</p>
+            <p>A diferencia de los cálculos simples que solo dividen el salario anual entre 2,080 horas (40 horas/semana × 52 semanas), nuestra calculadora tiene en cuenta el tiempo libre pagado, días festivos y variaciones en las horas de trabajo semanales. Esto proporciona una imagen mucho más precisa de lo que realmente gana por cada hora de trabajo.</p>
+            <p>Ya sea que esté considerando un nuevo trabajo, negociando un aumento, haciendo la transición al trabajo freelance o simplemente curioso acerca de su compensación horaria, esta calculadora proporciona la información clara y precisa que necesita.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar Esta Calculadora</h2>
+            <p><strong>Paso 1:</strong> Ingrese su salario anual bruto (antes de impuestos y deducciones). Este es el número total que aparece en su oferta de trabajo o contrato.</p>
+            <p><strong>Paso 2:</strong> Ingrese sus horas de trabajo semanales típicas. El estándar es 40 horas, pero muchas profesiones trabajan diferentes cantidades.</p>
+            <p><strong>Paso 3:</strong> Especifique cuántas semanas trabaja por año. La mayoría de los empleados a tiempo completo trabajan las 52 semanas (el trabajo a tiempo parcial o estacional puede variar).</p>
+            <p><strong>Paso 4:</strong> Ingrese cualquier día de vacaciones pagado que reciba anualmente. Esto podría incluir vacaciones ganadas, tiempo libre pagado (PTO) o días personales.</p>
+            <p><strong>Paso 5:</strong> Agregue cualquier día festivo pagado. La mayoría de los empleadores de EE. UU. ofrecen 6-10 días festivos pagados por año.</p>
+            <p><strong>Paso 6:</strong> La calculadora mostrará automáticamente su tarifa por hora junto con desgloses mensuales, semanales y diarios de su compensación.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo Sus Resultados</h2>
+            <p>Los resultados proporcionan un desglose completo de su compensación en varios períodos de tiempo:</p>
+            
+            <h3>Tarifa por Hora</h3>
+            <p>Esta es su métrica más importante: cuánto gana por cada hora de trabajo real. Esta cifra tiene en cuenta su tiempo libre pagado, lo que significa que representa las horas que realmente está en el trabajo, no solo todas las horas del año. Es por eso que incorporar días de vacaciones y días festivos aumenta su tarifa efectiva por hora: se le paga por esos días sin trabajar, distribuyendo su salario anual sobre menos horas de trabajo.</p>
+
+            <h3>Pago Mensual</h3>
+            <p>Su compensación mensual esperada (salario anual ÷ 12). Esto es útil para la elaboración de presupuestos y comparación con facturas mensuales como alquiler, pagos de automóviles y otros gastos recurrentes. Tenga en cuenta que los cheques de pago reales pueden variar según el calendario de pago de su empleador (quincenal vs. semimensual vs. mensual).</p>
+
+            <h3>Pago Semanal</h3>
+            <p>Cuánto gana cada semana en promedio. Esto ayuda a entender su flujo de ingresos a corto plazo y es particularmente útil si se le paga semanalmente o quincenalmente.</p>
+
+            <h3>Pago Diario</h3>
+            <p>Basado en un día laboral estándar de 8 horas, esto muestra su ganancia diaria. Esta métrica es valiosa para trabajadores freelance o consultores que facturan por día, y ayuda a visualizar el valor de su tiempo en incrementos más pequeños.</p>
+
+            <h3>Horas de Trabajo Anuales</h3>
+            <p>Las horas totales reales que trabajará durante el año después de tener en cuenta el tiempo libre. Este número es crucial para entender su carga de trabajo y equilibrio entre vida laboral y personal. La semana laboral típica a tiempo completo sin tiempo libre sería de 2,080 horas (40 × 52), pero con días de vacaciones y festivos, su cifra real será menor.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Por Qué Convertir Salario a Tarifa por Hora</h2>
+            
+            <h3>Comparación de Ofertas de Trabajo</h3>
+            <p>Al evaluar múltiples ofertas de trabajo, especialmente cuando una es asalariada y otra es por hora (o tienen horas de trabajo semanales diferentes), convertir todo a tarifas por hora crea una comparación de manzanas con manzanas. Un salario de $70,000 puede parecer mejor que $30/hora, pero si el trabajo de $70,000 requiere rutinariamente 60 horas/semana mientras que el trabajo por hora es de 40 horas/semana, el trabajo por hora en realidad paga mejor.</p>
+
+            <h3>Entendiendo el Valor del Tiempo Libre</h3>
+            <p>El tiempo libre pagado tiene un valor monetario real. Un trabajo que paga $60,000 con 3 semanas de vacaciones es efectivamente mejor que uno que paga $60,000 sin vacaciones, porque trabaja menos horas por la misma paga total. Nuestra calculadora cuantifica este beneficio mostrándole cómo el tiempo libre aumenta su tarifa efectiva por hora.</p>
+
+            <h3>Negociación de Aumento de Salario</h3>
+            <p>Cuando negocie aumentos, entender su tarifa por hora actual ayuda a enmarcar las discusiones. Pedir un aumento de $5/hora puede resonar de manera diferente que pedir $10,000 más por año, aunque sean equivalentes. Saber ambos números le da flexibilidad en cómo presenta su caso.</p>
+
+            <h3>Identificación de Horas Extra No Pagadas</h3>
+            <p>Muchos empleados asalariados trabajan más de 40 horas semanales sin compensación adicional. Calcular su tarifa por hora real basada en sus horas de trabajo verdaderas (no solo las estándar de 40) puede revelar que está ganando significativamente menos por hora de lo que pensaba. Esta información puede informar conversaciones sobre cargas de trabajo o búsqueda de nuevas oportunidades.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Estableciendo Tarifas Freelance y de Consultoría</h2>
+            <p>Si está haciendo la transición de un trabajo asalariado al trabajo freelance o de consultoría, su salario anterior por hora es su punto de partida, pero no su tarifa de facturación.</p>
+            
+            <h3>La Regla General 2x-3x</h3>
+            <p>Los freelancers típicamente cobran de 2 a 3 veces su tarifa equivalente por hora como empleado. ¿Por qué? Porque como freelancer, usted cubre gastos que los empleadores típicamente pagan:</p>
+            <p><strong>Impuestos de Trabajo por Cuenta Propia:</strong> Un adicional del 7.65% en impuestos de Seguro Social y Medicare que los empleados normalmente comparten con empleadores.</p>
+            <p><strong>Seguro de Salud:</strong> Los empleadores a menudo pagan el 50-80% de las primas; como freelancer, paga el 100%.</p>
+            <p><strong>Tiempo No Facturable:</strong> Los freelancers pasan el 20-40% del tiempo en marketing, administración, contabilidad y otras tareas no facturables.</p>
+            <p><strong>Sin Beneficios Pagados:</strong> Sin vacaciones pagadas, días por enfermedad o días festivos significa que solo se le paga cuando trabaja activamente.</p>
+            <p><strong>Gastos de Equipo y Oficina:</strong> Computadora, software, internet, espacio de oficina, todos salen de su bolsillo.</p>
+
+            <h3>Ejemplo de Cálculo de Tarifa Freelance</h3>
+            <p>Si su salario anterior le daba una tarifa por hora de $30/hora:</p>
+            <p>Tarifa base: $30/hora</p>
+            <p>Impuestos de trabajo por cuenta propia (+15%): $34.50/hora</p>
+            <p>Beneficios de salud (+20%): $41.40/hora</p>
+            <p>Tiempo no facturable (+30%): $53.82/hora</p>
+            <p>Fondo de emergencia y ahorros (+10%): $59.20/hora</p>
+            <p>Su tarifa de facturación debería estar en el rango de $55-65/hora para mantener un nivel de vida similar y tener en cuenta los riesgos del trabajo freelance.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Factores que Afectan la Tarifa por Hora Real</h2>
+            
+            <h3>Horas Extra No Pagadas</h3>
+            <p>Muchos empleados asalariados trabajan regularmente más de 40 horas sin pago adicional. Si trabaja rutinariamente 50 horas pero solo se le paga por 40, su tarifa efectiva por hora es 20% menor de lo que calcula. Siempre calcule su tarifa por hora real basada en las horas que realmente trabaja, no solo en las horas contractuales.</p>
+
+            <h3>Tiempo de Traslado</h3>
+            <p>Algunos expertos financieros sugieren incluir el tiempo de traslado en sus cálculos, ya que es tiempo dedicado a su trabajo que no puede usar para otros propósitos. Un trabajo que paga $5,000 más pero añade una hora de traslado diario podría no valer la pena financieramente.</p>
+
+            <h3>Trabajos Secundarios y Múltiples Ingresos</h3>
+            <p>Si tiene múltiples fuentes de ingresos, calcule la tarifa por hora para cada una para identificar qué usa su tiempo de manera más eficiente. Esto le ayuda a priorizar dónde invertir su energía.</p>
+
+            <h3>Variación Estacional</h3>
+            <p>Algunas industrias tienen temporadas ocupadas y tranquilas. Calcule su tarifa efectiva por hora basada en las horas de trabajo anuales reales, no solo en las semanas pico o las semanas lentas.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Conceptos Erróneos Comunes</h2>
+            
+            <h3>Concepto Erróneo: Salario Siempre Significa Mejor Pago</h3>
+            <p>Realidad: Los trabajos asalariados a menudo vienen con la expectativa de horas extra no pagadas. Un trabajo por hora con pago de horas extra puede pagar más que un puesto asalariado con el mismo salario base si trabaja regularmente más de 40 horas.</p>
+
+            <h3>Concepto Erróneo: El Cálculo Estándar 2,080 Horas es Preciso</h3>
+            <p>Realidad: Este cálculo (40 horas/semana × 52 semanas) ignora el tiempo libre pagado. Con días de vacaciones y festivos, la mayoría de los empleados trabajan 1,900-2,000 horas anualmente, haciendo que su tarifa efectiva por hora sea más alta.</p>
+
+            <h3>Concepto Erróneo: Más Horas Significa Más Ingresos</h3>
+            <p>Realidad: Para empleados asalariados, trabajar más horas sin pago adicional en realidad disminuye su tarifa efectiva por hora. Trabajar de manera más inteligente (más productivo en menos horas) es a menudo mejor financieramente que trabajar simplemente más horas.</p>
+
+            <h3>Concepto Erróneo: Su Tarifa por Hora Debería Ser Su Tarifa Freelance</h3>
+            <p>Realidad: Los freelancers deben cobrar significativamente más que su tarifa equivalente de empleado para tener en cuenta impuestos, beneficios, tiempo no facturable y riesgos comerciales. Cobrar la misma tarifa por hora resultará en menos ingresos netos.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Protegiendo Su Tarifa por Hora</h2>
+            
+            <h3>Documentar Horas Extras</h3>
+            <p>Incluso si es asalariado y exento, llevar un registro de sus horas de trabajo reales proporciona datos valiosos para negociaciones salariales. Si puede demostrar que trabaja rutinariamente 50 horas mientras se le paga por 40, tiene un caso sólido para un aumento del 25%.</p>
+
+            <h3>Negociar Tiempo Libre</h3>
+            <p>Si no puede obtener el aumento salarial que desea, negociar tiempo libre adicional logra el mismo objetivo: aumenta su tarifa efectiva por hora al reducir las horas trabajadas mientras mantiene el mismo salario.</p>
+
+            <h3>Evaluación Regular</h3>
+            <p>Recalcule su tarifa por hora anualmente o cada vez que cambien sus responsabilidades laborales. Si su carga de trabajo ha aumentado significativamente sin un aumento correspondiente en el salario, su tarifa efectiva por hora ha disminuido y es hora de una conversación con su gerente.</p>
+
+            <h3>Considerar el Paquete de Compensación Total</h3>
+            <p>Si bien la tarifa por hora es importante, recuerde considerar el valor de beneficios como contribuciones al plan 401(k), seguro de salud, bonificaciones y otros beneficios. Estos pueden agregar 20-40% a su compensación total.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+            
+            <h3>¿Debería calcular mi tarifa por hora usando salario bruto o neto?</h3>
+            <p>Siempre use salario bruto (antes de impuestos y deducciones) para estos cálculos. Su tarifa por hora bruta es la cifra comparable en industrias y la base para negociaciones salariales. El salario neto varía demasiado según situaciones fiscales individuales para ser útil para comparaciones.</p>
+
+            <h3>¿Qué pasa si trabajo horas variables cada semana?</h3>
+            <p>Use su promedio de horas semanales durante el año. Revise algunas semanas de sus registros de tiempo o estime basándose en su horario típico. Si sus horas varían dramáticamente por temporada, considere calcular tarifas por hora separadas para temporadas ocupadas y lentas para obtener una imagen completa.</p>
+
+            <h3>¿Debería incluir el pago de bonificaciones en mi cálculo de salario anual?</h3>
+            <p>Para bonificaciones garantizadas (bonificaciones firmadas por contrato), sí, inclúyalas. Para bonificaciones discrecionales o basadas en el rendimiento, es mejor calcular dos escenarios: tarifa por hora base sin bonificación y tarifa por hora con bonificación esperada incluida. Esto le da un rango en lugar de un solo número.</p>
+
+            <h3>¿Cómo afecta el trabajo remoto a mi tarifa por hora?</h3>
+            <p>El trabajo remoto puede aumentar su tarifa efectiva por hora al eliminar tiempo de traslado y gastos (gasolina, desgaste del automóvil, comidas fuera). Sin embargo, si el trabajo remoto hace que las líneas entre trabajo y hogar se difuminen y termina trabajando más horas, podría reducir su tarifa efectiva por hora. Rastree sus horas de trabajo reales para saber con certeza.</p>
+
+            <h3>¿Es mejor un salario más alto o más tiempo libre?</h3>
+            <p>Depende de sus prioridades. Matemáticamente, puede comparar las ofertas calculando la tarifa por hora para cada una. Un salario de $70,000 con 3 semanas de vacaciones puede tener la misma tarifa por hora que $67,000 con 4 semanas de vacaciones. Más allá de los números, considere qué valora más: dinero extra o tiempo adicional para familia, pasatiempos o relajación.</p>
+
+            <h3>¿Debería compartir mi tarifa por hora con mi empleador durante negociaciones?</h3>
+            <p>Generalmente, es mejor enmarcar las negociaciones en términos de salario anual en lugar de tarifa por hora, ya que eso es lo que aparece en su oferta. Sin embargo, entender su tarifa por hora internamente le ayuda a evaluar ofertas y contraofertas rápidamente durante las negociaciones.</p>
+
+            <h3>¿Cómo se compara mi tarifa por hora con los estándares de la industria?</h3>
+            <p>Una vez que conozca su tarifa por hora, compárela con encuestas salariales de la industria, sitios web como Glassdoor, PayScale o Salary.com, o profesionales de redes en su campo. Tenga en cuenta que las tarifas por hora varían significativamente según la ubicación, nivel de experiencia e industria específica.</p>
+
+            <h3>¿Deben los empleados asalariados preocuparse por las tarifas por hora?</h3>
+            <p>¡Absolutamente! Conocer su tarifa efectiva por hora le ayuda a entender si su compensación es justa por el tiempo que invierte, identificar cuándo está trabajando gratis esencialmente (horas extra no pagadas excesivas) y tomar decisiones informadas sobre ofertas de trabajo y negociaciones salariales. Es una de las métricas financieras personales más importantes, ya sea que se le pague por hora o salario.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculateHourly() {
+            const annualSalary = parseFloat(document.getElementById('annualSalary').value) || 0;
+            const hoursPerWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 40;
+            const weeksPerYear = parseFloat(document.getElementById('weeksPerYear').value) || 52;
+            const vacationDays = parseFloat(document.getElementById('vacationDays').value) || 0;
+            const holidays = parseFloat(document.getElementById('holidays').value) || 0;
+
+            if (annualSalary <= 0) {
+                document.getElementById('hourlyRate').textContent = '0.00';
+                document.getElementById('displayAnnual').textContent = '0';
+                document.getElementById('monthlyPay').textContent = '0';
+                document.getElementById('weeklyPay').textContent = '0';
+                document.getElementById('dailyPay').textContent = '0';
+                document.getElementById('workHours').textContent = '0';
+                return;
+            }
+
+            const totalPotentialHours = hoursPerWeek * weeksPerYear;
+            const hoursPerDay = hoursPerWeek / 5;
+            const paidTimeOffHours = (vacationDays + holidays) * hoursPerDay;
+            const actualWorkHours = totalPotentialHours - paidTimeOffHours;
+            const hourlyRate = annualSalary / actualWorkHours;
+
+            const monthlyPay = annualSalary / 12;
+            const weeklyPay = annualSalary / weeksPerYear;
+            const dailyPay = hourlyRate * 8;
+
+            document.getElementById('hourlyRate').textContent = hourlyRate.toFixed(2);
+            document.getElementById('displayAnnual').textContent = annualSalary.toLocaleString('es-ES');
+            document.getElementById('monthlyPay').textContent = monthlyPay.toLocaleString('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('weeklyPay').textContent = weeklyPay.toLocaleString('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('dailyPay').textContent = dailyPay.toLocaleString('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('workHours').textContent = actualWorkHours.toLocaleString('es-ES', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateHourly);
+        });
+    </script>
+</body>
+</html>

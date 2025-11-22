@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free amortization calculator - Generate complete loan amortization schedules. See monthly payments, principal, interest breakdown for mortgages and loans.">
+    <meta name="keywords" content="amortization calculator, loan amortization schedule, mortgage amortization, amortization table, loan payment schedule, principal and interest calculator">
+    <title>Amortization Calculator - Loan Payment Schedule | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/amortization-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html">Home</a></li><li><a href="../category/finance.html">Finance</a></li></ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Amortization Calculator</h1>
+            <p class="calculator-description">Generate detailed loan amortization schedules showing monthly payments, principal, and interest breakdown.</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Loan Information</h3>
+                <div class="form-group">
+                    <label for="loanAmount" class="form-label">Loan Amount ($)</label>
+                    <input type="number" id="loanAmount" class="form-input" value="" min="1000" step="1000" placeholder="e.g., 250000">
+                </div>
+                <div class="form-group">
+                    <label for="interestRate" class="form-label">Annual Interest Rate (%)</label>
+                    <input type="number" id="interestRate" class="form-input" value="" min="0" max="30" step="0.1" placeholder="e.g., 6.5">
+                </div>
+                <div class="form-group">
+                    <label for="loanTerm" class="form-label">Loan Term (years)</label>
+                    <input type="number" id="loanTerm" class="form-input" value="30" min="1" max="50" step="1">
+                </div>
+                <button onclick="calculateAmortization()" class="btn-calculate">Generate Schedule</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Payment Summary</h3>
+                <div class="result-item">
+                    <div class="result-label">Monthly Payment</div>
+                    <div class="result-value" id="monthlyPayment" style="font-size: 3rem; color: #10b981;">$0.00</div>
+                </div>
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Total Payments:</span>
+                        <span id="totalPayments" style="font-weight: 600;">$0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Total Principal:</span>
+                        <span id="totalPrincipal" style="font-weight: 600;">$0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Total Interest:</span>
+                        <span id="totalInterest" style="font-weight: 600; color: #dc2626;">$0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="scheduleContainer" style="max-width: 1200px; margin: 40px auto; padding: 0 24px; display: none;">
+            <h3 style="margin-bottom: 20px;">Amortization Schedule</h3>
+            <div style="overflow-x: auto;">
+                <table id="amortizationTable" style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                    <thead>
+                        <tr style="background: #f3f4f6;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Payment #</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Payment</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Principal</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Interest</th>
+                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>What is an Amortization Calculator?</h2>
+            <p>An amortization calculator is a financial tool that generates a complete payment schedule for loans, showing exactly how each payment is divided between principal (the amount borrowed) and interest charges over the entire loan term. This detailed breakdown helps borrowers understand how their loan balance decreases over time and how much interest they'll pay.</p>
+
+            <p>Amortization is the process of paying off debt through regular, scheduled payments. Each payment covers both interest charges on the remaining balance and a portion of the principal. Early in the loan, most of each payment goes toward interest. As the balance decreases, more of each payment goes toward principal, accelerating debt payoff over time.</p>
+
+            <h2>Understanding Amortization</h2>
+            <p>The word "amortization" comes from Latin roots meaning "to kill" - in this case, killing debt through systematic payments. Understanding how amortization works is crucial for anyone with a mortgage, car loan, student loan, or any other installment debt.</p>
+
+            <h3>How Amortization Works</h3>
+            <p>With amortized loans, you make equal payments throughout the loan term. While the payment amount stays the same, the breakdown between principal and interest changes dramatically:</p>
+
+            <ul>
+                <li><strong>Early Payments:</strong> Mostly interest with minimal principal reduction</li>
+                <li><strong>Middle Payments:</strong> More balanced mix of principal and interest</li>
+                <li><strong>Late Payments:</strong> Mostly principal with minimal interest</li>
+            </ul>
+
+            <p>For example, on a 30-year $300,000 mortgage at 6%, your first payment might be $500 principal and $1,500 interest, while your last payment might be $1,990 principal and only $10 interest—despite the total payment being $1,999 both times.</p>
+
+            <h2>Key Components of Amortization</h2>
+            <p>Understanding these elements helps you read amortization schedules:</p>
+
+            <h3>Payment Number</h3>
+            <p>Each row represents one payment period (usually monthly). A 30-year mortgage has 360 payments, a 5-year car loan has 60 payments.</p>
+
+            <h3>Payment Amount</h3>
+            <p>For fixed-rate loans, this stays constant. For adjustable-rate mortgages (ARMs), it can change when rates adjust.</p>
+
+            <h3>Principal</h3>
+            <p>The portion of your payment that reduces your loan balance. This amount increases with each payment as less interest is owed on the declining balance.</p>
+
+            <h3>Interest</h3>
+            <p>The cost of borrowing calculated on the remaining balance. This decreases with each payment as the balance shrinks.</p>
+
+            <h3>Remaining Balance</h3>
+            <p>How much you still owe after each payment. This should reach $0 at the final payment.</p>
+
+            <h2>Why Amortization Schedules Matter</h2>
+            <p>Understanding your amortization schedule provides valuable insights:</p>
+
+            <h3>1. True Cost of Borrowing</h3>
+            <p>Your schedule shows total interest paid over the loan's life. A $250,000 mortgage at 6% over 30 years costs $289,595 in interest—you pay $539,595 total for a $250,000 house. Seeing this number often motivates borrowers to pay extra principal or refinance.</p>
+
+            <h3>2. Equity Building</h3>
+            <p>The schedule shows how slowly equity builds early on. In year 1 of that $250,000 mortgage, you might pay $18,000 but only $3,500 goes to principal. Understanding this prevents surprises when refinancing or selling soon after purchase.</p>
+
+            <h3>3. Refinancing Decisions</h3>
+            <p>By showing your current principal balance and how much interest remains, amortization schedules help you evaluate refinancing offers. If you've paid 10 years on a 30-year loan, you've made significant progress—starting a new 30-year loan resets your amortization, potentially costing more despite lower rates.</p>
+
+            <h3>4. Extra Payment Impact</h3>
+            <p>Schedules help you calculate how extra payments affect payoff time and interest savings. Paying an extra $100 monthly might save $50,000 in interest and cut years off your loan.</p>
+
+            <h2>Types of Amortized Loans</h2>
+            <p>Different loans use amortization in various ways:</p>
+
+            <h3>Fully Amortizing Loans</h3>
+            <p>Most common for mortgages and car loans. Equal payments over a set term completely pay off the loan. The final payment brings the balance to exactly zero.</p>
+
+            <h3>Partially Amortizing Loans</h3>
+            <p>Payments cover only part of the principal, leaving a balloon payment due at term end. These are riskier and less common for consumer loans.</p>
+
+            <h3>Negatively Amortizing Loans</h3>
+            <p>Payments don't even cover interest, causing the balance to grow. These are dangerous and should be avoided except in very specific circumstances.</p>
+
+            <h3>Interest-Only Periods</h3>
+            <p>Some loans allow interest-only payments initially, with amortization beginning later. This delays principal reduction but can help with cash flow in the short term.</p>
+
+            <h2>Fixed vs. Variable Rate Impact</h2>
+            <p>Interest rates dramatically affect amortization:</p>
+
+            <h3>Fixed-Rate Loans</h3>
+            <p>The interest rate never changes, making amortization schedules perfectly predictable. Your 360th payment is exactly as calculated on day one. This predictability is valuable for budgeting and long-term planning.</p>
+
+            <h3>Adjustable-Rate Mortgages (ARMs)</h3>
+            <p>Interest rates (and payments) change periodically. Each rate adjustment requires recalculating the amortization schedule. Your payment might increase or decrease, and the principal/interest split changes accordingly. ARMs make long-term planning more difficult.</p>
+
+            <h3>Interest Rate Sensitivity</h3>
+            <p>Small rate differences create massive cost differences over long terms:</p>
+            <ul>
+                <li>$300,000 at 5% for 30 years: $279,767 total interest</li>
+                <li>$300,000 at 6% for 30 years: $347,515 total interest</li>
+                <li>$300,000 at 7% for 30 years: $418,527 total interest</li>
+            </ul>
+
+            <p>That 2% difference (5% vs 7%) costs an extra $138,760 in interest—nearly half the original loan amount!</p>
+
+            <h2>Accelerating Amortization with Extra Payments</h2>
+            <p>Making additional principal payments dramatically improves your amortization:</p>
+
+            <h3>How Extra Payments Work</h3>
+            <p>When you pay extra principal, you reduce the balance faster than scheduled. Since interest is calculated on the remaining balance, this saves interest on every future payment. The effect compounds—each extra payment saves interest not just on that payment, but on all subsequent payments.</p>
+
+            <h3>Common Extra Payment Strategies</h3>
+            <ul>
+                <li><strong>Monthly Extra:</strong> Add a fixed amount to each payment ($50, $100, $200)</li>
+                <li><strong>Annual Extra:</strong> Make one extra payment yearly (often tax refund or bonus)</li>
+                <li><strong>Biweekly Payments:</strong> Pay half your monthly payment every two weeks (results in 13 full payments yearly vs. 12)</li>
+                <li><strong>Lump Sums:</strong> Apply windfalls (inheritance, bonus, sale proceeds) to principal</li>
+                <li><strong>Rounding Up:</strong> Round payment to next $100 (if payment is $1,247, pay $1,300)</li>
+            </ul>
+
+            <h3>Impact Example</h3>
+            <p>On a $250,000, 30-year mortgage at 6%:</p>
+            <ul>
+                <li><strong>Standard payment:</strong> $1,499/month for 360 months = $539,595 total</li>
+                <li><strong>Extra $100/month:</strong> Pay off in 287 months = $458,609 total (saves $80,986)</li>
+                <li><strong>Extra $200/month:</strong> Pay off in 247 months = $418,743 total (saves $120,852)</li>
+            </ul>
+
+            <h2>Mortgage Amortization Specifics</h2>
+            <p>Mortgages have unique amortization considerations:</p>
+
+            <h3>15-Year vs. 30-Year Terms</h3>
+            <p>The term length dramatically affects both payment size and total interest:</p>
+
+            <p><strong>30-Year Mortgage:</strong></p>
+            <ul>
+                <li>Lower monthly payments (easier to afford)</li>
+                <li>Much more total interest paid</li>
+                <li>Slower equity building</li>
+                <li>More payment flexibility if finances tighten</li>
+            </ul>
+
+            <p><strong>15-Year Mortgage:</strong></p>
+            <ul>
+                <li>Higher monthly payments (requires higher income)</li>
+                <li>Dramatically less total interest (often 50-60% less)</li>
+                <li>Faster equity building</li>
+                <li>Typically lower interest rates (0.5-0.75% below 30-year)</li>
+            </ul>
+
+            <p>On $300,000 at 6%:</p>
+            <ul>
+                <li><strong>30-year:</strong> $1,799/month, $347,515 total interest</li>
+                <li><strong>15-year:</strong> $2,532/month, $155,761 total interest</li>
+            </ul>
+
+            <p>The 15-year costs $733 more monthly but saves $191,754 in interest!</p>
+
+            <h3>When to Refinance</h3>
+            <p>Your amortization schedule helps evaluate refinancing timing:</p>
+
+            <ul>
+                <li><strong>Early in loan:</strong> More to gain from lower rates since you haven't paid much principal yet</li>
+                <li><strong>Late in loan:</strong> Less benefit since you've already paid most interest; resetting to a new 30-year loan reverses your progress</li>
+                <li><strong>Break-even analysis:</strong> Compare closing costs against interest savings; typically need 2-3 years to break even</li>
+            </ul>
+
+            <h2>Student Loan Amortization</h2>
+            <p>Student loans have unique amortization features:</p>
+
+            <h3>Grace Periods</h3>
+            <p>Interest often accrues during school and grace periods but payments don't start until later. This means your actual balance when amortization begins exceeds your original borrowing.</p>
+
+            <h3>Income-Driven Repayment</h3>
+            <p>Payments based on income rather than standard amortization may not cover accruing interest, causing negative amortization where your balance grows despite making payments.</p>
+
+            <h3>Forgiveness Programs</h3>
+            <p>Some programs forgive remaining balances after 10-25 years of payments. Your amortization schedule helps track progress toward forgiveness eligibility.</p>
+
+            <h2>Auto Loan Amortization</h2>
+            <p>Car loans have shorter terms but important considerations:</p>
+
+            <h3>Depreciation vs. Amortization</h3>
+            <p>Cars depreciate faster than loans amortize, creating "negative equity" (owing more than car's worth) for the first 2-3 years. This is problematic if you total the car or want to sell early.</p>
+
+            <h3>Shorter Terms Recommended</h3>
+            <p>While 72-84 month car loans exist, 36-48 months is better. Longer terms mean paying interest on a depreciating asset for years, often leaving you underwater.</p>
+
+            <h2>Amortization Math Explained</h2>
+            <p>The amortization formula calculates your monthly payment:</p>
+
+            <p><strong>M = P × [r(1+r)^n] / [(1+r)^n - 1]</strong></p>
+
+            <p>Where:</p>
+            <ul>
+                <li>M = Monthly payment</li>
+                <li>P = Principal (loan amount)</li>
+                <li>r = Monthly interest rate (annual rate ÷ 12)</li>
+                <li>n = Number of payments (years × 12)</li>
+            </ul>
+
+            <p>Once you have the monthly payment, calculating each month's principal and interest is simpler:</p>
+            <ul>
+                <li>Interest = Remaining balance × monthly interest rate</li>
+                <li>Principal = Monthly payment - Interest</li>
+                <li>New balance = Old balance - Principal</li>
+            </ul>
+
+            <h2>Common Amortization Mistakes</h2>
+            <p>Avoid these errors when managing amortized loans:</p>
+
+            <h3>1. Ignoring the Schedule</h3>
+            <p>Many borrowers never look at their amortization schedule, missing opportunities to save through extra payments or strategic refinancing.</p>
+
+            <h3>2. Resetting Progress</h3>
+            <p>Refinancing from a 15-year-old 30-year mortgage into a new 30-year loan resets the clock. You'll likely pay more total interest despite lower rates.</p>
+
+            <h3>3. Not Specifying "Principal Only"</h3>
+            <p>When making extra payments, specify they should go to principal only. Otherwise, servicers might apply them to interest or future payments, reducing your benefit.</p>
+
+            <h3>4. Paying Off Low-Rate Debt First</h3>
+            <p>Mathematically, pay off highest-rate debt first. A 3% mortgage should be the last debt you accelerate if you have 15% credit card debt.</p>
+
+            <h3>5. Ignoring Opportunity Cost</h3>
+            <p>If your mortgage is 3% but you can earn 8% in investments, paying extra on the mortgage might not be the best use of money. Always consider alternative uses for extra payments.</p>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>What is an amortization schedule?</h3>
+            <p>An amortization schedule is a complete table showing every payment on a loan, breaking down how much goes to principal versus interest, and showing the remaining balance after each payment. It lets you see the entire life of your loan at a glance.</p>
+
+            <h3>How do I read an amortization schedule?</h3>
+            <p>Read left to right across each row. The payment number shows which payment it is, the payment amount is what you pay, principal is how much reduces your balance, interest is what you pay the lender, and remaining balance is what you still owe after that payment.</p>
+
+            <h3>Why does most of my payment go to interest at first?</h3>
+            <p>Interest is calculated on the remaining balance. Early in the loan, the balance is highest, so interest charges are highest. As you pay down principal, the balance decreases, so interest charges decrease, allowing more of each payment to reduce principal.</p>
+
+            <h3>Can I pay off an amortized loan early?</h3>
+            <p>Most loans allow early payoff, though some have prepayment penalties. Check your loan agreement. Making extra principal payments saves interest and shortens the loan term without refinancing.</p>
+
+            <h3>How much can I save with extra payments?</h3>
+            <p>It depends on your loan amount, rate, and term. Generally, an extra $100-200 monthly on a 30-year mortgage can save tens of thousands in interest and cut several years off the loan. Use our calculator with different payment amounts to see your specific savings.</p>
+
+            <h2>Related Calculators</h2>
+            <ul>
+                <li><a href="mortgage-calculator.html">Mortgage Calculator</a> - Calculate mortgage payments and costs</li>
+                <li><a href="loan-calculator.html">Loan Calculator</a> - General loan payment calculator</li>
+                <li><a href="car-loan-calculator.html">Car Loan Calculator</a> - Auto loan payments and terms</li>
+                <li><a href="refinance-calculator.html">Refinance Calculator</a> - Should you refinance?</li>
+            </ul>
+
+            <h2>Start Understanding Your Loan</h2>
+            <p>An amortization schedule transforms your loan from an abstract monthly payment into a clear roadmap of your debt payoff journey. Understanding how each payment chips away at principal while interest costs decrease empowers you to make smart financial decisions about extra payments, refinancing, and overall debt strategy.</p>
+
+            <p>Use our calculator above to generate your complete amortization schedule. See exactly where every dollar of every payment goes, understand your true borrowing costs, and discover how extra payments can save thousands and shorten your loan term. Knowledge of your amortization schedule is the first step toward faster debt freedom.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function calculateAmortization() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const years = parseInt(document.getElementById('loanTerm').value) || 0;
+
+            if (loanAmount <= 0 || years <= 0) return;
+
+            const monthlyRate = annualRate / 100 / 12;
+            const numPayments = years * 12;
+
+            let monthlyPayment;
+            if (annualRate === 0) {
+                monthlyPayment = loanAmount / numPayments;
+            } else {
+                monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
+                                (Math.pow(1 + monthlyRate, numPayments) - 1);
+            }
+
+            let balance = loanAmount;
+            let totalInterest = 0;
+            let scheduleHTML = '';
+
+            for (let i = 1; i <= numPayments; i++) {
+                const interestPayment = balance * monthlyRate;
+                const principalPayment = monthlyPayment - interestPayment;
+                balance -= principalPayment;
+                totalInterest += interestPayment;
+
+                if (i <= 12 || i > numPayments - 12 || i % 12 === 0) {
+                    scheduleHTML += `<tr style="border-bottom: 1px solid #e5e7eb;">
+                        <td style="padding: 12px;">${i}</td>
+                        <td style="padding: 12px; text-align: right;">$${monthlyPayment.toFixed(2)}</td>
+                        <td style="padding: 12px; text-align: right;">$${principalPayment.toFixed(2)}</td>
+                        <td style="padding: 12px; text-align: right;">$${interestPayment.toFixed(2)}</td>
+                        <td style="padding: 12px; text-align: right;">$${Math.max(0, balance).toFixed(2)}</td>
+                    </tr>`;
+                } else if (i === 13) {
+                    scheduleHTML += `<tr><td colspan="5" style="padding: 12px; text-align: center; color: #6b7280;">... (showing first year, annual milestones, and final year) ...</td></tr>`;
+                }
+            }
+
+            document.getElementById('monthlyPayment').textContent = '$' + monthlyPayment.toFixed(2);
+            document.getElementById('totalPayments').textContent = '$' + (monthlyPayment * numPayments).toLocaleString('en-US', {minimumFractionDigits: 2});
+            document.getElementById('totalPrincipal').textContent = '$' + loanAmount.toLocaleString('en-US', {minimumFractionDigits: 2});
+            document.getElementById('totalInterest').textContent = '$' + totalInterest.toLocaleString('en-US', {minimumFractionDigits: 2});
+
+            document.getElementById('scheduleBody').innerHTML = scheduleHTML;
+            document.getElementById('scheduleContainer').style.display = 'block';
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculateAmortization));
+    </script>
+</body>
+</html>

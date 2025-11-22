@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Precio Unitario - Comparador de Mejor Valor</title>
+    <meta name="description" content="Compare precios unitarios para encontrar el mejor valor al hacer compras. Ahorre dinero comparando tamaños de paquetes y marcas instantáneamente.">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Precio Unitario</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Compare dos productos para encontrar cuál ofrece el mejor valor por su dinero.</p>
+
+        <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+            <h3 style="margin-top: 0;">Producto A</h3>
+            <div class="input-group">
+                <label for="priceA" class="form-label">Precio ($)</label>
+                <input type="number" id="priceA" class="form-input" placeholder="ej., 4.99" min="0" step="0.01" value="">
+            </div>
+            <div class="input-group">
+                <label for="sizeA" class="form-label">Tamaño/Cantidad</label>
+                <input type="number" id="sizeA" class="form-input" placeholder="ej., 16" min="0" step="0.01" value="">
+            </div>
+            <div class="input-group">
+                <label for="unitA" class="form-label">Unidad</label>
+                <select id="unitA" class="form-input">
+                    <option value="oz">onzas (oz)</option>
+                    <option value="lb">libras (lb)</option>
+                    <option value="g">gramos (g)</option>
+                    <option value="kg">kilogramos (kg)</option>
+                    <option value="ml">mililitros (ml)</option>
+                    <option value="L">litros (L)</option>
+                    <option value="fl oz">onzas fluidas (fl oz)</option>
+                    <option value="gal">galones (gal)</option>
+                    <option value="count">unidades</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+            <h3 style="margin-top: 0;">Producto B</h3>
+            <div class="input-group">
+                <label for="priceB" class="form-label">Precio ($)</label>
+                <input type="number" id="priceB" class="form-input" placeholder="ej., 7.99" min="0" step="0.01" value="">
+            </div>
+            <div class="input-group">
+                <label for="sizeB" class="form-label">Tamaño/Cantidad</label>
+                <input type="number" id="sizeB" class="form-input" placeholder="ej., 32" min="0" step="0.01" value="">
+            </div>
+            <div class="input-group">
+                <label for="unitB" class="form-label">Unidad</label>
+                <select id="unitB" class="form-input">
+                    <option value="oz">onzas (oz)</option>
+                    <option value="lb">libras (lb)</option>
+                    <option value="g">gramos (g)</option>
+                    <option value="kg">kilogramos (kg)</option>
+                    <option value="ml">mililitros (ml)</option>
+                    <option value="L">litros (L)</option>
+                    <option value="fl oz">onzas fluidas (fl oz)</option>
+                    <option value="gal">galones (gal)</option>
+                    <option value="count">unidades</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Mejor Valor</span>
+                <span class="result-value" id="winner">-</span>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <div class="result-row">
+                    <span class="result-label">Precio Unitario - Producto A</span>
+                    <span class="result-value" id="unitPriceA">$0.00</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Precio Unitario - Producto B</span>
+                    <span class="result-value" id="unitPriceB">$0.00</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Ahorro Potencial</span>
+                    <span class="result-value">$<span id="savings">0.00</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Más Barato Por</span>
+                    <span class="result-value"><span id="percentCheaper">0.0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el Precio Unitario?</h2>
+            <p>El precio unitario es el costo por unidad estándar de medida de un producto, como el precio por onza, libra, litro o unidad individual. Es una herramienta de compras esencial que le permite comparar de manera justa el valor de diferentes tamaños de productos o marcas, incluso cuando vienen en paquetes muy diferentes.</p>
+            <p>Por ejemplo, un paquete de cereales de 16 oz que cuesta $4.99 tiene un precio unitario de aproximadamente $0.31 por onza. Un paquete más grande de 24 oz que cuesta $6.99 tiene un precio unitario de aproximadamente $0.29 por onza. Aunque el paquete más grande cuesta más por adelantado, es realmente el mejor valor porque paga menos por onza.</p>
+            <p>Mientras que muchas tiendas ahora muestran los precios unitarios en las etiquetas de estantería, no siempre están presentes, pueden usar diferentes unidades que hacen difícil la comparación, o pueden ser incorrectos. Nuestra calculadora le permite calcular y comparar rápidamente los precios unitarios para asegurar que obtiene el mejor valor por su dinero.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar Esta Calculadora</h2>
+            <p><strong>Paso 1:</strong> Ingrese el precio del primer producto que está comparando (Producto A). Este es el precio que ve en la tienda o en línea.</p>
+            <p><strong>Paso 2:</strong> Ingrese el tamaño o cantidad del Producto A. Este es el número en el empaque (16 onzas, 2 libras, 500ml, etc.).</p>
+            <p><strong>Paso 3:</strong> Seleccione la unidad de medida del Producto A de la lista desplegable (onzas, libras, mililitros, etc.).</p>
+            <p><strong>Paso 4:</strong> Repita los pasos 1-3 para el Producto B, el segundo artículo que está comparando.</p>
+            <p><strong>Paso 5:</strong> Revise los resultados. La calculadora le dirá qué producto es el mejor valor, el precio unitario de cada uno, cuánto ahorrará y por qué porcentaje más barato es la mejor opción.</p>
+            <p><strong>Consejo:</strong> No necesita usar las mismas unidades para ambos productos. Si el Producto A está en onzas y el Producto B en libras, simplemente seleccione la unidad apropiada para cada uno: nuestra calculadora aún comparará con precisión.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Por Qué Importa el Precio Unitario</h2>
+            
+            <h3>Mayores Ahorros a lo Largo del Tiempo</h3>
+            <p>Ahorrar $0.50 en una compra puede no parecer mucho, pero multiplíquelo por docenas de artículos a lo largo de meses y años, y estamos hablando de cientos o incluso miles de dólares en ahorros anuales. Las familias que consistentemente compran por precio unitario ahorran típicamente del 15-30% en sus cuentas de comestibles comparado con los que solo agarran lo que se ve bien.</p>
+
+            <h3>Los Paquetes Más Grandes No Siempre Son el Mejor Valor</h3>
+            <p>El supuesto común es que comprar a granel siempre ahorra dinero. Esto es a menudo cierto, pero no siempre. A veces los tamaños medianos están en oferta y tienen un precio unitario mejor que el paquete grande. A veces las marcas de tienda en tamaño regular superan a las marcas de nombre en tamaño grande. La única forma de saber con certeza es calcular el precio unitario.</p>
+
+            <h3>Evitando Trucos de Marketing</h3>
+            <p>Los minoristas usan varias tácticas para hacernos pensar que estamos obteniendo un buen trato: etiquetas de "gran valor", paquetes "bonificados" o rediseños de empaque que hacen que los paquetes parezcan más grandes. El precio unitario corta a través de todo esto para mostrar el valor real. Un paquete de "20% GRATIS" solo es un buen trato si el precio unitario es realmente mejor que las alternativas.</p>
+
+            <h3>Tomando Decisiones Informadas</h3>
+            <p>A veces pagar más por unidad tiene sentido: si el paquete grande se echará a perder antes de usarlo, si no tiene espacio de almacenamiento, o si el producto más barato es de calidad inferior. Pero solo puede tomar estas decisiones inteligentemente cuando conoce los precios unitarios reales.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Dónde el Precio Unitario Importa Más</h2>
+            
+            <h3>Comestibles y Alimentos</h3>
+            <p>Los artículos de comestibles son donde el precio unitario tiene el mayor impacto porque los compra con frecuencia. Los alimentos básicos como arroz, pasta, harina, aceite de cocina, especias y artículos enlatados muestran enormes variaciones en el precio unitario entre marcas y tamaños. Una diferencia del 50% en el precio unitario no es inusual entre la opción más cara y la más barata.</p>
+
+            <h3>Productos en Papel y de Limpieza</h3>
+            <p>El papel higiénico, las toallas de papel, el detergente para ropa y los productos de limpieza vienen en una variedad desconcertante de tamaños y "cuentas" (hojas por rollo, cargas por botella, etc.). Los precios unitarios le permiten comparar 6 mega rollos vs. 12 rollos dobles vs. 24 rollos regulares, o detergente concentrado vs. regular.</p>
+
+            <h3>Bebidas</h3>
+            <p>Los refrescos, jugos, agua embotellada y bebidas alcohólicas varían salvajemente en el precio unitario. Una botella individual de 20 oz de refresco del refrigerador podría costar $0.10 por onza, mientras que un paquete de 12 latas cuesta $0.03 por onza: ¡una diferencia de 233%! Las botellas de 2 litros vs. cajas de 12 latas vs. botellas de 20 oz tienen diferentes precios unitarios.</p>
+
+            <h3>Artículos para Bebés</h3>
+            <p>Los pañales, la fórmula y la comida para bebés son caros, y las familias están bajo presión presupuestaria. Estas categorías muestran diferencias significativas de precio unitario entre tamaños y marcas. Calcular el precio unitario puede ayudar a los nuevos padres a estirar presupuestos ajustados, especialmente cuando se combinan con cupones y ventas.</p>
+
+            <h3>Alimentos para Mascotas</h3>
+            <p>Las bolsas de 5 lb vs. 20 lb vs. 40 lb de comida para perros pueden tener precios unitarios dramáticamente diferentes. Si tiene una mascota grande que come mucho, elegir el mejor precio unitario podría ahorrar $200-400 anualmente solo en comida.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Estrategias para Compras Inteligentes</h2>
+            
+            <h3>Haga de los Precios Unitarios Su Primera Revisión</h3>
+            <p>Antes de que la lealtad a la marca, el atractivo del empaque o las afirmaciones de marketing influyan en su decisión, verifique los precios unitarios. Esto debería ser su filtro inicial. Solo después de identificar las mejores opciones de precio unitario debería considerar factores como preferencia de marca, lista de ingredientes, fecha de vencimiento o preferencias de sabor.</p>
+
+            <h3>Aprenda los Precios Unitarios "Buenos" para Sus Artículos Esenciales</h3>
+            <p>Para artículos que compra regularmente, memorice qué constituye un buen precio unitario. Por ejemplo, si aprende que $0.10/oz es un buen precio para su cereal favorito, puede detectar rápidamente cuándo una venta es realmente valiosa. Lleve una pequeña lista de precios de sus 20 artículos principales en su teléfono para referencia rápida.</p>
+
+            <h3>Combine Precios Unitarios con Cupones y Ventas</h3>
+            <p>La estrategia de máximo ahorro: encuentre el artículo con el mejor precio unitario, LUEGO aplique cupones y aproveche las ventas. Un cupón de $1 ahorra más en un artículo de $5 con buen precio unitario que en un artículo de $7 con mal precio unitario. Apile el precio unitario bajo + oferta de la tienda + cupón del fabricante para ahorros masivos.</p>
+
+            <h3>Considere el Uso Realista</h3>
+            <p>Un precio unitario bajo no es una ganga si el producto se echa a perder antes de usarlo. El aceite de oliva de 64 oz podría tener un precio unitario mejor, pero si solo cocina ocasionalmente y se pondrá rancio, el tamaño de 16 oz es más inteligente. Las nueces a granel son un gran valor hasta que se ponen rancias en su despensa seis meses después.</p>
+
+            <h3>Cuidado con el Relleno de Aire</h3>
+            <p>Algunos empaques están diseñados para parecer más grandes de lo que son (bolsas de chips hinchadas, cajas con tapas de plástico que reducen el contenido). Los precios unitarios basados en peso/volumen real cortan a través de este engaño. Siempre use la medida impresa en el empaque, no el tamaño aparente de la caja.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Trampas Comunes de Precio Unitario</h2>
+            
+            <h3>Unidades Inconsistentes en las Etiquetas de Tienda</h3>
+            <p>Las tiendas a veces muestran el precio unitario de una marca por onza, otra por libra, haciendo imposible la comparación rápida. Es por esto que es útil calcular usted mismo: asegura unidades consistentes. Nuestra calculadora maneja diferentes unidades automáticamente para que pueda comparar onzas con libras sin hacer conversiones.</p>
+
+            <h3>Asumir que el Precio Unitario de la Tienda es Correcto</h3>
+            <p>Los errores de etiquetado ocurren. A veces el precio unitario mostrado en el estante es simplemente incorrecto debido a errores humanos o software. Si algo parece extraño (el paquete pequeño muestra un precio unitario mejor que el grande), haga doble clic calculando usted mismo. He encontrado errores del 20-50% en etiquetas de estantes.</p>
+
+            <h3>Ignorar Calidad y Preferencia</h3>
+            <p>El precio unitario más bajo no significa nada si el producto es terrible. El papel higiénico de precio más bajo podría ser tan delgado que necesita usar el doble, anulando los ahorros. El queso de precio más bajo podría tener tanto relleno que se derrite mal. Use el precio unitario para comparar opciones de calidad similar, no para forzarse a comprar productos de baja calidad.</p>
+
+            <h3>El Síndrome de "Compré Demasiado"</h3>
+            <p>Comprar el paquete de 10 lb porque tiene el mejor precio unitario es una falsa economía si solo necesita 2 lb y el resto se desperdicia. Para artículos perecederos, calcule cuánto usará realísticamente antes del vencimiento. Para artículos no perecederos, considere los costos de almacenamiento y el costo de oportunidad de gastar ese dinero ahora vs. más tarde.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Enseñando a los Niños Sobre Precio Unitario</h2>
+            <p>El precio unitario es una habilidad matemática real que los niños pueden aprender y aplicar inmediatamente:</p>
+            
+            <h3>Edades 6-9: Conceptos Básicos</h3>
+            <p>Comience con comparaciones simples usando unidades de conteo. "Esta caja tiene 10 barras de granola por $5, esta tiene 6 barras por $4. ¿Cuál es un mejor valor?" Déjeles calcular precio por barra (división simple). Haga que encuentren el mejor valor en cereales o bocadillos usando unidades de conteo.</p>
+
+            <h3>Edades 10-13: Introducir Unidades de Medida</h3>
+            <p>Pase a comparar onzas, libras, etc. Muéstreles cómo leer el peso del empaque. Práctica en la tienda: "Calcula qué jugo es más barato por onza." Enséñeles a usar la calculadora de su teléfono para división: precio ÷ onzas = precio por onza. Conviértalo en un juego: "¿Puedes encontrar el ketchup con el mejor precio unitario?"</p>
+
+            <h3>Edades 14+: Comparaciones Complejas y Presupuesto</h3>
+            <p>Déles un presupuesto para comprar ciertos artículos y desafíelos a obtener el mejor valor total. Enséñeles sobre equilibrar el precio unitario con la calidad, el desperdicio y el almacenamiento. Discuta cómo el precio unitario afecta el presupuesto familiar: "Si ahorramos $20 a la semana en comestibles usando precio unitario, eso es $1,040 al año."</p>
+
+            <h3>Habilidades para Toda la Vida</h3>
+            <p>Los niños que aprenden el precio unitario desarrollan pensamiento crítico, habilidades matemáticas prácticas y alfabetización de consumidor. Se vuelven compradores inteligentes que no se dejan engañar por el marketing extravagante. Estas habilidades se transfieren a decisiones financieras posteriores como comparar tarifas de préstamos, primas de seguros y planes de inversión.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Precio Unitario para Compras en Línea</h2>
+            
+            <h3>Amazon y Otros Mercados</h3>
+            <p>Las compras en línea a menudo hacen que el precio unitario sea menos obvio. Los vendedores pueden listar el mismo producto en múltiples tamaños con descripciones inconsistentes. Use herramientas de comparación de navegador si están disponibles, o calcule manualmente. Cuidado con las "ofertas de suscribir y ahorrar" que parecen baratas pero tienen malos precios unitarios.</p>
+
+            <h3>Factorizar el Envío</h3>
+            <p>Al comprar en línea, agregue los costos de envío al precio antes de calcular el precio unitario. Un artículo con un precio unitario bajo pero $8 de envío podría terminar siendo más caro que una opción de tienda local. La membresía Prime puede cambiar los cálculos si elimina los costos de envío.</p>
+
+            <h3>Clubes de Almacén (Costco, Sam's Club)</h3>
+            <p>Los clubes de almacén a menudo, pero no siempre, tienen mejores precios unitarios que las tiendas de comestibles. Compare antes de asumir. Además, factorice el costo de membresía: si paga $60/año para la membresía, necesita ahorrar más de $60 en mejores precios unitarios para salir adelante. Para familias grandes que compran a granel regularmente, esto es fácil. Para individuos, podría no valer la pena.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+            
+            <h3>¿Debería siempre comprar el artículo con el precio unitario más bajo?</h3>
+            <p>No siempre. Use el precio unitario como su guía principal, pero también considere: (1) ¿Usará realmente todo antes de que se eche a perder?, (2) ¿Hay una diferencia de calidad significativa?, (3) ¿Tiene espacio de almacenamiento?, (4) ¿El mejor precio unitario requiere comprar una cantidad impráctica? El precio unitario es una herramienta para decisiones informadas, no una regla absoluta.</p>
+
+            <h3>¿Cómo comparo artículos en diferentes unidades como onzas líquidas vs. mililitros?</h3>
+            <p>Nuestra calculadora maneja esto automáticamente: simplemente seleccione la unidad correcta para cada producto. Si está calculando manualmente, convierta todo a la misma unidad primero. Factores de conversión comunes: 1 lb = 16 oz, 1 kg = 1000g, 1 L = 1000ml, 1 galón = 128 fl oz, 1 fl oz ≈ 30ml.</p>
+
+            <h3>¿El precio unitario más bajo siempre significa comprar el paquete más grande?</h3>
+            <p>Usualmente sí, pero no siempre. A veces los tamaños medianos están en oferta y tienen mejores precios unitarios que los grandes. A veces las marcas de tienda en tamaños regulares superan a las marcas de nombre en tamaños grandes. Los minoristas ocasionalmente precian mal los artículos. Siempre calcule; no asuma que más grande es mejor valor.</p>
+
+            <h3>¿Qué pasa con los paquetes "bonificados" que dicen "20% más gratis"?</h3>
+            <p>Estos son buenos solo si el precio unitario realmente lo refleja. Calcule el precio unitario del paquete bonificado vs. paquetes regulares. A veces el precio de la "bonificación" no es tan bueno como el paquete regular en oferta. Los reclamos de "bonificación" son marketing: siempre verifique las matemáticas.</p>
+
+            <h3>¿Cómo calculo el precio unitario para artículos vendidos por conteo (como huevos)?</h3>
+            <p>Simplemente divida el precio por el número de artículos. 12 huevos por $3.60 = $0.30 por huevo. 18 huevos por $4.50 = $0.25 por huevo. La caja más grande es el mejor valor. Esto funciona para cualquier cosa vendida por conteo: rollos de papel higiénico, baterías, barras de granola, etc.</p>
+
+            <h3>¿Los precios unitarios están estandarizados entre tiendas?</h3>
+            <p>No, desafortunadamente. Cada tienda puede elegir qué unidad usar para mostrar precios unitarios. Una tienda podría mostrar cereales por onza, otra por libra. Las tiendas de papel higiénico difieren salvajemente: algunas usan precio por rollo, otras precio por hoja. Esta inconsistencia es frustrante pero es otra razón por la que calcular usted mismo usando herramientas como esta calculadora es valioso.</p>
+        </div>
+    </div>
+
+    <script>
+        function compareUnits() {
+            const priceA = parseFloat(document.getElementById('priceA').value) || 0;
+            const sizeA = parseFloat(document.getElementById('sizeA').value) || 0;
+            const unitA = document.getElementById('unitA').value;
+            
+            const priceB = parseFloat(document.getElementById('priceB').value) || 0;
+            const sizeB = parseFloat(document.getElementById('sizeB').value) || 0;
+            const unitB = document.getElementById('unitB').value;
+
+            if (priceA <= 0 || sizeA <= 0 || priceB <= 0 || sizeB <= 0) {
+                document.getElementById('winner').textContent = '-';
+                document.getElementById('unitPriceA').textContent = '$0.00';
+                document.getElementById('unitPriceB').textContent = '$0.00';
+                document.getElementById('savings').textContent = '0.00';
+                document.getElementById('percentCheaper').textContent = '0.0%';
+                return;
+            }
+
+            const unitPriceA = priceA / sizeA;
+            const unitPriceB = priceB / sizeB;
+
+            let winner, savings, percentCheaper;
+            if (unitPriceA < unitPriceB) {
+                winner = "Producto A";
+                savings = (unitPriceB - unitPriceA) * sizeB;
+                percentCheaper = ((unitPriceB - unitPriceA) / unitPriceB * 100);
+            } else if (unitPriceB < unitPriceA) {
+                winner = "Producto B";
+                savings = (unitPriceA - unitPriceB) * sizeA;
+                percentCheaper = ((unitPriceA - unitPriceB) / unitPriceA * 100);
+            } else {
+                winner = "Mismo valor";
+                savings = 0;
+                percentCheaper = 0;
+            }
+
+            document.getElementById('winner').textContent = winner;
+            document.getElementById('unitPriceA').textContent = '$' + unitPriceA.toFixed(3) + '/' + unitA;
+            document.getElementById('unitPriceB').textContent = '$' + unitPriceB.toFixed(3) + '/' + unitB;
+            document.getElementById('savings').textContent = Math.abs(savings).toFixed(2);
+            document.getElementById('percentCheaper').textContent = percentCheaper.toFixed(1) + '%';
+        }
+
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('input', compareUnits);
+            input.addEventListener('change', compareUnits);
+        });
+    </script>
+</body>
+</html>

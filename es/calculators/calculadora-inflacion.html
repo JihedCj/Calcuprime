@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Inflación - Calculadora de Poder Adquisitivo</title>
+    <meta name="description" content="Calcule cómo la inflación afecta su dinero con el tiempo. Entienda la pérdida del poder adquisitivo y planifique sus inversiones sabiamente.">
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Calculadora de Inflación</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Vea cómo la inflación erosiona el poder adquisitivo de su dinero con el tiempo y planifique en consecuencia.</p>
+
+        <div class="input-group">
+            <label for="amount" class="form-label">Cantidad de Dinero Hoy ($)</label>
+            <input type="number" id="amount" class="form-input" placeholder="ej., 10000" min="0" step="100" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="years" class="form-label">Número de Años</label>
+            <input type="number" id="years" class="form-input" placeholder="ej., 10" min="1" max="100" step="1" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="inflationRate" class="form-label">Tasa de Inflación Anual (%)</label>
+            <input type="number" id="inflationRate" class="form-input" placeholder="ej., 3.5" min="0" max="100" step="0.1" value="">
+            <small style="color: #6b7280; display: block; margin-top: 5px;">Promedio histórico de EE.UU.: ~3.5% | Objetivo de la Fed: 2%</small>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Valor Futuro (Poder Adquisitivo)</span>
+                <span class="result-value">$<span id="futureValue">0</span></span>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <div class="result-row">
+                    <span class="result-label">Valor Hoy</span>
+                    <span class="result-value">$<span id="todayValue">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Pérdida de Valor</span>
+                    <span class="result-value">$<span id="lossValue">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Porcentaje Perdido</span>
+                    <span class="result-value"><span id="percentLost">0.0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 8px;">
+            <p style="margin: 0; font-size: 14px; color: #92400e;"><strong>Importante:</strong> Esta calculadora muestra cuánto menos podrá comprar su dinero en el futuro. Para preservar el poder adquisitivo, su dinero debe crecer más rápido que la inflación.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es la Inflación?</h2>
+            <p>La inflación es el aumento gradual de los precios de bienes y servicios con el tiempo, lo que resulta en una disminución del poder adquisitivo del dinero. En términos simples: el mismo dinero compra menos cosas a medida que pasa el tiempo. Lo que $100 podían comprar hace 10 años cuesta significativamente más hoy debido a la inflación.</p>
+            <p>La inflación es medida típicamente por el Índice de Precios al Consumidor (IPC), que rastrea los cambios en los precios de una canasta de bienes y servicios de consumo comunes, incluyendo alimentos, vivienda, transporte, atención médica y más. Cuando escucha que "la inflación es del 3% este año", significa que en promedio, los precios aumentaron un 3% durante el año pasado.</p>
+            <p>Mientras que algo de inflación es normal y esperada en una economía saludable (la Reserva Federal de EE.UU. apunta a alrededor del 2% anual), la alta inflación puede erosionar los ahorros dramáticamente, afectar la planificación de la jubilación y impactar su calidad de vida si sus ingresos no mantienen el ritmo.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Usar Esta Calculadora</h2>
+            <p><strong>Paso 1:</strong> Ingrese la cantidad de dinero que está evaluando. Esto podría ser sus ahorros actuales, un objetivo de ahorro futuro, un ingreso de pensión planificado o cualquier cantidad que quiera entender en términos de poder adquisitivo futuro.</p>
+            <p><strong>Paso 2:</strong> Especifique el número de años en el futuro que está considerando. Para la planificación de la jubilación, esto podría ser 20-40 años. Para compras importantes, podría ser 5-10 años.</p>
+            <p><strong>Paso 3:</strong> Ingrese la tasa de inflación anual esperada. Puede usar el promedio histórico de EE.UU. de alrededor del 3.5%, el objetivo actual de la Reserva Federal del 2%, o la tasa actual de inflación. Para proyecciones conservadoras, usar un número ligeramente más alto (4-5%) proporciona un margen de seguridad.</p>
+            <p><strong>Paso 4:</strong> Revise los resultados para ver cuánto valdrán realmente esos dólares en el futuro en términos de poder adquisitivo de hoy. El "Valor Futuro" muestra cuánto necesitará en dólares de hoy para comprar lo mismo en el futuro.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo Sus Resultados</h2>
+            
+            <h3>Valor Futuro (Poder Adquisitivo)</h3>
+            <p>Esta es la cifra más importante: muestra cuánto podrá comprar realmente su dinero en el futuro, expresado en dólares de hoy. Por ejemplo, si ingresa $50,000 con inflación del 3% durante 20 años, el valor futuro de alrededor de $27,600 significa que sus $50,000 en 20 años comprarán solo tanto como $27,600 compran hoy: una pérdida de poder adquisitivo del 45%.</p>
+
+            <h3>Pérdida de Valor</h3>
+            <p>Este número muestra cuánto poder adquisitivo perderá a la inflación en términos de dólares. Es la diferencia entre su cantidad de hoy y el valor futuro. Esta pérdida es por qué mantener grandes cantidades de efectivo a largo plazo es una mala estrategia financiera: literalmente pierde valor cada año.</p>
+
+            <h3>Porcentaje Perdido</h3>
+            <p>El porcentaje de poder adquisitivo perdido a la inflación. Esta métrica ayuda a visualizar el impacto: perder el 30% del poder adquisitivo significa que solo podrá comprar el 70% de tanto como puede comprar hoy con la misma cantidad de dinero.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Tasas de Inflación Históricas de EE.UU.</h2>
+            
+            <h3>Promedio a Largo Plazo (1913-Presente): ~3.5%</h3>
+            <p>Durante el siglo pasado, la inflación de EE.UU. ha promediado alrededor del 3-3.5% anualmente. Este promedio a largo plazo incluye períodos de alta inflación, baja inflación, e incluso deflación ocasional. Es una estimación razonable para la planificación financiera a largo plazo.</p>
+
+            <h3>Era Moderna (2000-2020): ~2.0%</h3>
+            <p>Desde el año 2000 hasta 2020, la inflación ha sido relativamente moderada, promediando alrededor del 2% anualmente. Este período de baja inflación ha sido apoyado por políticas de la Reserva Federal dirigidas a mantener la inflación cerca del 2%, su objetivo oficial.</p>
+
+            <h3>Alta Inflación de los Años 70 y 80</h3>
+            <p>Desde finales de los años 60 hasta principios de los 80, EE.UU. experimentó una inflación significativa, alcanzando su punto máximo en más del 13% en 1980. Esto fue impulsado por shocks de precios del petróleo, alta demanda de consumidores y políticas monetarias. Las personas que vivieron esta era vieron su poder adquisitivo erosionado dramáticamente.</p>
+
+            <h3>Era Post-Pandemia (2021-2023): 4-9%</h3>
+            <p>Después del COVID-19, la inflación aumentó a niveles no vistos desde los años 80, alcanzando su punto máximo alrededor del 9% en 2022 antes de comenzar a moderarse. Interrupciones en la cadena de suministro, estímulo gubernamental y cambios en la demanda de consumidores contribuyeron a este aumento. Esto ha afectado todo, desde comestibles hasta vivienda.</p>
+
+            <h3>La Gran Depresión (1930s): Deflación</h3>
+            <p>Durante la Gran Depresión, EE.UU. experimentó deflación (inflación negativa) con precios cayendo significativamente. Mientras que esto puede sonar bueno, la deflación se correlacionó con un desempleo masivo, colapso de negocios y dificultades económicas. La inflación moderada es generalmente más saludable que la deflación.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Impacto de la Inflación en Ahorros y Jubilación</h2>
+            
+            <h3>Erosión de Efectivo y Ahorros</h3>
+            <p>El dinero mantenido en efectivo o cuentas de ahorro de bajo interés pierde valor cada año debido a la inflación. Si su cuenta de ahorros paga 0.5% de interés pero la inflación es del 3%, está perdiendo efectivamente el 2.5% de poder adquisitivo anualmente. Durante 30 años al 3% de inflación, $100,000 en efectivo caerán a un valor equivalente de aproximadamente $41,000 en poder adquisitivo.</p>
+
+            <h3>Planificación de Jubilación</h3>
+            <p>La inflación es crucial para la planificación de la jubilación. Si se jubila a los 65 y vive hasta los 95, necesita que sus ahorros duren 30 años. Con inflación del 3%, necesitará más del doble de ingresos al final de su jubilación que al principio solo para mantener el mismo nivel de vida. Un retiro de $50,000 hoy deberá ser de $120,000 en 30 años solo para comprar lo mismo.</p>
+
+            <h3>Ingresos Fijos y Pensiones</h3>
+            <p>Los jubilados con ingresos fijos (pensiones sin ajustes por costo de vida, anualidades) son particularmente vulnerables a la inflación. Una pensión de $3,000/mes puede sentirse cómoda hoy, pero en 20 años al 3% de inflación, solo tendrá el poder adquisitivo de aproximadamente $1,650/mes en dólares de hoy: casi un recorte a la mitad en el nivel de vida.</p>
+
+            <h3>Ajustes por Costo de Vida del Seguro Social</h3>
+            <p>Los beneficios del Seguro Social incluyen ajustes automáticos por costo de vida (COLA) basados en la inflación, lo que ayuda a proteger a los jubilados de la pérdida de poder adquisitivo. Esta es una razón por la cual el Seguro Social es tan valioso: es uno de los pocos flujos de ingresos de jubilación que automáticamente se ajustan a la inflación.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Protegiendo Su Dinero de la Inflación</h2>
+            
+            <h3>Inversiones en Acciones</h3>
+            <p>Históricamente, las acciones han devuelto alrededor del 10% anualmente a largo plazo, superando con creces la inflación del 3%. Mientras que las acciones son volátiles a corto plazo, han sido una de las mejores protecciones contra la inflación a largo plazo. Las empresas pueden aumentar precios durante la inflación, haciendo crecer sus ganancias y valor de acciones.</p>
+
+            <h3>Bienes Raíces</h3>
+            <p>La propiedad tiende a apreciarse con o por encima de la inflación a largo plazo. Además, si alquila la propiedad, los ingresos por alquiler típicamente aumentan con la inflación. Los propietarios de vivienda con hipotecas de tasa fija en realidad se benefician de la inflación: sus pagos permanecen fijos mientras que el valor de la propiedad e ingresos aumentan.</p>
+
+            <h3>Valores Protegidos Contra la Inflación del Tesoro (TIPS)</h3>
+            <p>TIPS son bonos del gobierno de EE.UU. diseñados específicamente para proteger contra la inflación. El valor principal se ajusta con la inflación, asegurando que su inversión mantenga el poder adquisitivo. Si bien los rendimientos son típicamente más bajos que las acciones, TIPS proporcionan garantía de protección contra la inflación.</p>
+
+            <h3>Bonos I (Bonos de Ahorro Series I)</h3>
+            <p>Los Bonos de Ahorro I ofrecen una tasa compuesta: una tasa fija más una tasa de inflación que se ajusta cada seis meses. Están respaldados por el gobierno de EE.UU., no pierden valor y pueden ser buenas para ahorros de emergencia que deben mantener el ritmo con la inflación. Limitados a $10,000 de compra por persona por año.</p>
+
+            <h3>Materias Primas y Oro</h3>
+            <p>Las materias primas (oro, plata, petróleo) a menudo aumentan durante la inflación. El oro es particularmente visto como un almacén de valor durante la alta inflación. Sin embargo, las materias primas son volátiles y no ganan intereses o dividendos, haciéndolas más una cobertura que una inversión principal.</p>
+
+            <h3>Aumentar Sus Ingresos</h3>
+            <p>La mejor protección contra la inflación es asegurar que sus ingresos crezcan al menos tan rápido como la inflación. Negocie aumentos anuales, desarrolle habilidades que comanden salarios más altos, inicie negocios secundarios o haga la transición a carreras con crecimiento salarial fuerte.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué Causa la Inflación?</h2>
+            
+            <h3>Inflación Impulsada por la Demanda</h3>
+            <p>Cuando la demanda de bienes y servicios excede la oferta, los precios aumentan. Esto a menudo ocurre cuando la economía crece rápidamente, el desempleo es bajo y los consumidores tienen mucho dinero para gastar. Más dinero persiguiendo la misma cantidad de bienes conduce a precios más altos.</p>
+
+            <h3>Inflación Impulsada por los Costos</h3>
+            <p>Cuando los costos de producción (salarios, materias primas, energía) aumentan, las empresas pasan estos costos más altos a los consumidores a través de precios más altos. Los shocks de precios del petróleo son ejemplos clásicos: cuando los precios del petróleo aumentan, los costos de transporte aumentan, haciendo que todo sea más costoso.</p>
+
+            <h3>Aumento de la Oferta Monetaria</h3>
+            <p>Cuando los gobiernos o bancos centrales aumentan la oferta de dinero (imprimiendo más dinero, bajando las tasas de interés, flexibilización cuantitativa), más dinero en circulación puede conducir a la inflación. La frase "demasiado dinero persiguiendo muy pocos bienes" captura este concepto.</p>
+
+            <h3>Expectativas Incorporadas</h3>
+            <p>Cuando las personas esperan inflación, se comportan de maneras que la causan. Los trabajadores exigen salarios más altos anticipando precios más altos, las empresas aumentan los precios anticipando costos más altos, creando un ciclo autorrealizador. Gestionar las expectativas es por qué los bancos centrales comunican objetivos de inflación.</p>
+
+            <h3>Interrupciones en la Cadena de Suministro</h3>
+            <p>Cuando las cadenas de suministro se interrumpen (desastres naturales, pandemias, guerras), la escasez impulsa los precios hacia arriba. La inflación post-COVID-19 estuvo parcialmente impulsada por interrupciones masivas en la cadena de suministro que crearon escasez mientras la demanda se mantenía alta.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Rol de la Reserva Federal en la Inflación</h2>
+            <p>La Reserva Federal (Fed) de EE.UU. tiene un doble mandato: maximizar el empleo y mantener precios estables (controlar la inflación). La Fed apunta a una inflación del 2%, considerada óptima para el crecimiento económico.</p>
+            
+            <h3>Tasas de Interés</h3>
+            <p>La herramienta principal de la Fed es ajustar las tasas de interés. Para combatir la alta inflación, la Fed aumenta las tasas, haciendo que los préstamos sean más costosos. Esto ralentiza los préstamos y el gasto de consumidores, reduciendo la demanda y enfriando la inflación. Para estimular la economía durante baja inflación/recesión, la Fed baja las tasas para fomentar el endeudamiento y el gasto.</p>
+
+            <h3>Flexibilización Cuantitativa (QE)</h3>
+            <p>Durante crisis económicas, la Fed puede comprar bonos del gobierno y otros activos, inyectando dinero en la economía. Esto aumenta la oferta monetaria y reduce las tasas de interés a largo plazo, estimulando el crecimiento económico pero potencialmente aumentando la inflación si se exagera.</p>
+
+            <h3>Balanceando Actos</h3>
+            <p>La Fed debe equilibrar el control de la inflación sin causar recesión. Aumentar las tasas demasiado rápido puede sofocar el crecimiento económico y aumentar el desempleo. Aumentar las tasas demasiado lento permite que la inflación se arraigue. Esta cuerda floja hace que la política monetaria sea compleja y controvertida.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Inflación vs. Deflación vs. Hiperinflación</h2>
+            
+            <h3>Inflación Normal (2-3%)</h3>
+            <p>La inflación moderada es considerada saludable. Fomenta el gasto y la inversión (porque el dinero perderá valor con el tiempo, es mejor usarlo o invertirlo), proporciona margen para que los bancos centrales reduzcan las tasas durante recesiones, y permite ajustes de precios/salarios que mantienen la economía flexible.</p>
+
+            <h3>Alta Inflación (5-10%+)</h3>
+            <p>La alta inflación erosiona los ahorros rápidamente, crea incertidumbre para negocios y consumidores, puede conducir a decisiones económicas deficientes (las personas compran cosas que no necesitan porque temen precios más altos más tarde), y perjudica desproporcionadamente a personas de bajos ingresos que gastan la mayoría de sus ingresos en necesidades.</p>
+
+            <h3>Deflación (Inflación Negativa)</h3>
+            <p>Cuando los precios caen con el tiempo. Aunque suena bueno, la deflación es peligrosa: los consumidores retrasan las compras esperando precios más bajos, reduciendo la demanda y causando que las empresas reduzcan la producción y despidan trabajadores. Las deudas se vuelven más gravosas (debe la misma cantidad pero los ingresos/precios están cayendo). La deflación es difícil de revertir.</p>
+
+            <h3>Hiperinflación (50%+ mensual)</h3>
+            <p>Inflación extremadamente alta que típicamente resulta de colapso gubernamental, exceso de impresión de dinero o devastación de guerra. Ejemplos históricos incluyen Alemania en los años 1920, Zimbabwe en 2008, Venezuela recientemente. El dinero se vuelve sin valor, los ahorros se aniquilan y las economías colapsan. La hiperinflación es rara en economías desarrolladas.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Preguntas Frecuentes</h2>
+            
+            <h3>¿Por qué no ponemos la inflación en cero?</h3>
+            <p>La inflación cero o la deflación son en realidad perjudiciales para la economía. Con cero inflación, los salarios no pueden ajustarse fácilmente a la baja durante crisis sin despidos, hay menos margen para que los bancos centrales reduzcan las tasas durante recesiones, y las personas retrasan las compras esperando precios más bajos, ralentizando la economía. La inflación moderada del 2-3% proporciona "engrase" económico que mantiene la economía funcionando sin problemas.</p>
+
+            <h3>¿Cómo es diferente la inflación del aumento del costo de vida?</h3>
+            <p>El aumento del costo de vida incluye todos los cambios en cuánto cuesta mantener su nivel de vida, incluyendo inflación más otros factores como cambios en calidad de vida, tecnología, regulaciones ambientales, etc. La inflación específicamente mide cambios en los precios de una canasta estándar de bienes. Los ajustes por costo de vida (COLA) a menudo rastrean la inflación pero pueden incluir factores adicionales.</p>
+
+            <h3>¿Es 3.5% una buena tasa de inflación para usar en la planificación?</h3>
+            <p>El 3-3.5% es una estimación conservadora razonable para la planificación a largo plazo basada en promedios históricos. Para la planificación de jubilación (horizontes de 30-40 años), usar 3-4% proporciona un margen de seguridad. Para períodos más cortos (5-10 años), podría usar tasas actuales de la Fed (alrededor del 2%) o promedios recientes. La planificación conservadora usa tasas ligeramente más altas: es mejor sobreestimar la inflación que subestimarla.</p>
+
+            <h3>¿Debería mantener todo mi dinero en inversiones para vencer la inflación?</h3>
+            <p>No, necesita equilibrio. Mantenga 3-6 meses de gastos en ahorros de efectivo líquidos para emergencias a pesar de la erosión por inflación: no puede pagar emergencias con acciones que podrían estar bajas. Para objetivos a largo plazo (jubilación, universidad), invertir en activos que vencen la inflación (acciones, bienes raíces) es crucial. Para objetivos de mediano plazo (5-10 años), use una mezcla de inversiones conservadoras. El horizonte temporal dicta la estrategia.</p>
+
+            <h3>¿Por qué los alimentos y los precios de la gasolina aumentan más rápido que la inflación oficial?</h3>
+            <p>La inflación "central" excluye alimentos y energía porque son volátiles, cambiando rápidamente debido a clima, eventos geopolíticos, etc. Esto ayuda a la formulación de políticas. Sin embargo, los consumidores sienten estos precios intensamente porque compramos comida y gas frecuentemente. Algunos períodos ven alimentos/energía aumentar más rápido que la inflación general, otros períodos más lento. Con el tiempo, tienden a rastrear cerca de la inflación general.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculateInflation() {
+            const amount = parseFloat(document.getElementById('amount').value) || 0;
+            const years = parseInt(document.getElementById('years').value) || 0;
+            const rate = parseFloat(document.getElementById('inflationRate').value) || 0;
+
+            if (amount <= 0 || years <= 0) {
+                document.getElementById('futureValue').textContent = '0';
+                document.getElementById('todayValue').textContent = '0';
+                document.getElementById('lossValue').textContent = '0';
+                document.getElementById('percentLost').textContent = '0.0%';
+                return;
+            }
+
+            const inflationFactor = Math.pow(1 + (rate / 100), years);
+            const futureValue = amount / inflationFactor;
+            const lossValue = amount - futureValue;
+            const percentLost = ((lossValue / amount) * 100);
+
+            document.getElementById('futureValue').textContent = futureValue.toLocaleString('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('todayValue').textContent = amount.toLocaleString('es-ES');
+            document.getElementById('lossValue').textContent = lossValue.toLocaleString('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('percentLost').textContent = percentLost.toFixed(1) + '%';
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateInflation);
+        });
+    </script>
+</body>
+</html>
