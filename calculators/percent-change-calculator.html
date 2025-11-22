@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Percent Change Calculator - Calculate the percentage increase or decrease between two values. Determine percentage difference easily.">
+    <meta name="keywords" content="percent change, percentage increase, percentage decrease, percentage difference, percent calculator">
+    <title>Percent Change Calculator - Increase and Decrease | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/percent-change-calculator.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/percent-change-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-cambio-porcentual.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/percent-change-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="percent-change-calculator.html" class="lang-link active">EN</a><a href="../es/calculators/calculadora-cambio-porcentual.html" class="lang-link">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../index.html#finance">Finance</a></li><li><a href="../index.html#health">Health</a></li><li><a href="../index.html#converters">Converters</a></li><li><a href="../index.html#math">Math</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Percent Change Calculator</h1><p class="calculator-description">Calculate the percentage increase or decrease between two values</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Enter Values</h3>
+                <div class="form-group"><label class="form-label">Initial Value</label><input type="number" id="initialValue" class="form-input" value="" step="0.01"></div>
+                <div class="form-group"><label class="form-label">Final Value</label><input type="number" id="finalValue" class="form-input" value="" step="0.01"></div>
+                <button onclick="calcChange()" class="btn-calculate">Calculate</button>
+            </div>
+            <div class="calculator-results"><h3>Results</h3>
+                <div class="result-item"><div class="result-label">Percent Change</div><div class="result-value" id="percentChange" style="font-size:2.5rem;color:#10b981">0%</div></div>
+                <div class="result-item"><div class="result-label">Absolute Change</div><div class="result-value" id="absoluteChange">0.00</div></div>
+                <div class="result-item"><div class="result-label">Change Type</div><div class="result-value" id="changeType">-</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Understanding Percent Change</h2><p>Percent change is a fundamental metric in mathematics and finance that expresses the difference between two values as a percentage of the original value. This allows you to compare changes of different magnitudes on a common scale.</p>
+            <h2>How to Calculate Percent Change</h2><h3>Basic Formula</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Percent Change = ((Final Value - Initial Value) / Initial Value) × 100<br><br>Absolute Change = Final Value - Initial Value</p>
+            <h3>Step-by-Step Example</h3><p><strong>Scenario:</strong> A stock price increased from $100 to $150.<br><br><strong>Step 1:</strong> Calculate absolute change<br>Absolute Change = $150 - $100 = $50<br><br><strong>Step 2:</strong> Divide by initial value<br>$50 / $100 = 0.50<br><br><strong>Step 3:</strong> Multiply by 100 to get percentage<br>0.50 × 100 = 50%<br><br><strong>Result:</strong> The stock increased by 50%</p>
+            <h2>Types of Percent Change</h2><h3>Percent Increase (Positive Change)</h3><p>Occurs when the final value is greater than the initial value. Result is a positive percentage. Common in sales growth, salary raises, population increase, or investment appreciation.</p>
+            <h3>Percent Decrease (Negative Change)</h3><p>Happens when the final value is less than the initial value. Result is a negative percentage. Seen in discounts, weight loss, cost reduction, or asset depreciation.</p>
+            <h3>No Change (Zero Percent)</h3><p>When initial and final values are equal, the percent change is 0%. This indicates stability or stagnation.</p>
+            <h2>Practical Applications</h2><h3>Financial Analysis</h3><p><strong>Investment Returns:</strong> Calculate stock, bond, or real estate returns by comparing purchase price with selling price.<br><br><strong>Revenue Growth:</strong> Companies track quarter-over-quarter or year-over-year revenue changes to measure business performance.<br><br><strong>Inflation:</strong> Economists use percent change to express how prices of goods and services increase over time.</p>
+            <h3>Business & Retail</h3><p><strong>Sales Performance:</strong> Managers compare sales between periods to identify trends and make strategic decisions.<br><br><strong>Price Adjustments:</strong> Retailers determine pricing strategies by calculating percent changes in costs and competitor pricing.</p>
+            <h3>Personal Finance</h3><p><strong>Salary Growth:</strong> Evaluate pay raises by comparing old salary with new salary.<br><br><strong>Savings Goals:</strong> Track how quickly your savings grow from month to month or year to year.</p>
+            <h2>Common Mistakes to Avoid</h2><h3>Confusing Percentage Points with Percent Change</h3><p>If an interest rate increases from 5% to 7%, that's a 2 percentage point increase, but a 40% percent change (because (7-5)/5 × 100 = 40%). These are different measures.</p>
+            <h3>Using Wrong Value as Base</h3><p>Always use the initial value as the denominator, not the final value. Using the wrong value produces misleading results.</p>
+            <h3>Misinterpreting Negative Changes</h3><p>A -50% decrease means something is worth half its original value. To return to the original value from -50%, you need a 100% increase, not 50%.</p>
+            <h2>Advanced Concepts</h2><h3>Compound Percent Change</h3><p>When calculating percent changes over multiple periods, changes compound. For example, a 10% increase followed by another 10% increase is not a 20% total increase, but 21% (because 1.10 × 1.10 = 1.21).</p>
+            <h3>Compound Annual Growth Rate (CAGR)</h3><p>For changes over several years, CAGR provides a "smoothed" growth rate considering compounding effect. Formula: CAGR = (Final Value / Initial Value)^(1/years) - 1</p>
+            <h2>Frequently Asked Questions</h2><h3>What's the difference between percent change and percent difference?</h3><p>Percent change compares two values in sequence (initial vs. final). Percent difference compares two independent values without assuming order, typically using their average as the base.</p>
+            <h3>How do I calculate percentage decrease?</h3><p>Use the same formula. The result will be negative, indicating a decrease. For example, from 100 to 75: ((75-100)/100) × 100 = -25%.</p>
+            <h3>Can I have a percent change greater than 100%?</h3><p>Yes. If a value doubles, that's a 100% increase. If it triples, that's a 200% increase. There's no upper limit to percent change.</p>
+            <h3>How do I reverse a percent change?</h3><p>To reverse an X% increase, you must decrease by X/(100+X) × 100%. For example, reversing a 25% increase requires a 20% decrease: (25/125 × 100 = 20%).</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>function calcChange(){const initial=parseFloat(document.getElementById('initialValue').value)||0;const final=parseFloat(document.getElementById('finalValue').value)||0;if(initial===0){return;}const absChange=final-initial;const percChange=(absChange/initial)*100;const type=percChange>0?'Increase':percChange<0?'Decrease':'No Change';document.getElementById('percentChange').textContent=percChange.toFixed(2)+'%';document.getElementById('absoluteChange').textContent=absChange.toFixed(2);document.getElementById('changeType').textContent=type;document.getElementById('percentChange').style.color=percChange>=0?'#10b981':'#ef4444';}document.querySelectorAll('.form-input').forEach(e=>e.addEventListener('input',calcChange));window.addEventListener('load',calcChange);</script>
+</body>
+</html>

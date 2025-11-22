@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Average Calculator - Calculate mean, median, mode, and range of numbers. Fast statistical calculations for datasets.">
+    <meta name="keywords" content="average calculator, mean calculator, median, mode, range, statistics calculator">
+    <title>Average Calculator - Mean, Median, Mode & Range | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/average-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Average Calculator</h1>
+            <p class="calculator-description">Calculate mean, median, mode, and range of your dataset</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Enter Numbers</h3>
+                <div class="form-group">
+                    <label class="form-label">Values (comma-separated or space-separated)</label>
+                    <textarea id="numbers" class="form-input" rows="5" placeholder="e.g., 10, 20, 30, 40, 50"></textarea>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calculate</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Results</h3>
+                <div class="result-item">
+                    <div class="result-label">Mean (Average)</div>
+                    <div class="result-value" id="mean" style="font-size:2.5rem;color:#4F46E5">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Median</div>
+                    <div class="result-value" id="median">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Mode</div>
+                    <div class="result-value" id="mode">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Range</div>
+                    <div class="result-value" id="range">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Count</div>
+                    <div class="result-value" id="count">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Sum</div>
+                    <div class="result-value" id="sum">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>About Statistical Measures</h2>
+
+            <h3>Mean (Average)</h3>
+            <p>The arithmetic mean is the sum of all values divided by the count of values. It's the most commonly used measure of central tendency.</p>
+            <p><strong>Formula:</strong> Mean = (Sum of all values) / (Number of values)</p>
+            <p><strong>Example:</strong> For the dataset {2, 4, 6, 8, 10}, the mean is (2+4+6+8+10)/5 = 30/5 = 6</p>
+
+            <h3>Median</h3>
+            <p>The median is the middle value when numbers are arranged in order. For even counts, it's the average of the two middle values.</p>
+            <p><strong>Why use it:</strong> The median is less affected by outliers than the mean, making it useful for skewed datasets.</p>
+            <p><strong>Example:</strong> For {1, 3, 5, 7, 9}, the median is 5. For {1, 3, 5, 7}, the median is (3+5)/2 = 4.</p>
+
+            <h3>Mode</h3>
+            <p>The mode is the value that appears most frequently in the dataset. A dataset can have one mode, multiple modes, or no mode at all.</p>
+            <p><strong>Example:</strong> In {1, 2, 2, 3, 4, 4, 4, 5}, the mode is 4 because it appears three times.</p>
+
+            <h3>Range</h3>
+            <p>The range is the difference between the maximum and minimum values. It shows the spread of your data.</p>
+            <p><strong>Formula:</strong> Range = Maximum value - Minimum value</p>
+            <p><strong>Example:</strong> For {10, 25, 30, 45, 50}, the range is 50 - 10 = 40</p>
+
+            <h2>When to Use Each Measure</h2>
+
+            <h3>Use Mean When:</h3>
+            <ul>
+                <li>Your data is normally distributed without extreme outliers</li>
+                <li>You need to calculate further statistics like standard deviation</li>
+                <li>Working with test scores, measurements, or continuous data</li>
+            </ul>
+
+            <h3>Use Median When:</h3>
+            <ul>
+                <li>Your data has outliers or is skewed</li>
+                <li>Dealing with income data or house prices</li>
+                <li>You need a more "typical" value that represents the center</li>
+            </ul>
+
+            <h3>Use Mode When:</h3>
+            <ul>
+                <li>Working with categorical data</li>
+                <li>You want to find the most common value</li>
+                <li>Analyzing survey responses or frequency data</li>
+            </ul>
+
+            <h2>Practical Applications</h2>
+
+            <h3>Education</h3>
+            <p>Calculate average test scores, find the median grade in a class, or identify the most common score (mode) to understand student performance.</p>
+
+            <h3>Business & Finance</h3>
+            <p>Analyze sales data, calculate average revenue, find median customer spending, or identify the most popular product price point.</p>
+
+            <h3>Sports & Fitness</h3>
+            <p>Track average workout times, median heart rate, or most common exercise duration to monitor fitness progress.</p>
+
+            <h3>Data Analysis</h3>
+            <p>Understand datasets quickly by calculating central tendency measures to summarize large amounts of information.</p>
+
+            <h2>Tips for Accurate Calculations</h2>
+
+            <ul>
+                <li><strong>Remove errors:</strong> Check for typos or impossible values before calculating</li>
+                <li><strong>Consider outliers:</strong> Extreme values can significantly affect the mean</li>
+                <li><strong>Use appropriate measure:</strong> Choose mean, median, or mode based on your data distribution</li>
+                <li><strong>Check data type:</strong> Ensure all values are numbers before calculation</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>What's the difference between mean and average?</h3>
+            <p>The terms "mean" and "average" are often used interchangeably, though technically "average" can refer to mean, median, or mode. In common usage, "average" typically means the arithmetic mean.</p>
+
+            <h3>How do I handle decimal numbers?</h3>
+            <p>Our calculator handles decimal numbers automatically. Simply enter them separated by commas or spaces.</p>
+
+            <h3>What if I have repeated values?</h3>
+            <p>Include repeated values as many times as they occur. For example: 5, 5, 5, 10, 15</p>
+
+            <h3>Can I calculate the average of negative numbers?</h3>
+            <p>Yes, the calculator works with both positive and negative numbers.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function calculate() {
+            const input = document.getElementById('numbers').value;
+            const numbers = input.split(/[\s,]+/).filter(n => n).map(Number).filter(n => !isNaN(n));
+
+            if (numbers.length === 0) {
+                alert('Please enter valid numbers');
+                return;
+            }
+
+            // Sort numbers for median and range
+            const sorted = [...numbers].sort((a, b) => a - b);
+
+            // Mean
+            const sum = numbers.reduce((a, b) => a + b, 0);
+            const mean = sum / numbers.length;
+
+            // Median
+            const mid = Math.floor(sorted.length / 2);
+            const median = sorted.length % 2 === 0
+                ? (sorted[mid - 1] + sorted[mid]) / 2
+                : sorted[mid];
+
+            // Mode
+            const frequency = {};
+            numbers.forEach(n => frequency[n] = (frequency[n] || 0) + 1);
+            const maxFreq = Math.max(...Object.values(frequency));
+            const modes = Object.keys(frequency).filter(k => frequency[k] === maxFreq);
+            const mode = maxFreq > 1 ? modes.join(', ') : 'No mode';
+
+            // Range
+            const range = sorted[sorted.length - 1] - sorted[0];
+
+            // Display results
+            document.getElementById('mean').textContent = mean.toFixed(2);
+            document.getElementById('median').textContent = median.toFixed(2);
+            document.getElementById('mode').textContent = mode;
+            document.getElementById('range').textContent = range.toFixed(2);
+            document.getElementById('count').textContent = numbers.length;
+            document.getElementById('sum').textContent = sum.toFixed(2);
+        }
+
+        // Calculate on input change
+        document.getElementById('numbers').addEventListener('input', () => {
+            const input = document.getElementById('numbers').value;
+            if (input.trim()) {
+                calculate();
+            }
+        });
+    </script>
+</body>
+</html>
