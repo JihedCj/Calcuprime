@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Converter - Convert kg, lbs, oz, tons, grams & more</title>
+    <meta name="description" content="Convert weight between kilograms, pounds, ounces, grams, tons, and more. Instant accurate weight conversion for cooking, fitness, shipping, and science.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Weight Converter</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Convert weight and mass between different units instantly. Perfect for cooking, fitness tracking, shipping, and scientific calculations.</p>
+
+        <div class="input-group">
+            <label for="inputValue" class="form-label">Enter Value</label>
+            <input type="number" id="inputValue" class="form-input" placeholder="e.g., 150" min="0" step="any" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="inputUnit" class="form-label">From Unit</label>
+            <select id="inputUnit" class="form-input">
+                <optgroup label="Metric">
+                    <option value="mg">Milligrams (mg)</option>
+                    <option value="g">Grams (g)</option>
+                    <option value="kg" selected>Kilograms (kg)</option>
+                    <option value="mt">Metric Tons (t)</option>
+                </optgroup>
+                <optgroup label="Imperial / US">
+                    <option value="oz">Ounces (oz)</option>
+                    <option value="lbs">Pounds (lbs)</option>
+                    <option value="st">Stones (st)</option>
+                    <option value="ton">US Tons (ton)</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Kilograms (kg)</span>
+                <span class="result-value"><span id="kg">0</span> kg</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Pounds (lbs)</span>
+                <span class="result-value"><span id="lbs">0</span> lbs</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Grams (g)</span>
+                <span class="result-value"><span id="g">0</span> g</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Ounces (oz)</span>
+                <span class="result-value"><span id="oz">0</span> oz</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Stones (st)</span>
+                <span class="result-value"><span id="st">0</span> st</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Milligrams (mg)</span>
+                <span class="result-value"><span id="mg">0</span> mg</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Metric Tons (t)</span>
+                <span class="result-value"><span id="mt">0</span> t</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">US Tons</span>
+                <span class="result-value"><span id="ton">0</span> ton</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Weight vs Mass</h2>
+            <p>While we commonly say "weight converter," we're actually converting mass. Weight is the force exerted by gravity on an object, while mass is the amount of matter in an object. Your mass stays the same whether you're on Earth, the Moon, or floating in space, but your weight changes based on gravitational pull. For everyday purposes, we use "weight" to mean mass.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Weight Conversions</h2>
+            <h3>Metric System (Based on grams)</h3>
+            <p><strong>1 kilogram (kg)</strong> = 1,000 grams. Most common unit for body weight, food items, and general measurements.</p>
+            <p><strong>1 gram (g)</strong> = 1,000 milligrams. Used for small items, ingredients, medication.</p>
+            <p><strong>1 metric ton</strong> = 1,000 kilograms. Used for vehicles, large shipments, industrial materials.</p>
+            
+            <h3>Imperial/US System (Based on pounds)</h3>
+            <p><strong>1 pound (lb)</strong> = 16 ounces = 453.592 grams. Standard US body weight and grocery measurement.</p>
+            <p><strong>1 ounce (oz)</strong> = 28.35 grams. Used for small food portions, precious metals, mail.</p>
+            <p><strong>1 stone (st)</strong> = 14 pounds = 6.35 kg. Common in UK/Ireland for body weight.</p>
+            <p><strong>1 US ton</strong> = 2,000 pounds = 907.185 kg. Different from metric ton (1,000 kg).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Practical Uses</h2>
+            <h3>Fitness & Body Weight</h3>
+            <p>Track weight loss/gain across different scales. US scales show pounds, European scales show kilograms. Converting helps when traveling, using fitness apps from different countries, or following international diet plans. A 150 lb person weighs 68 kg.</p>
+            
+            <h3>Cooking & Recipes</h3>
+            <p>International recipes use different units. European recipes list flour in grams; American recipes use ounces or cups (weight-based baking is more accurate). Converting ensures recipe success: 1 cup flour ≈ 120-125g.</p>
+            
+            <h3>Shipping & Postage</h3>
+            <p>Postal services worldwide use different weight limits. USPS uses ounces/pounds for domestic, kilograms for international. Knowing conversions helps calculate shipping costs and avoid overage fees.</p>
+            
+            <h3>Precious Metals & Jewelry</h3>
+            <p>Gold, silver, and gems measured in troy ounces (31.1g) or grams. Understanding conversions helps value jewelry and compare prices across markets.</p>
+            
+            <h3>Medical & Pharmaceutical</h3>
+            <p>Medication doses in milligrams (mg), patient weight in kg or lbs. Accurate conversion critical for dosing, especially pediatrics where doses scale with body weight.</p>
+            
+            <h3>Science & Engineering</h3>
+            <p>Scientific work uses metric (grams, kg). Engineering may use imperial depending on country. Converting between systems essential for international collaboration.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Quick Reference Guide</h2>
+            <p><strong>1 kg</strong> = 2.205 pounds (remember: 1 kg ≈ 2.2 lbs)</p>
+            <p><strong>1 lb</strong> = 0.454 kg (remember: 1 lb ≈ 0.45 kg)</p>
+            <p><strong>1 oz</strong> = 28.35 grams (remember: 1 oz ≈ 28-30g)</p>
+            <p><strong>1 stone</strong> = 14 lbs = 6.35 kg</p>
+            <p><strong>100 g</strong> = 3.527 oz (common food portion)</p>
+            <p><strong>500 g</strong> = 1.1 lbs (approximately half kilo ≈ 1 pound)</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Conversion Scenarios</h2>
+            <h3>Baby Weight: 7 lbs 8 oz to kg</h3>
+            <p>7.5 lbs = 3.4 kg. Newborn weights typically 2.5-4.5 kg (5.5-10 lbs).</p>
+            
+            <h3>Body Weight: 150 lbs to kg</h3>
+            <p>150 lbs = 68 kg. Average adult weight varies globally: US average ~180 lbs (82 kg), Europe ~70 kg (154 lbs).</p>
+            
+            <h3>Baking: 250g flour to oz</h3>
+            <p>250g = 8.82 oz ≈ 2 cups. Precision matters in baking—use weight for best results.</p>
+            
+            <h3>Luggage: 50 lbs to kg</h3>
+            <p>50 lbs = 22.7 kg. Most airlines allow 50 lbs (23 kg) checked bag. International flights may differ.</p>
+            
+            <h3>Package Shipping: 5 kg to lbs</h3>
+            <p>5 kg = 11 lbs. Important for calculating shipping rates and weight limits.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Tips for Accurate Measurement</h2>
+            <p><strong>Use Digital Scales:</strong> More accurate than analog. Look for 0.1g precision for small items, 0.1 lb for body weight.</p>
+            <p><strong>Tare Function:</strong> Zero out container weight before measuring ingredients. Essential for cooking accuracy.</p>
+            <p><strong>Calibrate Regularly:</strong> Check scale accuracy with known weights (dumbbells, coins, etc.). Scales drift over time.</p>
+            <p><strong>Stable Surface:</strong> Place scales on hard, flat surface. Carpet or uneven surfaces give false readings.</p>
+            <p><strong>Multiple Readings:</strong> Weigh yourself 3 times, take average. Body weight fluctuates pound or two daily (water, food, clothing).</p>
+        </div>
+    </div>
+
+    <script>
+        const conversionFactors = {
+            mg: 0.000001,
+            g: 0.001,
+            kg: 1,
+            mt: 1000,
+            oz: 0.0283495,
+            lbs: 0.453592,
+            st: 6.35029,
+            ton: 907.185
+        };
+
+        function convert() {
+            const value = parseFloat(document.getElementById('inputValue').value) || 0;
+            const inputUnit = document.getElementById('inputUnit').value;
+            
+            // Convert to kg first
+            const valueInKg = value * conversionFactors[inputUnit];
+            
+            // Convert to all units
+            document.getElementById('kg').textContent = valueInKg.toFixed(4);
+            document.getElementById('lbs').textContent = (valueInKg / conversionFactors.lbs).toFixed(4);
+            document.getElementById('g').textContent = (valueInKg / conversionFactors.g).toFixed(2);
+            document.getElementById('oz').textContent = (valueInKg / conversionFactors.oz).toFixed(4);
+            document.getElementById('st').textContent = (valueInKg / conversionFactors.st).toFixed(4);
+            document.getElementById('mg').textContent = (valueInKg / conversionFactors.mg).toFixed(0);
+            document.getElementById('mt').textContent = (valueInKg / conversionFactors.mt).toFixed(6);
+            document.getElementById('ton').textContent = (valueInKg / conversionFactors.ton).toFixed(6);
+        }
+
+        document.getElementById('inputValue').addEventListener('input', convert);
+        document.getElementById('inputUnit').addEventListener('change', convert);
+    </script>
+</body>
+</html>

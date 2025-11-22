@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Converter - Convert mph, km/h, m/s, knots & more</title>
+    <meta name="description" content="Convert speed between mph, km/h, meters per second, knots, and more. Perfect for travel, aviation, sports, and science.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Speed Converter</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Convert speed between different units instantly. Perfect for travel, aviation, maritime, and athletic performance.</p>
+
+        <div class="input-group">
+            <label for="inputValue" class="form-label">Enter Speed</label>
+            <input type="number" id="inputValue" class="form-input" placeholder="e.g., 65" min="0" step="any" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="inputUnit" class="form-label">From Unit</label>
+            <select id="inputUnit" class="form-input">
+                <option value="mph" selected>Miles per Hour (mph)</option>
+                <option value="kph">Kilometers per Hour (km/h)</option>
+                <option value="ms">Meters per Second (m/s)</option>
+                <option value="fps">Feet per Second (ft/s)</option>
+                <option value="knots">Knots (nautical mph)</option>
+                <option value="mach">Mach (speed of sound)</option>
+            </select>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Miles per Hour (mph)</span>
+                <span class="result-value"><span id="mph">0</span> mph</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Kilometers per Hour (km/h)</span>
+                <span class="result-value"><span id="kph">0</span> km/h</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Meters per Second (m/s)</span>
+                <span class="result-value"><span id="ms">0</span> m/s</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Feet per Second (ft/s)</span>
+                <span class="result-value"><span id="fps">0</span> ft/s</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Knots</span>
+                <span class="result-value"><span id="knots">0</span> knots</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Mach</span>
+                <span class="result-value"><span id="mach">0</span> Mach</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Speed Conversion Guide</h2>
+            <p><strong>mph to km/h:</strong> Multiply by 1.609 (65 mph = 104.6 km/h)</p>
+            <p><strong>km/h to mph:</strong> Multiply by 0.621 (100 km/h = 62.1 mph)</p>
+            <p><strong>m/s to mph:</strong> Multiply by 2.237 (10 m/s = 22.37 mph)</p>
+            <p><strong>Knots to mph:</strong> Multiply by 1.151 (100 knots = 115.1 mph)</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Practical Uses</h2>
+            <h3>International Driving</h3>
+            <p>US uses mph, most countries use km/h. Speed limit conversions essential when renting cars abroad. 70 mph ≈ 113 km/h.</p>
+            
+            <h3>Aviation</h3>
+            <p>Aircraft speed in knots. 1 knot = 1.151 mph. Commercial jets cruise at 450-550 knots (518-633 mph).</p>
+            
+            <h3>Maritime Navigation</h3>
+            <p>Boats use knots. Based on nautical miles (1.151 statute miles). Essential for sailors and boaters.</p>
+            
+            <h3>Athletics</h3>
+            <p>Track speeds in m/s. Usain Bolt's 100m record: 9.58s = 10.44 m/s = 23.35 mph = 37.58 km/h.</p>
+            
+            <h3>Physics & Engineering</h3>
+            <p>Scientific calculations use m/s. Converting to real-world speeds (mph/km/h) aids understanding.</p>
+        </div>
+    </div>
+
+    <script>
+        const toMPS = {
+            mph: 0.44704,
+            kph: 0.277778,
+            ms: 1,
+            fps: 0.3048,
+            knots: 0.514444,
+            mach: 343
+        };
+
+        function convert() {
+            const value = parseFloat(document.getElementById('inputValue').value) || 0;
+            const inputUnit = document.getElementById('inputUnit').value;
+            const valueInMPS = value * toMPS[inputUnit];
+            
+            document.getElementById('mph').textContent = (valueInMPS / toMPS.mph).toFixed(2);
+            document.getElementById('kph').textContent = (valueInMPS / toMPS.kph).toFixed(2);
+            document.getElementById('ms').textContent = valueInMPS.toFixed(3);
+            document.getElementById('fps').textContent = (valueInMPS / toMPS.fps).toFixed(2);
+            document.getElementById('knots').textContent = (valueInMPS / toMPS.knots).toFixed(2);
+            document.getElementById('mach').textContent = (valueInMPS / toMPS.mach).toFixed(4);
+        }
+
+        document.getElementById('inputValue').addEventListener('input', convert);
+        document.getElementById('inputUnit').addEventListener('change', convert);
+    </script>
+</body>
+</html>

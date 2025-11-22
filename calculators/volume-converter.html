@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volume Converter - Convert Liters, Gallons, ml, Cups & More</title>
+    <meta name="description" content="Convert volume between liters, gallons, milliliters, cups, pints, quarts, and more. Perfect for cooking, automotive, science, and everyday measurements.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Volume Converter</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Convert volume between liters, gallons, cups, and more. Essential for cooking, automotive work, and scientific applications.</p>
+
+        <div class="input-group">
+            <label for="inputValue" class="form-label">Enter Value</label>
+            <input type="number" id="inputValue" class="form-input" placeholder="e.g., 5" min="0" step="any" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="inputUnit" class="form-label">From Unit</label>
+            <select id="inputUnit" class="form-input">
+                <optgroup label="Metric">
+                    <option value="ml">Milliliters (ml)</option>
+                    <option value="l" selected>Liters (L)</option>
+                    <option value="m3">Cubic Meters (m³)</option>
+                </optgroup>
+                <optgroup label="US Liquid">
+                    <option value="tsp">Teaspoons (tsp)</option>
+                    <option value="tbsp">Tablespoons (tbsp)</option>
+                    <option value="floz">Fluid Ounces (fl oz)</option>
+                    <option value="cup">Cups</option>
+                    <option value="pt">Pints (pt)</option>
+                    <option value="qt">Quarts (qt)</option>
+                    <option value="gal">Gallons (gal)</option>
+                </optgroup>
+                <optgroup label="UK Imperial">
+                    <option value="ukpt">UK Pints</option>
+                    <option value="ukgal">UK Gallons</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Liters (L)</span>
+                <span class="result-value"><span id="l">0</span> L</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Milliliters (ml)</span>
+                <span class="result-value"><span id="ml">0</span> ml</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">US Gallons</span>
+                <span class="result-value"><span id="gal">0</span> gal</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Fluid Ounces (fl oz)</span>
+                <span class="result-value"><span id="floz">0</span> fl oz</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Cups (US)</span>
+                <span class="result-value"><span id="cup">0</span> cups</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Tablespoons (tbsp)</span>
+                <span class="result-value"><span id="tbsp">0</span> tbsp</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Teaspoons (tsp)</span>
+                <span class="result-value"><span id="tsp">0</span> tsp</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Quarts (qt)</span>
+                <span class="result-value"><span id="qt">0</span> qt</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Volume Conversions</h2>
+            <p><strong>1 Liter</strong> = 1,000 milliliters = 33.814 fl oz = 4.227 cups</p>
+            <p><strong>1 Gallon (US)</strong> = 3.785 liters = 128 fl oz = 16 cups = 4 quarts</p>
+            <p><strong>1 Cup</strong> = 236.588 ml = 8 fl oz = 16 tablespoons</p>
+            <p><strong>1 Tablespoon</strong> = 14.787 ml = 3 teaspoons</p>
+            <p><strong>1 Quart</strong> = 0.946 liters = 32 fl oz = 4 cups</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Practical Applications</h2>
+            <h3>Cooking & Baking</h3>
+            <p>Recipe conversions between metric and imperial. European recipes use ml/L, American use cups/tbsp. Accurate volume conversion ensures recipe success.</p>
+            
+            <h3>Automotive</h3>
+            <p>Engine displacement (cubic centimeters or liters), fuel capacity (gallons or liters), oil changes (quarts or liters). US cars: gallons, European: liters.</p>
+            
+            <h3>Aquariums</h3>
+            <p>Tank sizes in gallons or liters. Water treatment doses based on volume. A 50-gallon tank = 189 liters.</p>
+            
+            <h3>Swimming Pools</h3>
+            <p>Pool volume for chemicals. Olympic pool: 2.5M liters (660,000 gallons). Residential: 15,000-25,000 gallons.</p>
+        </div>
+    </div>
+
+    <script>
+        const toLiters = {
+            ml: 0.001,
+            l: 1,
+            m3: 1000,
+            tsp: 0.00492892,
+            tbsp: 0.0147868,
+            floz: 0.0295735,
+            cup: 0.236588,
+            pt: 0.473176,
+            qt: 0.946353,
+            gal: 3.78541,
+            ukpt: 0.568261,
+            ukgal: 4.54609
+        };
+
+        function convert() {
+            const value = parseFloat(document.getElementById('inputValue').value) || 0;
+            const inputUnit = document.getElementById('inputUnit').value;
+            const valueInLiters = value * toLiters[inputUnit];
+            
+            document.getElementById('l').textContent = valueInLiters.toFixed(4);
+            document.getElementById('ml').textContent = (valueInLiters / toLiters.ml).toFixed(2);
+            document.getElementById('gal').textContent = (valueInLiters / toLiters.gal).toFixed(4);
+            document.getElementById('floz').textContent = (valueInLiters / toLiters.floz).toFixed(2);
+            document.getElementById('cup').textContent = (valueInLiters / toLiters.cup).toFixed(3);
+            document.getElementById('tbsp').textContent = (valueInLiters / toLiters.tbsp).toFixed(2);
+            document.getElementById('tsp').textContent = (valueInLiters / toLiters.tsp).toFixed(2);
+            document.getElementById('qt').textContent = (valueInLiters / toLiters.qt).toFixed(3);
+        }
+
+        document.getElementById('inputValue').addEventListener('input', convert);
+        document.getElementById('inputUnit').addEventListener('change', convert);
+    </script>
+</body>
+</html>
