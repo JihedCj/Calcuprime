@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free salary to hourly calculator - Convert annual salary to hourly wage instantly. Calculate your hourly rate from yearly salary with taxes, benefits, and overtime.">
+    <meta name="keywords" content="salary to hourly calculator, annual salary to hourly, yearly salary calculator, hourly wage calculator, salary converter, hourly rate calculator">
+
+    <title>Salary to Hourly Calculator - Convert Annual Salary to Hourly Wage | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/salary-to-hourly-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../category/finance.html">Finance</a></li>
+                <li><a href="../category/health.html">Health</a></li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Salary to Hourly Calculator</h1>
+            <p class="calculator-description">Convert your annual salary to hourly wage with our free calculator. Includes options for overtime, taxes, and benefits.</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Salary Information</h3>
+
+                <div class="form-group">
+                    <label for="annualSalary" class="form-label">Annual Salary ($)</label>
+                    <input type="number" id="annualSalary" class="form-input" value="" min="0" step="1000" placeholder="e.g., 60000">
+                </div>
+
+                <div class="form-group">
+                    <label for="hoursPerWeek" class="form-label">Hours Per Week</label>
+                    <input type="number" id="hoursPerWeek" class="form-input" value="40" min="1" max="168" step="0.5">
+                </div>
+
+                <div class="form-group">
+                    <label for="weeksPerYear" class="form-label">Weeks Worked Per Year</label>
+                    <input type="number" id="weeksPerYear" class="form-input" value="52" min="1" max="52" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="vacationDays" class="form-label">Paid Vacation Days</label>
+                    <input type="number" id="vacationDays" class="form-input" value="0" min="0" max="365" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="holidays" class="form-label">Paid Holidays</label>
+                    <input type="number" id="holidays" class="form-input" value="0" min="0" max="365" step="1">
+                </div>
+
+                <button onclick="calculateHourly()" class="btn-calculate">Calculate Hourly Rate</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Your Hourly Rate</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Hourly Rate</div>
+                    <div class="result-value" id="hourlyRate" style="font-size: 3rem; color: #10b981;">$0.00</div>
+                </div>
+
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px;">Breakdown</h4>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Annual Salary:</span>
+                        <span id="displayAnnual" style="font-weight: 600;">$0</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Monthly:</span>
+                        <span id="monthlyPay" style="font-weight: 600;">$0</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Weekly:</span>
+                        <span id="weeklyPay" style="font-weight: 600;">$0</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Daily (8 hours):</span>
+                        <span id="dailyPay" style="font-weight: 600;">$0</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Total Work Hours/Year:</span>
+                        <span id="totalHours" style="font-weight: 600;">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>What is a Salary to Hourly Calculator?</h2>
+            <p>A salary to hourly calculator is a financial tool that converts your annual salary into an equivalent hourly wage. This powerful calculator helps employees, freelancers, and business owners understand their true hourly earnings by factoring in work hours, vacation days, holidays, and other variables that affect your effective hourly rate.</p>
+
+            <p>Understanding your hourly rate is crucial for several reasons: it helps you compare job offers accurately, negotiate better compensation packages, evaluate overtime opportunities, and make informed decisions about career changes. Whether you're considering a salaried position or comparing it to an hourly job, knowing your equivalent hourly wage provides valuable perspective on your compensation.</p>
+
+            <h2>How to Use the Salary to Hourly Calculator</h2>
+            <p>Using our salary to hourly calculator is straightforward and takes just a few simple steps:</p>
+
+            <ol>
+                <li><strong>Enter Your Annual Salary:</strong> Input your total yearly salary before taxes. This should include your base salary but typically excludes bonuses, commissions, or other variable compensation unless you want to include average annual bonuses.</li>
+
+                <li><strong>Specify Your Work Hours:</strong> Enter the number of hours you work per week. The standard is 40 hours, but many professionals work different schedules. Be honest about your actual working hours, including any regular overtime.</li>
+
+                <li><strong>Set Weeks Worked Per Year:</strong> Most people work 52 weeks per year, but this field allows you to adjust for part-year positions or seasonal work. The default is 52 weeks.</li>
+
+                <li><strong>Include Paid Time Off:</strong> Add your paid vacation days and paid holidays. These are days you're paid for but don't work, which affects your effective hourly rate. This gives you a more accurate picture of your compensation.</li>
+
+                <li><strong>Calculate:</strong> Click the "Calculate Hourly Rate" button to see your results instantly. The calculator will show your hourly rate along with monthly, weekly, and daily pay breakdowns.</li>
+            </ol>
+
+            <h2>Understanding Your Results</h2>
+            <p>Once you calculate your salary to hourly conversion, you'll receive a comprehensive breakdown of your compensation:</p>
+
+            <p><strong>Hourly Rate:</strong> This is your primary result—the amount you earn per hour worked. This calculation accounts for all the variables you entered, including paid time off, giving you the most accurate representation of your hourly earnings.</p>
+
+            <p><strong>Monthly Pay:</strong> Your annual salary divided by 12 months. This helps you understand your monthly cash flow and is useful for budgeting purposes, especially when comparing to monthly expenses like rent, mortgage payments, or loan obligations.</p>
+
+            <p><strong>Weekly Pay:</strong> Your earnings per week based on your annual salary and weeks worked. This is particularly useful if you're comparing salaried positions to weekly-paid hourly jobs or planning weekly budgets.</p>
+
+            <p><strong>Daily Pay:</strong> Based on an 8-hour workday, this shows your daily earnings. This metric is helpful for understanding the value of a single day's work and can be motivating when thinking about productivity and time management.</p>
+
+            <p><strong>Total Work Hours:</strong> The calculator shows your total working hours per year after accounting for vacation days and holidays. This helps you understand how many hours you're actually working for your salary and can reveal whether you're being fairly compensated for your time.</p>
+
+            <h2>Why Convert Salary to Hourly Rate?</h2>
+            <p>Converting your annual salary to an hourly rate serves multiple important purposes in your financial and career planning:</p>
+
+            <h3>1. Comparing Job Offers</h3>
+            <p>When you're evaluating multiple job opportunities—some offering salaries and others offering hourly wages—converting everything to an hourly rate creates an apples-to-apples comparison. A $60,000 salary might seem attractive, but when you factor in 60-hour work weeks, your effective hourly rate might be lower than a $25/hour position with a standard 40-hour week and better work-life balance.</p>
+
+            <h3>2. Negotiating Compensation</h3>
+            <p>Understanding your hourly rate empowers you during salary negotiations. If you know your current hourly rate is $28.85 and the market rate for your position is $35-40/hour, you have concrete data to support your request for a raise. It's much more powerful to say "I'm earning $28.85/hour, which is 20% below market rate" than to discuss vague percentage increases.</p>
+
+            <h3>3. Evaluating Overtime Worth</h3>
+            <p>For salaried employees who don't receive overtime pay, knowing your effective hourly rate helps you understand the true cost of working extra hours. If your hourly rate is $30 but you're regularly working 50-hour weeks, you're effectively earning $24/hour for those extra 10 hours. This insight can guide decisions about work-life balance and whether overtime is financially worthwhile.</p>
+
+            <h3>4. Freelance and Contract Rate Setting</h3>
+            <p>If you're transitioning from salaried employment to freelancing or contract work, your current hourly rate serves as a baseline. Freelancers typically need to charge 1.5-2x their salaried hourly rate to account for benefits, taxes, unpaid time off, business expenses, and irregular income. Our calculator helps you establish this baseline.</p>
+
+            <h3>5. Understanding True Compensation Value</h3>
+            <p>A high salary might look impressive, but if it comes with minimal vacation time, long hours, and high stress, your effective hourly rate—and quality of life—might be lower than a position with a smaller salary but better benefits and reasonable hours. The salary-to-hourly calculation reveals the real value of your time.</p>
+
+            <h2>The Standard Calculation Formula</h2>
+            <p>Our salary to hourly calculator uses a precise formula that accounts for all variables affecting your hourly rate:</p>
+
+            <p><strong>Basic Formula:</strong><br>
+            Hourly Rate = Annual Salary ÷ (Hours per Week × Weeks Worked per Year)</p>
+
+            <p><strong>With Paid Time Off:</strong><br>
+            Actual Work Hours = (Weeks Worked × Hours per Week) - ((Vacation Days + Holidays) × Hours per Day)<br>
+            Hourly Rate = Annual Salary ÷ Actual Work Hours</p>
+
+            <p>For example, if you earn $60,000 annually, work 40 hours per week for 52 weeks, with 10 vacation days and 8 holidays:</p>
+            <ul>
+                <li>Total potential hours: 52 weeks × 40 hours = 2,080 hours</li>
+                <li>Paid time off: (10 + 8) days × 8 hours = 144 hours</li>
+                <li>Actual work hours: 2,080 - 144 = 1,936 hours</li>
+                <li>Hourly rate: $60,000 ÷ 1,936 = $30.99/hour</li>
+            </ul>
+
+            <p>This calculation gives you a much more accurate picture than simply dividing $60,000 by 2,080 hours (the standard full-time hours), which would show $28.85/hour—a difference of over $2/hour.</p>
+
+            <h2>Factors That Affect Your Hourly Rate</h2>
+            <p>Several factors can significantly impact your effective hourly rate, and understanding these helps you make better career and financial decisions:</p>
+
+            <h3>Paid Time Off (PTO)</h3>
+            <p>Generous PTO policies increase your effective hourly rate because you're paid for hours you don't work. An employee earning $50,000 with 4 weeks of PTO has a higher effective hourly rate than someone earning $50,000 with 2 weeks of PTO, even though their annual salaries are identical.</p>
+
+            <h3>Actual Working Hours</h3>
+            <p>Many salaried employees work significantly more than 40 hours per week. If you consistently work 50-60 hours weekly, your effective hourly rate is much lower than the 40-hour calculation suggests. Track your actual hours for a month to get an accurate picture of your real hourly earnings.</p>
+
+            <h3>Unpaid Overtime</h3>
+            <p>Salaried positions often come with the expectation of working beyond standard hours without additional compensation. This "unpaid overtime" can dramatically reduce your effective hourly rate. A $70,000 salary with regular 50-hour weeks equals $26.92/hour, while the same salary with 40-hour weeks equals $33.65/hour.</p>
+
+            <h3>Commute Time</h3>
+            <p>While not traditionally included in hourly rate calculations, your commute is unpaid time dedicated to work. If you have a 1-hour each-way commute (10 hours weekly), you might want to factor this into your personal hourly rate calculation to understand your true time investment in a job.</p>
+
+            <h3>Benefits and Perks</h3>
+            <p>Employer-provided benefits like health insurance, retirement contributions, and stock options represent additional compensation. While our basic calculator focuses on cash salary, remember that total compensation includes these valuable benefits. A $55,000 salary with excellent benefits might be worth more than a $60,000 salary with minimal benefits.</p>
+
+            <h2>Common Salary to Hourly Conversions</h2>
+            <p>Here are typical salary-to-hourly conversions based on standard full-time work (40 hours/week, 52 weeks/year, 2,080 hours annually):</p>
+
+            <ul>
+                <li><strong>$30,000/year</strong> = $14.42/hour</li>
+                <li><strong>$40,000/year</strong> = $19.23/hour</li>
+                <li><strong>$50,000/year</strong> = $24.04/hour</li>
+                <li><strong>$60,000/year</strong> = $28.85/hour</li>
+                <li><strong>$70,000/year</strong> = $33.65/hour</li>
+                <li><strong>$80,000/year</strong> = $38.46/hour</li>
+                <li><strong>$90,000/year</strong> = $43.27/hour</li>
+                <li><strong>$100,000/year</strong> = $48.08/hour</li>
+                <li><strong>$120,000/year</strong> = $57.69/hour</li>
+                <li><strong>$150,000/year</strong> = $72.12/hour</li>
+            </ul>
+
+            <p>Remember that these are baseline calculations. Your actual hourly rate will vary based on your specific work hours, vacation days, holidays, and other factors. Use our calculator above for personalized results.</p>
+
+            <h2>Salary vs. Hourly: Which is Better?</h2>
+            <p>The decision between salary and hourly compensation depends on your circumstances, industry, career goals, and personal preferences:</p>
+
+            <h3>Advantages of Salaried Positions</h3>
+            <ul>
+                <li><strong>Predictable Income:</strong> You know exactly what you'll earn each pay period, making budgeting easier and providing financial stability.</li>
+                <li><strong>Benefits:</strong> Salaried positions typically include better benefits packages, including health insurance, retirement plans, and paid time off.</li>
+                <li><strong>Professional Status:</strong> Many professional and management roles are salaried, which can offer greater career advancement opportunities.</li>
+                <li><strong>Flexibility:</strong> Some salaried positions offer more flexibility in when and where you work, as long as you complete your responsibilities.</li>
+            </ul>
+
+            <h3>Advantages of Hourly Positions</h3>
+            <ul>
+                <li><strong>Overtime Pay:</strong> Hourly workers receive overtime compensation (typically 1.5x regular rate) for hours beyond 40 per week, which can significantly boost earnings.</li>
+                <li><strong>Clear Boundaries:</strong> Hourly positions usually have defined working hours, promoting better work-life balance and preventing unpaid overtime.</li>
+                <li><strong>Accurate Compensation:</strong> You're paid for every hour worked, with no expectation of "free" extra hours during busy periods.</li>
+                <li><strong>Schedule Flexibility:</strong> Some hourly positions offer flexible scheduling, allowing you to adjust hours based on personal needs.</li>
+            </ul>
+
+            <p>The "better" option depends on your priorities. If you value predictability and comprehensive benefits, a salary might suit you better. If you prefer being compensated for every hour worked and appreciate overtime opportunities, hourly might be ideal. Use our calculator to compare specific opportunities and make an informed choice.</p>
+
+            <h2>Tips for Maximizing Your Hourly Rate</h2>
+            <p>Whether you're salaried or hourly, these strategies can help you increase your effective hourly earnings:</p>
+
+            <h3>1. Track Your Actual Hours</h3>
+            <p>For one month, precisely track every hour you work, including early arrivals, late stays, weekend work, and work done at home. This data reveals your true hourly rate and provides leverage for compensation discussions. Many people discover they're working 45-50 hours weekly while being paid for 40.</p>
+
+            <h3>2. Negotiate Better PTO</h3>
+            <p>Additional vacation days or holidays increase your effective hourly rate without increasing your workload. During salary negotiations, if the employer can't increase your base salary, ask for additional PTO instead. Even 5 extra vacation days can meaningfully boost your hourly rate.</p>
+
+            <h3>3. Set Boundaries on Unpaid Work</h3>
+            <p>Unless truly necessary, avoid regularly working beyond your contracted hours without compensation. If extra hours are consistently required, this is a strong argument for a raise or promotion. Your time has value—protect it.</p>
+
+            <h3>4. Improve Efficiency</h3>
+            <p>The more efficiently you work, the more value you deliver per hour. This makes you more valuable to employers and strengthens your position in salary negotiations. Focus on high-impact activities and eliminate time-wasters.</p>
+
+            <h3>5. Develop Valuable Skills</h3>
+            <p>Continuously improving your skills increases your market value and, consequently, your hourly rate. Invest in professional development, certifications, and training that are valued in your industry.</p>
+
+            <h3>6. Know Your Market Value</h3>
+            <p>Research typical hourly rates for your position, experience level, and location using salary websites, industry reports, and professional networks. This knowledge empowers you to negotiate effectively and recognize when you're underpaid.</p>
+
+            <h2>Freelance and Contract Rates</h2>
+            <p>If you're transitioning from salaried employment to freelance or contract work, your hourly rate calculation becomes even more important. Freelancers need to charge significantly more than their salaried hourly rate to maintain equivalent take-home income:</p>
+
+            <h3>The Freelance Rate Multiplier</h3>
+            <p>A common rule of thumb is to multiply your salaried hourly rate by 2-2.5x for freelance work. Here's why:</p>
+
+            <ul>
+                <li><strong>Self-Employment Taxes:</strong> Freelancers pay both employer and employee portions of Social Security and Medicare taxes (15.3% total), versus 7.65% for employees.</li>
+                <li><strong>No Benefits:</strong> You must pay for health insurance, retirement contributions, and other benefits out of pocket—costs that employers typically cover for salaried workers.</li>
+                <li><strong>Unbillable Time:</strong> Freelancers spend significant time on administrative tasks, marketing, invoicing, and client acquisition—none of which generates income.</li>
+                <li><strong>Irregular Income:</strong> You won't work billable hours every week of the year. Account for slow periods, project gaps, and business development time.</li>
+                <li><strong>Business Expenses:</strong> Equipment, software, office space, insurance, and professional development are your responsibility as a freelancer.</li>
+                <li><strong>No Paid Time Off:</strong> When you take vacation or sick days, you don't earn income—unlike salaried positions with PTO.</li>
+            </ul>
+
+            <p>For example, if your salaried hourly rate is $30/hour, your freelance rate should be $60-75/hour to maintain similar take-home pay and benefits coverage.</p>
+
+            <h2>Tax Considerations</h2>
+            <p>It's important to note that our salary to hourly calculator shows gross pay (before taxes). Your actual take-home hourly rate will be lower after accounting for:</p>
+
+            <ul>
+                <li><strong>Federal Income Tax:</strong> Based on your tax bracket (10% to 37% for 2024)</li>
+                <li><strong>State Income Tax:</strong> Varies by state (0% to 13%+)</li>
+                <li><strong>FICA Taxes:</strong> Social Security (6.2%) and Medicare (1.45%)</li>
+                <li><strong>Other Deductions:</strong> Health insurance premiums, retirement contributions, etc.</li>
+            </ul>
+
+            <p>On average, expect 20-30% of your gross hourly rate to go toward taxes and deductions, though this varies significantly based on your tax situation, location, and benefit elections. Use our paycheck calculator to estimate your net (after-tax) hourly rate for more accurate budgeting.</p>
+
+            <h2>Industry Variations</h2>
+            <p>Different industries have varying norms for salary structures and hourly rates:</p>
+
+            <p><strong>Technology:</strong> Tech companies often offer high salaries but may expect long hours. Calculate your true hourly rate to ensure the impressive salary translates to competitive hourly compensation, especially considering potential startup equity that may or may not materialize.</p>
+
+            <p><strong>Healthcare:</strong> Medical professionals may work varying shifts and hours. Physicians, nurses, and other healthcare workers should carefully calculate hourly rates considering on-call time, irregular schedules, and overnight/weekend differentials.</p>
+
+            <p><strong>Finance:</strong> Investment banking and financial services are known for high salaries but also 60-80 hour work weeks. The impressive six-figure salary might equate to a moderate hourly rate when divided by actual working hours.</p>
+
+            <p><strong>Education:</strong> Teachers are typically salaried but work during limited weeks per year. Consider only contractual working weeks (often 36-40 weeks) rather than the full 52 weeks when calculating hourly rates.</p>
+
+            <p><strong>Retail and Hospitality:</strong> These industries commonly offer hourly rather than salaried positions. If considering a salaried management role, verify that the salary increase adequately compensates for lost overtime pay.</p>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>How do I convert my salary to hourly rate?</h3>
+            <p>Divide your annual salary by the number of hours you work per year. For standard full-time work (40 hours/week, 52 weeks), this is 2,080 hours. For example: $50,000 ÷ 2,080 hours = $24.04/hour. Use our calculator above for personalized results including vacation days and actual work hours.</p>
+
+            <h3>What is $60,000 a year hourly?</h3>
+            <p>A $60,000 annual salary equals approximately $28.85 per hour based on standard full-time work (2,080 hours yearly). However, your actual hourly rate depends on your work hours, vacation days, and holidays. Use our calculator with your specific details for an accurate answer.</p>
+
+            <h3>Should I factor in vacation days?</h3>
+            <p>Yes, including paid vacation days and holidays in your calculation provides a more accurate hourly rate because you're paid for these days without working. This reveals your true compensation and is especially important when comparing job offers with different PTO policies.</p>
+
+            <h3>How many hours are considered full-time?</h3>
+            <p>The standard definition of full-time employment is 40 hours per week, which equals 2,080 hours annually (40 hours × 52 weeks). However, many salaried professionals work significantly more than this, which reduces their effective hourly rate.</p>
+
+            <h3>Is it better to be paid salary or hourly?</h3>
+            <p>It depends on your situation. Salaried positions offer predictable income and typically better benefits, while hourly positions provide overtime pay and clearer work-life boundaries. Calculate your effective hourly rate for each option and consider your priorities regarding income stability, benefits, and work-life balance.</p>
+
+            <h3>How do I calculate overtime equivalent for salaried employees?</h3>
+            <p>First, determine your hourly rate by dividing your salary by your standard annual hours (typically 2,080). If you regularly work more than 40 hours weekly, those extra hours are effectively unpaid overtime. For example, if your calculated hourly rate is $30 but you work 50-hour weeks, you're essentially working 10 hours weekly at $0—reducing your true hourly rate to $24.</p>
+
+            <h2>Related Calculators</h2>
+            <p>Enhance your financial planning with these related tools:</p>
+            <ul>
+                <li><a href="paycheck-calculator.html">Paycheck Calculator</a> - Calculate your take-home pay after taxes and deductions</li>
+                <li><a href="tax-calculator.html">Income Tax Calculator</a> - Estimate your federal and state income taxes</li>
+                <li><a href="budget-calculator.html">Budget Calculator</a> - Create a comprehensive budget based on your income</li>
+                <li><a href="retirement-calculator.html">Retirement Calculator</a> - Plan your retirement savings based on current income</li>
+                <li><a href="investment-calculator.html">Investment Calculator</a> - Calculate potential investment growth over time</li>
+            </ul>
+
+            <h2>Start Converting Your Salary Today</h2>
+            <p>Understanding your hourly rate is fundamental to making informed career and financial decisions. Whether you're negotiating a job offer, evaluating a career change, setting freelance rates, or simply want to understand the true value of your time, our salary to hourly calculator provides the clarity you need.</p>
+
+            <p>The calculator is completely free, requires no registration, and provides instant results. It factors in all the variables that affect your actual hourly earnings, including work hours, vacation days, and holidays, giving you the most accurate picture of your compensation.</p>
+
+            <p>Use the calculator above to convert your salary to an hourly rate right now. The insights you gain will empower you to negotiate better compensation, make smarter career choices, and ensure you're being fairly paid for your time and expertise. Your time is valuable—make sure you know exactly what it's worth.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function calculateHourly() {
+            const annualSalary = parseFloat(document.getElementById('annualSalary').value) || 0;
+            const hoursPerWeek = parseFloat(document.getElementById('hoursPerWeek').value) || 40;
+            const weeksPerYear = parseFloat(document.getElementById('weeksPerYear').value) || 52;
+            const vacationDays = parseFloat(document.getElementById('vacationDays').value) || 0;
+            const holidays = parseFloat(document.getElementById('holidays').value) || 0;
+
+            if (annualSalary <= 0) {
+                return;
+            }
+
+            // Calculate total hours worked per year
+            const totalPotentialHours = hoursPerWeek * weeksPerYear;
+            const hoursPerDay = hoursPerWeek / 5; // Assuming 5-day work week
+            const paidTimeOffHours = (vacationDays + holidays) * hoursPerDay;
+            const actualWorkHours = totalPotentialHours - paidTimeOffHours;
+
+            // Calculate hourly rate
+            const hourlyRate = annualSalary / actualWorkHours;
+
+            // Calculate other time periods
+            const monthlyPay = annualSalary / 12;
+            const weeklyPay = annualSalary / weeksPerYear;
+            const dailyPay = hourlyRate * 8; // 8-hour day
+
+            // Display results
+            document.getElementById('hourlyRate').textContent = '$' + hourlyRate.toFixed(2);
+            document.getElementById('displayAnnual').textContent = '$' + annualSalary.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('monthlyPay').textContent = '$' + monthlyPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('weeklyPay').textContent = '$' + weeklyPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('dailyPay').textContent = '$' + dailyPay.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('totalHours').textContent = actualWorkHours.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0}) + ' hours';
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateHourly);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free bill split calculator - Split bills and expenses evenly or by custom amounts. Calculate tip, tax, and who owes what when dining out with friends.">
+    <meta name="keywords" content="bill split calculator, split the bill, check splitter, expense splitter, tip calculator with split, restaurant bill calculator, group expense calculator">
+
+    <title>Bill Split Calculator - Split Bills, Tips & Expenses Easily | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/bill-split-calculator.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../category/everyday.html">Everyday</a></li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Bill Split Calculator</h1>
+            <p class="calculator-description">Split restaurant bills, calculate tips, and divide expenses fairly among friends and groups.</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Bill Details</h3>
+
+                <div class="form-group">
+                    <label for="billAmount" class="form-label">Total Bill Amount ($)</label>
+                    <input type="number" id="billAmount" class="form-input" value="" min="0" step="0.01" placeholder="e.g., 150.00">
+                </div>
+
+                <div class="form-group">
+                    <label for="numPeople" class="form-label">Number of People</label>
+                    <input type="number" id="numPeople" class="form-input" value="2" min="1" max="50" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="tipPercent" class="form-label">Tip Percentage (%)</label>
+                    <input type="number" id="tipPercent" class="form-input" value="18" min="0" max="100" step="1">
+                    <div style="display: flex; gap: 8px; margin-top: 8px;">
+                        <button onclick="setTip(15)" style="padding: 6px 12px; border: 1px solid #e5e7eb; border-radius: 4px; background: white; cursor: pointer; font-size: 14px;">15%</button>
+                        <button onclick="setTip(18)" style="padding: 6px 12px; border: 1px solid #e5e7eb; border-radius: 4px; background: white; cursor: pointer; font-size: 14px;">18%</button>
+                        <button onclick="setTip(20)" style="padding: 6px 12px; border: 1px solid #e5e7eb; border-radius: 4px; background: white; cursor: pointer; font-size: 14px;">20%</button>
+                        <button onclick="setTip(25)" style="padding: 6px 12px; border: 1px solid #e5e7eb; border-radius: 4px; background: white; cursor: pointer; font-size: 14px;">25%</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="taxPercent" class="form-label">Tax Percentage (%) - Optional</label>
+                    <input type="number" id="taxPercent" class="form-input" value="" min="0" max="20" step="0.1" placeholder="e.g., 8.5">
+                </div>
+
+                <button onclick="calculateSplit()" class="btn-calculate">Calculate Split</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Per Person</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Each Person Pays</div>
+                    <div class="result-value" id="perPerson" style="font-size: 3rem; color: #10b981;">$0.00</div>
+                </div>
+
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px;">Breakdown</h4>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Subtotal:</span>
+                        <span id="displaySubtotal" style="font-weight: 600;">$0.00</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Tax:</span>
+                        <span id="taxAmount" style="font-weight: 600;">$0.00</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Tip (<span id="tipPercentDisplay">0</span>%):</span>
+                        <span id="tipAmount" style="font-weight: 600;">$0.00</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-top: 10px; border-top: 2px solid #e5e7eb;">
+                        <span style="font-weight: 700;">Total:</span>
+                        <span id="grandTotal" style="font-weight: 700;">$0.00</span>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 2px solid #e5e7eb;">
+                        <span style="color: #059669; font-weight: 600;">Per Person Share:</span>
+                        <span id="perPersonShare" style="color: #059669; font-weight: 700; font-size: 1.2rem;">$0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>What is a Bill Split Calculator?</h2>
+            <p>A bill split calculator is an essential tool for dividing restaurant bills, group expenses, and shared costs fairly among multiple people. This calculator eliminates the awkward math at the end of dinner, instantly showing each person's share including tip, tax, and the base bill amount.</p>
+
+            <p>Whether you're dining out with friends, splitting a group vacation expense, sharing household bills with roommates, or dividing the cost of office lunches, this calculator ensures everyone pays their fair share. It handles all the calculations automatically—tip percentages, tax amounts, and equal divisions—saving you time and preventing disputes over who owes what.</p>
+
+            <h2>How to Use the Bill Split Calculator</h2>
+            <p>Follow these simple steps to split any bill quickly and accurately:</p>
+
+            <ol>
+                <li><strong>Enter the Total Bill Amount:</strong> Input the total bill before tip and tax. If tax is already included on your bill, you can skip the tax field and just enter the full amount here.</li>
+
+                <li><strong>Specify Number of People:</strong> Enter how many people are splitting the bill. This can be 2 for a date, 4 for a double date, 6 for a family dinner, or any number up to large group gatherings.</li>
+
+                <li><strong>Set Tip Percentage:</strong> Choose your tip amount using the quick buttons (15%, 18%, 20%, 25%) or enter a custom percentage. The calculator will automatically add this to the bill before splitting.</li>
+
+                <li><strong>Add Tax if Needed:</strong> If your bill doesn't include tax or if you need to calculate it separately, enter your local tax rate. Many restaurant bills already show tax, so this field is optional.</li>
+
+                <li><strong>Calculate:</strong> Click "Calculate Split" to see instant results showing exactly what each person owes, including their share of tax and tip.</li>
+            </ol>
+
+            <h2>Understanding Your Results</h2>
+            <p>The calculator provides a complete breakdown of the split:</p>
+
+            <p><strong>Each Person Pays:</strong> This is the main result—the amount each person should contribute. This figure includes their share of the bill, tax, and tip. Use this number to collect from each person or when using payment apps like Venmo, Cash App, or Zelle.</p>
+
+            <p><strong>Subtotal:</strong> The original bill amount before any additions. This helps verify the starting point of your calculation.</p>
+
+            <p><strong>Tax Amount:</strong> If you entered a tax percentage, this shows the total tax added to the bill. Many receipts show this separately, allowing you to verify accuracy.</p>
+
+            <p><strong>Tip Amount:</strong> The total tip calculated from your chosen percentage. This shows the entire tip amount for the group, not just per person.</p>
+
+            <p><strong>Grand Total:</strong> The complete amount the group pays including bill, tax, and tip. This is what should match your total payment when everyone contributes their share.</p>
+
+            <p><strong>Per Person Share:</strong> Highlighted in green, this repeats the key number—what each individual owes. Make sure everyone understands this includes everything (their food, their share of tax, and their share of tip).</p>
+
+            <h2>Tipping Etiquette and Guidelines</h2>
+            <p>Knowing how much to tip can be confusing, especially in different dining situations. Here are standard tipping guidelines:</p>
+
+            <h3>Restaurant Tipping Standards</h3>
+            <ul>
+                <li><strong>15%:</strong> Acceptable for average service. This is the minimum for sit-down restaurants.</li>
+                <li><strong>18%:</strong> Good service, the modern standard. Use this as your baseline for competent, friendly service.</li>
+                <li><strong>20%:</strong> Excellent service. Choose this for attentive servers, special occasions, or complex orders handled well.</li>
+                <li><strong>25%+:</strong> Exceptional service or if you're feeling generous. Also appropriate for very small bills (a $20 tab deserves more than a $3 tip even though 15% would be $3).</li>
+            </ul>
+
+            <h3>When to Tip Less</h3>
+            <p>While you should aim for 15-20% in most situations, there are cases where less is acceptable:</p>
+            <ul>
+                <li>Poor service that you brought to management's attention</li>
+                <li>Buffets or self-service restaurants (10% is typical)</li>
+                <li>Counter service where you order and pick up (0-10%)</li>
+                <li>Coffee shops or quick service (tip jar situations)</li>
+            </ul>
+
+            <h3>When to Tip More</h3>
+            <p>Consider tipping 20-25% or more in these situations:</p>
+            <ul>
+                <li>Large groups (6+ people) with excellent service</li>
+                <li>Complicated orders or special dietary requests handled well</li>
+                <li>You're a regular at the establishment</li>
+                <li>During holidays or terrible weather when servers work harder</li>
+                <li>Servers go above and beyond (remember birthdays, accommodate kids, etc.)</li>
+                <li>Happy hour or deeply discounted bills (tip on the regular price)</li>
+            </ul>
+
+            <h2>Should You Tip Before or After Tax?</h2>
+            <p>This is a common etiquette question with varying opinions:</p>
+
+            <p><strong>Before Tax (Traditional):</strong> Many people calculate tips on the pre-tax amount because tax isn't part of the restaurant's service—it goes to the government. This is perfectly acceptable and was the traditional approach.</p>
+
+            <p><strong>After Tax (Modern/Easier):</strong> Most restaurants print suggested tip amounts on receipts calculated on the post-tax total, and this has become the norm in many areas. It's also simpler—you see the total and calculate the percentage. The difference is usually only a few cents to a dollar.</p>
+
+            <p><strong>Our Recommendation:</strong> Use the after-tax total for simplicity, especially when splitting bills. The small difference isn't worth the complicated math, and servers appreciate consistency. If your total is $100 after tax, an 18% tip is $18—easy to calculate and fair to your server.</p>
+
+            <h2>Splitting Bills Fairly: Different Scenarios</h2>
+            <p>Not all bill-splitting situations are equal. Here's how to handle various scenarios:</p>
+
+            <h3>Equal Split (The Easiest)</h3>
+            <p>This is what our calculator does—divide everything equally. This works great when:</p>
+            <ul>
+                <li>Everyone ordered similar priced items</li>
+                <li>You're sharing family-style or multiple dishes</li>
+                <li>Calculating individual amounts would be complicated</li>
+                <li>Your group prefers simplicity over exact fairness</li>
+            </ul>
+
+            <p>The social convention is that if totals are within 20-30% of each other, splitting equally keeps things simple and friendly.</p>
+
+            <h3>Itemized Split (Most Fair)</h3>
+            <p>When there's a big discrepancy in what people ordered, consider itemized splitting:</p>
+            <ul>
+                <li>Someone ordered expensive wine while others had water</li>
+                <li>One person had appetizer, entree, dessert while others just had entrees</li>
+                <li>Significant price differences (one person's meal was $15, another's was $45)</li>
+                <li>Someone doesn't drink alcohol but others ordered multiple rounds</li>
+            </ul>
+
+            <p>In these cases, calculate each person's items plus their share of tax and tip. Our calculator can help—just input one person's subtotal at a time to see their individual share including tip and tax.</p>
+
+            <h3>Proportional Split (The Compromise)</h3>
+            <p>For groups where some people ordered significantly more but you don't want to itemize everything:</p>
+            <ul>
+                <li>Divide the group into "high spenders" and "low spenders"</li>
+                <li>High spenders pay a larger share (e.g., $30 per person)</li>
+                <li>Low spenders pay a smaller share (e.g., $20 per person)</li>
+                <li>Adjust amounts until the total works out</li>
+            </ul>
+
+            <h2>Common Bill Splitting Situations</h2>
+            <p>Here's how to handle specific scenarios you'll encounter:</p>
+
+            <h3>Splitting With Non-Drinkers</h3>
+            <p>When some people drink alcohol and others don't, fairness matters. Alcohol often doubles the bill. Options:</p>
+            <ul>
+                <li><strong>Split the food evenly, drinkers split alcohol:</strong> Add up all food/non-alcoholic drinks and split evenly. Then drinkers split the alcohol tab separately.</li>
+                <li><strong>Itemize from the start:</strong> If you know some people won't drink, keep beverages on separate tabs if the restaurant allows.</li>
+                <li><strong>Use judgment:</strong> If alcohol was just one round of drinks ($20-30), it might not be worth the hassle to split separately.</li>
+            </ul>
+
+            <h3>Splitting Birthday Dinners</h3>
+            <p>When celebrating someone's birthday:</p>
+            <ul>
+                <li>Decide upfront whether the birthday person pays or not</li>
+                <li>If they don't pay, use our calculator with N-1 people (if 6 people, enter 5)</li>
+                <li>Some groups split the birthday person's meal among everyone else</li>
+                <li>Be clear about expectations before ordering to avoid awkwardness</li>
+            </ul>
+
+            <h3>Roommate Bill Splitting</h3>
+            <p>For recurring bills like utilities, groceries, or household expenses:</p>
+            <ul>
+                <li>Use our calculator for one-time shared expenses</li>
+                <li>For monthly bills, set up a rotation or proportional system</li>
+                <li>Consider apps like Splitwise for ongoing expense tracking</li>
+                <li>Be consistent—if you split groceries, split them every time</li>
+            </ul>
+
+            <h3>Large Group Dinners</h3>
+            <p>Groups of 8+ people create special challenges:</p>
+            <ul>
+                <li>Many restaurants add automatic gratuity (usually 18-20%) for groups of 6-8+</li>
+                <li>Check your receipt carefully—don't double-tip by adding another 18% on top of auto-gratuity</li>
+                <li>Consider asking for separate checks when making reservations</li>
+                <li>If splitting one bill, collect cash or Venmo requests before people leave</li>
+                <li>Designate one person to collect money and pay the bill to avoid confusion</li>
+            </ul>
+
+            <h2>Payment Apps and Bill Splitting</h2>
+            <p>Modern payment apps make collecting your share easy:</p>
+
+            <h3>Venmo, Cash App, and Zelle</h3>
+            <p>These apps have made bill splitting seamless:</p>
+            <ul>
+                <li>Calculate the per-person amount using our calculator</li>
+                <li>Send a request to each person with the exact amount</li>
+                <li>Add a note like "Dinner at Luigi's - $34.50 per person (includes tip)"</li>
+                <li>One person pays the full bill and collects from everyone else</li>
+                <li>Requests should be sent immediately while everyone still remembers</li>
+            </ul>
+
+            <h3>Apple Pay and Google Pay</h3>
+            <p>Some restaurants and apps now support splitting bills digitally:</p>
+            <ul>
+                <li>Look for "split" options in payment apps at participating merchants</li>
+                <li>Each person can pay their share directly through their phone</li>
+                <li>Eliminates the need for one person to front the money</li>
+                <li>Automatically handles tax and tip in many cases</li>
+            </ul>
+
+            <h3>Splitwise and Group Payment Apps</h3>
+            <p>For groups that regularly split expenses:</p>
+            <ul>
+                <li>Splitwise tracks who owes whom across multiple occasions</li>
+                <li>Great for roommates, travel groups, or friend groups who dine out often</li>
+                <li>Automatically calculates who needs to pay whom to settle up</li>
+                <li>Integrates with Venmo for easy settlement</li>
+            </ul>
+
+            <h2>Cultural Differences in Bill Splitting</h2>
+            <p>Bill-splitting customs vary significantly across cultures:</p>
+
+            <h3>United States</h3>
+            <p>Splitting bills is extremely common and socially acceptable. Asking for separate checks or using "split evenly" is normal. Tipping 15-20% is expected and considered part of the meal cost.</p>
+
+            <h3>Europe</h3>
+            <p>In many European countries, paying together is more common than splitting. One person often pays and others compensate them later. Tipping is less expected (often 5-10% or just rounding up) as service is typically included in the price.</p>
+
+            <h3>Asia</h3>
+            <p>Cultural norms vary widely. In some countries (China, Korea, Japan), the expectation is that one person treats everyone, with others reciprocating on future occasions. Splitting exactly can be seen as less generous. However, young people increasingly use bill-splitting apps.</p>
+
+            <h3>Middle East</h3>
+            <p>Hospitality is paramount, and the person who invited typically pays. Offering to split might even be considered insulting in some contexts. If you're unsure, let the person who invited take the lead.</p>
+
+            <h2>Tips for Smooth Bill Splitting</h2>
+            <p>Avoid awkwardness with these practical strategies:</p>
+
+            <h3>Before Ordering</h3>
+            <ul>
+                <li><strong>Set expectations early:</strong> Mention how you'll split the bill before everyone orders</li>
+                <li><strong>Ask for separate checks:</strong> If your group prefers itemized bills, request separate checks when ordering</li>
+                <li><strong>Communicate about expensive items:</strong> If you want that $40 steak, be prepared to pay more or split fairly</li>
+                <li><strong>Discuss drinks upfront:</strong> If some people aren't drinking, acknowledge this before the first round</li>
+            </ul>
+
+            <h3>During the Meal</h3>
+            <ul>
+                <li><strong>Keep receipts:</strong> Save the receipt if you need to verify amounts later</li>
+                <li><strong>Track shared items:</strong> Note who ordered appetizers or shared dishes to split costs fairly</li>
+                <li><strong>Clarify special situations:</strong> If it's someone's birthday, confirm whether they're paying or being treated</li>
+            </ul>
+
+            <h3>When the Bill Arrives</h3>
+            <ul>
+                <li><strong>Use our calculator:</strong> Pull out your phone and use our bill split calculator to get exact amounts</li>
+                <li><strong>Round up slightly:</strong> If the math gives you $34.67 per person, asking for $35 is fine and covers minor calculation differences</li>
+                <li><strong>One person collects:</strong> Designate someone to handle the payment and collect from others to avoid confusion</li>
+                <li><strong>Verify the math:</strong> Double-check that collected amounts match the total bill including tip</li>
+                <li><strong>Don't be cheap with the tip:</strong> Servers work hard; the difference between 15% and 20% is usually just a few dollars</li>
+            </ul>
+
+            <h3>After Paying</h3>
+            <ul>
+                <li><strong>Send requests immediately:</strong> Don't wait days to request money via Venmo; do it while everyone remembers</li>
+                <li><strong>Be clear in requests:</strong> Include what the payment is for and why that's the amount</li>
+                <li><strong>Follow up politely:</strong> If someone hasn't paid after a few days, send a friendly reminder</li>
+                <li><strong>Keep it casual:</strong> Don't make bill splitting more stressful than it needs to be</li>
+            </ul>
+
+            <h2>Math Behind Bill Splitting</h2>
+            <p>Understanding the calculations helps you verify results and split bills even without a calculator:</p>
+
+            <h3>Basic Equal Split Formula</h3>
+            <p><strong>Per Person = (Bill + Tax + Tip) ÷ Number of People</strong></p>
+
+            <p>For example, if your bill is $100, tax is 8% ($8), and tip is 20% ($20 on the original $100):</p>
+            <ul>
+                <li>Total = $100 + $8 + $20 = $128</li>
+                <li>Per Person (4 people) = $128 ÷ 4 = $32.00 each</li>
+            </ul>
+
+            <h3>Calculating Tip Quickly</h3>
+            <p>Mental math shortcuts for common tip percentages:</p>
+            <ul>
+                <li><strong>15%:</strong> Calculate 10% (move decimal left one place), then add half of that amount. On $50: 10% = $5, half is $2.50, total tip = $7.50</li>
+                <li><strong>20%:</strong> Calculate 10%, then double it. On $50: 10% = $5, doubled = $10</li>
+                <li><strong>18%:</strong> Calculate 10%, add half (5%), then add another 3%. Or just round to 20% for simplicity</li>
+            </ul>
+
+            <h3>Verifying the Calculator</h3>
+            <p>To double-check our calculator's accuracy:</p>
+            <ol>
+                <li>Multiply your per-person amount by the number of people</li>
+                <li>The result should equal the total shown</li>
+                <li>If there's a small difference (a few cents), it's due to rounding</li>
+            </ol>
+
+            <h2>Handling Awkward Bill Situations</h2>
+            <p>Sometimes bill splitting gets complicated. Here's how to navigate common awkward scenarios:</p>
+
+            <h3>Someone Can't Afford Their Share</h3>
+            <p>If a friend is genuinely struggling financially:</p>
+            <ul>
+                <li>Quietly offer to cover part of their share</li>
+                <li>Suggest going to less expensive restaurants in the future</li>
+                <li>Organize potlucks or cooking at home instead</li>
+                <li>Never make someone feel bad about their financial situation</li>
+            </ul>
+
+            <h3>Someone Ordered Much More Than Everyone Else</h3>
+            <p>When one person's order significantly exceeds others:</p>
+            <ul>
+                <li>Politely suggest splitting proportionally rather than equally</li>
+                <li>Use phrases like "Since we ordered different amounts, should we split proportionally?"</li>
+                <li>If they push back, consider if the amount is worth the relationship friction</li>
+                <li>For future dinners, set expectations upfront about splitting equally</li>
+            </ul>
+
+            <h3>Someone Forgot Their Wallet</h3>
+            <p>This happens more than you'd think:</p>
+            <ul>
+                <li>Cover their share if you can, and they can Venmo you later</li>
+                <li>If it's a pattern, address it privately—some people habitually "forget"</li>
+                <li>Set a deadline for repayment if it's a significant amount</li>
+                <li>Consider not dining out with serial forgetters</li>
+            </ul>
+
+            <h3>Someone Is Being Cheap</h3>
+            <p>If someone consistently under-contributes or argues about small amounts:</p>
+            <ul>
+                <li>Use our calculator to show exact math—hard to argue with numbers</li>
+                <li>Suggest separate checks for future outings with this person</li>
+                <li>Address the pattern privately if it's affecting the group</li>
+                <li>Decide if the friendship is worth the recurring frustration</li>
+            </ul>
+
+            <h2>Business Meal Bill Splitting</h2>
+            <p>Professional dining has different etiquette:</p>
+
+            <h3>Client Dinners</h3>
+            <ul>
+                <li>The person who invited always pays (usually the vendor/salesperson)</li>
+                <li>Never ask a client to split or pay for their portion</li>
+                <li>If a client insists on paying, graciously accept but offer to get the next one</li>
+                <li>Keep receipts for expense reports and tax purposes</li>
+            </ul>
+
+            <h3>Colleague Lunches</h3>
+            <ul>
+                <li>Splitting equally is common among peers</li>
+                <li>If there's a significant hierarchy, more senior colleagues often pay</li>
+                <li>Rotate who pays if you dine together regularly</li>
+                <li>Keep work relationships professional—don't make bill splitting complicated</li>
+            </ul>
+
+            <h3>Expense Reports</h3>
+            <ul>
+                <li>If expensing, know your company's policy on splitting bills</li>
+                <li>Get itemized receipts, not just credit card slips</li>
+                <li>Note on the receipt who attended if required</li>
+                <li>Don't expense personal items from a work dinner</li>
+            </ul>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>How do you split a bill evenly?</h3>
+            <p>Divide the total bill (including tax and tip) by the number of people. Use our calculator above to handle this automatically—just enter the bill amount, number of people, and tip percentage to get the exact per-person share.</p>
+
+            <h3>Should you tip before or after splitting the bill?</h3>
+            <p>Calculate the tip on the total bill first, then split everything (bill + tax + tip) among all people. Don't split the bill first and then have each person calculate their own tip—this leads to under-tipping. The tip is a group expense that should be split equally.</p>
+
+            <h3>Is it rude to ask to split the bill?</h3>
+            <p>Not at all! In the United States and many Western countries, splitting bills is completely normal and expected, especially among friends and peers. It's only potentially rude if someone explicitly invited you (they're treating), or in business contexts where the senior person or vendor typically pays.</p>
+
+            <h3>How do you split a bill when people ordered different amounts?</h3>
+            <p>You have three options: 1) Split evenly if differences are minor (simplest), 2) Calculate each person's items plus their share of tax/tip (most fair), or 3) Divide into groups (light eaters vs. heavy spenders) and charge different amounts to each group (compromise solution).</p>
+
+            <h3>What if the split comes to an uneven amount like $34.67?</h3>
+            <p>Round up to the nearest dollar or even multiple of $5 for simplicity. Asking for $35 per person when the math says $34.67 is perfectly acceptable. The small overage can cover calculation discrepancies or be seen as extra generosity to the server.</p>
+
+            <h3>How do I split a bill with someone who drank alcohol when I didn't?</h3>
+            <p>Split the food and non-alcoholic drinks evenly among everyone, then have the drinkers split the alcohol charges separately. This is fair and prevents non-drinkers from subsidizing others' cocktails. Many restaurants will separate alcohol on the bill if requested.</p>
+
+            <h2>Related Calculators</h2>
+            <p>Make life easier with these related tools:</p>
+            <ul>
+                <li><a href="tip-calculator.html">Tip Calculator</a> - Calculate tips for any service</li>
+                <li><a href="discount-calculator.html">Discount Calculator</a> - Figure out sale prices and savings</li>
+                <li><a href="percentage-calculator.html">Percentage Calculator</a> - Calculate any percentage quickly</li>
+                <li><a href="budget-calculator.html">Budget Calculator</a> - Track your overall spending</li>
+            </ul>
+
+            <h2>Start Splitting Bills Fairly</h2>
+            <p>Never struggle with restaurant math again. Our bill split calculator eliminates the awkward end-of-meal calculations, ensures everyone pays their fair share, and makes group dining enjoyable rather than stressful.</p>
+
+            <p>Whether you're splitting a casual lunch with coworkers, dividing a fancy dinner with friends, or managing group vacation expenses, our calculator provides instant, accurate results. The days of pulling out napkins and calculators to figure out who owes what are over—just pull up our calculator on your phone and split the bill in seconds.</p>
+
+            <p>Use the calculator above right now for your next group meal. Your friends will thank you for making bill splitting quick, fair, and drama-free!</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function setTip(percent) {
+            document.getElementById('tipPercent').value = percent;
+            calculateSplit();
+        }
+
+        function calculateSplit() {
+            const billAmount = parseFloat(document.getElementById('billAmount').value) || 0;
+            const numPeople = parseInt(document.getElementById('numPeople').value) || 1;
+            const tipPercent = parseFloat(document.getElementById('tipPercent').value) || 0;
+            const taxPercent = parseFloat(document.getElementById('taxPercent').value) || 0;
+
+            if (billAmount <= 0 || numPeople <= 0) {
+                return;
+            }
+
+            // Calculate tax
+            const taxAmount = billAmount * (taxPercent / 100);
+
+            // Calculate tip (on bill + tax, or just bill depending on preference - we'll use bill only)
+            const tipAmount = billAmount * (tipPercent / 100);
+
+            // Calculate grand total
+            const grandTotal = billAmount + taxAmount + tipAmount;
+
+            // Calculate per person
+            const perPerson = grandTotal / numPeople;
+
+            // Display results
+            document.getElementById('perPerson').textContent = '$' + perPerson.toFixed(2);
+            document.getElementById('displaySubtotal').textContent = '$' + billAmount.toFixed(2);
+            document.getElementById('taxAmount').textContent = '$' + taxAmount.toFixed(2);
+            document.getElementById('tipPercentDisplay').textContent = tipPercent;
+            document.getElementById('tipAmount').textContent = '$' + tipAmount.toFixed(2);
+            document.getElementById('grandTotal').textContent = '$' + grandTotal.toFixed(2);
+            document.getElementById('perPersonShare').textContent = '$' + perPerson.toFixed(2);
+        }
+
+        // Auto-calculate on input change
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculateSplit);
+        });
+    </script>
+</body>
+</html>
