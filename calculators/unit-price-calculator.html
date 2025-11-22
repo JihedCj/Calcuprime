@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free unit price calculator - Compare prices per unit to find the best value. Calculate price per ounce, pound, liter, or any unit to save money shopping.">
+    <meta name="keywords" content="unit price calculator, price per unit, cost comparison, price per ounce, grocery savings, best value calculator, compare prices">
+    <title>Unit Price Calculator - Compare Prices & Find Best Value | CalcuPrime</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/calculators/unit-price-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a>
+            <ul class="nav-menu"><li><a href="../index.html">Home</a></li><li><a href="../category/everyday.html">Everyday</a></li></ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Unit Price Calculator</h1>
+            <p class="calculator-description">Compare prices per unit to find the best value and save money on every purchase.</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Product A</h3>
+                <div class="form-group">
+                    <label for="priceA" class="form-label">Price ($)</label>
+                    <input type="number" id="priceA" class="form-input" value="" min="0" step="0.01" placeholder="e.g., 5.99">
+                </div>
+                <div class="form-group">
+                    <label for="sizeA" class="form-label">Size/Quantity</label>
+                    <input type="number" id="sizeA" class="form-input" value="" min="0.01" step="0.01" placeholder="e.g., 16">
+                </div>
+                <div class="form-group">
+                    <label for="unitA" class="form-label">Unit</label>
+                    <select id="unitA" class="form-input">
+                        <option value="oz">ounces (oz)</option>
+                        <option value="lb">pounds (lb)</option>
+                        <option value="g">grams (g)</option>
+                        <option value="kg">kilograms (kg)</option>
+                        <option value="ml">milliliters (ml)</option>
+                        <option value="L">liters (L)</option>
+                        <option value="fl oz">fluid ounces (fl oz)</option>
+                        <option value="gal">gallons (gal)</option>
+                        <option value="count">count</option>
+                    </select>
+                </div>
+
+                <h3 style="margin-top: 30px;">Product B</h3>
+                <div class="form-group">
+                    <label for="priceB" class="form-label">Price ($)</label>
+                    <input type="number" id="priceB" class="form-input" value="" min="0" step="0.01" placeholder="e.g., 8.99">
+                </div>
+                <div class="form-group">
+                    <label for="sizeB" class="form-label">Size/Quantity</label>
+                    <input type="number" id="sizeB" class="form-input" value="" min="0.01" step="0.01" placeholder="e.g., 32">
+                </div>
+                <div class="form-group">
+                    <label for="unitB" class="form-label">Unit</label>
+                    <select id="unitB" class="form-input">
+                        <option value="oz">ounces (oz)</option>
+                        <option value="lb">pounds (lb)</option>
+                        <option value="g">grams (g)</option>
+                        <option value="kg">kilograms (kg)</option>
+                        <option value="ml">milliliters (ml)</option>
+                        <option value="L">liters (L)</option>
+                        <option value="fl oz">fluid ounces (fl oz)</option>
+                        <option value="gal">gallons (gal)</option>
+                        <option value="count">count</option>
+                    </select>
+                </div>
+
+                <button onclick="compareUnits()" class="btn-calculate">Compare Prices</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Best Value</h3>
+                <div class="result-item">
+                    <div class="result-label">Winner</div>
+                    <div class="result-value" id="winner" style="font-size: 2.5rem; color: #10b981;">-</div>
+                </div>
+
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px;">Unit Prices</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Product A:</span>
+                        <span id="unitPriceA" style="font-weight: 600;">$0.00/unit</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Product B:</span>
+                        <span id="unitPriceB" style="font-weight: 600;">$0.00/unit</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 2px solid #e5e7eb;">
+                        <span style="font-weight: 600;">Savings:</span>
+                        <span id="savings" style="font-weight: 600; color: #10b981;">$0.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Percent Cheaper:</span>
+                        <span id="percentCheaper" style="font-weight: 600; color: #10b981;">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>What is a Unit Price Calculator?</h2>
+            <p>A unit price calculator is a practical tool that helps you determine the true cost of products by calculating the price per standardized unit (ounce, pound, liter, etc.). This allows you to accurately compare different package sizes and brands to identify which option provides the best value for your money, regardless of packaging differences.</p>
+
+            <p>Shopping can be deceptive—larger packages aren't always cheaper per unit, and flashy sales don't always represent genuine savings. Our calculator cuts through marketing confusion and packaging tricks to show you the real cost per unit, empowering you to make informed purchasing decisions that save money over time.</p>
+
+            <h2>Why Unit Price Matters</h2>
+            <p>Understanding unit pricing is one of the simplest yet most effective ways to save money on everyday purchases. Here's why it's crucial:</p>
+
+            <h3>Bigger Isn't Always Better</h3>
+            <p>Many shoppers assume larger packages offer better value, but this isn't guaranteed. Stores sometimes price smaller packages more competitively to attract budget shoppers, or clearance items in odd sizes may have lower unit prices than bulk options. Always calculate before assuming size equals savings.</p>
+
+            <h3>Sales Can Be Misleading</h3>
+            <p>A "50% OFF!" sticker doesn't mean you're getting the best deal. The sale item might still cost more per unit than a different brand or size at regular price. Unit price comparison reveals whether a sale represents genuine value or clever marketing.</p>
+
+            <h3>Brand vs. Generic</h3>
+            <p>Name brand products often cost significantly more per unit than generic alternatives, sometimes 30-50% more for identical or near-identical products. Calculating unit prices shows you exactly how much extra you're paying for branding and helps you decide if it's worth it.</p>
+
+            <h3>Accumulative Savings</h3>
+            <p>Saving $0.50 per unit doesn't seem significant, but multiply that by dozens of products across weekly shopping trips over a year, and you could save hundreds or even thousands of dollars annually just by choosing better unit prices.</p>
+
+            <h2>How to Calculate Unit Price</h2>
+            <p>The formula is straightforward:</p>
+
+            <p><strong>Unit Price = Total Price ÷ Number of Units</strong></p>
+
+            <p>For example, if a 16-ounce box costs $4.80:</p>
+            <p>Unit Price = $4.80 ÷ 16 oz = $0.30 per ounce</p>
+
+            <p>To compare with a 24-ounce box costing $6.00:</p>
+            <p>Unit Price = $6.00 ÷ 24 oz = $0.25 per ounce</p>
+
+            <p>The 24-ounce box is the better value at $0.25/oz versus $0.30/oz, saving you $0.05 per ounce or $1.20 on the larger package.</p>
+
+            <h2>Common Grocery Store Strategies</h2>
+            <p>Understanding retailer pricing strategies helps you shop smarter:</p>
+
+            <h3>Strategic Pricing</h3>
+            <p>Stores often price popular items (milk, bread, eggs) competitively while charging premium unit prices on less-compared items. They count on busy shoppers not calculating every product's unit price, allowing higher margins on convenience items.</p>
+
+            <h3>Package Size Manipulation</h3>
+            <p>Odd package sizes (14.3 oz instead of 16 oz) make mental math difficult, discouraging price comparison. Manufacturers reduce package size while keeping prices similar, effectively raising unit prices without obvious price increases—a practice called "shrinkflation."</p>
+
+            <h3>Sale Cycle Awareness</h3>
+            <p>Many products go on sale in 6-12 week cycles. Knowing these cycles and stocking up when unit prices are lowest can lead to significant savings. Non-perishables are perfect for this strategy.</p>
+
+            <h3>Loss Leaders</h3>
+            <p>Stores advertise extremely low prices on select items (loss leaders) to get you in the door, expecting you'll buy higher-margin products while there. The advertised items may have great unit prices, but surrounding products might not.</p>
+
+            <h2>Where Unit Price Matters Most</h2>
+            <p>Focus your unit price calculations on these product categories for maximum savings:</p>
+
+            <h3>1. Pantry Staples</h3>
+            <p>Items you buy repeatedly—rice, pasta, canned goods, oils, flour, sugar. Small unit price differences add up quickly on frequently purchased products. Stock up when unit prices are lowest since these don't expire quickly.</p>
+
+            <h3>2. Cleaning Products</h3>
+            <p>Detergents, dish soap, all-purpose cleaners. Concentrated versions often have better unit prices despite higher sticker prices. A $12 concentrated detergent making 96 loads ($0.125/load) beats a $6 bottle making 32 loads ($0.1875/load).</p>
+
+            <h3>3. Personal Care Items</h3>
+            <p>Shampoo, toothpaste, deodorant, toiletries. These have long shelf lives and show dramatic unit price variations between sizes and brands. Generic versions often cost 40-50% less per unit than name brands.</p>
+
+            <h3>4. Paper Products</h3>
+            <p>Toilet paper, paper towels, tissues. Bulk packages usually (but not always) offer better unit prices. However, warehouse club memberships should factor into calculations—the membership fee effectively increases unit price.</p>
+
+            <h3>5. Snacks and Beverages</h3>
+            <p>Individual servings have terrible unit prices compared to larger packages you portion yourself. A 12-pack of individual chips might cost $0.50/oz while a family-size bag costs $0.20/oz for the same product.</p>
+
+            <h2>Smart Shopping Strategies</h2>
+            <p>Maximize your savings with these unit price strategies:</p>
+
+            <h3>Use Store Shelf Tags</h3>
+            <p>Many stores display unit prices on shelf tags below products. However, verify these are accurate and use the same units across competing products—some stores make comparison difficult by using different units (one in ounces, another in pounds).</p>
+
+            <h3>Bring a Calculator or Use Your Phone</h3>
+            <p>Most smartphones have calculators. Take 30 seconds to calculate unit prices on big-ticket items or products you buy frequently. The time investment pays off immediately.</p>
+
+            <h3>Compare Across Brands</h3>
+            <p>Don't just compare sizes within one brand. The best value might be a different brand entirely. Store brands frequently offer 20-40% better unit prices than national brands for similar quality.</p>
+
+            <h3>Consider Quality</h3>
+            <p>Unit price isn't everything. Cheap paper towels requiring three sheets per wipe versus quality towels needing one mean the "expensive" option might actually cost less per use. Factor in effectiveness and durability.</p>
+
+            <h3>Storage and Waste</h3>
+            <p>The best unit price is irrelevant if the product expires before you use it. Large quantities only save money if consumed before spoiling. Consider storage space too—is the savings worth the storage real estate?</p>
+
+            <h3>Bulk Buying Considerations</h3>
+            <p>Warehouse clubs like Costco and Sam's Club often have excellent unit prices, but factor in:</p>
+            <ul>
+                <li>Annual membership fees ($60-120) amortized across purchases</li>
+                <li>Greater temptation to buy unnecessary items</li>
+                <li>Need for storage space</li>
+                <li>Ability to use products before expiration</li>
+                <li>Gas and time costs for special trips</li>
+            </ul>
+
+            <h2>Common Unit Price Traps</h2>
+            <p>Avoid these mistakes when comparing unit prices:</p>
+
+            <h3>Inconsistent Units</h3>
+            <p>Always convert to the same unit before comparing. Comparing price per ounce to price per pound will mislead you. Our calculator handles unit conversions automatically.</p>
+
+            <h3>Ignoring Coupons and Sales</h3>
+            <p>Apply coupons and calculate sale prices BEFORE determining unit price. A larger package might have a worse baseline unit price but become the better deal with a coupon.</p>
+
+            <h3>Forgetting Tax</h3>
+            <p>For items where one is taxed and another isn't (in some states, prepared food is taxed but ingredients aren't), factor tax into total price before calculating unit price for accurate comparison.</p>
+
+            <h3>Not Reading Labels</h3>
+            <p>Verify the actual contents match the package size claims. "Family Size" might be 18oz when the regular is 16oz—barely larger despite the label. Check nutrition labels for true serving counts.</p>
+
+            <h2>Beyond Groceries: Other Applications</h2>
+            <p>Unit price calculations apply to many purchases:</p>
+
+            <h3>Gas Stations</h3>
+            <p>When comparing gas stations, price per gallon is obvious, but factor in distance. Driving 10 miles round trip for gas $0.10 cheaper per gallon on a 12-gallon fill-up saves $1.20 but costs more in gas and time.</p>
+
+            <h3>Utilities</h3>
+            <p>Compare electricity or internet plans using price per kilowatt-hour or megabit to identify the best value. Promotional rates often increase significantly after introductory periods—calculate long-term unit cost.</p>
+
+            <h3>Medications</h3>
+            <p>Generic medications are chemically identical to brand names but often cost 60-80% less per pill. Always ask for generic equivalents and compare unit prices between pharmacies—variations can be substantial.</p>
+
+            <h3>Office Supplies</h3>
+            <p>Printer ink by the cartridge versus bulk refills, copy paper by the ream, pens in bulk packs versus singles. Office supplies show huge unit price variations—calculating before buying can cut costs significantly.</p>
+
+            <h2>Teaching Kids About Unit Price</h2>
+            <p>Unit price calculation is an excellent real-world math lesson for children:</p>
+
+            <ul>
+                <li><strong>Practical Math:</strong> Division and comparison in a meaningful context</li>
+                <li><strong>Financial Literacy:</strong> Early lessons in smart spending and value assessment</li>
+                <li><strong>Critical Thinking:</strong> Looking beyond marketing to evaluate real value</li>
+                <li><strong>Decision Making:</strong> Weighing factors like quality, quantity, and price</li>
+            </ul>
+
+            <p>Give children a shopping budget and have them use unit price calculations to make purchase decisions. They'll learn math while understanding that savings from smart shopping can fund treats or savings goals.</p>
+
+            <h2>Digital Tools and Apps</h2>
+            <p>Technology makes unit price comparison easier:</p>
+
+            <h3>Store Apps</h3>
+            <p>Many grocery store apps highlight deals and show unit prices digitally. Some allow you to scan products for instant unit price comparisons.</p>
+
+            <h3>Browser Extensions</h3>
+            <p>Shopping browser extensions like Honey or CamelCamelCamel track price histories on Amazon and other sites, helping you identify when unit prices are truly at their lowest.</p>
+
+            <h3>Price Comparison Apps</h3>
+            <p>Apps like Flipp, ShopSavvy, or Basket compile circulars from multiple stores, allowing unit price comparison across retailers without visiting each one.</p>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Is bigger always cheaper per unit?</h3>
+            <p>No. While bulk often provides savings, it's not guaranteed. Retailers sometimes price mid-size packages most competitively or offer clearance on small sizes. Always calculate—assumptions cost money.</p>
+
+            <h3>Should I always buy the cheapest unit price?</h3>
+            <p>Not necessarily. Consider quality, household needs, storage, and expiration. The cheapest option is only worthwhile if it meets your needs and won't go to waste.</p>
+
+            <h3>How much can unit price shopping actually save?</h3>
+            <p>Families consistently using unit price comparison for groceries and household items typically save 15-25% on shopping bills—potentially $1,500-$3,000 annually for a family spending $500 monthly on groceries.</p>
+
+            <h3>Do warehouse clubs always have the best unit prices?</h3>
+            <p>Usually but not always. Compare warehouse unit prices to grocery sales and coupons. Sometimes grocery stores on sale beat warehouse prices, especially after factoring in membership fees.</p>
+
+            <h3>What if products use different units?</h3>
+            <p>Convert to a common unit before comparing. Our calculator handles conversions automatically. For manual calculation, remember: 16 oz = 1 lb, 33.8 fl oz ≈ 1 liter, 128 fl oz = 1 gallon.</p>
+
+            <h2>Related Calculators</h2>
+            <ul>
+                <li><a href="discount-calculator.html">Discount Calculator</a> - Calculate sale prices and savings</li>
+                <li><a href="percentage-calculator.html">Percentage Calculator</a> - Find percentage differences</li>
+                <li><a href="tip-calculator.html">Tip Calculator</a> - Calculate tips and totals</li>
+                <li><a href="budget-calculator.html">Budget Calculator</a> - Track shopping budgets</li>
+            </ul>
+
+            <h2>Start Comparing and Saving</h2>
+            <p>Unit price comparison is one of the simplest and most effective money-saving strategies available. By spending just a few seconds calculating unit prices before purchasing, you can save hundreds to thousands of dollars annually on everyday items.</p>
+
+            <p>Use our calculator on your next shopping trip—in-store with your phone or at home while planning your shopping list. Compare products, find the best values, and watch your savings accumulate. Smart shopping starts with knowing the true cost per unit.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. All rights reserved.</p></div></div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function compareUnits() {
+            const priceA = parseFloat(document.getElementById('priceA').value) || 0;
+            const sizeA = parseFloat(document.getElementById('sizeA').value) || 0;
+            const unitA = document.getElementById('unitA').value;
+            
+            const priceB = parseFloat(document.getElementById('priceB').value) || 0;
+            const sizeB = parseFloat(document.getElementById('sizeB').value) || 0;
+            const unitB = document.getElementById('unitB').value;
+
+            if (priceA <= 0 || sizeA <= 0 || priceB <= 0 || sizeB <= 0) return;
+
+            const unitPriceA = priceA / sizeA;
+            const unitPriceB = priceB / sizeB;
+
+            let winner, savings, percentCheaper;
+            if (unitPriceA < unitPriceB) {
+                winner = "Product A";
+                savings = (unitPriceB - unitPriceA) * sizeB;
+                percentCheaper = ((unitPriceB - unitPriceA) / unitPriceB * 100);
+            } else {
+                winner = "Product B";
+                savings = (unitPriceA - unitPriceB) * sizeA;
+                percentCheaper = ((unitPriceA - unitPriceB) / unitPriceA * 100);
+            }
+
+            document.getElementById('winner').textContent = winner;
+            document.getElementById('unitPriceA').textContent = '$' + unitPriceA.toFixed(3) + '/' + unitA;
+            document.getElementById('unitPriceB').textContent = '$' + unitPriceB.toFixed(3) + '/' + unitB;
+            document.getElementById('savings').textContent = '$' + Math.abs(savings).toFixed(2);
+            document.getElementById('percentCheaper').textContent = percentCheaper.toFixed(1) + '%';
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', compareUnits));
+    </script>
+</body>
+</html>
