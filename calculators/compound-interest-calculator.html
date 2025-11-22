@@ -50,31 +50,31 @@
 
                 <div class="form-group">
                     <label for="principal" class="form-label">Initial Investment ($)</label>
-                    <input type="number" id="principal" class="form-input" value="5000" min="0" max="10000000" step="100">
+                    <input type="number" id="principal" class="form-input" value="" min="0" max="10000000" step="100">
                 </div>
 
                 <div class="form-group">
                     <label for="contribution" class="form-label">Monthly Contribution ($)</label>
-                    <input type="number" id="contribution" class="form-input" value="200" min="0" max="100000" step="10">
+                    <input type="number" id="contribution" class="form-input" value="" min="0" max="100000" step="10">
                 </div>
 
                 <div class="form-group">
                     <label for="interestRate" class="form-label">Annual Interest Rate (%)</label>
-                    <input type="number" id="interestRate" class="form-input" value="7" min="0" max="30" step="0.1">
+                    <input type="number" id="interestRate" class="form-input" value="" min="0" max="30" step="0.1">
                 </div>
 
                 <div class="form-group">
                     <label for="years" class="form-label">Investment Period (years)</label>
-                    <input type="number" id="years" class="form-input" value="10" min="1" max="50">
+                    <input type="number" id="years" class="form-input" value="" min="1" max="50">
                 </div>
 
                 <div class="form-group">
                     <label for="compoundFrequency" class="form-label">Compound Frequency</label>
                     <select id="compoundFrequency" class="form-select">
-                        <option value="1">Annually</option>
-                        <option value="4">Quarterly</option>
-                        <option value="12" selected>Monthly</option>
-                        <option value="365">Daily</option>
+                        <option value="">Annually</option>
+                        <option value="">Quarterly</option>
+                        <option value="" selected>Monthly</option>
+                        <option value="">Daily</option>
                     </select>
                 </div>
 
@@ -302,7 +302,7 @@
             const compoundFreq = parseInt(document.getElementById('compoundFrequency').value);
 
             if (principal < 0 || monthlyContribution < 0 || annualRate < 0 || years <= 0) {
-                alert('Please enter valid investment details');
+                // Validation removed
                 return;
             }
 

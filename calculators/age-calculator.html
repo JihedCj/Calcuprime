@@ -270,7 +270,7 @@
             const currentDateInput = document.getElementById('currentDate').value;
 
             if (!birthDateInput || !currentDateInput) {
-                alert('Please enter both dates');
+                // Validation removed
                 return;
             }
 
@@ -278,7 +278,7 @@
             const currentDate = new Date(currentDateInput);
 
             if (birthDate > currentDate) {
-                alert('Birth date cannot be in the future');
+                // Validation removed
                 return;
             }
 

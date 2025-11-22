@@ -21,13 +21,13 @@
         <div class="calculator-header"><h1 class="calculator-title">Calculadora de Jubilación</h1><p class="calculator-description">Planifica tu retiro y calcula cuánto necesitas ahorrar para una jubilación cómoda</p></div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs"><h3>Información Personal</h3>
-                <div class="form-group"><label class="form-label">Edad Actual</label><input type="number" id="currentAge" class="form-input" value="30" min="18" max="80"></div>
-                <div class="form-group"><label class="form-label">Edad de Jubilación Deseada</label><input type="number" id="retirementAge" class="form-input" value="65" min="50" max="80"></div>
-                <div class="form-group"><label class="form-label">Esperanza de Vida</label><input type="number" id="lifeExpectancy" class="form-input" value="90" min="65" max="100"></div>
-                <div class="form-group"><label class="form-label">Ahorros Actuales ($)</label><input type="number" id="currentSavings" class="form-input" value="50000" min="0" step="1000"></div>
-                <div class="form-group"><label class="form-label">Contribución Mensual ($)</label><input type="number" id="monthlyContribution" class="form-input" value="500" min="0" step="50"></div>
-                <div class="form-group"><label class="form-label">Retorno Anual Esperado (%)</label><input type="number" id="returnRate" class="form-input" value="7" min="0" max="15" step="0.1"></div>
-                <div class="form-group"><label class="form-label">Ingreso Mensual Deseado en Retiro ($)</label><input type="number" id="monthlyIncome" class="form-input" value="4000" min="0" step="100"></div>
+                <div class="form-group"><label class="form-label">Edad Actual</label><input type="number" id="currentAge" class="form-input" value="" min="18" max="80"></div>
+                <div class="form-group"><label class="form-label">Edad de Jubilación Deseada</label><input type="number" id="retirementAge" class="form-input" value="" min="50" max="80"></div>
+                <div class="form-group"><label class="form-label">Esperanza de Vida</label><input type="number" id="lifeExpectancy" class="form-input" value="" min="65" max="100"></div>
+                <div class="form-group"><label class="form-label">Ahorros Actuales ($)</label><input type="number" id="currentSavings" class="form-input" value="" min="0" step="1000"></div>
+                <div class="form-group"><label class="form-label">Contribución Mensual ($)</label><input type="number" id="monthlyContribution" class="form-input" value="" min="0" step="50"></div>
+                <div class="form-group"><label class="form-label">Retorno Anual Esperado (%)</label><input type="number" id="returnRate" class="form-input" value="" min="0" max="15" step="0.1"></div>
+                <div class="form-group"><label class="form-label">Ingreso Mensual Deseado en Retiro ($)</label><input type="number" id="monthlyIncome" class="form-input" value="" min="0" step="100"></div>
                 <button onclick="calcRet()" class="btn-calculate">Calcular Jubilación</button>
             </div>
             <div class="calculator-results"><h3>Resultados</h3>

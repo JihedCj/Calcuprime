@@ -21,8 +21,8 @@
         <div class="calculator-header"><h1 class="calculator-title">Calculadora de MCD y MCM</h1><p class="calculator-description">Calcula el máximo común divisor y el mínimo común múltiplo de números</p></div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs"><h3>Ingresa los Números</h3>
-                <div class="form-group"><label class="form-label">Primer Número</label><input type="number" id="num1" class="form-input" value="12" min="1" step="1"></div>
-                <div class="form-group"><label class="form-label">Segundo Número</label><input type="number" id="num2" class="form-input" value="18" min="1" step="1"></div>
+                <div class="form-group"><label class="form-label">Primer Número</label><input type="number" id="num1" class="form-input" value="" min="1" step="1"></div>
+                <div class="form-group"><label class="form-label">Segundo Número</label><input type="number" id="num2" class="form-input" value="" min="1" step="1"></div>
                 <div class="form-group"><label class="form-label">Tercer Número (Opcional)</label><input type="number" id="num3" class="form-input" value="" min="1" step="1"></div>
                 <button onclick="calcMCDMCM()" class="btn-calculate">Calcular</button>
             </div>
@@ -72,6 +72,6 @@
     </main>
     <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
     <script src="../../js/main.js"></script>
-    <script>function mcd2(a,b){return b===0?a:mcd2(b,a%b);}function mcd(...nums){return nums.reduce((a,b)=>mcd2(a,b));}function mcm2(a,b){return Math.abs(a*b)/mcd2(a,b);}function mcm(...nums){return nums.reduce((a,b)=>mcm2(a,b));}function calcMCDMCM(){const n1=parseInt(document.getElementById('num1').value)||0;const n2=parseInt(document.getElementById('num2').value)||0;const n3=parseInt(document.getElementById('num3').value)||0;if(n1<=0||n2<=0){alert('Ingresa números enteros positivos');return;}const nums=n3>0?[n1,n2,n3]:[n1,n2];const mcdResult=mcd(...nums);const mcmResult=mcm(...nums);document.getElementById('mcd').textContent=mcdResult;document.getElementById('mcm').textContent=mcmResult;if(nums.length===2){const producto=n1*n2;document.getElementById('relacion').textContent=`${mcdResult} × ${mcmResult} = ${mcdResult*mcmResult} = ${n1} × ${n2}`;}else{document.getElementById('relacion').textContent='MCD divide a todos los números';}}document.querySelectorAll('.form-input').forEach(e=>e.addEventListener('input',calcMCDMCM));window.addEventListener('load',calcMCDMCM);</script>
+    <script>function mcd2(a,b){return b===0?a:mcd2(b,a%b);}function mcd(...nums){return nums.reduce((a,b)=>mcd2(a,b));}function mcm2(a,b){return Math.abs(a*b)/mcd2(a,b);}function mcm(...nums){return nums.reduce((a,b)=>mcm2(a,b));}function calcMCDMCM(){const n1=parseInt(document.getElementById('num1').value)||0;const n2=parseInt(document.getElementById('num2').value)||0;const n3=parseInt(document.getElementById('num3').value)||0;if(n1<=0||n2<=0){// Validación eliminadareturn;}const nums=n3>0?[n1,n2,n3]:[n1,n2];const mcdResult=mcd(...nums);const mcmResult=mcm(...nums);document.getElementById('mcd').textContent=mcdResult;document.getElementById('mcm').textContent=mcmResult;if(nums.length===2){const producto=n1*n2;document.getElementById('relacion').textContent=`${mcdResult} × ${mcmResult} = ${mcdResult*mcmResult} = ${n1} × ${n2}`;}else{document.getElementById('relacion').textContent='MCD divide a todos los números';}}document.querySelectorAll('.form-input').forEach(e=>e.addEventListener('input',calcMCDMCM));window.addEventListener('load',calcMCDMCM);</script>
 </body>
 </html>

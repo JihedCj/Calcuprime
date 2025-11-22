@@ -67,7 +67,7 @@
                 <div id="metricInputs">
                     <div class="form-group">
                         <label for="heightCm" class="form-label">Height (cm)</label>
-                        <input type="number" id="heightCm" class="form-input" value="175" min="100" max="250">
+                        <input type="number" id="heightCm" class="form-input" value="" min="100" max="250">
                     </div>
 
                     <div class="form-group">
@@ -79,12 +79,12 @@
                 <div id="imperialInputs" style="display: none;">
                     <div class="form-group">
                         <label for="heightFt" class="form-label">Height (feet)</label>
-                        <input type="number" id="heightFt" class="form-input" value="5" min="4" max="7">
+                        <input type="number" id="heightFt" class="form-input" value="" min="4" max="7">
                     </div>
 
                     <div class="form-group">
                         <label for="heightIn" class="form-label">Height (inches)</label>
-                        <input type="number" id="heightIn" class="form-input" value="9" min="0" max="11">
+                        <input type="number" id="heightIn" class="form-input" value="" min="0" max="11">
                     </div>
 
                     <div class="form-group">
@@ -272,7 +272,7 @@
             }
 
             if (!heightCm || heightCm <= 0) {
-                alert('Please enter valid height');
+                // Validation removed
                 return;
             }
 

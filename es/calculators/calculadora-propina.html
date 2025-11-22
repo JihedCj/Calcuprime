@@ -21,10 +21,10 @@
         <div class="calculator-header"><h1 class="calculator-title">Calculadora de Propina</h1><p class="calculator-description">Calcula propinas rápidamente y divide la cuenta entre múltiples personas</p></div>
         <div class="calculator-wrapper">
             <div class="calculator-inputs"><h3>Detalles de la Cuenta</h3>
-                <div class="form-group"><label class="form-label">Total de la Cuenta ($)</label><input type="number" id="billAmount" class="form-input" value="100" min="0" step="0.01"></div>
-                <div class="form-group"><label class="form-label">Porcentaje de Propina (%)</label><input type="number" id="tipPercent" class="form-input" value="15" min="0" max="100" step="1"></div>
+                <div class="form-group"><label class="form-label">Total de la Cuenta ($)</label><input type="number" id="billAmount" class="form-input" value="" min="0" step="0.01"></div>
+                <div class="form-group"><label class="form-label">Porcentaje de Propina (%)</label><input type="number" id="tipPercent" class="form-input" value="" min="0" max="100" step="1"></div>
                 <div style="display:flex;gap:10px;margin:10px 0"><button onclick="setTip(10)" style="flex:1;padding:8px;border:1px solid #e5e7eb;border-radius:6px;background:white;cursor:pointer">10%</button><button onclick="setTip(15)" style="flex:1;padding:8px;border:1px solid #e5e7eb;border-radius:6px;background:white;cursor:pointer">15%</button><button onclick="setTip(18)" style="flex:1;padding:8px;border:1px solid #e5e7eb;border-radius:6px;background:white;cursor:pointer">18%</button><button onclick="setTip(20)" style="flex:1;padding:8px;border:1px solid #e5e7eb;border-radius:6px;background:white;cursor:pointer">20%</button></div>
-                <div class="form-group"><label class="form-label">Número de Personas</label><input type="number" id="people" class="form-input" value="1" min="1"></div>
+                <div class="form-group"><label class="form-label">Número de Personas</label><input type="number" id="people" class="form-input" value="" min="1"></div>
                 <button onclick="calcTip()" class="btn-calculate">Calcular</button>
             </div>
             <div class="calculator-results"><h3>Resultados</h3>

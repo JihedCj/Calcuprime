@@ -87,12 +87,12 @@
 
                 <div class="form-group">
                     <label for="annualIncome" class="form-label">Ingreso Anual Bruto ($)</label>
-                    <input type="number" id="annualIncome" class="form-input" value="75000" min="0" step="1000">
+                    <input type="number" id="annualIncome" class="form-input" value="" min="0" step="1000">
                 </div>
 
                 <div class="form-group">
                     <label for="monthlyDebts" class="form-label">Pagos Mensuales de Deudas ($)</label>
-                    <input type="number" id="monthlyDebts" class="form-input" value="500" min="0" step="50">
+                    <input type="number" id="monthlyDebts" class="form-input" value="" min="0" step="50">
                     <small style="color: #6b7280; font-size: 0.875rem;">Auto, tarjetas de crédito, préstamos estudiantiles, etc.</small>
                 </div>
 
@@ -100,31 +100,31 @@
 
                 <div class="form-group">
                     <label for="downPayment" class="form-label">Pago Inicial ($)</label>
-                    <input type="number" id="downPayment" class="form-input" value="50000" min="0" step="1000">
+                    <input type="number" id="downPayment" class="form-input" value="" min="0" step="1000">
                 </div>
 
                 <div class="form-group">
                     <label for="interestRate" class="form-label">Tasa de Interés (%)</label>
-                    <input type="number" id="interestRate" class="form-input" value="6.5" min="0" max="15" step="0.1">
+                    <input type="number" id="interestRate" class="form-input" value="" min="0" max="15" step="0.1">
                 </div>
 
                 <div class="form-group">
                     <label for="loanTerm" class="form-label">Plazo del Préstamo (años)</label>
                     <select id="loanTerm" class="form-select">
-                        <option value="15">15 años</option>
-                        <option value="20">20 años</option>
-                        <option value="30" selected>30 años</option>
+                        <option value="">15 años</option>
+                        <option value="">20 años</option>
+                        <option value="" selected>30 años</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="propertyTax" class="form-label">Impuestos Anuales Estimados (%)</label>
-                    <input type="number" id="propertyTax" class="form-input" value="1.2" min="0" max="5" step="0.1">
+                    <input type="number" id="propertyTax" class="form-input" value="" min="0" max="5" step="0.1">
                 </div>
 
                 <div class="form-group">
                     <label for="homeInsurance" class="form-label">Seguro Anual Estimado ($)</label>
-                    <input type="number" id="homeInsurance" class="form-input" value="1200" min="0" step="100">
+                    <input type="number" id="homeInsurance" class="form-input" value="" min="0" step="100">
                 </div>
 
                 <button onclick="calculate()" class="btn-calculate">Calcular</button>

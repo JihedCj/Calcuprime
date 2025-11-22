@@ -87,36 +87,36 @@
 
                 <div class="form-group">
                     <label for="msrp" class="form-label">Precio MSRP del Vehículo ($)</label>
-                    <input type="number" id="msrp" class="form-input" value="35000" min="0" step="1000">
+                    <input type="number" id="msrp" class="form-input" value="" min="0" step="1000">
                 </div>
 
                 <div class="form-group">
                     <label for="salePrice" class="form-label">Precio Negociado ($)</label>
-                    <input type="number" id="salePrice" class="form-input" value="33000" min="0" step="500">
+                    <input type="number" id="salePrice" class="form-input" value="" min="0" step="500">
                 </div>
 
                 <div class="form-group">
                     <label for="downPayment" class="form-label">Pago Inicial ($)</label>
-                    <input type="number" id="downPayment" class="form-input" value="3000" min="0" step="500">
+                    <input type="number" id="downPayment" class="form-input" value="" min="0" step="500">
                 </div>
 
                 <div class="form-group">
                     <label for="leaseTerm" class="form-label">Plazo de Arrendamiento (meses)</label>
                     <select id="leaseTerm" class="form-select">
-                        <option value="24">24 meses</option>
-                        <option value="36" selected>36 meses</option>
-                        <option value="48">48 meses</option>
+                        <option value="">24 meses</option>
+                        <option value="" selected>36 meses</option>
+                        <option value="">48 meses</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="residualValue" class="form-label">Valor Residual (%)</label>
-                    <input type="number" id="residualValue" class="form-input" value="55" min="0" max="80" step="1">
+                    <input type="number" id="residualValue" class="form-input" value="" min="0" max="80" step="1">
                 </div>
 
                 <div class="form-group">
                     <label for="moneyFactor" class="form-label">Factor de Dinero</label>
-                    <input type="number" id="moneyFactor" class="form-input" value="0.00125" min="0" max="0.01" step="0.00001">
+                    <input type="number" id="moneyFactor" class="form-input" value="" min="0" max="0.01" step="0.00001">
                 </div>
 
                 <button onclick="calculate()" class="btn-calculate">Calcular</button>
