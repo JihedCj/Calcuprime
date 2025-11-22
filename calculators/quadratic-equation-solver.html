@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Equation Solver - Solve ax² + bx + c = 0 with Steps</title>
+    <meta name="description" content="Solve quadratic equations instantly with step-by-step solutions. Calculate roots using quadratic formula, shows discriminant, vertex, and graphs. Perfect for students and homework help.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Quadratic Equation Solver</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Solve quadratic equations in the form ax² + bx + c = 0. Get step-by-step solutions, discriminant analysis, and vertex calculations.</p>
+
+        <div style="margin-bottom: 25px; padding: 20px; background: #f3f4f6; border-radius: 8px;">
+            <h3 style="margin: 0 0 15px 0; color: #1f2937;">Enter Coefficients for: ax² + bx + c = 0</h3>
+
+            <div class="input-group">
+                <label for="a" class="form-label">Coefficient a (x² term)</label>
+                <input type="number" id="a" class="form-input" placeholder="e.g., 1" step="any" value="">
+            </div>
+
+            <div class="input-group">
+                <label for="b" class="form-label">Coefficient b (x term)</label>
+                <input type="number" id="b" class="form-input" placeholder="e.g., -5" step="any" value="">
+            </div>
+
+            <div class="input-group" style="margin: 0;">
+                <label for="c" class="form-label">Coefficient c (constant)</label>
+                <input type="number" id="c" class="form-input" placeholder="e.g., 6" step="any" value="">
+            </div>
+        </div>
+
+        <div id="equationDisplay" style="text-align: center; font-size: 24px; font-weight: 600; color: #1f2937; margin: 20px 0; padding: 15px; background: white; border-radius: 8px; border: 2px solid #e5e7eb;">
+            <span id="displayedEquation">Enter coefficients above</span>
+        </div>
+
+        <div id="resultsSection" style="display: none;">
+            <div class="result-card">
+                <div class="result-row">
+                    <span class="result-label">Discriminant (Δ)</span>
+                    <span class="result-value" id="discriminantValue">0</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Number of Real Solutions</span>
+                    <span class="result-value" id="solutionCount">—</span>
+                </div>
+            </div>
+
+            <div id="solutionsCard" style="margin: 25px 0; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white;">
+                <h3 style="margin: 0 0 20px 0; font-size: 22px;">Solutions</h3>
+                <div id="solutions"></div>
+            </div>
+
+            <div class="result-card" id="vertexCard">
+                <h3 style="margin: 0 0 15px 0; color: #1f2937;">Parabola Properties</h3>
+                <div class="result-row">
+                    <span class="result-label">Vertex (Turning Point)</span>
+                    <span class="result-value" id="vertex">—</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Axis of Symmetry</span>
+                    <span class="result-value" id="axis">—</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Parabola Opens</span>
+                    <span class="result-value" id="opening">—</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Y-Intercept</span>
+                    <span class="result-value" id="yIntercept">—</span>
+                </div>
+            </div>
+
+            <div id="stepsCard" style="margin: 25px 0; padding: 20px; background: #f0f9ff; border-left: 4px solid #2563eb; border-radius: 8px;">
+                <h3 style="margin: 0 0 15px 0; color: #1e40af;">Step-by-Step Solution</h3>
+                <div id="steps" style="color: #1e3a8a; line-height: 1.8;"></div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>What is a Quadratic Equation?</h2>
+            <p>A quadratic equation is a second-degree polynomial equation in the form <strong>ax² + bx + c = 0</strong>, where:</p>
+            <ul>
+                <li><strong>a</strong> is the coefficient of x² (cannot be 0, or it's not quadratic)</li>
+                <li><strong>b</strong> is the coefficient of x</li>
+                <li><strong>c</strong> is the constant term</li>
+                <li><strong>x</strong> is the variable (unknown we're solving for)</li>
+            </ul>
+
+            <p><strong>Examples of quadratic equations:</strong></p>
+            <ul>
+                <li>x² - 5x + 6 = 0 (a=1, b=-5, c=6)</li>
+                <li>2x² + 3x - 2 = 0 (a=2, b=3, c=-2)</li>
+                <li>x² - 16 = 0 (a=1, b=0, c=-16)</li>
+                <li>-3x² + 12x = 0 (a=-3, b=12, c=0)</li>
+            </ul>
+
+            <h3>Why Quadratic Equations Matter</h3>
+            <p>Quadratic equations appear throughout mathematics, science, and engineering:</p>
+            <ul>
+                <li><strong>Physics:</strong> Projectile motion, acceleration problems, energy calculations</li>
+                <li><strong>Engineering:</strong> Bridge design, optimization problems, signal processing</li>
+                <li><strong>Business:</strong> Profit maximization, cost minimization, break-even analysis</li>
+                <li><strong>Geometry:</strong> Area problems, Pythagorean theorem applications</li>
+                <li><strong>Computer Graphics:</strong> Collision detection, curve rendering, animation paths</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>The Quadratic Formula</h2>
+            <p>The quadratic formula solves any quadratic equation. It's derived by completing the square on the general form ax² + bx + c = 0.</p>
+
+            <div style="text-align: center; font-size: 28px; font-weight: 600; margin: 30px 0; padding: 20px; background: #fef3c7; border-radius: 8px; color: #78350f;">
+                x = (-b ± √(b² - 4ac)) / (2a)
+            </div>
+
+            <h3>Understanding Each Part</h3>
+            <p><strong>-b:</strong> Negative of the b coefficient</p>
+            <p><strong>±:</strong> Plus or minus—gives two solutions (x₁ with +, x₂ with -)</p>
+            <p><strong>b² - 4ac:</strong> The discriminant (Δ), determines number and type of solutions</p>
+            <p><strong>√(b² - 4ac):</strong> Square root of discriminant</p>
+            <p><strong>2a:</strong> Twice the a coefficient (denominator for entire expression)</p>
+
+            <h3>Step-by-Step Process</h3>
+            <p><strong>Example: Solve x² - 5x + 6 = 0</strong></p>
+            <ol>
+                <li><strong>Identify coefficients:</strong> a = 1, b = -5, c = 6</li>
+                <li><strong>Calculate discriminant:</strong> Δ = b² - 4ac = (-5)² - 4(1)(6) = 25 - 24 = 1</li>
+                <li><strong>Apply quadratic formula:</strong>
+                    <br>x = (-(-5) ± √1) / (2 × 1)
+                    <br>x = (5 ± 1) / 2
+                </li>
+                <li><strong>Calculate both solutions:</strong>
+                    <br>x₁ = (5 + 1) / 2 = 6 / 2 = 3
+                    <br>x₂ = (5 - 1) / 2 = 4 / 2 = 2
+                </li>
+                <li><strong>Solutions:</strong> x = 3 or x = 2</li>
+                <li><strong>Verify:</strong> 3² - 5(3) + 6 = 9 - 15 + 6 = 0 ✓<br>2² - 5(2) + 6 = 4 - 10 + 6 = 0 ✓</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2>The Discriminant: Key to Understanding Solutions</h2>
+            <p>The discriminant <strong>Δ = b² - 4ac</strong> determines the number and type of solutions without actually solving the equation.</p>
+
+            <h3>Discriminant > 0 (Positive)</h3>
+            <p><strong>Two distinct real solutions</strong></p>
+            <p><strong>Example:</strong> x² - 5x + 6 = 0</p>
+            <p>Δ = (-5)² - 4(1)(6) = 25 - 24 = 1 > 0</p>
+            <p>Solutions: x = 2 and x = 3 (two different real numbers)</p>
+            <p><strong>Graph:</strong> Parabola crosses x-axis at two points</p>
+
+            <h3>Discriminant = 0 (Zero)</h3>
+            <p><strong>One repeated real solution (double root)</strong></p>
+            <p><strong>Example:</strong> x² - 6x + 9 = 0</p>
+            <p>Δ = (-6)² - 4(1)(9) = 36 - 36 = 0</p>
+            <p>Solution: x = 3 (only one solution, with multiplicity 2)</p>
+            <p><strong>Graph:</strong> Parabola touches x-axis at exactly one point (vertex on x-axis)</p>
+
+            <h3>Discriminant < 0 (Negative)</h3>
+            <p><strong>No real solutions (two complex/imaginary solutions)</strong></p>
+            <p><strong>Example:</strong> x² + 2x + 5 = 0</p>
+            <p>Δ = 2² - 4(1)(5) = 4 - 20 = -16 < 0</p>
+            <p>No real solutions (solutions involve imaginary numbers: x = -1 ± 2i)</p>
+            <p><strong>Graph:</strong> Parabola doesn't cross x-axis</p>
+
+            <h3>Perfect Square Discriminant</h3>
+            <p>If discriminant is a perfect square (1, 4, 9, 16, 25...), solutions are rational numbers (fractions or integers). Otherwise, solutions involve irrational numbers (square roots).</p>
+            <p><strong>Δ = 1:</strong> Solutions involve ±√1 = ±1 (rational)</p>
+            <p><strong>Δ = 5:</strong> Solutions involve ±√5 ≈ ±2.236... (irrational)</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Alternative Solving Methods</h2>
+
+            <h3>Method 1: Factoring (When Possible)</h3>
+            <p>If quadratic factors nicely, factoring is fastest method.</p>
+
+            <p><strong>Example: x² - 5x + 6 = 0</strong></p>
+            <ol>
+                <li>Find two numbers that multiply to 6 and add to -5: -2 and -3</li>
+                <li>Factor: (x - 2)(x - 3) = 0</li>
+                <li>Set each factor to zero: x - 2 = 0 or x - 3 = 0</li>
+                <li>Solutions: x = 2 or x = 3</li>
+            </ol>
+
+            <p><strong>Limitation:</strong> Only works when equation factors with integers. Many quadratics don't factor nicely (e.g., x² + x - 1 = 0).</p>
+
+            <h3>Method 2: Completing the Square</h3>
+            <p>Rewrites equation as perfect square, then solves. Method used to derive quadratic formula.</p>
+
+            <p><strong>Example: x² + 6x + 5 = 0</strong></p>
+            <ol>
+                <li>Move constant: x² + 6x = -5</li>
+                <li>Add (b/2)² to both sides: x² + 6x + 9 = -5 + 9</li>
+                <li>Left side is perfect square: (x + 3)² = 4</li>
+                <li>Take square root: x + 3 = ±2</li>
+                <li>Solve: x = -3 ± 2, so x = -1 or x = -5</li>
+            </ol>
+
+            <p><strong>Use case:</strong> Good for understanding vertex form and derivations. Less practical than quadratic formula for computation.</p>
+
+            <h3>Method 3: Graphing</h3>
+            <p>Graph y = ax² + bx + c and find x-intercepts (where graph crosses y = 0).</p>
+
+            <p><strong>Pros:</strong> Visual understanding, approximate solutions quickly</p>
+            <p><strong>Cons:</strong> Less precise, requires graphing technology, doesn't show exact irrational solutions</p>
+
+            <h3>Which Method to Use?</h3>
+            <p><strong>Try factoring first</strong> if coefficients are small integers—fastest if it works.</p>
+            <p><strong>Use quadratic formula</strong> if factoring doesn't work or coefficients are complex—always works, gives exact answers.</p>
+            <p><strong>Complete the square</strong> for deriving vertex form or theoretical work.</p>
+            <p><strong>Graph</strong> for visual understanding or approximate solutions.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Vertex and Parabola Properties</h2>
+
+            <h3>Vertex (Turning Point)</h3>
+            <p>The vertex is the highest or lowest point on the parabola.</p>
+
+            <p><strong>Formula:</strong> Vertex = (-b/(2a), f(-b/(2a)))</p>
+
+            <p><strong>x-coordinate:</strong> x = -b/(2a)</p>
+            <p><strong>y-coordinate:</strong> Substitute x into equation to find y</p>
+
+            <p><strong>Example: y = x² - 4x + 3</strong></p>
+            <ul>
+                <li>x-coordinate: x = -(-4)/(2×1) = 4/2 = 2</li>
+                <li>y-coordinate: y = 2² - 4(2) + 3 = 4 - 8 + 3 = -1</li>
+                <li>Vertex: (2, -1)</li>
+            </ul>
+
+            <h3>Axis of Symmetry</h3>
+            <p>Vertical line through vertex: <strong>x = -b/(2a)</strong></p>
+            <p>Parabola is symmetric—mirror image across this line.</p>
+
+            <h3>Direction of Opening</h3>
+            <p><strong>a > 0:</strong> Parabola opens upward (∪ shape). Vertex is minimum point.</p>
+            <p><strong>a < 0:</strong> Parabola opens downward (∩ shape). Vertex is maximum point.</p>
+            <p><strong>|a| larger:</strong> Narrower parabola (steep sides)</p>
+            <p><strong>|a| smaller:</strong> Wider parabola (gentle curve)</p>
+
+            <h3>Y-Intercept</h3>
+            <p>Where parabola crosses y-axis (when x = 0).</p>
+            <p><strong>Formula:</strong> y-intercept = c</p>
+            <p>Simply the constant term in ax² + bx + c.</p>
+
+            <h3>X-Intercepts (Roots)</h3>
+            <p>Where parabola crosses x-axis (when y = 0).</p>
+            <p>These are the solutions to ax² + bx + c = 0—what quadratic formula finds.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Real-World Applications</h2>
+
+            <h3>Projectile Motion</h3>
+            <p>Ball thrown upward: h(t) = -16t² + v₀t + h₀</p>
+            <p>h = height, t = time, v₀ = initial velocity, h₀ = initial height</p>
+
+            <p><strong>Example:</strong> Ball thrown at 64 ft/s from 6 ft height. When does it hit ground?</p>
+            <p>-16t² + 64t + 6 = 0</p>
+            <p>Using quadratic formula: t ≈ 4.09 seconds</p>
+            <p>Negative solution (t ≈ -0.09) is discarded—time can't be negative.</p>
+
+            <h3>Area Optimization</h3>
+            <p>Rectangular garden 40 ft perimeter. What dimensions maximize area?</p>
+            <p>If width = x, length = 20 - x (since perimeter = 2w + 2l = 40)</p>
+            <p>Area = x(20 - x) = 20x - x² = -x² + 20x</p>
+            <p>Vertex gives maximum: x = -20/(2×-1) = 10 ft</p>
+            <p>Maximum area when width = length = 10 ft (square maximizes area)</p>
+
+            <h3>Business Profit</h3>
+            <p>Profit function: P(x) = -2x² + 80x - 200</p>
+            <p>x = number of units, P = profit in dollars</p>
+
+            <p><strong>Break-even points:</strong> -2x² + 80x - 200 = 0</p>
+            <p>Solutions: x = 5 and x = 35 (break even at 5 units and 35 units)</p>
+            <p><strong>Maximum profit:</strong> Vertex at x = -80/(2×-2) = 20 units</p>
+            <p>P(20) = -2(400) + 80(20) - 200 = $600 maximum profit</p>
+
+            <h3>Construction & Design</h3>
+            <p>Bridge arch, satellite dish shape, headlight reflectors—all parabolic. Quadratic equations model these curves for engineering calculations.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Mistakes & How to Avoid Them</h2>
+
+            <h3>Mistake 1: Sign Errors</h3>
+            <p>❌ Wrong: For b = -5, using -b = -5 in formula</p>
+            <p>✓ Correct: -b = -(-5) = 5</p>
+            <p>Carefully handle negative signs, especially with -b.</p>
+
+            <h3>Mistake 2: Order of Operations</h3>
+            <p>❌ Wrong: b² - 4ac = -5² - 4(1)(6) = -25 - 24</p>
+            <p>✓ Correct: b² - 4ac = (-5)² - 4(1)(6) = 25 - 24</p>
+            <p>Square b first before applying negative. (-5)² = 25, not -25.</p>
+
+            <h3>Mistake 3: Forgetting ± Symbol</h3>
+            <p>❌ Wrong: x = (-b + √discriminant) / 2a (only one solution)</p>
+            <p>✓ Correct: x = (-b ± √discriminant) / 2a (two solutions)</p>
+            <p>Always calculate both + and - to get both roots.</p>
+
+            <h3>Mistake 4: Dividing Only Part of Numerator</h3>
+            <p>❌ Wrong: x = -b / 2a ± √discriminant</p>
+            <p>✓ Correct: x = (-b ± √discriminant) / 2a</p>
+            <p>Entire numerator divides by 2a, not just -b.</p>
+
+            <h3>Mistake 5: Not Simplifying Radicals</h3>
+            <p>❌ Leaving answer as: x = (6 ± √8) / 2</p>
+            <p>✓ Better: √8 = 2√2, so x = (6 ± 2√2) / 2 = 3 ± √2</p>
+            <p>Simplify radicals and reduce fractions for cleaner final answer.</p>
+
+            <h3>Mistake 6: Using Formula on Non-Quadratic</h3>
+            <p>If a = 0, equation is linear (bx + c = 0), not quadratic. Quadratic formula doesn't apply. Solve as x = -c/b instead.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>What if the discriminant is negative?</h3>
+            <p>No real solutions exist—solutions are complex numbers involving √-1 = i. For basic algebra and real-world problems, "no real solutions" is the answer. In advanced math, calculate complex solutions: x = (-b ± i√|discriminant|) / 2a.</p>
+
+            <h3>Can quadratic equations have three solutions?</h3>
+            <p>No. Quadratic equations have maximum two solutions (or one repeated solution). Three solutions would require cubic equation (x³). This is fundamental algebra theorem.</p>
+
+            <h3>When should I use factoring vs quadratic formula?</h3>
+            <p>Try factoring first for simple integer coefficients—faster if it works. If can't factor in 30 seconds, use quadratic formula—always works and gives exact answer. Quadratic formula is more reliable for complex coefficients, decimals, or fractions.</p>
+
+            <h3>Why do we only use positive square root sometimes?</h3>
+            <p>The ± in quadratic formula means we use both positive and negative square roots—that's why we get two solutions. In other contexts (like Pythagorean theorem for side length), we use only positive because negative length doesn't make physical sense.</p>
+
+            <h3>How do I know which solution to use in word problems?</h3>
+            <p>Check both solutions against problem context. Negative time, negative length, or values outside stated domain should be discarded. Example: If solving for time and get t = 5 or t = -2, discard t = -2 (time can't be negative). Use t = 5.</p>
+
+            <h3>What's the difference between roots, zeros, solutions, and x-intercepts?</h3>
+            <p>All same thing, different terminology: <strong>Solutions</strong> to ax² + bx + c = 0. <strong>Roots</strong> of the equation. <strong>Zeros</strong> of function f(x) = ax² + bx + c. <strong>X-intercepts</strong> of parabola y = ax² + bx + c. Different names for where parabola crosses x-axis.</p>
+        </div>
+    </div>
+
+    <script>
+        function displayEquation() {
+            const a = parseFloat(document.getElementById('a').value) || 0;
+            const b = parseFloat(document.getElementById('b').value) || 0;
+            const c = parseFloat(document.getElementById('c').value) || 0;
+
+            if (a === 0 && b === 0 && c === 0) {
+                document.getElementById('displayedEquation').textContent = 'Enter coefficients above';
+                return '';
+            }
+
+            let equation = '';
+
+            // a term
+            if (a !== 0) {
+                if (a === 1) equation += 'x²';
+                else if (a === -1) equation += '-x²';
+                else equation += a + 'x²';
+            }
+
+            // b term
+            if (b !== 0) {
+                if (equation !== '') {
+                    equation += b > 0 ? ' + ' : ' - ';
+                    const absB = Math.abs(b);
+                    equation += absB === 1 ? 'x' : absB + 'x';
+                } else {
+                    equation += b === 1 ? 'x' : (b === -1 ? '-x' : b + 'x');
+                }
+            }
+
+            // c term
+            if (c !== 0) {
+                if (equation !== '') {
+                    equation += c > 0 ? ' + ' + c : ' - ' + Math.abs(c);
+                } else {
+                    equation += c;
+                }
+            }
+
+            if (equation === '') equation = '0';
+
+            equation += ' = 0';
+
+            document.getElementById('displayedEquation').textContent = equation;
+
+            return equation;
+        }
+
+        function solve() {
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value) || 0;
+            const c = parseFloat(document.getElementById('c').value) || 0;
+
+            displayEquation();
+
+            // Validate input
+            if (isNaN(a) || a === 0) {
+                document.getElementById('resultsSection').style.display = 'none';
+                return;
+            }
+
+            // Show results section
+            document.getElementById('resultsSection').style.display = 'block';
+
+            // Calculate discriminant
+            const discriminant = b * b - 4 * a * c;
+
+            document.getElementById('discriminantValue').textContent = discriminant.toFixed(4);
+
+            // Determine solution count
+            let solutionCount;
+            let solutionCountColor;
+            if (discriminant > 0) {
+                solutionCount = 'Two distinct real solutions';
+                solutionCountColor = '#059669';
+            } else if (discriminant === 0) {
+                solutionCount = 'One repeated real solution';
+                solutionCountColor = '#2563eb';
+            } else {
+                solutionCount = 'No real solutions';
+                solutionCountColor = '#dc2626';
+            }
+
+            document.getElementById('solutionCount').textContent = solutionCount;
+            document.getElementById('solutionCount').style.color = solutionCountColor;
+
+            // Calculate solutions
+            let solutionsHTML = '';
+            let stepsHTML = '';
+
+            stepsHTML += `<p><strong>Given equation:</strong> ${displayEquation().replace(' = 0', '')} = 0</p>`;
+            stepsHTML += `<p><strong>Coefficients:</strong> a = ${a}, b = ${b}, c = ${c}</p>`;
+            stepsHTML += `<p><strong>Step 1 - Calculate discriminant:</strong><br>Δ = b² - 4ac = (${b})² - 4(${a})(${c}) = ${b*b} - ${4*a*c} = ${discriminant}</p>`;
+
+            if (discriminant > 0) {
+                const sqrtDisc = Math.sqrt(discriminant);
+                const x1 = (-b + sqrtDisc) / (2 * a);
+                const x2 = (-b - sqrtDisc) / (2 * a);
+
+                solutionsHTML += `<div style="font-size: 20px; margin: 10px 0;">
+                    <strong>x₁ = ${x1.toFixed(4)}</strong>
+                </div>`;
+                solutionsHTML += `<div style="font-size: 20px; margin: 10px 0;">
+                    <strong>x₂ = ${x2.toFixed(4)}</strong>
+                </div>`;
+
+                stepsHTML += `<p><strong>Step 2 - Apply quadratic formula:</strong><br>`;
+                stepsHTML += `x = (-b ± √Δ) / (2a)<br>`;
+                stepsHTML += `x = (${-b} ± √${discriminant}) / ${2*a}<br>`;
+                stepsHTML += `x = (${-b} ± ${sqrtDisc.toFixed(4)}) / ${2*a}</p>`;
+
+                stepsHTML += `<p><strong>Step 3 - Calculate both solutions:</strong><br>`;
+                stepsHTML += `x₁ = (${-b} + ${sqrtDisc.toFixed(4)}) / ${2*a} = ${x1.toFixed(4)}<br>`;
+                stepsHTML += `x₂ = (${-b} - ${sqrtDisc.toFixed(4)}) / ${2*a} = ${x2.toFixed(4)}</p>`;
+
+            } else if (discriminant === 0) {
+                const x = -b / (2 * a);
+
+                solutionsHTML += `<div style="font-size: 24px; margin: 10px 0;">
+                    <strong>x = ${x.toFixed(4)}</strong>
+                </div>`;
+                solutionsHTML += `<div style="font-size: 14px; opacity: 0.9;">(repeated root)</div>`;
+
+                stepsHTML += `<p><strong>Step 2 - Apply quadratic formula:</strong><br>`;
+                stepsHTML += `Since Δ = 0, there is one repeated solution:<br>`;
+                stepsHTML += `x = -b / (2a) = ${-b} / ${2*a} = ${x.toFixed(4)}</p>`;
+
+            } else {
+                solutionsHTML += `<div style="font-size: 18px;">
+                    No real solutions exist.<br>
+                    <span style="font-size: 14px; opacity: 0.9;">(Discriminant is negative)</span>
+                </div>`;
+
+                stepsHTML += `<p><strong>Step 2 - Interpret result:</strong><br>`;
+                stepsHTML += `Since Δ = ${discriminant} < 0, there are no real solutions.<br>`;
+                stepsHTML += `The parabola does not cross the x-axis.</p>`;
+
+                if (a > 0) {
+                    stepsHTML += `<p>The parabola opens upward and lies entirely above the x-axis.</p>`;
+                } else {
+                    stepsHTML += `<p>The parabola opens downward and lies entirely below the x-axis.</p>`;
+                }
+            }
+
+            document.getElementById('solutions').innerHTML = solutionsHTML;
+            document.getElementById('steps').innerHTML = stepsHTML;
+
+            // Calculate vertex
+            const vertexX = -b / (2 * a);
+            const vertexY = a * vertexX * vertexX + b * vertexX + c;
+
+            document.getElementById('vertex').textContent = `(${vertexX.toFixed(4)}, ${vertexY.toFixed(4)})`;
+            document.getElementById('axis').textContent = `x = ${vertexX.toFixed(4)}`;
+            document.getElementById('opening').textContent = a > 0 ? 'Upward (∪)' : 'Downward (∩)';
+            document.getElementById('yIntercept').textContent = `(0, ${c})`;
+        }
+
+        // Event listeners
+        document.getElementById('a').addEventListener('input', solve);
+        document.getElementById('b').addEventListener('input', solve);
+        document.getElementById('c').addEventListener('input', solve);
+
+        // Initialize display
+        displayEquation();
+    </script>
+</body>
+</html>

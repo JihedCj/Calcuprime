@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Square Root Calculator - Calculate √x with Steps & Explanation</title>
+    <meta name="description" content="Calculate square roots instantly with step-by-step explanations. Perfect square checker, decimal precision control, and educational content for students learning square roots.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Square Root Calculator</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calculate the square root of any number with detailed explanations. Perfect for students, engineers, and quick calculations.</p>
+
+        <div class="input-group">
+            <label for="number" class="form-label">Enter Number</label>
+            <input type="number" id="number" class="form-input" placeholder="e.g., 144" min="0" step="any" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="decimals" class="form-label">Decimal Places</label>
+            <select id="decimals" class="form-input">
+                <option value="2">2 decimal places</option>
+                <option value="4" selected>4 decimal places</option>
+                <option value="6">6 decimal places</option>
+                <option value="8">8 decimal places</option>
+                <option value="10">10 decimal places</option>
+            </select>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">√<span id="inputDisplay">0</span> =</span>
+                <span class="result-value" style="font-size: 36px; font-weight: bold; color: #2563eb;"><span id="result">0</span></span>
+            </div>
+            <div class="result-row" id="perfectSquareRow" style="display: none;">
+                <span class="result-label">Perfect Square</span>
+                <span class="result-value" style="color: #059669; font-weight: 600;">✓ Yes</span>
+            </div>
+            <div class="result-row" id="verificationRow">
+                <span class="result-label">Verification</span>
+                <span class="result-value"><span id="verification">—</span></span>
+            </div>
+        </div>
+
+        <div id="explanationCard" style="display: none; margin: 25px 0; padding: 20px; background: #f0f9ff; border-left: 4px solid #2563eb; border-radius: 8px;">
+            <h3 style="margin: 0 0 10px 0; color: #1e40af;">Explanation</h3>
+            <p id="explanation" style="margin: 0; color: #1e3a8a; line-height: 1.6;"></p>
+        </div>
+
+        <div class="content-section">
+            <h2>What is a Square Root?</h2>
+            <p>The square root of a number is a value that, when multiplied by itself, equals the original number. It's the inverse operation of squaring a number.</p>
+
+            <p><strong>Mathematical notation:</strong> √x or x<sup>1/2</sup></p>
+
+            <p><strong>Example:</strong> √144 = 12 because 12 × 12 = 144</p>
+
+            <h3>Perfect Squares vs Non-Perfect Squares</h3>
+            <p><strong>Perfect squares</strong> are numbers whose square roots are whole numbers (integers). Examples: 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, etc.</p>
+
+            <p><strong>Non-perfect squares</strong> have irrational square roots—decimals that never end or repeat. Examples: √2 = 1.41421356..., √3 = 1.73205080..., √5 = 2.23606797...</p>
+
+            <h3>Why Square Roots Matter</h3>
+            <ul>
+                <li><strong>Geometry:</strong> Finding side lengths of squares when you know the area. If square area = 225 sq ft, each side = √225 = 15 feet.</li>
+                <li><strong>Pythagorean Theorem:</strong> a² + b² = c². To find hypotenuse: c = √(a² + b²). Essential in construction, navigation, physics.</li>
+                <li><strong>Statistics:</strong> Standard deviation calculations use square roots. Converting variance to standard deviation.</li>
+                <li><strong>Physics:</strong> Velocity, energy, wave calculations frequently involve square roots.</li>
+                <li><strong>Finance:</strong> Calculating growth rates, volatility, compound interest problems.</li>
+                <li><strong>Computer Science:</strong> Distance calculations, graphics programming, algorithm complexity analysis.</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Calculate Square Roots</h2>
+
+            <h3>Method 1: Calculator (Fastest)</h3>
+            <p>Most calculators have a √ button. Enter number, press √ button. Digital calculators and computer software use iterative algorithms (like Newton's method) to approximate square roots to many decimal places instantly.</p>
+
+            <h3>Method 2: Prime Factorization (Perfect Squares)</h3>
+            <p>Break number into prime factors, pair them up, multiply one from each pair.</p>
+
+            <p><strong>Example: √144</strong></p>
+            <ol>
+                <li>Prime factorization: 144 = 2 × 2 × 2 × 2 × 3 × 3</li>
+                <li>Group pairs: (2 × 2) × (2 × 2) × (3 × 3)</li>
+                <li>Take one from each pair: 2 × 2 × 3 = 12</li>
+                <li>Answer: √144 = 12</li>
+            </ol>
+
+            <p><strong>Example: √180</strong></p>
+            <ol>
+                <li>Prime factorization: 180 = 2 × 2 × 3 × 3 × 5</li>
+                <li>Group pairs: (2 × 2) × (3 × 3) × 5</li>
+                <li>Take one from each pair, leave unpaired: 2 × 3 × √5</li>
+                <li>Answer: √180 = 6√5 ≈ 6 × 2.236 ≈ 13.416</li>
+            </ol>
+
+            <h3>Method 3: Estimation & Refinement</h3>
+            <p>For mental math or when calculator unavailable:</p>
+
+            <p><strong>Example: √50</strong></p>
+            <ol>
+                <li>Find nearest perfect squares: 49 (7²) and 64 (8²)</li>
+                <li>√50 is between 7 and 8</li>
+                <li>50 is closer to 49, so estimate 7.1</li>
+                <li>Test: 7.1 × 7.1 = 50.41 (close!)</li>
+                <li>Refine: 7.07 × 7.07 = 49.98 (closer)</li>
+                <li>Actual: √50 = 7.071...</li>
+            </ol>
+
+            <h3>Method 4: Long Division Method (Historical)</h3>
+            <p>Before calculators, people used long division-like algorithm to find square roots by hand. Still taught in some schools for understanding, but impractical today. Similar to long division but involves pairing digits and finding largest square at each step. Tedious but works for any number to any precision.</p>
+
+            <h3>Newton's Method (How Calculators Work)</h3>
+            <p>Iterative approximation: Start with guess, refine until accurate.</p>
+
+            <p><strong>Formula:</strong> Next guess = (guess + number/guess) / 2</p>
+
+            <p><strong>Example: √20</strong></p>
+            <ol>
+                <li>Initial guess: 4 (since 4² = 16, close to 20)</li>
+                <li>Iteration 1: (4 + 20/4) / 2 = (4 + 5) / 2 = 4.5</li>
+                <li>Iteration 2: (4.5 + 20/4.5) / 2 = (4.5 + 4.444) / 2 = 4.472</li>
+                <li>Iteration 3: (4.472 + 20/4.472) / 2 = 4.47213...</li>
+                <li>Converges rapidly to √20 = 4.47213595...</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Perfect Squares to Memorize</h2>
+
+            <h3>Perfect Squares 1-25</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0;">
+                <div>1² = 1, √1 = 1</div>
+                <div>2² = 4, √4 = 2</div>
+                <div>3² = 9, √9 = 3</div>
+                <div>4² = 16, √16 = 4</div>
+                <div>5² = 25, √25 = 5</div>
+                <div>6² = 36, √36 = 6</div>
+                <div>7² = 49, √49 = 7</div>
+                <div>8² = 64, √64 = 8</div>
+                <div>9² = 81, √81 = 9</div>
+                <div>10² = 100, √100 = 10</div>
+                <div>11² = 121, √121 = 11</div>
+                <div>12² = 144, √144 = 12</div>
+                <div>13² = 169, √169 = 13</div>
+                <div>14² = 196, √196 = 14</div>
+                <div>15² = 225, √225 = 15</div>
+                <div>16² = 256, √256 = 16</div>
+                <div>17² = 289, √289 = 17</div>
+                <div>18² = 324, √324 = 18</div>
+                <div>19² = 361, √361 = 19</div>
+                <div>20² = 400, √400 = 20</div>
+                <div>21² = 441, √441 = 21</div>
+                <div>22² = 484, √484 = 22</div>
+                <div>23² = 529, √529 = 23</div>
+                <div>24² = 576, √576 = 24</div>
+                <div>25² = 625, √625 = 25</div>
+            </div>
+
+            <h3>Larger Perfect Squares Worth Knowing</h3>
+            <p>30² = 900, 40² = 1,600, 50² = 2,500, 60² = 3,600, 70² = 4,900, 80² = 6,400, 90² = 8,100, 100² = 10,000</p>
+
+            <p>Memorizing these helps with mental estimation and recognizing perfect squares in problems.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Properties of Square Roots</h2>
+
+            <h3>Product Property</h3>
+            <p>√(a × b) = √a × √b</p>
+            <p><strong>Example:</strong> √72 = √(36 × 2) = √36 × √2 = 6√2</p>
+            <p>Use this to simplify square roots by factoring out perfect squares.</p>
+
+            <h3>Quotient Property</h3>
+            <p>√(a / b) = √a / √b</p>
+            <p><strong>Example:</strong> √(25/4) = √25 / √4 = 5 / 2 = 2.5</p>
+
+            <h3>Square Root of a Square</h3>
+            <p>√(x²) = |x| (absolute value of x)</p>
+            <p><strong>Example:</strong> √(5²) = √25 = 5, and √((-5)²) = √25 = 5</p>
+            <p>The square root of a squared number always gives the positive (absolute) value.</p>
+
+            <h3>Principal Square Root</h3>
+            <p>Every positive number has two square roots: positive and negative. 3² = 9 AND (-3)² = 9. The √ symbol means principal (positive) square root only.</p>
+            <p>√9 = 3 (not ±3). If you need both roots, write ±√9 = ±3.</p>
+
+            <h3>Square Root of Negative Numbers</h3>
+            <p>Square root of negative numbers involves imaginary numbers (i = √-1). √-16 = 4i. This is complex number territory, not covered by standard square root calculator. In real number system, square roots of negative numbers are undefined.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Real-World Applications</h2>
+
+            <h3>Geometry & Construction</h3>
+            <p><strong>Square area to side length:</strong> Floor area = 324 sq ft. Side length = √324 = 18 feet.</p>
+            <p><strong>Diagonal of square:</strong> Diagonal = side × √2. Square with 10" sides has diagonal = 10√2 ≈ 14.14 inches.</p>
+            <p><strong>Pythagorean Theorem:</strong> Right triangle with legs 3 and 4. Hypotenuse = √(3² + 4²) = √(9 + 16) = √25 = 5. The famous 3-4-5 right triangle.</p>
+
+            <h3>Distance Formula</h3>
+            <p>Distance between two points (x₁, y₁) and (x₂, y₂): d = √((x₂ - x₁)² + (y₂ - y₁)²)</p>
+            <p><strong>Example:</strong> Distance from (1, 2) to (4, 6): d = √((4-1)² + (6-2)²) = √(9 + 16) = √25 = 5 units</p>
+
+            <h3>Physics - Free Fall</h3>
+            <p>Time to fall from height: t = √(2h/g), where h = height, g = gravity (9.8 m/s²)</p>
+            <p><strong>Example:</strong> Object dropped from 80 meters. Time = √(2 × 80 / 9.8) = √16.33 ≈ 4.04 seconds</p>
+
+            <h3>Finance - Compound Growth</h3>
+            <p>Finding annual growth rate from total growth over 2 years: Annual rate = √(Final/Initial) - 1</p>
+            <p><strong>Example:</strong> Investment grows from $10,000 to $12,100 in 2 years. Annual rate = √(12,100/10,000) - 1 = √1.21 - 1 = 1.1 - 1 = 0.10 = 10% per year</p>
+
+            <h3>Statistics - Standard Deviation</h3>
+            <p>Standard deviation is square root of variance. Variance = average squared deviation. Standard deviation brings units back to original scale.</p>
+            <p><strong>Example:</strong> Variance = 64. Standard deviation = √64 = 8.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Simplifying Square Roots</h2>
+
+            <h3>What Does Simplifying Mean?</h3>
+            <p>Express square root with smallest possible number under the radical by factoring out perfect squares.</p>
+
+            <h3>Step-by-Step Process</h3>
+            <p><strong>Example: Simplify √200</strong></p>
+            <ol>
+                <li>Find largest perfect square factor: 200 = 100 × 2</li>
+                <li>Split using product property: √200 = √(100 × 2) = √100 × √2</li>
+                <li>Simplify perfect square: √100 = 10</li>
+                <li>Final answer: 10√2</li>
+            </ol>
+
+            <p><strong>Example: Simplify √288</strong></p>
+            <ol>
+                <li>Prime factorization: 288 = 2 × 2 × 2 × 2 × 2 × 3 × 3</li>
+                <li>Identify perfect square pairs: (2×2) × (2×2) × 2 × (3×3)</li>
+                <li>Extract pairs: 2 × 2 × 3 = 12, leaving 2 inside</li>
+                <li>Final answer: 12√2</li>
+            </ol>
+
+            <h3>Common Simplifications</h3>
+            <ul>
+                <li>√8 = √(4 × 2) = 2√2</li>
+                <li>√12 = √(4 × 3) = 2√3</li>
+                <li>√18 = √(9 × 2) = 3√2</li>
+                <li>√20 = √(4 × 5) = 2√5</li>
+                <li>√27 = √(9 × 3) = 3√3</li>
+                <li>√32 = √(16 × 2) = 4√2</li>
+                <li>√45 = √(9 × 5) = 3√5</li>
+                <li>√48 = √(16 × 3) = 4√3</li>
+                <li>√50 = √(25 × 2) = 5√2</li>
+                <li>√72 = √(36 × 2) = 6√2</li>
+                <li>√75 = √(25 × 3) = 5√3</li>
+                <li>√98 = √(49 × 2) = 7√2</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Adding & Subtracting Square Roots</h2>
+
+            <h3>Like Radicals</h3>
+            <p>Can only add/subtract square roots with same radicand (number under √).</p>
+
+            <p><strong>Valid:</strong> 3√5 + 2√5 = 5√5 (like terms, same as 3x + 2x = 5x)</p>
+            <p><strong>Invalid:</strong> √2 + √3 cannot be simplified (different radicands)</p>
+
+            <h3>Simplify First, Then Combine</h3>
+            <p><strong>Example: √50 + √18</strong></p>
+            <ol>
+                <li>Simplify each: √50 = 5√2 and √18 = 3√2</li>
+                <li>Now they're like radicals: 5√2 + 3√2 = 8√2</li>
+            </ol>
+
+            <p><strong>Example: √48 - √12 + √75</strong></p>
+            <ol>
+                <li>Simplify: √48 = 4√3, √12 = 2√3, √75 = 5√3</li>
+                <li>Combine: 4√3 - 2√3 + 5√3 = 7√3</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2>Multiplying & Dividing Square Roots</h2>
+
+            <h3>Multiplying Square Roots</h3>
+            <p>√a × √b = √(a × b)</p>
+
+            <p><strong>Examples:</strong></p>
+            <ul>
+                <li>√2 × √8 = √16 = 4</li>
+                <li>√3 × √12 = √36 = 6</li>
+                <li>2√3 × 4√5 = 8√15</li>
+                <li>3√2 × 5√2 = 15 × 2 = 30</li>
+            </ul>
+
+            <h3>Dividing Square Roots</h3>
+            <p>√a / √b = √(a / b)</p>
+
+            <p><strong>Examples:</strong></p>
+            <ul>
+                <li>√50 / √2 = √(50/2) = √25 = 5</li>
+                <li>√72 / √8 = √(72/8) = √9 = 3</li>
+                <li>10√6 / 2√3 = 5√(6/3) = 5√2</li>
+            </ul>
+
+            <h3>Rationalizing the Denominator</h3>
+            <p>Eliminate square roots from denominators by multiplying by √/√.</p>
+
+            <p><strong>Example: 5/√3</strong></p>
+            <ol>
+                <li>Multiply top and bottom by √3: (5 × √3) / (√3 × √3)</li>
+                <li>Simplify: 5√3 / 3</li>
+            </ol>
+
+            <p><strong>Example: 12/√8</strong></p>
+            <ol>
+                <li>Simplify √8 first: √8 = 2√2, so 12/(2√2) = 6/√2</li>
+                <li>Rationalize: (6 × √2) / (√2 × √2) = 6√2 / 2 = 3√2</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Mistakes to Avoid</h2>
+
+            <h3>Mistake 1: Adding Square Roots Incorrectly</h3>
+            <p>❌ Wrong: √4 + √9 = √13</p>
+            <p>✓ Correct: √4 + √9 = 2 + 3 = 5</p>
+            <p>Cannot add numbers inside different square roots. Simplify each first, then add.</p>
+
+            <h3>Mistake 2: Squaring Incorrectly</h3>
+            <p>❌ Wrong: (√5)² = 5²</p>
+            <p>✓ Correct: (√5)² = 5</p>
+            <p>Squaring and square root are inverse operations—they cancel out.</p>
+
+            <h3>Mistake 3: Distributing Square Root</h3>
+            <p>❌ Wrong: √(x + y) = √x + √y</p>
+            <p>✓ Correct: √(x + y) cannot be simplified this way</p>
+            <p>Product/quotient properties work, but NOT sum/difference. √(4 + 9) = √13 ≠ 2 + 3.</p>
+
+            <h3>Mistake 4: Negative Square Roots</h3>
+            <p>❌ Wrong: √9 = ±3</p>
+            <p>✓ Correct: √9 = 3 (principal square root is positive only)</p>
+            <p>√ symbol means positive root. If equation is x² = 9, then x = ±3. But √9 = 3 only.</p>
+
+            <h3>Mistake 5: Simplification Errors</h3>
+            <p>❌ Wrong: √24 = 2√6 (missed larger perfect square factor)</p>
+            <p>✓ Correct: √24 = √(4 × 6) = 2√6, or better: √(4 × 4 × 1.5)... wait, √24 = 2√6 is correct!</p>
+            <p>Actually the first was right. Better example: √32 = 4√2 not 2√8 (fully simplify).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Can you take the square root of a negative number?</h3>
+            <p>Not in the real number system. √-1 is defined as "i" (imaginary unit) in complex numbers. √-9 = 3i. For real-world calculations and basic algebra, square roots of negatives are undefined. Scientific calculators show "Error" for √(-x).</p>
+
+            <h3>What's the difference between √ and ²?</h3>
+            <p>They're inverse operations. Squaring (²) multiplies number by itself. Square root (√) finds what number multiplied by itself gives the result. 5² = 25. √25 = 5. They undo each other: √(x²) = x and (√x)² = x.</p>
+
+            <h3>Why is √2 irrational?</h3>
+            <p>Proof by contradiction shows √2 cannot be expressed as fraction. It's decimal expansion never ends or repeats: 1.41421356237309504880168872420969... Many square roots are irrational (any non-perfect square). This was one of ancient Greeks' most important mathematical discoveries.</p>
+
+            <h3>How do I estimate square roots in my head?</h3>
+            <p>Find nearest perfect squares above and below. For √30: 25 < 30 < 36, so 5 < √30 < 6. Since 30 is closer to 25, estimate ≈5.5. (Actual: 5.477). Practice with perfect squares 1-100 to get faster.</p>
+
+            <h3>What's the square root of 0?</h3>
+            <p>√0 = 0. Zero is special case—only number equal to its own square root. 0 × 0 = 0, so √0 = 0.</p>
+
+            <h3>How many decimal places should I use?</h3>
+            <p>Depends on context. Engineering: 3-4 decimals usually sufficient. Scientific calculations: 6-8. Financial: 2. Most real-world situations don't need beyond 4 decimal places. Additional precision is just noise.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const number = parseFloat(document.getElementById('number').value);
+            const decimals = parseInt(document.getElementById('decimals').value);
+
+            // Reset displays if invalid input
+            if (isNaN(number) || number < 0) {
+                document.getElementById('inputDisplay').textContent = '0';
+                document.getElementById('result').textContent = '0';
+                document.getElementById('verification').textContent = '—';
+                document.getElementById('perfectSquareRow').style.display = 'none';
+                document.getElementById('explanationCard').style.display = 'none';
+                return;
+            }
+
+            // Calculate square root
+            const result = Math.sqrt(number);
+
+            // Display input and result
+            document.getElementById('inputDisplay').textContent = number;
+            document.getElementById('result').textContent = result.toFixed(decimals);
+
+            // Verification
+            const squared = result * result;
+            document.getElementById('verification').textContent =
+                result.toFixed(decimals) + ' × ' + result.toFixed(decimals) + ' = ' + squared.toFixed(decimals);
+
+            // Check if perfect square
+            const isPerfectSquare = Number.isInteger(result);
+            if (isPerfectSquare) {
+                document.getElementById('perfectSquareRow').style.display = 'flex';
+            } else {
+                document.getElementById('perfectSquareRow').style.display = 'none';
+            }
+
+            // Generate explanation
+            let explanation = '';
+            if (number === 0) {
+                explanation = 'The square root of 0 is 0. Zero is the only number equal to its own square root.';
+            } else if (isPerfectSquare) {
+                explanation = `${number} is a perfect square. ${result} × ${result} = ${number}, therefore √${number} = ${result}.`;
+            } else {
+                // Find nearest perfect squares
+                const lower = Math.floor(result);
+                const upper = lower + 1;
+                const lowerSquare = lower * lower;
+                const upperSquare = upper * upper;
+
+                explanation = `${number} is not a perfect square. It falls between ${lower}² = ${lowerSquare} and ${upper}² = ${upperSquare}. `;
+                explanation += `Therefore, √${number} is between ${lower} and ${upper}. `;
+                explanation += `The precise value is approximately ${result.toFixed(decimals)}.`;
+
+                // Add simplification info if applicable
+                const simplified = simplifySquareRoot(number);
+                if (simplified) {
+                    explanation += ` In simplified form: √${number} = ${simplified}.`;
+                }
+            }
+
+            document.getElementById('explanation').textContent = explanation;
+            document.getElementById('explanationCard').style.display = 'block';
+        }
+
+        function simplifySquareRoot(n) {
+            // Find largest perfect square factor
+            let factor = 1;
+            for (let i = 2; i * i <= n; i++) {
+                while (n % (i * i) === 0) {
+                    factor *= i;
+                    n /= (i * i);
+                }
+            }
+
+            if (factor > 1) {
+                if (n === 1) {
+                    return factor.toString();
+                } else {
+                    return `${factor}√${n}`;
+                }
+            }
+            return null;
+        }
+
+        // Event listeners
+        document.getElementById('number').addEventListener('input', calculate);
+        document.getElementById('decimals').addEventListener('change', calculate);
+    </script>
+</body>
+</html>
