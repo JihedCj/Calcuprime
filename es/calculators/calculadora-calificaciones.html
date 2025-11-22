@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de calificaciones gratuita - Calcula notas finales del curso con tareas ponderadas, exámenes y parciales. Determina qué puntuación necesitas en el examen final.">
+    <meta name="keywords" content="calculadora calificaciones, calculadora nota final, calificación ponderada, calculadora examen, nota curso, calculadora examen final">
+
+    <title>Calculadora de Calificaciones - Notas y Exámenes | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-calificaciones.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/grade-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-calificaciones.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/grade-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/grade-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-calificaciones.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#diario">Diario</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Calificaciones</h1>
+            <p class="calculator-description">Calcula tu nota actual y planifica para los exámenes finales</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Componentes de Calificación</h3>
+                <div class="grade-row" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <span style="width: 100px; font-size: 0.9rem;">Tareas</span>
+                    <input type="number" class="form-input component-score" placeholder="Puntuación %" value="85" min="0" max="100" step="1" style="flex: 1;">
+                    <input type="number" class="form-input component-weight" placeholder="Peso %" value="20" min="0" max="100" step="1" style="flex: 1;">
+                </div>
+                <div class="grade-row" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <span style="width: 100px; font-size: 0.9rem;">Cuestionarios</span>
+                    <input type="number" class="form-input component-score" placeholder="Puntuación %" value="90" min="0" max="100" step="1" style="flex: 1;">
+                    <input type="number" class="form-input component-weight" placeholder="Peso %" value="15" min="0" max="100" step="1" style="flex: 1;">
+                </div>
+                <div class="grade-row" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <span style="width: 100px; font-size: 0.9rem;">Parcial</span>
+                    <input type="number" class="form-input component-score" placeholder="Puntuación %" value="82" min="0" max="100" step="1" style="flex: 1;">
+                    <input type="number" class="form-input component-weight" placeholder="Peso %" value="25" min="0" max="100" step="1" style="flex: 1;">
+                </div>
+                <div class="grade-row" style="display: flex; gap: 10px; margin-bottom: 10px; align-items: center;">
+                    <span style="width: 100px; font-size: 0.9rem;">Examen Final</span>
+                    <input type="number" id="finalScore" class="form-input component-score" placeholder="Puntuación %" value="0" min="0" max="100" step="1" style="flex: 1;">
+                    <input type="number" id="finalWeight" class="form-input component-weight" placeholder="Peso %" value="40" min="0" max="100" step="1" style="flex: 1;">
+                </div>
+                <h3 style="margin-top: 1.5rem;">Calculadora de Nota Objetivo</h3>
+                <div class="form-group">
+                    <label for="targetGrade" class="form-label">Calificación Final Deseada (%)</label>
+                    <input type="number" id="targetGrade" class="form-input" value="90" min="0" max="100" step="1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular Calificación</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tu Calificación</h3>
+                <div class="result-item">
+                    <div class="result-label">Calificación Actual</div>
+                    <div class="result-value" id="currentGrade" style="font-size: 2.5rem; color: #10b981;">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Nota en Letra</div>
+                    <div class="result-value" id="letterGrade">F</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Calificación Final (con puntuación actual del examen final)</div>
+                    <div class="result-value" id="finalGrade">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Puntuación Necesaria en el Examen Final</div>
+                    <div class="result-value" id="neededScore" style="font-size: 1.5rem;">0%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Evaluación</div>
+                    <div class="result-value" id="assessment" style="font-size: 1rem;">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Comprensión de las Calificaciones Ponderadas</h2>
+            <p>La mayoría de los cursos calculan las calificaciones finales utilizando promedios ponderados en lugar de medias aritméticas simples. La calificación ponderada asigna diferentes porcentajes de tu calificación final a diferentes categorías: las tareas pueden contar 20%, los exámenes 30%, los proyectos 25% y el examen final 25%. Este sistema refleja la importancia variable de diferentes tipos de evaluación y asegura que los exámenes principales influyan apropiadamente en tu calificación final a pesar de representar menos tareas que las tareas o cuestionarios. Comprender las calificaciones ponderadas transforma los puntos porcentuales abstractos en planificación académica estratégica.</p>
+
+            <p>Comprender las calificaciones ponderadas te permite planificar estratégicamente tu esfuerzo académico. Si tu examen final cuenta el 40% de tu calificación, ese único examen importa más que 15 tareas que valen colectivamente el 15%. Este conocimiento ayuda a priorizar el tiempo de estudio, asignar esfuerzo apropiadamente y calcular exactamente qué puntuaciones necesitas para lograr calificaciones objetivo. En lugar de sentirte perdido en la incertidumbre, los cálculos de calificaciones ponderadas proporcionan claridad y control sobre los resultados académicos. Saber qué necesitas lograr elimina la ansiedad y te permite enfocar tu energía de manera efectiva.</p>
+
+            <h2>Cómo Calcular Calificaciones Ponderadas</h2>
+            <p>El cálculo de calificación ponderada multiplica cada puntuación de componente por su peso, luego suma estas puntuaciones ponderadas. La fórmula: Calificación Final = (Puntuación1 × Peso1) + (Puntuación2 × Peso2) + (Puntuación3 × Peso3) + ... </p>
+
+            <p><strong>Ejemplo:</strong> Tu curso tiene cuatro componentes: Tareas (85%, vale 20%), Cuestionarios (90%, vale 15%), Parcial (82%, vale 25%), Examen Final (88%, vale 40%). Calcula: (85 × 0.20) + (90 × 0.15) + (82 × 0.25) + (88 × 0.40) = 17.0 + 13.5 + 20.5 + 35.2 = 86.2%. Tu calificación final es 86.2%, típicamente una B o B+ dependiendo de la escala de calificación. Este cálculo preciso te permite saber exactamente dónde estás académicamente en cualquier momento del semestre.</p>
+
+            <p>Perspectiva clave: el impacto de un componente en tu calificación final es igual a su puntuación multiplicada por su peso. Obtener 100% en tareas con peso del 5% agrega 5 puntos a tu calificación final. Obtener 100% en un examen final con peso del 30% agrega 30 puntos. El impacto del examen final es seis veces mayor que las tareas, aunque las tareas involucran docenas de asignaciones versus un examen. Esta comprensión debería guiar tus prioridades de estudio.</p>
+
+            <h2>Escalas de Calificación Estándar</h2>
+            <p>La mayoría de las escuelas y universidades americanas y de habla hispana utilizan calificaciones en letras correspondientes a rangos de porcentaje. La escala más común:</p>
+
+            <p><strong>A (90-100%):</strong> Trabajo excelente que demuestra dominio del material del curso. Indica comprensión integral, errores mínimos y capacidad para aplicar conceptos a nuevas situaciones. Contribuye con 4.0 al GPA en sistemas americanos o 10 en sistemas de 0-10.</p>
+
+            <p><strong>B (80-89%):</strong> Buen trabajo que demuestra comprensión sólida con brechas o errores menores. Muestra competencia en la mayoría de las áreas con espacio para mejorar. Contribuye con 3.0 al GPA o 8-9 en escala de 10.</p>
+
+            <p><strong>C (70-79%):</strong> Trabajo satisfactorio que cumple con los requisitos básicos. Demuestra comprensión adecuada pero quedan brechas significativas. Para muchos programas, C representa la calificación mínima de aprobación para cursos principales. Contribuye con 2.0 al GPA o 6-7 en escala de 10.</p>
+
+            <p><strong>D (60-69%):</strong> Trabajo pobre que cumple con requisitos mínimos para crédito del curso (en algunas instituciones). Indica deficiencias sustanciales en comprensión. Muchas universidades no aceptan calificaciones D para requisitos principales o prerrequisitos. Contribuye con 1.0 al GPA o 5 en escala de 10.</p>
+
+            <p><strong>F (Por debajo de 60%):</strong> Trabajo reprobado que no cumple con los requisitos del curso. No se obtiene crédito; el curso debe ser retomado. Contribuye con 0.0 al GPA. En algunos sistemas, cualquier puntuación por debajo de 50% o 60% es automáticamente reprobatoria.</p>
+
+            <h2>Cálculo de lo que Necesitas en el Examen Final</h2>
+            <p>Uno de los cálculos más valiosos determina la puntuación mínima del examen final necesaria para lograr una calificación objetivo. Este análisis de "qué pasaría si" ayuda a establecer metas realistas y priorizar el estudio.</p>
+
+            <p>Fórmula: Puntuación Requerida del Examen Final = (Calificación Objetivo - Calificación Ponderada Actual) ÷ Peso del Examen Final</p>
+
+            <p><strong>Ejemplo:</strong> Antes del examen final, tu promedio ponderado es 84% basado en trabajo completado que vale el 60% de tu calificación. El examen final vale el 40%. Quieres una A (90%). Calcula: (90 - 84 × 0.60) ÷ 0.40 = (90 - 50.4) ÷ 0.40 = 39.6 ÷ 0.40 = 99%. Necesitas 99% en el final para lograr 90% en general: posible pero desafiante. Este cálculo te dice exactamente qué tan duro necesitas estudiar.</p>
+
+            <p>Este cálculo tiene tres resultados posibles: (1) La puntuación requerida es alcanzable (0-100%), dándote un objetivo claro. (2) La puntuación requerida excede 100%, lo que significa que tu calificación objetivo es matemáticamente imposible: ajusta expectativas o explora crédito extra. (3) La puntuación requerida es negativa o muy baja, lo que significa que ya has asegurado tu calificación objetivo: estudia para mantener el conocimiento pero reduce el estrés sobre los resultados de la calificación.</p>
+
+            <h2>Gestión Estratégica de Calificaciones</h2>
+            <h3>Carga Frontal de Tu Esfuerzo</h3>
+            <p>El rendimiento fuerte temprano en el semestre construye un colchón de calificación para desafíos posteriores. Obtener puntuaciones altas en asignaciones tempranas, a menudo más fáciles, crea espacio para errores en material más difícil más adelante. Los estudiantes que comienzan fuerte a menudo mantienen esa trayectoria; los estudiantes que comienzan mal rara vez se recuperan completamente. Las primeras semanas establecen el tono para el éxito de todo el semestre.</p>
+
+            <h3>Prioriza Componentes de Alto Peso</h3>
+            <p>Si el examen final vale el 40% y las tareas valen el 10%, una hora adicional estudiando para el final impacta tu calificación cuatro veces más que una hora adicional perfeccionando tareas. Asigna el tiempo de estudio proporcional a los pesos de los componentes. Esto no significa ignorar asignaciones de bajo peso (construyen conocimiento para evaluaciones de alto peso) pero cuando el tiempo es limitado, prioriza lo que más importa. El estudio estratégico maximiza los resultados de calificación para el esfuerzo invertido.</p>
+
+            <h3>Calcula a Menudo</h3>
+            <p>No esperes hasta los finales para verificar tu calificación. Después de cada asignación, cuestionario o examen, recalcula tu posición actual y lo que necesitas hacia adelante. Este monitoreo regular identifica problemas temprano cuando la corrección aún es posible. Muchos estudiantes se sorprenden por las calificaciones finales porque nunca calcularon su posición real durante el semestre. La conciencia regular previene sorpresas desagradables.</p>
+
+            <h3>Comprende los Efectos de Umbral</h3>
+            <p>La diferencia entre 89.4% y 89.6% podría separar una B de una A si tu profesor redondea. De manera similar, 79.5% podría redondear a 80% (B-) en lugar de 79% (C+). Cuando estás cerca de límites de calificación, pequeñas mejoras producen resultados desproporcionados. Unos pocos puntos extra del crédito extra, puntuaciones mejoradas de tareas o rendimiento más fuerte en exámenes pueden cambiar tu calificación en letra. Conocer los umbrales te motiva a esforzarte por esos puntos cruciales finales.</p>
+
+            <h3>Comunícate con los Profesores</h3>
+            <p>Si estás en el límite entre calificaciones, considera discutir tu situación con tu profesor. Algunos profesores aprecian a los estudiantes proactivos y pueden ofrecer oportunidades de crédito extra, permitir revisiones de asignaciones o proporcionar orientación para la preparación del examen final. Esto no es rogar por cambios de calificación: es demostrar compromiso y buscar ayuda para ganar la calificación que quieres. La comunicación proactiva puede marcar la diferencia.</p>
+
+            <h2>Estrategia de Crédito Extra</h2>
+            <p>Las oportunidades de crédito extra pueden marcar la diferencia entre niveles de calificación, pero abordalas estratégicamente. El crédito extra típicamente cae en tres categorías:</p>
+
+            <p><strong>Crédito Extra de Reemplazo:</strong> Algunos profesores permiten que las asignaciones de crédito extra reemplacen tu puntuación más baja de tarea o cuestionario. Beneficio máximo: la diferencia entre tu puntuación más baja y 100%. Si tu cuestionario más bajo es 70%, el crédito extra que lo reemplaza agrega 30% × peso del cuestionario a tu calificación final. Persigue estas oportunidades cuando tus puntuaciones más bajas arrastren significativamente tu calificación.</p>
+
+            <p><strong>Crédito Extra Aditivo:</strong> Puntos agregados directamente a categorías de asignación específicas o tu calificación final. Fuentes comunes: asistir a conferencias opcionales, participar en estudios de investigación, completar problemas suplementarios. Estos puntos aumentan directamente tu calificación: un bono de 2 puntos en un examen de 100 puntos eleva esa puntuación de examen del 85% al 87%. El crédito extra aditivo proporciona mejora de calificación garantizada y generalmente requiere esfuerzo mínimo.</p>
+
+            <p><strong>Crédito Extra de Participación:</strong> Algunos profesores ofrecen pequeños bonos continuos por participación consistente en clase, asistencia o compromiso. Aunque las recompensas individuales son pequeñas (0.5-1 punto por clase), se acumulan durante el semestre. La asistencia perfecta que vale 1% no suena impresionante, pero 1% puede cambiar 89% a 90% (B+ a A-). Las pequeñas ganancias constantes se acumulan en beneficios significativos.</p>
+
+            <h2>Estrategias de Estudio para Diferentes Objetivos de Calificación</h2>
+            <h3>Apuntando a A (90-100%)</h3>
+            <p>Requiere dominio de todo el material del curso, incluidos conceptos difíciles. Comienza a estudiar temprano, asiste a todas las clases y horas de oficina, completa todas las lecturas y asignaciones, forma grupos de estudio y busca ayuda inmediatamente cuando estés confundido. Practica más allá del trabajo asignado: haz problemas adicionales, crea tus propios ejemplos, enseña conceptos a otros. Para exámenes, busca estar sobreprepardo para que la ansiedad y errores menores no te hagan caer por debajo del 90%. La excelencia requiere esfuerzo consistente y exhaustivo.</p>
+
+            <h3>Apuntando a B (80-89%)</h3>
+            <p>Requiere comprensión sólida de conceptos básicos con espacio para brechas en material avanzado. Asiste a la mayoría de las clases, completa todas las asignaciones importantes, estudia consistentemente en lugar de empollar y busca ayuda para temas particularmente confusos. Enfoca energía en el material enfatizado por el profesor y evaluaciones de alto peso. Para exámenes, la preparación minuciosa en conceptos principales generalmente asegura el rango B incluso con rendimiento más débil en preguntas desafiantes.</p>
+
+            <h3>Apuntando a Aprobar (70-79% o 60-69%)</h3>
+            <p>Requiere competencia básica con esfuerzo mínimo. Si solo intentas aprobar un curso requerido fuera de tus intereses, calcula el esfuerzo mínimo necesario. Identifica los componentes de mayor peso y enfócate allí: si el final es el 50%, puedes tener bajo rendimiento en tareas y aún aprobar con un rendimiento final fuerte. Esto no se recomienda para cursos principales o cuando el aprendizaje importa, pero el esfuerzo mínimo estratégico tiene sentido para requisitos de distribución cuando tomas cursos exigentes en tu especialidad simultáneamente.</p>
+
+            <h2>Cuando las Calificaciones No Reflejan el Aprendizaje</h2>
+            <p>Las calificaciones miden el rendimiento en evaluaciones específicas bajo condiciones específicas. No miden perfectamente el conocimiento, la inteligencia, la capacidad o el valor. Comprender esta distinción importa:</p>
+
+            <p><strong>Ansiedad por los Exámenes:</strong> Algunos estudiantes conocen el material a fondo pero rinden mal bajo condiciones de examen cronometrado. Si la ansiedad por los exámenes afecta tus calificaciones, busca adaptaciones (tiempo extendido, entornos de reducción de distracciones), trabaja con servicios de consejería en gestión de ansiedad y discute opciones de evaluación alternativas con los profesores. Muchas escuelas ofrecen adaptaciones formales de exámenes para trastornos de ansiedad documentados.</p>
+
+            <p><strong>Discapacidades de Aprendizaje:</strong> Condiciones como dislexia, TDAH, disgrafía y trastornos de procesamiento afectan el rendimiento académico pero no reflejan la capacidad intelectual. Si consistentemente rindes por debajo de tu comprensión, considera la evaluación de discapacidades de aprendizaje. El diagnóstico formal a menudo te califica para adaptaciones (tiempo extra, servicios de toma de notas, formatos de examen alternativos) que nivelan el campo de juego. No sufras en silencio: busca el apoyo que mereces.</p>
+
+            <p><strong>Circunstancias de Vida:</strong> Enfermedad, emergencias familiares, desafíos de salud mental, estrés financiero y otros factores de vida impactan las calificaciones. La mayoría de las instituciones tienen políticas para calificaciones incompletas, retiros tardíos o apelaciones de calificaciones basadas en circunstancias atenuantes documentadas. Comunícate con profesores y asesores académicos cuando la vida interfiera con el trabajo del curso: muchas escuelas ofrecen más flexibilidad de lo que los estudiantes se dan cuenta. No esperes hasta que sea demasiado tarde para buscar ayuda.</p>
+
+            <h2>Conclusión</h2>
+            <p>El cálculo de calificaciones no es misterioso: es matemática directa que empodera la planificación académica estratégica. Comprender cómo los componentes se combinan en calificaciones finales te permite establecer objetivos realistas, priorizar el tiempo de estudio efectivamente y tomar decisiones informadas sobre la asignación de esfuerzo a través de múltiples cursos. Usa calculadoras de calificaciones regularmente, comprende qué puntuaciones necesitas en las próximas evaluaciones y mantén la conciencia de tu posición académica durante todo el semestre en lugar de ser sorprendido por las calificaciones finales. Aunque las calificaciones no lo son todo, importan para el GPA, la posición académica, las becas y las oportunidades futuras. Toma control de tus calificaciones a través del cálculo, la planificación y el esfuerzo estratégico. La inversión en la gestión de calificaciones produce mejores resultados con menos estrés y más confianza en tu éxito académico.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const rows = document.querySelectorAll('.grade-row');
+            const finalScore = parseFloat(document.getElementById('finalScore').value) || 0;
+            const finalWeight = parseFloat(document.getElementById('finalWeight').value) || 0;
+            const targetGrade = parseFloat(document.getElementById('targetGrade').value) || 90;
+
+            let totalWeightedScore = 0;
+            let totalWeight = 0;
+            let totalWeightExcludingFinal = 0;
+            let weightedScoreExcludingFinal = 0;
+
+            rows.forEach((row, index) => {
+                const score = parseFloat(row.querySelector('.component-score').value) || 0;
+                const weight = parseFloat(row.querySelector('.component-weight').value) || 0;
+
+                if (weight > 0) {
+                    if (index < rows.length - 1) {
+                        weightedScoreExcludingFinal += (score * weight / 100);
+                        totalWeightExcludingFinal += weight;
+                    }
+
+                    if (score > 0 || index < rows.length - 1) {
+                        totalWeightedScore += (score * weight / 100);
+                        totalWeight += weight;
+                    }
+                }
+            });
+
+            const currentGrade = totalWeightExcludingFinal > 0 ?
+                (weightedScoreExcludingFinal / totalWeightExcludingFinal) * 100 : 0;
+
+            const finalGrade = totalWeight > 0 ? totalWeightedScore : 0;
+
+            const neededOnFinal = finalWeight > 0 ?
+                ((targetGrade - weightedScoreExcludingFinal) / (finalWeight / 100)) : 0;
+
+            document.getElementById('currentGrade').textContent = currentGrade.toFixed(1) + '%';
+
+            const letterGrade = getLetterGrade(finalScore > 0 ? finalGrade : currentGrade);
+            document.getElementById('letterGrade').textContent = letterGrade;
+
+            document.getElementById('finalGrade').textContent = finalGrade.toFixed(1) + '%';
+
+            document.getElementById('neededScore').textContent = neededOnFinal.toFixed(1) + '%';
+
+            let assessment, assessmentColor;
+            if (neededOnFinal > 100) {
+                assessment = 'Calificación objetivo no alcanzable con puntuación perfecta en el examen final';
+                assessmentColor = '#dc2626';
+            } else if (neededOnFinal >= 95) {
+                assessment = 'Muy desafiante - necesita examen final casi perfecto';
+                assessmentColor = '#f97316';
+            } else if (neededOnFinal >= 85) {
+                assessment = 'Desafiante pero alcanzable con preparación sólida';
+                assessmentColor = '#f59e0b';
+            } else if (neededOnFinal >= 70) {
+                assessment = 'Alcanzable con estudio y preparación sólidos';
+                assessmentColor = '#0891b2';
+            } else if (neededOnFinal >= 50) {
+                assessment = 'Muy alcanzable - buena posición para calificación objetivo';
+                assessmentColor = '#10b981';
+            } else if (neededOnFinal > 0) {
+                assessment = 'Excelente posición - puntuación mínima necesaria en examen final';
+                assessmentColor = '#10b981';
+            } else {
+                assessment = '¡Calificación objetivo ya asegurada!';
+                assessmentColor = '#10b981';
+            }
+
+            document.getElementById('assessment').textContent = assessment;
+            document.getElementById('assessment').style.color = assessmentColor;
+        }
+
+        function getLetterGrade(percentage) {
+            if (percentage >= 93) return 'A';
+            if (percentage >= 90) return 'A-';
+            if (percentage >= 87) return 'B+';
+            if (percentage >= 83) return 'B';
+            if (percentage >= 80) return 'B-';
+            if (percentage >= 77) return 'C+';
+            if (percentage >= 73) return 'C';
+            if (percentage >= 70) return 'C-';
+            if (percentage >= 67) return 'D+';
+            if (percentage >= 60) return 'D';
+            return 'F';
+        }
+
+        document.querySelectorAll('.component-score, .component-weight').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+        document.getElementById('targetGrade').addEventListener('input', calculate);
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

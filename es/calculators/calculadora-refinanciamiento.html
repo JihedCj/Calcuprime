@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de refinanciamiento gratuita - Determina si deberías refinanciar tu hipoteca. Calcula ahorros mensuales y costos totales del refinanciamiento.">
+    <meta name="keywords" content="calculadora refinanciamiento, refinanciar hipoteca, calculadora ahorro refinanciamiento, refinanciamiento préstamo">
+
+    <title>Calculadora de Refinanciamiento - ¿Deberías Refinanciar? | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-refinanciamiento.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/refinance-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-refinanciamiento.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/refinance-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/refinance-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-refinanciamiento.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Refinanciamiento</h1>
+            <p class="calculator-description">¿Deberías refinanciar tu hipoteca? Calcula tus ahorros potenciales</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Detalles del Préstamo</h3>
+
+                <div class="form-group">
+                    <label for="balance" class="form-label">Saldo Actual ($)</label>
+                    <input type="number" id="balance" class="form-input" value="200000" min="0" step="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="oldRate" class="form-label">Tasa Actual (%)</label>
+                    <input type="number" id="oldRate" class="form-input" value="6" min="0" max="20" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="newRate" class="form-label">Nueva Tasa (%)</label>
+                    <input type="number" id="newRate" class="form-input" value="4.5" min="0" max="20" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="years" class="form-label">Años Restantes</label>
+                    <input type="number" id="years" class="form-input" value="20" min="1" max="30" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="closingCosts" class="form-label">Costos de Cierre ($)</label>
+                    <input type="number" id="closingCosts" class="form-input" value="5000" min="0" step="500">
+                </div>
+
+                <button onclick="calculate()" class="btn-calculate">Calcular</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Pago Mensual Actual</div>
+                    <div class="result-value" id="oldPayment" style="font-size: 1.5rem;">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Nuevo Pago Mensual</div>
+                    <div class="result-value" id="newPayment" style="font-size: 1.5rem; color: #10b981;">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Ahorro Mensual</div>
+                    <div class="result-value" id="monthlySavings">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Ahorro Total en Vida del Préstamo</div>
+                    <div class="result-value" id="lifetimeSavings">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Punto de Equilibrio</div>
+                    <div class="result-value" id="breakEven">0 meses</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el Refinanciamiento Hipotecario?</h2>
+            <p>El refinanciamiento hipotecario es el proceso de reemplazar tu préstamo hipotecario existente con uno nuevo, típicamente con términos más favorables. Los propietarios refinancian por varias razones: obtener una tasa de interés más baja, reducir pagos mensuales, acortar el plazo del préstamo, cambiar de una hipoteca de tasa ajustable a una de tasa fija, o acceder al capital de la vivienda para otros propósitos financieros.</p>
+
+            <p>El refinanciamiento funciona liquidando tu hipoteca original con los fondos de un nuevo préstamo. Esencialmente estás obteniendo un préstamo completamente nuevo con su propia tasa de interés, plazo y condiciones. Mientras que el proceso es similar a obtener tu hipoteca original, incluye nueva suscripción, tasación y costos de cierre, los beneficios potenciales pueden ser sustanciales cuando el momento y las circunstancias son correctos.</p>
+
+            <h2>Razones para Refinanciar tu Hipoteca</h2>
+            <p><strong>Reducir tu Tasa de Interés:</strong> Esta es la razón más común para refinanciar. Incluso una reducción de 0.5-1% en tu tasa de interés puede ahorrar decenas de miles de dólares durante la vida de tu préstamo. Por ejemplo, en un préstamo de $300,000, reducir tu tasa de 5% a 4% ahorra aproximadamente $300 al mes y más de $100,000 durante un préstamo de 30 años.</p>
+
+            <p><strong>Acortar el Plazo de tu Préstamo:</strong> Refinanciar de una hipoteca a 30 años a una de 15 años te permite pagar tu vivienda más rápido y ahorra significativamente en intereses totales. Mientras tus pagos mensuales serán más altos, construirás capital más rápido y serás dueño de tu vivienda libre de deudas años antes. Esta estrategia funciona bien cuando tus ingresos han aumentado desde que obtuviste tu hipoteca original.</p>
+
+            <p><strong>Reducir Pagos Mensuales:</strong> Si estás enfrentando dificultades financieras o simplemente quieres mejorar tu flujo de efectivo mensual, refinanciar a una tasa más baja o extender tu plazo puede reducir tus pagos mensuales. Aunque extender el plazo significa pagar más intereses con el tiempo, la flexibilidad mensual puede valer la pena dependiendo de tus circunstancias.</p>
+
+            <p><strong>Cambiar de ARM a Tasa Fija:</strong> Si tienes una hipoteca de tasa ajustable (ARM) y las tasas están aumentando o planeas quedarte en tu vivienda a largo plazo, refinanciar a una hipoteca de tasa fija proporciona estabilidad y protección contra futuros aumentos de tasas. Este cambio elimina la incertidumbre de pagos fluctuantes.</p>
+
+            <p><strong>Refinanciamiento de Retiro de Efectivo:</strong> Acceder al capital de tu vivienda mediante un refinanciamiento de retiro de efectivo te permite pedir prestado contra el valor que has construido. Los propietarios usan estos fondos para mejoras al hogar, consolidación de deudas de alto interés, gastos educativos o inversiones. Sin embargo, aumentas el saldo de tu préstamo y tiempo de pago, así que usa esta opción sabiamente.</p>
+
+            <p><strong>Eliminar el PMI:</strong> Si tu vivienda ha apreciado o has pagado suficiente capital para alcanzar 20% de capital, refinanciar puede eliminar el seguro hipotecario privado (PMI), ahorrándote cientos mensuales. Esta es particularmente atractiva si estabas cerca del umbral del 20% cuando compraste originalmente.</p>
+
+            <h2>Cuándo Refinanciar Tiene Sentido</h2>
+            <p>La regla general tradicional sugiere refinanciar cuando puedes reducir tu tasa de interés en al menos 1%, pero esta guía está desactualizada. Con los costos de cierre modernos más bajos y préstamos sin costo disponibles, incluso una reducción de 0.5% puede valer la pena si planeas permanecer en tu vivienda lo suficiente para alcanzar el punto de equilibrio.</p>
+
+            <p><strong>Calcula tu Punto de Equilibrio:</strong> Divide tus costos totales de cierre por tu ahorro mensual. Si los costos de cierre son $5,000 y ahorras $200/mes, tu punto de equilibrio es 25 meses (poco más de 2 años). Si planeas permanecer en tu vivienda más allá de este período, el refinanciamiento probablemente tiene sentido financiero. Cuanto más permanezcas después del punto de equilibrio, mayores serán tus ahorros acumulativos.</p>
+
+            <p><strong>Mejora de Puntuación Crediticia:</strong> Si tu puntaje crediticio ha mejorado significativamente desde que obtuviste tu hipoteca original, puedes calificar para tasas mucho mejores. Un aumento de 680 a 760+ puede significar tasas de interés 0.5-1% más bajas, traduciendo a ahorros sustanciales.</p>
+
+            <p><strong>Tendencias del Mercado:</strong> El entorno de tasas de interés importa. Si las tasas han caído desde que compraste o refinanciaste, es momento de explorar opciones. Monitorea tendencias de tasas, pero no intentes cronometrar el mercado perfectamente: si los números funcionan hoy, procede en lugar de esperar tasas potencialmente más bajas que pueden nunca materializarse.</p>
+
+            <h2>Costos de Refinanciamiento</h2>
+            <p>El refinanciamiento no es gratuito. Espera pagar 2-5% del monto del préstamo en costos de cierre. En un préstamo de $300,000, eso es $6,000-15,000. Los costos de cierre típicamente incluyen:</p>
+
+            <ul>
+                <li><strong>Cargo de Solicitud:</strong> $75-500 para procesar tu solicitud de préstamo</li>
+                <li><strong>Cargo de Originación del Préstamo:</strong> Típicamente 0.5-1% del monto del préstamo</li>
+                <li><strong>Cargo de Tasación:</strong> $300-700 para evaluar el valor actual de tu vivienda</li>
+                <li><strong>Búsqueda e Seguro de Título:</strong> $400-1,200 para asegurar que no hay gravámenes contra la propiedad</li>
+                <li><strong>Inspección de Vivienda:</strong> $300-500 (no siempre requerida para refinanciamientos)</li>
+                <li><strong>Informe Crediticio:</strong> $25-50 para que el prestamista revise tu historial crediticio</li>
+                <li><strong>Puntos:</strong> Cargos opcionales (cada punto = 1% del préstamo) pagados por adelantado para reducir tu tasa de interés</li>
+            </ul>
+
+            <p><strong>Refinanciamientos Sin Costo de Cierre:</strong> Algunos prestamistas ofrecen refinanciamientos "sin costo" donde no pagas gastos de bolsillo. Sin embargo, estos costos no desaparecen: se incorporan en una tasa de interés ligeramente más alta o se añaden al saldo de tu préstamo. Los refinanciamientos sin costo tienen sentido si planeas vender pronto o esperas refinanciar nuevamente cuando las tasas bajen más.</p>
+
+            <h2>El Proceso de Refinanciamiento</h2>
+            <p><strong>Paso 1 - Compra y Compara:</strong> Contacta a múltiples prestamistas (bancos, cooperativas de crédito, prestamistas en línea) y compara cotizaciones. Mira más allá de la tasa de interés anunciada hacia la Tasa Porcentual Anual (APR), que incluye cargos y proporciona una imagen más completa del costo total. Obtén Estimados de Préstamo estandarizados de al menos 3-5 prestamistas.</p>
+
+            <p><strong>Paso 2 - Solicita:</strong> Una vez que hayas seleccionado un prestamista, completa la solicitud formal. Proporciona documentación financiera: recibos de pago recientes, declaraciones de impuestos de 2 años, estados de cuenta bancarios, y detalles de deuda actuales. El prestamista ejecutará tu crédito y comenzará la suscripción.</p>
+
+            <p><strong>Paso 3 - Bloquea tu Tasa:</strong> Las tasas de interés fluctúan diariamente. Una vez que hayas aplicado, puedes bloquear tu tasa por 30-60 días, protegiéndote de aumentos mientras se procesa tu préstamo. El momento de bloqueo de tasas es crítico: muy temprano y puedes perder tasas más bajas, muy tarde y puedes quedar atrapado con tasas más altas.</p>
+
+            <p><strong>Paso 4 - Tasación y Suscripción:</strong> El prestamista ordena una tasación para confirmar el valor de tu vivienda. Los suscriptores revisan tu crédito, ingresos, activos y historial laboral para aprobar tu préstamo. Este proceso toma típicamente 2-4 semanas, aunque las tasaciones pueden causar retrasos en mercados ocupados.</p>
+
+            <p><strong>Paso 5 - Cierre:</strong> Revisa tu Divulgación de Cierre (proporcionada al menos 3 días antes del cierre) cuidadosamente. Firma los documentos, paga los costos de cierre, y tu nuevo préstamo reemplaza al anterior. Tienes un período de rescisión de 3 días después del cierre para cancelar sin penalización si refinancias tu residencia principal.</p>
+
+            <h2>Errores Comunes de Refinanciamiento a Evitar</h2>
+            <p><strong>No Comparar Suficientes Prestamistas:</strong> Las tasas y cargos varían significativamente entre prestamistas. Aplicar con un solo prestamista probablemente te cuesta dinero. Las múltiples consultas crediticias dentro de 45 días cuentan como una sola consulta a efectos de puntuación crediticia, así que compra agresivamente.</p>
+
+            <p><strong>Enfocarse Solo en la Tasa de Interés:</strong> Una tasa de interés baja con cargos altos puede costar más que una tasa ligeramente más alta con cargos bajos. Compara siempre el APR y costos totales de cierre, no solo la tasa de interés anunciada.</p>
+
+            <p><strong>Extender tu Plazo de Préstamo:</strong> Si has estado pagando tu hipoteca por 10 años y refinancias a un nuevo préstamo de 30 años, reducirás pagos mensuales pero pagarás significativamente más intereses durante la vida del préstamo. Considera refinanciar al tiempo restante (20 años en este ejemplo) o menos para maximizar ahorros de intereses.</p>
+
+            <p><strong>Refinanciar Demasiado Frecuentemente:</strong> Cada refinanciamiento viene con costos y reinicia tu reloj de amortización. Refinanciar cada vez que las tasas bajan 0.25% probablemente no valga la pena. Espera cambios de tasa significativos o cambios importantes en circunstancias financieras.</p>
+
+            <p><strong>Ignorar tu Cronograma:</strong> Si planeas vender dentro de unos años, puede que no permanezcas lo suficiente para alcanzar el punto de equilibrio en costos de cierre. Calcula cuidadosamente cuánto tiempo tomará para que los ahorros excedan los costos.</p>
+
+            <h2>Refinanciamiento y tu Puntuación Crediticia</h2>
+            <p>El refinanciamiento afecta tu puntuación crediticia de varias maneras. Inicialmente, las consultas crediticias y cerrar tu antigua cuenta de hipoteca pueden causar una pequeña caída temporal (5-10 puntos típicamente). Sin embargo, abrir tu nuevo préstamo e hacer pagos a tiempo construye historial crediticio positivo. Dentro de 6-12 meses, tu puntuación debería recuperarse y potencialmente mejorar si el refinanciamiento mejora tu utilización de crédito general o relación deuda-ingreso.</p>
+
+            <h2>Alternativas al Refinanciamiento</h2>
+            <p><strong>Modificación de Préstamo:</strong> Si estás enfrentando dificultades financieras, tu prestamista actual puede modificar los términos de tu préstamo existente sin un refinanciamiento completo. Las modificaciones típicamente involucran menos papeleo y costos menores pero pueden no proporcionar los mismos ahorros que un refinanciamiento de mercado.</p>
+
+            <p><strong>Pagos Adicionales al Capital:</strong> En lugar de refinanciar a un plazo más corto con pagos más altos, considera hacer pagos extras de capital en tu préstamo existente. Esto paga tu préstamo más rápido y ahorra intereses sin costos de refinanciamiento o obligaciones de pago más alto.</p>
+
+            <p><strong>Préstamo con Garantía Hipotecaria o HELOC:</strong> Si necesitas acceder a capital pero tienes una excelente tasa en tu hipoteca primaria, considera un préstamo con garantía hipotecaria o línea de crédito con garantía hipotecaria (HELOC) en lugar de un refinanciamiento de retiro de efectivo. Estos productos de segunda posición te permiten pedir prestado contra tu capital mientras mantienes tu hipoteca primaria favorable.</p>
+
+            <h2>La Conclusión</h2>
+            <p>El refinanciamiento puede ser una herramienta financiera poderosa cuando se usa estratégicamente. Ya sea que busques reducir pagos mensuales, pagar tu vivienda más rápido, o acceder a capital para otros objetivos, entender los números es crucial. Usa esta calculadora para evaluar si el refinanciamiento tiene sentido para tu situación, pero también consulta con profesionales hipotecarios que puedan proporcionar consejo personalizado basado en tu situación financiera completa y objetivos a largo plazo.</p>
+
+            <p>Recuerda que el mejor momento para refinanciar es cuando los números tienen sentido para ti: cuando puedes reducir tu tasa significativamente, mejorar tus términos de préstamo, o lograr objetivos financieros específicos. No te dejes presionar a refinanciar por tácticas de ventas agresivas: toma el tiempo para analizar cuidadosamente los costos, beneficios y cómo el refinanciamiento se alinea con tu estrategia financiera general.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calcPayment(principal, rate, years) {
+            const monthlyRate = rate / 12;
+            const numPayments = years * 12;
+            if (monthlyRate === 0) return principal / numPayments;
+            return principal * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
+                   (Math.pow(1 + monthlyRate, numPayments) - 1);
+        }
+
+        function calculate() {
+            const balance = parseFloat(document.getElementById('balance').value) || 0;
+            const oldRate = parseFloat(document.getElementById('oldRate').value) / 100 || 0;
+            const newRate = parseFloat(document.getElementById('newRate').value) / 100 || 0;
+            const years = parseInt(document.getElementById('years').value) || 1;
+            const closingCosts = parseFloat(document.getElementById('closingCosts').value) || 0;
+
+            const oldPayment = calcPayment(balance, oldRate, years);
+            const newPayment = calcPayment(balance, newRate, years);
+            const monthlySavings = oldPayment - newPayment;
+            const totalOldCost = oldPayment * years * 12;
+            const totalNewCost = (newPayment * years * 12) + closingCosts;
+            const lifetimeSavings = totalOldCost - totalNewCost;
+            const breakEven = monthlySavings > 0 ? Math.ceil(closingCosts / monthlySavings) : 0;
+
+            document.getElementById('oldPayment').textContent = '$' + oldPayment.toFixed(2);
+            document.getElementById('newPayment').textContent = '$' + newPayment.toFixed(2);
+            document.getElementById('monthlySavings').textContent = '$' + monthlySavings.toFixed(2);
+            document.getElementById('lifetimeSavings').textContent = '$' + lifetimeSavings.toLocaleString('es-US', {minimumFractionDigits: 2});
+            document.getElementById('breakEven').textContent = breakEven + ' meses';
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

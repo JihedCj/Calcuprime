@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de desviación estándar - Calcula media, mediana, desviación estándar y varianza para conjuntos de datos. Análisis estadístico fácil.">
+    <meta name="keywords" content="calculadora desviación estándar, calculadora varianza, calculadora estadística, media mediana moda, análisis de datos">
+    <title>Calculadora de Desviación Estándar - Estadística y Varianza | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-desviacion-estandar.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/standard-deviation-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-desviacion-estandar.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/standard-deviation-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/standard-deviation-calculator.html" class="lang-link">EN</a><a href="calculadora-desviacion-estandar.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora de Desviación Estándar</h1><p class="calculator-description">Calcula desviación estándar, varianza y otras estadísticas de conjuntos de datos</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Ingresa tus Datos</h3>
+                <div class="form-group"><label class="form-label">Valores (separados por comas)</label><textarea id="datos" class="form-input" rows="4" placeholder="Ej: 2, 4, 4, 4, 5, 5, 7, 9">2, 4, 4, 4, 5, 5, 7, 9</textarea></div>
+                <div class="form-group"><label class="form-label">Tipo de Desviación</label>
+                    <select id="tipoDesv" class="form-select">
+                        <option value="muestra">Muestra (n-1)</option>
+                        <option value="poblacion">Población (n)</option>
+                    </select>
+                </div>
+                <button onclick="calcEstadisticas()" class="btn-calculate">Calcular Estadísticas</button>
+            </div>
+            <div class="calculator-results"><h3>Resultados</h3>
+                <div class="result-item"><div class="result-label">Cantidad de Datos</div><div class="result-value" id="cantidad">8</div></div>
+                <div class="result-item"><div class="result-label">Media (Promedio)</div><div class="result-value" id="media" style="font-size:2rem;color:#10b981">5.00</div></div>
+                <div class="result-item"><div class="result-label">Mediana</div><div class="result-value" id="mediana">4.50</div></div>
+                <div class="result-item"><div class="result-label">Desviación Estándar</div><div class="result-value" id="desviacion" style="font-size:2rem;color:#3b82f6">2.00</div></div>
+                <div class="result-item"><div class="result-label">Varianza</div><div class="result-value" id="varianza">4.00</div></div>
+                <div class="result-item"><div class="result-label">Rango</div><div class="result-value" id="rango">7</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Comprender la Desviación Estándar</h2><p>La desviación estándar es una medida estadística fundamental que cuantifica la cantidad de variación o dispersión en un conjunto de datos. Indica qué tan dispersos están los valores respecto a la media (promedio). Una desviación estándar baja significa que los valores tienden a estar cerca de la media, mientras que una desviación alta indica que los valores están más dispersos en un rango más amplio.</p>
+            <h2>¿Qué es la Desviación Estándar?</h2><h3>Definición Simple</h3><p>La desviación estándar mide cuánto se desvían típicamente los números individuales del promedio del grupo. Es la raíz cuadrada de la varianza y se expresa en las mismas unidades que los datos originales.</p>
+            <h3>¿Por Qué es Importante?</h3><p>La desviación estándar te ayuda a entender:<br>• Qué tan confiables son tus datos<br>• Si los valores son consistentes o variables<br>• Qué tan típico es cualquier valor individual<br>• El riesgo o incertidumbre en mediciones o predicciones</p>
+            <h2>Fórmulas de Desviación Estándar</h2><h3>Desviación Estándar de la Población (σ)</h3><p>Usada cuando tienes datos de toda la población:</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">σ = √[Σ(x - μ)² / N]<br><br>Donde:<br>σ = desviación estándar de la población<br>x = cada valor<br>μ = media de la población<br>N = tamaño de la población</p>
+            <h3>Desviación Estándar de la Muestra (s)</h3><p>Usada cuando tienes datos de una muestra de la población:</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">s = √[Σ(x - x̄)² / (n-1)]<br><br>Donde:<br>s = desviación estándar de la muestra<br>x = cada valor<br>x̄ = media de la muestra<br>n = tamaño de la muestra</p>
+            <h3>¿Por Qué n-1 en la Muestra?</h3><p>Se usa n-1 (llamado corrección de Bessel) para obtener un estimado insesgado de la desviación estándar de la población. Esto compensa el hecho de que las muestras tienden a tener menos variabilidad que poblaciones completas.</p>
+            <h2>Cómo Calcular la Desviación Estándar Paso a Paso</h2><h3>Ejemplo con el Conjunto de Datos: 2, 4, 4, 4, 5, 5, 7, 9</h3>
+            <p><strong>Paso 1: Calcula la Media</strong><br>Suma todos los valores y divide por la cantidad de valores:<br>(2+4+4+4+5+5+7+9) / 8 = 40 / 8 = 5</p>
+            <p><strong>Paso 2: Calcula las Desviaciones</strong><br>Resta la media de cada valor:<br>2-5=-3, 4-5=-1, 4-5=-1, 4-5=-1, 5-5=0, 5-5=0, 7-5=2, 9-5=4</p>
+            <p><strong>Paso 3: Eleva al Cuadrado las Desviaciones</strong><br>(-3)²=9, (-1)²=1, (-1)²=1, (-1)²=1, 0²=0, 0²=0, 2²=4, 4²=16</p>
+            <p><strong>Paso 4: Suma los Cuadrados</strong><br>9+1+1+1+0+0+4+16 = 32</p>
+            <p><strong>Paso 5: Divide por n-1 (para muestra) o n (para población)</strong><br>Para muestra: 32/(8-1) = 32/7 ≈ 4.571 (esta es la varianza)<br>Para población: 32/8 = 4 (esta es la varianza)</p>
+            <p><strong>Paso 6: Toma la Raíz Cuadrada</strong><br>Para muestra: s = √4.571 ≈ 2.138<br>Para población: σ = √4 = 2.000</p>
+            <h2>Varianza: La Compañera de la Desviación Estándar</h2><h3>¿Qué es la Varianza?</h3><p>La varianza es el promedio de las desviaciones cuadradas. Es simplemente la desviación estándar elevada al cuadrado. Mientras que la desviación estándar está en las mismas unidades que los datos, la varianza está en unidades cuadradas.</p>
+            <h3>Relación Entre Varianza y Desviación Estándar</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Varianza = (Desviación Estándar)²<br>Desviación Estándar = √Varianza</p>
+            <h3>¿Cuándo Usar Cada Una?</h3><p><strong>Desviación Estándar:</strong> Preferida para interpretación porque está en las mismas unidades que los datos originales.<br><br><strong>Varianza:</strong> Útil en cálculos matemáticos y teóricos, especialmente en análisis de varianza (ANOVA) y regresión.</p>
+            <h2>Otras Medidas Estadísticas Importantes</h2><h3>Media (Promedio)</h3><p>La suma de todos los valores dividida por la cantidad de valores. Representa el "centro" del conjunto de datos.</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Media (x̄) = Σx / n</p>
+            <h3>Mediana</h3><p>El valor central cuando los datos están ordenados. No se ve afectada por valores extremos (outliers).</p>
+            <p><strong>Para cantidad impar:</strong> El valor del medio<br><strong>Para cantidad par:</strong> El promedio de los dos valores centrales</p>
+            <h3>Moda</h3><p>El valor que aparece con mayor frecuencia en el conjunto de datos. Puede haber una moda, múltiples modas o ninguna moda.</p>
+            <h3>Rango</h3><p>La diferencia entre el valor máximo y el mínimo. Proporciona una medida simple de dispersión.</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Rango = Valor Máximo - Valor Mínimo</p>
+            <h2>Aplicaciones de la Desviación Estándar</h2><h3>Control de Calidad y Manufactura</h3><p>Las empresas usan desviación estándar para monitorear la consistencia en procesos de producción. Una desviación estándar pequeña en las dimensiones de productos significa alta calidad y consistencia. Los gráficos de control usan límites basados en desviaciones estándar para identificar cuándo un proceso está fuera de control.</p>
+            <h3>Finanzas e Inversiones</h3><p><strong>Volatilidad:</strong> La desviación estándar de los retornos mide el riesgo de inversión. Mayor desviación estándar = mayor volatilidad = mayor riesgo.<br><br><strong>Diversificación de Portafolio:</strong> Los inversionistas usan desviación estándar para equilibrar riesgo y retorno, construyendo portafolios que maximizan retornos para un nivel dado de riesgo.</p>
+            <h3>Educación y Evaluación</h3><p>Los educadores usan desviación estándar para analizar el rendimiento en exámenes. Una desviación estándar grande indica que los estudiantes tienen niveles de habilidad muy variados, mientras que una pequeña sugiere rendimiento más uniforme.</p>
+            <h3>Ciencia e Investigación</h3><p><strong>Error Experimental:</strong> Los científicos reportan mediciones con desviaciones estándar para indicar precisión e incertidumbre.<br><br><strong>Intervalos de Confianza:</strong> Las estimaciones estadísticas se expresan frecuentemente como media ± desviaciones estándar.<br><br><strong>Pruebas de Hipótesis:</strong> Determinar si las diferencias son estadísticamente significativas requiere desviación estándar.</p>
+            <h3>Análisis Meteorológico</h3><p>Los meteorólogos usan desviación estándar para describir variabilidad en temperatura, precipitación y otros fenómenos climáticos. Ayuda a identificar patrones y anomalías.</p>
+            <h2>La Regla Empírica (Regla 68-95-99.7)</h2><p>Para datos distribuidos normalmente (curva de campana), la desviación estándar te dice qué porcentaje de datos cae dentro de ciertos rangos:</p>
+            <ul><li><strong>68%</strong> de los datos cae dentro de 1 desviación estándar de la media</li><li><strong>95%</strong> cae dentro de 2 desviaciones estándar</li><li><strong>99.7%</strong> cae dentro de 3 desviaciones estándar</li></ul>
+            <p><strong>Ejemplo:</strong> Si las calificaciones tienen media=75 y desviación estándar=10:<br>• 68% de estudiantes califica entre 65-85<br>• 95% califica entre 55-95<br>• 99.7% califica entre 45-105</p>
+            <h2>Puntuaciones Z (Z-Scores)</h2><h3>¿Qué es una Puntuación Z?</h3><p>Una puntuación Z indica cuántas desviaciones estándar está un valor por encima o por debajo de la media.</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Z = (x - μ) / σ<br><br>Donde:<br>x = valor individual<br>μ = media<br>σ = desviación estándar</p>
+            <h3>Interpretación de Puntuaciones Z</h3><p>• Z = 0: El valor es exactamente la media<br>• Z = 1: El valor está 1 desviación estándar sobre la media<br>• Z = -2: El valor está 2 desviaciones estándar bajo la media<br>• |Z| > 3: El valor es un outlier extremo</p>
+            <h3>Aplicaciones de Puntuaciones Z</h3><p><strong>Comparar Diferentes Escalas:</strong> Compara calificaciones de exámenes, mediciones o rendimiento en diferentes escalas.<br><br><strong>Identificar Outliers:</strong> Valores con |Z| > 3 son típicamente considerados outliers estadísticos.</p>
+            <h2>Desviación Estándar vs Otras Medidas de Dispersión</h2><h3>Rango Intercuartílico (IQR)</h3><p>El IQR mide el rango del 50% central de los datos. Es resistente a outliers, a diferencia de la desviación estándar.<br>IQR = Q3 - Q1 (tercer cuartil menos primer cuartil)</p>
+            <h3>Desviación Absoluta Media (MAD)</h3><p>La desviación absoluta media usa valores absolutos en lugar de cuadrados, haciéndola menos sensible a outliers que la desviación estándar.</p>
+            <h3>Coeficiente de Variación (CV)</h3><p>Expresa la desviación estándar como porcentaje de la media, permitiendo comparar variabilidad entre conjuntos de datos con diferentes unidades o escalas.<br>CV = (s / x̄) × 100%</p>
+            <h2>Errores Comunes e Interpretaciones Incorrectas</h2><h3>Confundir Varianza y Desviación Estándar</h3><p>Recuerda: la desviación estándar es la raíz cuadrada de la varianza. Están relacionadas pero tienen diferentes magnitudes y unidades.</p>
+            <h3>Usar la Fórmula Incorrecta</h3><p>Usa la fórmula de muestra (n-1) cuando trabajas con una muestra. Usa la fórmula de población (n) solo cuando tienes datos de toda la población.</p>
+            <h3>Asumir Distribución Normal</h3><p>La regla 68-95-99.7 solo se aplica a datos distribuidos normalmente. Para distribuciones sesgadas o no normales, usa el teorema de Chebyshev o métodos no paramétricos.</p>
+            <h3>Ignorar Outliers</h3><p>Los outliers afectan significativamente la desviación estándar. Siempre investiga valores extremos antes de calcular estadísticas.</p>
+            <h3>Desviación Estándar Cero</h3><p>Una desviación estándar de cero significa que todos los valores son idénticos. Esto es raro en datos del mundo real y puede indicar un problema con la recolección de datos.</p>
+            <h2>Consejos para el Análisis de Datos</h2><h3>Visualiza Tus Datos Primero</h3><p>Antes de calcular estadísticas, crea histogramas, gráficos de caja o diagramas de dispersión para entender la distribución y identificar patrones o outliers.</p>
+            <h3>Reporta Múltiples Estadísticas</h3><p>No te bases solo en la desviación estándar. Reporta media, mediana, rango y desviación estándar para una imagen completa.</p>
+            <h3>Considera el Tamaño de la Muestra</h3><p>Las muestras pequeñas (n<30) pueden tener desviaciones estándar poco confiables. Muestras más grandes proporcionan estimaciones más estables.</p>
+            <h3>Verifica Suposiciones</h3><p>Muchas pruebas estadísticas asumen normalidad y varianzas iguales. Verifica estas suposiciones antes de aplicar técnicas avanzadas.</p>
+            <h2>Software y Herramientas para Cálculos Estadísticos</h2><p>Además de calculadoras en línea, considera estas herramientas para análisis estadístico más extenso:</p>
+            <ul><li><strong>Microsoft Excel:</strong> Funciones DESVEST.M() y DESVEST.P()</li><li><strong>Google Sheets:</strong> Funciones STDEV.S() y STDEV.P()</li><li><strong>R:</strong> Lenguaje de programación para análisis estadístico</li><li><strong>Python:</strong> Bibliotecas NumPy y pandas para ciencia de datos</li><li><strong>SPSS/SAS:</strong> Software estadístico profesional</li></ul>
+            <h2>Preguntas Frecuentes</h2><h3>¿Cuándo uso desviación estándar de muestra vs población?</h3><p>Usa desviación estándar de muestra (n-1) cuando analizas una muestra de una población más grande. Usa desviación estándar de población (n) solo cuando tienes datos de cada miembro de la población completa. En la práctica, casi siempre usas la versión de muestra.</p>
+            <h3>¿Puede la desviación estándar ser mayor que la media?</h3><p>Sí, especialmente cuando los datos tienen mucha variabilidad o están muy sesgados. Esto es común en datos financieros, distribuciones de ingreso y tiempos de espera.</p>
+            <h3>¿Qué es una "buena" desviación estándar?</h3><p>Depende completamente del contexto. En control de calidad de manufactura, desviaciones estándar pequeñas son deseables. En portafolios de inversión, cierta desviación (riesgo) puede ser aceptable para mayores retornos. Compara siempre con benchmarks relevantes en tu campo.</p>
+            <h3>¿Cómo afectan los outliers a la desviación estándar?</h3><p>Los outliers aumentan significativamente la desviación estándar porque las desviaciones se elevan al cuadrado, magnificando el efecto de valores extremos. Si los outliers representan errores, considera removerlos. Si son valores legítimos, considera medidas resistentes como el IQR.</p>
+            <h3>¿Por qué no solo usar el rango?</h3><p>El rango solo considera dos valores (máximo y mínimo) e ignora toda la distribución de datos. La desviación estándar usa todos los valores, proporcionando una medida más completa de variabilidad.</p>
+            <h3>¿Qué significa desviación estándar en términos simples?</h3><p>Piensa en la desviación estándar como la "distancia promedio típica de cada valor respecto al promedio del grupo". Si es pequeña, los valores están agrupados cerca del promedio. Si es grande, los valores están más dispersos.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function calcEstadisticas(){const input=document.getElementById('datos').value;const tipo=document.getElementById('tipoDesv').value;const valores=input.split(',').map(v=>parseFloat(v.trim())).filter(v=>!isNaN(v));if(valores.length<2){alert('Ingresa al menos 2 valores válidos');return;}const n=valores.length;const suma=valores.reduce((a,b)=>a+b,0);const media=suma/n;const ordenados=[...valores].sort((a,b)=>a-b);const mediana=n%2===0?(ordenados[n/2-1]+ordenados[n/2])/2:ordenados[Math.floor(n/2)];const desviaciones=valores.map(v=>Math.pow(v-media,2));const sumaDesv=desviaciones.reduce((a,b)=>a+b,0);const divisor=tipo==='muestra'?n-1:n;const varianza=sumaDesv/divisor;const desviacion=Math.sqrt(varianza);const rango=Math.max(...valores)-Math.min(...valores);document.getElementById('cantidad').textContent=n;document.getElementById('media').textContent=media.toFixed(2);document.getElementById('mediana').textContent=mediana.toFixed(2);document.getElementById('desviacion').textContent=desviacion.toFixed(2);document.getElementById('varianza').textContent=varianza.toFixed(2);document.getElementById('rango').textContent=rango.toFixed(2);}window.addEventListener('load',calcEstadisticas);</script>
+</body>
+</html>

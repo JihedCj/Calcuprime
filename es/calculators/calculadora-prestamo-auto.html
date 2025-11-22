@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de préstamos de auto gratuita - Calcula pagos mensuales, interés total y costo del financiamiento. Compara opciones de crédito automotriz.">
+    <meta name="keywords" content="calculadora préstamo auto, financiamiento coche, pago mensual auto, crédito automotriz, calculadora carro">
+
+    <title>Calculadora de Préstamo de Auto - Financiamiento Automotriz | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-prestamo-auto.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/auto-loan-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-prestamo-auto.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/auto-loan-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/auto-loan-calculator.html" class="lang-link">🇺🇸 EN</a>
+                <a href="calculadora-prestamo-auto.html" class="lang-link active">🇪🇸 ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Préstamo de Auto</h1>
+            <p class="calculator-description">Calcula tus pagos mensuales y el costo total de financiar tu vehículo</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Detalles del Préstamo</h3>
+
+                <div class="form-group">
+                    <label for="loanAmount" class="form-label">Precio del Vehículo ($)</label>
+                    <input type="number" id="loanAmount" class="form-input" value="25000" min="1000" max="500000" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="downPayment" class="form-label">Enganche / Pago Inicial ($)</label>
+                    <input type="number" id="downPayment" class="form-input" value="5000" min="0" max="500000" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="interestRate" class="form-label">Tasa de Interés Anual (%)</label>
+                    <input type="number" id="interestRate" class="form-input" value="6.5" min="0" max="30" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="loanTerm" class="form-label">Plazo del Préstamo (meses)</label>
+                    <select id="loanTerm" class="form-select">
+                        <option value="24">24 meses (2 años)</option>
+                        <option value="36">36 meses (3 años)</option>
+                        <option value="48">48 meses (4 años)</option>
+                        <option value="60" selected>60 meses (5 años)</option>
+                        <option value="72">72 meses (6 años)</option>
+                        <option value="84">84 meses (7 años)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tradeIn" class="form-label">Valor de Intercambio ($) - Opcional</label>
+                    <input type="number" id="tradeIn" class="form-input" value="0" min="0" max="100000" step="100">
+                </div>
+
+                <button onclick="calculate()" class="btn-calculate">Calcular Pago</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultados del Financiamiento</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Pago Mensual</div>
+                    <div class="result-value" id="monthlyPayment" style="font-size: 2.5rem; color: #10b981;">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Monto a Financiar</div>
+                    <div class="result-value" id="loanAmountResult">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Interés Total</div>
+                    <div class="result-value" id="totalInterest">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Costo Total del Préstamo</div>
+                    <div class="result-value" id="totalCost">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Porcentaje de Enganche</div>
+                    <div class="result-value" id="downPaymentPercent">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es un Préstamo de Auto?</h2>
+            <p>Un préstamo de auto, también conocido como crédito automotriz o financiamiento de vehículo, es un tipo de préstamo personal específicamente diseñado para ayudarte a comprar un automóvil nuevo o usado. Cuando solicitas un préstamo de auto, el prestamista te proporciona el dinero necesario para comprar el vehículo, y tú acuerdas devolverlo en pagos mensuales durante un período determinado, generalmente de 24 a 84 meses, junto con los intereses. El vehículo mismo sirve como garantía del préstamo, lo que significa que si no realizas los pagos según lo acordado, el prestamista puede recuperar el auto mediante un proceso llamado repossesión.</p>
+
+            <p>Este tipo de financiamiento es una de las formas más comunes que tienen las personas para adquirir un vehículo, ya que permite distribuir el costo total del auto en pagos mensuales manejables en lugar de pagar todo el precio de una sola vez. Los préstamos de auto están disponibles a través de bancos tradicionales, cooperativas de crédito, concesionarios de autos y prestamistas en línea especializados. Cada prestamista puede ofrecer diferentes tasas de interés, términos y condiciones según tu historial crediticio, ingresos y otros factores financieros.</p>
+
+            <h2>Cómo Usar la Calculadora de Préstamo de Auto</h2>
+            <p>Nuestra calculadora de préstamo de auto es una herramienta intuitiva y fácil de usar que te ayuda a planificar tu compra de vehículo con precisión. Para obtener resultados exactos, sigue estos pasos:</p>
+
+            <ol>
+                <li><strong>Precio del Vehículo:</strong> Ingresa el precio total del automóvil que deseas comprar. Este es el precio de etiqueta o el precio negociado con el vendedor, antes de cualquier descuento o intercambio.</li>
+                <li><strong>Enganche o Pago Inicial:</strong> Introduce la cantidad de dinero que planeas pagar por adelantado. Un enganche más grande reduce el monto a financiar y puede resultar en mejores tasas de interés.</li>
+                <li><strong>Tasa de Interés Anual:</strong> Ingresa la tasa de interés anual (APR) que te ofrece el prestamista. Si aún no tienes una oferta, puedes investigar tasas promedio según tu puntaje crediticio.</li>
+                <li><strong>Plazo del Préstamo:</strong> Selecciona cuántos meses planeas tomar para pagar el préstamo. Plazos más largos resultan en pagos mensuales más bajos pero mayor interés total.</li>
+                <li><strong>Valor de Intercambio:</strong> Si entregarás tu auto actual como parte del pago, ingresa su valor. Este monto se restará del precio del vehículo nuevo.</li>
+                <li><strong>Haz clic en "Calcular Pago":</strong> Los resultados se mostrarán instantáneamente, incluyendo tu pago mensual estimado, el interés total y el costo completo del préstamo.</li>
+            </ol>
+
+            <h2>Fórmula del Cálculo de Préstamo de Auto</h2>
+            <p>La calculadora utiliza la fórmula de amortización estándar para calcular los pagos mensuales:</p>
+
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; overflow-x: auto;">
+                <strong>Pago Mensual (M) = P × [r(1+r)^n] / [(1+r)^n-1]</strong><br><br>
+                Donde:<br>
+                • P = Principal (monto a financiar después de enganche y intercambio)<br>
+                • r = Tasa de interés mensual (tasa anual ÷ 12)<br>
+                • n = Número total de pagos (plazo en meses)<br><br>
+                <strong>Monto a Financiar:</strong> Precio del Vehículo - Enganche - Valor de Intercambio<br>
+                <strong>Interés Total:</strong> (Pago Mensual × Número de Pagos) - Monto Financiado<br>
+                <strong>Costo Total:</strong> Precio del Vehículo + Interés Total
+            </p>
+
+            <h2>Factores que Afectan tu Préstamo de Auto</h2>
+
+            <h3>1. Puntaje de Crédito</h3>
+            <p>Tu puntaje crediticio es uno de los factores más importantes que determinan la tasa de interés que recibirás. Los puntajes se clasifican generalmente así:</p>
+            <ul>
+                <li><strong>Excelente (720-850):</strong> Tasas de interés más bajas, típicamente 3-5% APR</li>
+                <li><strong>Bueno (690-719):</strong> Tasas competitivas, generalmente 5-8% APR</li>
+                <li><strong>Regular (630-689):</strong> Tasas moderadas, aproximadamente 8-12% APR</li>
+                <li><strong>Malo (300-629):</strong> Tasas altas, pueden superar el 12-20% APR</li>
+            </ul>
+            <p>Mejorar tu puntaje crediticio antes de solicitar un préstamo puede ahorrarte miles de dólares en intereses durante la vida del préstamo.</p>
+
+            <h3>2. Monto del Enganche</h3>
+            <p>El enganche o pago inicial es la cantidad que pagas por adelantado al comprar el vehículo. Los beneficios de un enganche más grande incluyen:</p>
+            <ul>
+                <li>Reduce el monto a financiar y los intereses totales</li>
+                <li>Puede calificarte para mejores tasas de interés</li>
+                <li>Proporciona equidad inmediata en el vehículo</li>
+                <li>Disminuye el riesgo de quedar "bajo el agua" (deber más que el valor del auto)</li>
+                <li>Reduce tus pagos mensuales significativamente</li>
+            </ul>
+            <p>Se recomienda generalmente un enganche de al menos el 20% del precio del vehículo para autos nuevos y 10% para autos usados.</p>
+
+            <h3>3. Plazo del Préstamo</h3>
+            <p>El plazo del préstamo afecta tanto tu pago mensual como el costo total:</p>
+            <ul>
+                <li><strong>Plazos Cortos (24-36 meses):</strong> Pagos mensuales más altos pero menos interés total. Construyes equidad más rápido.</li>
+                <li><strong>Plazos Medios (48-60 meses):</strong> Balance entre pagos manejables e interés razonable. Opción más común.</li>
+                <li><strong>Plazos Largos (72-84 meses):</strong> Pagos mensuales más bajos pero interés total significativamente mayor. Mayor riesgo de depreciación.</li>
+            </ul>
+
+            <h3>4. Auto Nuevo vs. Usado</h3>
+            <p>El tipo de vehículo también afecta tu préstamo:</p>
+            <ul>
+                <li><strong>Autos Nuevos:</strong> Generalmente califican para tasas de interés más bajas debido a menor riesgo para el prestamista. Los fabricantes a menudo ofrecen tasas promocionales.</li>
+                <li><strong>Autos Usados:</strong> Tasas de interés típicamente 1-3% más altas que los autos nuevos. El año del modelo y las millas pueden afectar la aprobación y las tasas.</li>
+            </ul>
+
+            <h2>Estrategias para Obtener el Mejor Préstamo de Auto</h2>
+
+            <h3>Antes de Solicitar</h3>
+            <ul>
+                <li><strong>Revisa tu crédito:</strong> Obtén una copia gratuita de tu reporte crediticio y corrige cualquier error. Conoce tu puntaje antes de solicitar.</li>
+                <li><strong>Ahorra para un enganche:</strong> Intenta ahorrar al menos el 20% del precio del vehículo. Esto mejorará significativamente tus términos de préstamo.</li>
+                <li><strong>Investiga tu presupuesto:</strong> Usa la regla 20/4/10: enganche del 20%, financiar por no más de 4 años, y el pago total del vehículo no debe exceder el 10% de tu ingreso bruto.</li>
+                <li><strong>Compara prestamistas:</strong> No te limites al financiamiento del concesionario. Compara ofertas de bancos, cooperativas de crédito y prestamistas en línea.</li>
+                <li><strong>Obtén pre-aprobación:</strong> Solicita pre-aprobaciones de múltiples prestamistas en un período de 14 días para minimizar el impacto en tu crédito.</li>
+            </ul>
+
+            <h3>Durante la Negociación</h3>
+            <ul>
+                <li><strong>Negocia el precio primero:</strong> Establece el precio del vehículo antes de discutir financiamiento. No te enfoques solo en el pago mensual.</li>
+                <li><strong>Conoce el valor de tu intercambio:</strong> Investiga el valor de mercado de tu auto actual antes de negociar. Sitios como KBB o Edmunds pueden ayudarte.</li>
+                <li><strong>Cuidado con extras:</strong> Los concesionarios pueden ofrecer garantías extendidas, protección de pintura u otros productos. Evalúa si realmente los necesitas.</li>
+                <li><strong>Lee el contrato completamente:</strong> Revisa todos los términos, tasas y cargos adicionales antes de firmar. No tengas prisa en este paso crucial.</li>
+                <li><strong>Pregunta sobre penalizaciones:</strong> Verifica si hay penalizaciones por pago anticipado. Lo ideal es un préstamo sin estas restricciones.</li>
+            </ul>
+
+            <h2>Errores Comunes a Evitar</h2>
+
+            <h3>1. Enfocarse Solo en el Pago Mensual</h3>
+            <p>Muchos compradores cometen el error de enfocarse únicamente en lograr un pago mensual bajo, lo que puede llevar a plazos de préstamo extremadamente largos. Esto resulta en pagar miles de dólares adicionales en intereses y el riesgo de deber más que el valor del auto durante la mayor parte del préstamo.</p>
+
+            <h3>2. Financiar por Demasiado Tiempo</h3>
+            <p>Los préstamos de 72 u 84 meses pueden parecer atractivos por sus pagos mensuales bajos, pero los autos se deprecian rápidamente. Podrías encontrarte debiendo más que el valor del vehículo, situación conocida como estar "bajo el agua" o tener equidad negativa.</p>
+
+            <h3>3. No Investigar las Tasas</h3>
+            <p>Aceptar la primera oferta sin comparar puede costarte significativamente. Incluso una diferencia del 1% en la tasa de interés puede significar cientos o miles de dólares durante la vida del préstamo.</p>
+
+            <h3>4. Financiar Extras y Accesorios</h3>
+            <p>Agregar garantías extendidas, productos de protección y accesorios al préstamo aumenta el monto financiado y los intereses que pagarás. Considera pagar estos extras en efectivo si realmente los necesitas.</p>
+
+            <h3>5. No Considerar el Costo Total</h3>
+            <p>Además del pago del préstamo, considera el costo total de propiedad: seguro, mantenimiento, gasolina, registro y depreciación. Asegúrate de poder manejar todos estos gastos cómodamente.</p>
+
+            <h2>Consejos para Ahorrar Dinero en tu Préstamo</h2>
+
+            <h3>Haz Pagos Adicionales</h3>
+            <p>Realizar pagos extras al principal reduce el interés total y acorta el plazo del préstamo. Incluso $50 adicionales al mes pueden hacer una diferencia significativa. Asegúrate de que tu prestamista aplique el pago extra al principal, no a futuros pagos.</p>
+
+            <h3>Refinancia Cuando Sea Posible</h3>
+            <p>Si tu crédito mejora o las tasas de interés bajan, considera refinanciar tu préstamo. Esto puede reducir tu tasa de interés y ahorrarte dinero, especialmente si estás en los primeros años del préstamo.</p>
+
+            <h3>Considera un Auto Usado Certificado</h3>
+            <p>Los autos usados certificados (CPO) ofrecen un equilibrio entre precio y confiabilidad. A menudo vienen con garantías y pueden calificar para tasas de interés similares a las de autos nuevos, pero a un precio menor.</p>
+
+            <h3>Haz Pagos Quincenales</h3>
+            <p>En lugar de un pago mensual, realiza la mitad del pago cada dos semanas. Esto resulta en 26 medios pagos al año (equivalente a 13 pagos mensuales completos), reduciendo el interés y el plazo del préstamo.</p>
+
+            <h2>Preguntas Frecuentes sobre Préstamos de Auto</h2>
+
+            <h3>¿Qué documentos necesito para solicitar un préstamo de auto?</h3>
+            <p>Generalmente necesitarás: identificación oficial con foto, comprobantes de ingresos (talones de pago, declaraciones de impuestos), comprobante de domicilio, información de empleo, referencias personales, y detalles del vehículo que deseas comprar.</p>
+
+            <h3>¿Puedo obtener un préstamo de auto con mal crédito?</h3>
+            <p>Sí, es posible, pero probablemente enfrentarás tasas de interés más altas. Considera trabajar con cooperativas de crédito, buscar un co-firmante, o hacer un enganche más grande para mejorar tus posibilidades y términos.</p>
+
+            <h3>¿Cuánto debo gastar en un auto?</h3>
+            <p>Como regla general, el pago mensual total de tu auto (incluyendo seguro) no debe exceder el 15-20% de tu ingreso mensual neto. El precio total del vehículo idealmente no debe ser más del 35-40% de tu ingreso anual.</p>
+
+            <h3>¿Debo comprar o arrendar?</h3>
+            <p>Comprar es mejor si planeas mantener el auto por mucho tiempo, conduces muchas millas, o quieres construir equidad. Arrendar puede ser adecuado si te gusta cambiar de auto frecuentemente, conduces pocas millas, y valoras pagos mensuales más bajos.</p>
+
+            <h3>¿Qué es la GAP insurance?</h3>
+            <p>El seguro GAP (Guaranteed Asset Protection) cubre la diferencia entre lo que debes en el préstamo y el valor real del auto si es declarado pérdida total. Es especialmente importante si hiciste un enganche pequeño o tienes un préstamo largo.</p>
+
+            <h3>¿Cuándo es el mejor momento para comprar un auto?</h3>
+            <p>Generalmente, los mejores momentos son al final del mes, trimestre o año fiscal del concesionario cuando tienen cuotas de ventas que cumplir. También busca temporadas de limpieza de inventario cuando llegan los modelos nuevos.</p>
+
+            <h2>Alternativas al Préstamo de Auto Tradicional</h2>
+
+            <h3>Préstamos de Cooperativas de Crédito</h3>
+            <p>Las cooperativas de crédito a menudo ofrecen tasas de interés más bajas que los bancos tradicionales porque son organizaciones sin fines de lucro. Los requisitos de membresía varían, pero muchas son accesibles basadas en tu ubicación o empleador.</p>
+
+            <h3>Financiamiento del Fabricante</h3>
+            <p>Los fabricantes de autos frecuentemente ofrecen financiamiento promocional, especialmente para autos nuevos. Puedes encontrar tasas tan bajas como 0% APR, pero estos acuerdos generalmente requieren excelente crédito y pueden no combinarse con otros descuentos.</p>
+
+            <h3>Préstamos Peer-to-Peer</h3>
+            <p>Plataformas de préstamos P2P conectan prestatarios directamente con inversionistas individuales. Pueden ofrecer tasas competitivas, especialmente para personas con buen crédito que no califican para las mejores tasas bancarias.</p>
+
+            <h3>Pago en Efectivo</h3>
+            <p>Si tienes los ahorros, pagar en efectivo elimina los pagos mensuales y el interés. Sin embargo, considera si ese dinero podría generar mejores rendimientos en inversiones, especialmente si puedes obtener una tasa de interés muy baja.</p>
+
+            <h2>Impacto a Largo Plazo de tu Decisión de Préstamo</h2>
+            <p>Las decisiones que tomes sobre tu préstamo de auto pueden afectar tu salud financiera durante años. Un préstamo bien estructurado con pagos manejables te permite mantener otras metas financieras como ahorrar para emergencias, invertir para el retiro, o ahorrar para una casa. Por el contrario, comprometerte con un pago de auto que estira tu presupuesto puede crear estrés financiero y limitar tu flexibilidad.</p>
+
+            <p>Recuerda que un auto es un activo que se deprecia, típicamente perdiendo 20-30% de su valor en el primer año y continuando a depreciarse anualmente. Es importante no sobre-extenderse financieramente en un vehículo. Utiliza esta calculadora como punto de partida para tomar una decisión informada y siempre considera el panorama financiero completo antes de comprometerte con un préstamo de auto.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const vehiclePrice = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const tradeIn = parseFloat(document.getElementById('tradeIn').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const termMonths = parseInt(document.getElementById('loanTerm').value) || 60;
+
+            // Calculate loan amount
+            const loanAmount = vehiclePrice - downPayment - tradeIn;
+
+            if (loanAmount <= 0) {
+                document.getElementById('monthlyPayment').textContent = '$0.00';
+                document.getElementById('loanAmountResult').textContent = '$0.00';
+                document.getElementById('totalInterest').textContent = '$0.00';
+                document.getElementById('totalCost').textContent = vehiclePrice.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+                document.getElementById('downPaymentPercent').textContent = '100%';
+                return;
+            }
+
+            // Calculate monthly payment using amortization formula
+            const monthlyRate = annualRate / 100 / 12;
+            let monthlyPayment;
+
+            if (monthlyRate === 0) {
+                monthlyPayment = loanAmount / termMonths;
+            } else {
+                monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, termMonths)) /
+                                 (Math.pow(1 + monthlyRate, termMonths) - 1);
+            }
+
+            const totalPayments = monthlyPayment * termMonths;
+            const totalInterest = totalPayments - loanAmount;
+            const totalCost = vehiclePrice + totalInterest;
+            const downPaymentPercent = ((downPayment + tradeIn) / vehiclePrice * 100).toFixed(1);
+
+            // Display results
+            document.getElementById('monthlyPayment').textContent = monthlyPayment.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+            document.getElementById('loanAmountResult').textContent = loanAmount.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+            document.getElementById('totalInterest').textContent = totalInterest.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+            document.getElementById('totalCost').textContent = totalCost.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+            document.getElementById('downPaymentPercent').textContent = downPaymentPercent + '%';
+        }
+
+        // Event listeners
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

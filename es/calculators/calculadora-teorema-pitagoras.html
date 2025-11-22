@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora del Teorema de Pitágoras - Encuentra los lados faltantes de triángulos rectángulos. Calcula la hipotenusa y catetos fácilmente.">
+    <meta name="keywords" content="teorema de pitágoras, calculadora triángulo rectángulo, calcular hipotenusa, catetos, calculadora geometría">
+    <title>Calculadora del Teorema de Pitágoras - Triángulos Rectángulos | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-teorema-pitagoras.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/pythagorean-theorem-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-teorema-pitagoras.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/pythagorean-theorem-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/pythagorean-theorem-calculator.html" class="lang-link">EN</a><a href="calculadora-teorema-pitagoras.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora del Teorema de Pitágoras</h1><p class="calculator-description">Calcula los lados de triángulos rectángulos usando el teorema de Pitágoras</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Lados del Triángulo</h3>
+                <div class="form-group"><label class="form-label">Cateto a</label><input type="number" id="catetoA" class="form-input" value="3" min="0" step="0.01"></div>
+                <div class="form-group"><label class="form-label">Cateto b</label><input type="number" id="catetoB" class="form-input" value="4" min="0" step="0.01"></div>
+                <div class="form-group"><label class="form-label">Hipotenusa c (deja en blanco para calcular)</label><input type="number" id="hipotenusa" class="form-input" value="" min="0" step="0.01"></div>
+                <p style="font-size:0.875rem;color:#6b7280;margin-top:-10px;">Ingresa dos valores conocidos. La calculadora encontrará el tercero.</p>
+                <button onclick="calcPitagoras()" class="btn-calculate">Calcular</button>
+            </div>
+            <div class="calculator-results"><h3>Resultados</h3>
+                <div class="result-item"><div class="result-label">Cateto a</div><div class="result-value" id="resA">3.00</div></div>
+                <div class="result-item"><div class="result-label">Cateto b</div><div class="result-value" id="resB">4.00</div></div>
+                <div class="result-item"><div class="result-label">Hipotenusa c</div><div class="result-value" id="resC" style="font-size:2rem;color:#10b981">5.00</div></div>
+                <div class="result-item"><div class="result-label">Perímetro</div><div class="result-value" id="perimetro">12.00</div></div>
+                <div class="result-item"><div class="result-label">Área</div><div class="result-value" id="area">6.00</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>El Teorema de Pitágoras</h2><p>El Teorema de Pitágoras es uno de los principios fundamentales de la geometría, descubierto por el matemático griego Pitágoras hace más de 2,500 años. Este elegante teorema describe la relación entre los lados de un triángulo rectángulo y se ha convertido en una herramienta indispensable en matemáticas, ingeniería, arquitectura, navegación y muchos otros campos.</p>
+            <h2>La Fórmula del Teorema de Pitágoras</h2><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace;font-size:1.2rem;text-align:center">a² + b² = c²</p>
+            <p><strong>Donde:</strong><br>• <strong>a</strong> y <strong>b</strong> son los catetos (los dos lados que forman el ángulo recto)<br>• <strong>c</strong> es la hipotenusa (el lado más largo, opuesto al ángulo recto)</p>
+            <h3>En Palabras Simples</h3><p>En un triángulo rectángulo, el cuadrado de la longitud de la hipotenusa es igual a la suma de los cuadrados de las longitudes de los otros dos lados.</p>
+            <h2>Cómo Usar el Teorema de Pitágoras</h2><h3>Encontrar la Hipotenusa</h3><p>Cuando conoces los dos catetos y necesitas encontrar la hipotenusa:</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">c = √(a² + b²)</p>
+            <p><strong>Ejemplo:</strong> Si a = 3 y b = 4<br>c = √(3² + 4²)<br>c = √(9 + 16)<br>c = √25<br>c = 5</p>
+            <h3>Encontrar un Cateto</h3><p>Cuando conoces la hipotenusa y un cateto, necesitas encontrar el otro cateto:</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">a = √(c² - b²)<br>o<br>b = √(c² - a²)</p>
+            <p><strong>Ejemplo:</strong> Si c = 13 y b = 5<br>a = √(13² - 5²)<br>a = √(169 - 25)<br>a = √144<br>a = 12</p>
+            <h2>Triángulos Pitagóricos Comunes</h2><h3>Tríadas Pitagóricas</h3><p>Las tríadas pitagóricas son conjuntos de tres números enteros que satisfacen el teorema de Pitágoras. Conocer estas puede acelerar cálculos:</p>
+            <ul><li><strong>3-4-5:</strong> El más común. 3² + 4² = 5² (9 + 16 = 25)</li><li><strong>5-12-13:</strong> 5² + 12² = 13² (25 + 144 = 169)</li><li><strong>8-15-17:</strong> 8² + 15² = 17² (64 + 225 = 289)</li><li><strong>7-24-25:</strong> 7² + 24² = 25² (49 + 576 = 625)</li><li><strong>9-40-41:</strong> 9² + 40² = 41² (81 + 1600 = 1681)</li></ul>
+            <h3>Múltiplos de Tríadas</h3><p>Si multiplicas cada número de una tríada pitagórica por el mismo factor, obtienes otra tríada válida:<br>• 3-4-5 multiplicado por 2 = 6-8-10<br>• 3-4-5 multiplicado por 3 = 9-12-15<br>• 5-12-13 multiplicado por 2 = 10-24-26</p>
+            <h2>Aplicaciones en el Mundo Real</h2><h3>Construcción y Carpintería</h3><p><strong>Verificar Esquinas Cuadradas:</strong> Los constructores usan la regla 3-4-5 para asegurar que las esquinas estén en ángulo recto. Miden 3 pies en una dirección, 4 pies en la otra; si la diagonal mide exactamente 5 pies, la esquina es perfectamente cuadrada.<br><br><strong>Techos y Escaleras:</strong> Calcular longitudes de vigas, ángulos de techos y dimensiones de escaleras requiere el teorema de Pitágoras.</p>
+            <h3>Navegación y Distancias</h3><p><strong>Encontrar Distancias:</strong> Si caminas 3 km al norte y luego 4 km al este, el teorema de Pitágoras te dice que estás a 5 km de tu punto de inicio en línea recta.<br><br><strong>Navegación Aérea y Marítima:</strong> Los pilotos y navegantes calculan rutas directas y distancias usando coordenadas y el teorema de Pitágoras.</p>
+            <h3>Diseño y Arte</h3><p><strong>Gráficos por Computadora:</strong> Calcular distancias entre píxeles, crear perspectiva y renderizar imágenes 3D dependen del teorema de Pitágoras.<br><br><strong>Fotografía:</strong> Determinar distancias focales, profundidad de campo y composición a menudo involucra cálculos pitagóricos.</p>
+            <h3>Topografía y Mapeo</h3><p>Los agrimensores usan el teorema de Pitágoras constantemente para medir distancias sobre terreno irregular, calcular elevaciones y crear mapas precisos.</p>
+            <h3>Física e Ingeniería</h3><p><strong>Vectores y Fuerzas:</strong> Combinar fuerzas que actúan en ángulos rectos requiere el teorema de Pitágoras.<br><br><strong>Electricidad:</strong> Calcular impedancia en circuitos AC usa el teorema de Pitágoras con resistencia y reactancia.</p>
+            <h2>Verificar si un Triángulo es Rectángulo</h2><p>Puedes usar el teorema de Pitágoras al revés para verificar si un triángulo es rectángulo. Si conoces las tres longitudes de los lados:</p>
+            <ol><li>Identifica el lado más largo (potencial hipotenusa)</li><li>Eleva al cuadrado todos los tres lados</li><li>Suma los cuadrados de los dos lados más cortos</li><li>Compara con el cuadrado del lado más largo</li></ol>
+            <p><strong>Si son iguales</strong>, es un triángulo rectángulo.<br><strong>Si el cuadrado del lado más largo es mayor</strong>, es un triángulo obtusángulo.<br><strong>Si el cuadrado del lado más largo es menor</strong>, es un triángulo acutángulo.</p>
+            <p><strong>Ejemplo:</strong> ¿Es 5-12-13 un triángulo rectángulo?<br>5² + 12² = 25 + 144 = 169<br>13² = 169<br>169 = 169 ✓ ¡Sí, es un triángulo rectángulo!</p>
+            <h2>El Teorema de Pitágoras en 3D</h2><p>El teorema se extiende al espacio tridimensional. Para encontrar la diagonal de una caja rectangular:</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">d = √(l² + w² + h²)</p>
+            <p>Donde l = largo, w = ancho, h = alto</p>
+            <p><strong>Ejemplo:</strong> Una caja de 3 × 4 × 12<br>d = √(3² + 4² + 12²)<br>d = √(9 + 16 + 144)<br>d = √169<br>d = 13</p>
+            <h2>Historia y Descubrimiento</h2><h3>Pitágoras y su Escuela</h3><p>Aunque lleva el nombre de Pitágoras (570-495 a.C.), evidencia sugiere que los babilonios conocían este principio mil años antes. Sin embargo, Pitágoras y sus seguidores fueron los primeros en proveer una prueba matemática rigurosa.</p>
+            <h3>Importancia Cultural</h3><p>Los griegos antiguos consideraban este teorema tan importante que, según la leyenda, Pitágoras sacrificó 100 bueyes en celebración de su descubrimiento. El teorema se convirtió en piedra angular de la geometría y las matemáticas.</p>
+            <h2>Pruebas del Teorema de Pitágoras</h2><h3>Prueba Geométrica (Rearreglo de Cuadrados)</h3><p>Una de las formas más intuitivas de probar el teorema es usando rearreglos geométricos. Si tomas cuatro copias de un triángulo rectángulo y las arreglas de dos maneras diferentes dentro de cuadrados del mismo tamaño, puedes demostrar visualmente que a² + b² = c².</p>
+            <h3>Prueba Algebraica</h3><p>Usando álgebra y las propiedades de áreas, puedes probar el teorema arreglando triángulos y calculando áreas de diferentes maneras.</p>
+            <h3>Más de 370 Pruebas Conocidas</h3><p>¡Los matemáticos han desarrollado más de 370 pruebas diferentes del teorema de Pitágoras! Esto demuestra su importancia fundamental en las matemáticas.</p>
+            <h2>Errores Comunes a Evitar</h2><h3>Confundir Cuál Lado es la Hipotenusa</h3><p>La hipotenusa siempre es el lado más largo y está opuesto al ángulo recto. No asumas que c es siempre el valor más grande en tu cálculo a menos que realmente sea la hipotenusa.</p>
+            <h3>Olvidar Sacar la Raíz Cuadrada</h3><p>Recuerda que a² + b² = c² te da c², no c. Debes tomar la raíz cuadrada para encontrar la longitud real: c = √(a² + b²)</p>
+            <h3>Aplicarlo a Triángulos No Rectángulos</h3><p>El teorema de Pitágoras SOLO funciona para triángulos rectángulos. Para otros triángulos, necesitas la ley de cosenos o la ley de senos.</p>
+            <h3>Restar Incorrectamente al Encontrar un Cateto</h3><p>Al encontrar un cateto, resta el cuadrado del cateto conocido del cuadrado de la hipotenusa, no al revés. Siempre es c² - b² o c² - a², nunca b² - c².</p>
+            <h2>Fórmulas Relacionadas</h2><h3>Perímetro de un Triángulo Rectángulo</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">P = a + b + c</p>
+            <h3>Área de un Triángulo Rectángulo</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">A = (a × b) / 2</p>
+            <p>El área es simplemente la mitad del producto de los dos catetos.</p>
+            <h2>Consejos para Resolver Problemas</h2><ul><li><strong>Dibuja un Diagrama:</strong> Siempre dibuja el triángulo y etiqueta lo que sabes</li><li><strong>Identifica lo Conocido y lo Desconocido:</strong> Marca claramente qué valores tienes y cuál necesitas encontrar</li><li><strong>Verifica Números Razonables:</strong> La hipotenusa debe ser más larga que cualquier cateto</li><li><strong>Usa Tríadas Pitagóricas:</strong> Reconocer patrones comunes ahorra tiempo</li><li><strong>Verifica tu Respuesta:</strong> Sustituye tu resultado en la ecuación original para verificar</li><li><strong>Presta Atención a las Unidades:</strong> Mantén unidades consistentes en todos los cálculos</li></ul>
+            <h2>Preguntas Frecuentes</h2><h3>¿Se puede usar el Teorema de Pitágoras en triángulos que no sean rectángulos?</h3><p>No, el Teorema de Pitágoras solo se aplica a triángulos rectángulos. Para otros triángulos, usa la Ley de Cosenos: c² = a² + b² - 2ab·cos(C), que se reduce al Teorema de Pitágoras cuando C = 90° (porque cos(90°) = 0).</p>
+            <h3>¿Por qué la hipotenusa siempre es el lado más largo?</h3><p>En un triángulo, el lado opuesto al ángulo más grande es el más largo. Como el ángulo recto (90°) es el ángulo más grande posible en un triángulo, la hipotenusa (opuesta al ángulo recto) siempre es el lado más largo.</p>
+            <h3>¿Qué pasa si obtengo un número negativo bajo la raíz cuadrada?</h3><p>Esto significa que has cometido un error. Verifica que estás usando los valores correctos y la fórmula correcta. Al encontrar un cateto, asegúrate de que la hipotenusa sea mayor que el cateto conocido.</p>
+            <h3>¿Se puede usar el teorema con decimales y fracciones?</h3><p>Absolutamente. El teorema funciona con cualquier número real positivo, no solo enteros. Puedes tener lados que midan 2.5, 3.7, o incluso números irracionales como √2.</p>
+            <h3>¿Cómo se relaciona esto con el sistema de coordenadas?</h3><p>La fórmula de distancia en un plano de coordenadas es una aplicación directa del Teorema de Pitágoras. La distancia entre puntos (x₁,y₁) y (x₂,y₂) es √[(x₂-x₁)² + (y₂-y₁)²], que viene de formar un triángulo rectángulo entre los puntos.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function calcPitagoras(){let a=parseFloat(document.getElementById('catetoA').value)||0;let b=parseFloat(document.getElementById('catetoB').value)||0;let c=parseFloat(document.getElementById('hipotenusa').value)||0;let valorFaltante='';if(a>0&&b>0&&c===0){c=Math.sqrt(a*a+b*b);valorFaltante='hipotenusa';}else if(a>0&&c>0&&b===0){if(c<=a){alert('La hipotenusa debe ser mayor que el cateto conocido');return;}b=Math.sqrt(c*c-a*a);valorFaltante='cateto b';}else if(b>0&&c>0&&a===0){if(c<=b){alert('La hipotenusa debe ser mayor que el cateto conocido');return;}a=Math.sqrt(c*c-b*b);valorFaltante='cateto a';}else if(a===0||b===0||c===0){alert('Ingresa exactamente dos valores conocidos');return;}const perimetro=a+b+c;const area=(a*b)/2;document.getElementById('resA').textContent=a.toFixed(2);document.getElementById('resB').textContent=b.toFixed(2);document.getElementById('resC').textContent=c.toFixed(2);document.getElementById('perimetro').textContent=perimetro.toFixed(2);document.getElementById('area').textContent=area.toFixed(2);document.getElementById('catetoA').value=a.toFixed(2);document.getElementById('catetoB').value=b.toFixed(2);document.getElementById('hipotenusa').value=c.toFixed(2);}document.querySelectorAll('.form-input').forEach(e=>e.addEventListener('input',calcPitagoras));window.addEventListener('load',calcPitagoras);</script>
+</body>
+</html>

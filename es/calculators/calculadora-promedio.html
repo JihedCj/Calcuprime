@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de promedio gratuita - Calcula el promedio del semestre y acumulativo en escala 4.0. Agrega múltiples cursos con horas de crédito y calificaciones en letra.">
+    <meta name="keywords" content="calculadora promedio, promedio general, promedio acumulativo, promedio semestre, calculadora universitaria, escala 4.0">
+
+    <title>Calculadora de Promedio (GPA) - Universitario | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-promedio.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/gpa-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-promedio.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/gpa-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/gpa-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-promedio.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#diario">Diario</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Promedio (GPA)</h1>
+            <p class="calculator-description">Calcula tu promedio del semestre y acumulativo con facilidad</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Cursos del Semestre Actual</h3>
+                <div id="courses">
+                    <div class="course-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <select class="form-input course-grade" style="flex: 1;">
+                            <option value="4.0">A (4.0)</option>
+                            <option value="3.7">A- (3.7)</option>
+                            <option value="3.3">B+ (3.3)</option>
+                            <option value="3.0">B (3.0)</option>
+                            <option value="2.7">B- (2.7)</option>
+                            <option value="2.3">C+ (2.3)</option>
+                            <option value="2.0">C (2.0)</option>
+                            <option value="1.7">C- (1.7)</option>
+                            <option value="1.3">D+ (1.3)</option>
+                            <option value="1.0">D (1.0)</option>
+                            <option value="0.0">F (0.0)</option>
+                        </select>
+                        <input type="number" class="form-input course-credits" placeholder="Créditos" value="3" min="1" max="6" step="0.5" style="flex: 0.6;">
+                    </div>
+                    <div class="course-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <select class="form-input course-grade" style="flex: 1;">
+                            <option value="4.0">A (4.0)</option>
+                            <option value="3.7">A- (3.7)</option>
+                            <option value="3.3" selected>B+ (3.3)</option>
+                            <option value="3.0">B (3.0)</option>
+                            <option value="2.7">B- (2.7)</option>
+                            <option value="2.3">C+ (2.3)</option>
+                            <option value="2.0">C (2.0)</option>
+                            <option value="1.7">C- (1.7)</option>
+                            <option value="1.3">D+ (1.3)</option>
+                            <option value="1.0">D (1.0)</option>
+                            <option value="0.0">F (0.0)</option>
+                        </select>
+                        <input type="number" class="form-input course-credits" placeholder="Créditos" value="4" min="1" max="6" step="0.5" style="flex: 0.6;">
+                    </div>
+                    <div class="course-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <select class="form-input course-grade" style="flex: 1;">
+                            <option value="4.0">A (4.0)</option>
+                            <option value="3.7">A- (3.7)</option>
+                            <option value="3.3">B+ (3.3)</option>
+                            <option value="3.0" selected>B (3.0)</option>
+                            <option value="2.7">B- (2.7)</option>
+                            <option value="2.3">C+ (2.3)</option>
+                            <option value="2.0">C (2.0)</option>
+                            <option value="1.7">C- (1.7)</option>
+                            <option value="1.3">D+ (1.3)</option>
+                            <option value="1.0">D (1.0)</option>
+                            <option value="0.0">F (0.0)</option>
+                        </select>
+                        <input type="number" class="form-input course-credits" placeholder="Créditos" value="3" min="1" max="6" step="0.5" style="flex: 0.6;">
+                    </div>
+                    <div class="course-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <select class="form-input course-grade" style="flex: 1;">
+                            <option value="4.0">A (4.0)</option>
+                            <option value="3.7" selected>A- (3.7)</option>
+                            <option value="3.3">B+ (3.3)</option>
+                            <option value="3.0">B (3.0)</option>
+                            <option value="2.7">B- (2.7)</option>
+                            <option value="2.3">C+ (2.3)</option>
+                            <option value="2.0">C (2.0)</option>
+                            <option value="1.7">C- (1.7)</option>
+                            <option value="1.3">D+ (1.3)</option>
+                            <option value="1.0">D (1.0)</option>
+                            <option value="0.0">F (0.0)</option>
+                        </select>
+                        <input type="number" class="form-input course-credits" placeholder="Créditos" value="3" min="1" max="6" step="0.5" style="flex: 0.6;">
+                    </div>
+                </div>
+                <h3 style="margin-top: 1.5rem;">Promedio Anterior (Opcional)</h3>
+                <div class="form-group">
+                    <label for="prevGPA" class="form-label">Promedio Acumulativo Anterior</label>
+                    <input type="number" id="prevGPA" class="form-input" value="0" min="0" max="4" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="prevCredits" class="form-label">Total de Créditos Anteriores</label>
+                    <input type="number" id="prevCredits" class="form-input" value="0" min="0" max="200" step="1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular Promedio</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tu Promedio</h3>
+                <div class="result-item">
+                    <div class="result-label">Promedio del Semestre</div>
+                    <div class="result-value" id="semesterGPA" style="font-size: 2.5rem; color: #10b981;">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Créditos del Semestre</div>
+                    <div class="result-value" id="semesterCredits">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Promedio Acumulativo</div>
+                    <div class="result-value" id="cumulativeGPA">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total de Créditos</div>
+                    <div class="result-value" id="totalCredits">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Posición Académica</div>
+                    <div class="result-value" id="standing" style="font-size: 1.2rem;">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el Promedio General (GPA)?</h2>
+            <p>El Promedio General o Grade Point Average (GPA) es una representación numérica estandarizada de tu rendimiento académico, calculado convirtiendo calificaciones en letras a valores numéricos, ponderándolos por horas de crédito y promediando los resultados. La escala más común en educación americana es la escala 4.0, donde A = 4.0, B = 3.0, C = 2.0, D = 1.0 y F = 0.0. En muchos países de habla hispana, se usa una escala de 0-10 o 0-100. El GPA sirve como la métrica académica principal para admisiones universitarias, elegibilidad de becas, honores académicos, solicitudes de posgrado e incluso algunas oportunidades de empleo.</p>
+
+            <p>Comprender el cálculo del GPA empodera la planificación académica estratégica. Saber cómo cada calificación impacta tu GPA ayuda a priorizar el tiempo de estudio, tomar decisiones informadas sobre la dificultad del curso y establecer objetivos realistas para el logro académico. Ya seas un estudiante de secundaria planificando para la universidad o un estudiante universitario apuntando a la escuela de posgrado, la conciencia del GPA es esencial para maximizar oportunidades. Un GPA fuerte abre puertas; un GPA débil las limita. La inversión en comprensión y gestión del GPA paga dividendos durante toda tu carrera educativa y profesional.</p>
+
+            <h2>Cómo se Calcula el GPA</h2>
+            <p>El cálculo del GPA sigue una fórmula de promedio ponderado directa. Cada curso contribuye a tu GPA proporcionalmente a sus horas de crédito:</p>
+
+            <p><strong>Paso 1: Convertir Calificaciones en Letras a Puntos.</strong> Escala estándar 4.0: A = 4.0, A- = 3.7, B+ = 3.3, B = 3.0, B- = 2.7, C+ = 2.3, C = 2.0, C- = 1.7, D+ = 1.3, D = 1.0, F = 0.0. Algunas escuelas usan escalas más simples (A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0.0) sin distinciones de más/menos. En sistemas de 0-10, las conversiones varían: 10 = 4.0, 9 = 3.7, 8 = 3.3, etc.</p>
+
+            <p><strong>Paso 2: Multiplicar Puntos de Calificación por Horas de Crédito.</strong> Un curso de 4 créditos con una A (4.0) gana 4 × 4.0 = 16.0 puntos de calidad. Un curso de 3 créditos con un B+ (3.3) gana 3 × 3.3 = 9.9 puntos de calidad. Calcula los puntos de calidad para cada curso. Los puntos de calidad representan el "peso" de cada curso en tu GPA general.</p>
+
+            <p><strong>Paso 3: Sumar Puntos de Calidad y Horas de Crédito.</strong> Suma todos los puntos de calidad de todos los cursos. Suma todas las horas de crédito de todos los cursos. Estos totales forman el numerador y denominador de tu cálculo de GPA.</p>
+
+            <p><strong>Paso 4: Dividir Total de Puntos de Calidad por Total de Horas de Crédito.</strong> GPA = Total de Puntos de Calidad ÷ Total de Horas de Crédito. Ejemplo: Si ganaste 45.5 puntos de calidad a través de 14 horas de crédito, tu GPA = 45.5 ÷ 14 = 3.25. Esta métrica única resume tu rendimiento académico en todos los cursos.</p>
+
+            <p><strong>Cálculo del GPA Acumulativo:</strong> Para actualizar el GPA acumulativo con nuevas calificaciones del semestre, calcula los puntos de calidad totales de todos los semestres (puntos previos + puntos del nuevo semestre), divide por las horas de crédito totales de todos los semestres (créditos previos + créditos del nuevo semestre). Este enfoque ponderado significa que el rendimiento fuerte en cursos de alto crédito importa más que el rendimiento fuerte en cursos de bajo crédito. Un curso de 4 créditos impacta tu GPA el doble que un curso de 2 créditos.</p>
+
+            <h2>Diferentes Escalas de GPA</h2>
+            <h3>Escala 4.0 No Ponderada</h3>
+            <p>La escala estándar donde A = 4.0 representa el máximo. Esto trata todos los cursos por igual independientemente de la dificultad. La mayoría de las universidades usan GPA no ponderado para cálculos de admisiones, incluso cuando las escuelas secundarias reportan GPAs ponderados. Esta escala proporciona una métrica consistente para comparar estudiantes de diferentes escuelas con diferentes políticas de calificación.</p>
+
+            <h3>Escala de GPA Ponderada</h3>
+            <p>Muchas escuelas secundarias usan escalas ponderadas que otorgan puntos extra por cursos de Colocación Avanzada (AP), Bachillerato Internacional (IB) u honores. Escala ponderada común: A Regular = 4.0, A de Honores = 4.5, A de AP/IB = 5.0. Los GPAs ponderados pueden exceder 4.0, a veces alcanzando 5.0 o más. El GPA ponderado recompensa el rigor académico y la dificultad del curso, incentivando a los estudiantes a desafiarse a sí mismos con cursos más difíciles.</p>
+
+            <h3>Conversión de Porcentaje a GPA</h3>
+            <p>Algunas escuelas usan calificaciones en porcentaje en lugar de letras. Conversiones comunes: 93-100% = A (4.0), 90-92% = A- (3.7), 87-89% = B+ (3.3), 83-86% = B (3.0), 80-82% = B- (2.7), y así sucesivamente. Sin embargo, las escalas de conversión varían significativamente según la institución, así que siempre verifica la política específica de tu escuela. Algunas escuelas usan 90+ para A, mientras que otras requieren 93+.</p>
+
+            <h3>GPA Universitario vs. Secundaria</h3>
+            <p>Los GPAs de secundaria a menudo incluyen todos los cursos (incluidas optativas, educación física, artes). Los GPAs universitarios típicamente incluyen solo cursos que cuentan para tu título. Muchas universidades también calculan el GPA de especialidad (cursos en tu especialidad) por separado del GPA general. Los programas de posgrado a menudo ponderan el GPA de especialidad más fuertemente que el GPA general, ya que demuestra competencia en tu campo de estudio.</p>
+
+            <h2>Por Qué Importa el GPA</h2>
+            <h3>Admisiones Universitarias</h3>
+            <p>El GPA es el factor más importante en las decisiones de admisión universitaria. Un estudio de factores de admisión clasificó el GPA en cursos preparatorios para la universidad como la consideración principal, por delante de puntajes de exámenes estandarizados, actividades extracurriculares y ensayos. Las universidades selectivas típicamente admiten estudiantes con GPAs de 3.7-4.0 (no ponderado), mientras que instituciones menos selectivas aceptan GPAs de 2.5-3.5. Muchas universidades publican rangos de GPA de estudiantes admitidos: investiga las escuelas objetivo para comprender los requisitos. Tu GPA abre o cierra puertas a instituciones específicas.</p>
+
+            <h3>Becas y Ayuda Financiera</h3>
+            <p>Las becas basadas en mérito establecen requisitos mínimos de GPA, típicamente 3.0-3.5 para becas institucionales y 3.5-4.0 para becas nacionales competitivas. Mantener el GPA por encima de niveles umbral te califica para becas renovables que valen decenas de miles de dólares durante cuatro años. Muchas becas requieren mantener un GPA mínimo anualmente para renovar el financiamiento. Caer por debajo del umbral puede significar perder decenas de miles en apoyo financiero.</p>
+
+            <h3>Admisiones a Escuelas de Posgrado</h3>
+            <p>Los programas de posgrado, especialmente los competitivos (escuela de medicina, derecho, MBA, Ph.D.), ponderan fuertemente el GPA de pregrado. Las escuelas de medicina típicamente requieren GPA de 3.5+ con GPA de cursos de ciencias (biología, química, física, matemáticas) de 3.5+ para candidatura competitiva. Las escuelas de derecho y programas de MBA enfatizan de manera similar el GPA junto con puntajes de exámenes estandarizados (LSAT, GMAT, GRE). Tu GPA de pregrado determina qué programas de posgrado son alcanzables.</p>
+
+            <h3>Oportunidades de Empleo</h3>
+            <p>Muchos empleadores, particularmente para posiciones de nivel de entrada y campos competitivos (consultoría, finanzas, tecnología), establecen requisitos mínimos de GPA (típicamente 3.0-3.5) para la selección de currículums. Aunque el GPA importa menos después de ganar experiencia laboral, un GPA fuerte de pregrado abre puertas para primeros trabajos y pasantías. Algunas empresas de alto nivel (Goldman Sachs, McKinsey, Google) tienen umbrales de GPA de 3.5-3.7 para candidatos de pregrado.</p>
+
+            <h3>Posición Académica y Elegibilidad</h3>
+            <p>Las universidades aplican requisitos mínimos de GPA para buena posición académica (típicamente 2.0), elegibilidad atlética (típicamente 2.3), programas de estudio en el extranjero (típicamente 2.5-3.0) y declaración de especialidad (varía por programa). Caer por debajo de los umbrales desencadena probación académica, potencialmente llevando al despido. Comprender estos requisitos motiva el mantenimiento de estándares académicos mínimos.</p>
+
+            <h2>Cómo Mejorar Tu GPA</h2>
+            <h3>Selección Estratégica de Cursos</h3>
+            <p>Equilibra cursos desafiantes que impresionen a los comités de admisiones con cursos donde puedas sobresalir. Una mezcla de clases rigurosas (AP, honores, requisitos de especialidad desafiantes) con optativas manejables optimiza el GPA mientras demuestra ambición académica. Evita sobrecargar semestres con múltiples cursos extremadamente difíciles simultáneamente. La sobrecarga a menudo resulta en rendimiento mediocre en todas las clases en lugar de excelencia en algunas.</p>
+
+            <h3>Domina la Gestión del Tiempo</h3>
+            <p>Los estudiantes exitosos asignan tiempo de estudio proporcional a las horas de crédito y la dificultad del curso. Una regla común: dedica 2-3 horas fuera de clase por cada hora de crédito. Un semestre de 15 créditos requiere 30-45 horas semanales de tiempo de estudio. Usa calendarios, planificadores o aplicaciones para programar sesiones de estudio, rastrear tareas y planificar exámenes. La gestión del tiempo consistente previene el abarrotamiento y reduce el estrés.</p>
+
+            <h3>Asiste a Clase Consistentemente</h3>
+            <p>Los estudios muestran una fuerte correlación entre la asistencia a clase y las calificaciones. Los profesores a menudo proporcionan pistas de exámenes, aclaran conceptos confusos y enfatizan material importante durante las conferencias. Faltar a clases crea brechas en la comprensión que se acumulan durante el semestre. La asistencia perfecta o casi perfecta se correlaciona fuertemente con GPAs más altos.</p>
+
+            <h3>Utiliza Horas de Oficina y Tutoría</h3>
+            <p>Los profesores y asistentes de enseñanza mantienen horas de oficina específicamente para ayudar a los estudiantes. Asistir a las horas de oficina demuestra compromiso, aclara conceptos difíciles y construye relaciones que conducen a mejores cartas de recomendación. Los servicios gratuitos de tutoría, grupos de estudio y centros de escritura proporcionan apoyo adicional. Aprovecha estos recursos: están incluidos en tu matrícula.</p>
+
+            <h3>Comienza las Tareas Temprano</h3>
+            <p>La procrastinación produce trabajo apresurado y de menor calidad y crea estrés innecesario. Comenzar las tareas cuando se asignan permite tiempo para investigación, borradores, revisión y preguntas. Este enfoque típicamente mejora las calificaciones en 0.3-0.5 puntos por tarea en comparación con esfuerzos de último minuto. Las pequeñas mejoras en las tareas se acumulan en mejoras significativas del GPA durante el semestre.</p>
+
+            <h3>Estudia Efectivamente, No Solo Más</h3>
+            <p>Las técnicas de estudio activas (problemas de práctica, autoevaluación, enseñar conceptos a otros, hacer conexiones entre ideas) producen mejor retención que métodos pasivos (releer notas, resaltar). Enfócate en comprender conceptos en lugar de memorizar hechos. El estudio efectivo produce mejores resultados en menos tiempo que el estudio ineficiente prolongado.</p>
+
+            <h2>Estrategias de Recuperación del GPA</h2>
+            <h3>Las Matemáticas de la Recuperación del GPA</h3>
+            <p>Los GPAs bajos de principios de semestre o principios de universidad son difíciles pero no imposibles de aumentar. La mejora del GPA requiere calificaciones más altas en cursos futuros, pero el impacto disminuye a medida que acumulas créditos. Aumentar un GPA de 2.5 después de 30 créditos a 3.0 para la graduación (120 créditos) requiere aproximadamente un GPA de 3.2 en los 90 créditos restantes. Usa calculadoras de GPA para modelar escenarios y establecer objetivos realistas. Comprender las matemáticas previene expectativas poco realistas.</p>
+
+            <h3>Políticas de Reemplazo de Calificaciones</h3>
+            <p>Algunas universidades permiten retomar cursos con reemplazo de calificación: la nueva calificación reemplaza la calificación anterior en el cálculo del GPA (aunque ambas calificaciones pueden aparecer en las transcripciones). Retomar estratégicamente cursos donde obtuviste C- o por debajo puede aumentar significativamente el GPA, especialmente si retomas cursos de alto crédito. Verifica las políticas de tu institución sobre reemplazo de calificaciones y límites de retoma.</p>
+
+            <h3>Programas de Perdón de Calificaciones</h3>
+            <p>Algunas instituciones ofrecen programas académicos de nuevo comienzo que permiten a los estudiantes solicitar excluir ciertos semestres (típicamente debido a problemas médicos, emergencias familiares u otras circunstancias atenuantes) del cálculo del GPA. Los requisitos y limitaciones varían, pero estos programas proporcionan oportunidades de recuperación para estudiantes que experimentaron contratiempos temporales. La elegibilidad generalmente requiere documentación de circunstancias atenuantes.</p>
+
+            <h3>Enfócate en el GPA de Especialidad</h3>
+            <p>Si el GPA general es mediocre pero el GPA de especialidad es fuerte, enfatiza el GPA de especialidad en solicitudes y currículums. Muchos empleadores y programas de posgrado valoran el GPA de especialidad más que el GPA general, ya que refleja mejor la competencia en tu campo. Un GPA de especialidad fuerte puede compensar un GPA general más débil causado por luchas tempranas o cursos fuera de tu fortaleza.</p>
+
+            <h2>Errores Comunes del GPA a Evitar</h2>
+            <h3>Ignorar Calificaciones Tempranas</h3>
+            <p>Muchos estudiantes no toman en serio el primer año, asumiendo que tienen tiempo para mejorar más tarde. Sin embargo, las calificaciones tempranas pobres crean un hoyo de GPA difícil de escapar. Cada curso importa desde el primer día. Los estudiantes de primer año deben comprender que las calificaciones del primer semestre impactan el GPA acumulativo tanto como las calificaciones del último semestre.</p>
+
+            <h3>Tomar Demasiados Cursos Difíciles Simultáneamente</h3>
+            <p>Las cargas de cursos demasiado ambiciosas a menudo resultan contraproducentes. Tomar cinco cursos principales desafiantes en un semestre mientras trabajas a tiempo parcial y participas en extracurriculares dispersa el tiempo demasiado delgado, resultando en calificaciones mediocres en todas las clases. Es mejor tomar 4-5 cursos y sobresalir que tomar 6-7 cursos y luchar. La calidad supera a la cantidad en el rendimiento académico.</p>
+
+            <h3>No Calcular el GPA Regularmente</h3>
+            <p>Muchos estudiantes no rastrean el GPA hasta que llegan los reportes de calificaciones, perdiendo oportunidades de identificar problemas temprano. Calcula el GPA después de cada tarea y examen para comprender la posición antes de los finales. Esta conciencia permite estudiar estratégicamente y tomar decisiones informadas sobre abandonar cursos si es necesario. La ignorancia no es felicidad cuando se trata del GPA.</p>
+
+            <h3>Malentender las Políticas de Retiro</h3>
+            <p>Retirarse de cursos (calificación W) típicamente no impacta el GPA pero cuenta hacia los límites de horas de crédito y puede afectar la ayuda financiera. Comprende los plazos de retiro y las implicaciones antes de abandonar cursos. A veces aceptar una C es mejor que retirarse si ya has invertido tiempo significativo. Múltiples retiros en la transcripción pueden levantar banderas rojas para admisiones de posgrado o empleadores.</p>
+
+            <h2>GPA y Clasificación de Clase</h2>
+            <p>La clasificación de clase expresa tu GPA en relación con los compañeros de clase: top 10%, top 25%, etc. Aunque algunas escuelas secundarias aún reportan la clasificación de clase, muchas la han eliminado debido a preocupaciones de competitividad. Las universidades que reciben clasificación de clase la usan para contextualizar el GPA. Un GPA de 3.8 clasificado en el top 1% de la clase en una escuela secundaria competitiva puede impresionar más que un GPA de 4.0 clasificado en el top 20% de la clase en una escuela menos competitiva. El contexto importa en la evaluación del GPA.</p>
+
+            <p>Para universidades que no reciben clasificación de clase, dependen del perfil de tu escuela secundaria (documento que describe políticas de calificación, rigor del curso, datos históricos de admisiones universitarias) para interpretar tu GPA. Por esto importa el rigor del curso: los oficiales de admisiones evalúan los GPAs en el contexto de las oportunidades disponibles. Tomar los cursos más desafiantes disponibles demuestra ambición académica.</p>
+
+            <h2>Conclusión</h2>
+            <p>El GPA es una métrica académica poderosa que abre o cierra puertas durante toda tu carrera educativa y profesional temprana. Comprender el cálculo del GPA permite la planificación académica estratégica, el establecimiento de objetivos realistas y decisiones informadas sobre cursos, especialidades y asignación de tiempo de estudio. Aunque el GPA no lo es todo (los exámenes estandarizados, actividades extracurriculares, liderazgo, experiencia laboral y cualidades personales todas importan), sigue siendo la credencial académica fundamental. Calcula tu GPA regularmente, comprende cómo cada calificación impacta tu posición, establece objetivos ambiciosos pero alcanzables y comprométete con los hábitos y estrategias que producen éxito académico. El GPA fuerte crea opciones; el GPA débil las limita. La inversión en la gestión del GPA paga dividendos en becas, ofertas de admisión y oportunidades profesionales durante años.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const courseRows = document.querySelectorAll('.course-row');
+            let totalQualityPoints = 0;
+            let totalCredits = 0;
+
+            courseRows.forEach(row => {
+                const grade = parseFloat(row.querySelector('.course-grade').value);
+                const credits = parseFloat(row.querySelector('.course-credits').value) || 0;
+
+                if (credits > 0) {
+                    totalQualityPoints += grade * credits;
+                    totalCredits += credits;
+                }
+            });
+
+            const semesterGPA = totalCredits > 0 ? totalQualityPoints / totalCredits : 0;
+
+            const prevGPA = parseFloat(document.getElementById('prevGPA').value) || 0;
+            const prevCredits = parseFloat(document.getElementById('prevCredits').value) || 0;
+            const prevQualityPoints = prevGPA * prevCredits;
+
+            const cumulativeQualityPoints = prevQualityPoints + totalQualityPoints;
+            const cumulativeTotalCredits = prevCredits + totalCredits;
+            const cumulativeGPA = cumulativeTotalCredits > 0 ? cumulativeQualityPoints / cumulativeTotalCredits : semesterGPA;
+
+            document.getElementById('semesterGPA').textContent = semesterGPA.toFixed(2);
+            document.getElementById('semesterCredits').textContent = totalCredits.toFixed(1);
+            document.getElementById('cumulativeGPA').textContent = cumulativeGPA.toFixed(2);
+            document.getElementById('totalCredits').textContent = cumulativeTotalCredits.toFixed(1);
+
+            const gpaToCheck = cumulativeTotalCredits > 0 ? cumulativeGPA : semesterGPA;
+            let standing, standingColor;
+
+            if (gpaToCheck >= 3.8) {
+                standing = 'Summa Cum Laude (Excelencia)';
+                standingColor = '#10b981';
+            } else if (gpaToCheck >= 3.5) {
+                standing = 'Magna Cum Laude (Muy Bueno)';
+                standingColor = '#10b981';
+            } else if (gpaToCheck >= 3.2) {
+                standing = 'Cum Laude (Bueno)';
+                standingColor = '#059669';
+            } else if (gpaToCheck >= 3.0) {
+                standing = 'Lista del Decano';
+                standingColor = '#0891b2';
+            } else if (gpaToCheck >= 2.5) {
+                standing = 'Buena Posición';
+                standingColor = '#6366f1';
+            } else if (gpaToCheck >= 2.0) {
+                standing = 'Satisfactorio';
+                standingColor = '#f59e0b';
+            } else if (gpaToCheck >= 1.5) {
+                standing = 'Advertencia Académica';
+                standingColor = '#f97316';
+            } else {
+                standing = 'Probación Académica';
+                standingColor = '#dc2626';
+            }
+
+            document.getElementById('standing').textContent = standing;
+            document.getElementById('standing').style.color = standingColor;
+        }
+
+        document.querySelectorAll('.course-grade, .course-credits').forEach(input => {
+            input.addEventListener('change', calculate);
+        });
+        document.getElementById('prevGPA').addEventListener('input', calculate);
+        document.getElementById('prevCredits').addEventListener('input', calculate);
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

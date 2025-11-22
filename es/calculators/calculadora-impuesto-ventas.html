@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de impuesto de ventas gratuita - Calcula el monto del impuesto de ventas, precio total con impuesto, y calcula inversamente el precio antes de impuesto.">
+    <meta name="keywords" content="calculadora impuesto ventas, calculadora impuesto, calcular impuesto, precio con impuesto, calculadora monto impuesto">
+
+    <title>Calculadora de Impuesto de Ventas - Calcula Impuestos | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-impuesto-ventas.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/sales-tax-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-impuesto-ventas.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/sales-tax-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/sales-tax-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-impuesto-ventas.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Impuesto de Ventas</h1>
+            <p class="calculator-description">Calcula el impuesto de ventas y el precio total al instante</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Información de Compra</h3>
+
+                <div class="form-group">
+                    <label for="price" class="form-label">Precio Antes de Impuesto ($)</label>
+                    <input type="number" id="price" class="form-input" value="100" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="taxRate" class="form-label">Tasa de Impuesto de Ventas (%)</label>
+                    <input type="number" id="taxRate" class="form-input" value="7.5" min="0" max="15" step="0.1">
+                </div>
+
+                <button onclick="calculate()" class="btn-calculate">Calcular Impuesto</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Desglose de Impuesto</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Monto del Impuesto de Ventas</div>
+                    <div class="result-value" id="taxAmount" style="font-size: 2.5rem; color: #10b981;">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Precio Total (con impuesto)</div>
+                    <div class="result-value" id="totalPrice">$0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Precio Antes de Impuesto</div>
+                    <div class="result-value" id="priceBeforeTax">$0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Funciona el Impuesto de Ventas</h2>
+            <p>El impuesto de ventas es un impuesto al consumo impuesto por gobiernos sobre la venta de bienes y servicios. En Estados Unidos, el impuesto de ventas es principalmente un impuesto estatal y local: 45 estados más Washington D.C. cobran impuesto de ventas, mientras que cinco estados (Alaska, Delaware, Montana, New Hampshire y Oregon) no tienen impuesto de ventas estatal. Las tasas varían dramáticamente, desde tan bajo como 2.9% en Colorado hasta tan alto como 9.56% de impuesto estatal y local promedio combinado en Tennessee.</p>
+
+            <p>El cálculo del impuesto de ventas es directo: multiplica el precio de compra por la tasa de impuesto. Para un artículo de $100 con 7.5% de impuesto: $100 × 0.075 = $7.50 en impuesto, para un precio total de $107.50. Esta fórmula simple se aplica a la mayoría de las compras, aunque existen exenciones para ciertas categorías como comestibles, medicamentos recetados, y a veces ropa dependiendo del estado.</p>
+
+            <h2>Tasas de Impuesto de Ventas Estatales</h2>
+            <p>Las tasas base de impuesto de ventas estatales van desde 2.9% hasta 7.25%, pero el impuesto total que pagas a menudo incluye adiciones locales. California tiene una tasa estatal de 7.25%, pero cuando se combina con impuestos de distritos locales, los compradores en Los Angeles pagan 9.5% total. La tasa estatal de Nueva York es 4%, pero la Ciudad de Nueva York añade 4.5% para 8.5% combinado. Texas cobra 6.25% de impuesto estatal más hasta 2% local para un potencial 8.25% total.</p>
+
+            <p><strong>Tasas Combinadas Más Altas:</strong> Louisiana (promedio 9.55%), Tennessee (9.547%), Arkansas (9.48%), Washington (9.29%), Alabama (9.24%). Estos estados combinan tasas estatales moderadas con adiciones locales significativas.</p>
+
+            <p><strong>Tasas Combinadas Más Bajas:</strong> Alaska (1.76%, sin impuesto estatal pero algunas localidades cobran impuesto), Hawaii (4.44%), Wyoming (5.36%), Wisconsin (5.43%), Maine (5.5%). Estos estados tienen tasas estatales bajas, adiciones locales mínimas, o ambos.</p>
+
+            <p><strong>Sin Impuesto de Ventas Estatal:</strong> Alaska, Delaware, Montana, New Hampshire, Oregon. Sin embargo, Alaska permite impuestos de ventas locales, por lo que algunas jurisdicciones cobran impuesto a pesar de no tener impuesto a nivel estatal. Los otros cuatro no tienen impuestos de ventas estatales ni locales, aunque compensan con impuestos sobre la renta o propiedad más altos.</p>
+
+            <h2>Qué se Grava y Qué No</h2>
+            <p><strong>Generalmente Gravable:</strong> La mayoría de bienes tangibles: ropa, electrónicos, muebles, vehículos, electrodomésticos, juguetes y artículos similares están sujetos al impuesto de ventas. Los servicios cada vez enfrentan más tributación en muchos estados, incluyendo servicios de reparación, servicios de cuidado personal y entretenimiento.</p>
+
+            <p><strong>Alimentos y Comestibles:</strong> 32 estados exentan comestibles no preparados del impuesto de ventas, reconociendo la comida como una necesidad. Sin embargo, 13 estados gravan comestibles a tasas completas o reducidas. La comida preparada (comidas de restaurante, artículos calientes de delicatessen) es gravable en todos los estados con impuesto de ventas. La distinción entre "comestible" y "comida preparada" a veces crea confusión: un sándwich frío de delicatessen podría estar exento mientras que un sándwich caliente es gravable.</p>
+
+            <p><strong>Medicamentos Recetados:</strong> Casi todos los estados exentan medicamentos recetados del impuesto de ventas, aunque los medicamentos de venta libre usualmente son gravables. Esta exención refleja el reconocimiento de los medicamentos como necesidades de salud en lugar de compras discrecionales.</p>
+
+            <p><strong>Ropa:</strong> La mayoría de los estados gravan la ropa, pero seis estados (Massachusetts, Minnesota, New Jersey, Nueva York, Pennsylvania, Rhode Island, Vermont) proporcionan exenciones para ropa por debajo de ciertos umbrales de precio. Por ejemplo, Nueva York exenta ropa y calzado menores de $110 por artículo. Durante períodos de regreso a clases, muchos estados ofrecen vacaciones de impuesto de ventas donde ropa, útiles escolares y a veces computadoras están temporalmente exentos de impuesto.</p>
+
+            <h2>Ventas en Línea e Impuesto de Comercio Electrónico</h2>
+            <p>La decisión de la Corte Suprema de 2018 en Dakota del Sur vs. Wayfair revolucionó el impuesto de ventas en línea. Previamente, las empresas solo cobraban impuesto de ventas en estados donde tenían presencia física ("nexo"). El fallo permitió a los estados requerir cobro de impuesto de ventas de vendedores fuera del estado que cumplan ciertos umbrales, típicamente $100,000 en ventas anuales o 200 transacciones en el estado.</p>
+
+            <p>Ahora, cuando compras en línea, usualmente pagarás impuesto de ventas basado en tu dirección de envío en lugar de la ubicación del vendedor. Amazon, Walmart, Target y otros grandes minoristas cobran impuesto para todos los estados aplicables. Los vendedores más pequeños pueden no cobrar impuesto para cada estado, pero técnicamente estás requerido a remitir "impuesto de uso" para compras no gravadas al declarar impuestos estatales sobre la renta (aunque el cumplimiento es bajo).</p>
+
+            <p>Los productos digitales (descargas de software, suscripciones de streaming, libros electrónicos) enfrentan tributación inconsistente. Algunos estados los gravan como bienes, otros los exentan como servicios, y muchos todavía están desarrollando políticas. A medida que crece el comercio digital, espera que más estados extiendan el impuesto de ventas a estos productos para proteger ingresos.</p>
+
+            <h2>Impuesto de Ventas para Empresas</h2>
+            <p>Las empresas que cobran impuesto de ventas deben obtener un permiso de impuesto de ventas (también llamado permiso de vendedor o certificado de reventa) de su estado. Cobran impuesto de los clientes, presentan declaraciones regulares de impuesto de ventas (mensual, trimestral o anualmente dependiendo del volumen de ventas), y remiten el impuesto cobrado a autoridades estatales y locales.</p>
+
+            <p><strong>Exenciones de Reventa:</strong> Las empresas que compran inventario para reventa no pagan impuesto de ventas en esas compras: proporcionan su certificado de reventa a los proveedores. El impuesto de ventas se cobra solo en la venta final a consumidores finales. Esto previene "pirámide de impuestos" donde el impuesto se cobra múltiples veces a través de la cadena de suministro.</p>
+
+            <p><strong>Requisitos de Nexo:</strong> Las empresas deben cobrar impuesto de ventas en estados donde tienen nexo: presencia física (oficina, almacén, empleados) o presencia económica (exceder umbrales de ventas). Las empresas multi-estatales deben rastrear nexo en todos los estados y cumplir con reglas variadas, creando complejidad de cumplimiento significativa.</p>
+
+            <p><strong>Presentación y Multas:</strong> Las presentaciones de impuesto de ventas tardías o incorrectas activan multas e intereses. Las multas típicamente van de 5-25% del impuesto no pagado más intereses al 5-12% anual. Las empresas deben remitir el impuesto de ventas incluso si enfrentan problemas de flujo de efectivo ya que la falta de remitir impuesto cobrado es vista seriamente por los estados: no es el dinero de la empresa sino impuesto mantenido en fideicomiso para el gobierno.</p>
+
+            <h2>Calculando el Impuesto de Ventas Manualmente</h2>
+            <p>Fórmula: Impuesto de Ventas = Precio × Tasa de Impuesto (expresada como decimal). Ejemplo: artículo de $50 con 8% de impuesto: $50 × 0.08 = $4 en impuesto. Precio total = $50 + $4 = $54.</p>
+
+            <p><strong>Matemática Mental Rápida:</strong> Para 10% de impuesto, simplemente mueve el punto decimal un lugar ($50 se convierte en $5 de impuesto). Para 5%, calcula 10% y divide entre dos. Para 7.5%, calcula 10% y resta un cuarto de esa cantidad. Para $50 al 7.5%: 10% = $5, cuarto de $5 = $1.25, $5 - $1.25 = $3.75 de impuesto.</p>
+
+            <p><strong>Cálculo Inverso (Encontrar Precio Antes de Impuesto):</strong> Si conoces el precio total con impuesto y necesitas determinar el precio antes de impuesto: Precio Antes de Impuesto = Precio Total ÷ (1 + Tasa de Impuesto). Ejemplo: El total es $108 con 8% de impuesto: $108 ÷ 1.08 = $100 precio antes de impuesto. Este cálculo ayuda al comparar precios o presupuestar cuando algunos precios incluyen impuesto y otros no.</p>
+
+            <h2>Estrategias de Impuesto de Ventas para Consumidores</h2>
+            <p><strong>Compra en Vacaciones Libres de Impuesto:</strong> Muchos estados ofrecen vacaciones de impuesto de ventas durante la temporada de regreso a clases (típicamente principios de agosto), proporcionando 3-7 días de compras libres de impuesto para ropa, útiles escolares y a veces computadoras. Programar compras importantes durante estas vacaciones ahorra 5-10% inmediatamente. Verifica el sitio web del departamento de ingresos de tu estado para fechas anuales de vacaciones y artículos calificados.</p>
+
+            <p><strong>Considera Compras Transfronterizas:</strong> Si vives cerca de un estado con impuesto de ventas más bajo o sin él, las compras grandes (muebles, electrodomésticos, vehículos) podrían justificar el viaje. Sin embargo, técnicamente estás requerido a pagar "impuesto de uso" en tu estado de origen para artículos comprados en otro lugar para usar en casa, aunque la aplicación es mínima excepto para vehículos.</p>
+
+            <p><strong>Entiende las Compras Comerciales:</strong> Si operas un negocio con certificado de reventa, puedes comprar inventario calificado y suministros comerciales libres de impuesto. Mantén registros detallados y solo usa certificados de exención para compras comerciales legítimas para evitar multas por uso indebido.</p>
+
+            <h2>La Conclusión</h2>
+            <p>El impuesto de ventas impacta significativamente el poder adquisitivo: una tasa combinada de 9% significa $90 en impuesto sobre una compra de $1,000. Entender tu tasa de impuesto local, qué artículos están exentos, y estrategias para minimizar la carga fiscal ayuda a estirar tu presupuesto. Para empresas, el cumplimiento adecuado del impuesto de ventas evita multas mientras las exenciones de reventa reducen costos en compras de inventario. Usa calculadoras de impuesto de ventas para presupuestar con precisión compras grandes, entender comparaciones de precios entre ubicaciones, y asegurar el cobro adecuado de impuesto si estás vendiendo. En estados con tasas combinadas altas, ese 8-10% extra en compras importantes se acumula rápidamente con el tiempo, haciendo que la conciencia fiscal sea un componente valioso de la planificación financiera.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const price = parseFloat(document.getElementById('price').value) || 0;
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+
+            const taxAmount = price * (taxRate / 100);
+            const totalPrice = price + taxAmount;
+
+            document.getElementById('taxAmount').textContent = '$' + taxAmount.toFixed(2);
+            document.getElementById('totalPrice').textContent = '$' + totalPrice.toFixed(2);
+            document.getElementById('priceBeforeTax').textContent = '$' + price.toFixed(2);
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

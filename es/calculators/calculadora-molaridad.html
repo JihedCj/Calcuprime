@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de Molaridad gratuita - Calcula molaridad, moles y concentración de soluciones. Herramienta esencial para química y laboratorio.">
+    <meta name="keywords" content="calculadora molaridad, concentración molar, calcular moles, soluciones químicas, laboratorio química">
+
+    <title>Calculadora de Molaridad - Concentración de Soluciones | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-molaridad.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/molarity-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-molaridad.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/molarity-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/molarity-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-molaridad.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Molaridad</h1>
+            <p class="calculator-description">Calcula la concentración molar de soluciones químicas con precisión</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Datos de la Solución</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Modo de Cálculo</label>
+                    <select id="calcMode" class="form-select">
+                        <option value="molarity">Calcular Molaridad</option>
+                        <option value="moles">Calcular Moles</option>
+                        <option value="volume">Calcular Volumen</option>
+                        <option value="mass">Calcular Masa</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="molarityGroup">
+                    <label for="moles" class="form-label">Moles de Soluto (mol)</label>
+                    <input type="number" id="moles" class="form-input" value="1" min="0" step="0.001">
+                </div>
+
+                <div class="form-group" id="volumeGroup">
+                    <label for="volume" class="form-label">Volumen de Solución (L)</label>
+                    <input type="number" id="volume" class="form-input" value="1" min="0" step="0.001">
+                </div>
+
+                <div class="form-group" id="massGroup" style="display: none;">
+                    <label for="mass" class="form-label">Masa de Soluto (g)</label>
+                    <input type="number" id="mass" class="form-input" value="58.44" min="0" step="0.01">
+                </div>
+
+                <div class="form-group" id="molarMassGroup" style="display: none;">
+                    <label for="molarMass" class="form-label">Masa Molar (g/mol)</label>
+                    <input type="number" id="molarMass" class="form-input" value="58.44" min="0" step="0.01">
+                    <small style="color: #6b7280;">Ej: NaCl = 58.44 g/mol</small>
+                </div>
+
+                <button onclick="calculateMolarity()" class="btn-calculate">Calcular</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Molaridad (M)</div>
+                    <div class="result-value" id="molarityValue" style="font-size: 2.5rem; color: #10b981;">0.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Moles de Soluto</div>
+                    <div class="result-value" id="molesValue" style="font-size: 1.5rem;">0.00 mol</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Volumen de Solución</div>
+                    <div class="result-value" id="volumeValue" style="font-size: 1.5rem;">0.00 L</div>
+                </div>
+
+                <div class="result-item" id="massResult" style="display: none;">
+                    <div class="result-label">Masa de Soluto</div>
+                    <div class="result-value" id="massValue" style="font-size: 1.5rem;">0.00 g</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px;">
+                    <p style="margin: 0; color: #1e40af; font-size: 0.9rem;" id="solutionInfo">
+                        <strong>Fórmula:</strong> M = n / V
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es la Molaridad?</h2>
+            <p>La molaridad (M) es una medida de concentración que indica el número de moles de soluto disueltos en un litro de solución. Es una de las unidades de concentración más utilizadas en química debido a su conveniencia y relación directa con las cantidades de sustancias en reacciones químicas. La molaridad se expresa en moles por litro (mol/L) y es fundamental para preparar soluciones precisas en laboratorios de investigación, control de calidad e industria farmacéutica. Esta medida permite a los químicos calcular exactamente cuánta sustancia necesitan para lograr una concentración específica, lo cual es esencial para experimentos reproducibles y reacciones químicas controladas.</p>
+
+            <h2>Fórmula de la Molaridad</h2>
+            <p>La fórmula básica para calcular la molaridad es:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 1.2rem; text-align: center;">
+                <strong>M = n / V</strong>
+            </p>
+            <p>Donde:</p>
+            <ul>
+                <li><strong>M</strong> = Molaridad (mol/L o M)</li>
+                <li><strong>n</strong> = Número de moles de soluto (mol)</li>
+                <li><strong>V</strong> = Volumen de la solución en litros (L)</li>
+            </ul>
+
+            <p>Para calcular los moles cuando conoces la masa:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 1.2rem; text-align: center;">
+                <strong>n = masa / masa molar</strong>
+            </p>
+
+            <h2>Cómo Usar la Calculadora de Molaridad</h2>
+            <ol>
+                <li><strong>Selecciona el modo de cálculo:</strong> Elige qué parámetro deseas calcular (molaridad, moles, volumen o masa)</li>
+                <li><strong>Ingresa los valores conocidos:</strong> Introduce los datos que tienes disponibles</li>
+                <li><strong>Proporciona la masa molar:</strong> Si trabajas con masa, ingresa la masa molar del compuesto</li>
+                <li><strong>Calcula:</strong> Haz clic en el botón para obtener los resultados instantáneamente</li>
+                <li><strong>Interpreta los resultados:</strong> Revisa todos los valores calculados y la fórmula utilizada</li>
+            </ol>
+
+            <h2>Ejemplos Prácticos de Cálculos de Molaridad</h2>
+
+            <h3>Ejemplo 1: Calcular Molaridad</h3>
+            <p>Si disuelves 2 moles de NaCl en 1 litro de agua:</p>
+            <ul>
+                <li>Moles (n) = 2 mol</li>
+                <li>Volumen (V) = 1 L</li>
+                <li>Molaridad (M) = 2 mol / 1 L = 2 M</li>
+            </ul>
+            <p>Esta es una solución 2 molar de cloruro de sodio.</p>
+
+            <h3>Ejemplo 2: Calcular Moles Necesarios</h3>
+            <p>Para preparar 500 mL de una solución 0.5 M de glucosa:</p>
+            <ul>
+                <li>Molaridad (M) = 0.5 M</li>
+                <li>Volumen (V) = 0.5 L (500 mL convertidos a litros)</li>
+                <li>Moles (n) = M × V = 0.5 M × 0.5 L = 0.25 mol</li>
+                <li>Masa molar de glucosa (C₆H₁₂O₆) = 180.16 g/mol</li>
+                <li>Masa necesaria = 0.25 mol × 180.16 g/mol = 45.04 g</li>
+            </ul>
+
+            <h3>Ejemplo 3: Diluciones</h3>
+            <p>Para diluir una solución, usa la fórmula de dilución:</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; font-family: monospace;">
+                M₁V₁ = M₂V₂
+            </p>
+            <p>Si tienes 100 mL de solución 2 M y quieres obtener una solución 0.5 M:</p>
+            <ul>
+                <li>M₁ = 2 M, V₁ = 100 mL</li>
+                <li>M₂ = 0.5 M, V₂ = ?</li>
+                <li>V₂ = (M₁ × V₁) / M₂ = (2 M × 100 mL) / 0.5 M = 400 mL</li>
+            </ul>
+            <p>Necesitas diluir los 100 mL originales hasta 400 mL totales (agregar 300 mL de solvente).</p>
+
+            <h2>Aplicaciones de la Molaridad en la Química</h2>
+
+            <h3>Laboratorio de Investigación</h3>
+            <p>En investigación científica, la molaridad es crucial para preparar soluciones buffer, reactivos y medios de cultivo con concentraciones exactas. Los investigadores deben preparar soluciones precisas para obtener resultados reproducibles y confiables.</p>
+
+            <h3>Industria Farmacéutica</h3>
+            <p>La preparación de medicamentos requiere concentraciones exactas de principios activos. Los farmacéuticos utilizan cálculos de molaridad para formular medicamentos intravenosos, soluciones orales y otros preparados farmacéuticos que requieren dosificación precisa.</p>
+
+            <h3>Control de Calidad</h3>
+            <p>En control de calidad, las soluciones de molaridad conocida se utilizan como estándares para titulaciones, calibración de equipos y validación de métodos analíticos. La precisión en estas concentraciones es fundamental para garantizar la calidad del producto.</p>
+
+            <h3>Educación Química</h3>
+            <p>Los estudiantes de química aprenden conceptos de estequiometría y preparación de soluciones mediante el uso de cálculos de molaridad. Esta habilidad es fundamental para comprender las reacciones químicas y el comportamiento de las soluciones.</p>
+
+            <h2>Diferencias entre Molaridad y Otras Concentraciones</h2>
+
+            <h3>Molaridad vs. Molalidad</h3>
+            <ul>
+                <li><strong>Molaridad (M):</strong> moles de soluto por litro de solución. Varía con la temperatura porque el volumen cambia.</li>
+                <li><strong>Molalidad (m):</strong> moles de soluto por kilogramo de solvente. No varía con la temperatura porque se basa en masa.</li>
+            </ul>
+
+            <h3>Molaridad vs. Normalidad</h3>
+            <ul>
+                <li><strong>Molaridad (M):</strong> basada en moles totales de sustancia.</li>
+                <li><strong>Normalidad (N):</strong> basada en equivalentes de sustancia reactiva, útil en reacciones ácido-base y redox.</li>
+            </ul>
+
+            <h3>Molaridad vs. Porcentaje en Masa</h3>
+            <ul>
+                <li><strong>Molaridad (M):</strong> relaciona moles con volumen, ideal para cálculos estequiométricos.</li>
+                <li><strong>Porcentaje en masa:</strong> masa de soluto dividida por masa total de solución, expresado como porcentaje.</li>
+            </ul>
+
+            <h2>Consejos para Preparar Soluciones Molares</h2>
+            <ul>
+                <li><strong>Usa material volumétrico calibrado:</strong> Emplea matraces aforados, pipetas volumétricas y buretas calibradas para mediciones precisas de volumen.</li>
+                <li><strong>Pesa con precisión:</strong> Utiliza una balanza analítica con precisión de al menos 0.001 g para pesar reactivos.</li>
+                <li><strong>Disuelve completamente:</strong> Asegúrate de que el soluto esté completamente disuelto antes de aforar al volumen final.</li>
+                <li><strong>Ajusta a temperatura:</strong> Prepara las soluciones a la temperatura de trabajo, ya que el volumen varía con la temperatura.</li>
+                <li><strong>Etiqueta correctamente:</strong> Marca todas las soluciones con nombre, concentración, fecha de preparación y precauciones de seguridad.</li>
+                <li><strong>Verifica la pureza:</strong> Usa reactivos de grado analítico cuando la precisión es crítica.</li>
+                <li><strong>Considera la higroscopicidad:</strong> Algunos compuestos absorben humedad del aire, lo que afecta su masa real.</li>
+            </ul>
+
+            <h2>Factores que Afectan la Molaridad</h2>
+
+            <h3>Temperatura</h3>
+            <p>La molaridad es dependiente de la temperatura porque el volumen de la solución cambia con la temperatura. A mayor temperatura, los líquidos se expanden, disminuyendo la molaridad. A menor temperatura, se contraen, aumentando la molaridad. Para trabajos de alta precisión, especifique la temperatura de referencia.</p>
+
+            <h3>Pureza del Reactivo</h3>
+            <p>Los reactivos comerciales raramente son 100% puros. Muchos productos químicos contienen agua de cristalización, impurezas o se presentan como sales hidratadas. Siempre verifique el porcentaje de pureza en la etiqueta y ajuste sus cálculos en consecuencia.</p>
+
+            <h3>Densidad de la Solución</h3>
+            <p>Cuando se preparan soluciones concentradas, especialmente de ácidos o bases, la densidad de la solución puede diferir significativamente del solvente puro. Esto debe considerarse al calcular volúmenes exactos.</p>
+
+            <h2>Errores Comunes al Calcular Molaridad</h2>
+            <ul>
+                <li><strong>Confundir volumen de solvente con volumen de solución:</strong> La molaridad se basa en el volumen final de la solución, no en el volumen de solvente añadido.</li>
+                <li><strong>No convertir unidades:</strong> Asegúrate de que el volumen esté en litros y la masa en gramos antes de calcular.</li>
+                <li><strong>Usar masa molar incorrecta:</strong> Verifica la fórmula química y calcula la masa molar correctamente sumando todos los átomos.</li>
+                <li><strong>Ignorar la hidratación:</strong> Compuestos como CuSO₄·5H₂O incluyen moléculas de agua en su masa molar.</li>
+                <li><strong>Medir el volumen antes de disolver:</strong> Siempre disuelve primero el soluto y luego ajusta al volumen final.</li>
+            </ul>
+
+            <h2>Seguridad en el Laboratorio</h2>
+            <p>Al trabajar con soluciones químicas, siempre siga las precauciones de seguridad:</p>
+            <ul>
+                <li>Use equipo de protección personal (gafas, bata de laboratorio, guantes)</li>
+                <li>Trabaje en una campana de extracción cuando manipule sustancias volátiles o tóxicas</li>
+                <li>Agregue siempre ácido al agua, nunca al revés (para prevenir salpicaduras violentas)</li>
+                <li>Almacene las soluciones en recipientes apropiados y etiquetados</li>
+                <li>Conozca la ubicación de duchas de emergencia y lavaojos</li>
+                <li>Disponga de los residuos químicos según las regulaciones locales</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Cuál es la diferencia entre molaridad y concentración?</h3>
+            <p>La molaridad es un tipo específico de concentración expresada en moles por litro. "Concentración" es un término general que puede referirse a varias formas de expresar la cantidad de soluto en una solución, incluyendo molaridad, molalidad, porcentaje en masa, partes por millón, etc.</p>
+
+            <h3>¿Por qué la molaridad cambia con la temperatura?</h3>
+            <p>La molaridad depende del volumen de la solución, y el volumen cambia con la temperatura debido a la expansión o contracción térmica. La molalidad, que se basa en masa, no cambia con la temperatura y es preferible en algunos tipos de cálculos termodinámicos.</p>
+
+            <h3>¿Cómo preparo una solución de molaridad específica?</h3>
+            <p>Calcula los moles necesarios (M × V), conviértelos a gramos usando la masa molar, pesa esa cantidad de soluto, disuélvelo en un poco de solvente en un matraz aforado, y luego completa hasta la marca de volumen deseado con más solvente.</p>
+
+            <h3>¿Puedo usar la molaridad para gases?</h3>
+            <p>Técnicamente sí, pero para gases es más común usar concentraciones en moles por metro cúbico, presión parcial, o fracción molar. La molaridad se usa principalmente para soluciones líquidas donde el volumen es fácil de medir con precisión.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        const calcModeSelect = document.getElementById('calcMode');
+
+        calcModeSelect.addEventListener('change', function() {
+            updateFormFields();
+        });
+
+        function updateFormFields() {
+            const mode = calcModeSelect.value;
+            const molarityGroup = document.getElementById('molarityGroup');
+            const volumeGroup = document.getElementById('volumeGroup');
+            const massGroup = document.getElementById('massGroup');
+            const molarMassGroup = document.getElementById('molarMassGroup');
+
+            // Reset all
+            molarityGroup.style.display = 'block';
+            volumeGroup.style.display = 'block';
+            massGroup.style.display = 'none';
+            molarMassGroup.style.display = 'none';
+
+            const molesLabel = molarityGroup.querySelector('label');
+            const volumeLabel = volumeGroup.querySelector('label');
+
+            if (mode === 'molarity') {
+                molesLabel.textContent = 'Moles de Soluto (mol)';
+                volumeLabel.textContent = 'Volumen de Solución (L)';
+            } else if (mode === 'moles') {
+                molesLabel.textContent = 'Molaridad (M)';
+                volumeLabel.textContent = 'Volumen de Solución (L)';
+            } else if (mode === 'volume') {
+                molesLabel.textContent = 'Moles de Soluto (mol)';
+                volumeLabel.textContent = 'Molaridad (M)';
+            } else if (mode === 'mass') {
+                molarityGroup.style.display = 'block';
+                volumeGroup.style.display = 'block';
+                massGroup.style.display = 'none';
+                molarMassGroup.style.display = 'block';
+                molesLabel.textContent = 'Molaridad Deseada (M)';
+                volumeLabel.textContent = 'Volumen de Solución (L)';
+            }
+        }
+
+        function calculateMolarity() {
+            const mode = calcModeSelect.value;
+            const input1 = parseFloat(document.getElementById('moles').value);
+            const input2 = parseFloat(document.getElementById('volume').value);
+            const mass = parseFloat(document.getElementById('mass').value);
+            const molarMass = parseFloat(document.getElementById('molarMass').value);
+
+            let molarity, moles, volume, calculatedMass;
+
+            if (mode === 'molarity') {
+                moles = input1;
+                volume = input2;
+                if (volume <= 0) {
+                    alert('El volumen debe ser mayor que cero');
+                    return;
+                }
+                molarity = moles / volume;
+                calculatedMass = moles * 58.44; // Default NaCl mass
+            } else if (mode === 'moles') {
+                molarity = input1;
+                volume = input2;
+                moles = molarity * volume;
+                calculatedMass = moles * 58.44;
+            } else if (mode === 'volume') {
+                moles = input1;
+                molarity = input2;
+                if (molarity <= 0) {
+                    alert('La molaridad debe ser mayor que cero');
+                    return;
+                }
+                volume = moles / molarity;
+                calculatedMass = moles * 58.44;
+            } else if (mode === 'mass') {
+                molarity = input1;
+                volume = input2;
+                if (!molarMass || molarMass <= 0) {
+                    alert('Por favor ingresa una masa molar válida');
+                    return;
+                }
+                moles = molarity * volume;
+                calculatedMass = moles * molarMass;
+                document.getElementById('massResult').style.display = 'block';
+            }
+
+            document.getElementById('molarityValue').textContent = molarity.toFixed(3);
+            document.getElementById('molesValue').textContent = moles.toFixed(4) + ' mol';
+            document.getElementById('volumeValue').textContent = volume.toFixed(3) + ' L';
+
+            if (mode === 'mass') {
+                document.getElementById('massValue').textContent = calculatedMass.toFixed(2) + ' g';
+            }
+
+            let formula = '';
+            if (mode === 'molarity') formula = `M = n / V = ${moles.toFixed(3)} mol / ${volume.toFixed(3)} L`;
+            else if (mode === 'moles') formula = `n = M × V = ${molarity.toFixed(3)} M × ${volume.toFixed(3)} L`;
+            else if (mode === 'volume') formula = `V = n / M = ${moles.toFixed(3)} mol / ${molarity.toFixed(3)} M`;
+            else if (mode === 'mass') formula = `masa = n × MM = ${moles.toFixed(3)} mol × ${molarMass.toFixed(2)} g/mol`;
+
+            document.getElementById('solutionInfo').innerHTML = `<strong>Fórmula:</strong> ${formula}`;
+
+            showResult('molarityValue');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculateMolarity);
+        });
+
+        window.addEventListener('load', calculateMolarity);
+    </script>
+</body>
+</html>

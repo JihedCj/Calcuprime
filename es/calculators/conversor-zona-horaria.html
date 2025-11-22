@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conversor de zona horaria gratuito - Convierte la hora entre zonas horarias del mundo al instante. Programa reuniones a través de zonas horarias globales con conversiones precisas.">
+    <meta name="keywords" content="conversor zona horaria, hora mundial, calculadora zona horaria, conversor hora, reloj mundial, GMT, UTC, huso horario">
+
+    <title>Conversor de Zona Horaria - Convierte Hora Mundial Instantáneamente | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/conversor-zona-horaria.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/time-zone-converter.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-zona-horaria.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/time-zone-converter.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/time-zone-converter.html" class="lang-link">EN</a>
+                <a href="conversor-zona-horaria.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Conversor de Zona Horaria</h1>
+            <p class="calculator-description">Convierte la hora entre zonas horarias globales instantáneamente para programar reuniones y coordinar a través de fronteras</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Desde</h3>
+
+                <div class="form-group">
+                    <label for="fromZone" class="form-label">Zona Horaria</label>
+                    <select id="fromZone" class="form-select">
+                        <option value="-8">PST (UTC-8) - Los Ángeles</option>
+                        <option value="-7">MST (UTC-7) - Denver</option>
+                        <option value="-6">CST (UTC-6) - Chicago</option>
+                        <option value="-5" selected>EST (UTC-5) - Nueva York</option>
+                        <option value="0">GMT/UTC (UTC+0) - Londres</option>
+                        <option value="1">CET (UTC+1) - París, Madrid</option>
+                        <option value="2">EET (UTC+2) - El Cairo</option>
+                        <option value="3">MSK (UTC+3) - Moscú</option>
+                        <option value="5.5">IST (UTC+5:30) - India</option>
+                        <option value="8">CST (UTC+8) - Beijing</option>
+                        <option value="9">JST (UTC+9) - Tokio</option>
+                        <option value="10">AEST (UTC+10) - Sídney</option>
+                        <option value="-3">ART (UTC-3) - Buenos Aires</option>
+                        <option value="-4">AST (UTC-4) - Santiago</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fromTime" class="form-label">Hora</label>
+                    <input type="time" id="fromTime" class="form-input" value="12:00">
+                </div>
+
+                <h3 style="margin-top: 1.5rem;">Hacia</h3>
+
+                <div class="form-group">
+                    <label for="toZone" class="form-label">Zona Horaria</label>
+                    <select id="toZone" class="form-select">
+                        <option value="-8">PST (UTC-8) - Los Ángeles</option>
+                        <option value="-7">MST (UTC-7) - Denver</option>
+                        <option value="-6">CST (UTC-6) - Chicago</option>
+                        <option value="-5">EST (UTC-5) - Nueva York</option>
+                        <option value="0">GMT/UTC (UTC+0) - Londres</option>
+                        <option value="1" selected>CET (UTC+1) - París, Madrid</option>
+                        <option value="2">EET (UTC+2) - El Cairo</option>
+                        <option value="3">MSK (UTC+3) - Moscú</option>
+                        <option value="5.5">IST (UTC+5:30) - India</option>
+                        <option value="8">CST (UTC+8) - Beijing</option>
+                        <option value="9">JST (UTC+9) - Tokio</option>
+                        <option value="10">AEST (UTC+10) - Sídney</option>
+                        <option value="-3">ART (UTC-3) - Buenos Aires</option>
+                        <option value="-4">AST (UTC-4) - Santiago</option>
+                    </select>
+                </div>
+
+                <button onclick="convertTime()" class="btn-calculate">Convertir Hora</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Hora Convertida</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Hora en Destino</div>
+                    <div class="result-value" id="convertedTime" style="font-size: 2.5rem; color: #10b981;">18:00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Diferencia Horaria</div>
+                    <div class="result-value" id="timeDiff">6 horas adelante</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Ajuste de Día</div>
+                    <div class="result-value" id="dayAdjust">Mismo día</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo las Zonas Horarias</h2>
+            <p>Las zonas horarias dividen el mundo en 24 regiones, cada una típicamente abarcando 15 grados de longitud y representando una hora de diferencia de tiempo. El sistema se originó en 1884 para estandarizar los horarios de ferrocarriles y desde entonces se ha vuelto esencial para la comunicación global y el comercio. El Meridiano de Greenwich en Inglaterra sirve como punto de referencia (UTC+0), con zonas numeradas positivamente hacia el este y negativamente hacia el oeste.</p>
+
+            <p>Convertir entre zonas horarias requiere sumar o restar horas basándose en los desplazamientos UTC. Si Nueva York (UTC-5) son las 12:00 PM, Londres (UTC+0) son las 5:00 PM (5 horas adelante), mientras que Los Ángeles (UTC-8) son las 9:00 AM (3 horas detrás de Nueva York). Comprender estas conversiones es crítico para programar llamadas internacionales, coordinar equipos remotos, planificar viajes y gestionar operaciones comerciales globales.</p>
+
+            <h2>UTC y GMT</h2>
+            <p>El Tiempo Universal Coordinado (UTC) sirve como el estándar de tiempo mundial. A pesar de que las siglas no coinciden en español (debido al compromiso entre el inglés "CUT" y el francés "TUC"), UTC reemplazó al Tiempo Medio de Greenwich (GMT) como referencia oficial. Para propósitos prácticos, UTC y GMT son idénticos, ambos representan el tiempo a 0° de longitud. Sin embargo, UTC es más preciso, utilizando relojes atómicos en lugar de observaciones astronómicas.</p>
+
+            <p>Todas las zonas horarias se expresan relativas a UTC usando desplazamientos de horas positivos o negativos. Tokio opera a UTC+9, lo que significa que cuando UTC es 00:00 (medianoche), Tokio son las 09:00 (9 AM). Sídney a UTC+10 está una hora adelante de Tokio. Comprender los desplazamientos UTC permite cálculos mentales rápidos de zonas horarias sin memorizar cada relación entre zonas.</p>
+
+            <h2>Horario de Verano</h2>
+            <p>El Horario de Verano (DST) complica las conversiones de zonas horarias. Muchas regiones adelantan los relojes una hora en primavera y los atrasan en otoño para extender la luz del día vespertina. Estados Unidos observa DST desde el segundo domingo de marzo hasta el primer domingo de noviembre. Durante DST, la Hora Estándar del Este (EST, UTC-5) se convierte en Hora de Verano del Este (EDT, UTC-4).</p>
+
+            <p>No todas las regiones observan DST. Arizona (excepto la Nación Navajo), Hawái y la mayor parte de Saskatchewan permanecen en hora estándar todo el año. Las variaciones internacionales crean confusión: Europa cambia en fechas diferentes a América del Norte. Australia observa DST durante meses opuestos (octubre-abril) ya que las estaciones están invertidas en el Hemisferio Sur. Siempre verifica si aplica DST al programar a través de zonas horarias.</p>
+
+            <h2>Programar Reuniones Internacionales</h2>
+            <p>Encontrar horarios de reunión convenientes a través de múltiples zonas horarias requiere considerar las horas laborales en cada ubicación. Una reunión a las 10:00 AM en Nueva York (EST) ocurre a las 3:00 PM en Londres (GMT) y a las 11:00 PM en Tokio (JST), fuera del horario laboral normal para Tokio. Herramientas como World Time Buddy o conversores de zonas horarias ayudan a identificar horas laborales superpuestas.</p>
+
+            <p>Para coordinación EE.UU.-Europa, las mañanas en EE.UU. se superponen con tardes en Europa (3:00 PM Londres = 10:00 AM EST). Para coordinación EE.UU.-Asia, las tardes en EE.UU. se superponen con mañanas en Asia (8:00 PM EST = 9:00 AM JST). Los equipos globales a menudo rotan los horarios de reuniones para compartir la inconveniencia equitativamente en lugar de favorecer siempre una región.</p>
+
+            <h2>Zonas Horarias de América Latina</h2>
+
+            <h3>Zonas Principales de Latinoamérica</h3>
+            <p>América Latina abarca múltiples zonas horarias. Argentina y Chile operan típicamente a UTC-3 (Hora de Argentina, Hora de Chile). Brasil tiene cuatro zonas horarias: UTC-2 (Fernando de Noronha), UTC-3 (Brasília), UTC-4 (Amazonas) y UTC-5 (Acre). México usa tres zonas: UTC-6 (Central), UTC-7 (Montaña) y UTC-8 (Pacífico), similar a EE.UU.</p>
+
+            <h3>Horario de Verano en Latinoamérica</h3>
+            <p>La observancia de DST varía ampliamente. Chile y Paraguay observan DST (octubre-marzo), adelantando a UTC-3 a UTC-4. Brasil eliminó DST en 2019 después de usarlo durante décadas. México eliminó DST en la mayoría de los estados en 2022, excepto ciudades fronterizas. Argentina experimentó con DST pero actualmente permanece en UTC-3 todo el año. Al programar con colegas latinoamericanos, verifica siempre su hora local actual, no asumas basándote en años anteriores.</p>
+
+            <h2>Errores Comunes de Zona Horaria</h2>
+            <p>Asumir diferencias de horas consistentes falla cuando ocurren cambios de DST. EE.UU. cambia DST antes que Europa, creando una semana donde Nueva York-Londres es 4 horas en lugar de las 5 horas usuales. Las invitaciones de calendario deben especificar zonas horarias explícitamente (10:00 AM EST) en lugar de asumir que los destinatarios comparten tu zona. Muchas aplicaciones de calendario ajustan automáticamente para las zonas horarias de los destinatarios cuando las zonas se especifican apropiadamente.</p>
+
+            <p>Confundir formatos de 12 horas y 24 horas causa errores. "6:00" podría significar mañana o tarde: especifica 6:00 AM o 6:00 PM, o usa formato de 24 horas (06:00 o 18:00). Los colegas internacionales a menudo prefieren formato de 24 horas para eliminar ambigüedad AM/PM. Al programar, siempre confirma si otros interpretan las horas en su zona local o un estándar especificado (UTC, hora de la sede de la empresa, etc.).</p>
+
+            <h2>Zonas Horarias para Negocios Globales</h2>
+
+            <h3>Coordinación de Equipos Distribuidos</h3>
+            <p>Las empresas con equipos globales establecen "horas centrales" cuando todos los miembros deben estar disponibles. Para equipos EE.UU.-Europa, esto podría ser 1:00-4:00 PM EST (6:00-9:00 PM CET). Para equipos globales abarcando EE.UU.-Asia, encontrar horas superpuestas es desafiante: 9:00 PM EST = 10:00 AM JST (siguiente día). Algunas empresas rotan semanalmente "días de Asia" (reuniones nocturnas de EE.UU.) y "días de EE.UU." (reuniones matutinas de Asia).</p>
+
+            <h3>Comunicación Asincrónica</h3>
+            <p>Los equipos distribuidos globalmente a menudo adoptan comunicación asincrónica: correos electrónicos detallados, videos de Loom, documentación compartida que no requiere tiempo real. Esto respeta las zonas horarias mientras mantiene la productividad. Las reuniones sincrónicas se reservan para toma de decisiones críticas, lluvia de ideas o alineación de equipo. Herramientas como Slack permiten respetar estados "No Molestar" basados en horas locales.</p>
+
+            <h2>Consejos de Viaje y Jet Lag</h2>
+
+            <h3>Calcular Diferencias de Jet Lag</h3>
+            <p>El jet lag ocurre cuando cruzas múltiples zonas horarias rápidamente, desincronizando tu reloj interno. La regla general: necesitas 1 día de ajuste por zona horaria cruzada. Volar de Nueva York (UTC-5) a París (UTC+1) cruza 6 zonas horarias: espera 6 días de ajuste completo. Viajar hacia el este (adelantando horas) causa jet lag peor que viajar hacia el oeste (retrasando horas) porque es más fácil permanecer despierto más tiempo que forzar el sueño más temprano.</p>
+
+            <h3>Minimizar el Jet Lag</h3>
+            <ul>
+                <li><strong>Pre-Ajuste:</strong> Cambia gradualmente tu horario de sueño 1 hora por día durante 3-5 días antes de salir</li>
+                <li><strong>Hidrátate:</strong> Bebe 8+ onzas de agua por hora de vuelo; la deshidratación empeora el jet lag</li>
+                <li><strong>Luz Solar:</strong> Exponte a luz brillante en tu nueva ubicación durante "horas de vigilia" deseadas</li>
+                <li><strong>Melatonina:</strong> Toma 0.5-3mg de melatonina 30 minutos antes de acostarte en la nueva zona horaria</li>
+                <li><strong>Permanece Despierto:</strong> A la llegada, permanece despierto hasta la hora local de acostarse sin importar el cansancio</li>
+                <li><strong>Evita el Alcohol:</strong> El alcohol interrumpe los ciclos de sueño y empeora la deshidratación</li>
+            </ul>
+
+            <h2>Herramientas y Recursos</h2>
+
+            <h3>Apps de Zona Horaria Recomendadas</h3>
+            <ul>
+                <li><strong>World Time Buddy:</strong> Interface visual mostrando horas superpuestas para múltiples zonas</li>
+                <li><strong>Every Time Zone:</strong> Vista de desplazamiento simple de todas las zonas a la vez</li>
+                <li><strong>Time.is:</strong> Muestra la hora exacta sincronizada con relojes atómicos</li>
+                <li><strong>Google Calendar:</strong> Convierte automáticamente eventos a la zona horaria del usuario</li>
+                <li><strong>Calendly:</strong> Herramienta de programación detectando zonas horarias automáticamente</li>
+            </ul>
+
+            <h3>Comunicación Profesional</h3>
+            <p>Al enviar horarios de reuniones, usa este formato: "Reunión: Miércoles, 15 de marzo a las 3:00 PM EST / 8:00 PM CET / 6:00 AM JST (Jueves)". Especifica todas las zonas relevantes más ajustes de día. Para equipos recurrentes, establece una convención: "todas las horas en UTC" o "todas las horas en hora de la sede". Incluye enlaces de conversor de zona horaria en invitaciones de calendario para verificación fácil.</p>
+
+            <h2>Zonas Horarias Inusuales</h2>
+
+            <h3>Desplazamientos de Media Hora y Cuarto de Hora</h3>
+            <p>No todas las zonas horarias difieren en horas completas de UTC. India usa UTC+5:30 (5 horas y 30 minutos adelante). Nepal usa UTC+5:45 (único con desplazamiento de 15 minutos). Australia Central usa UTC+9:30. Terranova (Canadá) usa UTC-3:30. Estos desplazamientos inusuales surgieron de consideraciones geográficas locales y se mantienen por tradición. Al programar con estas regiones, verifica dos veces los desplazamientos exactos de minutos.</p>
+
+            <h3>Zonas de Hora Única</h3>
+            <p>China abarca 5 zonas geográficas pero usa una sola zona horaria oficial (UTC+8, Hora Estándar de China) para unidad política. Esto significa que el amanecer en el oeste de China ocurre a las 10:00 AM hora oficial. Rusia, el país más ancho, usa 11 zonas horarias (UTC+2 a UTC+12). India usa una zona única (UTC+5:30) a pesar de abarcar aproximadamente 30° de longitud donde serían apropiadas 2 zonas.</p>
+
+            <h2>Historia y Futuro de las Zonas Horarias</h2>
+
+            <h3>Orígenes del Ferrocarril</h3>
+            <p>Antes de 1883, ciudades establecían su propio "tiempo local" basado en la posición del sol. Esto causó caos para los ferrocarriles: Buffalo, NY tenía tres relojes de estación diferentes para varias líneas ferroviarias. En 1883, las compañías ferroviarias estadounidenses implementaron cuatro zonas horarias continentales. La Conferencia Internacional del Meridiano de 1884 estableció el sistema de 24 zonas globales centradas en Greenwich. La mayoría de los países adoptaron gradualmente este sistema en las décadas de 1890-1920.</p>
+
+            <h3>Movimiento de Abolición de DST</h3>
+            <p>El horario de verano enfrenta creciente oposición debido a investigaciones que muestran efectos negativos para la salud (aumento de ataques cardíacos, accidentes automovilísticos) y beneficios energéticos mínimos. La Unión Europea votó en 2019 para permitir que los estados miembros eliminen DST, pero la implementación se estancó. Los estados de EE.UU. han propuesto DST permanente o hora estándar permanente, pero requieren aprobación federal. Rusia eliminó DST en 2014. El movimiento global tiende hacia menos cambios de reloj, aunque persiste el debate sobre cuál tiempo debería ser permanente.</p>
+
+            <h2>Conversiones Rápidas de Zona Horaria</h2>
+
+            <h3>Diferencias Horarias Comunes</h3>
+            <ul>
+                <li><strong>Nueva York a Londres:</strong> +5 horas (EST a GMT) / +4 durante cambio de DST</li>
+                <li><strong>Nueva York a Tokio:</strong> +14 horas (día siguiente) / +13 durante cambio de DST</li>
+                <li><strong>Los Ángeles a Sídney:</strong> +19 horas (día siguiente en DST) / +18 fuera de DST</li>
+                <li><strong>Londres a India:</strong> +5:30 horas (sin DST en India)</li>
+                <li><strong>Madrid a Buenos Aires:</strong> -4 horas (CET a ART) / -5 durante DST europeo</li>
+                <li><strong>Ciudad de México a Madrid:</strong> +7 horas (CST a CET) / variaciones de DST</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Por qué algunas zonas horarias tienen desplazamientos de 30 o 45 minutos?</h3>
+            <p>Razones históricas, políticas y geográficas. Cuando se establecieron las zonas horarias, algunos países eligieron desplazamientos que centraban mejor el mediodía solar sobre sus territorios o capitales. India eligió UTC+5:30 para centrar aproximadamente Nueva Delhi. Nepal eligió UTC+5:45 para diferenciarse de la vecina India. Irán usa UTC+3:30 por razones similares. Estos desplazamientos persisten por tradición, aunque causan complejidad en la programación.</p>
+
+            <h3>¿Qué sucede cuando las zonas horarias cambian en fechas diferentes?</h3>
+            <p>Crea caos temporal. EE.UU. cambia al horario de verano 2-3 semanas antes que Europa. Durante este período, Nueva York-Londres es 4 horas en lugar de 5, pero solo por semanas. Los sistemas de calendario automatizados pueden confundirse. Los equipos globales deben verificar manualmente las diferencias horarias actuales durante los períodos de cambio de marzo-abril y octubre-noviembre. Algunas empresas programan reuniones "basadas en UTC" durante estas semanas de transición para evitar confusiones.</p>
+
+            <h3>¿Cómo manejo zonas horarias al reservar vuelos internacionales?</h3>
+            <p>Los horarios de vuelo siempre se muestran en hora local: "Salida: 10:00 PM EST, Llegada: 11:00 AM GMT (siguiente día)" significa 10 PM en Nueva York, 11 AM en Londres. El tiempo de vuelo (duración) considera zonas horarias: un vuelo de 6 horas que sale a las 10 PM EST llega a las 4 AM EST, pero Londres es GMT, así que son las 9 AM GMT. Verifica siempre qué hora local significa "hora de llegada". Las apps de viaje como TripIt convierten automáticamente a tu zona horaria actual para claridad.</p>
+
+            <h3>¿Las zonas horarias afectan las transacciones financieras?</h3>
+            <p>Absolutamente. Los mercados de valores operan en horarios específicos de zona horaria: NYSE 9:30 AM - 4:00 PM EST, London Stock Exchange 8:00 AM - 4:30 PM GMT, Tokyo Stock Exchange 9:00 AM - 3:00 PM JST. El comercio de divisas (forex) opera 24/5 siguiendo al sol: Sídney abre, luego Tokio, Londres, Nueva York. Los comunicados económicos importantes se programan en horas específicas (Nóminas no agrícolas de EE.UU. 8:30 AM EST primer viernes). Los comerciantes globales deben rastrear múltiples zonas horarias constantemente para tiempos de eventos de mercado.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function convertTime() {
+            const fromZone = parseFloat(document.getElementById('fromZone').value);
+            const toZone = parseFloat(document.getElementById('toZone').value);
+            const fromTime = document.getElementById('fromTime').value);
+
+            if (!fromTime) return;
+
+            const [hours, minutes] = fromTime.split(':').map(Number);
+
+            // Convert to UTC
+            let utcHours = hours - fromZone;
+
+            // Convert from UTC to target zone
+            let targetHours = utcHours + toZone;
+
+            // Handle day overflow
+            let dayAdjust = 0;
+            while (targetHours >= 24) {
+                targetHours -= 24;
+                dayAdjust++;
+            }
+            while (targetHours < 0) {
+                targetHours += 24;
+                dayAdjust--;
+            }
+
+            // Format time
+            const targetTime = String(Math.floor(targetHours)).padStart(2, '0') + ':' + String(minutes).padStart(2, '0');
+
+            // Calculate time difference
+            const diff = toZone - fromZone;
+            const diffHours = Math.abs(diff);
+            const diffText = diff > 0
+                ? diffHours + ' horas adelante'
+                : diff < 0
+                    ? diffHours + ' horas atrás'
+                    : 'Misma hora';
+
+            // Day adjustment text
+            let dayText = 'Mismo día';
+            if (dayAdjust > 0) dayText = 'Día siguiente (+' + dayAdjust + ')';
+            if (dayAdjust < 0) dayText = 'Día anterior (' + dayAdjust + ')';
+
+            document.getElementById('convertedTime').textContent = targetTime;
+            document.getElementById('timeDiff').textContent = diffText;
+            document.getElementById('dayAdjust').textContent = dayText;
+
+            showResult('convertedTime');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', convertTime);
+            input.addEventListener('change', convertTime);
+        });
+
+        window.addEventListener('load', convertTime);
+    </script>
+</body>
+</html>

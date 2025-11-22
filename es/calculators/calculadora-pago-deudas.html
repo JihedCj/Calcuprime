@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de pago de deudas - Planifica cómo liquidar tus deudas más rápido. Compara métodos avalancha y bola de nieve para eliminar deudas eficientemente.">
+    <meta name="keywords" content="pago deudas, liquidar deudas, método avalancha, método bola de nieve, eliminar deudas">
+
+    <title>Calculadora de Pago de Deudas - Estrategias de Liquidación | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-pago-deudas.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/debt-payoff-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-pago-deudas.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/debt-payoff-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/debt-payoff-calculator.html" class="lang-link">🇺🇸 EN</a>
+                <a href="calculadora-pago-deudas.html" class="lang-link active">🇪🇸 ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Pago de Deudas</h1>
+            <p class="calculator-description">Descubre cuándo estarás libre de deudas y cuánto ahorrarás con diferentes estrategias</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Total de Deudas</h3>
+
+                <div class="form-group">
+                    <label for="totalDebt" class="form-label">Deuda Total ($)</label>
+                    <input type="number" id="totalDebt" class="form-input" value="25000" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="avgInterest" class="form-label">Tasa de Interés Promedio (%)</label>
+                    <input type="number" id="avgInterest" class="form-input" value="15" min="0" max="36" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyPayment" class="form-label">Pago Mensual Total ($)</label>
+                    <input type="number" id="monthlyPayment" class="form-input" value="750" min="0" step="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="extraPayment" class="form-label">Pago Extra Mensual ($) - Opcional</label>
+                    <input type="number" id="extraPayment" class="form-input" value="0" min="0" step="25">
+                </div>
+
+                <button onclick="calculate()" class="btn-calculate">Calcular Plan de Pago</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tu Plan de Libertad Financiera</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Fecha Libre de Deudas</div>
+                    <div class="result-value" id="payoffDate" style="font-size: 2rem; color: #10b981;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Tiempo para Pagar</div>
+                    <div class="result-value" id="payoffTime">0 meses</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Interés Total</div>
+                    <div class="result-value" id="totalInterest" style="color: #ef4444;">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Total a Pagar</div>
+                    <div class="result-value" id="totalPaid">$0</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 6px;">
+                    <strong style="color: #1e40af;">💡 Consejo:</strong>
+                    <p id="savingsTip" style="color: #1e3a8a; margin: 5px 0 0 0;"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Por Qué es Importante Tener un Plan de Pago de Deudas?</h2>
+            <p>La deuda puede ser una de las cargas financieras más pesadas que enfrentan las personas y familias. Sin un plan claro para eliminarla, es fácil sentirse abrumado y atrapado en un ciclo interminable de pagos mínimos que apenas reducen el saldo principal. Un plan estructurado de pago de deudas te proporciona un camino claro hacia la libertad financiera, te ayuda a visualizar el final del túnel y te mantiene motivado durante el proceso.</p>
+
+            <p>Tener una estrategia definida transforma la eliminación de deudas de una tarea imposible a una serie de pasos alcanzables. Te permite tomar decisiones informadas sobre cómo asignar tus recursos financieros, te muestra el impacto real de pagos adicionales, y te da el control sobre tu situación financiera en lugar de sentirte controlado por tus deudas. Estudios demuestran que las personas con un plan escrito de pago de deudas tienen 3 veces más probabilidades de lograr sus objetivos financieros que aquellas sin un plan.</p>
+
+            <h2>Los Dos Métodos Principales de Pago de Deudas</h2>
+
+            <h3>Método Avalancha (Debt Avalanche)</h3>
+            <p>El método avalancha es la estrategia matemáticamente más eficiente para eliminar deudas. Se enfoca en minimizar el interés total que pagarás durante el proceso de liquidación de deudas.</p>
+
+            <h4>Cómo Funciona:</h4>
+            <ol>
+                <li><strong>Lista todas tus deudas:</strong> Anota cada deuda con su saldo, tasa de interés y pago mínimo</li>
+                <li><strong>Ordena por tasa de interés:</strong> Organiza de mayor a menor tasa de interés (APR)</li>
+                <li><strong>Paga mínimos en todas:</strong> Continúa pagando el mínimo en cada deuda para evitar penalizaciones</li>
+                <li><strong>Ataca la más cara:</strong> Destina TODO el dinero extra a la deuda con la tasa de interés más alta</li>
+                <li><strong>Elimina y continúa:</strong> Una vez pagada la primera deuda, toma ese pago completo y súmalo al siguiente pago de la deuda con la segunda tasa más alta</li>
+                <li><strong>Repite hasta estar libre:</strong> Continúa este patrón hasta eliminar todas las deudas</li>
+            </ol>
+
+            <h4>Ventajas del Método Avalancha:</h4>
+            <ul>
+                <li><strong>Mayor ahorro en intereses:</strong> Matemáticamente óptimo, pagas la menor cantidad de interés total</li>
+                <li><strong>Pago más rápido:</strong> Generalmente te liberas de deudas antes que con otros métodos</li>
+                <li><strong>Eficiencia financiera:</strong> Cada dólar trabaja de la manera más efectiva posible</li>
+                <li><strong>Mejor para grandes deudas:</strong> Especialmente efectivo cuando tienes deudas significativas con altas tasas de interés</li>
+            </ul>
+
+            <h4>Desventajas del Método Avalancha:</h4>
+            <ul>
+                <li><strong>Recompensas lentas:</strong> Si tu deuda de mayor interés también tiene el saldo más grande, puede tomar meses ver la primera victoria</li>
+                <li><strong>Requiere disciplina:</strong> Necesitas mantener motivación sin victorias rápidas</li>
+                <li><strong>Complejidad mental:</strong> Puede ser desalentador si no ves progreso tangible rápidamente</li>
+            </ul>
+
+            <h3>Método Bola de Nieve (Debt Snowball)</h3>
+            <p>El método bola de nieve fue popularizado por el experto financiero Dave Ramsey. Prioriza el aspecto psicológico y la motivación sobre la eficiencia matemática pura.</p>
+
+            <h4>Cómo Funciona:</h4>
+            <ol>
+                <li><strong>Lista todas tus deudas:</strong> Registra cada deuda con su información completa</li>
+                <li><strong>Ordena por saldo:</strong> Organiza de menor a mayor saldo, ignorando las tasas de interés</li>
+                <li><strong>Paga mínimos en todas:</strong> Mantén todos los pagos mínimos al corriente</li>
+                <li><strong>Ataca la más pequeña:</strong> Envía todo el dinero extra a la deuda con el saldo más bajo</li>
+                <li><strong>Celebra victorias rápidas:</strong> Disfruta el logro de eliminar completamente una deuda</li>
+                <li><strong>Acumula momentum:</strong> El pago de la primera deuda se suma al pago de la siguiente, creando un efecto "bola de nieve"</li>
+                <li><strong>Repite el proceso:</strong> Continúa hasta estar completamente libre de deudas</li>
+            </ol>
+
+            <h4>Ventajas del Método Bola de Nieve:</h4>
+            <ul>
+                <li><strong>Victorias psicológicas:</strong> Ver deudas eliminarse completamente proporciona motivación poderosa</li>
+                <li><strong>Momentum positivo:</strong> Cada victoria te impulsa a seguir adelante</li>
+                <li><strong>Simplificación progresiva:</strong> Reduces el número de cuentas y pagos a manejar</li>
+                <li><strong>Mayor tasa de éxito:</strong> Estudios muestran que más personas completan el pago de deudas con este método debido al factor motivacional</li>
+                <li><strong>Ideal para principiantes:</strong> Perfecto si nunca has seguido un plan de deudas antes</li>
+            </ul>
+
+            <h4>Desventajas del Método Bola de Nieve:</h4>
+            <ul>
+                <li><strong>Más caro:</strong> Pagarás más interés total comparado con el método avalancha</li>
+                <li><strong>Tiempo más largo:</strong> Generalmente toma más tiempo estar completamente libre de deudas</li>
+                <li><strong>No óptimo matemáticamente:</strong> Ignora las tasas de interés puede costarte cientos o miles de dólares</li>
+            </ul>
+
+            <h2>¿Cuál Método Debes Elegir?</h2>
+
+            <h3>Elige el Método Avalancha Si:</h3>
+            <ul>
+                <li>Eres altamente disciplinado y motivado intrínsecamente</li>
+                <li>Te motiva más ahorrar dinero que obtener victorias rápidas</li>
+                <li>Tienes deudas de alto interés (tarjetas de crédito con APR >15%)</li>
+                <li>Puedes mantener tu compromiso sin recompensas inmediatas</li>
+                <li>Entiendes y valoras la eficiencia matemática</li>
+            </ul>
+
+            <h3>Elige el Método Bola de Nieve Si:</h3>
+            <ul>
+                <li>Necesitas victorias rápidas para mantenerte motivado</li>
+                <li>Has intentado pagar deudas antes sin éxito</li>
+                <li>Te sientes abrumado por múltiples deudas pequeñas</li>
+                <li>La simplicidad y el momentum psicológico son importantes para ti</li>
+                <li>La diferencia en interés entre métodos no es significativa en tu situación</li>
+            </ul>
+
+            <h3>Método Híbrido</h3>
+            <p>Algunos expertos recomiendan un enfoque híbrido que combina ambos métodos:</p>
+            <ul>
+                <li>Comienza con bola de nieve para obtener 1-2 victorias rápidas y construir momentum</li>
+                <li>Una vez motivado y con menos deudas, cambia a avalancha para optimizar ahorro de intereses</li>
+                <li>O agrupa deudas con tasas similares y dentro de esos grupos usa el método bola de nieve</li>
+            </ul>
+
+            <h2>Estrategias Avanzadas para Acelerar el Pago de Deudas</h2>
+
+            <h3>1. Aumenta tus Ingresos Temporalmente</h3>
+            <p>Considera trabajos secundarios o freelancing específicamente para pagar deudas:</p>
+            <ul>
+                <li><strong>Economía de plataformas:</strong> Uber, DoorDash, TaskRabbit durante noches/fines de semana</li>
+                <li><strong>Freelancing online:</strong> Upwork, Fiverr usando tus habilidades profesionales</li>
+                <li><strong>Venta de artículos:</strong> Decluttering intensivo vendiendo lo que no necesitas</li>
+                <li><strong>Servicios locales:</strong> Cuidado de mascotas, tutorías, mantenimiento de jardines</li>
+            </ul>
+            <p>Destina el 100% de estos ingresos extra directamente a deudas. Incluso $200-500 mensuales adicionales puede reducir años de tu plan de pago.</p>
+
+            <h3>2. Reduce Gastos Drásticamente (Temporalmente)</h3>
+            <p>Considera un "modo intensivo" de 6-12 meses:</p>
+            <ul>
+                <li><strong>Elimina entretenimiento pagado:</strong> Cancela cable, reduce suscripciones a solo esenciales</li>
+                <li><strong>Dieta frugal:</strong> Cocina en casa 100%, planifica comidas, elimina restaurantes</li>
+                <li><strong>Pausa lujos:</strong> Sin vacaciones, compras de ropa, o gastos discrecionales</li>
+                <li><strong>Vende un auto:</strong> Si tienes dos vehículos, considera vender uno temporalmente</li>
+                <li><strong>Consigue compañero de cuarto:</strong> Reduce costos de vivienda significativamente</li>
+            </ul>
+
+            <h3>3. Usa Windfalls Estratégicamente</h3>
+            <p>Destina el 100% de ingresos inesperados a deudas:</p>
+            <ul>
+                <li>Reembolsos de impuestos</li>
+                <li>Bonos laborales</li>
+                <li>Herencias o regalos monetarios</li>
+                <li>Reembolsos o liquidaciones</li>
+                <li>Comisiones o propinas grandes</li>
+            </ul>
+            <p>Un reembolso de impuestos de $2,000-3,000 puede eliminar una deuda completa instantáneamente.</p>
+
+            <h3>4. Refinancia o Consolida Inteligentemente</h3>
+            <ul>
+                <li><strong>Transferencias de saldo:</strong> Mueve deuda de alto interés a tarjetas 0% APR (cuidado con tarifas de transferencia)</li>
+                <li><strong>Préstamos personales:</strong> Consolida múltiples deudas a menor tasa (generalmente 6-12% vs 15-25%)</li>
+                <li><strong>Préstamos de consolidación de deuda:</strong> Un solo pago simplifica y puede reducir tasa</li>
+                <li><strong>Líneas de crédito con garantía hipotecaria:</strong> Tasas muy bajas pero usa tu casa como garantía (riesgoso)</li>
+            </ul>
+
+            <h3>5. Negocia con Acreedores</h3>
+            <p>Muchos acreedores están dispuestos a negociar si llamas y pides:</p>
+            <ul>
+                <li><strong>Reducción de tasa de interés:</strong> Especialmente si tienes buen historial de pagos</li>
+                <li><strong>Waiver de cargos:</strong> Eliminación de cargos por pagos atrasados o anuales</li>
+                <li><strong>Planes de dificultad:</strong> Programas especiales para personas con problemas financieros temporales</li>
+                <li><strong>Liquidación por menos:</strong> En casos extremos, ofrecer pago único por menos del total debido</li>
+            </ul>
+
+            <h2>Errores Comunes que Debes Evitar</h2>
+
+            <h3>1. Continuar Usando Crédito Mientras Pagas Deudas</h3>
+            <p>Es como llenar un balde con un agujero en el fondo. Mientras pagas deudas activamente, congela o corta tus tarjetas de crédito. Si necesitas una tarjeta para emergencias, mantén solo una con límite bajo.</p>
+
+            <h3>2. No Tener un Fondo de Emergencia Pequeño</h3>
+            <p>Antes de atacar deudas agresivamente, ahorra $1,000-2,000 para emergencias. Sin este colchón, cualquier gasto inesperado te fuerza a usar tarjetas de crédito nuevamente, saboteando tu progreso.</p>
+
+            <h3>3. Pagar Solo Mínimos</h3>
+            <p>Los pagos mínimos están diseñados para mantenerte en deuda el mayor tiempo posible. En una deuda de $10,000 a 18% APR, pagar solo el mínimo te costará $17,000+ y tomará más de 25 años.</p>
+
+            <h3>4. No Tener un Presupuesto</h3>
+            <p>No puedes pagar deudas agresivamente sin saber exactamente dónde va tu dinero cada mes. Un presupuesto detallado revela dinero "perdido" que puede destinarse a deudas.</p>
+
+            <h3>5. Abandonar por Perfeccionismo</h3>
+            <p>Si tienes un mes malo o usas crédito por una emergencia, no abandones todo el plan. Ajusta, aprende y continúa. El progreso imperfecto sigue siendo progreso.</p>
+
+            <h2>Cómo Mantenerse Motivado Durante el Proceso</h2>
+
+            <h3>Visualiza tu Progreso</h3>
+            <ul>
+                <li><strong>Gráficas de progreso:</strong> Crea un gráfico visual que coloreas a medida que pagas deudas</li>
+                <li><strong>Aplicaciones de rastreo:</strong> Usa apps que muestran tu progreso gráficamente</li>
+                <li><strong>Hoja de cálculo:</strong> Actualiza mensualmente viendo el saldo disminuir</li>
+                <li><strong>Termómetro de deuda:</strong> Imprime un termómetro grande y márcalo cada mes</li>
+            </ul>
+
+            <h3>Celebra Milestones</h3>
+            <ul>
+                <li>Primera deuda eliminada (sin importar el tamaño)</li>
+                <li>Cada $5,000 o $10,000 pagados</li>
+                <li>Llegar a mitad de camino</li>
+                <li>Eliminar todas las deudas de tarjetas de crédito</li>
+                <li>Último pago (¡celebración grande!)</li>
+            </ul>
+            <p>Celebra de maneras que no cuesten dinero: día en el parque, noche de películas en casa, cocina tu comida favorita.</p>
+
+            <h3>Encuentra un Compañero de Responsabilidad</h3>
+            <p>Comparte tus metas con alguien que te apoye: cónyuge, amigo de confianza, o únete a comunidades online de pago de deudas. Reportar progreso regularmente aumenta significativamente las posibilidades de éxito.</p>
+
+            <h3>Visualiza tu Vida Libre de Deudas</h3>
+            <p>Regularmente imagina y escribe sobre cómo será tu vida sin pagos de deudas:</p>
+            <ul>
+                <li>¿Qué harás con el dinero liberado?</li>
+                <li>¿Cómo te sentirás emocionalmente?</li>
+                <li>¿Qué nuevas oportunidades tendrás?</li>
+                <li>¿Cómo impactará tu familia?</li>
+            </ul>
+
+            <h2>Qué Hacer Después de Estar Libre de Deudas</h2>
+
+            <h3>1. Construye tu Fondo de Emergencia Completo</h3>
+            <p>Toma los pagos que hacías a deudas y destínalos a ahorros hasta tener 3-6 meses de gastos. Esto previene futuras deudas cuando surjan emergencias.</p>
+
+            <h3>2. Invierte para el Retiro</h3>
+            <p>Maximiza contribuciones a cuentas de retiro (401k, IRA). El dinero que antes iba a intereses ahora puede crecer para tu futuro.</p>
+
+            <h3>3. Ahorra para Objetivos Específicos</h3>
+            <p>Crea fondos separados para: casa, educación de hijos, próximo auto (para comprarlo en efectivo), vacaciones, remodelaciones.</p>
+
+            <h3>4. Considera Invertir</h3>
+            <p>Con deudas eliminadas y fondo de emergencia sólido, explora inversiones en acciones, fondos indexados, bienes raíces.</p>
+
+            <h3>5. Sé Generoso</h3>
+            <p>La libertad financiera te permite ayudar a otros. Considera donaciones caritativas, apoyar causas importantes, o ayudar a familiares.</p>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Debo pagar deudas o ahorrar para emergencias primero?</h3>
+            <p>Ahorra $1,000-2,000 primero como colchón básico, luego ataca deudas agresivamente. Una vez libre de deudas de alto interés, construye el fondo completo de 3-6 meses.</p>
+
+            <h3>¿Qué pasa si no puedo pagar ni los mínimos?</h3>
+            <p>Contacta a tus acreedores inmediatamente. Muchos tienen programas de dificultad. Considera consejería de crédito sin fines de lucro. No ignores el problema, empeora con el tiempo.</p>
+
+            <h3>¿Debo usar ahorros de retiro para pagar deudas?</h3>
+            <p>Generalmente NO. Los retiros anticipados de 401k/IRA tienen penalizaciones del 10% más impuestos. Solo considera en situaciones extremas de bancarrota inminente.</p>
+
+            <h3>¿Cuánto dinero extra necesito para ver diferencia real?</h3>
+            <p>Incluso $50-100 extra mensuales puede reducir años de tu plan de pago y ahorrar miles en intereses. Cada dólar cuenta significativamente.</p>
+
+            <h3>¿Debo pagar mi hipoteca o auto primero?</h3>
+            <p>Generalmente enfócate primero en deudas de consumo (tarjetas de crédito, préstamos personales) ya que tienen tasas más altas. Hipotecas y autos usualmente tienen tasas más bajas y pueden esperar.</p>
+
+            <p>Usar esta calculadora es tu primer paso hacia la libertad financiera. Actualiza tus números mensualmente para ver tu progreso y mantener la motivación. ¡El mejor momento para empezar es hoy!</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const totalDebt = parseFloat(document.getElementById('totalDebt').value) || 0;
+            const avgInterest = parseFloat(document.getElementById('avgInterest').value) || 0;
+            const monthlyPayment = parseFloat(document.getElementById('monthlyPayment').value) || 0;
+            const extraPayment = parseFloat(document.getElementById('extraPayment').value) || 0;
+            const totalMonthlyPayment = monthlyPayment + extraPayment;
+
+            if (totalDebt <= 0 || totalMonthlyPayment <= 0) {
+                return;
+            }
+
+            const monthlyRate = avgInterest / 100 / 12;
+            let balance = totalDebt;
+            let months = 0;
+            let totalInterest = 0;
+            const maxMonths = 600;
+
+            while (balance > 0.01 && months < maxMonths) {
+                const interest = balance * monthlyRate;
+                const principal = Math.min(totalMonthlyPayment - interest, balance);
+
+                if (principal <= 0) {
+                    document.getElementById('payoffTime').textContent = 'Pago insuficiente';
+                    document.getElementById('totalInterest').textContent = 'No se puede calcular';
+                    document.getElementById('totalPaid').textContent = 'Aumenta tu pago mensual';
+                    document.getElementById('payoffDate').textContent = 'Nunca';
+                    document.getElementById('savingsTip').textContent = 'Tu pago mensual no cubre el interés. Aumenta tu pago para ver progreso.';
+                    return;
+                }
+
+                totalInterest += interest;
+                balance -= principal;
+                months++;
+            }
+
+            // Calculate payoff date
+            const today = new Date();
+            const payoffDate = new Date(today);
+            payoffDate.setMonth(payoffDate.getMonth() + months);
+
+            const monthNames = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+                "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+            const payoffDateString = monthNames[payoffDate.getMonth()] + " " + payoffDate.getFullYear();
+
+            // Format time
+            const years = Math.floor(months / 12);
+            const remainingMonths = months % 12;
+            let timeString = '';
+            if (years > 0) {
+                timeString += years + (years === 1 ? ' año' : ' años');
+                if (remainingMonths > 0) {
+                    timeString += ' y ' + remainingMonths + (remainingMonths === 1 ? ' mes' : ' meses');
+                }
+            } else {
+                timeString = months + (months === 1 ? ' mes' : ' meses');
+            }
+
+            const totalPaid = totalDebt + totalInterest;
+
+            // Calculate savings with extra payment
+            let savingsTip = '';
+            if (extraPayment > 0) {
+                // Calculate without extra payment
+                let balanceNoExtra = totalDebt;
+                let monthsNoExtra = 0;
+                let interestNoExtra = 0;
+
+                while (balanceNoExtra > 0.01 && monthsNoExtra < maxMonths) {
+                    const interest = balanceNoExtra * monthlyRate;
+                    const principal = Math.min(monthlyPayment - interest, balanceNoExtra);
+                    if (principal <= 0) break;
+                    interestNoExtra += interest;
+                    balanceNoExtra -= principal;
+                    monthsNoExtra++;
+                }
+
+                const savedInterest = interestNoExtra - totalInterest;
+                const savedMonths = monthsNoExtra - months;
+
+                if (savedMonths > 0) {
+                    const savedYears = Math.floor(savedMonths / 12);
+                    const savedRemaining = savedMonths % 12;
+                    let savedTimeString = '';
+                    if (savedYears > 0) {
+                        savedTimeString = savedYears + (savedYears === 1 ? ' año' : ' años');
+                        if (savedRemaining > 0) {
+                            savedTimeString += ' ' + savedRemaining + ' meses';
+                        }
+                    } else {
+                        savedTimeString = savedMonths + ' meses';
+                    }
+
+                    savingsTip = `Con tu pago extra de $${extraPayment.toFixed(0)}/mes, te liberarás ${savedTimeString} antes y ahorrarás ${savedInterest.toLocaleString('en-US', {style: 'currency', currency: 'USD'})} en intereses.`;
+                }
+            } else {
+                savingsTip = `Agregando solo $100 mensuales extra puede reducir años de tu plan de pago. ¡Inténtalo!`;
+            }
+
+            // Display results
+            document.getElementById('payoffDate').textContent = payoffDateString;
+            document.getElementById('payoffTime').textContent = timeString;
+            document.getElementById('totalInterest').textContent = totalInterest.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+            document.getElementById('totalPaid').textContent = totalPaid.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+            document.getElementById('savingsTip').textContent = savingsTip;
+        }
+
+        // Event listeners
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

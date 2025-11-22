@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de Peso Molecular gratuita - Calcula el peso molecular y masa molar de compuestos químicos a partir de fórmulas químicas.">
+    <meta name="keywords" content="peso molecular, masa molar, fórmula química, calculadora química, química">
+
+    <title>Calculadora de Peso Molecular - Masa Molar | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-peso-molecular.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/molecular-weight-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-peso-molecular.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/molecular-weight-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+        .element-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 8px;
+            margin: 20px 0;
+        }
+        .element-box {
+            padding: 10px;
+            background: #f3f4f6;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .element-box:hover {
+            background: #e5e7eb;
+            transform: scale(1.05);
+        }
+        .element-symbol {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4F46E5;
+        }
+        .element-weight {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/molecular-weight-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-peso-molecular.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Peso Molecular</h1>
+            <p class="calculator-description">Calcula la masa molar de compuestos químicos a partir de fórmulas</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Fórmula Química</h3>
+
+                <div class="form-group">
+                    <label for="chemicalFormula" class="form-label">Ingresa la Fórmula</label>
+                    <input type="text" id="chemicalFormula" class="form-input" value="H2O" placeholder="Ej: H2O, NaCl, C6H12O6">
+                    <small style="color: #6b7280;">Ejemplos: H₂O, NaCl, C₆H₁₂O₆, Ca(OH)₂</small>
+                </div>
+
+                <button onclick="calculateMolecularWeight()" class="btn-calculate">Calcular Peso Molecular</button>
+
+                <div style="margin-top: 20px;">
+                    <h4 style="margin-bottom: 10px;">Elementos Comunes (clic para agregar)</h4>
+                    <div class="element-table" id="elementTable">
+                        <!-- Elements will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Peso Molecular</div>
+                    <div class="result-value" id="molecularWeight" style="font-size: 2.5rem; color: #10b981;">0.00</div>
+                    <div style="font-size: 0.9rem; color: #6b7280;">g/mol</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Fórmula Ingresada</div>
+                    <div class="result-value" id="formulaDisplay" style="font-size: 1.5rem;">-</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Composición</div>
+                    <div id="composition" style="font-size: 0.95rem; line-height: 1.6;">
+                        Ingresa una fórmula para ver la composición
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 4px;">
+                    <p style="margin: 0; color: #1e40af; font-size: 0.9rem;" id="massInfo">
+                        La masa molar es la suma de las masas atómicas de todos los átomos en la fórmula.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el Peso Molecular?</h2>
+            <p>El peso molecular (también llamado masa molar) es la masa de una molécula de un compuesto químico, expresada en unidades de masa atómica (uma) o gramos por mol (g/mol). Se calcula sumando las masas atómicas de todos los átomos presentes en la fórmula molecular del compuesto. El peso molecular es una propiedad fundamental que permite a los químicos convertir entre masa y cantidad de sustancia (moles), lo cual es esencial para realizar cálculos estequiométricos, preparar soluciones, y llevar a cabo reacciones químicas con precisión. La masa atómica de cada elemento se encuentra en la tabla periódica y representa el promedio ponderado de los isótopos naturales de ese elemento.</p>
+
+            <h2>Cómo Usar la Calculadora de Peso Molecular</h2>
+            <ol>
+                <li><strong>Ingresa la fórmula química:</strong> Escribe la fórmula del compuesto usando símbolos químicos estándar</li>
+                <li><strong>Usa números para subíndices:</strong> Escribe H2O (no H₂O), aunque ambos funcionan</li>
+                <li><strong>Paréntesis para grupos:</strong> Usa paréntesis para grupos que se repiten, como Ca(OH)2</li>
+                <li><strong>Mayúsculas y minúsculas:</strong> Los símbolos químicos distinguen entre mayúsculas (Cl = cloro, CL es incorrecto)</li>
+                <li><strong>Elementos comunes:</strong> Haz clic en los elementos de la tabla para agregarlos rápidamente</li>
+                <li><strong>Calcula:</strong> Presiona el botón o Enter para obtener el peso molecular y composición</li>
+            </ol>
+
+            <h2>Fórmula del Peso Molecular</h2>
+            <p>El peso molecular se calcula mediante:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; font-size: 1.1rem;">
+                <strong>PM = Σ (n × Masa atómica)</strong>
+            </p>
+            <p>Donde:</p>
+            <ul>
+                <li><strong>PM</strong> = Peso molecular (g/mol)</li>
+                <li><strong>n</strong> = Número de átomos de cada elemento</li>
+                <li><strong>Masa atómica</strong> = Masa del elemento de la tabla periódica</li>
+                <li><strong>Σ</strong> = Suma de todos los elementos en la fórmula</li>
+            </ul>
+
+            <h2>Ejemplos de Cálculos de Peso Molecular</h2>
+
+            <h3>Ejemplo 1: Agua (H₂O)</h3>
+            <p>La molécula de agua contiene:</p>
+            <ul>
+                <li>2 átomos de Hidrógeno (H): 2 × 1.008 = 2.016 g/mol</li>
+                <li>1 átomo de Oxígeno (O): 1 × 15.999 = 15.999 g/mol</li>
+                <li><strong>Peso molecular total:</strong> 2.016 + 15.999 = <strong>18.015 g/mol</strong></li>
+            </ul>
+
+            <h3>Ejemplo 2: Cloruro de Sodio (NaCl)</h3>
+            <p>Sal de mesa común:</p>
+            <ul>
+                <li>1 átomo de Sodio (Na): 1 × 22.990 = 22.990 g/mol</li>
+                <li>1 átomo de Cloro (Cl): 1 × 35.453 = 35.453 g/mol</li>
+                <li><strong>Peso molecular total:</strong> 22.990 + 35.453 = <strong>58.443 g/mol</strong></li>
+            </ul>
+
+            <h3>Ejemplo 3: Glucosa (C₆H₁₂O₆)</h3>
+            <p>Azúcar simple importante en biología:</p>
+            <ul>
+                <li>6 átomos de Carbono (C): 6 × 12.011 = 72.066 g/mol</li>
+                <li>12 átomos de Hidrógeno (H): 12 × 1.008 = 12.096 g/mol</li>
+                <li>6 átomos de Oxígeno (O): 6 × 15.999 = 95.994 g/mol</li>
+                <li><strong>Peso molecular total:</strong> 72.066 + 12.096 + 95.994 = <strong>180.156 g/mol</strong></li>
+            </ul>
+
+            <h3>Ejemplo 4: Hidróxido de Calcio Ca(OH)₂</h3>
+            <p>Compuesto con paréntesis:</p>
+            <ul>
+                <li>1 átomo de Calcio (Ca): 1 × 40.078 = 40.078 g/mol</li>
+                <li>2 átomos de Oxígeno (O): 2 × 15.999 = 31.998 g/mol</li>
+                <li>2 átomos de Hidrógeno (H): 2 × 1.008 = 2.016 g/mol</li>
+                <li><strong>Peso molecular total:</strong> 40.078 + 31.998 + 2.016 = <strong>74.092 g/mol</strong></li>
+            </ul>
+
+            <h2>Aplicaciones del Peso Molecular</h2>
+
+            <h3>Cálculos Estequiométricos</h3>
+            <p>El peso molecular es fundamental para determinar las cantidades de reactivos y productos en reacciones químicas. Permite convertir entre gramos y moles, lo cual es esencial para balancear ecuaciones químicas y predecir rendimientos de reacciones. Por ejemplo, para saber cuántos gramos de NaCl se producen al reaccionar 23 g de Na con Cl₂, necesitas conocer los pesos moleculares.</p>
+
+            <h3>Preparación de Soluciones</h3>
+            <p>Para preparar soluciones de concentración específica (molaridad, normalidad), debes calcular cuántos gramos de soluto necesitas. Esto requiere conocer el peso molecular del compuesto. Por ejemplo, para preparar 1 L de solución 0.5 M de NaCl, calculas: 0.5 mol × 58.44 g/mol = 29.22 g de NaCl.</p>
+
+            <h3>Análisis Químico</h3>
+            <p>En técnicas analíticas como espectrometría de masas, cromatografía y espectroscopía, el peso molecular ayuda a identificar compuestos desconocidos. Los picos en un espectro de masas corresponden a la relación masa/carga, que se relaciona directamente con el peso molecular.</p>
+
+            <h3>Química Farmacéutica</h3>
+            <p>En el desarrollo de medicamentos, el peso molecular afecta la absorción, distribución, metabolismo y excreción de fármacos. La "Regla de los Cinco" de Lipinski establece que fármacos orales efectivos típicamente tienen pesos moleculares menores a 500 g/mol.</p>
+
+            <h3>Química de Polímeros</h3>
+            <p>Para polímeros, el peso molecular promedio determina propiedades físicas como viscosidad, resistencia mecánica y temperatura de fusión. Los polímeros tienen distribuciones de peso molecular que afectan sus aplicaciones.</p>
+
+            <h2>Masas Atómicas de Elementos Comunes</h2>
+            <p>Estos son los pesos atómicos redondeados de elementos frecuentemente usados:</p>
+            <ul>
+                <li><strong>Hidrógeno (H):</strong> 1.008 g/mol</li>
+                <li><strong>Carbono (C):</strong> 12.011 g/mol</li>
+                <li><strong>Nitrógeno (N):</strong> 14.007 g/mol</li>
+                <li><strong>Oxígeno (O):</strong> 15.999 g/mol</li>
+                <li><strong>Flúor (F):</strong> 18.998 g/mol</li>
+                <li><strong>Sodio (Na):</strong> 22.990 g/mol</li>
+                <li><strong>Magnesio (Mg):</strong> 24.305 g/mol</li>
+                <li><strong>Fósforo (P):</strong> 30.974 g/mol</li>
+                <li><strong>Azufre (S):</strong> 32.065 g/mol</li>
+                <li><strong>Cloro (Cl):</strong> 35.453 g/mol</li>
+                <li><strong>Potasio (K):</strong> 39.098 g/mol</li>
+                <li><strong>Calcio (Ca):</strong> 40.078 g/mol</li>
+                <li><strong>Hierro (Fe):</strong> 55.845 g/mol</li>
+                <li><strong>Cobre (Cu):</strong> 63.546 g/mol</li>
+                <li><strong>Zinc (Zn):</strong> 65.380 g/mol</li>
+                <li><strong>Bromo (Br):</strong> 79.904 g/mol</li>
+                <li><strong>Plata (Ag):</strong> 107.868 g/mol</li>
+                <li><strong>Yodo (I):</strong> 126.904 g/mol</li>
+            </ul>
+
+            <h2>Compuestos Químicos Importantes y sus Pesos Moleculares</h2>
+
+            <h3>Compuestos Comunes en el Laboratorio</h3>
+            <ul>
+                <li><strong>Ácido clorhídrico (HCl):</strong> 36.46 g/mol</li>
+                <li><strong>Ácido sulfúrico (H₂SO₄):</strong> 98.08 g/mol</li>
+                <li><strong>Ácido nítrico (HNO₃):</strong> 63.01 g/mol</li>
+                <li><strong>Hidróxido de sodio (NaOH):</strong> 40.00 g/mol</li>
+                <li><strong>Carbonato de sodio (Na₂CO₃):</strong> 105.99 g/mol</li>
+                <li><strong>Sulfato de cobre(II) pentahidratado (CuSO₄·5H₂O):</strong> 249.68 g/mol</li>
+            </ul>
+
+            <h3>Compuestos Biológicos</h3>
+            <ul>
+                <li><strong>Glucosa (C₆H₁₂O₆):</strong> 180.16 g/mol</li>
+                <li><strong>Sacarosa (C₁₂H₂₂O₁₁):</strong> 342.30 g/mol</li>
+                <li><strong>Ácido acético (CH₃COOH):</strong> 60.05 g/mol</li>
+                <li><strong>Etanol (C₂H₅OH):</strong> 46.07 g/mol</li>
+                <li><strong>Urea (CH₄N₂O):</strong> 60.06 g/mol</li>
+                <li><strong>Ácido ascórbico/Vitamina C (C₆H₈O₆):</strong> 176.12 g/mol</li>
+            </ul>
+
+            <h3>Gases Comunes</h3>
+            <ul>
+                <li><strong>Oxígeno (O₂):</strong> 31.998 g/mol</li>
+                <li><strong>Nitrógeno (N₂):</strong> 28.014 g/mol</li>
+                <li><strong>Dióxido de carbono (CO₂):</strong> 44.01 g/mol</li>
+                <li><strong>Metano (CH₄):</strong> 16.04 g/mol</li>
+                <li><strong>Amoníaco (NH₃):</strong> 17.03 g/mol</li>
+            </ul>
+
+            <h2>Diferencias entre Peso Molecular, Masa Molar y Peso Fórmula</h2>
+
+            <h3>Peso Molecular</h3>
+            <p>Se refiere específicamente a moléculas covalentes y representa la suma de las masas atómicas de todos los átomos en una molécula individual. Expresado en unidades de masa atómica (uma) o Daltons (Da).</p>
+
+            <h3>Masa Molar</h3>
+            <p>Es la masa de un mol de sustancia (6.022 × 10²³ partículas). Numéricamente igual al peso molecular pero expresada en g/mol. Se usa en cálculos prácticos de laboratorio.</p>
+
+            <h3>Peso Fórmula</h3>
+            <p>Término usado para compuestos iónicos que no existen como moléculas discretas (como NaCl). Representa la suma de masas atómicas de los iones en la fórmula empírica.</p>
+
+            <h2>Isótopos y Peso Atómico</h2>
+            <p>Las masas atómicas en la tabla periódica no son números enteros porque son promedios ponderados de los isótopos naturales de cada elemento. Por ejemplo:</p>
+            <ul>
+                <li><strong>Carbono:</strong> 98.9% es ¹²C (masa 12.000) y 1.1% es ¹³C (masa 13.003), resultando en masa promedio de 12.011</li>
+                <li><strong>Cloro:</strong> 75.8% es ³⁵Cl (masa 34.969) y 24.2% es ³⁷Cl (masa 36.966), resultando en masa promedio de 35.453</li>
+            </ul>
+            <p>Para trabajos de alta precisión o cuando se usan isótopos específicos (como en trazadores radiactivos), debes usar la masa del isótopo específico, no el promedio.</p>
+
+            <h2>Conversiones entre Masa y Moles</h2>
+            <p>El peso molecular permite convertir entre masa (gramos) y cantidad de sustancia (moles):</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                <strong>n (moles) = masa (g) / PM (g/mol)</strong><br>
+                <strong>masa (g) = n (moles) × PM (g/mol)</strong>
+            </p>
+
+            <h3>Ejemplo de Conversión</h3>
+            <p>¿Cuántos moles hay en 100 g de NaCl (PM = 58.44 g/mol)?</p>
+            <ul>
+                <li>n = 100 g / 58.44 g/mol = 1.71 moles</li>
+            </ul>
+            <p>¿Cuántos gramos son 0.5 moles de H₂O (PM = 18.02 g/mol)?</p>
+            <ul>
+                <li>masa = 0.5 mol × 18.02 g/mol = 9.01 g</li>
+            </ul>
+
+            <h2>Composición Porcentual</h2>
+            <p>El peso molecular permite calcular el porcentaje en masa de cada elemento en un compuesto:</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; font-family: monospace;">
+                <strong>% elemento = (masa del elemento / PM total) × 100</strong>
+            </p>
+
+            <h3>Ejemplo: Composición de H₂O</h3>
+            <ul>
+                <li>% H = (2 × 1.008 / 18.015) × 100 = 11.19%</li>
+                <li>% O = (15.999 / 18.015) × 100 = 88.81%</li>
+            </ul>
+            <p>Esta información es útil en análisis elemental y para verificar la pureza de compuestos.</p>
+
+            <h2>Consejos para Escribir Fórmulas Químicas</h2>
+            <ul>
+                <li><strong>Símbolos correctos:</strong> Usa la primera letra mayúscula y la segunda minúscula (Co = cobalto, CO = monóxido de carbono)</li>
+                <li><strong>Subíndices:</strong> Números después del símbolo indican cantidad de átomos (H2O tiene 2 hidrógenos)</li>
+                <li><strong>Paréntesis:</strong> Agrupan átomos que se multiplican juntos: Ca(OH)2 = Ca + 2O + 2H</li>
+                <li><strong>Corchetes y llaves:</strong> Para estructuras complejas como [Co(NH₃)₆]Cl₃</li>
+                <li><strong>Hidratos:</strong> Moléculas de agua de cristalización se indican con punto: CuSO₄·5H₂O</li>
+                <li><strong>Cargas:</strong> Para iones, usa superíndices: SO₄²⁻, Fe³⁺</li>
+            </ul>
+
+            <h2>Errores Comunes al Calcular Peso Molecular</h2>
+            <ul>
+                <li><strong>Confundir símbolos:</strong> CO (monóxido de carbono) vs Co (cobalto)</li>
+                <li><strong>Olvidar multiplicar:</strong> En Ca(OH)₂, hay 2 átomos de O y 2 de H, no solo uno</li>
+                <li><strong>Usar masas incorrectas:</strong> Verificar las masas atómicas en una tabla periódica actualizada</li>
+                <li><strong>No considerar hidratos:</strong> CuSO₄·5H₂O tiene 5 moléculas de agua adicionales</li>
+                <li><strong>Errores de redondeo:</strong> Mantener suficientes decimales durante cálculos intermedios</li>
+                <li><strong>Confundir peso molecular con densidad:</strong> Son propiedades diferentes</li>
+            </ul>
+
+            <h2>Herramientas Complementarias</h2>
+            <p>Además de calcular peso molecular, considera usar:</p>
+            <ul>
+                <li><strong>Calculadora de molaridad:</strong> Para preparar soluciones de concentración específica</li>
+                <li><strong>Conversor de unidades:</strong> Para convertir entre diferentes unidades de masa</li>
+                <li><strong>Balanceador de ecuaciones:</strong> Para ecuaciones químicas complejas</li>
+                <li><strong>Calculadora estequiométrica:</strong> Para calcular reactivos y productos en reacciones</li>
+                <li><strong>Tabla periódica interactiva:</strong> Para consultar propiedades de elementos</li>
+            </ul>
+
+            <h2>Importancia en la Investigación Científica</h2>
+            <p>El peso molecular es crucial en múltiples áreas de investigación:</p>
+            <ul>
+                <li><strong>Síntesis orgánica:</strong> Calcular rendimientos teóricos y reales</li>
+                <li><strong>Bioquímica:</strong> Determinar concentraciones de proteínas y ADN</li>
+                <li><strong>Química ambiental:</strong> Medir contaminantes y sus efectos</li>
+                <li><strong>Ciencia de materiales:</strong> Diseñar polímeros y nanomateriales</li>
+                <li><strong>Química forense:</strong> Identificar sustancias desconocidas</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Cuál es la diferencia entre peso molecular y masa molecular?</h3>
+            <p>Los términos se usan intercambiablemente, aunque técnicamente "peso" debería referirse a fuerza gravitacional. En química, ambos términos significan lo mismo: la suma de masas atómicas en una molécula.</p>
+
+            <h3>¿Por qué las masas atómicas no son números enteros?</h3>
+            <p>Las masas atómicas en la tabla periódica son promedios ponderados de todos los isótopos naturales de un elemento. Cada isótopo tiene una masa diferente, y la proporción de cada isótopo en la naturaleza determina el promedio.</p>
+
+            <h3>¿Cómo calculo el peso molecular de sales hidratadas?</h3>
+            <p>Calcula el peso de la sal anhidra normalmente, luego suma la masa de las moléculas de agua de cristalización. Por ejemplo, CuSO₄·5H₂O = PM(CuSO₄) + 5 × PM(H₂O) = 159.61 + 90.08 = 249.69 g/mol.</p>
+
+            <h3>¿Es lo mismo peso molecular que peso fórmula?</h3>
+            <p>Peso molecular se usa para compuestos covalentes (moléculas verdaderas), mientras que peso fórmula se usa para compuestos iónicos que no existen como moléculas discretas. Los cálculos son idénticos, solo cambia la terminología según el tipo de compuesto.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Atomic weights of common elements
+        const atomicWeights = {
+            'H': 1.008, 'He': 4.003, 'Li': 6.941, 'Be': 9.012, 'B': 10.811,
+            'C': 12.011, 'N': 14.007, 'O': 15.999, 'F': 18.998, 'Ne': 20.180,
+            'Na': 22.990, 'Mg': 24.305, 'Al': 26.982, 'Si': 28.086, 'P': 30.974,
+            'S': 32.065, 'Cl': 35.453, 'Ar': 39.948, 'K': 39.098, 'Ca': 40.078,
+            'Fe': 55.845, 'Cu': 63.546, 'Zn': 65.380, 'Br': 79.904, 'Ag': 107.868,
+            'I': 126.904, 'Au': 196.967, 'Hg': 200.592
+        };
+
+        // Common elements for quick access
+        const commonElements = ['H', 'C', 'N', 'O', 'Na', 'Mg', 'P', 'S', 'Cl', 'K', 'Ca', 'Fe', 'Cu', 'Zn', 'Br', 'I'];
+
+        // Populate element table
+        const elementTable = document.getElementById('elementTable');
+        commonElements.forEach(symbol => {
+            const box = document.createElement('div');
+            box.className = 'element-box';
+            box.innerHTML = `
+                <div class="element-symbol">${symbol}</div>
+                <div class="element-weight">${atomicWeights[symbol].toFixed(2)}</div>
+            `;
+            box.onclick = () => {
+                const input = document.getElementById('chemicalFormula');
+                input.value += symbol;
+                input.focus();
+            };
+            elementTable.appendChild(box);
+        });
+
+        function parseFormula(formula) {
+            // Remove spaces and subscript numbers
+            formula = formula.replace(/\s/g, '').replace(/[₀-₉]/g, m => String.fromCharCode(m.charCodeAt(0) - 8272));
+
+            const composition = {};
+            const regex = /([A-Z][a-z]?)(\d*)/g;
+            let match;
+
+            // Handle parentheses
+            const parenRegex = /\(([^)]+)\)(\d*)/g;
+            let expandedFormula = formula;
+
+            while ((match = parenRegex.exec(formula)) !== null) {
+                const group = match[1];
+                const multiplier = parseInt(match[2]) || 1;
+                let expanded = '';
+
+                const groupRegex = /([A-Z][a-z]?)(\d*)/g;
+                let groupMatch;
+                while ((groupMatch = groupRegex.exec(group)) !== null) {
+                    const element = groupMatch[1];
+                    const count = parseInt(groupMatch[2]) || 1;
+                    expanded += element + (count * multiplier);
+                }
+
+                expandedFormula = expandedFormula.replace(match[0], expanded);
+            }
+
+            // Parse expanded formula
+            while ((match = regex.exec(expandedFormula)) !== null) {
+                const element = match[1];
+                const count = parseInt(match[2]) || 1;
+
+                if (atomicWeights[element]) {
+                    composition[element] = (composition[element] || 0) + count;
+                }
+            }
+
+            return composition;
+        }
+
+        function calculateMolecularWeight() {
+            const formula = document.getElementById('chemicalFormula').value.trim();
+
+            if (!formula) {
+                alert('Por favor ingresa una fórmula química');
+                return;
+            }
+
+            try {
+                const composition = parseFormula(formula);
+                let totalWeight = 0;
+                let compositionHTML = '<div style="text-align: left;">';
+
+                for (const [element, count] of Object.entries(composition)) {
+                    const weight = atomicWeights[element] * count;
+                    totalWeight += weight;
+                    compositionHTML += `<div style="margin: 5px 0;">
+                        <strong>${element}:</strong> ${count} × ${atomicWeights[element].toFixed(3)} = ${weight.toFixed(3)} g/mol
+                    </div>`;
+                }
+
+                compositionHTML += '</div>';
+
+                if (Object.keys(composition).length === 0) {
+                    alert('No se reconocieron elementos válidos en la fórmula');
+                    return;
+                }
+
+                document.getElementById('molecularWeight').textContent = totalWeight.toFixed(3);
+                document.getElementById('formulaDisplay').textContent = formula;
+                document.getElementById('composition').innerHTML = compositionHTML;
+
+                const massInfo = `Para obtener 1 mol (${totalWeight.toFixed(2)} g) de ${formula}, necesitas las cantidades exactas de cada elemento según la composición.`;
+                document.getElementById('massInfo').textContent = massInfo;
+
+                showResult('molecularWeight');
+            } catch (error) {
+                alert('Error al procesar la fórmula. Verifica que esté escrita correctamente.');
+            }
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        // Calculate on Enter key
+        document.getElementById('chemicalFormula').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateMolecularWeight();
+            }
+        });
+
+        window.addEventListener('load', calculateMolecularWeight);
+    </script>
+</body>
+</html>

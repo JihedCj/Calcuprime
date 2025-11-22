@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de presupuesto gratuita - Planifica tus finanzas personales, controla gastos e ingresos. Herramienta esencial para manejo financiero efectivo.">
+    <meta name="keywords" content="calculadora presupuesto, planificación financiera, control gastos, presupuesto mensual, finanzas personales">
+
+    <title>Calculadora de Presupuesto - Planificación Financiera Personal | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-presupuesto.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/budget-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-presupuesto.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/budget-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+        .budget-category {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .budget-category h4 {
+            margin-top: 0;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/budget-calculator.html" class="lang-link">🇺🇸 EN</a>
+                <a href="calculadora-presupuesto.html" class="lang-link active">🇪🇸 ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Presupuesto</h1>
+            <p class="calculator-description">Planifica tus finanzas personales y alcanza tus metas financieras</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Ingresos Mensuales</h3>
+
+                <div class="form-group">
+                    <label for="salary" class="form-label">Salario Neto Mensual ($)</label>
+                    <input type="number" id="salary" class="form-input" value="3500" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="otherIncome" class="form-label">Otros Ingresos ($)</label>
+                    <input type="number" id="otherIncome" class="form-input" value="0" min="0" step="50">
+                </div>
+
+                <h3 style="margin-top: 30px;">Gastos Mensuales</h3>
+
+                <div class="budget-category">
+                    <h4>Vivienda</h4>
+                    <div class="form-group">
+                        <label for="rent" class="form-label">Renta/Hipoteca ($)</label>
+                        <input type="number" id="rent" class="form-input" value="1200" min="0" step="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="utilities" class="form-label">Servicios ($)</label>
+                        <input type="number" id="utilities" class="form-input" value="150" min="0" step="10">
+                    </div>
+                </div>
+
+                <div class="budget-category">
+                    <h4>Transporte</h4>
+                    <div class="form-group">
+                        <label for="car" class="form-label">Auto/Transporte ($)</label>
+                        <input type="number" id="car" class="form-input" value="300" min="0" step="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="gas" class="form-label">Gasolina ($)</label>
+                        <input type="number" id="gas" class="form-input" value="150" min="0" step="10">
+                    </div>
+                </div>
+
+                <div class="budget-category">
+                    <h4>Vida Diaria</h4>
+                    <div class="form-group">
+                        <label for="food" class="form-label">Comida ($)</label>
+                        <input type="number" id="food" class="form-input" value="400" min="0" step="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="entertainment" class="form-label">Entretenimiento ($)</label>
+                        <input type="number" id="entertainment" class="form-input" value="200" min="0" step="25">
+                    </div>
+                </div>
+
+                <div class="budget-category">
+                    <h4>Otros Gastos</h4>
+                    <div class="form-group">
+                        <label for="insurance" class="form-label">Seguros ($)</label>
+                        <input type="number" id="insurance" class="form-input" value="200" min="0" step="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="other" class="form-label">Otros ($)</label>
+                        <input type="number" id="other" class="form-input" value="100" min="0" step="25">
+                    </div>
+                </div>
+
+                <button onclick="calculate()" class="btn-calculate">Calcular Presupuesto</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resumen del Presupuesto</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Ingresos Totales</div>
+                    <div class="result-value" id="totalIncome" style="color: #10b981;">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Gastos Totales</div>
+                    <div class="result-value" id="totalExpenses" style="color: #ef4444;">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Balance Mensual</div>
+                    <div class="result-value" id="balance" style="font-size: 2.5rem;">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Tasa de Ahorro</div>
+                    <div class="result-value" id="savingsRate">0%</div>
+                </div>
+
+                <div id="budgetStatus" style="margin-top: 20px; padding: 15px; border-radius: 8px; text-align: center; font-weight: 600;">
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es un Presupuesto Personal?</h2>
+            <p>Un presupuesto personal es un plan financiero detallado que registra y compara tus ingresos y gastos durante un período específico, generalmente un mes. Es una herramienta fundamental para la gestión financiera que te ayuda a entender hacia dónde va tu dinero, identificar áreas donde puedes reducir gastos, y planificar para alcanzar tus objetivos financieros a corto y largo plazo. Un presupuesto bien estructurado te permite tomar el control de tus finanzas en lugar de que tus finanzas te controlen a ti.</p>
+
+            <p>Crear y mantener un presupuesto no se trata de restringir tu vida o eliminar todo el disfrute de tus gastos. Más bien, se trata de tomar decisiones conscientes e informadas sobre cómo usar tus recursos financieros de la manera más efectiva. Te permite priorizar lo que es verdaderamente importante para ti mientras construyes seguridad financiera para el futuro. Según estudios financieros, las personas que mantienen un presupuesto regular tienen 2.5 veces más probabilidades de alcanzar sus metas financieras que aquellas que no lo hacen.</p>
+
+            <h2>Cómo Usar la Calculadora de Presupuesto</h2>
+            <p>Nuestra calculadora de presupuesto te ayuda a organizar tus finanzas de manera simple y efectiva:</p>
+
+            <ol>
+                <li><strong>Registra tus ingresos:</strong> Ingresa tu salario neto mensual (después de impuestos) y cualquier otro ingreso regular como trabajos secundarios, inversiones, o ingresos por alquiler.</li>
+                <li><strong>Detalla tus gastos de vivienda:</strong> Incluye tu renta o pago de hipoteca, servicios públicos como electricidad, agua, gas, internet y teléfono.</li>
+                <li><strong>Anota gastos de transporte:</strong> Pagos de auto, transporte público, gasolina, mantenimiento, seguro de auto, y estacionamiento.</li>
+                <li><strong>Registra gastos diarios:</strong> Comida (supermercado y restaurantes), entretenimiento, suscripciones, y gastos personales.</li>
+                <li><strong>Incluye otros gastos:</strong> Seguros de salud y vida, ahorros, pagos de deudas, y cualquier otro gasto regular.</li>
+                <li><strong>Analiza los resultados:</strong> Revisa tu balance mensual y tasa de ahorro para entender tu situación financiera actual.</li>
+            </ol>
+
+            <h2>Métodos de Presupuestación Popular</h2>
+
+            <h3>1. Regla 50/30/20</h3>
+            <p>Este es uno de los métodos más populares y fáciles de seguir para presupuestar. Divide tus ingresos después de impuestos en tres categorías principales:</p>
+            <ul>
+                <li><strong>50% - Necesidades:</strong> Gastos esenciales que debes pagar para vivir y trabajar. Incluye vivienda, transporte, servicios básicos, seguro, pagos mínimos de deudas, y comida básica.</li>
+                <li><strong>30% - Deseos:</strong> Gastos no esenciales que mejoran tu calidad de vida. Incluye entretenimiento, comidas en restaurantes, viajes, membresías de gimnasio, suscripciones de streaming, y compras discrecionales.</li>
+                <li><strong>20% - Ahorros e Inversiones:</strong> Ahorros de emergencia, contribuciones para el retiro, pagos extra a deudas por encima del mínimo, e inversiones para metas futuras.</li>
+            </ul>
+            <p>Este método es flexible y se adapta a diferentes niveles de ingresos. Si tus necesidades exceden el 50%, busca maneras de reducir costos de vivienda o transporte, o considera aumentar tus ingresos.</p>
+
+            <h3>2. Presupuesto Base Cero</h3>
+            <p>En el presupuesto base cero, asignas cada dólar de tus ingresos a una categoría específica, de modo que Ingresos - Gastos = 0. Esto no significa que gastas todo tu dinero; significa que cada dólar tiene un propósito asignado, incluyendo ahorros e inversiones. Este método requiere más tiempo y planificación, pero proporciona el mayor control sobre tus finanzas.</p>
+
+            <h3>3. Método de Sobres</h3>
+            <p>Este sistema tradicional asigna efectivo físico a diferentes "sobres" o categorías de gastos. Una vez que se acaba el efectivo de un sobre, no puedes gastar más en esa categoría hasta el siguiente mes. Aunque originalmente usaba sobres físicos, ahora existen aplicaciones digitales que replican este concepto. Es excelente para controlar gastos excesivos en categorías problemáticas.</p>
+
+            <h3>4. Presupuesto 80/20</h3>
+            <p>Una versión simplificada que destina el 20% de tus ingresos a ahorros e inversiones automáticamente, y vives con el 80% restante. Este método es ideal para personas que encuentran el presupuesto tradicional demasiado tedioso pero quieren asegurarse de ahorrar consistentemente.</p>
+
+            <h2>Categorías de Gastos Esenciales</h2>
+
+            <h3>Vivienda (25-35% del ingreso)</h3>
+            <p>Tu mayor gasto típicamente. Incluye:</p>
+            <ul>
+                <li>Renta o pago de hipoteca</li>
+                <li>Impuestos a la propiedad (si eres dueño)</li>
+                <li>Seguro de vivienda</li>
+                <li>Mantenimiento y reparaciones</li>
+                <li>Servicios públicos: electricidad, agua, gas</li>
+                <li>Internet y telefonía</li>
+                <li>Gastos de condominio o asociación de vecinos</li>
+            </ul>
+            <p>Si gastas más del 35% de tu ingreso en vivienda, considera opciones más asequibles o busca maneras de aumentar tus ingresos.</p>
+
+            <h3>Transporte (15-20% del ingreso)</h3>
+            <ul>
+                <li>Pagos de auto o arrendamiento</li>
+                <li>Gasolina y mantenimiento del vehículo</li>
+                <li>Seguro de auto</li>
+                <li>Transporte público</li>
+                <li>Servicios de viaje compartido</li>
+                <li>Estacionamiento y peajes</li>
+                <li>Reparaciones y llantas</li>
+            </ul>
+
+            <h3>Alimentos (10-15% del ingreso)</h3>
+            <ul>
+                <li>Compras de supermercado</li>
+                <li>Comidas en restaurantes</li>
+                <li>Café y almuerzos de trabajo</li>
+                <li>Pedidos a domicilio</li>
+                <li>Alimentos especiales o dietéticos</li>
+            </ul>
+            <p>Esta es una categoría donde muchas personas pueden reducir gastos con planificación de comidas y cocinar en casa más frecuentemente.</p>
+
+            <h3>Ahorros e Inversiones (20% mínimo del ingreso)</h3>
+            <ul>
+                <li>Fondo de emergencia (3-6 meses de gastos)</li>
+                <li>Cuentas de retiro (401k, IRA, Roth IRA)</li>
+                <li>Inversiones en acciones o fondos</li>
+                <li>Ahorros para objetivos específicos (casa, educación)</li>
+                <li>Pagos extra a deudas de alto interés</li>
+            </ul>
+
+            <h3>Seguros (10-15% del ingreso)</h3>
+            <ul>
+                <li>Seguro de salud</li>
+                <li>Seguro de vida</li>
+                <li>Seguro de discapacidad</li>
+                <li>Seguro dental y de visión</li>
+                <li>Otros seguros especializados</li>
+            </ul>
+
+            <h2>Estrategias para Reducir Gastos</h2>
+
+            <h3>Gastos de Vivienda</h3>
+            <ul>
+                <li><strong>Refinancia tu hipoteca:</strong> Si las tasas han bajado, podrías ahorrar cientos al mes.</li>
+                <li><strong>Consigue un compañero de cuarto:</strong> Compartir espacio reduce significativamente los costos.</li>
+                <li><strong>Reduce servicios:</strong> Ajusta el termostato, apaga luces, usa electrodomésticos eficientes.</li>
+                <li><strong>Negocia servicios:</strong> Llama a proveedores de internet, cable y seguros para buscar mejores tarifas.</li>
+            </ul>
+
+            <h3>Gastos de Transporte</h3>
+            <ul>
+                <li><strong>Mantén tu vehículo:</strong> El mantenimiento preventivo evita reparaciones costosas.</li>
+                <li><strong>Comparte viajes:</strong> Carpooling o transporte público reducen costos de gasolina.</li>
+                <li><strong>Refinancia préstamos de auto:</strong> Tasas más bajas pueden reducir pagos mensuales.</li>
+                <li><strong>Considera alternativas:</strong> Bicicleta o caminar para distancias cortas.</li>
+            </ul>
+
+            <h3>Gastos de Alimentos</h3>
+            <ul>
+                <li><strong>Planifica comidas:</strong> Reduce desperdicios y compras impulsivas.</li>
+                <li><strong>Usa listas de compras:</strong> Compra solo lo necesario.</li>
+                <li><strong>Cocina en casa:</strong> Mucho más económico que comer fuera.</li>
+                <li><strong>Compra genéricos:</strong> Marcas propias suelen ser igual de buenas.</li>
+                <li><strong>Aprovecha ofertas:</strong> Compra en cantidad cuando hay descuentos en productos no perecederos.</li>
+            </ul>
+
+            <h3>Entretenimiento y Suscripciones</h3>
+            <ul>
+                <li><strong>Audita suscripciones:</strong> Cancela servicios que no usas regularmente.</li>
+                <li><strong>Busca alternativas gratuitas:</strong> Bibliotecas, eventos comunitarios, actividades al aire libre.</li>
+                <li><strong>Limita salidas:</strong> Reduce frecuencia de restaurantes y entretenimiento pagado.</li>
+                <li><strong>Usa cupones y descuentos:</strong> Aplicaciones de cashback y cupones digitales.</li>
+            </ul>
+
+            <h2>Cómo Aumentar tu Tasa de Ahorro</h2>
+
+            <h3>Automatiza tus Ahorros</h3>
+            <p>Configura transferencias automáticas a una cuenta de ahorros el día que recibes tu pago. "Págarte primero a ti mismo" asegura que ahorres antes de tener la oportunidad de gastar. Incluso empezar con 5-10% de tus ingresos marca una gran diferencia con el tiempo.</p>
+
+            <h3>Incrementa Gradualmente</h3>
+            <p>Cada vez que recibas un aumento salarial o bonificación, destina al menos el 50% al ahorro o pago de deudas antes de permitirte aumentar tu estilo de vida. Este enfoque te permite mejorar tu situación financiera sin sentir sacrificio.</p>
+
+            <h3>Desafíos de Ahorro</h3>
+            <ul>
+                <li><strong>Desafío de las 52 semanas:</strong> Ahorra $1 la primera semana, $2 la segunda, y así sucesivamente. Al final del año tendrás $1,378.</li>
+                <li><strong>Regla del redondeo:</strong> Redondea cada compra al dólar más cercano y ahorra la diferencia.</li>
+                <li><strong>Ahorro de cambio:</strong> Transfiere $5 a ahorros cada vez que gastas en una categoría específica.</li>
+            </ul>
+
+            <h2>Manejo de Deudas en tu Presupuesto</h2>
+
+            <h3>Método Avalancha</h3>
+            <p>Prioriza deudas con las tasas de interés más altas primero. Paga el mínimo en todas las deudas, pero envía pagos extra a la deuda con mayor interés. Una vez pagada, continúa con la siguiente tasa más alta. Este método ahorra más dinero en intereses a largo plazo.</p>
+
+            <h3>Método Bola de Nieve</h3>
+            <p>Enfócate en pagar primero la deuda más pequeña independientemente de la tasa de interés. Los logros rápidos proporcionan motivación psicológica para continuar. Una vez eliminada la primera deuda, aplica ese pago a la siguiente deuda más pequeña.</p>
+
+            <h3>Consolidación de Deudas</h3>
+            <p>Considera consolidar múltiples deudas de alto interés en un solo préstamo con tasa más baja. Esto simplifica pagos y puede reducir intereses, pero requiere disciplina para no acumular nuevas deudas.</p>
+
+            <h2>Fondos de Emergencia</h2>
+            <p>Un fondo de emergencia es crucial para la estabilidad financiera. Debe cubrir 3-6 meses de gastos esenciales y mantenerse en una cuenta de fácil acceso. Este fondo te protege contra:</p>
+            <ul>
+                <li>Pérdida inesperada de empleo</li>
+                <li>Emergencias médicas</li>
+                <li>Reparaciones urgentes de auto o casa</li>
+                <li>Gastos no anticipados</li>
+            </ul>
+            <p>Construye tu fondo de emergencia gradualmente, comenzando con $1,000 como meta inicial, luego aumenta hasta cubrir un mes de gastos, y finalmente alcanza los 3-6 meses completos.</p>
+
+            <h2>Errores Comunes de Presupuestación</h2>
+
+            <h3>1. No Rastrear Gastos Pequeños</h3>
+            <p>Gastos pequeños diarios como café, bocadillos, o aplicaciones pueden sumar $100-200 mensuales. Usa aplicaciones de rastreo o revisa estados de cuenta bancarios regularmente.</p>
+
+            <h3>2. Presupuesto Demasiado Restrictivo</h3>
+            <p>Un presupuesto que elimina todo placer es insostenible. Incluye dinero para entretenimiento y caprichos ocasionales para mantener el equilibrio.</p>
+
+            <h3>3. No Ajustar por Estacionalidad</h3>
+            <p>Algunos meses tienen gastos adicionales (regalos navideños, vacaciones, impuestos). Planifica estos gastos anuales dividiéndolos entre 12 meses.</p>
+
+            <h3>4. Ignorar Gastos Irregulares</h3>
+            <p>Mantenimiento de auto, renovaciones de seguros, o membresías anuales pueden arruinar un presupuesto si no se planean. Crea un fondo separado para estos gastos.</p>
+
+            <h3>5. No Revisar y Ajustar</h3>
+            <p>Tu presupuesto debe evolucionar con cambios en tu vida. Revísalo mensualmente y ajusta categorías según necesites.</p>
+
+            <h2>Herramientas y Aplicaciones Útiles</h2>
+            <p>Además de esta calculadora, considera usar:</p>
+            <ul>
+                <li><strong>Aplicaciones de presupuesto:</strong> Mint, YNAB (You Need A Budget), EveryDollar, PocketGuard</li>
+                <li><strong>Hojas de cálculo:</strong> Google Sheets o Excel con plantillas personalizadas</li>
+                <li><strong>Aplicaciones bancarias:</strong> Muchos bancos ofrecen herramientas integradas de rastreo de gastos</li>
+                <li><strong>Alertas automáticas:</strong> Configura notificaciones para límites de gasto y saldos bajos</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Con qué frecuencia debo revisar mi presupuesto?</h3>
+            <p>Revisa tu presupuesto semanalmente al principio para familiarizarte con tus patrones de gasto. Una vez establecido, una revisión mensual es suficiente, con ajustes mayores cada trimestre o cuando cambien tus circunstancias.</p>
+
+            <h3>¿Qué hago si mis gastos exceden mis ingresos?</h3>
+            <p>Primero, identifica gastos no esenciales que puedas eliminar. Si ya eliminaste todo lo innecesario, busca maneras de aumentar ingresos (trabajo extra, vender artículos no usados) o considera cambios mayores como mudarte a vivienda más asequible.</p>
+
+            <h3>¿Cuánto debo ahorrar cada mes?</h3>
+            <p>Idealmente, ahorra al menos el 20% de tus ingresos. Si eso es imposible ahora, empieza con lo que puedas (incluso 5%) y aumenta gradualmente. Lo importante es crear el hábito de ahorro consistente.</p>
+
+            <h3>¿Debo pagar deudas o ahorrar primero?</h3>
+            <p>Primero, construye un fondo de emergencia pequeño ($1,000). Luego enfócate en deudas de alto interés (tarjetas de crédito). Una vez eliminadas esas deudas, aumenta tu fondo de emergencia a 3-6 meses mientras pagas otras deudas.</p>
+
+            <h3>¿Cómo manejo gastos variables cada mes?</h3>
+            <p>Para gastos que varían (como servicios o comida), calcula un promedio basado en 3-6 meses de datos históricos. Usa este promedio en tu presupuesto y ajusta según sea necesario.</p>
+
+            <h2>Beneficios de Mantener un Presupuesto</h2>
+            <p>Mantener un presupuesto consistente ofrece múltiples beneficios más allá del simple control de gastos:</p>
+            <ul>
+                <li><strong>Reduce el estrés financiero:</strong> Saber exactamente dónde está tu dinero elimina la ansiedad de fin de mes.</li>
+                <li><strong>Mejora la toma de decisiones:</strong> Decisiones financieras basadas en datos en lugar de emociones.</li>
+                <li><strong>Acelera el logro de metas:</strong> Asignar fondos específicos a objetivos los hace alcanzables.</li>
+                <li><strong>Previene deudas:</strong> Vivir dentro de tus medios evita la acumulación de deudas costosas.</li>
+                <li><strong>Construye riqueza:</strong> Ahorros e inversiones consistentes crecen significativamente con el tiempo.</li>
+                <li><strong>Mejora relaciones:</strong> Muchas parejas reportan menos conflictos cuando tienen presupuesto claro.</li>
+                <li><strong>Proporciona libertad:</strong> Paradójicamente, las restricciones del presupuesto crean libertad financiera a largo plazo.</li>
+            </ul>
+
+            <p>Recuerda, un presupuesto es una herramienta flexible que debe servir a tus objetivos de vida, no una prisión que limita tu disfrute. El presupuesto perfecto es aquel que puedes mantener consistentemente mientras avanzas hacia tus metas financieras. Comienza hoy, sé paciente contigo mismo mientras aprendes, y ajusta según sea necesario. Tu futuro financiero te lo agradecerá.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            // Income
+            const salary = parseFloat(document.getElementById('salary').value) || 0;
+            const otherIncome = parseFloat(document.getElementById('otherIncome').value) || 0;
+            const totalIncome = salary + otherIncome;
+
+            // Expenses
+            const rent = parseFloat(document.getElementById('rent').value) || 0;
+            const utilities = parseFloat(document.getElementById('utilities').value) || 0;
+            const car = parseFloat(document.getElementById('car').value) || 0;
+            const gas = parseFloat(document.getElementById('gas').value) || 0;
+            const food = parseFloat(document.getElementById('food').value) || 0;
+            const entertainment = parseFloat(document.getElementById('entertainment').value) || 0;
+            const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+            const other = parseFloat(document.getElementById('other').value) || 0;
+
+            const totalExpenses = rent + utilities + car + gas + food + entertainment + insurance + other;
+            const balance = totalIncome - totalExpenses;
+            const savingsRate = totalIncome > 0 ? (balance / totalIncome * 100) : 0;
+
+            // Display results
+            document.getElementById('totalIncome').textContent = totalIncome.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+            document.getElementById('totalExpenses').textContent = totalExpenses.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+            document.getElementById('balance').textContent = balance.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+            document.getElementById('savingsRate').textContent = savingsRate.toFixed(1) + '%';
+
+            // Status message
+            const statusDiv = document.getElementById('budgetStatus');
+            if (balance > 0) {
+                document.getElementById('balance').style.color = '#10b981';
+                statusDiv.style.backgroundColor = '#d1fae5';
+                statusDiv.style.color = '#065f46';
+                if (savingsRate >= 20) {
+                    statusDiv.textContent = '¡Excelente! Estás ahorrando más del 20% de tus ingresos.';
+                } else {
+                    statusDiv.textContent = '¡Bien! Tienes un balance positivo. Intenta aumentar tu tasa de ahorro.';
+                }
+            } else if (balance === 0) {
+                document.getElementById('balance').style.color = '#f59e0b';
+                statusDiv.style.backgroundColor = '#fef3c7';
+                statusDiv.style.color = '#92400e';
+                statusDiv.textContent = 'Tu presupuesto está balanceado, pero sin margen de ahorro.';
+            } else {
+                document.getElementById('balance').style.color = '#ef4444';
+                statusDiv.style.backgroundColor = '#fee2e2';
+                statusDiv.style.color = '#991b1b';
+                statusDiv.textContent = 'Advertencia: Tus gastos exceden tus ingresos. Reduce gastos o aumenta ingresos.';
+            }
+        }
+
+        // Event listeners
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

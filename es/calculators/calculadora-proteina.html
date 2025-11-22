@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de proteína gratuita - Calcula tu ingesta diaria óptima de proteína para construcción muscular, pérdida de peso o mantenimiento. Recomendaciones basadas en ciencia.">
+    <meta name="keywords" content="calculadora proteína, proteína diaria, ingesta proteína, necesidades proteína, proteína músculo">
+
+    <title>Calculadora de Proteína - Calcular Proteína Diaria | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-proteina.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/protein-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-proteina.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/protein-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/protein-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-proteina.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Proteína</h1>
+            <p class="calculator-description">Calcula tu ingesta diaria óptima de proteína según tus objetivos y nivel de actividad</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Tu Información</h3>
+                <div class="form-group">
+                    <label for="weight" class="form-label">Peso Corporal (kg)</label>
+                    <input type="number" id="weight" class="form-input" value="77" min="30" max="200" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="goal" class="form-label">Objetivo Principal</label>
+                    <select id="goal" class="form-input">
+                        <option value="sedentary">Sedentario / Salud General</option>
+                        <option value="active">Activo / Fitness</option>
+                        <option value="athlete">Atleta / Entrenamiento Intenso</option>
+                        <option value="muscle">Construcción Muscular</option>
+                        <option value="cutting">Pérdida de Grasa / Definición</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bodyFat" class="form-label">Composición Corporal</label>
+                    <select id="bodyFat" class="form-input">
+                        <option value="lean">Delgado (10-18% hombres, 18-25% mujeres)</option>
+                        <option value="average" selected>Promedio (18-25% hombres, 25-32% mujeres)</option>
+                        <option value="overweight">Sobrepeso (25%+ hombres, 32%+ mujeres)</option>
+                    </select>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular Proteína</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Objetivo Diario de Proteína</h3>
+                <div class="result-item">
+                    <div class="result-label">Proteína Recomendada</div>
+                    <div class="result-value" id="protein" style="font-size: 2.5rem; color: #10b981;">0g</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Proteína por Kilo</div>
+                    <div class="result-value" id="perKg">0g/kg</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Proteína Mínima</div>
+                    <div class="result-value" id="minProtein">0g</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Proteína Máxima</div>
+                    <div class="result-value" id="maxProtein">0g</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Calorías de Proteína</div>
+                    <div class="result-value" id="proteinCals">0 calorías</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Comprendiendo las Necesidades de Proteína</h2>
+            <p>La proteína es el macronutriente más importante para construir y preservar masa muscular, apoyar la función inmunológica y mantener una salud óptima. Tus necesidades de proteína varían significativamente según tu nivel de actividad, objetivos de composición corporal e intensidad de entrenamiento. Nuestra calculadora de proteína utiliza investigación actual en nutrición deportiva para proporcionar recomendaciones basadas en evidencia adaptadas a tu situación específica, asegurando que consumas suficiente proteína para apoyar tus objetivos sin exceso innecesario.</p>
+
+            <h2>¿Cuánta Proteína Necesitas Realmente?</h2>
+            <p>La Cantidad Diaria Recomendada (CDR) de 0.8 gramos por kilogramo de peso corporal previene la deficiencia en adultos sedentarios pero está muy por debajo de la ingesta óptima para individuos activos o aquellos que buscan cambios en la composición corporal. La investigación muestra consistentemente que ingestas más altas de proteína benefician el crecimiento muscular, la pérdida de grasa y la salud metabólica.</p>
+
+            <p><strong>Adultos Sedentarios:</strong> 0.8-1.0 gramos por kilogramo mantiene la salud básica. Esta línea base previene la pérdida muscular en individuos inactivos pero no proporciona margen para recuperación mejorada, mejoras en composición corporal o aumento de actividad física.</p>
+
+            <p><strong>Individuos Activos:</strong> 1.4-1.8 gramos por kilogramo apoya ejercicio regular y objetivos de fitness general. Este rango acomoda 3-5 entrenamientos semanales y promueve recuperación del estrés de entrenamiento moderado mientras apoya el mantenimiento de masa magra durante estabilidad de peso.</p>
+
+            <p><strong>Atletas y Entrenadores Intensos:</strong> 1.6-2.2 gramos por kilogramo optimiza el rendimiento y recuperación del entrenamiento de alto volumen. Atletas de resistencia, jugadores de deportes de equipo y aquellos que entrenan 6+ días semanales se benefician del extremo superior de este rango para compensar la degradación proteica inducida por el entrenamiento y apoyar la adaptación.</p>
+
+            <p><strong>Construcción Muscular:</strong> 1.8-2.2 gramos por kilogramo maximiza la síntesis de proteína muscular cuando se combina con entrenamiento de resistencia progresivo. Aunque las ganancias ocurren con ingestas más bajas, la investigación sugiere que este rango optimiza la respuesta hipertrófica, particularmente para levantadores naturales operando con superávit calórico.</p>
+
+            <p><strong>Pérdida de Grasa / Definición:</strong> 1.8-2.7 gramos por kilogramo preserva la masa magra durante la restricción calórica. Ingestas más altas de proteína durante los cortes proporcionan mayor saciedad, preservan el metabolismo, previenen la pérdida muscular y proporcionan un margen contra la adherencia imperfecta. Cuanto más delgado te vuelves, más proteína ayuda a proteger el músculo ganado con esfuerzo.</p>
+
+            <h2>Proteína y Construcción Muscular</h2>
+            <p>La síntesis de proteína muscular (SPM) - el proceso de construcción de nuevas proteínas musculares - requiere tres condiciones: ingesta adecuada de proteína, calorías suficientes y tensión mecánica progresiva (entrenamiento de resistencia). La proteína proporciona los bloques de construcción de aminoácidos, pero sin estímulo de entrenamiento y excedente de energía, el exceso de proteína se convierte en glucosa o se oxida para energía en lugar de construir músculo.</p>
+
+            <p><strong>El Mito de la Ventana Anabólica:</strong> Investigaciones anteriores sugerían que la proteína inmediatamente post-entrenamiento era crítica para las ganancias. La evidencia actual muestra que la ingesta total diaria de proteína importa mucho más que el momento preciso. Consumir proteína dentro de varias horas del entrenamiento funciona bien, pero obsesionarse con ventanas de 30 minutos es innecesario. Distribuye la proteína en 3-5 comidas a lo largo del día para estimulación óptima de SPM.</p>
+
+            <p><strong>Proteína por Comida:</strong> Los estudios indican que 20-40 gramos de proteína por comida estimula maximalmente la SPM para la mayoría de las personas, con individuos más grandes beneficiándose de cantidades hacia el extremo superior. Consumir 60+ gramos en una sola sesión no triplica la SPM en comparación con 30 gramos; el exceso se oxida o se convierte en otros compuestos. Distribuye la ingesta de proteína en múltiples comidas en lugar de cargarla en una o dos porciones grandes.</p>
+
+            <h2>Proteína y Pérdida de Grasa</h2>
+            <p>La proteína es el macronutriente más importante durante la restricción calórica por varias razones convincentes:</p>
+
+            <p><strong>Preservación Muscular:</strong> Los déficits calóricos crean un ambiente catabólico donde el cuerpo descompone tejido para energía. Ingestas más altas de proteína (1.8-2.7g por kg) señalan al cuerpo a usar preferentemente las reservas de grasa mientras preserva la masa magra. Los estudios muestran que las personas a dieta que consumen proteína más alta retienen significativamente más músculo que aquellos con ingestas más bajas de proteína, incluso con déficits calóricos idénticos.</p>
+
+            <p><strong>Saciedad y Control del Apetito:</strong> La proteína es el macronutriente más saciante, aumentando las hormonas de saciedad (GLP-1, péptido YY) mientras reduce la hormona del hambre grelina. Las dietas altas en proteína reducen naturalmente la ingesta calórica total en 15-20% sin restricción consciente. Las personas a dieta reportan menos hambre, menos antojos y mejor adherencia a la dieta cuando la ingesta de proteína está optimizada.</p>
+
+            <p><strong>Efecto Térmico:</strong> Digerir y procesar proteína quema 20-30% de sus calorías en comparación con 5-10% para carbohidratos y 0-3% para grasas. Una comida de 30 gramos de proteína requiere 6-9 calorías solo para digestión y absorción. Con el tiempo, esta ventaja metabólica se suma: las dietas altas en proteína queman 80-100 calorías extra diariamente en comparación con dietas bajas en proteína con calorías equivalentes.</p>
+
+            <h2>Fuentes de Proteína y Calidad</h2>
+            <p><strong>Fuentes de Proteína Completa:</strong> Contienen los nueve aminoácidos esenciales en proporciones óptimas.</p>
+            <ul>
+                <li><strong>Pollo, Pavo, Carne Magra, Cerdo:</strong> 25-30g proteína por porción de 100g, baja grasa, versátil</li>
+                <li><strong>Pescado y Mariscos:</strong> 20-25g por 100g, rico en ácidos grasos omega-3</li>
+                <li><strong>Huevos:</strong> 6-7g por huevo, perfil de aminoácidos perfecto, asequible</li>
+                <li><strong>Yogur Griego:</strong> 15-20g por taza, probióticos, alto calcio</li>
+                <li><strong>Queso Cottage:</strong> 25-28g por taza, caseína para liberación sostenida</li>
+                <li><strong>Proteína de Suero:</strong> 20-30g por porción, absorción más rápida, conveniente</li>
+                <li><strong>Proteína de Caseína:</strong> 20-25g por porción, digestión lenta, ideal antes de dormir</li>
+            </ul>
+
+            <p><strong>Fuentes de Proteína Vegetal:</strong> A menudo incompletas pero pueden combinarse estratégicamente.</p>
+            <ul>
+                <li><strong>Productos de Soya (tofu, tempeh, edamame):</strong> Proteína completa, 15-20g por porción</li>
+                <li><strong>Legumbres (lentejas, garbanzos, frijoles negros):</strong> 15-18g por taza, alta fibra</li>
+                <li><strong>Quinoa:</strong> Proteína completa, 8g por taza cocida, alternativa versátil a granos</li>
+                <li><strong>Nueces y Semillas:</strong> 5-7g por onza, grasas saludables pero densas en calorías</li>
+                <li><strong>Polvos de Proteína Vegetal (guisante, arroz, cáñamo):</strong> 15-25g por porción, calidad en mejora</li>
+            </ul>
+
+            <h2>Errores Comunes con la Proteína</h2>
+            <p><strong>Mito: "Mucha Proteína Daña los Riñones"</strong><br>Realidad: No hay evidencia de que la ingesta alta de proteína dañe riñones sanos. Las personas con enfermedad renal preexistente deben moderar la proteína, pero los individuos sanos manejan ingestas altas sin problema. Los estudios en culturistas que consumen 2-3g por kg no muestran disminución en la función renal.</p>
+
+            <p><strong>Mito: "Solo Puedes Absorber 30g de Proteína por Comida"</strong><br>Realidad: Tu cuerpo absorbe esencialmente toda la proteína dietética, solo a tasas variables. Mientras que 30-40g por comida optimiza la SPM, consumir más no desperdicia proteína; sirve otras funciones (energía, gluconeogénesis, soporte inmunológico).</p>
+
+            <p><strong>Mito: "La Proteína Vegetal es Inferior a la Animal"</strong><br>Realidad: Aunque las proteínas animales son más completas y biodisponibles, las proteínas vegetales combinadas adecuadamente apoyan el crecimiento muscular efectivamente. Los veganos que construyen músculo con éxito simplemente necesitan 10-20% más proteína total y combinación estratégica de alimentos.</p>
+
+            <h2>Cuándo Ajustar la Ingesta de Proteína</h2>
+            <p>Aumenta la proteína si:</p>
+            <ul>
+                <li>Comienzas una fase de pérdida de grasa (muévete de 1.6g a 2.0-2.2g por kg)</li>
+                <li>Aumentas significativamente el volumen o intensidad del entrenamiento</li>
+                <li>Envejeces (las necesidades de proteína aumentan ligeramente con la edad para preservar músculo)</li>
+                <li>Te recuperas de lesión o enfermedad</li>
+                <li>Experimentas hambre excesiva durante una dieta</li>
+            </ul>
+
+            <p>Disminuye la proteína si:</p>
+            <ul>
+                <li>Experimentas problemas digestivos por ingestas muy altas</li>
+                <li>Necesitas más calorías para carbohidratos/grasas sin aumentar calorías totales</li>
+                <li>Las restricciones presupuestarias dificultan la ingesta alta de proteína</li>
+            </ul>
+
+            <h2>Conclusión</h2>
+            <p>La ingesta óptima de proteína para individuos activos varía de 1.6-2.2 gramos por kilogramo de peso corporal, con el extremo superior beneficiando a quienes construyen músculo o pierden grasa. Este nivel apoya el crecimiento muscular, preserva la masa magra durante los cortes, mejora la saciedad y optimiza la recuperación del entrenamiento. Distribuye la proteína en 3-5 comidas diarias, enfatizando fuentes de calidad, y rastrea la ingesta inicialmente para asegurar que alcanzas los objetivos consistentemente. Recuerda que la proteína es esencial pero funciona sinérgicamente con calorías adecuadas, entrenamiento de calidad y sueño suficiente para producir resultados.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const weight = parseFloat(document.getElementById('weight').value) || 77;
+            const goal = document.getElementById('goal').value;
+            const bodyFat = document.getElementById('bodyFat').value;
+
+            let gramsPerKg;
+
+            // Determine protein multiplier based on goal
+            switch(goal) {
+                case 'sedentary':
+                    gramsPerKg = 1.0;
+                    break;
+                case 'active':
+                    gramsPerKg = 1.6;
+                    break;
+                case 'athlete':
+                    gramsPerKg = 1.9;
+                    break;
+                case 'muscle':
+                    gramsPerKg = 2.0;
+                    break;
+                case 'cutting':
+                    gramsPerKg = 2.2;
+                    break;
+                default:
+                    gramsPerKg = 1.6;
+            }
+
+            // Adjust for body composition
+            let adjustedWeight = weight;
+            if (bodyFat === 'overweight') {
+                adjustedWeight = weight * 0.85; // Use 85% of body weight for overweight individuals
+            }
+
+            const protein = Math.round(adjustedWeight * gramsPerKg);
+            const minProtein = Math.round(adjustedWeight * (gramsPerKg - 0.2));
+            const maxProtein = Math.round(adjustedWeight * (gramsPerKg + 0.2));
+            const proteinCals = protein * 4; // 4 calories per gram of protein
+
+            document.getElementById('protein').textContent = protein + 'g';
+            document.getElementById('perKg').textContent = gramsPerKg.toFixed(1) + 'g/kg';
+            document.getElementById('minProtein').textContent = minProtein + 'g';
+            document.getElementById('maxProtein').textContent = maxProtein + 'g';
+            document.getElementById('proteinCals').textContent = proteinCals.toLocaleString() + ' calorías';
+        }
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

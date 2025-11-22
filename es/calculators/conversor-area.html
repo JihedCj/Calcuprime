@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conversor de área gratuito - Convierte pies cuadrados, metros, acres, hectáreas y otras unidades de área. Calculadora de medición de terrenos precisa.">
+    <meta name="keywords" content="conversor área, pies cuadrados a metros, conversión área, calculadora terreno, conversor acres, hectáreas">
+
+    <title>Conversor de Área - Convierte m², ft², Acres, Hectáreas | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/conversor-area.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/area-converter.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-area.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/area-converter.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/area-converter.html" class="lang-link">EN</a>
+                <a href="conversor-area.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Conversor de Área</h1>
+            <p class="calculator-description">Convierte entre metros cuadrados, pies cuadrados, acres, hectáreas y otras unidades de área</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Convertir Área</h3>
+
+                <div class="form-group">
+                    <label for="areaValue" class="form-label">Valor de Área</label>
+                    <input type="number" id="areaValue" class="form-input" value="1000" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="fromUnit" class="form-label">Desde</label>
+                    <select id="fromUnit" class="form-select">
+                        <option value="sqmeters">Metros cuadrados (m²)</option>
+                        <option value="sqfeet" selected>Pies cuadrados (ft²)</option>
+                        <option value="sqkilometers">Kilómetros cuadrados (km²)</option>
+                        <option value="sqmiles">Millas cuadradas (mi²)</option>
+                        <option value="sqyards">Yardas cuadradas (yd²)</option>
+                        <option value="sqinches">Pulgadas cuadradas (in²)</option>
+                        <option value="hectares">Hectáreas (ha)</option>
+                        <option value="acres">Acres (ac)</option>
+                        <option value="sqcentimeters">Centímetros cuadrados (cm²)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="toUnit" class="form-label">Hacia</label>
+                    <select id="toUnit" class="form-select">
+                        <option value="sqmeters" selected>Metros cuadrados (m²)</option>
+                        <option value="sqfeet">Pies cuadrados (ft²)</option>
+                        <option value="sqkilometers">Kilómetros cuadrados (km²)</option>
+                        <option value="sqmiles">Millas cuadradas (mi²)</option>
+                        <option value="sqyards">Yardas cuadradas (yd²)</option>
+                        <option value="sqinches">Pulgadas cuadradas (in²)</option>
+                        <option value="hectares">Hectáreas (ha)</option>
+                        <option value="acres">Acres (ac)</option>
+                        <option value="sqcentimeters">Centímetros cuadrados (cm²)</option>
+                    </select>
+                </div>
+
+                <button onclick="convertArea()" class="btn-calculate">Convertir</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultado de Conversión</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Área Convertida</div>
+                    <div class="result-value" id="result" style="font-size: 3rem; color: #10b981;">92.90 m²</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Visualización</h4>
+                    <div id="visualization" style="font-size: 0.9rem; line-height: 1.8;">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo las Conversiones de Área</h2>
+            <p>El área mide el espacio bidimensional dentro de un límite. A diferencia de la longitud (1D) o el volumen (3D), el área captura la superficie: cuánta pintura necesitas para una pared, cuánto césped para un jardín, cuánta tierra posees. Las mediciones de área se elevan al cuadrado porque multiplicas dos dimensiones (largo × ancho). Esta relación cuadrática significa que duplicar la longitud cuadruplica el área. Comprender las conversiones de área es esencial para bienes raíces, construcción, agricultura, diseño interior y planificación urbana.</p>
+
+            <h2>Unidades de Área Comunes</h2>
+
+            <h3>Metros Cuadrados (m²)</h3>
+            <p>El metro cuadrado es la unidad de área estándar SI utilizada globalmente. Un metro cuadrado = el área de un cuadrado con lados de 1 metro de largo. Los tamaños de apartamentos se especifican en m² internacionalmente: un estudio pequeño puede ser 25-35 m², un apartamento de 2 habitaciones típicamente 60-80 m². Los bienes raíces europeos cotizan precios por metro cuadrado: €3,000/m² en París, €8,000/m² en el centro de Londres. Los permisos de construcción, planos arquitectónicos y zonificación usan m² como estándar.</p>
+
+            <h3>Pies Cuadrados (ft²)</h3>
+            <p>Los pies cuadrados dominan los bienes raíces estadounidenses. Una casa estadounidense promedio tiene 2,000-2,500 ft² (186-232 m²). Los apartamentos se comercializan como "900 ft² de 2 habitaciones" (83.6 m²). Los materiales de construcción se venden por pie cuadrado: pisos de madera dura ($5-15/ft²), alfombras ($2-8/ft²), encimeras de granito ($40-100/ft²). Los tasadores utilizan el precio por pie cuadrado para valorar propiedades: si las casas comparables se venden a $150/ft², una casa de 2,000 ft² vale aproximadamente $300,000.</p>
+
+            <h3>Acres y Hectáreas</h3>
+            <p>Los acres miden terrenos grandes en Estados Unidos: lotes residenciales, tierras agrícolas, parques. Un acre = 43,560 ft² (4,047 m²) = aproximadamente un campo de fútbol americano sin las zonas de anotación. Los lotes suburbanos típicos son 0.25-0.5 acres. Las granjas van de 40 acres (pequeñas) a 1,000+ acres (grandes). Las hectáreas (ha) son la equivalencia métrica: 1 hectárea = 10,000 m² = 2.471 acres. La agricultura global usa hectáreas: los rendimientos de trigo se miden en toneladas por hectárea.</p>
+
+            <h3>Millas Cuadradas y Kilómetros Cuadrados</h3>
+            <p>Las jurisdicciones grandes usan millas cuadradas (mi²) o kilómetros cuadrados (km²). La Ciudad de Nueva York abarca 302.6 mi² (783.8 km²). Alaska tiene 665,384 mi² (1,723,337 km²), el estado más grande de EE.UU. Los países reportan área terrestre en km²: Francia = 551,695 km², Japón = 377,975 km². Los bosques, lagos y áreas protegidas se miden en estas unidades: el Parque Nacional Yellowstone = 8,991 km² (3,472 mi²).</p>
+
+            <h2>Fórmulas de Conversión de Área</h2>
+
+            <h3>Conversiones Métricas-Imperiales Básicas</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; line-height: 1.8;">
+                <strong>m² a ft²:</strong> ft² = m² × 10.7639<br>
+                <strong>ft² a m²:</strong> m² = ft² × 0.092903<br>
+                <strong>km² a mi²:</strong> mi² = km² × 0.386102<br>
+                <strong>mi² a km²:</strong> km² = mi² × 2.58999
+            </p>
+
+            <h3>Conversiones de Terrenos</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; line-height: 1.8;">
+                <strong>Hectáreas a Acres:</strong> acres = hectáreas × 2.47105<br>
+                <strong>Acres a Hectáreas:</strong> hectáreas = acres × 0.404686<br>
+                <strong>Hectáreas a m²:</strong> m² = hectáreas × 10,000<br>
+                <strong>Acres a ft²:</strong> ft² = acres × 43,560<br>
+                <strong>Acres a mi²:</strong> mi² = acres ÷ 640
+            </p>
+
+            <h3>Unidades Pequeñas de Área</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; line-height: 1.8;">
+                <strong>cm² a in²:</strong> in² = cm² × 0.155<br>
+                <strong>in² a cm²:</strong> cm² = in² × 6.4516<br>
+                <strong>yd² a m²:</strong> m² = yd² × 0.836127<br>
+                <strong>m² a yd²:</strong> yd² = m² × 1.19599
+            </p>
+
+            <h2>Aplicaciones Prácticas</h2>
+
+            <h3>Bienes Raíces y Tasación de Propiedades</h3>
+            <p>Los agentes inmobiliarios usan área para valorar propiedades. Método de precio por pie cuadrado: divide el precio de venta por el área. Si una casa de 2,200 ft² se vende por $440,000, eso es $200/ft². Para estimar el valor de una casa similar de 2,500 ft²: 2,500 × $200 = $500,000. Sin embargo, no todo el metraje cuadrado tiene el mismo valor: los sótanos terminados valen 50-70% del área del piso principal. Los garajes agregan poco valor por pie cuadrado. La ubicación domina: 1,000 ft² en Manhattan valen más que 5,000 ft² en áreas rurales.</p>
+
+            <h3>Construcción y Renovación</h3>
+            <p>Los contratistas estiman materiales por área. Los pisos requieren conocer los pies cuadrados totales más 10% de desperdicio. Un piso de 1,500 ft² necesita 1,650 ft² de material. La pintura cubre 350-400 ft² por galón. Para calcular galones de pintura: mide la superficie de la pared (largo × altura para cada pared), suma, divide por 350, multiplica por 2 abrigos. Una habitación de 12'×15' con techos de 8' tiene paredes de (12+12+15+15)×8 = 432 ft², requiriendo 2.5 galones para dos abrigos.</p>
+
+            <h3>Jardinería y Paisajismo</h3>
+            <p>Las semillas de césped cubren áreas específicas: 5 lbs cubren 1,000 ft² (93 m²). Para un jardín de 3,000 ft², necesitas 15 lbs de semilla. El mantillo se vende por yarda cúbica pero se aplica por área: 1 yarda cúbica cubre 100 ft² a 3 pulgadas de profundidad. Los fertilizantes se clasifican por cobertura: "cubre 5,000 ft²" en la bolsa. Convertir al métrico: 5,000 ft² ≈ 464 m². El riego requiere cálculos de área: los céspedes necesitan 1-1.5 pulgadas de agua por semana; un césped de 1,000 ft² requiere 620-930 galones semanales.</p>
+
+            <h3>Agricultura</h3>
+            <p>Los agricultores miden campos en acres (EE.UU.) o hectáreas (global). Los rendimientos de cultivos se reportan por unidad de área: maíz produce 170-200 bushels por acre (10.7-12.6 toneladas métricas por hectárea). Los requisitos de semilla se basan en el área: el trigo necesita 60-120 lbs de semilla por acre. Los fertilizantes se aplican en tasas específicas: 150 lbs de nitrógeno por acre (168 kg por hectárea). Los sistemas de riego se dimensionan para el área: pivotes centrales cubren típicamente 130-160 acres (círculos de 0.5 millas de diámetro).</p>
+
+            <h2>Calculando el Área de Formas</h2>
+
+            <h3>Áreas de Formas Básicas</h3>
+            <ul>
+                <li><strong>Cuadrado:</strong> Área = lado² (un cuadrado de 5m tiene 25 m² de área)</li>
+                <li><strong>Rectángulo:</strong> Área = largo × ancho (10m × 6m = 60 m²)</li>
+                <li><strong>Triángulo:</strong> Área = (base × altura) ÷ 2 (base 8m, altura 5m = 20 m²)</li>
+                <li><strong>Círculo:</strong> Área = π × radio² (radio 3m = π × 9 ≈ 28.27 m²)</li>
+                <li><strong>Trapecio:</strong> Área = [(base1 + base2) ÷ 2] × altura</li>
+            </ul>
+
+            <h3>Habitaciones de Forma Irregular</h3>
+            <p>Para habitaciones de forma irregular, divide en formas regulares, calcula cada área, suma. Una habitación en forma de L: divide en dos rectángulos (12'×10' = 120 ft²) + (8'×6' = 48 ft²) = 168 ft² total. Alternativamente, dibuja en papel cuadriculado (cada cuadrado = 1 ft²), cuenta cuadrados. Para formas muy irregulares, los profesionales usan medidores láser y software CAD para trazado de área preciso.</p>
+
+            <h3>Lotes y Límites de Propiedad</h3>
+            <p>Los lotes de terreno rara vez son rectángulos perfectos. Los documentos de escritura enumeran medidas de límites (metraje y ángulos). Los topógrafos calculan área usando fórmulas de coordenadas o triangulación. Los lotes rectangulares aproximados: 100' × 150' = 15,000 ft² = 0.344 acres. Los sitios web de bienes raíces a menudo enumeran tanto pies cuadrados como acres para lotes: "15,000 ft² (0.34 acres)". Los impuestos a la propiedad se basan en el área del lote, por lo que las mediciones precisas importan financieramente.</p>
+
+            <h2>Conversiones de Área en Contexto del Mundo Real</h2>
+
+            <h3>Tamaños de Vivienda Típicos</h3>
+            <ul>
+                <li><strong>Estudio/Apartamento Tipo Loft:</strong> 400-600 ft² (37-56 m²)</li>
+                <li><strong>Apartamento de 1 Habitación:</strong> 600-900 ft² (56-84 m²)</li>
+                <li><strong>Apartamento de 2 Habitaciones:</strong> 900-1,200 ft² (84-111 m²)</li>
+                <li><strong>Casa Pequeña:</strong> 1,000-1,500 ft² (93-139 m²)</li>
+                <li><strong>Casa Promedio (EE.UU.):</strong> 2,000-2,500 ft² (186-232 m²)</li>
+                <li><strong>Casa Grande:</strong> 3,500-5,000 ft² (325-464 m²)</li>
+                <li><strong>Mansión:</strong> 8,000+ ft² (743+ m²)</li>
+            </ul>
+
+            <h3>Áreas de Espacios Famosos</h3>
+            <ul>
+                <li><strong>Campo de Fútbol (Soccer):</strong> 7,140 m² (76,854 ft², 1.76 acres)</li>
+                <li><strong>Campo de Fútbol Americano:</strong> 57,600 ft² (5,351 m², 1.32 acres) incluyendo zonas de anotación</li>
+                <li><strong>Cancha de Tenis:</strong> 2,808 ft² (261 m²) para dobles</li>
+                <li><strong>Cancha de Baloncesto (NBA):</strong> 4,700 ft² (436.6 m²)</li>
+                <li><strong>Campo de Béisbol:</strong> 2.5-3 acres (1-1.2 hectáreas) incluyendo campo exterior</li>
+                <li><strong>Vaticano (país):</strong> 0.17 mi² (0.44 km², 109 acres) - ¡país más pequeño!</li>
+                <li><strong>Pentágono (edificio):</strong> 6.5 millones de ft² (604,000 m²) de espacio de piso</li>
+                <li><strong>Estacionamiento Promedio:</strong> 180 ft² (16.7 m²) por espacio</li>
+            </ul>
+
+            <h3>Tamaños de Terreno</h3>
+            <ul>
+                <li><strong>Lote Urbano Típico:</strong> 5,000-7,000 ft² (0.11-0.16 acres, 464-650 m²)</li>
+                <li><strong>Lote Suburbano:</strong> 0.25-0.5 acres (10,890-21,780 ft², 1,011-2,023 m²)</li>
+                <li><strong>Lote Rural:</strong> 1-5 acres (43,560-217,800 ft², 0.4-2 hectáreas)</li>
+                <li><strong>Granja Pequeña:</strong> 40-100 acres (16-40 hectáreas)</li>
+                <li><strong>Rancho Grande:</strong> 1,000-10,000+ acres (405-4,047+ hectáreas)</li>
+            </ul>
+
+            <h2>Consejos para Medición Precisa</h2>
+
+            <h3>Herramientas y Técnicas</h3>
+            <ul>
+                <li><strong>Cinta Métrica:</strong> Estándar para habitaciones interiores; usa medidas en pies/pulgadas o metros</li>
+                <li><strong>Medidor Láser:</strong> Precisión de ±1/16" hasta 300 pies; ideal para profesionales</li>
+                <li><strong>Rueda de Medición:</strong> Recorre terrenos grandes; mide hasta 10,000 pies</li>
+                <li><strong>GPS/Drones:</strong> Topografía de terrenos grandes; precisión dentro de pulgadas con GPS diferencial</li>
+                <li><strong>Apps de Smartphone:</strong> Apps de medición AR usan cámaras para estimar; precisión ±2-5%</li>
+            </ul>
+
+            <h3>Evitar Errores Comunes</h3>
+            <ul>
+                <li><strong>Medir al Punto Más Largo:</strong> Para habitaciones irregulares, mide los puntos más anchos, no la longitud promedio</li>
+                <li><strong>Contabilizar Paredes:</strong> Mide hasta el drywall, no incluyas el grosor de las paredes en pies cuadrados habitables</li>
+                <li><strong>Documentar Todo:</strong> Dibuja bocetos, anota medidas; fácil olvidar números más tarde</li>
+                <li><strong>Verificar Dos Veces:</strong> Re-mide áreas críticas; los errores se amplifican en cálculos de materiales</li>
+                <li><strong>Usar Unidades Consistentes:</strong> No mezcles pies/metros a mitad del cálculo</li>
+            </ul>
+
+            <h2>Errores Comunes de Conversión</h2>
+            <ul>
+                <li><strong>Olvidar Elevar al Cuadrado:</strong> 10 ft a metros es 3.048 m, pero 10 ft² a m² es 0.929 m² (no 9.29 m²)</li>
+                <li><strong>Confundir Área con Perímetro:</strong> Un cuadrado de 10m tiene perímetro de 40m pero área de 100 m²</li>
+                <li><strong>Asumir Relaciones Lineales:</strong> Duplicar los lados cuadruplica el área: 2'×2' = 4 ft², pero 4'×4' = 16 ft² (no 8 ft²)</li>
+                <li><strong>Malinterpretar Listados:</strong> "Casa de 2,000 ft²" puede incluir garaje/sótano o solo área habitable principal</li>
+                <li><strong>Ignorar Forma:</strong> 1 acre puede ser 208'×209' (cuadrado) o 66'×660' (largo y estrecho); misma área, utilidad diferente</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Cómo se mide el área de casas con techos altos o múltiples pisos?</h3>
+            <p>El área de piso es bidimensional; la altura del techo no afecta los pies cuadrados. Una habitación de 10'×12' con un techo de 20' sigue siendo 120 ft² de área de piso. Las casas de varios niveles suman el área de piso de cada nivel. Una casa de dos pisos con 1,000 ft² por piso = 2,000 ft² totales. Los sótanos, áticos y garajes pueden o no contarse dependiendo de si están "terminados" (habitables) y las regulaciones locales de tasación.</p>
+
+            <h3>¿Por qué los acres tienen un número tan extraño (43,560 ft²)?</h3>
+            <p>Razones históricas de Inglaterra medieval. Originalmente, un acre era el área que una yunta de bueyes podía arar en un día: 1 furlong (660 pies) de largo por 1 cadena (66 pies) de ancho = 43,560 ft². Estas medidas se estandarizaron alrededor de 1300 DC y permanecen en uso hoy. El sistema métrico hace que las conversiones sean más simples: 1 hectárea = exactamente 10,000 m² (no hay números raros).</p>
+
+            <h3>¿Cómo convierto precio por pie cuadrado a precio por metro cuadrado?</h3>
+            <p>Multiplica $/ft² por 10.764 para obtener $/m². Ejemplo: $150/ft² × 10.764 = $1,614.60/m². Funciona porque 1 m² = 10.764 ft², entonces el mismo espacio cuesta 10.764 veces más cuando lo mides en metros cuadrados. Por el contrario, divide $/m² por 10.764 para obtener $/ft². Los listados de bienes raíces globales usan diferentes unidades: compare €5,000/m² (París) con $400/ft² (San Francisco) convirtiéndolos primero.</p>
+
+            <h3>¿Las dimensiones de habitación a habitación suman el total del área de la casa?</h3>
+            <p>No exactamente. Medir habitaciones individuales excluye áreas de pared entre habitaciones, pasillos, armarios y espacios de utilidad. Los profesionales miden el perímetro exterior, calculan el área total, luego restan para garajes/espacios no terminados. El metraje cuadrado "terminado" es área habitable: excluye garajes, áticos no terminados, sótanos crudos. Los métodos de medición varían; las diferencias de 5-10% entre tasadores son comunes. Por eso los inspectores profesionales usan métodos estandarizados (ANSI Z765).</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        const conversions = {
+            sqmeters: 1,
+            sqfeet: 10.7639,
+            sqkilometers: 0.000001,
+            sqmiles: 0.000000386102,
+            sqyards: 1.19599,
+            sqinches: 1550,
+            hectares: 0.0001,
+            acres: 0.000247105,
+            sqcentimeters: 10000
+        };
+
+        function convertArea() {
+            const value = parseFloat(document.getElementById('areaValue').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+
+            if (!value || value < 0) {
+                alert('Por favor ingresa un valor de área válido');
+                return;
+            }
+
+            // Convert to square meters first
+            const sqMetersValue = value / conversions[fromUnit];
+
+            // Convert from square meters to target unit
+            const result = sqMetersValue * conversions[toUnit];
+
+            const unitNames = {
+                sqmeters: 'm²',
+                sqfeet: 'ft²',
+                sqkilometers: 'km²',
+                sqmiles: 'mi²',
+                sqyards: 'yd²',
+                sqinches: 'in²',
+                hectares: 'ha',
+                acres: 'acres',
+                sqcentimeters: 'cm²'
+            };
+
+            document.getElementById('result').textContent =
+                result.toFixed(2) + ' ' + unitNames[toUnit];
+
+            // Visualization
+            let vizHtml = '<div style="margin-bottom: 10px;"><strong>Esto es aproximadamente:</strong></div>';
+
+            // Football field comparison
+            const footballFields = sqMetersValue / 5351; // American football field with end zones
+            if (footballFields >= 0.1) {
+                vizHtml += `<div>${footballFields.toFixed(2)} campos de fútbol americano</div>`;
+            }
+
+            // Tennis courts
+            const tennisCourts = sqMetersValue / 261;
+            if (tennisCourts >= 0.1 && tennisCourts < 100) {
+                vizHtml += `<div>${tennisCourts.toFixed(2)} canchas de tenis</div>`;
+            }
+
+            // Basketball courts
+            const basketballCourts = sqMetersValue / 436.6;
+            if (basketballCourts >= 0.1 && basketballCourts < 50) {
+                vizHtml += `<div>${basketballCourts.toFixed(2)} canchas de baloncesto</div>`;
+            }
+
+            // Parking spaces
+            const parkingSpaces = sqMetersValue / 16.7;
+            if (parkingSpaces >= 1 && parkingSpaces < 1000) {
+                vizHtml += `<div>${Math.round(parkingSpaces)} espacios de estacionamiento</div>`;
+            }
+
+            document.getElementById('visualization').innerHTML = vizHtml;
+
+            showResult('result');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', convertArea);
+            input.addEventListener('change', convertArea);
+        });
+
+        window.addEventListener('load', convertArea);
+    </script>
+</body>
+</html>

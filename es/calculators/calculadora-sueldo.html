@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de sueldo gratuita - Calcula tu salario neto después de impuestos y deducciones. Calculadora precisa de cheque de pago y salario.">
+    <meta name="keywords" content="calculadora sueldo, calculadora salario, pago neto, salario neto, calculadora nómina, calculadora cheque pago">
+
+    <title>Calculadora de Sueldo - Calcula tu Pago Neto | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-sueldo.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/paycheck-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-sueldo.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/paycheck-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/paycheck-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-sueldo.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Sueldo</h1>
+            <p class="calculator-description">Calcula tu pago neto del salario bruto después de impuestos y deducciones</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Información Salarial</h3>
+
+                <div class="form-group">
+                    <label for="salary" class="form-label">Salario Anual ($)</label>
+                    <input type="number" id="salary" class="form-input" value="60000" min="0" step="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="payFrequency" class="form-label">Frecuencia de Pago</label>
+                    <select id="payFrequency" class="form-select">
+                        <option value="26">Quincenal (26 cheques)</option>
+                        <option value="24">Semi-mensual (24 cheques)</option>
+                        <option value="12">Mensual (12 cheques)</option>
+                        <option value="52">Semanal (52 cheques)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="federalAllowances" class="form-label">Tasa de Impuesto Federal (%)</label>
+                    <input type="number" id="federalAllowances" class="form-input" value="15" min="0" max="40" step="0.5">
+                </div>
+
+                <div class="form-group">
+                    <label for="stateTax" class="form-label">Tasa de Impuesto Estatal (%)</label>
+                    <input type="number" id="stateTax" class="form-input" value="5" min="0" max="15" step="0.5">
+                </div>
+
+                <button onclick="calculate()" class="btn-calculate">Calcular Sueldo</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Desglose del Cheque de Pago</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Pago Bruto (por cheque)</div>
+                    <div class="result-value" id="grossPay">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Impuesto Federal</div>
+                    <div class="result-value" id="federalTax">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Impuesto Estatal</div>
+                    <div class="result-value" id="stateTaxAmount">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">FICA (7.65%)</div>
+                    <div class="result-value" id="ficaTax">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Pago Neto (Para Llevar)</div>
+                    <div class="result-value" id="netPay" style="font-size: 2.5rem; color: #10b981;">$0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo tu Cheque de Pago</h2>
+            <p>Tu cheque de pago representa más que solo tu salario por hora o salario anual dividido por períodos de pago. Entender las diversas deducciones y cómo se calculan te empodera para tomar decisiones financieras informadas, planificar tu presupuesto con precisión, y asegurar que te están pagando correctamente. Esta guía completa te ayudará a entender cada línea en tu talón de pago.</p>
+
+            <h2>Pago Bruto vs Pago Neto</h2>
+            <p><strong>El pago bruto</strong> son tus ganancias totales antes de cualquier deducción. Se calcula dividiendo tu salario anual por el número de períodos de pago en un año. Para empleados por hora, es el número de horas trabajadas multiplicado por la tarifa por hora, más cualquier pago de horas extras a tiempo y medio (o tiempo doble para circunstancias especiales).</p>
+
+            <p><strong>El pago neto</strong> o "salario para llevar a casa" es lo que realmente recibes después de todas las deducciones obligatorias y voluntarias. La diferencia entre pago bruto y neto puede ser sustancial: típicamente 20-30% o más de tus ganancias brutas, dependiendo de tu categoría impositiva, estado de residencia, y elecciones de beneficios.</p>
+
+            <h2>Frecuencia de Pago y su Impacto</h2>
+            <p>La frecuencia con que te pagan afecta significativamente tu gestión de flujo de efectivo:</p>
+
+            <p><strong>Semanal (52 cheques):</strong> Proporciona el flujo de efectivo más frecuente, lo cual puede ser útil para gestionar gastos semanales como comestibles y gasolina. Sin embargo, los cheques individuales son más pequeños, haciendo más difícil ahorrar grandes cantidades de una vez. Esta frecuencia es común en trabajos por hora, construcción y manufactura.</p>
+
+            <p><strong>Quincenal (26 cheques):</strong> La frecuencia de pago más común en Estados Unidos. Los empleados reciben dos cheques la mayoría de los meses, con dos meses al año teniendo tres cheques: una buena oportunidad de bonificación para ahorros extra o pago de deudas. Este horario típicamente sigue un día consistente de la semana (como cada segundo viernes).</p>
+
+            <p><strong>Semi-mensual (24 cheques):</strong> Típicamente pagado el 15 y último día del mes. Esta frecuencia es más fácil para presupuestar mensualmente ya que los montos son consistentes y se alinean con las cuentas mensuales. Sin embargo, puede complicar los cálculos de horas extras y no cae en días de semana consistentes.</p>
+
+            <p><strong>Mensual (12 cheques):</strong> Menos común en EE.UU. pero estándar en muchos otros países. Requiere presupuesto más disciplinado a lo largo del mes pero simplifica la planificación de gastos mensuales y típicamente resulta en menores costos administrativos para empleadores.</p>
+
+            <h2>Retención de Impuesto Federal sobre la Renta</h2>
+            <p>Tu empleador retiene impuesto federal sobre la renta de cada cheque basándose en la información que proporcionaste en el Formulario W-4. La cantidad retenida depende de varios factores clave:</p>
+
+            <ul>
+                <li><strong>Estado Civil:</strong> Las personas solteras tienen categorías impositivas más estrechas que casados declarando conjuntamente</li>
+                <li><strong>Número de Dependientes:</strong> Cada dependiente reduce tu retención</li>
+                <li><strong>Ingresos Adicionales:</strong> Ingresos de otros trabajos, inversiones, o negocios secundarios</li>
+                <li><strong>Deducciones y Créditos:</strong> Interés hipotecario, interés de préstamos estudiantiles, contribuciones IRA</li>
+                <li><strong>Retención Extra:</strong> Montos adicionales que solicitas voluntariamente que sean retenidos</li>
+            </ul>
+
+            <p>El objetivo es retener la cantidad correcta durante el año. Retener demasiado significa dar al gobierno un préstamo sin intereses, mientras que retener muy poco puede resultar en una factura de impuestos y posibles multas cuando declares. Revisa tu W-4 anualmente y después de cambios de vida importantes como matrimonio, divorcio, o tener hijos.</p>
+
+            <h2>Impuestos FICA: Seguro Social y Medicare</h2>
+            <p>Los impuestos FICA (Ley de Contribuciones al Seguro Federal) financian los programas de Seguro Social y Medicare. En 2024, el desglose es:</p>
+
+            <p><strong>Impuesto de Seguro Social:</strong> 6.2% del pago bruto hasta el límite de base salarial anual de $168,600. Tanto empleado como empleador contribuyen cada uno 6.2%, para un total combinado de 12.4%. Una vez que ganas por encima del límite de base salarial en un año calendario, no se retiene impuesto de Seguro Social adicional de cheques subsecuentes.</p>
+
+            <p><strong>Impuesto de Medicare:</strong> 1.45% de todo el pago bruto sin límite de ingresos. Los empleadores igualan este 1.45%, elevando el total a 2.9%. Los que ganan más (más de $200,000 para declarantes solteros, $250,000 para casados declarando conjuntamente) pagan un impuesto adicional de Medicare de 0.9% sobre ganancias por encima de estos umbrales. El empleador no iguala este impuesto adicional.</p>
+
+            <p>Combinados, la mayoría de los empleados pagan 7.65% en impuestos FICA. Las personas autoempleadas pagan tanto las porciones de empleado como de empleador (15.3% total) pero pueden deducir la mitad como gasto comercial en su declaración de impuestos.</p>
+
+            <h2>Impuestos sobre la Renta Estatales y Locales</h2>
+            <p>Las tasas de impuesto estatal sobre la renta varían dramáticamente en el país. Nueve estados no tienen impuesto sobre la renta: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington y Wyoming. Otros estados van desde 1% hasta más de 13% en California.</p>
+
+            <p>Algunos estados usan categorías impositivas progresivas similares a los impuestos federales, mientras que otros imponen una tasa fija independientemente del ingreso. Además, algunas ciudades y condados cobran impuestos locales sobre la renta (común en Ohio, Pennsylvania y Maryland). Si trabajas en un estado pero vives en otro, puede que necesites declarar en ambos estados, aunque muchos estados tienen acuerdos recíprocos para prevenir la doble tributación.</p>
+
+            <h2>Deducciones Antes de Impuestos: Reduciendo tu Carga Fiscal</h2>
+            <p>Las deducciones antes de impuestos se restan de tu pago bruto antes de que se calculen los impuestos, efectivamente reduciendo tu ingreso gravable y carga fiscal general. Las deducciones comunes antes de impuestos incluyen:</p>
+
+            <p><strong>Contribuciones de Retiro:</strong> Las contribuciones a planes tradicionales 401(k), 403(b) y 457 reducen tu ingreso gravable actual mientras construyes ahorros para el retiro. Para 2024, puedes contribuir hasta $23,000 anualmente ($30,500 si tienes 50 años o más con contribuciones de recuperación). Esto puede ahorrarte miles en impuestos anualmente mientras aseguras tu futuro financiero.</p>
+
+            <p><strong>Primas de Seguro de Salud:</strong> Las primas de seguro de salud patrocinado por el empleador típicamente se deducen antes de impuestos, reduciendo tanto el impuesto sobre la renta como los impuestos FICA. Este beneficio fiscal triple hace que la cobertura de salud del empleador sea extremadamente valiosa.</p>
+
+            <p><strong>Cuenta de Ahorros de Salud (HSA):</strong> Si tienes un plan de salud de alto deducible calificado, las contribuciones HSA ofrecen ventajas fiscales triples: contribuciones deducibles de impuestos, crecimiento libre de impuestos, y retiros libres de impuestos para gastos médicos calificados. Para 2024, puedes contribuir hasta $4,150 para cobertura individual o $8,300 para cobertura familiar.</p>
+
+            <p><strong>Cuentas de Gastos Flexibles (FSA):</strong> Las FSA de atención médica permiten hasta $3,200 (2024) en contribuciones antes de impuestos para gastos médicos. Las FSA de Cuidado de Dependientes permiten hasta $5,000 anualmente para gastos de cuidado infantil. Recuerda que las FSA de Atención Médica estándar siguen reglas de "úsalo o piérdelo", aunque algunos empleadores ofrecen períodos de gracia o pequeños montos de traspaso.</p>
+
+            <h2>Deducciones Después de Impuestos</h2>
+            <p>Estas deducciones vienen de tu pago después de que se han calculado los impuestos. Las deducciones comunes después de impuestos incluyen:</p>
+            <ul>
+                <li><strong>Contribuciones Roth 401(k):</strong> A diferencia del 401(k) tradicional, estas contribuciones no reducen los impuestos actuales pero crecen libres de impuestos y no se gravan al retiro en el retiro</li>
+                <li><strong>Seguro Suplementario:</strong> Primas de seguro de vida más allá de la cobertura proporcionada por el empleador</li>
+                <li><strong>Seguro por Discapacidad:</strong> Cobertura de discapacidad a corto o largo plazo</li>
+                <li><strong>Cuotas Sindicales:</strong> Cuotas de membresía para sindicatos laborales</li>
+                <li><strong>Contribuciones Caritativas:</strong> Deducciones de nómina para campañas de donación en el lugar de trabajo</li>
+            </ul>
+
+            <h2>Maximizando tu Pago Neto</h2>
+            <p><strong>Optimiza tu W-4:</strong> Revisa y actualiza tu W-4 anualmente o después de cambios importantes de vida (matrimonio, nacimiento de un hijo, compra de casa). Usa el Estimador de Retención de Impuestos del IRS para determinar el nivel correcto de retención. Intenta equilibrarte en lugar de recibir un gran reembolso o deber un gran pago.</p>
+
+            <p><strong>Aprovecha los Beneficios Antes de Impuestos:</strong> Maximiza las contribuciones a planes de retiro patrocinados por el empleador, especialmente si tu empleador ofrece contribuciones equivalentes (¡eso es dinero gratis!). Aprovecha las HSA si eres elegible: son una de las mejores cuentas con ventajas fiscales disponibles.</p>
+
+            <p><strong>Entiende el Valor de tus Beneficios:</strong> Tu compensación total incluye más que solo salario. El seguro de salud pagado por el empleador, igualación de retiro, y otros beneficios pueden añadir 20-30% a tu compensación efectiva.</p>
+
+            <h2>Leyendo tu Talón de Pago</h2>
+            <p>Tu talón de pago contiene información crucial más allá de solo tu pago neto. Entender cada sección te ayuda a verificar la precisión y planificar financieramente:</p>
+
+            <p><strong>Totales del Año a la Fecha (YTD):</strong> Rastrea tus ganancias acumulativas e impuestos pagados durante el año. Estos números son esenciales para planificación fiscal y verificar tu W-2 al final del año.</p>
+
+            <p><strong>Desglose de Horas:</strong> Horas regulares, horas extras, tiempo doble, y cualquier tiempo libre pagado (vacaciones, licencia por enfermedad). Verifica que estos números coincidan con tu hoja de horas para detectar errores temprano.</p>
+
+            <p><strong>Retenciones de Impuestos:</strong> Impuestos federales, estatales, locales y FICA retenidos. Tanto los montos del período actual como YTD te ayudan a rastrear si estás en el ritmo correcto con tu responsabilidad fiscal anual esperada.</p>
+
+            <h2>Errores Comunes de Cheque de Pago y Cómo Detectarlos</h2>
+            <p>Los errores de nómina ocurren con más frecuencia de lo que podrías pensar. Según estudios, aproximadamente 1 de cada 6 cheques contiene algún error. Cuida de:</p>
+
+            <ul>
+                <li><strong>Horas incorrectas o cálculos de horas extras:</strong> Compara tu talón de pago con tu tarjeta de tiempo</li>
+                <li><strong>Estado civil fiscal incorrecto:</strong> Verifica que tu información W-4 esté correctamente ingresada</li>
+                <li><strong>Prima de horas extras faltante:</strong> Asegúrate de recibir tiempo y medio después de 40 horas</li>
+                <li><strong>Deducciones de beneficios incorrectas:</strong> Verifica que los montos de deducción coincidan con tus elecciones de beneficios</li>
+                <li><strong>No recibir bonificaciones o comisiones ganadas:</strong> Rastrea los pagos prometidos por separado</li>
+            </ul>
+
+            <p>Siempre revisa tu talón de pago cuidadosamente cada período de pago. Reporta discrepancias a Recursos Humanos o nómina inmediatamente: algunos estados limitan cuán atrás puedes reclamar salarios no pagados, por lo que la acción rápida es importante.</p>
+
+            <h2>Tu Cheque de Pago y Planificación Financiera</h2>
+            <p>Entender tu cheque de pago es fundamental para la planificación financiera efectiva. Usa este conocimiento para:</p>
+
+            <ul>
+                <li>Crear un presupuesto mensual preciso basado en tu pago neto real</li>
+                <li>Planificar contribuciones de retiro con ventajas fiscales para maximizar riqueza a largo plazo</li>
+                <li>Optimizar la retención de impuestos para mantener más dinero en tu bolsillo durante el año</li>
+                <li>Evaluar ofertas de trabajo comparando compensación total, no solo salario base</li>
+                <li>Identificar oportunidades para aumentar el pago neto a través de optimización de beneficios</li>
+            </ul>
+
+            <p>Recuerda que tu cheque de pago es más que solo un número: es una herramienta de planificación financiera que, cuando se entiende completamente, empodera mejores decisiones de gestión de dinero y construcción de riqueza.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const salary = parseFloat(document.getElementById('salary').value) || 0;
+            const frequency = parseFloat(document.getElementById('payFrequency').value) || 26;
+            const federalRate = parseFloat(document.getElementById('federalAllowances').value) / 100 || 0.15;
+            const stateRate = parseFloat(document.getElementById('stateTax').value) / 100 || 0.05;
+
+            const grossPay = salary / frequency;
+            const federalTax = grossPay * federalRate;
+            const stateTax = grossPay * stateRate;
+            const ficaTax = grossPay * 0.0765; // Social Security (6.2%) + Medicare (1.45%)
+            const netPay = grossPay - federalTax - stateTax - ficaTax;
+
+            document.getElementById('grossPay').textContent = '$' + grossPay.toLocaleString('es-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('federalTax').textContent = '-$' + federalTax.toLocaleString('es-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('stateTaxAmount').textContent = '-$' + stateTax.toLocaleString('es-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('ficaTax').textContent = '-$' + ficaTax.toLocaleString('es-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('netPay').textContent = '$' + netPay.toLocaleString('es-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

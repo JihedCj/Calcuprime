@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de ovulación gratuita - Calcula tu fecha de ovulación y ventana fértil. Planifica embarazo o rastrea ciclo menstrual.">
+    <meta name="keywords" content="calculadora ovulación, ventana fértil, fecha ovulación, calculadora fertilidad, calculadora concepción">
+
+    <title>Calculadora de Ovulación | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-ovulacion.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/ovulation-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-ovulacion.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/ovulation-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/ovulation-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-ovulacion.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Ovulación</h1>
+            <p class="calculator-description">Calcula tu fecha de ovulación y ventana fértil para planificar embarazo o rastrear ciclo</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Información del Ciclo</h3>
+                <div class="form-group">
+                    <label for="lastPeriod" class="form-label">Primer Día del Último Período</label>
+                    <input type="date" id="lastPeriod" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="cycleLength" class="form-label">Duración del Ciclo (días)</label>
+                    <input type="number" id="cycleLength" class="form-input" value="28" min="21" max="35" step="1">
+                    <small style="color: #666; font-size: 0.9rem;">Duración promedio de tu ciclo menstrual</small>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular Ovulación</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tu Ventana Fértil</h3>
+                <div class="result-item">
+                    <div class="result-label">Día Estimado de Ovulación</div>
+                    <div class="result-value" id="ovulationDate" style="font-size: 2.0rem; color: #10b981;">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Ventana Fértil</div>
+                    <div class="result-value" id="fertileWindow" style="font-size: 1.2rem;">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Próximo Período Esperado</div>
+                    <div class="result-value" id="nextPeriod">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Fecha Estimada de Prueba</div>
+                    <div class="result-value" id="testDate">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo la Ovulación</h2>
+            <p>La ovulación es el proceso donde un ovario libera un óvulo maduro, típicamente una vez por ciclo menstrual. Este óvulo viaja por la trompa de Falopio donde puede ser fertilizado por esperma durante aproximadamente 12-24 horas. Entender cuándo ovulas es esencial para lograr embarazo o prevenir concepción. Para mujeres intentando concebir, tener relaciones durante la ventana fértil (los días antes y durante la ovulación) maximiza las probabilidades de embarazo. Nuestra calculadora predice tu ventana fértil basada en patrones de ciclo típicos, aunque la variación individual existe.</p>
+
+            <h2>Cómo Funciona el Ciclo Menstrual</h2>
+            <p>El ciclo menstrual típico dura 28 días pero puede variar de 21-35 días y aún ser normal. El ciclo se divide en fases:</p>
+
+            <p><strong>Fase Menstrual (Días 1-5):</strong> El Día 1 es el primer día del sangrado menstrual. El revestimiento uterino se desprende porque no ocurrió fertilización. El sangrado típicamente dura 3-7 días.</p>
+
+            <p><strong>Fase Folicular (Días 1-13):</strong> Superposición con menstruación, esta fase comienza el Día 1 y continúa hasta ovulación. El cerebro libera hormona foliculoestimulante (FSH), estimulando a los ovarios a producir folículos que contienen óvulos inmaduros. Uno (a veces más) folículo se vuelve dominante y continúa madurando mientras otros se deterioran. Los niveles de estrógeno aumentan a medida que el folículo crece, engrosando el revestimiento uterino en preparación para posible embarazo.</p>
+
+            <p><strong>Ovulación (Día 14):</strong> En un ciclo de 28 días, la ovulación típicamente ocurre alrededor del Día 14, pero esto varía con la duración del ciclo. Un aumento de hormona luteinizante (LH) desencadena que el folículo maduro libere su óvulo. Este aumento de LH ocurre 24-36 horas antes de la ovulación y es lo que los kits predictores de ovulación detectan. El óvulo vive 12-24 horas después de la liberación.</p>
+
+            <p><strong>Fase Lútea (Días 15-28):</strong> Después de liberar el óvulo, el folículo vacío se transforma en cuerpo lúteo, secretando progesterona que mantiene el revestimiento uterino. Si ocurre fertilización, el embrión se implanta en el revestimiento engrosado. Si no ocurre embarazo, el cuerpo lúteo se deteriora, los niveles hormonales caen y el revestimiento se desprende (menstruación), comenzando un nuevo ciclo.</p>
+
+            <h2>La Ventana Fértil</h2>
+            <p>Aunque el óvulo vive solo 12-24 horas, la ventana fértil se extiende aproximadamente 6 días: los 5 días antes de ovulación más el día de ovulación mismo. Esta ventana extendida existe porque el esperma puede sobrevivir en el tracto reproductivo femenino hasta 5 días en condiciones óptimas.</p>
+
+            <p><strong>Probabilidad de Concepción por Día:</strong></p>
+            <ul>
+                <li><strong>5 días antes de ovulación:</strong> ~10% de probabilidad</li>
+                <li><strong>4 días antes de ovulación:</strong> ~16% de probabilidad</li>
+                <li><strong>3 días antes de ovulación:</strong> ~14% de probabilidad</li>
+                <li><strong>2 días antes de ovulación:</strong> ~27% de probabilidad</li>
+                <li><strong>1 día antes de ovulación:</strong> ~31% de probabilidad (más alta)</li>
+                <li><strong>Día de ovulación:</strong> ~33% de probabilidad (más alta)</li>
+                <li><strong>1 día después de ovulación:</strong> ~0-5% de probabilidad</li>
+            </ul>
+
+            <p>La mayor probabilidad de concepción ocurre en los 2-3 días antes de ovulación y el día de ovulación mismo. Tener relaciones cada 1-2 días durante la ventana fértil maximiza las probabilidades sin causar fatiga de esperma.</p>
+
+            <h2>Señales de Ovulación</h2>
+            <p>Aunque las calculadoras estiman ovulación, monitorear señales físicas proporciona confirmación:</p>
+
+            <p><strong>Moco Cervical:</strong> El cambio más confiable. Inmediatamente después de menstruación, el moco cervical es escaso y pegajoso. A medida que te acercas a ovulación, se vuelve más abundante, claro, resbaladizo y elástico (como clara de huevo cruda). Esta textura "fértil" ayuda al transporte de esperma. Después de ovulación, el moco se vuelve pegajoso nuevamente o se seca.</p>
+
+            <p><strong>Temperatura Basal Corporal (TBC):</strong> Tu temperatura en reposo aumenta ligeramente (0.3-0.5°C) después de ovulación debido a progesterona. Rastrear TBC requiere medir temperatura inmediatamente al despertar antes de cualquier actividad. TBC confirma ovulación retroactivamente (el aumento ocurre después de ovulación) en lugar de predecirla.</p>
+
+            <p><strong>Dolor de Mittelschmerz:</strong> Aproximadamente 20% de mujeres experimentan dolor abdominal lateral leve durante ovulación. Este dolor unilateral (solo un lado) puede ser afilado o punzante o dolor sordo. Dura minutos a horas, ocasionalmente hasta 1-2 días.</p>
+
+            <p><strong>Aumento de Libido:</strong> Muchas mujeres notan deseo sexual aumentado alrededor de ovulación: el momento biológico de la naturaleza para promover reproducción.</p>
+
+            <p><strong>Sensibilidad de Senos:</strong> Algunas mujeres experimentan sensibilidad o dolor de senos alrededor de ovulación debido a cambios hormonales.</p>
+
+            <h2>Kits Predictores de Ovulación (OPK)</h2>
+            <p>Los OPKs detectan el aumento de LH en orina que ocurre 24-36 horas antes de ovulación. Funcionan de manera similar a las pruebas de embarazo: orinas en un palillo y los resultados aparecen en minutos.</p>
+
+            <p><strong>Cómo Usar OPKs:</strong> Comienza a probar varios días antes de la ovulación esperada (Día 10-11 para ciclo de 28 días). Prueba a la misma hora diariamente, preferiblemente por la tarde o noche (la LH típicamente aumenta temprano en la mañana, detectándose en orina varias horas después). Continúa probando hasta detectar el aumento (resultado positivo). Ovularás dentro de 24-36 horas después de un resultado positivo.</p>
+
+            <p><strong>Precisión:</strong> Los OPKs son aproximadamente 90% precisos cuando se usan correctamente. Los falsos positivos pueden ocurrir con síndrome de ovario poliquístico (SOP) u otras condiciones hormonales. Un resultado positivo indica aumento de LH, no confirma que ocurrió ovulación (algunas mujeres tienen aumento de LH sin liberar un óvulo).</p>
+
+            <h2>Tiempo de Relaciones para Concepción</h2>
+            <p><strong>Frecuencia Óptima:</strong> Tener relaciones cada 1-2 días durante la ventana fértil maximiza las probabilidades de concepción. Relaciones diarias no mejoran significativamente las tasas de concepción comparado con cada dos días, y puede causar fatiga sexual para algunas parejas. El esperma se mantiene saludable con eyaculación cada 2-3 días.</p>
+
+            <p><strong>Cronometraje Específico:</strong> Apunta a relaciones en los 2-3 días antes de la ovulación esperada más el día de ovulación. Si usas OPKs, ten relaciones el día del resultado positivo y el día siguiente.</p>
+
+            <p><strong>Evitar Sobre-planificación:</strong> Aunque cronometrar relaciones alrededor de ovulación mejora las probabilidades, sobre-programar puede crear estrés y reducir el disfrute. Muchas parejas exitosamente conciben con relaciones regulares (2-3 veces semanalmente) durante todo el ciclo sin rastreo intensivo.</p>
+
+            <h2>Factores que Afectan la Ovulación</h2>
+            <p><strong>Estrés:</strong> El estrés severo puede retrasar o suprimir la ovulación al interferir con las señales hormonales del cerebro. El manejo del estrés apoya ciclos regulares.</p>
+
+            <p><strong>Peso:</strong> Tanto bajo peso (IMC <18.5) como sobrepeso (IMC >30) pueden interrumpir la ovulación. El tejido graso produce estrógeno; muy poco o mucho interrumpe el equilibrio hormonal necesario para ovulación.</p>
+
+            <p><strong>Ejercicio:</strong> El ejercicio moderado apoya ciclos saludables. El ejercicio excesivo (particularmente combinado con bajo peso o ingesta calórica) puede suprimir la ovulación.</p>
+
+            <p><strong>Edad:</strong> La fertilidad disminuye con la edad, particularmente después de 35, debido a disminución de reserva ovárica y calidad de óvulos. Los ciclos también pueden volverse irregulares a medida que la menopausia se acerca.</p>
+
+            <p><strong>Medicamentos:</strong> Algunos medicamentos (antidepresivos, medicamentos para tiroides, esteroides) pueden afectar la ovulación. Consulta a proveedores de salud si estás intentando concebir mientras tomas medicación.</p>
+
+            <p><strong>Condiciones Médicas:</strong> SOP, trastornos tiroideos, hiperprolactinemia e insuficiencia ovárica primaria pueden interrumpir o prevenir ovulación. Busca evaluación médica si ciclos son irregulares o ausentes.</p>
+
+            <h2>Cuándo Buscar Ayuda de Fertilidad</h2>
+            <p><strong>Menores de 35:</strong> Busca evaluación después de 12 meses de relaciones regulares sin protección sin concebir.</p>
+
+            <p><strong>35-40 años:</strong> Busca evaluación después de 6 meses de intentos.</p>
+
+            <p><strong>Mayores de 40:</strong> Considera consulta antes de intentar o después de 3 meses de intentos.</p>
+
+            <p><strong>Busca ayuda antes si:</strong></p>
+            <ul>
+                <li>Los ciclos son muy irregulares (varían >7 días) o ausentes</li>
+                <li>Tienes SOP diagnosticado u otros trastornos hormonales</li>
+                <li>Tienes historial de cirugía pélvica, endometriosis o enfermedad inflamatoria pélvica</li>
+                <li>Tu pareja tiene problemas de fertilidad conocidos</li>
+                <li>Experimentas múltiples abortos espontáneos</li>
+            </ul>
+
+            <h2>Consejos para Mejorar la Fertilidad</h2>
+            <p><strong>Mantener Peso Saludable:</strong> Apunta a IMC 18.5-24.9. Tanto bajo peso como sobrepeso pueden interrumpir ovulación.</p>
+
+            <p><strong>Comer Dieta Balanceada:</strong> Enfócate en alimentos integrales, proteína adecuada, grasas saludables, frutas y verduras. Algunas investigaciones sugieren que dietas al estilo Mediterráneo apoyan fertilidad.</p>
+
+            <p><strong>Tomar Ácido Fólico:</strong> 400-800 mcg diarios reduce el riesgo de defectos del tubo neural. Comienza antes de concebir.</p>
+
+            <p><strong>Limitar Alcohol y Cafeína:</strong> Consumo excesivo de alcohol deteriora fertilidad. Limita cafeína a <200mg diarios (aproximadamente 1-2 tazas de café).</p>
+
+            <p><strong>Dejar de Fumar:</strong> Fumar reduce significativamente fertilidad tanto en hombres como mujeres y aumenta el riesgo de aborto espontáneo.</p>
+
+            <p><strong>Manejar el Estrés:</strong> El estrés crónico puede interrumpir ciclos. Practica técnicas de relajación: meditación, yoga, ejercicio moderado, dormir adecuado.</p>
+
+            <p><strong>Evitar Lubricantes Hostiles al Esperma:</strong> Muchos lubricantes comerciales dañan o reducen la motilidad del esperma. Usa lubricantes amigables con la fertilidad si necesario, o solo saliva.</p>
+
+            <h2>Uso de Esta Calculadora</h2>
+            <p>Nuestra calculadora estima ovulación basada en la duración promedio del ciclo. Para ciclos de 28 días, la ovulación típicamente ocurre alrededor del Día 14. Para ciclos más largos o cortos, la calculadora ajusta en consecuencia: la ovulación generalmente ocurre 14 días antes de que comience tu próximo período.</p>
+
+            <p><strong>Limitaciones:</strong> Esta calculadora asume ciclos regulares. Si tus ciclos varían significativamente mes a mes, las predicciones pueden ser menos precisas. Combina esta calculadora con rastreo de moco cervical, OPKs o gráficos de TBC para confirmación mejorada de ovulación.</p>
+
+            <h2>Conclusión</h2>
+            <p>Entender tu ciclo de ovulación te empodera ya sea que estés intentando concebir, prevenir embarazo o simplemente rastrear salud reproductiva. Nuestra calculadora proporciona estimaciones útiles basadas en patrones de ciclo típicos, pero recuerda que la variación individual existe. Combina predicciones de calendario con monitoreo de señales de fertilidad (moco cervical, OPKs, TBC) para precisión mejorada. Si ciclos son irregulares o experimentas dificultad para concebir, consulta a un proveedor de salud para evaluación y orientación personalizadas.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // Set today's date as default
+        window.addEventListener('load', function() {
+            const today = new Date();
+            const dateString = today.toISOString().split('T')[0];
+            document.getElementById('lastPeriod').value = dateString;
+            calculate();
+        });
+
+        function calculate() {
+            const lastPeriodInput = document.getElementById('lastPeriod').value;
+            if (!lastPeriodInput) {
+                document.getElementById('ovulationDate').textContent = '-';
+                document.getElementById('fertileWindow').textContent = '-';
+                document.getElementById('nextPeriod').textContent = '-';
+                document.getElementById('testDate').textContent = '-';
+                return;
+            }
+
+            const lastPeriod = new Date(lastPeriodInput);
+            const cycleLength = parseInt(document.getElementById('cycleLength').value) || 28;
+
+            // Calculate ovulation day (typically 14 days before next period)
+            const ovulationDay = new Date(lastPeriod);
+            ovulationDay.setDate(lastPeriod.getDate() + cycleLength - 14);
+
+            // Fertile window: 5 days before ovulation to 1 day after
+            const fertileStart = new Date(ovulationDay);
+            fertileStart.setDate(ovulationDay.getDate() - 5);
+
+            const fertileEnd = new Date(ovulationDay);
+            fertileEnd.setDate(ovulationDay.getDate() + 1);
+
+            // Next period
+            const nextPeriod = new Date(lastPeriod);
+            nextPeriod.setDate(lastPeriod.getDate() + cycleLength);
+
+            // Test date (14 days after ovulation or day of expected period)
+            const testDate = new Date(nextPeriod);
+
+            // Format dates
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+            document.getElementById('ovulationDate').textContent = ovulationDay.toLocaleDateString('es-ES', options);
+            document.getElementById('fertileWindow').textContent =
+                fertileStart.toLocaleDateString('es-ES', { month: 'short', day: 'numeric' }) +
+                ' - ' +
+                fertileEnd.toLocaleDateString('es-ES', { month: 'short', day: 'numeric' });
+            document.getElementById('nextPeriod').textContent = nextPeriod.toLocaleDateString('es-ES', options);
+            document.getElementById('testDate').textContent = testDate.toLocaleDateString('es-ES', options);
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+    </script>
+</body>
+</html>

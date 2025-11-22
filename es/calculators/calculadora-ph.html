@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de pH gratuita - Calcula pH, pOH, concentración de H+ y OH-. Herramienta esencial para química ácido-base.">
+    <meta name="keywords" content="calculadora ph, poh, concentración hidrógeno, escala ph, ácidos bases">
+
+    <title>Calculadora de pH - Ácidos y Bases | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-ph.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/ph-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-ph.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/ph-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+        .ph-scale {
+            display: flex;
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+        }
+        .ph-indicator {
+            position: absolute;
+            top: -10px;
+            width: 3px;
+            height: 60px;
+            background: #000;
+            transition: left 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/ph-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-ph.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de pH</h1>
+            <p class="calculator-description">Calcula pH, pOH y concentraciones de H⁺ y OH⁻ en soluciones</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Datos de la Solución</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Calcular desde:</label>
+                    <select id="inputType" class="form-select">
+                        <option value="ph">pH</option>
+                        <option value="poh">pOH</option>
+                        <option value="h">Concentración H⁺</option>
+                        <option value="oh">Concentración OH⁻</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="phGroup">
+                    <label for="phValue" class="form-label">Valor de pH</label>
+                    <input type="number" id="phValue" class="form-input" value="7" min="0" max="14" step="0.01">
+                </div>
+
+                <div class="form-group" id="pohGroup" style="display: none;">
+                    <label for="pohValue" class="form-label">Valor de pOH</label>
+                    <input type="number" id="pohValue" class="form-input" value="7" min="0" max="14" step="0.01">
+                </div>
+
+                <div class="form-group" id="hGroup" style="display: none;">
+                    <label for="hValue" class="form-label">Concentración [H⁺] (mol/L)</label>
+                    <input type="number" id="hValue" class="form-input" value="0.0000001" min="0" step="0.0000000001">
+                    <small style="color: #6b7280;">Notación científica: 1e-7</small>
+                </div>
+
+                <div class="form-group" id="ohGroup" style="display: none;">
+                    <label for="ohValue" class="form-label">Concentración [OH⁻] (mol/L)</label>
+                    <input type="number" id="ohValue" class="form-input" value="0.0000001" min="0" step="0.0000000001">
+                    <small style="color: #6b7280;">Notación científica: 1e-7</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="temperature" class="form-label">Temperatura (°C)</label>
+                    <input type="number" id="temperature" class="form-input" value="25" min="0" max="100" step="0.1">
+                    <small style="color: #6b7280;">Afecta el pKw (a 25°C, pKw = 14)</small>
+                </div>
+
+                <button onclick="calculatePH()" class="btn-calculate">Calcular</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">pH</div>
+                    <div class="result-value" id="phResult" style="font-size: 2.5rem; color: #10b981;">7.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">pOH</div>
+                    <div class="result-value" id="pohResult" style="font-size: 1.8rem;">7.00</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">[H⁺] Concentración</div>
+                    <div class="result-value" id="hResult" style="font-size: 1.3rem;">1.0e-7 M</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">[OH⁻] Concentración</div>
+                    <div class="result-value" id="ohResult" style="font-size: 1.3rem;">1.0e-7 M</div>
+                </div>
+
+                <div class="result-item" style="text-align: center;">
+                    <div id="solutionType" style="font-size: 1.5rem; font-weight: 600; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        Neutra
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h4 style="margin-bottom: 10px;">Escala de pH</h4>
+                    <div class="ph-scale">
+                        <div style="flex: 1; background: linear-gradient(to right, #ef4444, #f97316, #fbbf24); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white; font-weight: 600;">Ácido</div>
+                        <div style="flex: 0.3; background: #34d399; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white; font-weight: 600;">Neutro</div>
+                        <div style="flex: 1; background: linear-gradient(to right, #60a5fa, #3b82f6, #2563eb); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white; font-weight: 600;">Básico</div>
+                        <div class="ph-indicator" id="phIndicator"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #6b7280;">
+                        <span>0</span>
+                        <span>7</span>
+                        <span>14</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el pH?</h2>
+            <p>El pH es una medida de la acidez o basicidad de una solución acuosa. La escala de pH va de 0 a 14, donde 7 es neutro, valores menores a 7 son ácidos, y valores mayores a 7 son básicos o alcalinos. El término pH significa "potencial de hidrógeno" y fue introducido por el químico danés Søren Peder Lauritz Sørensen en 1909. El pH se define como el logaritmo negativo en base 10 de la concentración de iones hidrógeno (H⁺). Esta escala logarítmica significa que cada unidad de pH representa un cambio de 10 veces en la concentración de iones hidrógeno, lo que hace que pequeños cambios en pH representen cambios significativos en la acidez o basicidad de una solución.</p>
+
+            <h2>Fórmulas del pH</h2>
+            <p>Las fórmulas fundamentales para calcular el pH son:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                <strong>pH = -log₁₀[H⁺]</strong><br>
+                <strong>pOH = -log₁₀[OH⁻]</strong><br>
+                <strong>pH + pOH = 14</strong> (a 25°C)<br>
+                <strong>[H⁺] × [OH⁻] = 1.0 × 10⁻¹⁴</strong> (Kw a 25°C)
+            </p>
+
+            <p>Para calcular concentraciones desde pH o pOH:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                <strong>[H⁺] = 10⁻ᵖᴴ</strong><br>
+                <strong>[OH⁻] = 10⁻ᵖᴼᴴ</strong>
+            </p>
+
+            <h2>Cómo Usar la Calculadora de pH</h2>
+            <ol>
+                <li><strong>Selecciona el tipo de entrada:</strong> Elige si conoces el pH, pOH, [H⁺] o [OH⁻]</li>
+                <li><strong>Ingresa el valor conocido:</strong> Introduce el dato que tienes disponible</li>
+                <li><strong>Ajusta la temperatura:</strong> La temperatura afecta el valor de pKw (por defecto 25°C)</li>
+                <li><strong>Calcula:</strong> Haz clic en el botón para obtener todos los valores relacionados</li>
+                <li><strong>Interpreta los resultados:</strong> Revisa el pH, pOH, concentraciones y el tipo de solución</li>
+            </ol>
+
+            <h2>La Escala de pH Explicada</h2>
+
+            <h3>pH 0-3: Fuertemente Ácido</h3>
+            <ul>
+                <li><strong>Ácido clorhídrico (HCl) concentrado:</strong> pH ≈ 0</li>
+                <li><strong>Ácido de batería:</strong> pH ≈ 1</li>
+                <li><strong>Jugo gástrico:</strong> pH ≈ 1.5-2</li>
+                <li><strong>Jugo de limón:</strong> pH ≈ 2-3</li>
+                <li><strong>Vinagre:</strong> pH ≈ 2.5-3</li>
+            </ul>
+
+            <h3>pH 4-6: Débilmente Ácido</h3>
+            <ul>
+                <li><strong>Jugo de naranja:</strong> pH ≈ 3.5</li>
+                <li><strong>Cerveza:</strong> pH ≈ 4-5</li>
+                <li><strong>Café negro:</strong> pH ≈ 5</li>
+                <li><strong>Lluvia ácida:</strong> pH &lt; 5.6</li>
+                <li><strong>Leche:</strong> pH ≈ 6.5</li>
+            </ul>
+
+            <h3>pH 7: Neutro</h3>
+            <ul>
+                <li><strong>Agua pura:</strong> pH = 7.0 (a 25°C)</li>
+                <li><strong>Sangre humana:</strong> pH ≈ 7.4 (ligeramente básica)</li>
+                <li><strong>Saliva:</strong> pH ≈ 6.5-7.5</li>
+            </ul>
+
+            <h3>pH 8-10: Débilmente Básico</h3>
+            <ul>
+                <li><strong>Agua de mar:</strong> pH ≈ 8</li>
+                <li><strong>Bicarbonato de sodio:</strong> pH ≈ 8.3</li>
+                <li><strong>Jabón de manos:</strong> pH ≈ 9-10</li>
+                <li><strong>Leche de magnesia:</strong> pH ≈ 10.5</li>
+            </ul>
+
+            <h3>pH 11-14: Fuertemente Básico</h3>
+            <ul>
+                <li><strong>Amoníaco:</strong> pH ≈ 11.5</li>
+                <li><strong>Lejía (hipoclorito de sodio):</strong> pH ≈ 12.5</li>
+                <li><strong>Limpiador de hornos:</strong> pH ≈ 13</li>
+                <li><strong>Hidróxido de sodio (NaOH) concentrado:</strong> pH ≈ 14</li>
+            </ul>
+
+            <h2>Importancia del pH en Diferentes Campos</h2>
+
+            <h3>Biología y Medicina</h3>
+            <p>El pH es crítico para todos los procesos biológicos. El pH de la sangre humana debe mantenerse entre 7.35 y 7.45 para la supervivencia. Los sistemas buffer en el cuerpo, principalmente el sistema bicarbonato-ácido carbónico, regulan el pH sanguíneo. La acidosis (pH &lt; 7.35) o alcalosis (pH &gt; 7.45) pueden ser condiciones médicas graves. Las enzimas funcionan óptimamente en rangos específicos de pH, y cambios pueden desnaturalizarlas.</p>
+
+            <h3>Agricultura y Suelos</h3>
+            <p>El pH del suelo afecta la disponibilidad de nutrientes para las plantas. La mayoría de las plantas prefieren pH entre 6.0 y 7.5. Suelos muy ácidos (pH &lt; 5.5) pueden tener aluminio y manganeso tóxicos disponibles. Suelos muy alcalinos (pH &gt; 8) pueden causar deficiencias de hierro, manganeso y zinc. Los agricultores modifican el pH del suelo con cal (aumenta pH) o azufre (disminuye pH).</p>
+
+            <h3>Acuarios y Acuicultura</h3>
+            <p>Los peces y organismos acuáticos son muy sensibles al pH. Peces tropicales generalmente prefieren pH 6.5-7.5, mientras que peces de agua fría prefieren pH 7.0-8.0. Cambios rápidos en pH pueden estresar o matar a los peces. El monitoreo regular del pH es esencial para mantener un ecosistema acuático saludable.</p>
+
+            <h3>Industria Alimentaria</h3>
+            <p>El pH afecta la conservación, sabor, textura y seguridad de los alimentos. Alimentos con pH &lt; 4.6 son considerados ácidos y menos propensos al crecimiento de bacterias peligrosas como Clostridium botulinum. El pH influye en la gelificación, fermentación, y estabilidad del color en alimentos procesados.</p>
+
+            <h3>Tratamiento de Agua</h3>
+            <p>El pH óptimo para agua potable es 6.5-8.5. El pH afecta la efectividad de la desinfección con cloro. Agua muy ácida puede corroer tuberías, mientras que agua muy alcalina puede causar incrustaciones. El ajuste de pH es crucial en plantas de tratamiento de aguas residuales.</p>
+
+            <h3>Química Industrial</h3>
+            <p>Muchos procesos industriales requieren control estricto del pH. En la fabricación de papel, productos farmacéuticos, textiles y productos químicos, el pH influye en las tasas de reacción, calidad del producto y seguridad del proceso.</p>
+
+            <h2>Sistemas Buffer (Amortiguadores)</h2>
+            <p>Un sistema buffer es una solución que resiste cambios en pH cuando se agregan pequeñas cantidades de ácido o base. Los buffers consisten en un ácido débil y su base conjugada (o una base débil y su ácido conjugado). Son esenciales en sistemas biológicos y en muchos procesos químicos donde el pH debe mantenerse constante.</p>
+
+            <h3>Buffers Comunes en el Laboratorio</h3>
+            <ul>
+                <li><strong>Buffer fosfato:</strong> pH 6.8-7.4, usado en bioquímica</li>
+                <li><strong>Buffer acetato:</strong> pH 3.6-5.6, común en química analítica</li>
+                <li><strong>Buffer Tris:</strong> pH 7.0-9.0, muy usado en biología molecular</li>
+                <li><strong>Buffer citrato:</strong> pH 3.0-6.2, usado en microbiología</li>
+                <li><strong>Buffer carbonato/bicarbonato:</strong> pH 9.2-10.7, sistemas naturales</li>
+            </ul>
+
+            <h3>Buffers Biológicos</h3>
+            <p>El sistema buffer más importante en la sangre es el bicarbonato (HCO₃⁻/H₂CO₃), que mantiene el pH sanguíneo cercano a 7.4. Otros buffers biológicos incluyen proteínas plasmáticas, hemoglobina y fosfatos inorgánicos.</p>
+
+            <h2>Medición del pH</h2>
+
+            <h3>pHmetros Digitales</h3>
+            <p>Los pHmetros electrónicos usan un electrodo de vidrio que genera un voltaje proporcional a la concentración de H⁺. Son precisos (±0.01 unidades de pH) pero requieren calibración regular con soluciones buffer estándar. Deben almacenarse adecuadamente y el electrodo debe mantenerse húmedo.</p>
+
+            <h3>Papel Indicador y Tiras de pH</h3>
+            <p>Contienen indicadores que cambian de color según el pH. Son convenientes y económicos pero menos precisos (±0.5-1 unidad de pH). El papel tornasol es el más simple: rojo en ácido, azul en base. Tiras de rango amplio muestran colores diferentes para cada unidad de pH.</p>
+
+            <h3>Indicadores Líquidos</h3>
+            <p>Sustancias que cambian de color en rangos específicos de pH. Ejemplos incluyen fenolftaleína (incolora en ácido, rosa en base), azul de bromotimol (amarillo-ácido, azul-base), y naranja de metilo (rojo-ácido, amarillo-base).</p>
+
+            <h2>Cálculos Relacionados con el pH</h2>
+
+            <h3>pH de Ácidos Fuertes</h3>
+            <p>Para ácidos fuertes completamente disociados como HCl, HNO₃, H₂SO₄:</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; font-family: monospace;">
+                pH = -log[H⁺]<br>
+                Ejemplo: HCl 0.01 M → [H⁺] = 0.01 M → pH = 2
+            </p>
+
+            <h3>pH de Bases Fuertes</h3>
+            <p>Para bases fuertes completamente disociadas como NaOH, KOH:</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; font-family: monospace;">
+                pOH = -log[OH⁻]<br>
+                pH = 14 - pOH<br>
+                Ejemplo: NaOH 0.01 M → [OH⁻] = 0.01 M → pOH = 2 → pH = 12
+            </p>
+
+            <h3>pH de Ácidos Débiles</h3>
+            <p>Para ácidos débiles, se usa la constante de disociación (Ka):</p>
+            <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; font-family: monospace;">
+                [H⁺] = √(Ka × C)<br>
+                pH = ½(pKa - log C)
+            </p>
+
+            <h2>Efectos de la Temperatura en el pH</h2>
+            <p>El producto iónico del agua (Kw) varía con la temperatura. A 25°C, Kw = 1.0 × 10⁻¹⁴ y pH neutro = 7.0. A temperaturas más altas, Kw aumenta y el pH neutro disminuye ligeramente. Por ejemplo, a 50°C, el pH neutro es aproximadamente 6.6. Esto no significa que el agua caliente sea ácida; simplemente refleja el equilibrio H⁺/OH⁻ a esa temperatura.</p>
+
+            <h2>Errores Comunes al Trabajar con pH</h2>
+            <ul>
+                <li><strong>Confundir pH y pOH:</strong> Recuerda que pH + pOH = 14 (a 25°C)</li>
+                <li><strong>No calibrar el pHmetro:</strong> Siempre calibra con al menos dos buffers estándar antes de medir</li>
+                <li><strong>Ignorar la temperatura:</strong> El pH varía con la temperatura; especifica siempre la temperatura de medición</li>
+                <li><strong>Mezclar ácidos fuertes y débiles:</strong> Los cálculos son diferentes para cada tipo</li>
+                <li><strong>No considerar la fuerza iónica:</strong> En soluciones con alta concentración de sales, la actividad difiere de la concentración</li>
+                <li><strong>Mal manejo de electrodos:</strong> Los electrodos de pH deben mantenerse húmedos y limpios</li>
+            </ul>
+
+            <h2>Seguridad al Trabajar con Ácidos y Bases</h2>
+            <ul>
+                <li>Use siempre equipo de protección personal (gafas, guantes, bata)</li>
+                <li>Trabaje en áreas bien ventiladas o bajo campana extractora</li>
+                <li>Tenga disponibles duchas de emergencia y lavaojos</li>
+                <li>Nunca agregue agua a ácido concentrado; siempre agregue ácido al agua</li>
+                <li>Conozca los procedimientos de neutralización y limpieza de derrames</li>
+                <li>Almacene ácidos y bases separados, en áreas designadas</li>
+                <li>Nunca pruebe sustancias químicas para determinar su pH</li>
+                <li>Disponga de residuos ácidos y básicos según regulaciones locales</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Por qué la escala de pH va de 0 a 14?</h3>
+            <p>La escala 0-14 corresponde a soluciones acuosas típicas a 25°C donde el producto iónico del agua (Kw) es 1.0 × 10⁻¹⁴. Técnicamente, es posible tener valores de pH negativos (ácidos muy concentrados) o mayores a 14 (bases muy concentradas), pero son poco comunes.</p>
+
+            <h3>¿El agua pura siempre tiene pH 7?</h3>
+            <p>Agua pura a 25°C tiene pH 7. Sin embargo, el pH neutro varía con la temperatura. Además, el agua pura rápidamente absorbe CO₂ del aire, formando ácido carbónico y bajando el pH a aproximadamente 5.5-6.5.</p>
+
+            <h3>¿Qué significa pKa?</h3>
+            <p>El pKa es el logaritmo negativo de la constante de disociación ácida (Ka). Un pKa bajo indica un ácido fuerte, mientras que un pKa alto indica un ácido débil. El pKa es útil para predecir el comportamiento de ácidos y bases en diferentes condiciones de pH.</p>
+
+            <h3>¿Cómo afecta el pH a la solubilidad?</h3>
+            <p>El pH puede afectar significativamente la solubilidad de muchos compuestos, especialmente ácidos y bases débiles. Por ejemplo, muchos fármacos ácidos son más solubles en pH básico, mientras que fármacos básicos son más solubles en pH ácido.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        const inputTypeSelect = document.getElementById('inputType');
+
+        inputTypeSelect.addEventListener('change', function() {
+            document.getElementById('phGroup').style.display = 'none';
+            document.getElementById('pohGroup').style.display = 'none';
+            document.getElementById('hGroup').style.display = 'none';
+            document.getElementById('ohGroup').style.display = 'none';
+
+            const selected = this.value;
+            if (selected === 'ph') document.getElementById('phGroup').style.display = 'block';
+            else if (selected === 'poh') document.getElementById('pohGroup').style.display = 'block';
+            else if (selected === 'h') document.getElementById('hGroup').style.display = 'block';
+            else if (selected === 'oh') document.getElementById('ohGroup').style.display = 'block';
+        });
+
+        function calculatePH() {
+            const inputType = inputTypeSelect.value;
+            const temperature = parseFloat(document.getElementById('temperature').value);
+
+            // pKw varies with temperature, using approximation
+            const pKw = 14; // Simplified for 25°C
+
+            let pH, pOH, hConc, ohConc;
+
+            if (inputType === 'ph') {
+                pH = parseFloat(document.getElementById('phValue').value);
+                pOH = pKw - pH;
+                hConc = Math.pow(10, -pH);
+                ohConc = Math.pow(10, -pOH);
+            } else if (inputType === 'poh') {
+                pOH = parseFloat(document.getElementById('pohValue').value);
+                pH = pKw - pOH;
+                hConc = Math.pow(10, -pH);
+                ohConc = Math.pow(10, -pOH);
+            } else if (inputType === 'h') {
+                hConc = parseFloat(document.getElementById('hValue').value);
+                if (hConc <= 0) {
+                    alert('La concentración debe ser mayor que cero');
+                    return;
+                }
+                pH = -Math.log10(hConc);
+                pOH = pKw - pH;
+                ohConc = Math.pow(10, -pOH);
+            } else if (inputType === 'oh') {
+                ohConc = parseFloat(document.getElementById('ohValue').value);
+                if (ohConc <= 0) {
+                    alert('La concentración debe ser mayor que cero');
+                    return;
+                }
+                pOH = -Math.log10(ohConc);
+                pH = pKw - pOH;
+                hConc = Math.pow(10, -pH);
+            }
+
+            // Update results
+            document.getElementById('phResult').textContent = pH.toFixed(2);
+            document.getElementById('pohResult').textContent = pOH.toFixed(2);
+            document.getElementById('hResult').textContent = hConc.toExponential(2) + ' M';
+            document.getElementById('ohResult').textContent = ohConc.toExponential(2) + ' M';
+
+            // Determine solution type
+            let type, color;
+            if (pH < 6.5) {
+                type = 'Ácida';
+                color = '#f97316';
+            } else if (pH > 7.5) {
+                type = 'Básica';
+                color = '#3b82f6';
+            } else {
+                type = 'Neutra';
+                color = '#34d399';
+            }
+
+            const solutionTypeDiv = document.getElementById('solutionType');
+            solutionTypeDiv.textContent = type;
+            solutionTypeDiv.style.backgroundColor = color;
+            solutionTypeDiv.style.color = 'white';
+
+            // Update pH indicator
+            const indicator = document.getElementById('phIndicator');
+            const position = (pH / 14) * 100;
+            indicator.style.left = `calc(${position}% - 1.5px)`;
+
+            showResult('phResult');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculatePH);
+        });
+
+        window.addEventListener('load', calculatePH);
+    </script>
+</body>
+</html>

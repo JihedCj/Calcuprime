@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de horas gratuita - Calcula el tiempo entre horas, horas de trabajo y salarios. Calculadora de duración de tiempo con soporte para horas extra.">
+    <meta name="keywords" content="calculadora horas, calculadora tiempo, horas trabajo, duración tiempo, calculadora horas y minutos, calculadora salario">
+
+    <title>Calculadora de Horas - Tiempo de Trabajo y Salarios | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-horas.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/hours-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-horas.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/hours-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/hours-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-horas.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#diario">Diario</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Horas</h1>
+            <p class="calculator-description">Calcula horas de trabajo, duración de tiempo y salarios con precisión</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Período de Tiempo</h3>
+                <div class="form-group">
+                    <label for="startTime" class="form-label">Hora de Inicio</label>
+                    <input type="time" id="startTime" class="form-input" value="09:00">
+                </div>
+                <div class="form-group">
+                    <label for="endTime" class="form-label">Hora de Finalización</label>
+                    <input type="time" id="endTime" class="form-input" value="17:00">
+                </div>
+                <div class="form-group">
+                    <label for="breakMinutes" class="form-label">Tiempo de Descanso (minutos)</label>
+                    <input type="number" id="breakMinutes" class="form-input" value="30" min="0" step="15">
+                </div>
+                <h3 style="margin-top: 1.5rem;">Cálculo de Salario (Opcional)</h3>
+                <div class="form-group">
+                    <label for="hourlyRate" class="form-label">Tarifa por Hora ($)</label>
+                    <input type="number" id="hourlyRate" class="form-input" value="20" min="0" step="0.5">
+                </div>
+                <div class="form-group">
+                    <label for="overtimeRate" class="form-label">Tarifa de Horas Extra (multiplicador x)</label>
+                    <input type="number" id="overtimeRate" class="form-input" value="1.5" min="1" max="3" step="0.1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular Horas</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tiempo Trabajado</h3>
+                <div class="result-item">
+                    <div class="result-label">Horas Totales</div>
+                    <div class="result-value" id="totalHours" style="font-size: 2.5rem; color: #10b981;">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Horas y Minutos</div>
+                    <div class="result-value" id="hoursMinutes">0h 0m</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Horas Regulares</div>
+                    <div class="result-value" id="regularHours">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Horas Extra</div>
+                    <div class="result-value" id="overtimeHours">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Pago Total</div>
+                    <div class="result-value" id="totalPay" style="font-size: 1.8rem; color: #10b981;">$0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Calcular Horas de Trabajo</h2>
+            <p>Calcular las horas de trabajo con precisión es esencial para la nómina, el seguimiento del tiempo y la gestión de proyectos. La fórmula básica resta la hora de inicio de la hora de finalización y deduce los descansos: Horas Totales = (Hora Final - Hora Inicio) - Tiempo de Descanso. Por ejemplo, trabajar de 9:00 AM a 5:00 PM con un descanso de almuerzo de 30 minutos equivale a 7.5 horas: 8 horas totales menos 0.5 horas de descanso. Esta calculadora simplifica este proceso, permitiéndote ingresar horas de inicio y finalización, especificar tiempo de descanso y obtener instantáneamente cálculos precisos de horas trabajadas.</p>
+
+            <p>Convertir entre horas y formato decimal simplifica los cálculos salariales. La mayoría de los sistemas de nómina utilizan horas decimales en lugar del formato horas:minutos. Para convertir: divide los minutos entre 60 y agrégalos a las horas. 7 horas 30 minutos = 7 + (30÷60) = 7.5 horas. Por el contrario, para convertir horas decimales a tiempo: multiplica la porción decimal por 60 para obtener minutos. 7.75 horas = 7 horas + (0.75×60) = 7 horas 45 minutos. Esta conversión es fundamental para una contabilidad de nómina precisa y asegura que los empleados reciban una compensación adecuada por cada minuto trabajado.</p>
+
+            <h2>Horas de Trabajo Estándar y Horas Extra</h2>
+            <p>Las leyes laborales en la mayoría de los países establecen una semana laboral estándar, generalmente de 40 horas semanales para empleados no exentos. Las horas trabajadas más allá de 40 en una sola semana laboral califican para pago de horas extra a 1.5 veces la tarifa regular ("tiempo y medio"). Algunos países y estados tienen leyes adicionales de horas extra: en California, se requieren horas extra por horas que excedan 8 en un solo día y doble tiempo por horas que excedan 12 en un día. Comprender estas regulaciones es crucial para empleadores y empleados para garantizar el cumplimiento y la compensación justa.</p>
+
+            <p><strong>Horas Regulares vs. Horas Extra:</strong> Si tu semana laboral estándar es de lunes a viernes, 8 horas diarias, cualquier hora más allá de 40 horas totales semanales o 8 horas diarias (en jurisdicciones aplicables) son horas extra. Trabajar 10 horas de lunes a jueves (40 horas totales) y luego 6 horas el viernes equivale a 6 horas extra en California, pero solo horas regulares federalmente, ya que el total semanal es de 46 horas (6 horas extra federalmente). Esta distinción entre regulaciones estatales y federales requiere atención cuidadosa.</p>
+
+            <p><strong>Tarifas de Horas Extra:</strong> Las horas extra estándar son 1.5× la tarifa regular. A $20/hora, las horas extra son $30/hora. Algunos contratos sindicales o empleadores ofrecen tarifas de horas extra premium: doble tiempo (2×), triple tiempo (3×) para días festivos, séptimo día consecutivo trabajado u horas extremas. Siempre verifica tu contrato de empleo y las leyes laborales aplicables para reglas específicas de horas extra. El incumplimiento de las regulaciones de horas extra puede resultar en sanciones significativas para los empleadores y salarios no pagados para los empleados.</p>
+
+            <h2>Tiempo de Descanso y Períodos No Pagados</h2>
+            <p>Las leyes federales en muchos países no requieren descansos para comer o descansar para trabajadores adultos, aunque muchos estados y países sí lo hacen. Cuando se proporcionan descansos, la ley generalmente distingue entre descansos pagados y no pagados:</p>
+
+            <p><strong>Descansos Cortos (5-20 minutos):</strong> Los descansos para café, descansos de baño y períodos de descanso cortos similares generalmente son tiempo pagado. Los empleadores no pueden deducir estos de las horas de trabajo. Estos descansos benefician tanto a empleadores como a empleados al mejorar la productividad, reducir la fatiga y mantener la moral.</p>
+
+            <p><strong>Descansos para Comer (30+ minutos):</strong> Los períodos de comida de buena fe donde los empleados están completamente liberados de sus deberes son típicamente no pagados. Si se te requiere permanecer en el lugar o responder teléfonos durante el almuerzo, el descanso puede ser compensable. La mayoría de los empleadores deducen descansos de almuerzo no pagados de 30-60 minutos de las horas diarias. Para que un descanso para comer sea verdaderamente no pagado, los empleados deben estar completamente liberados de todas las tareas laborales y libres de irse del lugar de trabajo.</p>
+
+            <p><strong>Requisitos Estatales:</strong> California requiere descansos de descanso pagados de 10 minutos por cada 4 horas trabajadas y descansos para comer no pagados de 30 minutos para turnos que excedan 5 horas. Nueva York requiere descansos para comer de 30 minutos para turnos de más de 6 horas. Consulta el departamento laboral de tu estado para requisitos específicos de descansos. El incumplimiento de las leyes de descansos puede resultar en sanciones premium donde los empleadores deben pagar una hora adicional de salario por cada día que se niegue o interrumpa un descanso.</p>
+
+            <h2>Mejores Prácticas de Seguimiento de Tiempo</h2>
+            <p><strong>Registrar Entrada/Salida con Precisión:</strong> Comienza a cronometrar cuando comiences a trabajar, no cuando llegues al lugar de trabajo. Si llegas a las 8:50 AM pero comienzas a trabajar a las 9:00 AM, registra la entrada a las 9:00 AM. De manera similar, registra la salida cuando dejes de trabajar, no cuando salgas del edificio. Los registros de tiempo precisos protegen tanto a empleados como a empleadores de disputas. Algunos empleadores requieren que los empleados estén en sus estaciones de trabajo listos para trabajar a la hora de inicio programada.</p>
+
+            <p><strong>Documentar Tiempos de Descanso:</strong> Rastrea cuándo comienzan y terminan los descansos en lugar de estimar. Muchos sistemas de seguimiento de tiempo deducen automáticamente tiempos de descanso estándar (30 minutos), pero si tu descanso real fue de 45 minutos, reporta con precisión para evitar acusaciones de robo de tiempo. Mantener registros precisos de descansos protege tanto a empleados (asegurando que reciban los descansos requeridos) como a empleadores (documentando el cumplimiento de las leyes laborales).</p>
+
+            <p><strong>Redondear el Tiempo Apropiadamente:</strong> Los empleadores pueden redondear el tiempo al cuarto de hora más cercano (15 minutos) utilizando la regla de 7 minutos: 1-7 minutos se redondean hacia abajo, 8-14 minutos se redondean hacia arriba. Registrar entrada a las 8:07 AM se redondea a 8:00 AM; registrar entrada a las 8:08 AM se redondea a 8:15 AM. El redondeo debe ser neutral, no sesgado sistemáticamente contra los empleados. Si el redondeo consistentemente beneficia al empleador, puede violar las leyes de salario y hora.</p>
+
+            <p><strong>Resúmenes de Tiempo Semanales:</strong> Calcula las horas semanales para identificar horas extra antes de que ocurran. Si has trabajado 35 horas de lunes a jueves, el trabajo del viernes incluirá horas extra más allá de 5 horas. Planifica en consecuencia o comunícate con la gerencia sobre ajustes de horario si no se desean horas extra. El seguimiento proactivo ayuda a los empleados a maximizar las ganancias y a los empleadores a controlar los costos laborales.</p>
+
+            <h2>Cálculo de Horas Semanales y Anuales</h2>
+            <p><strong>Equivalente a Tiempo Completo (FTE):</strong> El empleo estándar a tiempo completo es de 40 horas semanales, totalizando 2,080 horas anuales (40 horas × 52 semanas). Los empleados a tiempo parcial que trabajan 20 horas semanales trabajan 1,040 horas anuales (0.5 FTE). Estos cálculos ayudan a los empleadores a presupuestar y determinar la elegibilidad para beneficios. Muchos beneficios, como seguro de salud y tiempo libre pagado, están disponibles solo para empleados que trabajan un mínimo de horas (a menudo 30+ horas semanales o 0.75 FTE).</p>
+
+            <p><strong>Contabilizando Días Festivos y PTO:</strong> La mayoría de los empleados a tiempo completo en realidad no trabajan 2,080 horas anuales debido a tiempo libre pagado, días festivos y días de enfermedad. Un empleado típico a tiempo completo trabaja aproximadamente 1,800-1,960 horas anuales después de deducir 10 días festivos federales, 2 semanas de vacaciones y días de enfermedad ocasionales. La planificación de proyectos debe tener en cuenta las horas disponibles realistas, no las horas máximas teóricas. Sobrestimar las horas disponibles conduce a plazos perdidos y personal sobrecargado.</p>
+
+            <p><strong>Horas Facturables vs. No Facturables:</strong> Los profesionales en consultoría, legal y campos similares distinguen las horas facturables (trabajo de cara al cliente) de las horas no facturables (administración, capacitación, desarrollo de negocios). El seguimiento de ambas categorías revela la productividad y ayuda a fijar precios de servicios apropiadamente. Las tasas de utilización facturables objetivo típicamente van del 60-80% de las horas totales de trabajo dependiendo de la industria. Las horas facturables más bajas pueden indicar ineficiencias administrativas o esfuerzos insuficientes de desarrollo de negocios.</p>
+
+            <h2>Errores Comunes en el Cálculo de Tiempo</h2>
+            <p><strong>Confundir Horas Decimales con Horas:Minutos:</strong> 7.5 horas equivalen a 7 horas 30 minutos, no 7 horas 5 minutos. Este error común ocurre cuando las personas interpretan el decimal como minutos. Siempre convierte apropiadamente: decimal × 60 = minutos. Este error puede resultar en pagos incorrectos significativos si no se corrige.</p>
+
+            <p><strong>Olvidar Deducir Descansos:</strong> Muchos trabajadores calculan las horas simplemente restando la hora de inicio de la hora de finalización sin deducir descansos para comer no pagados. Esto sobrestima las horas trabajadas y puede llevar a errores de nómina o disputas. Siempre resta explícitamente el tiempo de descanso no pagado de las horas totales.</p>
+
+            <p><strong>Aplicar Mal las Reglas de Horas Extra:</strong> Las horas extra típicamente se calculan semanalmente, no diariamente (excepto en estados específicos). Trabajar 12 horas el lunes y 4 horas cada martes-viernes totaliza 28 horas sin horas extra federalmente. Comprender cuándo realmente se activan las horas extra previene expectativas salariales poco realistas. Sin embargo, recuerda que las leyes estatales pueden ser más generosas que las leyes federales: los empleadores deben cumplir con la ley que sea más favorable para los empleados.</p>
+
+            <p><strong>Acumulación de Errores de Redondeo:</strong> Los errores de redondeo individualmente pequeños se acumulan durante los períodos de pago. Si el tiempo se redondea hacia abajo 5 minutos diarios, eso es 25 minutos semanales o más de 21 horas anuales, una pérdida salarial significativa. Rastrea los tiempos reales y verifica que las prácticas de redondeo del empleador cumplan con las regulaciones. El redondeo sistemático que perjudica a los empleados puede constituir una violación de las leyes de salario.</p>
+
+            <h2>Herramientas y Tecnología para el Seguimiento de Tiempo</h2>
+            <p><strong>Relojes de Tiempo Físicos:</strong> Los relojes tradicionales que usan tarjetas o insignias proporcionan tiempos de inicio/finalización claros y documentados. Las versiones modernas utilizan escáneres biométricos (huella digital, reconocimiento facial) para prevenir el "registro de amigos" donde compañeros de trabajo registran entrada por empleados ausentes. Los sistemas biométricos aumentan la precisión pero plantean preocupaciones de privacidad que deben abordarse a través de políticas claras.</p>
+
+            <p><strong>Software de Seguimiento de Tiempo:</strong> Las herramientas digitales como TSheets, Clockify, Toggl y Harvest permiten a los empleados registrar entrada/salida desde computadoras o teléfonos inteligentes. Estos sistemas calculan automáticamente las horas, categorizan el tiempo por proyecto, generan informes e integran con el software de nómina. Muchos incluyen verificación GPS para trabajadores remotos. Las capacidades de informes ayudan a gerentes y empleados a analizar cómo se gasta el tiempo e identificar oportunidades de mejora de productividad.</p>
+
+            <p><strong>Seguimiento con Hojas de Cálculo:</strong> Las hojas de cálculo simples funcionan para el seguimiento básico de tiempo. Crea columnas para fecha, hora de inicio, hora de finalización, tiempo de descanso, horas totales y notas. Fórmula: =(Fin-Inicio)*24-Descanso/60 convierte el tiempo a horas decimales. Las hojas de cálculo proporcionan flexibilidad pero requieren entrada manual de datos y verificación de cálculos. Son apropiadas para pequeñas empresas o freelancers pero se vuelven engorrosas para organizaciones más grandes.</p>
+
+            <p><strong>Aplicaciones Móviles:</strong> Las aplicaciones especializadas ofrecen características como seguimiento sin conexión, cambio de proyectos, informes automatizados e integración con sistemas de facturación. Esencial para contratistas, freelancers y trabajadores remotos que necesitan seguimiento de tiempo portátil. Las mejores aplicaciones ofrecen interfaces intuitivas, sincronización confiable y opciones de exportación robustas para análisis o procesamiento de nómina.</p>
+
+            <h2>Conclusión</h2>
+            <p>El cálculo preciso del tiempo protege tanto a trabajadores como a empleadores. Los trabajadores aseguran una compensación adecuada por las horas trabajadas, incluidas las horas extra, mientras que los empleadores mantienen prácticas de nómina conformes y controlan los costos laborales. Ya seas un empleado rastreando horas para un pago preciso, un freelancer facturando a clientes o un gerente supervisando horarios de equipo, comprender los cálculos de tiempo, las reglas de horas extra y los métodos de seguimiento adecuados es esencial. Utiliza herramientas confiables, comprende las leyes laborales aplicables, documenta el tiempo con precisión y verifica los cálculos regularmente. Los pequeños errores se acumulan con el tiempo: 30 minutos de horas extra no rastreadas semanalmente equivalen a 26 horas anuales, representando salarios perdidos significativos o violaciones de cumplimiento. Calcula cuidadosamente, rastrea consistentemente y revisa minuciosamente para asegurar precisión y equidad en todos los cálculos de tiempo.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const startTime = document.getElementById('startTime').value;
+            const endTime = document.getElementById('endTime').value;
+            const breakMinutes = parseFloat(document.getElementById('breakMinutes').value) || 0;
+            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+            const overtimeRate = parseFloat(document.getElementById('overtimeRate').value) || 1.5;
+
+            if (!startTime || !endTime) {
+                return;
+            }
+
+            const [startHour, startMin] = startTime.split(':').map(Number);
+            const [endHour, endMin] = endTime.split(':').map(Number);
+
+            let startMinutes = startHour * 60 + startMin;
+            let endMinutes = endHour * 60 + endMin;
+
+            if (endMinutes < startMinutes) {
+                endMinutes += 24 * 60;
+            }
+
+            const totalMinutes = endMinutes - startMinutes - breakMinutes;
+            const totalHours = totalMinutes / 60;
+
+            const regularHours = Math.min(totalHours, 8);
+            const overtimeHours = Math.max(0, totalHours - 8);
+
+            const regularPay = regularHours * hourlyRate;
+            const overtimePay = overtimeHours * hourlyRate * overtimeRate;
+            const totalPay = regularPay + overtimePay;
+
+            document.getElementById('totalHours').textContent = totalHours.toFixed(2);
+
+            const hours = Math.floor(totalHours);
+            const minutes = Math.round((totalHours - hours) * 60);
+            document.getElementById('hoursMinutes').textContent = hours + 'h ' + minutes + 'm';
+
+            document.getElementById('regularHours').textContent = regularHours.toFixed(2);
+            document.getElementById('overtimeHours').textContent = overtimeHours.toFixed(2);
+            document.getElementById('totalPay').textContent = '$' + totalPay.toFixed(2);
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+            input.addEventListener('change', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

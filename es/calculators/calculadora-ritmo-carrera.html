@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de ritmo de carrera gratuita - Calcula ritmo por km/milla, tiempo final y tiempos parciales para carreras. Planifica tu estrategia de carrera con cálculos precisos de ritmo.">
+    <meta name="keywords" content="calculadora ritmo carrera, calculadora pace, calculadora running, ritmo carrera, calculadora tiempo final">
+
+    <title>Calculadora de Ritmo de Carrera | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-ritmo-carrera.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/running-pace-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-ritmo-carrera.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/running-pace-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/running-pace-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-ritmo-carrera.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Ritmo de Carrera</h1>
+            <p class="calculator-description">Calcula tu ritmo de carrera, tiempo final y parciales de carrera para rendimiento óptimo</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Información de Carrera</h3>
+                <div class="form-group">
+                    <label for="distance" class="form-label">Distancia</label>
+                    <select id="distance" class="form-input">
+                        <option value="5">5K (5 km)</option>
+                        <option value="10">10K (10 km)</option>
+                        <option value="21.1">Media Maratón (21.1 km)</option>
+                        <option value="42.2" selected>Maratón (42.2 km)</option>
+                        <option value="custom">Distancia Personalizada</option>
+                    </select>
+                </div>
+                <div class="form-group" id="customDistanceGroup" style="display:none;">
+                    <label for="customDistance" class="form-label">Distancia Personalizada (km)</label>
+                    <input type="number" id="customDistance" class="form-input" value="10" min="0.1" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="hours" class="form-label">Horas Objetivo</label>
+                    <input type="number" id="hours" class="form-input" value="3" min="0" max="10" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="minutes" class="form-label">Minutos Objetivo</label>
+                    <input type="number" id="minutes" class="form-input" value="30" min="0" max="59" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="seconds" class="form-label">Segundos Objetivo</label>
+                    <input type="number" id="seconds" class="form-input" value="0" min="0" max="59" step="1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular Ritmo</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tu Ritmo de Carrera</h3>
+                <div class="result-item">
+                    <div class="result-label">Ritmo por Kilómetro</div>
+                    <div class="result-value" id="pacePerKm" style="font-size: 2.5rem; color: #10b981;">0:00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Ritmo por Milla</div>
+                    <div class="result-value" id="pacePerMile">0:00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Velocidad Promedio (km/h)</div>
+                    <div class="result-value" id="speedKmh">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Velocidad Promedio (mph)</div>
+                    <div class="result-value" id="speedMph">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo el Ritmo de Carrera</h2>
+            <p>El ritmo de carrera es el tiempo que toma cubrir un kilómetro o milla, típicamente expresado como minutos por kilómetro (min/km) o minutos por milla (min/mi). Entender y manejar tu ritmo es fundamental para la estrategia de carrera, efectividad del entrenamiento y lograr récords personales. Ya sea que estés entrenando para tu primer 5K o apuntando a un tiempo de clasificación para Boston Marathon, la conciencia del ritmo transforma el correr aleatorio en entrenamiento estratégico orientado a objetivos.</p>
+
+            <h2>Por Qué Importa el Ritmo</h2>
+            <p>El control del ritmo separa las carreras exitosas de las decepcionantes. Comenzar demasiado rápido conduce a fatiga prematura y desaceleraciones dramáticas: el temido "muro" en maratones. Correr demasiado conservadoramente desperdicia condición física y deja tiempo sobre la mesa. El ritmo óptimo significa correr la carrera de esfuerzo uniforme más rápida que tu condición actual permite, maximizando el rendimiento sin colapsar.</p>
+
+            <p>La investigación muestra consistentemente que el ritmo uniforme o splits negativos ligeros (correr la segunda mitad ligeramente más rápido) produce los mejores resultados de carrera. Los estudios de maratonistas élite revelan que los tiempos más rápidos ocurren cuando la variación del ritmo se mantiene dentro del 2-3% durante toda la carrera. Para la mayoría de los corredores, esto significa mantener el esfuerzo consistente en lugar de perseguir la adrenalina o el ego temprano.</p>
+
+            <h2>Distancias de Carrera Comunes y Ritmos Objetivo</h2>
+            <p><strong>5K (5 km):</strong> Un 5K se corre aproximadamente al 95-100% de intensidad VO2 máx: difícil pero sostenible por 15-35 minutos para la mayoría de los corredores. Los corredores élite terminan en 13-15 minutos (ritmo 2:36-3:00 por km), mientras que los corredores recreativos típicamente terminan en 20-40 minutos (4:00-8:00 por km). El 5K demanda velocidad sostenida y fortaleza mental pero perdona errores de ritmo más que carreras más largas.</p>
+
+            <p><strong>10K (10 km):</strong> Corrido aproximadamente al 90-95% de frecuencia cardíaca máxima, el 10K requiere mantener incomodidad por 30-70 minutos. Los tiempos élite caen alrededor de 27-30 minutos (ritmo 2:42-3:00 por km), mientras que los corredores recreativos terminan en 45-90 minutos (4:30-9:00 por km). El 10K es lo suficientemente largo como para que la disciplina del ritmo importe significativamente: comenzar demasiado agresivamente conduce a desvanecimiento severo en las millas finales.</p>
+
+            <p><strong>Media Maratón (21.1 km):</strong> Corrida aproximadamente al 85-90% de frecuencia cardíaca máxima, la media maratón equilibra resistencia con velocidad. Los tiempos élite se agrupan alrededor de 60-65 minutos (ritmo 2:50-3:05 por km), mientras que los corredores recreativos típicamente terminan en 1:30-3:00 (4:15-8:30 por km). El ritmo es crítico: cada 10 segundos por km demasiado rápido en la primera mitad típicamente cuesta 20-30 segundos por km en la segunda mitad.</p>
+
+            <p><strong>Maratón (42.2 km):</strong> Corrido aproximadamente al 80-85% de frecuencia cardíaca máxima durante 2-6 horas, el maratón castiga brutalmente los errores de ritmo. Los hombres élite corren por debajo de 2:05 (ritmo 2:58 por km), las mujeres élite por debajo de 2:20 (ritmo 3:18 por km), y los corredores recreativos típicamente terminan en 3:00-6:00 horas (4:15-8:30 por km). El ritmo conservador temprano es esencial: la mayoría de los maratonistas corren su segunda mitad 5-15 minutos más lento que su primera mitad (split positivo), pero minimizar este diferencial separa las buenas carreras de las grandes.</p>
+
+            <h2>Estrategias de Ritmo para Diferentes Carreras</h2>
+            <p><strong>Ritmo Uniforme:</strong> Mantener splits consistentes durante toda la carrera maximiza el rendimiento para la mayoría de los corredores en la mayoría de las carreras. El ritmo uniforme minimiza el agotamiento de glucógeno y permite que el sistema cardiovascular encuentre un ritmo sostenible. Apunta a variación de menos del 2-3% entre kilómetros.</p>
+
+            <p><strong>Splits Negativos:</strong> Correr la segunda mitad más rápido que la primera mitad es fisiológicamente eficiente y psicológicamente empoderador. Comienza conservadoramente (5-10 segundos por km más lento que el ritmo objetivo para el primer 25-30% de la carrera), establece el ritmo objetivo para el 40-50% medio, luego empuja el 20-25% final si te sientes fuerte. Esta estrategia funciona especialmente bien para maratones y es casi a prueba de fallas para corredores más nuevos.</p>
+
+            <p><strong>Ritmo Variable (Colinas/Viento):</strong> En cursos con colinas, mantén el esfuerzo uniforme en lugar del ritmo uniforme. Reduce ligeramente en subidas para evitar picos excesivos de frecuencia cardíaca, luego recupera tiempo en bajadas sin sobre-extenderte o golpear. En vientos de frente, reduce el ritmo ligeramente (5-10 segundos por km) y recupera tiempo cuando el viento cambie a favor o cruzado.</p>
+
+            <h2>Errores Comunes de Ritmo</h2>
+            <p><strong>Comenzar Demasiado Rápido:</strong> El error más común y costoso. El primer kilómetro de cualquier carrera se siente fácil debido a la adrenalina, el descans y la emoción. Para maratones, comenzar 30 segundos por km demasiado rápido típicamente resulta en reducir 60-90 segundos por km en las millas finales. Comienza conservadoramente: cada carrera se vuelve más difícil, nunca más fácil.</p>
+
+            <p><strong>Ignorar el Clima:</strong> El clima caluroso (por encima de 15°C) reduce el ritmo en 1-2% por cada 3°C de aumento. La humedad amplifica este efecto. Ajusta el ritmo objetivo hacia abajo en 10-30 segundos por km en días calurosos en lugar de perseguir obstinadamente tiempos irreales. Las desaceleraciones relacionadas con el calor son fisiológicas, no debilidad mental.</p>
+
+            <p><strong>Seguir Corredores Más Rápidos:</strong> Correr con personas por delante de tu nivel de condición física conduce al agotamiento temprano. Es mejor pasar gradualmente a corredores que se desaceleran que colapsar espectacularmente. Ten la disciplina para dejar ir a los corredores más rápidos, especialmente en el primer tercio de cualquier carrera.</p>
+
+            <h2>Usando el Ritmo en el Entrenamiento</h2>
+            <p><strong>Ritmo de Carrera Fácil:</strong> 70-75% frecuencia cardíaca máxima, conversacional, 1:00-1:30 minutos por km más lento que el ritmo de carrera de 5K. Estas carreras de recuperación comprenden el 70-80% del volumen de entrenamiento y construyen base aeróbica sin acumulación de fatiga.</p>
+
+            <p><strong>Carreras a Ritmo de Maratón:</strong> Secciones de carreras largas o carreras dedicadas al ritmo objetivo de maratón enseñan a tu cuerpo a usar grasa eficientemente y ayudan a afinar la nutrición de carrera. Estas se sienten cómodamente duras: puedes hablar en frases cortas pero no mantener conversaciones largas.</p>
+
+            <p><strong>Ritmo Tempo:</strong> Aproximadamente ritmo actual de media maratón o 15-30 segundos por km más rápido que el ritmo de maratón. Sostenido por 20-40 minutos, las carreras tempo mejoran el umbral de lactato: el ritmo más rápido que puedes sostener aeróbicamente.</p>
+
+            <h2>Conclusión</h2>
+            <p>El ritmo óptimo equilibra la ambición con el realismo. Comienza conservadoramente, evalúa honestamente, ajusta inteligentemente. Cada corredor tiene carreras revolucionarias donde todo encaja y carreras decepcionantes donde nada funciona: la disciplina del ritmo maximiza las primeras y minimiza las últimas. Usa calculadoras de ritmo como herramientas de planificación, relojes GPS como barandales, y la conciencia corporal como árbitro final. Corre tu propia carrera a tu propio ritmo, y la línea de meta se cuida sola.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        document.getElementById('distance').addEventListener('change', function() {
+            if (this.value === 'custom') {
+                document.getElementById('customDistanceGroup').style.display = 'block';
+            } else {
+                document.getElementById('customDistanceGroup').style.display = 'none';
+            }
+        });
+
+        function calculate() {
+            let distanceKm;
+            const distanceSelect = document.getElementById('distance').value;
+
+            if (distanceSelect === 'custom') {
+                distanceKm = parseFloat(document.getElementById('customDistance').value) || 10;
+            } else {
+                distanceKm = parseFloat(distanceSelect);
+            }
+
+            const hours = parseFloat(document.getElementById('hours').value) || 0;
+            const minutes = parseFloat(document.getElementById('minutes').value) || 0;
+            const seconds = parseFloat(document.getElementById('seconds').value) || 0;
+
+            // Convert total time to seconds
+            const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+
+            // Calculate pace per kilometer in seconds
+            const pacePerKmSeconds = totalSeconds / distanceKm;
+
+            // Calculate pace per mile in seconds
+            const distanceMiles = distanceKm * 0.621371;
+            const pacePerMileSeconds = totalSeconds / distanceMiles;
+
+            // Convert pace to minutes:seconds format
+            const pacePerKmMin = Math.floor(pacePerKmSeconds / 60);
+            const pacePerKmSec = Math.round(pacePerKmSeconds % 60);
+            const pacePerMileMin = Math.floor(pacePerMileSeconds / 60);
+            const pacePerMileSec = Math.round(pacePerMileSeconds % 60);
+
+            // Calculate speeds
+            const speedKmh = (distanceKm / (totalSeconds / 3600)).toFixed(2);
+            const speedMph = (distanceMiles / (totalSeconds / 3600)).toFixed(2);
+
+            // Display results
+            document.getElementById('pacePerKm').textContent = pacePerKmMin + ':' + (pacePerKmSec < 10 ? '0' : '') + pacePerKmSec + ' min/km';
+            document.getElementById('pacePerMile').textContent = pacePerMileMin + ':' + (pacePerMileSec < 10 ? '0' : '') + pacePerMileSec + ' min/mi';
+            document.getElementById('speedKmh').textContent = speedKmh + ' km/h';
+            document.getElementById('speedMph').textContent = speedMph + ' mph';
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

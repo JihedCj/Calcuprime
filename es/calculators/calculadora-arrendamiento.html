@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de arrendamiento de autos gratuita - Calcula pagos de leasing, costos totales y compara arrendar vs comprar. Toma decisiones informadas sobre financiamiento vehicular.">
+    <meta name="keywords" content="calculadora arrendamiento, leasing auto, arrendamiento vehículo, calculadora pago leasing, arrendamiento automóvil">
+
+    <title>Calculadora de Arrendamiento - Calcula Pagos de Leasing | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-arrendamiento.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/lease-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-arrendamiento.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/lease-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/lease-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-arrendamiento.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Arrendamiento</h1>
+            <p class="calculator-description">Calcula pagos de arrendamiento de autos, costo total y compara arrendar vs comprar</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Información del Vehículo</h3>
+
+                <div class="form-group">
+                    <label for="msrp" class="form-label">Precio MSRP del Vehículo ($)</label>
+                    <input type="number" id="msrp" class="form-input" value="35000" min="0" step="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="salePrice" class="form-label">Precio Negociado ($)</label>
+                    <input type="number" id="salePrice" class="form-input" value="33000" min="0" step="500">
+                </div>
+
+                <div class="form-group">
+                    <label for="downPayment" class="form-label">Pago Inicial ($)</label>
+                    <input type="number" id="downPayment" class="form-input" value="3000" min="0" step="500">
+                </div>
+
+                <div class="form-group">
+                    <label for="leaseTerm" class="form-label">Plazo de Arrendamiento (meses)</label>
+                    <select id="leaseTerm" class="form-select">
+                        <option value="24">24 meses</option>
+                        <option value="36" selected>36 meses</option>
+                        <option value="48">48 meses</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="residualValue" class="form-label">Valor Residual (%)</label>
+                    <input type="number" id="residualValue" class="form-input" value="55" min="0" max="80" step="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="moneyFactor" class="form-label">Factor de Dinero</label>
+                    <input type="number" id="moneyFactor" class="form-input" value="0.00125" min="0" max="0.01" step="0.00001">
+                </div>
+
+                <button onclick="calculate()" class="btn-calculate">Calcular</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Pago Mensual de Arrendamiento</div>
+                    <div class="result-value" id="monthlyPayment" style="font-size: 2.5rem; color: #10b981;">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Costo Total del Arrendamiento</div>
+                    <div class="result-value" id="totalCost">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">APR Efectivo</div>
+                    <div class="result-value" id="effectiveAPR">0%</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Cargo por Depreciación</div>
+                    <div class="result-value" id="depreciationFee">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Cargo Financiero</div>
+                    <div class="result-value" id="financeFee">$0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el Arrendamiento de Vehículos?</h2>
+            <p>Arrendar un vehículo es esencialmente rentarlo por un período específico, típicamente 24-48 meses. En lugar de pagar por el valor completo del vehículo, pagas por la depreciación durante el plazo de arrendamiento más cargos por intereses (llamados cargos de renta o cargos financieros). Al finalizar el arrendamiento, devuelves el vehículo al concesionario a menos que decidas comprarlo por el valor residual predeterminado.</p>
+
+            <p>Aproximadamente el 30% de los vehículos nuevos en Estados Unidos se arriendan en lugar de comprarse. El arrendamiento ofrece pagos mensuales más bajos comparado con financiar una compra, acceso a vehículos más nuevos con mayor frecuencia, y potencialmente menores costos de mantenimiento durante el período de garantía. Sin embargo, viene con restricciones de kilometraje, cargos por desgaste excesivo, y no construyes capital.</p>
+
+            <h2>Términos Clave del Arrendamiento</h2>
+            <p><strong>Costo Capitalizado (Cap Cost):</strong> El precio acordado del vehículo, equivalente al precio de compra al adquirirlo. Negocia esto como lo harías al comprar: los concesionarios a menudo enfocan las negociaciones de arrendamiento en pagos mensuales en lugar del precio del vehículo, donde tienen más flexibilidad de margen.</p>
+
+            <p><strong>Valor Residual:</strong> El valor estimado del vehículo al final del arrendamiento, expresado como porcentaje del MSRP. Valores residuales más altos significan menores cargos por depreciación y pagos mensuales más bajos. Las marcas de lujo a menudo tienen residuales más altos (55-65%) que los autos económicos (45-55%). El fabricante establece los valores residuales basándose en valores proyectados de reventa.</p>
+
+            <p><strong>Factor de Dinero:</strong> El equivalente de tasa de interés usado en arrendamientos. Convierte el factor de dinero a APR multiplicando por 2,400. Por ejemplo, un factor de dinero de 0.00125 equivale a 3% APR. Factores de dinero más bajos significan menores cargos financieros. Puntuaciones crediticias buenas (720+) típicamente califican para los mejores factores de dinero.</p>
+
+            <h2>Cómo se Calculan los Pagos de Arrendamiento</h2>
+            <p>Los pagos de arrendamiento consisten de dos componentes principales:</p>
+
+            <p><strong>Cargo por Depreciación:</strong> (Precio Negociado - Valor Residual) ÷ Plazo de Arrendamiento. Esto cubre la pérdida de valor esperada del vehículo durante tu arrendamiento. Si arriendas un auto de $30,000 con 60% de valor residual por 36 meses: ($30,000 - $18,000) ÷ 36 = $333.33 de cargo mensual por depreciación.</p>
+
+            <p><strong>Cargo Financiero (Cargo de Renta):</strong> (Precio Negociado + Valor Residual) × Factor de Dinero. Este es el cargo por interés para financiar la depreciación. Usando el mismo ejemplo con factor de dinero 0.00125: ($30,000 + $18,000) × 0.00125 = $60 de cargo financiero mensual.</p>
+
+            <p>Pago mensual total antes de impuestos: $333.33 + $60 = $393.33. Añade el impuesto de ventas aplicable (típicamente cobrado solo en pagos mensuales, no en el precio completo del vehículo, una ventaja fiscal del arrendamiento) y cualquier cargo adicional para tu pago final.</p>
+
+            <h2>Arrendar vs Comprar: Tomando la Decisión Correcta</h2>
+            <p><strong>Elige Arrendar Si:</strong></p>
+            <ul>
+                <li>Quieres pagos mensuales más bajos (típicamente 30-50% menos que financiar una compra)</li>
+                <li>Prefieres conducir un auto nuevo cada 2-4 años con la última tecnología y características de seguridad</li>
+                <li>Conduces menos de 12,000-15,000 millas anualmente (límites típicos de arrendamiento)</li>
+                <li>Quieres evitar la molestia de vender o intercambiar tu vehículo</li>
+                <li>Puedes deducir gastos del vehículo para uso comercial (los pagos de arrendamiento son completamente deducibles; solo el interés del préstamo es deducible al comprar)</li>
+                <li>Valoras la cobertura de garantía durante todo el período de propiedad</li>
+            </ul>
+
+            <p><strong>Elige Comprar Si:</strong></p>
+            <ul>
+                <li>Conduces más de 15,000 millas anualmente (cargos por exceso de kilometraje de $0.15-0.30 por milla se acumulan rápidamente)</li>
+                <li>Quieres construir capital y eventualmente ser dueño de tu vehículo completamente</li>
+                <li>Planeas mantener tu vehículo por 6+ años</li>
+                <li>Quieres libertad para personalizar o modificar tu vehículo</li>
+                <li>No quieres preocuparte por cargos de desgaste por abolladuras, rayones o daños interiores</li>
+                <li>Quieres la opción de vender cuando elijas</li>
+                <li>Prefieres no tener pagos mensuales continuos</li>
+            </ul>
+
+            <h2>Negociando un Mejor Trato de Arrendamiento</h2>
+            <p><strong>Negocia el Costo Capitalizado, No el Pago:</strong> Los concesionarios a menudo dirigen las negociaciones de arrendamiento hacia el pago mensual en lugar del precio del vehículo. Insiste en negociar el costo capitalizado como lo harías con un precio de compra. Investiga el valor justo de mercado usando recursos como Kelley Blue Book, Edmunds o TrueCar antes de visitar concesionarios.</p>
+
+            <p><strong>Compara Factores de Dinero:</strong> Los factores de dinero pueden variar entre concesionarios y fabricantes. Obtén cotizaciones de múltiples concesionarios y compañías financieras cautivas de los fabricantes. Las cooperativas de crédito a veces ofrecen mejores tasas de arrendamiento que el financiamiento del fabricante.</p>
+
+            <p><strong>Considera Programas de Depósitos de Seguridad Múltiples (MSD):</strong> Algunos fabricantes te permiten prepagar hasta 7-10 depósitos de seguridad reembolsables (típicamente igual al pago mensual redondeado a $50) para reducir tu factor de dinero en 0.00005-0.00010 por depósito. Esto puede ahorrar cientos durante el plazo del arrendamiento, y recuperas los depósitos al finalizar.</p>
+
+            <p><strong>El Momento Importa:</strong> El fin de mes, trimestre y año modelo son momentos oportunos para mejores ofertas. Los concesionarios tienen cuotas de ventas y los fabricantes ofrecen incentivos para mover años modelo salientes. Diciembre particularmente ofrece fuertes incentivos cuando los concesionarios cierran libros anuales.</p>
+
+            <h2>Kilometraje de Arrendamiento: Entiende los Límites</h2>
+            <p>Los arrendamientos estándar incluyen 10,000-12,000 millas por año, con opciones de 15,000 millas disponibles por pagos mensuales más altos (típicamente $15-25 más por mes por cada 1,000 millas anuales adicionales). Los cargos por exceso de kilometraje al final del arrendamiento van de $0.15-0.30 por milla dependiendo del vehículo.</p>
+
+            <p>Calcula tu kilometraje anual antes de arrendar. Si conduces 15,000 millas anualmente, un arrendamiento de 36 meses permite 45,000 millas totales. Terminar con 50,000 millas cuesta $750-1,500 en cargos por exceso de kilometraje (5,000 millas × $0.15-0.30). Usualmente es más barato comprar mayor límite de kilometraje por adelantado que pagar cargos por exceso después.</p>
+
+            <h2>Opciones al Finalizar el Arrendamiento</h2>
+            <p><strong>Devolver el Vehículo:</strong> Simplemente devuélvelo al concesionario, paga cualquier cargo por exceso de kilometraje o desgaste, y aléjate. Programa una pre-inspección 2-3 meses antes de que finalice el arrendamiento (servicio gratuito de la mayoría de los fabricantes) para identificar y abordar posibles cargos antes de devolver.</p>
+
+            <p><strong>Comprar el Vehículo:</strong> Cómpralo por el valor residual predeterminado. Esto tiene sentido si: el valor de mercado excede el valor residual (dándote capital instantáneo), te has encariñado con el vehículo, excediste el kilometraje significativamente (comprar elimina cargos por exceso de kilometraje), o lo modificaste y quieres conservar esas modificaciones.</p>
+
+            <p><strong>Intercambiarlo:</strong> Si el valor de mercado de tu vehículo excede el valor residual, tienes capital para usar hacia tu próximo vehículo. Obtén cotizaciones de intercambio de múltiples concesionarios: pueden ofrecer más que el valor residual, creando un pago inicial integrado para tu próximo arrendamiento o compra.</p>
+
+            <h2>Desgaste: ¿Qué es Aceptable?</h2>
+            <p>Los contratos de arrendamiento incluyen cláusulas de "desgaste normal", pero la interpretación varía. Generalmente aceptable:</p>
+            <ul>
+                <li>Pequeñas abolladuras menores de 1 pulgada de diámetro</li>
+                <li>Rayones menores que no han penetrado la pintura</li>
+                <li>Pequeñas manchas interiores que se pueden limpiar</li>
+                <li>Banda de rodadura de neumáticos por encima de 4/32 pulgadas (idealmente 5/32+)</li>
+                <li>Chips menores de parabrisas menores de 1 pulgada que no obstruyen la visión</li>
+            </ul>
+
+            <p>Típicamente cobrado como desgaste excesivo:</p>
+            <ul>
+                <li>Abolladuras mayores de 2 pulgadas ($50-150 por panel)</li>
+                <li>Rayones a través de la pintura ($50-200 por panel)</li>
+                <li>Vidrio agrietado o roto ($200-500 por pieza)</li>
+                <li>Tapicería manchada, rasgada o quemada ($100-500)</li>
+                <li>Neumáticos calvos por debajo de 4/32 de banda ($150-200 por neumático)</li>
+                <li>Equipo roto o faltante ($100-1,000 dependiendo del artículo)</li>
+            </ul>
+
+            <h2>Consideraciones de Seguro</h2>
+            <p>Los contratos de arrendamiento requieren cobertura integral y de colisión con deducibles bajos ($500-1,000). Además, considera el seguro gap, que cubre la diferencia entre el valor real en efectivo de tu vehículo y el saldo restante del arrendamiento si el auto se totaliza o es robado. Muchos contratos de arrendamiento incluyen cobertura gap, pero verifica esto: comprar seguro gap separado cuesta $400-700 versus $20-40 anualmente cuando se añade a tu seguro de auto.</p>
+
+            <h2>Beneficios Fiscales del Arrendamiento</h2>
+            <p>Los dueños de negocios y personas autoempleadas pueden deducir pagos de arrendamiento como gasto comercial si el vehículo se usa para propósitos comerciales. Con compras, solo el interés del préstamo y la depreciación son deducibles. Además, el impuesto de ventas típicamente se aplica solo a los pagos mensuales en lugar del precio completo del vehículo, proporcionando ahorros fiscales inmediatos.</p>
+
+            <h2>Impacto en el Puntaje Crediticio</h2>
+            <p>El arrendamiento requiere crédito bueno a excelente (puntajes 680+) para los mejores factores de dinero. Puntajes por debajo de 620 típicamente no califican para arrendamiento o enfrentan factores de dinero significativamente más altos. Un arrendamiento aparece en tu reporte crediticio como un préstamo a plazos y afecta tu crédito de manera similar a un préstamo de auto: positivamente si haces pagos a tiempo, negativamente si pierdes pagos.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const msrp = parseFloat(document.getElementById('msrp').value) || 0;
+            const salePrice = parseFloat(document.getElementById('salePrice').value) || msrp;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const leaseTerm = parseFloat(document.getElementById('leaseTerm').value) || 36;
+            const residualPercent = parseFloat(document.getElementById('residualValue').value) / 100 || 0.55;
+            const moneyFactor = parseFloat(document.getElementById('moneyFactor').value) || 0.00125;
+
+            const residualValue = msrp * residualPercent;
+            const netCapCost = salePrice - downPayment;
+            const depreciationFee = (netCapCost - residualValue) / leaseTerm;
+            const financeFee = (netCapCost + residualValue) * moneyFactor;
+            const monthlyPayment = depreciationFee + financeFee;
+            const totalCost = downPayment + (monthlyPayment * leaseTerm);
+            const effectiveAPR = (moneyFactor * 2400).toFixed(2);
+
+            document.getElementById('monthlyPayment').textContent = '$' + monthlyPayment.toLocaleString('es-US', {minimumFractionDigits: 2});
+            document.getElementById('totalCost').textContent = '$' + totalCost.toLocaleString('es-US', {minimumFractionDigits: 2});
+            document.getElementById('effectiveAPR').textContent = effectiveAPR + '%';
+            document.getElementById('depreciationFee').textContent = '$' + depreciationFee.toLocaleString('es-US', {minimumFractionDigits: 2});
+            document.getElementById('financeFee').textContent = '$' + financeFee.toLocaleString('es-US', {minimumFractionDigits: 2});
+        }
+
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

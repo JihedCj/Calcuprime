@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora gratuita de diferencia de fechas - Calcula días, semanas, meses y años entre dos fechas. Perfecta para calcular edad y planificación.">
+    <meta name="keywords" content="calculadora diferencia fechas, días entre fechas, calculadora fechas, tiempo entre fechas, edad en días">
+
+    <title>Calculadora de Diferencia de Fechas Gratis | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-diferencia-fechas.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/date-difference-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-diferencia-fechas.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/date-difference-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/date-difference-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-diferencia-fechas.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#diario">Diario</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Diferencia de Fechas</h1>
+            <p class="calculator-description">Calcula la diferencia entre dos fechas en días, semanas, meses y años</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Calculadora</h3>
+                <div class="form-group">
+                    <label for="startDate" class="form-label">Fecha de Inicio</label>
+                    <input type="date" id="startDate" class="form-input" value="">
+                </div>
+                <div class="form-group">
+                    <label for="endDate" class="form-label">Fecha Final</label>
+                    <input type="date" id="endDate" class="form-input" value="">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultados</h3>
+                <div class="result-item">
+                    <div class="result-value" id="days" style="font-size: 2rem; color: #10b981;">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value" id="weeks" style="font-size: 2rem; color: #10b981;">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value" id="months" style="font-size: 2rem; color: #10b981;">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value" id="years" style="font-size: 2rem; color: #10b981;">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Calcular la Diferencia Entre Fechas</h2>
+            <p>Calcular la diferencia entre dos fechas es una operación fundamental que se utiliza en innumerables situaciones cotidianas y profesionales. Ya sea que estés calculando tu edad exacta, planificando un proyecto, determinando cuánto tiempo falta para un evento importante o calculando antigüedad laboral, entender cómo medir el tiempo transcurrido entre fechas es esencial. Nuestra calculadora de diferencia de fechas simplifica este proceso proporcionando resultados instantáneos en múltiples unidades de tiempo: días, semanas, meses y años.</p>
+
+            <p>El cálculo básico de diferencia de fechas implica determinar el número exacto de días entre una fecha de inicio y una fecha final. La fórmula fundamental resta la fecha más temprana de la fecha más reciente, pero la complejidad surge cuando se consideran factores como meses de diferentes longitudes, años bisiestos y conversiones entre unidades de tiempo. Nuestra calculadora maneja automáticamente todas estas complejidades, proporcionando resultados precisos sin necesidad de cálculos manuales.</p>
+
+            <h2>Aplicaciones Comunes del Cálculo de Fechas</h2>
+            <h3>Cálculo de Edad Preciso</h3>
+            <p>Una de las aplicaciones más frecuentes es calcular la edad exacta de una persona en años, meses y días. Mientras que la mayoría de las personas conocen su edad en años, conocer la edad precisa en días puede ser útil para calcular expectativa de vida, planificación de jubilación o simplemente satisfacer la curiosidad. Por ejemplo, si naciste el 15 de marzo de 1990 y hoy es 22 de noviembre de 2025, habrás vivido aproximadamente 13,036 días, lo que equivale a 35 años y 8 meses. Esta precisión es especialmente importante en contextos médicos, legales y administrativos.</p>
+
+            <h3>Planificación de Proyectos</h3>
+            <p>En gestión de proyectos, calcular la duración entre fechas de inicio y finalización es fundamental para la planificación, seguimiento y evaluación. Si un proyecto comienza el 1 de enero y debe completarse el 30 de junio, saber que tienes exactamente 181 días (en un año no bisiesto) o aproximadamente 26 semanas permite distribuir tareas, asignar recursos y establecer hitos intermedios de manera efectiva. Los gerentes de proyecto utilizan estas calculaciones para crear cronogramas realistas, identificar rutas críticas y comunicar expectativas de tiempo a las partes interesadas.</p>
+
+            <h3>Cálculos Financieros</h3>
+            <p>Los cálculos de diferencia de fechas son esenciales en finanzas para determinar períodos de interés en préstamos, inversiones y cuentas de ahorro. Los bancos calculan el interés basándose en el número exacto de días que el dinero estuvo depositado o prestado. Por ejemplo, si depositas dinero en una cuenta de ahorros el 15 de febrero y retiras el 20 de agosto, el banco calculará el interés basándose en 186 días. La precisión en estos cálculos puede significar diferencias sustanciales en cantidades financieras, especialmente en grandes préstamos o inversiones a largo plazo.</p>
+
+            <h3>Recursos Humanos y Empleo</h3>
+            <p>En el ámbito laboral, calcular antigüedad laboral, períodos de vacaciones acumuladas, licencias médicas y elegibilidad para beneficios requiere mediciones precisas de tiempo. Si comenzaste a trabajar el 1 de junio de 2020 y estamos en noviembre de 2025, habrás completado aproximadamente 5 años y 5 meses de servicio, lo que podría calificarte para beneficios adicionales, aumentos de salario por antigüedad o mayores días de vacaciones. Los departamentos de recursos humanos dependen de estos cálculos para administrar políticas de personal de manera justa y consistente.</p>
+
+            <h2>Comprendiendo Diferentes Unidades de Tiempo</h2>
+            <h3>Días</h3>
+            <p>El día es la unidad de tiempo más fundamental y precisa para medir diferencias de fechas. Los cálculos en días son exactos y no requieren aproximaciones. Un día siempre equivale a 24 horas, independientemente del mes o año. Esta precisión hace que los días sean la unidad preferida para cálculos financieros, legales y científicos. Por ejemplo, si calculas que entre dos fechas hay 365 días, este número es absoluto y no está sujeto a interpretación.</p>
+
+            <h3>Semanas</h3>
+            <p>Las semanas proporcionan una unidad de tiempo intermedia conveniente para planificación y comunicación. Una semana siempre contiene 7 días, lo que hace que la conversión sea directa: simplemente divide el número de días entre 7. Las semanas son especialmente útiles en contextos de trabajo y educación, donde los horarios siguen ciclos semanales. Si un proyecto dura 84 días, comunicar que es un proyecto de 12 semanas a menudo es más intuitivo y fácil de conceptualizar que expresarlo solo en días.</p>
+
+            <h3>Meses</h3>
+            <p>Los meses son más complejos porque varían en longitud: febrero tiene 28 o 29 días, mientras que otros meses tienen 30 o 31 días. Por lo tanto, calcular diferencias en meses requiere aproximaciones. El método común utiliza una longitud promedio de mes de 30.44 días (365.25 días por año dividido entre 12 meses). Esta aproximación funciona bien para períodos largos pero puede ser menos precisa para períodos cortos. Por ejemplo, del 15 de enero al 15 de marzo son exactamente 2 meses en términos de días del mes, pero en días calendario pueden ser 59 o 60 días dependiendo de si febrero es bisiesto.</p>
+
+            <h3>Años</h3>
+            <p>Los años también presentan complejidades debido a los años bisiestos. Un año calendario regular tiene 365 días, mientras que un año bisiesto tiene 366 días. Para cálculos precisos a largo plazo, se utiliza la aproximación de 365.25 días por año. Esta cifra promedia los años bisiestos que ocurren cada cuatro años. Si calculas que entre dos fechas hay 1,461 días, esto equivale a aproximadamente 4.0 años (1,461 ÷ 365.25 = 4.0), lo cual coincide exactamente con un ciclo de cuatro años que incluye un año bisiesto.</p>
+
+            <h2>Años Bisiestos y Su Impacto</h2>
+            <p>Los años bisiestos existen para mantener nuestro calendario alineado con la órbita de la Tierra alrededor del Sol, que toma aproximadamente 365.25 días. Sin años bisiestos, las estaciones gradualmente se desalinearían con el calendario. Las reglas para determinar años bisiestos son: un año es bisiesto si es divisible entre 4, excepto los años divisibles entre 100 que no lo son, a menos que también sean divisibles entre 400. Por lo tanto, 2000 fue bisiesto (divisible entre 400), pero 1900 no lo fue (divisible entre 100 pero no entre 400).</p>
+
+            <p>Al calcular diferencias de fechas que abarcan múltiples años, los años bisiestos agregan días adicionales que deben contabilizarse. Por ejemplo, del 1 de enero de 2020 al 1 de enero de 2025 hay exactamente 1,827 días, no 1,825 (5 × 365), porque 2020 y 2024 fueron años bisiestos, agregando dos días adicionales. Nuestra calculadora automáticamente considera los años bisiestos, asegurando precisión sin requerir que recuerdes estas reglas complejas.</p>
+
+            <h2>Cálculos Prácticos y Ejemplos</h2>
+            <h3>Ejemplo 1: Planificación de Embarazo</h3>
+            <p>Si la fecha estimada de parto es el 20 de diciembre de 2025 y hoy es 22 de noviembre de 2025, calcular la diferencia muestra que faltan 28 días, o exactamente 4 semanas. Esta información ayuda a las futuras madres a prepararse adecuadamente, programar citas médicas finales y organizar los preparativos necesarios. Conocer la cuenta regresiva precisa en días y semanas proporciona un marco tangible para la planificación y preparación psicológica.</p>
+
+            <h3>Ejemplo 2: Conteo de Aniversarios</h3>
+            <p>Si te casaste el 15 de junio de 2015 y quieres saber cuántos días han pasado hasta el 22 de noviembre de 2025, el cálculo muestra aproximadamente 3,812 días, o 10 años y 5 meses. Algunas parejas celebran aniversarios basados en días (como 1,000 días o 5,000 días de matrimonio) en lugar de solo años, lo que crea oportunidades adicionales de celebración y apreciación.</p>
+
+            <h3>Ejemplo 3: Cuenta Regresiva de Vacaciones</h3>
+            <p>Si has planeado unas vacaciones que comienzan el 1 de julio de 2026 y hoy es 22 de noviembre de 2025, la calculadora muestra que faltan aproximadamente 221 días, o 31 semanas, o 7.2 meses. Esta información te permite planificar ahorros mensuales (dividir el costo total entre 7 meses), programar preparativos y aumentar la anticipación al ver la cuenta regresiva.</p>
+
+            <h2>Consejos para Usar la Calculadora Efectivamente</h2>
+            <h3>Formato de Fechas</h3>
+            <p>Asegúrate de ingresar las fechas en el formato correcto que acepta tu calculadora. La mayoría de las calculadoras modernas utilizan selectores de fechas visuales que evitan errores de formato, pero si ingresas fechas manualmente, verifica que el día, mes y año estén en el orden correcto. Un error común es confundir el formato DD/MM/AAAA con MM/DD/AAAA, lo que puede generar resultados incorrectos o errores.</p>
+
+            <h3>Orden de Fechas</h3>
+            <p>Generalmente, ingresa la fecha más temprana como "fecha de inicio" y la fecha más reciente como "fecha final". Sin embargo, la mayoría de las calculadoras calculan automáticamente el valor absoluto de la diferencia, por lo que el orden no afecta el resultado numérico. No obstante, mantener un orden lógico ayuda a evitar confusiones al interpretar resultados.</p>
+
+            <h3>Incluyendo o Excluyendo Fechas Límite</h3>
+            <p>Algunas aplicaciones requieren decidir si incluir o excluir las fechas de inicio y final en el conteo. Por ejemplo, si calculas días de vacaciones del 1 de junio al 5 de junio, ¿son 4 días (excluyendo una fecha límite) o 5 días (incluyendo ambas)? La mayoría de las calculadoras de diferencia de fechas excluyen la fecha de inicio y cuentan hasta la fecha final inclusive, o viceversa, resultando en un conteo de días completos. Verifica la convención de tu calculadora para evitar errores de planificación.</p>
+
+            <h2>Aplicaciones Especializadas</h2>
+            <h3>Cálculos Legales y Contractuales</h3>
+            <p>En contextos legales, el cálculo preciso de fechas es crítico para determinar plazos, períodos de prescripción y cumplimiento de contratos. Los contratos a menudo especifican duraciones en meses o años, y determinar la fecha exacta de finalización requiere cálculos cuidadosos. Por ejemplo, un contrato de arrendamiento de "12 meses" que comienza el 15 de marzo de 2025 termina el 14 de marzo de 2026, no el 15 de marzo. Un día de diferencia puede tener implicaciones legales significativas.</p>
+
+            <h3>Cálculos Académicos</h3>
+            <p>Las instituciones educativas utilizan cálculos de fechas para determinar períodos académicos, elegibilidad por edad para inscripción y programación de exámenes. Si un semestre académico va del 1 de septiembre al 15 de diciembre, saber que son 105 días o 15 semanas ayuda a planificar el currículo, distribuir 15 semanas de material de curso y programar exámenes intermedios y finales apropiadamente.</p>
+
+            <h3>Cálculos de Salud y Fitness</h3>
+            <p>Los entusiastas del fitness a menudo rastrean programas de entrenamiento en semanas o días. Si comienzas un programa de entrenamiento de maratón de 16 semanas el 1 de febrero, calcular la fecha final (aproximadamente 19 de mayo) te ayuda a seleccionar carreras objetivo apropiadas y planificar la progresión del entrenamiento. Rastrear días consecutivos de ejercicio o dieta también motiva la adherencia a objetivos de salud.</p>
+
+            <h2>Conclusión</h2>
+            <p>La capacidad de calcular diferencias de fechas con precisión es una habilidad práctica invaluable con aplicaciones en prácticamente todos los aspectos de la vida personal y profesional. Ya sea que estés planificando eventos futuros, calculando duraciones pasadas, gestionando proyectos, tomando decisiones financieras o simplemente satisfaciendo tu curiosidad sobre el tiempo transcurrido, entender cómo medir el tiempo entre fechas te empodera con información precisa para una mejor toma de decisiones. Nuestra calculadora de diferencia de fechas elimina la complejidad de estos cálculos, manejando automáticamente años bisiestos, longitudes variables de meses y conversiones entre unidades de tiempo, proporcionándote resultados instantáneos y precisos en los que puedes confiar.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const start = new Date(document.getElementById('startDate').value);
+            const end = new Date(document.getElementById('endDate').value);
+            const diff = Math.abs(end - start);
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const weeks = Math.floor(days / 7);
+            const months = Math.floor(days / 30.44);
+            const years = Math.floor(days / 365.25);
+            document.getElementById('days').textContent = days.toLocaleString() + ' días';
+            document.getElementById('weeks').textContent = weeks.toLocaleString() + ' semanas';
+            document.getElementById('months').textContent = months + ' meses';
+            document.getElementById('years').textContent = years.toFixed(1) + ' años';
+        }
+        document.querySelectorAll('input, select').forEach(el => el.addEventListener('change', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

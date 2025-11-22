@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora científica en línea - Realiza operaciones matemáticas avanzadas, trigonometría, logaritmos y cálculos científicos.">
+    <meta name="keywords" content="calculadora científica, calculadora en línea, calculadora matemática, calculadora avanzada, calc científica">
+    <title>Calculadora Científica En Línea - Operaciones Avanzadas | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-cientifica.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/scientific-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-cientifica.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/scientific-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}.calc-btn{padding:15px;margin:5px;font-size:1.1rem;border:1px solid #d1d5db;border-radius:8px;background:white;cursor:pointer;transition:all .2s}.calc-btn:hover{background:#f3f4f6}.calc-btn:active{background:#e5e7eb}.calc-display{width:100%;padding:15px;font-size:1.5rem;text-align:right;border:2px solid #4F46E5;border-radius:8px;margin-bottom:15px;font-family:monospace;background:#f9fafb}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/scientific-calculator.html" class="lang-link">EN</a><a href="calculadora-cientifica.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora Científica</h1><p class="calculator-description">Realiza cálculos matemáticos avanzados y operaciones científicas</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs" style="max-width:600px;margin:0 auto;">
+                <input type="text" id="display" class="calc-display" value="0" readonly>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">
+                    <button class="calc-btn" onclick="appendNum('7')">7</button>
+                    <button class="calc-btn" onclick="appendNum('8')">8</button>
+                    <button class="calc-btn" onclick="appendNum('9')">9</button>
+                    <button class="calc-btn" onclick="appendOp('/')">/</button>
+                    <button class="calc-btn" onclick="appendNum('4')">4</button>
+                    <button class="calc-btn" onclick="appendNum('5')">5</button>
+                    <button class="calc-btn" onclick="appendNum('6')">6</button>
+                    <button class="calc-btn" onclick="appendOp('*')">×</button>
+                    <button class="calc-btn" onclick="appendNum('1')">1</button>
+                    <button class="calc-btn" onclick="appendNum('2')">2</button>
+                    <button class="calc-btn" onclick="appendNum('3')">3</button>
+                    <button class="calc-btn" onclick="appendOp('-')">-</button>
+                    <button class="calc-btn" onclick="appendNum('0')">0</button>
+                    <button class="calc-btn" onclick="appendNum('.')">.</button>
+                    <button class="calc-btn" onclick="calcular()" style="background:#10b981;color:white;">=</button>
+                    <button class="calc-btn" onclick="appendOp('+')">+</button>
+                    <button class="calc-btn" onclick="clearDisplay()">C</button>
+                    <button class="calc-btn" onclick="calcFunc('sqrt')">√</button>
+                    <button class="calc-btn" onclick="calcFunc('pow')">x²</button>
+                    <button class="calc-btn" onclick="calcFunc('sin')">sen</button>
+                    <button class="calc-btn" onclick="calcFunc('cos')">cos</button>
+                    <button class="calc-btn" onclick="calcFunc('tan')">tan</button>
+                    <button class="calc-btn" onclick="calcFunc('log')">log</button>
+                    <button class="calc-btn" onclick="calcFunc('ln')">ln</button>
+                </div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Calculadora Científica: Tu Herramienta Matemática Esencial</h2><p>Una calculadora científica es una herramienta indispensable para estudiantes, ingenieros, científicos y profesionales que necesitan realizar cálculos matemáticos avanzados más allá de la aritmética básica. Nuestra calculadora científica en línea proporciona todas las funciones que necesitas sin requerir software especializado o dispositivos físicos, accesible desde cualquier navegador web.</p>
+            <h2>Funciones Básicas de la Calculadora</h2><h3>Operaciones Aritméticas</h3><p><strong>Suma (+):</strong> Combina dos o más números. Ejemplo: 15 + 28 = 43<br><strong>Resta (-):</strong> Encuentra la diferencia entre números. Ejemplo: 50 - 23 = 27<br><strong>Multiplicación (×):</strong> Multiplica valores. Ejemplo: 7 × 8 = 56<br><strong>División (÷):</strong> Divide un número por otro. Ejemplo: 144 ÷ 12 = 12</p>
+            <h3>Orden de Operaciones (PEMDAS)</h3><p>Las calculadoras científicas siguen el orden estándar de operaciones:</p>
+            <ol><li><strong>P</strong>aréntesis - Se evalúan primero</li><li><strong>E</strong>xponentes - Potencias y raíces</li><li><strong>M</strong>ultiplicación y <strong>D</strong>ivisión - De izquierda a derecha</li><li><strong>A</strong>dición y <strong>S</strong>ustracción - De izquierda a derecha</li></ol>
+            <p><strong>Ejemplo:</strong> 2 + 3 × 4 = 2 + 12 = 14 (no 20)<br>La multiplicación se hace primero, luego la suma.</p>
+            <h2>Funciones Científicas Avanzadas</h2><h3>Exponentes y Potencias</h3><p><strong>Elevar al Cuadrado (x²):</strong> Multiplica un número por sí mismo. 5² = 25<br><strong>Elevar al Cubo (x³):</strong> Multiplica un número por sí mismo tres veces. 4³ = 64<br><strong>Potencias Generales (x^y):</strong> Eleva x a la potencia y. 2⁵ = 32</p>
+            <h3>Raíces</h3><p><strong>Raíz Cuadrada (√):</strong> Encuentra qué número multiplicado por sí mismo da el valor. √49 = 7<br><strong>Raíz Cúbica (³√):</strong> Encuentra qué número al cubo da el valor. ³√27 = 3<br><strong>Raíz n-ésima:</strong> Raíces de cualquier orden. ⁴√16 = 2</p>
+            <h3>Funciones Trigonométricas</h3><p>Esenciales para cálculos que involucran ángulos y triángulos:</p>
+            <p><strong>Seno (sen):</strong> Razón del cateto opuesto a la hipotenusa<br><strong>Coseno (cos):</strong> Razón del cateto adyacente a la hipotenusa<br><strong>Tangente (tan):</strong> Razón del cateto opuesto al cateto adyacente<br><strong>Funciones Inversas:</strong> arcsen, arccos, arctan encuentran ángulos<br><strong>Hiperbólicas:</strong> senh, cosh, tanh para aplicaciones avanzadas</p>
+            <h3>Logaritmos</h3><p><strong>Logaritmo Común (log):</strong> Base 10. log(100) = 2 porque 10² = 100<br><strong>Logaritmo Natural (ln):</strong> Base e. ln(e²) = 2<br><strong>Logaritmo Personalizado:</strong> Cualquier base. log₂(8) = 3</p>
+            <h3>Constantes Matemáticas</h3><p><strong>Pi (π):</strong> 3.14159265... (razón de circunferencia a diámetro)<br><strong>e (número de Euler):</strong> 2.71828182... (base del logaritmo natural)<br><strong>φ (razón áurea):</strong> 1.61803398...</p>
+            <h2>Aplicaciones en Diferentes Campos</h2><h3>Matemáticas y Educación</h3><p><strong>Álgebra:</strong> Resolver ecuaciones, simplificar expresiones, trabajar con polinomios<br><strong>Geometría:</strong> Calcular áreas, volúmenes, ángulos y distancias<br><strong>Cálculo:</strong> Evaluar límites, derivadas e integrales numéricamente<br><strong>Estadística:</strong> Calcular medias, desviaciones estándar, distribuciones de probabilidad</p>
+            <h3>Física</h3><p><strong>Mecánica:</strong> Calcular fuerzas, velocidades, aceleraciones, energía<br><strong>Ondas:</strong> Analizar frecuencias, amplitudes, interferencia<br><strong>Termodinámica:</strong> Conversiones de temperatura, transferencia de calor<br><strong>Electricidad:</strong> Ley de Ohm, impedancia, análisis de circuitos</p>
+            <h3>Ingeniería</h3><p><strong>Ingeniería Civil:</strong> Análisis estructural, cálculos de materiales, topografía<br><strong>Ingeniería Eléctrica:</strong> Análisis de circuitos, procesamiento de señales, sistemas de control<br><strong>Ingeniería Mecánica:</strong> Diseño de máquinas, dinámica de fluidos, transferencia de calor<br><strong>Ingeniería Química:</strong> Balance de masa, cinética de reacciones, termodinámica</p>
+            <h3>Química</h3><p><strong>Estequiometría:</strong> Cálculos de reactivos y productos<br><strong>pH y Concentraciones:</strong> Usando logaritmos para acidez y alcalinidad<br><strong>Termodinámica:</strong> Cálculos de energía y equilibrio<br><strong>Cinética:</strong> Tasas de reacción y constantes de velocidad</p>
+            <h3>Finanzas</h3><p><strong>Interés Compuesto:</strong> Crecimiento de inversiones con el tiempo<br><strong>Valor Presente/Futuro:</strong> Valor temporal del dinero<br><strong>Amortización:</strong> Cálculos de pagos de préstamos<br><strong>Tasas de Retorno:</strong> Análisis de rendimiento de inversiones</p>
+            <h2>Funciones de Memoria de la Calculadora</h2><h3>Memoria Principal (M+, M-, MR, MC)</h3><p><strong>M+ (Memoria Suma):</strong> Agrega el valor actual a la memoria<br><strong>M- (Memoria Resta):</strong> Resta el valor actual de la memoria<br><strong>MR (Memoria Recall):</strong> Muestra el valor almacenado en memoria<br><strong>MC (Memoria Clear):</strong> Borra el contenido de la memoria</p>
+            <p><strong>Ejemplo de Uso:</strong><br>1. Calcula 25 × 4 = 100<br>2. Presiona M+ (guarda 100)<br>3. Calcula 30 × 3 = 90<br>4. Presiona M+ (ahora memoria = 190)<br>5. Presiona MR (muestra 190)</p>
+            <h2>Modos de Ángulo: Grados vs Radianes</h2><h3>Modo Grados (DEG)</h3><p>Usado en la mayoría de aplicaciones cotidianas. Un círculo completo = 360°<br>sen(30°) = 0.5<br>cos(60°) = 0.5</p>
+            <h3>Modo Radianes (RAD)</h3><p>Preferido en matemáticas avanzadas y ciencia. Un círculo completo = 2π radianes<br>sen(π/6) = 0.5<br>cos(π/3) = 0.5</p>
+            <h3>Conversión</h3><p>Radianes a Grados: grados = radianes × (180/π)<br>Grados a Radianes: radianes = grados × (π/180)</p>
+            <h2>Notación Científica</h2><h3>¿Qué es la Notación Científica?</h3><p>Una forma de escribir números muy grandes o muy pequeños de manera compacta:</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Número × 10^exponente<br><br>Ejemplos:<br>3,000,000 = 3 × 10⁶ = 3E6<br>0.000045 = 4.5 × 10⁻⁵ = 4.5E-5</p>
+            <h3>Operaciones con Notación Científica</h3><p><strong>Multiplicación:</strong> Multiplica números, suma exponentes<br>(2×10³) × (3×10⁴) = 6×10⁷<br><br><strong>División:</strong> Divide números, resta exponentes<br>(6×10⁸) ÷ (2×10³) = 3×10⁵</p>
+            <h2>Cálculos de Porcentaje</h2><h3>Funciones de Porcentaje</h3><p><strong>Encontrar Porcentaje:</strong> ¿Qué es el 15% de 200?<br>200 × 15% = 30<br><br><strong>Aumento Porcentual:</strong> Aumentar 50 en 20%<br>50 + (50 × 20%) = 60<br><br><strong>Disminución Porcentual:</strong> Disminuir 80 en 25%<br>80 - (80 × 25%) = 60</p>
+            <h2>Consejos para Uso Eficiente</h2><h3>Verifica Tu Modo</h3><p>Siempre verifica si estás en modo DEG o RAD antes de cálculos trigonométricos. Un resultado incorrecto a menudo se debe al modo equivocado.</p>
+            <h3>Usa Paréntesis</h3><p>Cuando tengas dudas, usa paréntesis para aclarar el orden de operaciones:<br>Sin paréntesis: 2+3×4 = 14<br>Con paréntesis: (2+3)×4 = 20</p>
+            <h3>Aproxima Primero</h3><p>Antes de calcular, haz una estimación mental del resultado esperado. Esto te ayuda a detectar errores de entrada.</p>
+            <h3>Guarda Resultados Intermedios</h3><p>Para cálculos largos de varios pasos, usa la función de memoria para almacenar resultados intermedios y evitar errores de redondeo.</p>
+            <h2>Errores Comunes y Soluciones</h2><h3>Error: División por Cero</h3><p>Matemáticamente indefinido. Cualquier número dividido por cero produce este error. Verifica tu entrada.</p>
+            <h3>Error: Dominio de Función</h3><p>Ocurre cuando intentas una operación no válida, como:<br>• Raíz cuadrada de número negativo (en modo real)<br>• Logaritmo de número negativo o cero<br>• Arcsen o arccos de valores fuera de [-1, 1]</p>
+            <h3>Error de Sintaxis</h3><p>Causado por entrada incorrecta:<br>• Paréntesis no balanceados<br>• Operadores consecutivos<br>• Operandos faltantes</p>
+            <h3>Error de Desbordamiento</h3><p>El resultado es demasiado grande para que la calculadora lo muestre. Considera usar notación científica o dividir el problema.</p>
+            <h2>Funciones Estadísticas</h2><h3>Estadísticas de Un Variable</h3><p><strong>Media (x̄):</strong> Promedio de todos los valores<br><strong>Suma (Σx):</strong> Total de todos los valores<br><strong>Suma de Cuadrados (Σx²):</strong> Para cálculos de varianza<br><strong>Desviación Estándar (σ):</strong> Medida de dispersión de datos</p>
+            <h3>Análisis de Regresión</h3><p>Algunas calculadoras científicas pueden realizar regresión lineal para encontrar la ecuación de mejor ajuste para un conjunto de datos.</p>
+            <h2>Calculadoras Científicas vs Gráficas</h2><h3>Calculadoras Científicas</h3><p><strong>Fortalezas:</strong> Rápidas, simples de usar, excelentes para cálculos numéricos<br><strong>Limitaciones:</strong> No pueden graficar funciones, memoria limitada, sin capacidades de programación</p>
+            <h3>Calculadoras Gráficas</h3><p><strong>Fortalezas:</strong> Pueden graficar funciones, más memoria, programables<br><strong>Limitaciones:</strong> Más complejas, más caras, mayor curva de aprendizaje</p>
+            <h2>Historia de las Calculadoras Científicas</h2><p>La primera calculadora científica de bolsillo, la HP-35, fue lanzada por Hewlett-Packard en 1972, revolucionando los cálculos científicos y de ingeniería. Antes, los profesionales dependían de reglas de cálculo y tablas matemáticas. Las calculadoras científicas modernas ofrecen cientos de funciones en dispositivos de bolsillo o, como esta, en navegadores web.</p>
+            <h2>Preguntas Frecuentes</h2><h3>¿Cuál es la diferencia entre log y ln?</h3><p>log es el logaritmo común (base 10), mientras que ln es el logaritmo natural (base e≈2.718). log(100)=2 porque 10²=100. ln(e²)=2 porque e²=e². En ciencia e ingeniería, ln se usa más frecuentemente.</p>
+            <h3>¿Por qué sen(30) no da 0.5 en mi calculadora?</h3><p>Probablemente estás en modo radianes (RAD) en lugar de grados (DEG). sen(30°)=0.5, pero sen(30 radianes)≈-0.988. Cambia a modo DEG si trabajas con grados.</p>
+            <h3>¿Cómo calculo un porcentaje?</h3><p>Para encontrar el X% de Y, multiplica: Y × (X/100). Ejemplo: 25% de 80 = 80 × (25/100) = 80 × 0.25 = 20. Muchas calculadoras tienen una tecla % que automatiza esto.</p>
+            <h3>¿Qué significa el símbolo E en la pantalla?</h3><p>E significa "×10^" y se usa en notación científica. 5.2E8 significa 5.2×10⁸ = 520,000,000. Es una forma de mostrar números muy grandes o muy pequeños de manera compacta.</p>
+            <h3>¿Puedo usar esta calculadora para exámenes?</h3><p>Depende de las reglas del examen. Muchos exámenes estandarizados permiten calculadoras científicas pero no calculadoras gráficas o con capacidad CAS. Siempre verifica las políticas específicas de tu examen.</p>
+            <h3>¿Cómo calculo potencias fraccionarias como x^(2/3)?</h3><p>x^(2/3) es equivalente a (x²)^(1/3) o ³√(x²). Puedes elevar x al cuadrado primero, luego tomar la raíz cúbica, o usar la función de potencia general con 2/3 como exponente.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>let displayVal='0';let lastOp='';function updateDisplay(){document.getElementById('display').value=displayVal;}function clearDisplay(){displayVal='0';updateDisplay();}function appendNum(num){if(displayVal==='0')displayVal=num;else displayVal+=num;updateDisplay();}function appendOp(op){displayVal+=op;updateDisplay();}function calcular(){try{displayVal=eval(displayVal.replace('×','*').replace('÷','/')).toString();updateDisplay();}catch(e){displayVal='Error';updateDisplay();}}function calcFunc(func){try{const num=parseFloat(displayVal);let result;switch(func){case 'sqrt':result=Math.sqrt(num);break;case 'pow':result=Math.pow(num,2);break;case 'sin':result=Math.sin(num*Math.PI/180);break;case 'cos':result=Math.cos(num*Math.PI/180);break;case 'tan':result=Math.tan(num*Math.PI/180);break;case 'log':result=Math.log10(num);break;case 'ln':result=Math.log(num);break;default:result=num;}displayVal=result.toString();updateDisplay();}catch(e){displayVal='Error';updateDisplay();}}</script>
+</body>
+</html>

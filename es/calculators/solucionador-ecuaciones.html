@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Solucionador de ecuaciones - Resuelve ecuaciones lineales, cuadráticas y polinomiales. Soluciones paso a paso para problemas de álgebra.">
+    <meta name="keywords" content="solucionador ecuaciones, resolver ecuaciones, calculadora álgebra, ecuaciones cuadráticas, solucionador matemático">
+    <title>Solucionador de Ecuaciones - Lineales y Cuadráticas | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/solucionador-ecuaciones.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/equation-solver.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/solucionador-ecuaciones.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/equation-solver.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/equation-solver.html" class="lang-link">EN</a><a href="solucionador-ecuaciones.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Solucionador de Ecuaciones</h1><p class="calculator-description">Resuelve ecuaciones lineales y cuadráticas con soluciones detalladas</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Tipo de Ecuación</h3>
+                <div class="form-group"><label class="form-label">Tipo</label>
+                    <select id="tipoEcuacion" class="form-select" onchange="cambiarTipo()">
+                        <option value="lineal">Lineal (ax + b = c)</option>
+                        <option value="cuadratica">Cuadrática (ax² + bx + c = 0)</option>
+                    </select>
+                </div>
+                <div id="inputsLineales">
+                    <h3>Ecuación: ax + b = c</h3>
+                    <div class="form-group"><label class="form-label">Coeficiente a</label><input type="number" id="aLin" class="form-input" value="2" step="any"></div>
+                    <div class="form-group"><label class="form-label">Constante b</label><input type="number" id="bLin" class="form-input" value="3" step="any"></div>
+                    <div class="form-group"><label class="form-label">Resultado c</label><input type="number" id="cLin" class="form-input" value="11" step="any"></div>
+                </div>
+                <div id="inputsCuadratica" style="display:none;">
+                    <h3>Ecuación: ax² + bx + c = 0</h3>
+                    <div class="form-group"><label class="form-label">Coeficiente a (x²)</label><input type="number" id="aCuad" class="form-input" value="1" step="any"></div>
+                    <div class="form-group"><label class="form-label">Coeficiente b (x)</label><input type="number" id="bCuad" class="form-input" value="-5" step="any"></div>
+                    <div class="form-group"><label class="form-label">Constante c</label><input type="number" id="cCuad" class="form-input" value="6" step="any"></div>
+                </div>
+                <button onclick="resolverEcuacion()" class="btn-calculate">Resolver Ecuación</button>
+            </div>
+            <div class="calculator-results"><h3>Solución</h3>
+                <div class="result-item"><div class="result-label">Resultado</div><div class="result-value" id="solucion" style="font-size:2rem;color:#10b981">x = 4</div></div>
+                <div class="result-item"><div class="result-label">Pasos</div><div class="result-value" id="pasos" style="font-size:0.9rem;text-align:left;white-space:pre-line">2x + 3 = 11<br>2x = 11 - 3<br>2x = 8<br>x = 4</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Comprender las Ecuaciones Matemáticas</h2><p>Una ecuación es una declaración matemática que establece que dos expresiones son iguales. Resolver ecuaciones es una habilidad fundamental en álgebra que permite encontrar valores desconocidos y resolver problemas del mundo real. Desde calcular distancias hasta optimizar ganancias, las ecuaciones son herramientas esenciales en matemáticas, ciencias, ingeniería, finanzas y muchos otros campos.</p>
+            <h2>Tipos de Ecuaciones</h2><h3>Ecuaciones Lineales</h3><p>Las ecuaciones lineales tienen variables solo a la primera potencia (sin exponentes). Se llaman "lineales" porque su gráfica es una línea recta.</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px"><strong>Forma General:</strong> ax + b = c<br><strong>Ejemplo:</strong> 2x + 3 = 11<br><strong>Características:</strong> Siempre tienen exactamente una solución (a menos que sean inconsistentes o identidades)</p>
+            <h3>Ecuaciones Cuadráticas</h3><p>Las ecuaciones cuadráticas tienen la variable elevada al cuadrado (segunda potencia) como el término de mayor grado.</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px"><strong>Forma General:</strong> ax² + bx + c = 0<br><strong>Ejemplo:</strong> x² - 5x + 6 = 0<br><strong>Características:</strong> Pueden tener dos soluciones, una solución o ninguna solución real</p>
+            <h3>Otros Tipos de Ecuaciones</h3><p><strong>Ecuaciones Cúbicas:</strong> ax³ + bx² + cx + d = 0 (hasta 3 soluciones)<br><strong>Ecuaciones Polinomiales:</strong> Cualquier potencia de x (n soluciones posibles)<br><strong>Ecuaciones Exponenciales:</strong> Contienen variables en exponentes (ej: 2^x = 8)<br><strong>Ecuaciones Logarítmicas:</strong> Contienen logaritmos (ej: log(x) = 2)</p>
+            <h2>Resolver Ecuaciones Lineales</h2><h3>Método de Resolución Paso a Paso</h3><p>El objetivo es aislar la variable en un lado de la ecuación.</p>
+            <p><strong>Ejemplo: 2x + 3 = 11</strong></p>
+            <p><strong>Paso 1:</strong> Resta 3 de ambos lados (eliminar el término constante)<br>2x + 3 - 3 = 11 - 3<br>2x = 8</p>
+            <p><strong>Paso 2:</strong> Divide ambos lados por 2 (aislar x)<br>2x / 2 = 8 / 2<br>x = 4</p>
+            <p><strong>Paso 3:</strong> Verifica la solución (sustituir x = 4 en la ecuación original)<br>2(4) + 3 = 11<br>8 + 3 = 11<br>11 = 11 ✓</p>
+            <h3>Principios Fundamentales</h3><ul><li><strong>Propiedad de Suma/Resta:</strong> Puedes sumar o restar el mismo valor a ambos lados</li><li><strong>Propiedad de Multiplicación/División:</strong> Puedes multiplicar o dividir ambos lados por el mismo valor (excepto cero)</li><li><strong>Mantener el Balance:</strong> Lo que hagas a un lado, hazlo al otro</li></ul>
+            <h3>Ejemplos Más Complejos</h3><p><strong>Ecuación con Variables en Ambos Lados:</strong><br>3x + 5 = 2x + 9<br>3x - 2x = 9 - 5<br>x = 4</p>
+            <p><strong>Ecuación con Fracciones:</strong><br>(x/2) + 3 = 7<br>x/2 = 4<br>x = 8</p>
+            <p><strong>Ecuación con Paréntesis:</strong><br>2(x + 3) = 14<br>2x + 6 = 14<br>2x = 8<br>x = 4</p>
+            <h2>Resolver Ecuaciones Cuadráticas</h2><h3>Método 1: Factorización</h3><p>Cuando la ecuación se puede factorizar fácilmente:</p>
+            <p><strong>Ejemplo:</strong> x² - 5x + 6 = 0<br><strong>Paso 1:</strong> Factoriza<br>(x - 2)(x - 3) = 0<br><strong>Paso 2:</strong> Aplica propiedad del producto cero<br>x - 2 = 0 o x - 3 = 0<br>x = 2 o x = 3</p>
+            <h3>Método 2: Fórmula Cuadrática</h3><p>La fórmula universal que funciona para cualquier ecuación cuadrática:</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace;font-size:1.1rem">x = [-b ± √(b² - 4ac)] / (2a)</p>
+            <p><strong>Ejemplo:</strong> 2x² - 7x + 3 = 0<br>a = 2, b = -7, c = 3</p>
+            <p>x = [7 ± √(49 - 24)] / 4<br>x = [7 ± √25] / 4<br>x = [7 ± 5] / 4<br><br>x₁ = (7 + 5) / 4 = 3<br>x₂ = (7 - 5) / 4 = 0.5</p>
+            <h3>Método 3: Completar el Cuadrado</h3><p>Transforma la ecuación en un cuadrado perfecto:</p>
+            <p><strong>Ejemplo:</strong> x² + 6x + 5 = 0<br>x² + 6x = -5<br>x² + 6x + 9 = -5 + 9<br>(x + 3)² = 4<br>x + 3 = ±2<br>x = -3 + 2 = -1 o x = -3 - 2 = -5</p>
+            <h2>El Discriminante</h2><p>El discriminante (b² - 4ac) determina el número y tipo de soluciones de una ecuación cuadrática:</p>
+            <ul><li><strong>b² - 4ac > 0:</strong> Dos soluciones reales diferentes</li><li><strong>b² - 4ac = 0:</strong> Una solución real (raíz doble)</li><li><strong>b² - 4ac < 0:</strong> No hay soluciones reales (dos soluciones complejas)</li></ul>
+            <p><strong>Ejemplo 1:</strong> x² - 5x + 6 = 0<br>Discriminante = 25 - 24 = 1 > 0 → Dos soluciones reales</p>
+            <p><strong>Ejemplo 2:</strong> x² - 4x + 4 = 0<br>Discriminante = 16 - 16 = 0 → Una solución (x = 2)</p>
+            <p><strong>Ejemplo 3:</strong> x² + 2x + 5 = 0<br>Discriminante = 4 - 20 = -16 < 0 → No hay soluciones reales</p>
+            <h2>Aplicaciones en el Mundo Real</h2><h3>Física y Movimiento</h3><p><strong>Movimiento Proyectil:</strong> Calcular dónde aterriza una pelota lanzada<br>Ecuación: h = -16t² + v₀t + h₀<br>Donde h = altura, t = tiempo, v₀ = velocidad inicial, h₀ = altura inicial</p>
+            <p><strong>Caída Libre:</strong> Determinar tiempo de caída desde altura<br>h = ½gt²<br>Resuelve para t dado h</p>
+            <h3>Negocios y Economía</h3><p><strong>Punto de Equilibrio:</strong> Encontrar dónde ingresos = costos<br>Ingresos: R = px<br>Costos: C = F + vx<br>Resuelve: px = F + vx para encontrar x</p>
+            <p><strong>Optimización de Ganancias:</strong> Maximizar ganancias usando ecuaciones cuadráticas<br>G(x) = -ax² + bx - c<br>Encontrar el vértice para ganancia máxima</p>
+            <h3>Geometría y Construcción</h3><p><strong>Área de Rectángulos:</strong> Si el área es 24 y el largo es x+3 y el ancho es x<br>x(x + 3) = 24<br>x² + 3x - 24 = 0<br>Resuelve para encontrar dimensiones</p>
+            <p><strong>Teorema de Pitágoras:</strong> Encontrar lados desconocidos de triángulos rectángulos<br>a² + b² = c²<br>Resuelve para el lado desconocido</p>
+            <h3>Finanzas</h3><p><strong>Interés Compuesto:</strong> Calcular tiempo para duplicar inversión<br>A = P(1 + r)^t<br>Resuelve para t cuando A = 2P</p>
+            <p><strong>Pagos de Préstamos:</strong> Determinar pagos mensuales o tasas de interés usando ecuaciones lineales y fórmulas de anualidad</p>
+            <h2>Sistemas de Ecuaciones</h2><h3>Método de Sustitución</h3><p>Resuelve una ecuación para una variable, luego sustituye en la otra:</p>
+            <p><strong>Ejemplo:</strong><br>x + y = 10<br>2x - y = 5</p>
+            <p>De la primera: y = 10 - x<br>Sustituye en la segunda: 2x - (10 - x) = 5<br>3x - 10 = 5<br>x = 5, luego y = 5</p>
+            <h3>Método de Eliminación</h3><p>Suma o resta ecuaciones para eliminar una variable:</p>
+            <p><strong>Ejemplo:</strong><br>3x + 2y = 12<br>3x - y = 3</p>
+            <p>Resta la segunda de la primera:<br>3y = 9<br>y = 3, luego x = 2</p>
+            <h2>Ecuaciones Especiales</h2><h3>Identidades</h3><p>Ecuaciones verdaderas para todos los valores de la variable:</p>
+            <p>2(x + 3) = 2x + 6<br>Esta es verdadera para cualquier valor de x</p>
+            <h3>Contradicciones</h3><p>Ecuaciones sin solución:</p>
+            <p>x + 5 = x + 3<br>5 = 3 (falso)<br>No hay solución</p>
+            <h3>Ecuaciones con Valor Absoluto</h3><p>|x| = 5 tiene dos soluciones: x = 5 o x = -5<br>|2x - 3| = 7<br>2x - 3 = 7 o 2x - 3 = -7<br>x = 5 o x = -2</p>
+            <h2>Errores Comunes al Resolver Ecuaciones</h2><h3>No Aplicar Operaciones a Ambos Lados</h3><p>❌ Incorrecto: x + 5 = 10 → x = 10<br>✓ Correcto: x + 5 = 10 → x = 5</p>
+            <h3>Errores con Signos Negativos</h3><p>❌ Incorrecto: -2x = 6 → x = -3 (olvidando el signo)<br>✓ Correcto: -2x = 6 → x = -3</p>
+            <h3>División por Variable Que Podría Ser Cero</h3><p>Al resolver x² = 3x, NO dividas por x<br>❌ Incorrecto: x = 3 (pierdes la solución x = 0)<br>✓ Correcto: x² - 3x = 0 → x(x - 3) = 0 → x = 0 o x = 3</p>
+            <h3>Olvidar el ± en Raíces Cuadradas</h3><p>Si x² = 25, entonces x = ±5, no solo x = 5</p>
+            <h3>Errores en la Fórmula Cuadrática</h3><p>• Olvidar el signo negativo en -b<br>• Usar 4ac en lugar de -4ac<br>• Olvidar dividir TODO entre 2a<br>• Errores de cálculo en el discriminante</p>
+            <h2>Verificar Tus Soluciones</h2><p>Siempre verifica sustituyendo tu respuesta en la ecuación original:</p>
+            <p><strong>Ejemplo:</strong> Si resolviste 2x + 3 = 11 y obtuviste x = 4<br>Verifica: 2(4) + 3 = 8 + 3 = 11 ✓ Correcto</p>
+            <p>La verificación es especialmente importante para:<br>• Ecuaciones con fracciones<br>• Ecuaciones con radicales<br>• Ecuaciones cuadráticas<br>• Problemas donde perdiste o ganaste soluciones</p>
+            <h2>Herramientas y Tecnología</h2><h3>Calculadoras Gráficas</h3><p>Pueden resolver ecuaciones gráficamente encontrando intersecciones de funciones. Útil para visualizar soluciones y verificar respuestas algebraicas.</p>
+            <h3>Software de Álgebra Computacional (CAS)</h3><p>• Wolfram Alpha<br>• Symbolab<br>• Microsoft Math Solver<br>• Photomath (aplicación móvil)</p>
+            <p>Estas herramientas no solo dan respuestas sino también pasos detallados de solución.</p>
+            <h2>Consejos para Dominar la Resolución de Ecuaciones</h2><ul><li><strong>Practica Regularmente:</strong> Las habilidades algebraicas mejoran con práctica constante</li><li><strong>Trabaja Ordenadamente:</strong> Escribe cada paso claramente para evitar errores</li><li><strong>Verifica el Trabajo:</strong> Sustituye tus respuestas para confirmar que son correctas</li><li><strong>Entiende el "Por Qué":</strong> No solo memorices reglas, entiende por qué funcionan</li><li><strong>Comienza Simple:</strong> Domina ecuaciones simples antes de abordar las complejas</li><li><strong>Identifica Patrones:</strong> Reconoce tipos de ecuaciones y sus métodos de solución</li><li><strong>Usa Múltiples Métodos:</strong> Resolver la misma ecuación de diferentes maneras refuerza la comprensión</li></ul>
+            <h2>Preguntas Frecuentes</h2><h3>¿Cuál es la diferencia entre una ecuación y una expresión?</h3><p>Una expresión es una frase matemática (como 2x + 3) que puede simplificarse pero no resolverse. Una ecuación tiene un signo igual (como 2x + 3 = 11) y puede resolverse para encontrar el valor de la variable.</p>
+            <h3>¿Pueden las ecuaciones no tener solución?</h3><p>Sí. Las ecuaciones contradictorias como x + 5 = x + 3 no tienen solución. Las ecuaciones cuadráticas con discriminante negativo no tienen soluciones reales (pero tienen soluciones complejas).</p>
+            <h3>¿Cuándo debo usar la fórmula cuadrática vs factorización?</h3><p>Intenta factorizar primero si es obvio (como x² - 5x + 6). Usa la fórmula cuadrática cuando la factorización es difícil o imposible, o cuando necesitas soluciones exactas para coeficientes no enteros.</p>
+            <h3>¿Por qué obtengo soluciones extrañas a veces?</h3><p>Las soluciones extrañas ocurren cuando elevas al cuadrado ambos lados o multiplicas por una expresión variable. Siempre verifica tus soluciones en la ecuación original para identificar y eliminar soluciones extrañas.</p>
+            <h3>¿Puedo usar este solucionador para tareas?</h3><p>Úsalo para verificar tu trabajo y aprender el proceso de solución, pero hacer la tarea tú mismo es la mejor forma de aprender. Entiende los pasos, no solo copies las respuestas.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function cambiarTipo(){const tipo=document.getElementById('tipoEcuacion').value;document.getElementById('inputsLineales').style.display=tipo==='lineal'?'block':'none';document.getElementById('inputsCuadratica').style.display=tipo==='cuadratica'?'block':'none';}function resolverEcuacion(){const tipo=document.getElementById('tipoEcuacion').value;if(tipo==='lineal'){const a=parseFloat(document.getElementById('aLin').value);const b=parseFloat(document.getElementById('bLin').value);const c=parseFloat(document.getElementById('cLin').value);if(a===0){document.getElementById('solucion').textContent='Error: a no puede ser 0';return;}const x=(c-b)/a;const pasos=`${a}x + ${b} = ${c}\n${a}x = ${c} - ${b}\n${a}x = ${c-b}\nx = ${x.toFixed(4)}`;document.getElementById('solucion').textContent=`x = ${x.toFixed(4)}`;document.getElementById('pasos').textContent=pasos;}else{const a=parseFloat(document.getElementById('aCuad').value);const b=parseFloat(document.getElementById('bCuad').value);const c=parseFloat(document.getElementById('cCuad').value);if(a===0){document.getElementById('solucion').textContent='Error: a no puede ser 0';return;}const disc=b*b-4*a*c;let solucion='';let pasos=`${a}x² + ${b}x + ${c} = 0\n\nDiscriminante: b² - 4ac = ${disc}\n`;if(disc>0){const x1=(-b+Math.sqrt(disc))/(2*a);const x2=(-b-Math.sqrt(disc))/(2*a);solucion=`x₁ = ${x1.toFixed(4)}, x₂ = ${x2.toFixed(4)}`;pasos+=`\nDos soluciones reales:\nx₁ = ${x1.toFixed(4)}\nx₂ = ${x2.toFixed(4)}`;}else if(disc===0){const x=-b/(2*a);solucion=`x = ${x.toFixed(4)} (raíz doble)`;pasos+=`\nUna solución:\nx = ${x.toFixed(4)}`;}else{const real=-b/(2*a);const imag=Math.sqrt(-disc)/(2*a);solucion='No hay soluciones reales';pasos+=`\nNo hay soluciones reales\nSoluciones complejas:\nx₁ = ${real.toFixed(4)} + ${imag.toFixed(4)}i\nx₂ = ${real.toFixed(4)} - ${imag.toFixed(4)}i`;}document.getElementById('solucion').textContent=solucion;document.getElementById('pasos').textContent=pasos;}}window.addEventListener('load',resolverEcuacion);</script>
+</body>
+</html>

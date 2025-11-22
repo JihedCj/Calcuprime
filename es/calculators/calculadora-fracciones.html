@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de fracciones - Suma, resta, multiplica y divide fracciones. Simplifica fracciones y convierte a decimales fácilmente.">
+    <meta name="keywords" content="calculadora fracciones, sumar fracciones, restar fracciones, multiplicar fracciones, dividir fracciones, simplificar fracciones">
+    <title>Calculadora de Fracciones - Sumar, Restar, Multiplicar, Dividir | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-fracciones.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/fraction-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-fracciones.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/fraction-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/fraction-calculator.html" class="lang-link">EN</a><a href="calculadora-fracciones.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora de Fracciones</h1><p class="calculator-description">Suma, resta, multiplica y divide fracciones con facilidad</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Operaciones con Fracciones</h3>
+                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:15px;">
+                    <input type="number" id="num1" class="form-input" value="1" style="width:60px;">
+                    <span style="font-size:1.5rem;">/</span>
+                    <input type="number" id="den1" class="form-input" value="2" style="width:60px;">
+                </div>
+                <div class="form-group"><label class="form-label">Operación</label>
+                    <select id="operacion" class="form-select">
+                        <option value="+">Sumar (+)</option>
+                        <option value="-">Restar (-)</option>
+                        <option value="*">Multiplicar (×)</option>
+                        <option value="/">Dividir (÷)</option>
+                    </select>
+                </div>
+                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:15px;">
+                    <input type="number" id="num2" class="form-input" value="1" style="width:60px;">
+                    <span style="font-size:1.5rem;">/</span>
+                    <input type="number" id="den2" class="form-input" value="4" style="width:60px;">
+                </div>
+                <button onclick="calcularFrac()" class="btn-calculate">Calcular</button>
+            </div>
+            <div class="calculator-results"><h3>Resultado</h3>
+                <div class="result-item"><div class="result-label">Respuesta</div><div class="result-value" id="resultado" style="font-size:2.5rem;color:#3b82f6;">3/4</div></div>
+                <div class="result-item"><div class="result-label">Decimal</div><div class="result-value" id="decimal">0.7500</div></div>
+                <div class="result-item"><div class="result-label">Número Mixto</div><div class="result-value" id="mixto">3/4</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Comprender las Fracciones</h2><p>Las fracciones son una forma de representar partes de un todo o, más generalmente, cualquier número de partes iguales. Una fracción consta de un numerador (el número superior) que indica cuántas partes tienes, y un denominador (el número inferior) que indica en cuántas partes se divide el todo. Dominar las operaciones con fracciones es esencial para las matemáticas de nivel superior y aplicaciones prácticas del mundo real.</p>
+            <h2>Componentes de una Fracción</h2><h3>Numerador</h3><p>El número superior que indica cuántas partes tienes. En la fracción 3/4, el 3 es el numerador, lo que significa que tienes 3 partes.</p>
+            <h3>Denominador</h3><p>El número inferior que indica en cuántas partes iguales se divide el todo. En 3/4, el 4 es el denominador, lo que significa que el todo está dividido en 4 partes iguales.</p>
+            <h3>Línea de Fracción</h3><p>La línea entre el numerador y el denominador representa división. La fracción 3/4 también puede leerse como "3 dividido por 4", que es igual a 0.75.</p>
+            <h2>Tipos de Fracciones</h2><h3>Fracciones Propias</h3><p>Fracciones donde el numerador es menor que el denominador (ejemplo: 3/4, 2/5). Estas fracciones representan valores menores a 1.</p>
+            <h3>Fracciones Impropias</h3><p>Fracciones donde el numerador es mayor o igual al denominador (ejemplo: 5/4, 7/3). Estas representan valores mayores o iguales a 1.</p>
+            <h3>Números Mixtos</h3><p>Una combinación de un número entero y una fracción propia (ejemplo: 1 1/4, 2 1/3). Estos son otra forma de escribir fracciones impropias.</p>
+            <h3>Fracciones Equivalentes</h3><p>Fracciones diferentes que representan el mismo valor (ejemplo: 1/2 = 2/4 = 3/6). Se crean multiplicando o dividiendo tanto el numerador como el denominador por el mismo número.</p>
+            <h2>Cómo Realizar Operaciones con Fracciones</h2><h3>Suma y Resta de Fracciones</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Para sumar o restar fracciones:<br>1. Encuentra un denominador común<br>2. Convierte las fracciones a denominador común<br>3. Suma o resta los numeradores<br>4. Mantén el denominador igual<br>5. Simplifica si es posible</p>
+            <p><strong>Ejemplo:</strong> 1/4 + 1/2<br>1. Denominador común: 4<br>2. Convierte: 1/4 + 2/4<br>3. Suma numeradores: 3/4<br>4. Resultado: 3/4</p>
+            <h3>Multiplicación de Fracciones</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Para multiplicar fracciones:<br>1. Multiplica los numeradores<br>2. Multiplica los denominadores<br>3. Simplifica el resultado</p>
+            <p><strong>Ejemplo:</strong> 1/2 × 3/4<br>1. Multiplica numeradores: 1 × 3 = 3<br>2. Multiplica denominadores: 2 × 4 = 8<br>3. Resultado: 3/8</p>
+            <h3>División de Fracciones</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Para dividir fracciones:<br>1. Voltea la segunda fracción (recíproco)<br>2. Multiplica la primera fracción por el recíproco<br>3. Simplifica el resultado</p>
+            <p><strong>Ejemplo:</strong> 1/2 ÷ 1/4<br>1. Voltea la segunda: 1/4 se convierte en 4/1<br>2. Multiplica: 1/2 × 4/1 = 4/2<br>3. Simplifica: 4/2 = 2</p>
+            <h2>Simplificar Fracciones</h2><h3>Encontrar el Máximo Común Divisor (MCD)</h3><p>Para simplificar una fracción, divide tanto el numerador como el denominador por su máximo común divisor. Por ejemplo, para simplificar 6/8:<br>1. Encuentra el MCD de 6 y 8, que es 2<br>2. Divide ambos: 6÷2 = 3, 8÷2 = 4<br>3. Resultado simplificado: 3/4</p>
+            <h3>Fracciones en Términos Mínimos</h3><p>Una fracción está en términos mínimos (completamente simplificada) cuando el único número que divide tanto al numerador como al denominador es 1. Por ejemplo, 3/4 está en términos mínimos, pero 6/8 no lo está.</p>
+            <h2>Convertir Entre Formas</h2><h3>Fracción Impropia a Número Mixto</h3><p>Divide el numerador por el denominador. El cociente es el número entero, el residuo es el nuevo numerador, y el denominador permanece igual.<br><br><strong>Ejemplo:</strong> 7/4<br>7 ÷ 4 = 1 con residuo 3<br>Resultado: 1 3/4</p>
+            <h3>Número Mixto a Fracción Impropia</h3><p>Multiplica el número entero por el denominador, suma el numerador y coloca el resultado sobre el denominador original.<br><br><strong>Ejemplo:</strong> 2 1/3<br>(2 × 3) + 1 = 7<br>Resultado: 7/3</p>
+            <h3>Fracción a Decimal</h3><p>Divide el numerador por el denominador.<br><strong>Ejemplo:</strong> 3/4 = 3 ÷ 4 = 0.75</p>
+            <h3>Decimal a Fracción</h3><p>Escribe el decimal sobre la potencia apropiada de 10 y simplifica.<br><strong>Ejemplo:</strong> 0.75 = 75/100 = 3/4 (simplificado)</p>
+            <h2>Aplicaciones Prácticas de las Fracciones</h2><h3>Cocina y Recetas</h3><p>Las recetas frecuentemente usan fracciones (1/2 taza, 3/4 cucharadita). Ajustar recetas requiere multiplicar o dividir fracciones. Si quieres duplicar una receta que pide 2/3 taza de azúcar, necesitas calcular 2 × 2/3 = 4/3 = 1 1/3 tazas.</p>
+            <h3>Construcción y Carpintería</h3><p>Las medidas en construcción típicamente usan fracciones de pulgada. Los carpinteros constantemente suman, restan y dividen fracciones al medir y cortar materiales. Entender fracciones asegura cortes precisos y menos desperdicio de materiales.</p>
+            <h3>Finanzas</h3><p>Los precios de acciones históricamente se cotizaban en fracciones (ejemplo: 50 1/4 por acción). Aunque ahora se usa notación decimal, entender fracciones ayuda a comprender conceptos financieros como propiedad fraccionaria o división de activos.</p>
+            <h3>Música</h3><p>La notación musical depende en gran medida de fracciones. Las notas enteras, medias notas, cuartos de nota y octavos de nota representan duraciones fraccionarias de tiempo. Los músicos deben sumar fracciones mentalmente para contar el tiempo correctamente.</p>
+            <h2>Errores Comunes y Cómo Evitarlos</h2><h3>No Encontrar un Denominador Común</h3><p>No puedes sumar o restar fracciones directamente sin un denominador común. 1/4 + 1/2 no es igual a 2/6. Primero debes convertir a 1/4 + 2/4 = 3/4.</p>
+            <h3>Sumar Denominadores</h3><p>Al sumar fracciones, solo sumas los numeradores. Los denominadores permanecen iguales (después de encontrar un denominador común). 1/4 + 1/4 = 2/4, no 2/8.</p>
+            <h3>Olvidar Simplificar</h3><p>Siempre simplifica tu respuesta final. Aunque 4/8 es correcto matemáticamente, la forma simplificada 1/2 es más clara y estándar.</p>
+            <h3>Confundir Multiplicación y División</h3><p>Recuerda: para dividir fracciones, voltea la segunda y multiplica. No voltees la primera fracción ni intentes dividir numeradores y denominadores directamente.</p>
+            <h2>Técnicas Avanzadas con Fracciones</h2><h3>Fracciones Complejas</h3><p>Una fracción compleja tiene una fracción en el numerador, denominador, o ambos. Para simplificar, multiplica tanto el numerador como el denominador por el mínimo común múltiplo de todos los denominadores involucrados.</p>
+            <h3>Multiplicación Cruzada</h3><p>Para comparar fracciones o resolver ecuaciones, la multiplicación cruzada es útil. Para comparar 3/4 y 5/7, multiplica en cruz: 3×7=21 y 4×5=20. Como 21>20, entonces 3/4>5/7.</p>
+            <h3>Mínimo Común Múltiplo (MCM)</h3><p>Al sumar o restar fracciones con diferentes denominadores, encontrar el MCM de los denominadores da el denominador común más pequeño posible, haciendo los cálculos más fáciles.</p>
+            <h2>Consejos para el Dominio de Fracciones</h2><ul><li><strong>Practica Regularmente:</strong> La fluidez con fracciones viene con la práctica consistente</li><li><strong>Visualiza:</strong> Usa diagramas de pastel, barras de fracciones o bloques de patrones para representar fracciones visualmente</li><li><strong>Memoriza Equivalentes Comunes:</strong> Conoce equivalentes como 1/2=0.5, 1/4=0.25, 3/4=0.75</li><li><strong>Verifica tu Trabajo:</strong> Convierte tu respuesta a decimal y verifica si tiene sentido</li><li><strong>Entiende el Concepto:</strong> No solo memorices reglas; entiende por qué funcionan</li></ul>
+            <h2>Preguntas Frecuentes</h2><h3>¿Por qué no puedes tener cero como denominador?</h3><p>La división por cero es indefinida en matemáticas. Un denominador de cero significaría dividir algo en cero partes, lo cual no tiene sentido matemático.</p>
+            <h3>¿Cuál es la diferencia entre una razón y una fracción?</h3><p>Las fracciones representan partes de un todo, mientras que las razones comparan dos cantidades. Sin embargo, ambas usan notación similar y pueden simplificarse de la misma manera.</p>
+            <h3>¿Cómo sumo tres o más fracciones?</h3><p>Encuentra un denominador común para todas las fracciones, conviértelas todas a ese denominador, luego suma todos los numeradores. El proceso es el mismo que con dos fracciones.</p>
+            <h3>¿Necesito simplificar siempre?</h3><p>Aunque no siempre es estrictamente necesario, simplificar hace que las fracciones sean más fáciles de entender y comparar. La mayoría de maestros y aplicaciones del mundo real esperan fracciones simplificadas.</p>
+            <h3>¿Puedo usar una calculadora para fracciones en exámenes?</h3><p>Depende del examen. Muchos exámenes estandarizados permiten calculadoras, incluidas calculadoras gráficas con capacidad de fracciones. Siempre verifica las reglas específicas del examen.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function mcd(a,b){return b===0?a:mcd(b,a%b);}function simplificar(num,den){const g=mcd(Math.abs(num),Math.abs(den));return[num/g,den/g];}function calcularFrac(){let n1=parseInt(document.getElementById('num1').value);let d1=parseInt(document.getElementById('den1').value);let n2=parseInt(document.getElementById('num2').value);let d2=parseInt(document.getElementById('den2').value);const op=document.getElementById('operacion').value;if(d1===0||d2===0){alert('El denominador no puede ser cero');return;}let resNum,resDen;if(op==='+'){resNum=n1*d2+n2*d1;resDen=d1*d2;}else if(op==='-'){resNum=n1*d2-n2*d1;resDen=d1*d2;}else if(op==='*'){resNum=n1*n2;resDen=d1*d2;}else{resNum=n1*d2;resDen=d1*n2;}[resNum,resDen]=simplificar(resNum,resDen);if(resDen<0){resNum=-resNum;resDen=-resDen;}const decimal=resNum/resDen;const entero=Math.floor(Math.abs(decimal));const fracNum=Math.abs(resNum)-entero*Math.abs(resDen);const mixto=entero>0&&fracNum>0?(resNum<0?'-':'')+entero+' '+fracNum+'/'+Math.abs(resDen):resNum+'/'+resDen;document.getElementById('resultado').textContent=resNum+'/'+resDen;document.getElementById('decimal').textContent=decimal.toFixed(4);document.getElementById('mixto').textContent=mixto;}document.querySelectorAll('input,select').forEach(el=>el.addEventListener('change',calcularFrac));window.addEventListener('load',calcularFrac);</script>
+</body>
+</html>

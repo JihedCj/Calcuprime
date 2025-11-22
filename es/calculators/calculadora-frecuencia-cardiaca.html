@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de frecuencia cardíaca gratuita - Calcula la frecuencia cardíaca máxima y zonas de entrenamiento personalizadas. Optimiza entrenamientos cardiovasculares con zonas basadas en ciencia.">
+    <meta name="keywords" content="calculadora frecuencia cardíaca, frecuencia cardíaca máxima, frecuencia cardíaca objetivo, zonas entrenamiento, calculadora cardio">
+
+    <title>Calculadora de Frecuencia Cardíaca | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-frecuencia-cardiaca.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/heart-rate-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-frecuencia-cardiaca.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/heart-rate-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/heart-rate-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-frecuencia-cardiaca.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Frecuencia Cardíaca</h1>
+            <p class="calculator-description">Calcula tu frecuencia cardíaca máxima y zonas de entrenamiento personalizadas para óptima condición cardiovascular</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Tu Información</h3>
+                <div class="form-group">
+                    <label for="age" class="form-label">Edad (años)</label>
+                    <input type="number" id="age" class="form-input" value="30" min="15" max="80" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="restingHR" class="form-label">Frecuencia Cardíaca en Reposo (lpm)</label>
+                    <input type="number" id="restingHR" class="form-input" value="60" min="40" max="100" step="1">
+                    <small style="color: #666; font-size: 0.9rem;">Medir a primera hora de la mañana antes de levantarse</small>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular Zonas de Frecuencia Cardíaca</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tus Zonas de Frecuencia Cardíaca</h3>
+                <div class="result-item">
+                    <div class="result-label">Frecuencia Cardíaca Máxima</div>
+                    <div class="result-value" id="maxHR" style="font-size: 2.5rem; color: #ef4444;">0 lpm</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Zona 1: Recuperación (50-60%)</div>
+                    <div class="result-value" id="zone1">0-0 lpm</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Zona 2: Quema Grasa (60-70%)</div>
+                    <div class="result-value" id="zone2">0-0 lpm</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Zona 3: Aeróbica (70-80%)</div>
+                    <div class="result-value" id="zone3">0-0 lpm</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Zona 4: Umbral (80-90%)</div>
+                    <div class="result-value" id="zone4">0-0 lpm</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Zona 5: Máxima (90-100%)</div>
+                    <div class="result-value" id="zone5">0-0 lpm</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo el Entrenamiento por Frecuencia Cardíaca</h2>
+            <p>Entrenar con zonas de frecuencia cardíaca proporciona un método científico y objetivo para optimizar la intensidad del ejercicio cardiovascular. Ya sea que tu objetivo sea pérdida de grasa, construcción de resistencia o mejora del rendimiento, entender y utilizar las zonas de frecuencia cardíaca asegura que estés entrenando a la intensidad correcta para lograr tus objetivos específicos eficientemente. Nuestra calculadora usa tanto la fórmula tradicional de frecuencia cardíaca máxima como el método Karvonen, que considera la frecuencia cardíaca en reposo para proporcionar zonas de entrenamiento más personalizadas.</p>
+
+            <h2>Frecuencia Cardíaca Máxima Explicada</h2>
+            <p><strong>La frecuencia cardíaca máxima (FCM)</strong> es el número más alto de latidos por minuto que tu corazón puede alcanzar durante el esfuerzo máximo. Aunque la fórmula clásica "220 menos edad" proporciona una estimación razonable, la variación individual puede ser ±10-12 latidos por minuto. Existen fórmulas más precisas, pero todas las estimaciones deben validarse mediante pruebas reales cuando sea posible.</p>
+
+            <p><strong>Fórmula Predicha por Edad:</strong> FCM = 220 - edad. Este cálculo simple funciona razonablemente bien para la mayoría de las personas pero tiende a sobreestimar la FCM en individuos más jóvenes y subestimarla en adultos mayores. Es mejor verlo como un punto de partida en lugar de una verdad absoluta.</p>
+
+            <p><strong>Factores que Afectan la FCM:</strong> La genética juega el papel más importante: algunas personas naturalmente tienen tasas máximas más altas o más bajas. La condición cardiovascular no aumenta la FCM pero mejora la eficiencia en intensidades submáximas. El calor, la altitud y los medicamentos (particularmente los betabloqueantes) también pueden afectar la respuesta de la frecuencia cardíaca al ejercicio.</p>
+
+            <h2>Las Cinco Zonas de Entrenamiento por Frecuencia Cardíaca</h2>
+            <p>Las zonas de frecuencia cardíaca típicamente se dividen en cinco niveles basados en el porcentaje de frecuencia cardíaca máxima, cada una ofreciendo adaptaciones fisiológicas y beneficios de entrenamiento distintos.</p>
+
+            <p><strong>Zona 1: Zona de Recuperación (50-60% FCM)</strong></p>
+            <p>Esta zona de intensidad muy ligera promueve la recuperación, aumenta el flujo sanguíneo para entrega de nutrientes y eliminación de desechos, y construye base aeróbica en principiantes. Caminar, ciclismo fácil o natación suave caen en esta zona. La mayoría de las personas pueden mantener conversaciones fácilmente. Los beneficios incluyen recuperación activa entre sesiones duras, calentamiento y enfriamiento, y construcción de condición física fundamental para individuos sedentarios que comienzan programas de ejercicio.</p>
+
+            <p><strong>Zona 2: Zona de Quema de Grasa (60-70% FCM)</strong></p>
+            <p>Intensidad ligera a moderada donde el cuerpo principalmente oxida grasa para combustible. Esta zona construye base aeróbica, mejora el metabolismo de grasas, aumenta la densidad mitocondrial y mejora la eficiencia cardiovascular. La conversación es cómoda pero requiere un poco más de control de la respiración que la Zona 1. Las actividades incluyen caminar rápido, trotar fácil o ciclismo moderado.</p>
+
+            <p><strong>Zona 3: Zona Aeróbica (70-80% FCM)</strong></p>
+            <p>Intensidad moderada a moderadamente alta que mejora la eficiencia cardiovascular, aumenta el umbral de lactato, fortalece el músculo cardíaco y mejora la entrega de oxígeno. Esta zona de "tempo" se siente cómodamente dura. Puedes hablar en oraciones cortas pero la conversación se vuelve difícil. Las actividades comunes incluyen carreras a ritmo constante, ciclismo con resistencia moderada-alta o remo.</p>
+
+            <p><strong>Zona 4: Zona de Umbral (80-90% FCM)</strong></p>
+            <p>Alta intensidad cerca o en el umbral de lactato: el punto donde el lactato se acumula más rápido de lo que el cuerpo puede eliminarlo. Esta zona mejora dramáticamente el umbral de lactato, aumenta el VO2 máx, mejora la capacidad anaeróbica y proporciona adaptaciones cardiovasculares significativas. La conversación es casi imposible; solo puedes manejar algunas palabras. El entrenamiento se siente duro y sostenible solo por 10-40 minutos.</p>
+
+            <p><strong>Zona 5: Zona de Esfuerzo Máximo (90-100% FCM)</strong></p>
+            <p>Intensidad máxima acercándose o en el VO2 máx: la capacidad máxima de absorción de oxígeno de tu cuerpo. Esta zona maximiza el VO2 máx, mejora la potencia neuromuscular, aumenta la capacidad anaeróbica y mejora el amortiguamiento de lactato. La conversación es imposible. Sostenible solo por 30 segundos a 5 minutos dependiendo del nivel de condición física. La respiración es laboriosa e incómoda.</p>
+
+            <h2>Frecuencia Cardíaca en Reposo: Un Indicador Clave de Condición</h2>
+            <p><strong>La frecuencia cardíaca en reposo (FCR)</strong> es tu frecuencia cardíaca en reposo completo, idealmente medida a primera hora de la mañana antes de levantarte de la cama. La FCR sirve como un excelente marcador de condición física e indicador de recuperación.</p>
+
+            <p><strong>Rangos Normales:</strong> Adultos promedio: 60-100 lpm. Atletas de resistencia entrenados: 40-60 lpm. Atletas de resistencia élite: a veces por debajo de 40 lpm. Tasas en reposo más altas no son necesariamente preocupantes si por lo demás eres saludable, aunque el entrenamiento cardiovascular típicamente reduce la FCR con el tiempo a medida que el corazón se vuelve más eficiente.</p>
+
+            <p><strong>Usando la FCR para Monitoreo de Recuperación:</strong> Rastrea la FCR diariamente. Una FCR elevada (5-10 latidos por encima de la línea base) indica recuperación incompleta, enfermedad, deshidratación, sobreentrenamiento o estrés. Cuando la FCR está elevada, reduce la intensidad o volumen del entrenamiento para ese día. La FCR consistentemente elevada sugiere recuperación inadecuada entre sesiones de entrenamiento: toma 1-3 días de entrenamiento fácil o descanso completo.</p>
+
+            <h2>Cómo Medir la Frecuencia Cardíaca</h2>
+            <p><strong>Monitores de Frecuencia Cardíaca:</strong> Los monitores de banda pectoral (como Polar H10) proporcionan los datos de frecuencia cardíaca en tiempo real más precisos mediante detección de señal eléctrica. Los monitores ópticos de muñeca (en smartwatches y rastreadores de fitness) son convenientes pero menos precisos, particularmente durante intervalos de alta intensidad o actividades con movimiento del brazo. Para entrenamiento serio, invierte en una banda pectoral; para monitoreo general de fitness, los dispositivos de muñeca funcionan adecuadamente.</p>
+
+            <p><strong>Verificación Manual del Pulso:</strong> Encuentra tu pulso en la arteria radial (muñeca) o arteria carótida (cuello). Cuenta los latidos durante 15 segundos y multiplica por 4, o cuenta durante 30 segundos y multiplica por 2. Aunque es gratuito y siempre disponible, la verificación manual interrumpe el ejercicio y es menos práctica durante los entrenamientos. Mejor usarla para mediciones de frecuencia cardíaca en reposo.</p>
+
+            <h2>Estrategias de Entrenamiento por Zona</h2>
+            <p><strong>Para Pérdida de Grasa:</strong> Contrario a la creencia popular, la Zona 2 de "quema de grasa" no es óptima para la pérdida de grasa: el quemado total de calorías importa más. Sin embargo, el trabajo en Zona 2 mejora la capacidad de oxidación de grasas, haciendo que el cuerpo sea más eficiente usando grasa como combustible. Combina la construcción de base en Zona 2 (60-70% del entrenamiento) con intervalos de Zona 4-5 (10-15% del entrenamiento) para pérdida óptima de grasa. Los intervalos queman más calorías y aumentan el metabolismo post-ejercicio, mientras que la Zona 2 permite mayor volumen de entrenamiento sin fatiga excesiva.</p>
+
+            <p><strong>Para Construcción de Resistencia:</strong> La regla 80/20: 80% del entrenamiento en Zonas 1-2 (fácil), 20% en Zonas 4-5 (duro). Evita el "agujero negro" de la Zona 3. Este enfoque polarizado construye una base aeróbica masiva mientras proporciona suficiente estímulo de alta intensidad para la adaptación. La mayoría de los atletas recreativos hacen lo opuesto (demasiada Zona 3, no suficiente trabajo verdaderamente fácil o verdaderamente duro), llevando a fatiga crónica y estancamientos.</p>
+
+            <p><strong>Para Principiantes:</strong> Comienza con 100% de entrenamiento en Zona 1-2 durante 4-8 semanas. Construye volumen gradualmente (no más del 10% de aumento semanal). Una vez cómodo con 30+ minutos de trabajo continuo en Zona 2, agrega una sesión de Zona 3-4 semanalmente. La paciencia durante esta fase de construcción de base previene lesiones y crea una base para la progresión futura.</p>
+
+            <h2>Errores Comunes en el Entrenamiento por Frecuencia Cardíaca</h2>
+            <p><strong>Entrenar Demasiado Duro Demasiado Seguido:</strong> El error más común. Exceder la Zona 2 en días "fáciles" acumula fatiga sin permitir adaptación. Los días fáciles deben sentirse fáciles: ritmo conversacional, capaz de respirar por la nariz. La mayoría de las personas necesitan reducir significativamente la velocidad en los días fáciles.</p>
+
+            <p><strong>Nunca Ir Suficientemente Duro:</strong> Por el contrario, algunos evitan el trabajo de alta intensidad, limitando las ganancias de condición física. Los intervalos en Zonas 4-5 son incómodos pero impulsan adaptaciones significativas. Una a dos sesiones duras semanales (para individuos entrenados) mejora significativamente el rendimiento.</p>
+
+            <p><strong>Ignorar Indicadores de Recuperación:</strong> Entrenar a través de frecuencia cardíaca en reposo elevada, fatiga excesiva o rendimiento decreciente conduce al sobreentrenamiento. La recuperación es cuando ocurre la adaptación: el entrenamiento proporciona el estímulo, la recuperación permite la mejora.</p>
+
+            <h2>Conclusión</h2>
+            <p>Las zonas de entrenamiento por frecuencia cardíaca proporcionan un método objetivo y personalizado para optimizar el ejercicio cardiovascular. La mayoría de las personas deben pasar el 70-80% del tiempo de entrenamiento en Zonas fáciles 1-2, construyendo base aeróbica y permitiendo recuperación. El uso estratégico de intervalos de Zonas 4-5 (10-15% del entrenamiento) impulsa adaptaciones de rendimiento. Evita el entrenamiento excesivo en Zona 3. Monitorea la frecuencia cardíaca en reposo diariamente como indicador de recuperación. Recuerda que la frecuencia cardíaca es una herramienta valiosa pero no infalible: combínala con el esfuerzo percibido y cómo te sientes en general para decisiones de entrenamiento óptimas.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const age = parseFloat(document.getElementById('age').value) || 30;
+            const restingHR = parseFloat(document.getElementById('restingHR').value) || 60;
+
+            // Calculate maximum heart rate using 220-age formula
+            const maxHR = 220 - age;
+
+            // Calculate heart rate reserve (Karvonen method)
+            const hrReserve = maxHR - restingHR;
+
+            // Calculate zones using Karvonen formula: ((MHR - RHR) × %Intensity) + RHR
+            const zone1Min = Math.round((hrReserve * 0.50) + restingHR);
+            const zone1Max = Math.round((hrReserve * 0.60) + restingHR);
+
+            const zone2Min = Math.round((hrReserve * 0.60) + restingHR);
+            const zone2Max = Math.round((hrReserve * 0.70) + restingHR);
+
+            const zone3Min = Math.round((hrReserve * 0.70) + restingHR);
+            const zone3Max = Math.round((hrReserve * 0.80) + restingHR);
+
+            const zone4Min = Math.round((hrReserve * 0.80) + restingHR);
+            const zone4Max = Math.round((hrReserve * 0.90) + restingHR);
+
+            const zone5Min = Math.round((hrReserve * 0.90) + restingHR);
+            const zone5Max = maxHR;
+
+            document.getElementById('maxHR').textContent = maxHR + ' lpm';
+            document.getElementById('zone1').textContent = zone1Min + '-' + zone1Max + ' lpm';
+            document.getElementById('zone2').textContent = zone2Min + '-' + zone2Max + ' lpm';
+            document.getElementById('zone3').textContent = zone3Min + '-' + zone3Max + ' lpm';
+            document.getElementById('zone4').textContent = zone4Min + '-' + zone4Max + ' lpm';
+            document.getElementById('zone5').textContent = zone5Min + '-' + zone5Max + ' lpm';
+        }
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

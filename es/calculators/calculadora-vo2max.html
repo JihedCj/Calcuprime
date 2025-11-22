@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de VO2 máx gratuita - Estima el nivel de condición cardiovascular usando Test de Cooper o Test de Caminata Rockport. Rastrea resistencia y mejoras de capacidad aeróbica.">
+    <meta name="keywords" content="calculadora vo2 max, calculadora fitness, condición cardiovascular, capacidad aeróbica, calculadora resistencia, test cooper">
+
+    <title>Calculadora de VO2 Máx | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-vo2max.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/vo2-max-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-vo2max.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/vo2-max-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/vo2-max-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-vo2max.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de VO2 Máx</h1>
+            <p class="calculator-description">Estima tu nivel de condición cardiovascular y rastrea mejoras de capacidad aeróbica</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Información Personal</h3>
+                <div class="form-group">
+                    <label for="age" class="form-label">Edad (años)</label>
+                    <input type="number" id="age" class="form-input" value="30" min="15" max="100" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="gender" class="form-label">Sexo</label>
+                    <select id="gender" class="form-input">
+                        <option value="male">Masculino</option>
+                        <option value="female">Femenino</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="testType" class="form-label">Tipo de Test</label>
+                    <select id="testType" class="form-input">
+                        <option value="cooper">Test de Carrera Cooper 12 Minutos</option>
+                        <option value="rockport">Test de Caminata Rockport 1 Milla</option>
+                    </select>
+                </div>
+                <div id="cooperInputs" style="display: block;">
+                    <h3>Datos Test Cooper</h3>
+                    <div class="form-group">
+                        <label for="distance" class="form-label">Distancia Cubierta en 12 Minutos (metros)</label>
+                        <input type="number" id="distance" class="form-input" value="2400" min="800" max="4000" step="50">
+                    </div>
+                </div>
+                <div id="rockportInputs" style="display: none;">
+                    <h3>Datos Test Caminata Rockport</h3>
+                    <div class="form-group">
+                        <label for="walkTime" class="form-label">Tiempo de Caminata (minutos)</label>
+                        <input type="number" id="walkTime" class="form-input" value="13" min="5" max="30" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="heartRate" class="form-label">Frecuencia Cardíaca al Final (lpm)</label>
+                        <input type="number" id="heartRate" class="form-input" value="120" min="60" max="200" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="weight" class="form-label">Peso Corporal (kg)</label>
+                        <input type="number" id="weight" class="form-input" value="75" min="40" max="200" step="1">
+                    </div>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular VO2 Máx</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tu VO2 Máx</h3>
+                <div class="result-item">
+                    <div class="result-label">VO2 Máx</div>
+                    <div class="result-value" id="vo2max" style="font-size: 2.5rem; color: #10b981;">0 ml/kg/min</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Nivel de Condición</div>
+                    <div class="result-value" id="fitnessLevel">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Descripción de Categoría</div>
+                    <div class="result-value" id="categoryDesc" style="font-size: 1rem;">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el VO2 Máx?</h2>
+            <p>El VO2 máx (consumo máximo de oxígeno) es la cantidad máxima de oxígeno que tu cuerpo puede utilizar durante el ejercicio intenso. Medido en mililitros de oxígeno por kilogramo de peso corporal por minuto (ml/kg/min), el VO2 máx representa la medida estándar de oro de la condición cardiovascular y la capacidad de resistencia aeróbica. Cuantifica qué tan eficientemente tu corazón, pulmones, vasos sanguíneos y músculos trabajan juntos para entregar y consumir oxígeno durante el esfuerzo máximo.</p>
+
+            <p>Valores más altos de VO2 máx indican condición cardiovascular superior. Los atletas de resistencia élite masculinos (esquiadores de fondo, corredores de distancia, ciclistas) típicamente miden 70-85 ml/kg/min, mientras que las mujeres élite van de 60-75 ml/kg/min. Los individuos sedentarios a menudo miden 25-35 ml/kg/min (hombres) o 20-30 ml/kg/min (mujeres). Los ejercitadores recreativos promedio caen en algún punto intermedio, típicamente 35-50 ml/kg/min dependiendo de edad, sexo, genética y estado de entrenamiento.</p>
+
+            <h2>Por Qué el VO2 Máx Importa</h2>
+            <p><strong>Predictor de Salud:</strong> La investigación identifica consistentemente el VO2 máx como uno de los predictores más fuertes de mortalidad por todas las causas: mejor que factores de riesgo tradicionales como presión arterial, colesterol o azúcar en sangre. Un estudio publicado en JAMA encontró que la baja condición cardiorrespiratoria llevaba mayor riesgo de mortalidad que diabetes, tabaquismo o hipertensión. Cada aumento de 1 ml/kg/min en VO2 máx se correlaciona con aproximadamente 10-15% de reducción en riesgo de mortalidad.</p>
+
+            <p><strong>Indicador de Rendimiento:</strong> Para atletas de resistencia, el VO2 máx determina en gran medida el techo de rendimiento. No puedes sostener un ritmo de carrera que exceda tu capacidad aeróbica. El ritmo de maratón típicamente se sitúa al 75-85% del VO2 máx, media maratón al 85-90%, 10K al 90-95%, y 5K al 95-100%. Aunque otros factores importan (economía de carrera, umbral de lactato, fortaleza mental), el VO2 máx establece el límite superior del rendimiento de resistencia.</p>
+
+            <h2>Cómo se Mide el VO2 Máx</h2>
+            <p><strong>Pruebas de Laboratorio (Estándar de Oro):</strong> Las pruebas verdaderas de VO2 máx ocurren en laboratorios de fisiología del ejercicio usando carritos metabólicos y protocolos de ejercicio graduado. Usas una máscara conectada a equipo de análisis de gas mientras corres en una cinta o pedaleas en un ergómetro a intensidad progresivamente creciente hasta el agotamiento. El equipo analiza el aire inhalado y exhalado, calculando el consumo de oxígeno. Las pruebas de laboratorio cuestan $100-300 y proporcionan mediciones precisas pero requieren equipo especializado y técnicos entrenados.</p>
+
+            <p><strong>Pruebas de Campo (Estimadas):</strong> Las pruebas de campo estiman el VO2 máx usando fórmulas basadas en rendimiento validadas contra pruebas de laboratorio. Aunque menos precisas que las mediciones de laboratorio, las pruebas de campo proporcionan alternativas prácticas y accesibles que requieren equipo mínimo. El test de carrera Cooper de 12 minutos y el test de caminata Rockport de 1 milla son dos protocolos de evaluación de campo ampliamente validados.</p>
+
+            <h2>Test de Carrera Cooper de 12 Minutos</h2>
+            <p>Desarrollado por el Dr. Kenneth Cooper en 1968, este test estima el VO2 máx basado en la distancia cubierta en exactamente 12 minutos de carrera de esfuerzo máximo. La fórmula: VO2 máx = (Distancia en metros - 504.9) / 44.73. Por ejemplo, correr 2,400 metros en 12 minutos estima un VO2 máx de (2400 - 504.9) / 44.73 = 42.4 ml/kg/min.</p>
+
+            <p><strong>Cómo Realizar:</strong> Usa una pista medida (pista de 400 metros = 6 vueltas en 12 minutos para 2,400 metros). Calienta completamente durante 10-15 minutos con trote fácil y estiramiento dinámico. Inicia un cronómetro y corre lo más lejos posible en exactamente 12 minutos, manteniendo el ritmo sostenible más rápido. Esta es una prueba máxima: espera incomodidad significativa. Enfría con 5-10 minutos de caminata o trote fácil. Registra la distancia total cubierta.</p>
+
+            <h2>Test de Caminata Rockport de 1 Milla</h2>
+            <p>Este test submáximo estima el VO2 máx a partir de una caminata rápida de 1 milla (1.6 km), frecuencia cardíaca final, edad, sexo y peso corporal. La fórmula incorpora múltiples variables para proporcionar una estimación personalizada de capacidad aeróbica.</p>
+
+            <p><strong>Cómo Realizar:</strong> Usa una milla medida (4 vueltas en una pista de 400 metros o cinta calibrada). Calienta con 5 minutos de caminata fácil. Camina 1 milla lo más rápido posible mientras mantienes una marcha de caminar (un pie siempre en contacto con el suelo: no corras). Inmediatamente al completar la milla, registra tu frecuencia cardíaca (usa un monitor de frecuencia cardíaca para precisión o cuenta el pulso durante 15 segundos y multiplica por 4). Registra el tiempo total de caminata en minutos y segundos.</p>
+
+            <h2>Normas y Clasificaciones de VO2 Máx</h2>
+            <p>El VO2 máx disminuye con la edad (aproximadamente 10% por década después de los 30 años) y difiere significativamente por sexo. Los hombres típicamente miden 10-20% más alto que las mujeres debido a mayor concentración de hemoglobina, tamaño cardíaco más grande y mayor masa muscular. Clasificaciones (rangos aproximados para edades 20-29):</p>
+
+            <p><strong>Hombres:</strong> Superior (>56), Excelente (51-56), Por Encima del Promedio (45-50), Promedio (38-44), Por Debajo del Promedio (33-37), Pobre (<33)</p>
+
+            <p><strong>Mujeres:</strong> Superior (>49), Excelente (43-49), Por Encima del Promedio (39-42), Promedio (33-38), Por Debajo del Promedio (28-32), Pobre (<28)</p>
+
+            <h2>Cómo Mejorar el VO2 Máx</h2>
+            <p><strong>Entrenamiento de Intervalos de Alta Intensidad (HIIT):</strong> Ráfagas cortas (2-8 minutos) de esfuerzo al 90-100% separadas por períodos de recuperación producen las mejores mejoras de VO2 máx. Ejemplo: 5×3 minutos al ritmo de carrera de 5K con 3 minutos de recuperación fácil, o 8×2 minutos al ritmo de 3K con 2 minutos de recuperación. Realiza 1-2 sesiones HIIT semanalmente.</p>
+
+            <p><strong>Carreras Tempo:</strong> Esfuerzos sostenidos de 20-40 minutos al 80-90% de frecuencia cardíaca máxima (a menudo descrito como "cómodamente duro") mejoran el umbral de lactato y el VO2 máx. Ejemplo: carrera tempo de 30 minutos al ritmo de media maratón. Incluye 1-2 sesiones tempo semanalmente.</p>
+
+            <p><strong>Carreras Aeróbicas Largas:</strong> Carreras largas de ritmo fácil (60-120+ minutos al 65-75% de frecuencia cardíaca máxima) construyen base aeróbica, aumentan la densidad mitocondrial y mejoran la entrega de oxígeno. Aunque menos intensas que los intervalos, la acumulación de volumen impulsa la adaptación. Incluye 1 carrera larga semanalmente.</p>
+
+            <h2>Factores que Afectan el VO2 Máx</h2>
+            <p><strong>Genética:</strong> Los estudios sugieren que el 40-50% de la varianza del VO2 máx está genéticamente determinada. Algunos individuos responden dramáticamente al entrenamiento (aumentos del 30%), mientras que otros mejoran mínimamente (5-10%) a pesar de programas idénticos. Acepta las limitaciones genéticas mientras maximizas la adaptación entrenable.</p>
+
+            <p><strong>Edad:</strong> El VO2 máx alcanza su pico a mediados de los 20, luego disminuye aproximadamente 10% por década. Sin embargo, los individuos entrenados mantienen valores absolutos más altos que los pares sedentarios. Un atleta de resistencia de 60 años a menudo excede el VO2 máx de una persona sedentaria de 30 años. El entrenamiento ralentiza pero no previene la disminución relacionada con la edad.</p>
+
+            <p><strong>Composición Corporal:</strong> El VO2 máx se expresa por kilogramo de peso corporal. Reducir el exceso de grasa corporal mientras se mantiene la masa muscular mejora el VO2 máx incluso sin adaptación cardiovascular. Perder 5 kg de grasa potencialmente aumenta el VO2 máx en 1-2 ml/kg/min solo a través del cambio de peso.</p>
+
+            <h2>Conclusión</h2>
+            <p>El VO2 máx proporciona información valiosa sobre la condición cardiovascular, el riesgo de salud y el potencial de resistencia. Aunque las pruebas de laboratorio ofrecen precisión, las pruebas de campo y las estimaciones de dispositivos portátiles proporcionan herramientas prácticas de monitoreo. Enfócate en mejorar o mantener tu VO2 máx a través de entrenamiento aeróbico consistente, trabajo ocasional de alta intensidad y composición corporal saludable. Rastrea cambios con el tiempo en lugar de compararte con atletas élite. Un VO2 máx más alto mejora no solo el rendimiento atlético sino la longevidad, resistencia a enfermedades y calidad de vida.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        document.getElementById('testType').addEventListener('change', function() {
+            if (this.value === 'cooper') {
+                document.getElementById('cooperInputs').style.display = 'block';
+                document.getElementById('rockportInputs').style.display = 'none';
+            } else {
+                document.getElementById('cooperInputs').style.display = 'none';
+                document.getElementById('rockportInputs').style.display = 'block';
+            }
+        });
+
+        function calculate() {
+            const age = parseFloat(document.getElementById('age').value) || 30;
+            const gender = document.getElementById('gender').value;
+            const testType = document.getElementById('testType').value;
+            let vo2max;
+
+            if (testType === 'cooper') {
+                const distance = parseFloat(document.getElementById('distance').value) || 2000;
+                vo2max = (distance - 504.9) / 44.73;
+            } else {
+                const walkTime = parseFloat(document.getElementById('walkTime').value) || 15;
+                const heartRate = parseFloat(document.getElementById('heartRate').value) || 120;
+                const weight = parseFloat(document.getElementById('weight').value) * 2.20462;
+                const genderValue = gender === 'male' ? 1 : 0;
+
+                vo2max = 132.853 - (0.0769 * weight) - (0.3877 * age) + (6.315 * genderValue) - (3.2649 * walkTime) - (0.1565 * heartRate);
+            }
+
+            vo2max = Math.max(15, Math.min(85, vo2max));
+
+            document.getElementById('vo2max').textContent = vo2max.toFixed(1) + ' ml/kg/min';
+
+            const fitnessLevel = getFitnessLevel(vo2max, age, gender);
+            document.getElementById('fitnessLevel').textContent = fitnessLevel.level;
+            document.getElementById('categoryDesc').textContent = fitnessLevel.description;
+        }
+
+        function getFitnessLevel(vo2max, age, gender) {
+            let ageAdjustment = 0;
+            if (age > 30) ageAdjustment = Math.floor((age - 30) / 10) * 3;
+
+            const adjustedVO2 = vo2max + ageAdjustment;
+
+            let level, description;
+            if (gender === 'male') {
+                if (adjustedVO2 >= 56) {
+                    level = 'Superior';
+                    description = 'Excelente condición cardiovascular - nivel atlético/competitivo';
+                } else if (adjustedVO2 >= 51) {
+                    level = 'Excelente';
+                    description = 'Muy buena condición cardiovascular - muy por encima del promedio';
+                } else if (adjustedVO2 >= 45) {
+                    level = 'Por Encima del Promedio';
+                    description = 'Buena condición cardiovascular - por encima del promedio poblacional';
+                } else if (adjustedVO2 >= 38) {
+                    level = 'Promedio';
+                    description = 'Condición cardiovascular razonable - típica para grupo de edad';
+                } else if (adjustedVO2 >= 33) {
+                    level = 'Por Debajo del Promedio';
+                    description = 'Condición por debajo del promedio - espacio para mejora';
+                } else {
+                    level = 'Pobre';
+                    description = 'Baja condición cardiovascular - comenzar programa de ejercicio suave';
+                }
+            } else {
+                if (adjustedVO2 >= 49) {
+                    level = 'Superior';
+                    description = 'Excelente condición cardiovascular - nivel atlético/competitivo';
+                } else if (adjustedVO2 >= 43) {
+                    level = 'Excelente';
+                    description = 'Muy buena condición cardiovascular - muy por encima del promedio';
+                } else if (adjustedVO2 >= 39) {
+                    level = 'Por Encima del Promedio';
+                    description = 'Buena condición cardiovascular - por encima del promedio poblacional';
+                } else if (adjustedVO2 >= 33) {
+                    level = 'Promedio';
+                    description = 'Condición cardiovascular razonable - típica para grupo de edad';
+                } else if (adjustedVO2 >= 28) {
+                    level = 'Por Debajo del Promedio';
+                    description = 'Condición por debajo del promedio - espacio para mejora';
+                } else {
+                    level = 'Pobre';
+                    description = 'Baja condición cardiovascular - comenzar programa de ejercicio suave';
+                }
+            }
+
+            return { level, description };
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora gratuita de consumo de combustible - Calcula el rendimiento de gasolina, costo por kilómetro y gastos anuales. Compara economía de combustible y planifica costos de viaje.">
+    <meta name="keywords" content="calculadora consumo combustible, calculadora rendimiento, economía combustible, costo combustible, rastreador kilometraje, costo viaje">
+
+    <title>Calculadora de Consumo de Combustible | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-consumo-combustible.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/gas-mileage-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-consumo-combustible.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/gas-mileage-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/gas-mileage-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-consumo-combustible.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#diario">Diario</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Consumo de Combustible</h1>
+            <p class="calculator-description">Calcula la eficiencia de combustible y costos de viaje con precisión</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Información del Viaje</h3>
+                <div class="form-group">
+                    <label for="miles" class="form-label">Kilómetros Recorridos</label>
+                    <input type="number" id="miles" class="form-input" value="300" min="0" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="gallons" class="form-label">Litros Usados</label>
+                    <input type="number" id="gallons" class="form-input" value="10" min="0.1" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="gasPrice" class="form-label">Precio por Litro ($)</label>
+                    <input type="number" id="gasPrice" class="form-input" value="1.20" min="0" step="0.01">
+                </div>
+                <h3 style="margin-top: 1.5rem;">Estimación Anual (Opcional)</h3>
+                <div class="form-group">
+                    <label for="annualMiles" class="form-label">Kilómetros Anuales</label>
+                    <input type="number" id="annualMiles" class="form-input" value="12000" min="0" step="100">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Economía de Combustible</h3>
+                <div class="result-item">
+                    <div class="result-label">Kilómetros por Litro</div>
+                    <div class="result-value" id="mpg" style="font-size: 2.5rem; color: #10b981;">0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Costo del Viaje</div>
+                    <div class="result-value" id="tripCost">$0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Costo por Kilómetro</div>
+                    <div class="result-value" id="costPerMile">$0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Costo Anual de Combustible</div>
+                    <div class="result-value" id="annualCost">$0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Calificación de Eficiencia</div>
+                    <div class="result-value" id="rating" style="font-size: 1.2rem;">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Cómo Calcular el Consumo de Combustible</h2>
+            <p>El rendimiento de combustible mide cuán eficientemente tu vehículo utiliza la gasolina, expresado típicamente como kilómetros por litro (km/L) o litros por 100 kilómetros (L/100km). El cálculo es simple: km/L = Kilómetros Recorridos ÷ Litros Usados. Por ejemplo, si conduces 300 kilómetros y usas 10 litros, tu rendimiento = 300 ÷ 10 = 30 km/L. Esta métrica directa permite comparar vehículos, rastrear cambios en la economía de combustible con el tiempo y calcular costos de viaje. Comprender tu rendimiento de combustible te empodera para tomar decisiones informadas sobre hábitos de conducción, mantenimiento del vehículo y compras futuras de automóviles.</p>
+
+            <p>El cálculo preciso del consumo requiere medición adecuada. Llena tu tanque completamente, reinicia tu odómetro de viaje, conduce normalmente hasta que el tanque esté al menos medio vacío (preferiblemente casi vacío), vuelve a llenar completamente y anota los kilómetros recorridos y litros agregados. Los litros agregados divididos entre los kilómetros recorridos equivalen a tu rendimiento real para ese tanque. Los cálculos de un solo tanque fluctúan debido a las condiciones de conducción; rastrea el rendimiento durante múltiples tanques para promedios precisos. Mantener un registro de repostaje ayuda a identificar tendencias y detectar problemas potenciales del vehículo temprano.</p>
+
+            <h2>Comprensión de los Números de Rendimiento</h2>
+            <h3>Autos Compactos (12-17 km/L)</h3>
+            <p>Los sedanes modernos eficientes en combustible como Honda Civic, Toyota Corolla y Mazda3 típicamente logran 12-15 km/L combinados (ciudad y carretera). Estos vehículos equilibran la practicidad con excelente economía de combustible, convirtiéndolos en conductores diarios económicos. El rendimiento en carretera a menudo alcanza 16-18 km/L. Su tamaño más pequeño, motores eficientes y peso ligero contribuyen a un consumo de combustible superior, ahorrando significativamente en costos de combustible en comparación con vehículos más grandes.</p>
+
+            <h3>Sedanes Medianos (10-13 km/L)</h3>
+            <p>Los sedanes familiares como Honda Accord, Toyota Camry y Nissan Altima entregan 11-13 km/L combinados. Ligeramente más grandes y potentes que los compactos, sacrifican algunos km/L por espacio adicional y rendimiento. El rendimiento en carretera típicamente alcanza 14-17 km/L. Estos vehículos ofrecen un buen equilibrio entre eficiencia de combustible, comodidad de pasajeros y capacidad de carga, convirtiéndolos en opciones populares para familias.</p>
+
+            <h3>Híbridos (19-25 km/L)</h3>
+            <p>Toyota Prius, Honda Insight y Hyundai Ioniq logran una eficiencia excepcional a través de sistemas de propulsión gas-eléctricos. El Prius alcanza 23 km/L combinados, casi el doble que los autos convencionales. Los híbridos sobresalen en conducción urbana donde el frenado regenerativo recupera energía. El rendimiento en carretera puede ser solo 10-15% mejor que los autos convencionales ya que el frenado regenerativo proporciona menos beneficio. Sin embargo, para conductores principalmente urbanos, los ahorros de combustible de los híbridos pueden ser sustanciales.</p>
+
+            <h3>SUVs y Camionetas (6-12 km/L)</h3>
+            <p>Los vehículos más grandes sacrifican eficiencia por espacio y capacidad. Los SUVs compactos como RAV4 y CR-V logran 11-13 km/L. Los SUVs medianos caen a 9-11 km/L. Las camionetas de tamaño completo como F-150 y Silverado logran 7-10 km/L. Las camionetas de trabajo pesado con motores más grandes pueden obtener solo 5-7 km/L. Si no necesitas regularmente la capacidad de una camioneta, la diferencia en costo de combustible versus un sedán suma miles de dólares anuales. Considera cuidadosamente si realmente necesitas un vehículo más grande o si un auto más pequeño y eficiente satisfaría tus necesidades.</p>
+
+            <h3>Vehículos Eléctricos (Equivalente)</h3>
+            <p>Los VE no usan gasolina, por lo que se califican en eficiencia energética equivalente. Un Tesla Model 3 logra el equivalente a aproximadamente 55 km/L en términos de energía consumida. Esto se traduce en aproximadamente $0.02-0.03 por kilómetro en costos de electricidad versus $0.04-0.06 por kilómetro para vehículos de gasolina. Con el tiempo, los ahorros en combustible de los VE pueden compensar parcial o totalmente su precio de compra premium, especialmente para conductores de alto kilometraje.</p>
+
+            <h2>Factores que Afectan la Economía de Combustible</h2>
+            <h3>Comportamiento de Conducción</h3>
+            <p>La aceleración agresiva y el frenado brusco reducen dramáticamente el rendimiento, hasta en un 33% en carreteras y 5% en ciudades. La aceleración suave y gradual y el frenado anticipado mejoran la economía. El exceso de velocidad perjudica la eficiencia; el rendimiento disminuye rápidamente por encima de 80 km/h debido a la resistencia aerodinámica. Conducir a 130 km/h versus 105 km/h típicamente reduce el rendimiento en 15-25%. Adoptar hábitos de conducción más suaves puede mejorar tu economía de combustible en 10-20% sin costo alguno.</p>
+
+            <h3>Mantenimiento del Vehículo</h3>
+            <p>El mantenimiento adecuado preserva la economía de combustible. Los neumáticos poco inflados reducen el rendimiento en 0.2% por cada 1 PSI caída por debajo de la presión recomendada: neumáticos significativamente poco inflados pueden costar 1-2 km/L. Los filtros de aire sucios restringen el flujo de aire, reduciendo el rendimiento hasta en un 10%. Las bujías viejas fallan, desperdiciando combustible. Los cambios regulares de aceite con la viscosidad recomendada reducen la fricción y mejoran la economía en 1-2%. Invertir en mantenimiento preventivo paga dividendos en eficiencia de combustible mejorada.</p>
+
+            <h3>Carga y Accesorios</h3>
+            <p>Cada 45 kilogramos de peso extra reducen el rendimiento en aproximadamente 1%. Los portaequipajes en el techo y las cajas de carga aumentan la resistencia aerodinámica, reduciendo el rendimiento en carretera en 2-8% cuando están vacíos y 10-25% cuando están cargados. Retira los accesorios de techo cuando no se necesiten. Los artículos en exceso en tu maletero desperdician combustible: limpia la carga innecesaria. Conducir con el portaequipajes vacío todo el año puede costar cientos de dólares en combustible adicional.</p>
+
+            <h3>Clima y Terreno</h3>
+            <p>El clima frío reduce significativamente el rendimiento: los motores funcionan menos eficientemente cuando están fríos, el aceite es más espeso, la presión de los neumáticos cae y la capacidad de la batería disminuye. El rendimiento en invierno a menudo cae 15-30% por debajo del rendimiento en verano. El terreno montañoso disminuye el rendimiento en comparación con carreteras planas ya que subir requiere más energía de la que recupera descender. Los vientos en contra reducen la eficiencia; los vientos de cola la mejoran. Comprende que las condiciones ambientales afectan significativamente el rendimiento más allá de tu control.</p>
+
+            <h3>Aire Acondicionado y Accesorios</h3>
+            <p>El AC reduce el rendimiento en 5-25% dependiendo de la temperatura exterior y la intensidad de uso del AC. A bajas velocidades, las ventanas abiertas son más eficientes que el AC. Por encima de 70 km/h, las ventanas abiertas crean resistencia que excede la penalización de eficiencia del AC: usa AC en carreteras, abre ligeramente las ventanas en la ciudad. Otros accesorios eléctricos (asientos calefaccionados, desempañador, luces) tienen un impacto mínimo: menos del 1% combinado. El AC es el consumidor de energía más grande después del motor mismo.</p>
+
+            <h2>Consejos para Mejorar el Consumo de Combustible</h2>
+            <h3>Conduce Suavemente</h3>
+            <p>Acelera gradualmente, anticipa paradas y desacelera cuando sea posible. Imagina que hay un huevo bajo el pedal del acelerador: solo presión suave. Mantener una velocidad constante maximiza la eficiencia. Usa el control de crucero en carreteras para evitar fluctuaciones de velocidad inconscientes que desperdician combustible. La conducción suave no solo ahorra combustible sino que también reduce el desgaste de los frenos, neumáticos y motor.</p>
+
+            <h3>Reduce la Velocidad</h3>
+            <p>Observa los límites de velocidad y resiste las velocidades agresivas en carretera. Cada 8 km/h por encima de 80 km/h cuesta aproximadamente un 5-7% de eficiencia de combustible. En un viaje de 500 km a $1.20/litro, reducir la velocidad de 120 a 105 km/h ahorra $5-10 en combustible mientras agrega solo 30-45 minutos al tiempo de viaje. Para viajes largos frecuentes, reducir la velocidad de crucero puede ahorrar cientos de dólares anuales.</p>
+
+            <h3>Minimiza el Tiempo de Ralentí</h3>
+            <p>Los motores modernos no necesitan calentamiento prolongado: 30 segundos son suficientes incluso en invierno. El ralentí obtiene 0 km/L y desperdicia combustible. Si estás detenido por más de 60 segundos, apaga el motor (a menos que estés en el tráfico). Muchos vehículos nuevos incluyen sistemas automáticos de parada-arranque que hacen esto automáticamente, mejorando el rendimiento urbano en 3-5%. El ralentí durante 10 minutos diarios desperdicia aproximadamente 100 litros de combustible anualmente.</p>
+
+            <h3>Mantén la Presión Adecuada de los Neumáticos</h3>
+            <p>Verifica la presión de los neumáticos mensualmente con un medidor preciso cuando los neumáticos estén fríos. Infla a la presión mostrada en el marco de la puerta del conductor (no la presión máxima en el costado del neumático). La inflación adecuada mejora el rendimiento, extiende la vida útil de los neumáticos y mejora la seguridad. Los neumáticos poco inflados no solo desperdician combustible sino que también se desgastan prematuramente y comprometen el manejo.</p>
+
+            <h3>Combina Viajes</h3>
+            <p>Los arranques en frío consumen significativamente más combustible que la conducción con motor caliente. Combina recados en un solo viaje en lugar de múltiples viajes cortos desde casa. Planifica rutas para minimizar retrocesos. Un viaje de 16 km usa menos combustible que dos viajes de 8 km desde un arranque en frío. La planificación eficiente de rutas ahorra tiempo y dinero.</p>
+
+            <h2>Cálculo de Costos de Viaje y Anuales</h2>
+            <h3>Fórmula de Costo de Viaje</h3>
+            <p>(Kilómetros Recorridos ÷ km/L) × Precio por Litro = Costo de Combustible. Para un viaje de 500 km a 12 km/L y $1.20/litro: (500 ÷ 12) × 1.20 = 41.67 × 1.20 = $50.00 en costos de combustible. Conocer el costo de combustible de un viaje ayuda a presupuestar vacaciones, comparar costos de conducción versus vuelo y decidir si compartir gastos con pasajeros es apropiado.</p>
+
+            <h3>Costo por Kilómetro</h3>
+            <p>Precio por Litro ÷ km/L = Costo por Kilómetro. A 10 km/L y $1.20/litro: 1.20 ÷ 10 = $0.12 por kilómetro. Esta métrica ayuda a comparar vehículos: un vehículo que obtiene 17 km/L cuesta $0.07 por kilómetro al mismo precio de gasolina, ahorrando $0.05 por kilómetro o $500 por cada 10,000 kilómetros. Los ahorros en un vehículo eficiente se acumulan rápidamente durante la propiedad.</p>
+
+            <h3>Costo Anual</h3>
+            <p>(Kilómetros Anuales ÷ km/L) × Precio por Litro. Conducir 12,000 km anuales a 10 km/L y $1.20/litro: (12,000 ÷ 10) × 1.20 = 1,200 × 1.20 = $1,440 por año. Mejorar a 13 km/L ahorra: (12,000 ÷ 13) × 1.20 = $1,108, un ahorro anual de $332. Durante 5 años, eso es $1,660 en ahorros, suficiente para justificar la compra de un vehículo más eficiente.</p>
+
+            <h2>Seguimiento de la Economía de Combustible a lo Largo del Tiempo</h2>
+            <p>La disminución del rendimiento señala problemas de mantenimiento. Si tu auto normalmente de 13 km/L cae a 10 km/L, investiga las causas: baja presión de neumáticos, filtro de aire sucio, sensor de oxígeno defectuoso, bujías gastadas o problemas más serios del motor. Abordar los problemas temprano previene reparaciones costosas y mantiene la eficiencia. El rendimiento de combustible en deterioro es a menudo una señal de advertencia temprana de problemas mecánicos.</p>
+
+            <p>Rastrea el rendimiento usando aplicaciones para teléfonos inteligentes (Fuelio, GasBuddy, Fuelly), hojas de cálculo o simples cuadernos. Registra cada llenado: fecha, lectura del odómetro, litros comprados, precio por litro, costo total. Con el tiempo, los datos revelan tendencias, variaciones estacionales y necesidades de mantenimiento. Muchos vehículos modernos muestran rendimiento instantáneo y promedio en el tablero: útil para retroalimentación pero menos preciso que el rendimiento calculado a partir del consumo real de combustible.</p>
+
+            <h2>Conclusión</h2>
+            <p>Comprender y optimizar la economía de combustible ahorra dinero, reduce el impacto ambiental y extiende la vida del vehículo. Calcula tu rendimiento real regularmente, implementa técnicas de eficiencia, mantén tu vehículo correctamente y toma decisiones informadas al comprar vehículos. Pequeños cambios: presión adecuada de neumáticos, aceleración suave, velocidades reducidas en carretera, colectivamente mejoran el rendimiento en 15-25%, ahorrando cientos a miles de dólares anuales. Usa cálculos de costo de combustible para evaluar gastos de viaje, comparar vehículos y rastrear si tus esfuos de eficiencia producen resultados. El conocimiento de la economía de combustible de tu vehículo empodera decisiones de conducción más inteligentes y ahorros financieros a largo plazo.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const miles = parseFloat(document.getElementById('miles').value) || 0;
+            const gallons = parseFloat(document.getElementById('gallons').value) || 1;
+            const gasPrice = parseFloat(document.getElementById('gasPrice').value) || 1.20;
+            const annualMiles = parseFloat(document.getElementById('annualMiles').value) || 12000;
+
+            const mpg = miles / gallons;
+
+            const tripCost = (miles / mpg) * gasPrice;
+            const costPerMile = gasPrice / mpg;
+            const annualCost = (annualMiles / mpg) * gasPrice;
+
+            document.getElementById('mpg').textContent = mpg.toFixed(1) + ' km/L';
+            document.getElementById('tripCost').textContent = '$' + tripCost.toFixed(2);
+            document.getElementById('costPerMile').textContent = '$' + costPerMile.toFixed(3);
+            document.getElementById('annualCost').textContent = '$' + annualCost.toFixed(0);
+
+            let rating, ratingColor;
+            if (mpg >= 19) {
+                rating = 'Excelente (Nivel Híbrido)';
+                ratingColor = '#10b981';
+            } else if (mpg >= 15) {
+                rating = 'Muy Bueno (Compacto Eficiente)';
+                ratingColor = '#10b981';
+            } else if (mpg >= 12) {
+                rating = 'Bueno (Sedán Promedio)';
+                ratingColor = '#0891b2';
+            } else if (mpg >= 9) {
+                rating = 'Regular (SUV/Crossover)';
+                ratingColor = '#f59e0b';
+            } else if (mpg >= 7) {
+                rating = 'Bajo Promedio (Camioneta/SUV Grande)';
+                ratingColor = '#f97316';
+            } else {
+                rating = 'Deficiente (Trabajo Pesado/Rendimiento)';
+                ratingColor = '#dc2626';
+            }
+
+            document.getElementById('rating').textContent = rating;
+            document.getElementById('rating').style.color = ratingColor;
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de presión arterial gratuita - Verifica si tu presión arterial es normal, elevada o hipertensiva según guías AHA. Entiende lecturas sistólica y diastólica e implicaciones de salud.">
+    <meta name="keywords" content="calculadora presión arterial, calculadora pa, calculadora hipertensión, sistólica diastólica, tabla presión arterial, guías AHA">
+
+    <title>Calculadora de Presión Arterial | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-presion-arterial.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/blood-pressure-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-presion-arterial.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/blood-pressure-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/blood-pressure-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-presion-arterial.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Presión Arterial</h1>
+            <p class="calculator-description">Verifica tu categoría de presión arterial y entiende tu salud cardiovascular</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Lectura de Presión Arterial</h3>
+                <div class="form-group">
+                    <label for="systolic" class="form-label">Sistólica (Número Superior) mmHg</label>
+                    <input type="number" id="systolic" class="form-input" value="120" min="70" max="200" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="diastolic" class="form-label">Diastólica (Número Inferior) mmHg</label>
+                    <input type="number" id="diastolic" class="form-input" value="80" min="40" max="140" step="1">
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Verificar Presión Arterial</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tu Categoría de Presión Arterial</h3>
+                <div class="result-item">
+                    <div class="result-label">Lectura</div>
+                    <div class="result-value" id="bpReading" style="font-size: 2.5rem; color: #10b981;">120/80</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Categoría</div>
+                    <div class="result-value" id="category">Normal</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Recomendación</div>
+                    <div class="result-value" id="recommendation" style="font-size: 1rem;">Mantener estilo de vida saludable</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo la Presión Arterial</h2>
+            <p>La presión arterial mide la fuerza que tu sangre ejerce contra las paredes de las arterias mientras tu corazón bombea. Expresada como dos números: sistólica sobre diastólica (ej., 120/80 mmHg), la presión arterial sirve como un indicador vital de salud cardiovascular y riesgo de enfermedad. El número sistólico (superior) representa la presión cuando tu corazón se contrae y bombea sangre, mientras que el número diastólico (inferior) representa la presión cuando tu corazón se relaja entre latidos. Ambos números importan, y lecturas elevadas en cualquier categoría aumentan el riesgo de enfermedad cardíaca, accidente cerebrovascular, enfermedad renal y otras condiciones de salud graves.</p>
+
+            <h2>Categorías de Presión Arterial (Asociación Americana del Corazón)</h2>
+            <p>La Asociación Americana del Corazón define cinco categorías de presión arterial basadas en mediciones sistólica y diastólica:</p>
+
+            <p><strong>Normal:</strong> Sistólica menor que 120 mmHg Y diastólica menor que 80 mmHg. Este rango saludable indica bajo riesgo cardiovascular. Mantén este nivel a través de hábitos de estilo de vida saludables: dieta equilibrada, ejercicio regular, peso saludable, alcohol limitado, no fumar y manejo del estrés.</p>
+
+            <p><strong>Elevada:</strong> Sistólica 120-129 mmHg Y diastólica menor que 80 mmHg. Aún no tienes hipertensión, pero es probable que la desarrolles sin intervención. La presión arterial elevada duplica tu riesgo de complicaciones cardiovasculares comparado con presión arterial normal. La modificación agresiva del estilo de vida en esta etapa a menudo previene la progresión a hipertensión, evitando la necesidad de medicación.</p>
+
+            <p><strong>Hipertensión Etapa 1:</strong> Sistólica 130-139 mmHg O diastólica 80-89 mmHg. Tu médico probablemente recomendará cambios en el estilo de vida y puede prescribir medicación para presión arterial dependiendo de tus factores de riesgo cardiovascular (diabetes, enfermedad renal, ataque cardíaco o accidente cerebrovascular previo). Los estudios muestran que tratar la hipertensión Etapa 1 reduce el riesgo de ataque cardíaco y accidente cerebrovascular en aproximadamente 25%.</p>
+
+            <p><strong>Hipertensión Etapa 2:</strong> Sistólica 140 mmHg o mayor O diastólica 90 mmHg o mayor. Necesitas medicación para presión arterial además de cambios en el estilo de vida. Tu médico probablemente prescribirá una combinación de medicamentos para controlar la presión arterial rápidamente, reduciendo tu riesgo elevado de eventos cardiovasculares.</p>
+
+            <p><strong>Crisis Hipertensiva:</strong> Sistólica mayor que 180 mmHg Y/O diastólica mayor que 120 mmHg. Esta emergencia médica requiere atención inmediata. Si mides presión arterial en este rango, espera cinco minutos y vuelve a probar. Si permanece extremadamente elevada y experimentas síntomas (dolor de pecho, falta de aire, dolor de espalda, entumecimiento/debilidad, cambios de visión, dificultad para hablar), llama al 911 inmediatamente.</p>
+
+            <h2>¿Qué Causa la Presión Arterial Alta?</h2>
+            <p><strong>Hipertensión Primaria (Esencial) (90-95% de casos):</strong> Sin causa identificable única. Este tipo se desarrolla gradualmente durante años debido a interacciones complejas entre genética, envejecimiento y factores de estilo de vida. El historial familiar predice fuertemente el riesgo de hipertensión: si ambos padres tienen presión arterial alta, enfrentas aproximadamente 60% de riesgo de por vida. La edad aumenta el riesgo a medida que las arterias se endurecen y se vuelven menos elásticas. Los factores de estilo de vida (obesidad, alto consumo de sodio, consumo excesivo de alcohol, inactividad física, estrés crónico y sueño pobre) contribuyen independiente y acumulativamente a la elevación de la presión arterial.</p>
+
+            <p><strong>Hipertensión Secundaria (5-10% de casos):</strong> Causada por condiciones médicas subyacentes o medicamentos. Las causas comunes incluyen enfermedad renal (más común), apnea del sueño, trastornos tiroideos, tumores de glándula suprarrenal, ciertos medicamentos (píldoras anticonceptivas, descongestionantes, AINEs, algunos antidepresivos) y drogas ilegales (cocaína, anfetaminas). La hipertensión secundaria a menudo aparece repentinamente, causa presión arterial más alta que la hipertensión primaria y no responde bien a medicamentos estándar.</p>
+
+            <h2>Riesgos de Salud de la Presión Arterial Alta</h2>
+            <p>La hipertensión ganó el apodo de "asesino silencioso" porque daña tu cuerpo durante años sin síntomas, luego produce repentinamente eventos catastróficos:</p>
+
+            <p><strong>Enfermedad Cardíaca y Ataque Cardíaco:</strong> La presión arterial alta fuerza a tu corazón a trabajar más duro, causando que el músculo cardíaco se engrose (hipertrofia ventricular izquierda). El músculo engrosado requiere más oxígeno pero recibe menos debido a arterias coronarias estrechadas dañadas por hipertensión. Este desajuste causa dolor de pecho (angina) y aumenta el riesgo de ataque cardíaco. La hipertensión causa aproximadamente 50% de ataques cardíacos y casos de insuficiencia cardíaca.</p>
+
+            <p><strong>Accidente Cerebrovascular:</strong> La presión elevada daña y debilita los vasos sanguíneos en todo el cerebro, haciéndolos propensos a ruptura (accidente cerebrovascular hemorrágico) o bloqueo (accidente cerebrovascular isquémico). La hipertensión contribuye a aproximadamente 70% de los accidentes cerebrovasculares. Cuanto más alta tu presión arterial, mayor tu riesgo de accidente cerebrovascular: cada aumento de 20 mmHg en presión sistólica o 10 mmHg en presión diastólica duplica el riesgo de accidente cerebrovascular.</p>
+
+            <p><strong>Enfermedad Renal:</strong> Tus riñones contienen vasos sanguíneos diminutos que filtran desechos de la sangre. La presión arterial alta daña estos vasos delicados, reduciendo la función renal y potencialmente llevando a insuficiencia renal que requiere diálisis o trasplante. La hipertensión causa aproximadamente 30% de casos de insuficiencia renal en los Estados Unidos.</p>
+
+            <h2>Cómo Medir la Presión Arterial Correctamente</h2>
+            <p>La medición precisa requiere técnica apropiada. Las mediciones incorrectas conducen a diagnóstico erróneo: sobreestimar la presión arterial resulta en medicación innecesaria; subestimar pierde hipertensión peligrosa.</p>
+
+            <p><strong>Antes de la Medición:</strong> Evita cafeína, ejercicio y fumar durante 30 minutos antes de medir. Vacía tu vejiga: una vejiga llena puede aumentar las lecturas en 10-15 mmHg. Siéntate tranquilamente durante 5 minutos antes de la medición en una silla con respaldo, pies planos en el piso, piernas sin cruzar. Evita hablar durante la medición.</p>
+
+            <p><strong>Colocación Apropiada del Brazalete:</strong> Usa el tamaño de brazalete apropiado (un brazalete demasiado pequeño eleva falsamente las lecturas; demasiado grande las baja falsamente). Coloca el brazalete en piel desnuda (no sobre ropa) en tu brazo superior a nivel del corazón. El borde inferior del brazalete debe estar una pulgada por encima del pliegue del codo. Descansa tu brazo en una mesa o apoyabrazos a nivel del corazón: sostener tu brazo arriba o dejarlo colgar produce lecturas inexactas.</p>
+
+            <h2>Cambios en el Estilo de Vida para Bajar la Presión Arterial</h2>
+            <p><strong>Pérdida de Peso:</strong> Perder peso exceso reduce poderosamente la presión arterial. Cada kilogramo perdido típicamente reduce la presión sistólica en aproximadamente 1 mmHg. Perder 5 kg a menudo baja la presión arterial en 5-10 mmHg. La pérdida de peso también mejora la efectividad de los medicamentos: muchas personas reducen o eliminan medicamentos para presión arterial después de pérdida sustancial de peso.</p>
+
+            <p><strong>Dieta DASH:</strong> La dieta Enfoques Dietéticos para Detener la Hipertensión (DASH) enfatiza frutas, verduras, granos integrales, proteínas magras y lácteos bajos en grasa mientras limita grasa saturada, colesterol y dulces. La dieta DASH baja la presión sistólica en 8-14 mmHg en promedio. La dieta funciona proporcionando altas cantidades de potasio, calcio, magnesio y fibra mientras reduce el sodio.</p>
+
+            <p><strong>Reducción de Sodio:</strong> La mayoría de las personas consumen 3,400 mg de sodio diariamente; el objetivo ideal es menos de 1,500 mg (menos de 2,300 mg mínimo). Reducir la ingesta de sodio de 3,500 mg a 1,500 mg diariamente baja la presión sistólica en aproximadamente 6-8 mmHg. La mayoría del sodio dietético proviene de alimentos procesados y de restaurante, no del salero. Lee las etiquetas de nutrición y elige opciones bajas en sodio.</p>
+
+            <p><strong>Ejercicio Regular:</strong> El ejercicio aeróbico (caminar rápido, trotar, ciclismo, natación) durante 30 minutos la mayoría de los días de la semana baja la presión arterial en 5-8 mmHg. El efecto de reducción de presión arterial comienza dentro de semanas y persiste mientras permanezcas activo. Incluso sin pérdida de peso, el ejercicio reduce independientemente la presión arterial.</p>
+
+            <p><strong>Limitar el Alcohol:</strong> Beber más de cantidades moderadas (más de 2 bebidas diarias para hombres, 1 para mujeres) eleva la presión arterial y reduce la efectividad de la medicación. Los bebedores pesados que reducen a niveles moderados a menudo reducen la presión sistólica en 4-6 mmHg.</p>
+
+            <h2>Medicamentos para Presión Arterial</h2>
+            <p>Cuando los cambios en el estilo de vida solos no controlan adecuadamente la presión arterial, los medicamentos se vuelven necesarios. Las clases comunes incluyen:</p>
+
+            <p><strong>Diuréticos (píldoras de agua):</strong> Ayudan a los riñones a eliminar sodio y agua, reduciendo el volumen sanguíneo y la presión. A menudo prescritos primero debido a efectividad, bajo costo y décadas de datos de seguridad. Los efectos secundarios comunes incluyen micción aumentada y pérdida de potasio (a menudo abordada con suplementos de potasio o diuréticos ahorradores de potasio).</p>
+
+            <p><strong>Inhibidores de la ECA:</strong> Bloquean la producción de angiotensina II, una hormona que estrecha los vasos sanguíneos. Generalmente bien tolerados con efectos protectores en los riñones, haciéndolos especialmente valiosos para personas con diabetes o enfermedad renal. Efecto secundario común: tos seca (ocurre en 10-15% de usuarios).</p>
+
+            <p><strong>Bloqueadores de Receptores de Angiotensina II (BRA):</strong> Bloquean la acción de angiotensina II en lugar de su producción. Beneficios similares a los inhibidores de la ECA sin el efecto secundario de tos. A menudo prescritos cuando los inhibidores de la ECA causan tos intolerable.</p>
+
+            <h2>Cuándo Ver a un Médico</h2>
+            <p>Consulta a tu médico si mides presión arterial consistentemente por encima de 120/80 mmHg. Incluso presión arterial elevada (120-129 mmHg sistólica) justifica discusión médica sobre modificaciones de estilo de vida y evaluación de riesgo cardiovascular. Si mides hipertensión Etapa 1 o Etapa 2 (130/80 mmHg o mayor), programa una cita para evaluación y posible tratamiento.</p>
+
+            <p>Busca atención de emergencia inmediata (llama al 911) si mides presión arterial por encima de 180/120 mmHg y experimentas dolor de pecho, falta de aire, dolor de espalda, entumecimiento/debilidad, cambios de visión o dificultad para hablar. Estos síntomas sugieren daño agudo de órganos que requiere intervención de emergencia.</p>
+
+            <h2>Conclusión</h2>
+            <p>El manejo de la presión arterial es una de las formas más importantes y efectivas de prevenir enfermedad cardíaca, accidente cerebrovascular, insuficiencia renal y muerte prematura. Conoce tus números, entiende tu categoría y toma acción apropiada. La presión arterial normal merece mantenimiento a través de elecciones de estilo de vida saludables. La presión arterial elevada o alta requiere intervención: modificaciones de estilo de vida como mínimo, medicamentos cuando sea necesario. La inversión en control de presión arterial paga enormes dividendos en longevidad, calidad de vida y libertad de enfermedad cardiovascular.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const systolic = parseFloat(document.getElementById('systolic').value) || 120;
+            const diastolic = parseFloat(document.getElementById('diastolic').value) || 80;
+
+            document.getElementById('bpReading').textContent = systolic + '/' + diastolic;
+
+            let category, recommendation, color;
+
+            if (systolic >= 180 || diastolic >= 120) {
+                category = 'Crisis Hipertensiva';
+                recommendation = 'BUSCAR ATENCIÓN MÉDICA INMEDIATA - Llamar 911 si experimentas síntomas';
+                color = '#dc2626';
+            } else if (systolic >= 140 || diastolic >= 90) {
+                category = 'Hipertensión Etapa 2';
+                recommendation = 'Consultar médico inmediatamente - Se necesitan medicación y cambios de estilo de vida';
+                color = '#ea580c';
+            } else if (systolic >= 130 || diastolic >= 80) {
+                category = 'Hipertensión Etapa 1';
+                recommendation = 'Ver médico pronto - Cambios de estilo de vida y posible medicación';
+                color = '#f59e0b';
+            } else if (systolic >= 120 && diastolic < 80) {
+                category = 'Elevada';
+                recommendation = 'Mejorar estilo de vida para prevenir hipertensión - Dieta, ejercicio, pérdida de peso';
+                color = '#eab308';
+            } else {
+                category = 'Normal';
+                recommendation = 'Mantener estilo de vida saludable - Continuar monitoreando regularmente';
+                color = '#10b981';
+            }
+
+            document.getElementById('category').textContent = category;
+            document.getElementById('category').style.color = color;
+            document.getElementById('recommendation').textContent = recommendation;
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

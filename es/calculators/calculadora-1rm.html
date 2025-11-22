@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de 1RM gratuita - Calcula tu máximo de una repetición para entrenamiento de fuerza usando fórmulas Epley y Brzycki. Obtén porcentajes de entrenamiento y recomendaciones de peso para todos los rangos de repeticiones.">
+    <meta name="keywords" content="calculadora 1rm, calculadora una repetición máxima, calculadora fuerza, calculadora máximo levantamiento, porcentajes entrenamiento, powerlifting">
+
+    <title>Calculadora 1RM - Una Repetición Máxima | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-1rm.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/one-rep-max-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-1rm.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/one-rep-max-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/one-rep-max-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-1rm.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de 1RM</h1>
+            <p class="calculator-description">Calcula tu 1RM y porcentajes de entrenamiento para programación óptima de fuerza</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Información de Levantamiento</h3>
+                <div class="form-group">
+                    <label for="exercise" class="form-label">Ejercicio</label>
+                    <select id="exercise" class="form-input">
+                        <option value="bench">Press de Banca</option>
+                        <option value="squat">Sentadilla</option>
+                        <option value="deadlift">Peso Muerto</option>
+                        <option value="overhead">Press Militar</option>
+                        <option value="other">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="weight" class="form-label">Peso Levantado (kg)</label>
+                    <input type="number" id="weight" class="form-input" value="100" min="1" step="2.5">
+                </div>
+                <div class="form-group">
+                    <label for="reps" class="form-label">Repeticiones Completadas</label>
+                    <input type="number" id="reps" class="form-input" value="5" min="1" max="12" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="formula" class="form-label">Fórmula</label>
+                    <select id="formula" class="form-input">
+                        <option value="epley">Epley (más común)</option>
+                        <option value="brzycki">Brzycki (conservadora)</option>
+                        <option value="average">Promedio de Ambas</option>
+                    </select>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular 1RM</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tu 1RM Estimado</h3>
+                <div class="result-item">
+                    <div class="result-label">Una Repetición Máxima</div>
+                    <div class="result-value" id="oneRepMax" style="font-size: 2.5rem; color: #10b981;">0 kg</div>
+                </div>
+                <h3 style="margin-top: 2rem;">Porcentajes de Entrenamiento</h3>
+                <div class="result-item">
+                    <div class="result-label">95% (1-2 reps)</div>
+                    <div class="result-value" id="pct95">0 kg</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">90% (2-4 reps)</div>
+                    <div class="result-value" id="pct90">0 kg</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">85% (4-6 reps)</div>
+                    <div class="result-value" id="pct85">0 kg</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">80% (6-8 reps)</div>
+                    <div class="result-value" id="pct80">0 kg</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">75% (8-10 reps)</div>
+                    <div class="result-value" id="pct75">0 kg</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">70% (10-12 reps)</div>
+                    <div class="result-value" id="pct70">0 kg</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el 1RM (Una Repetición Máxima)?</h2>
+            <p>Tu una repetición máxima (1RM) es el peso máximo que puedes levantar para una sola repetición de un ejercicio dado con forma apropiada. Representa el pico de tu fuerza absoluta para ese movimiento específico y sirve como la base para programar rutinas efectivas de entrenamiento de fuerza. Ya seas un powerlifter preparándote para competencia, un atleta de CrossFit trabajando en levantamientos olímpicos, o un entusiasta del fitness general rastreando progreso, conocer tu 1RM proporciona un punto de referencia objetivo para medir ganancias de fuerza y estructurar sobrecarga progresiva.</p>
+
+            <h2>Cómo Funcionan las Fórmulas de 1RM</h2>
+            <p>Varias fórmulas matemáticas estiman el 1RM a partir de levantamientos submáximos. Las dos más ampliamente usadas y validadas son:</p>
+
+            <p><strong>Fórmula Epley (1985):</strong> 1RM = Peso × (1 + Reps/30). Esta es la fórmula más comúnmente usada en círculos de entrenamiento de fuerza y tiende a ser precisa en un amplio rango de rangos de repeticiones. Por ejemplo, si levantas 100 kg por 5 reps, la fórmula Epley estima tu 1RM en 100 × (1 + 5/30) = 100 × 1.167 = 117 kg.</p>
+
+            <p><strong>Fórmula Brzycki (1993):</strong> 1RM = Peso × (36 / (37 - Reps)). Esta fórmula tiende a ser más conservadora y es particularmente precisa para rangos de repeticiones más bajos (1-6 reps). Usando el mismo ejemplo de 100 kg por 5 reps, Brzycki estima 100 × (36 / (37 - 5)) = 100 × 1.125 = 113 kg.</p>
+
+            <p>Ambas fórmulas pierden precisión más allá de 10 repeticiones. Los sets de altas repeticiones (12+ reps) involucran resistencia muscular significativa en lugar de fuerza pura, haciendo las predicciones de 1RM menos confiables. Para mejores resultados, usa pesos que puedas levantar por 3-8 repeticiones.</p>
+
+            <h2>Por Qué el 1RM Importa para el Entrenamiento</h2>
+            <p>Conocer tu 1RM habilita el entrenamiento basado en porcentajes, la piedra angular de la programación de fuerza efectiva. Diferentes adaptaciones de entrenamiento ocurren a diferentes porcentajes de tu 1RM:</p>
+
+            <p><strong>90-100% (1-3 reps):</strong> Fuerza máxima y adaptación neural. Este rango desarrolla la capacidad del sistema nervioso para reclutar unidades motoras de alto umbral y generar fuerza máxima. Usado principalmente por powerlifters, halterófilos olímpicos y atletas que requieren fuerza pico. Alto riesgo de lesión y fatiga del SNC demandan programación cuidadosa.</p>
+
+            <p><strong>80-90% (4-6 reps):</strong> Fuerza con volumen moderado. Este rango equilibra carga pesada con suficiente volumen para acumular estímulo de entrenamiento. Comúnmente usado en programas de fuerza intermedia y avanzada para movimientos compuestos. Proporciona excelentes ganancias de fuerza con fatiga y riesgo de lesión manejables.</p>
+
+            <p><strong>70-80% (6-10 reps):</strong> Combinación de hipertrofia y fuerza. Este rango equilibra óptimamente tensión mecánica, estrés metabólico y daño muscular: los tres mecanismos del crecimiento muscular. La mayoría de los programas de culturismo y fuerza general se centran en este rango. Sostenible para alto volumen semanal.</p>
+
+            <h2>Probando Tu 1RM con Seguridad</h2>
+            <p>Mientras esta calculadora elimina la necesidad de pruebas verdaderas de 1RM, algunas situaciones justifican un intento de máximo real: competencias de powerlifting, satisfacción del ego o validación de estimaciones. Sigue estos protocolos para pruebas seguras de 1RM:</p>
+
+            <p><strong>Calentamiento Apropiado:</strong> Comienza con 5-10 minutos de movimiento general (remo, ciclismo, estiramiento dinámico). Realiza sets de calentamiento específicos: 8-10 reps al 50% del 1RM estimado, 5-6 reps al 70%, 3-4 reps al 80%, 1-2 reps al 90%, 1 rep al 95%. Descansa 2-3 minutos entre sets. Esta carga progresiva prepara las vías neuromusculares sin inducir fatiga.</p>
+
+            <p><strong>Usar un Ayudante:</strong> Para press de banca, press militar y sentadillas, siempre usa ayudantes competentes que entiendan la técnica apropiada de asistencia. Para peso muerto, asegura que las barras de seguridad o plataformas estén colocadas correctamente. Nunca intentes levantamientos máximos solo a menos que uses equipamiento con mecanismos de seguridad apropiados.</p>
+
+            <h2>Usando Porcentajes de Entrenamiento Efectivamente</h2>
+            <p>Una vez que conoces tu 1RM, la programación basada en porcentajes se vuelve directa. Los esquemas de programación comunes incluyen:</p>
+
+            <p><strong>Periodización Lineal:</strong> Progresa de mayor volumen/menor intensidad a menor volumen/mayor intensidad durante semanas o meses. Semana 1-4: 4×8 al 70%, Semana 5-8: 4×6 al 80%, Semana 9-12: 5×3 al 87%, Semana 13: Probar nuevo 1RM. Este enfoque tradicional funciona bien para principiantes pero se vuelve menos efectivo a medida que aumenta la edad de entrenamiento.</p>
+
+            <p><strong>Periodización Ondulatoria Diaria (DUP):</strong> Varía intensidad y volumen de entrenamiento a entrenamiento. Lunes: 4×6 al 80%, Miércoles: 5×10 al 65%, Viernes: 6×3 al 87%. Este enfoque proporciona estímulos variados mientras maneja la fatiga y es altamente efectivo para levantadores intermedios y avanzados.</p>
+
+            <h2>Estrategias de Progresión</h2>
+            <p>Las ganancias de fuerza requieren sobrecarga progresiva: aumentar gradualmente el estrés de entrenamiento con el tiempo. Varios métodos habilitan la progresión:</p>
+
+            <p><strong>Progresión Lineal:</strong> Agrega peso a la barra cada entrenamiento o semana. Efectivo para principiantes que pueden agregar 2.5-5 kg a levantamientos de parte inferior del cuerpo y 1-2.5 kg a levantamientos de parte superior semanalmente. Eventualmente, la progresión lineal se estanca a medida que las tasas de adaptación se ralentizan, típicamente después de 3-9 meses de entrenamiento consistente.</p>
+
+            <p><strong>Doble Progresión:</strong> Agrega repeticiones antes de agregar peso. Si tu programa requiere 3×8 a un peso dado, progresa a 3×9, luego 3×10, luego aumenta el peso en 2.5-5 kg y regresa a 3×8. Este enfoque funciona bien para levantadores intermedios y culturistas.</p>
+
+            <h2>Consideraciones Específicas por Ejercicio</h2>
+            <p><strong>Sentadilla:</strong> Las sentadillas high-bar típicamente permiten 5-10% más peso que low-bar debido a diferentes palancas y reclutamiento muscular. Las sentadillas frontales típicamente van al 80-85% del máximo de sentadilla trasera. Las pruebas de 1RM de sentadilla requieren excelente estabilidad del core y confianza. La mayoría de los entrenadores recomiendan estimar desde sets de 3-5 en lugar de intentos verdaderos de 1RM debido al riesgo de lesión.</p>
+
+            <p><strong>Press de Banca:</strong> El levantamiento más comúnmente probado y generalmente el más seguro para intentos verdaderos de 1RM con ayuda apropiada. El press de banca responde bien a la programación basada en porcentajes. El press de banca agarre cerrado típicamente está al 85-90% del máximo de press de banca estándar.</p>
+
+            <p><strong>Peso Muerto:</strong> Los pesos muertos convencionales típicamente exceden los máximos de sentadilla en 10-20% para la mayoría de los levantadores. Los pesos muertos sumo van del 95-105% del peso muerto convencional dependiendo de las palancas individuales. Las pruebas de 1RM de peso muerto son relativamente seguras ya que simplemente puedes soltar el peso, pero la descomposición de la forma (espalda redondeada) debe detener inmediatamente los intentos.</p>
+
+            <h2>Errores Comunes con el Entrenamiento de 1RM</h2>
+            <p><strong>Probar con Demasiada Frecuencia:</strong> Los intentos verdaderos de 1RM son agotadores para el sistema nervioso y las articulaciones. Probar mensualmente o más a menudo interrumpe la progresión del entrenamiento y aumenta el riesgo de lesión. Prueba el 1RM cada 8-16 semanas máximo, o simplemente estima a partir de levantamientos de entrenamiento.</p>
+
+            <p><strong>Entrenar Demasiado Pesado Demasiado Seguido:</strong> Trabajar constantemente al 90%+ del 1RM produce volumen mínimo y fatiga excesiva. La mayor parte del desarrollo de fuerza ocurre al 70-85% de intensidad. Reserva el trabajo al 90%+ para fases de pico o singles pesados ocasionales para adaptación neural.</p>
+
+            <p><strong>Ignorar la Técnica:</strong> Perseguir peso a expensas de la forma eventualmente conduce a lesión. Si tu 1RM estimado aumenta pero tu forma se deteriora, no te estás haciendo más fuerte: estás levantando más peso con peor técnica. Prioriza la calidad del movimiento sobre los números.</p>
+
+            <h2>Conclusión</h2>
+            <p>Tu una repetición máxima es una herramienta, no una meta en sí misma (a menos que seas un powerlifter competitivo). Usa estimaciones de 1RM para guiar decisiones inteligentes de entrenamiento, estructurar sobrecarga progresiva y rastrear desarrollo de fuerza a largo plazo. Enfócate en la ejecución consistente de programas bien diseñados basados en porcentajes en lugar de intentos frecuentes de máximos. El progreso en pesos de entrenamiento al 70-85% de intensidad se correlaciona fuertemente con mejora de 1RM mientras minimiza el riesgo de lesión y demandas de recuperación.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+            const reps = parseInt(document.getElementById('reps').value) || 1;
+            const formula = document.getElementById('formula').value;
+
+            let oneRepMax;
+
+            if (formula === 'epley') {
+                oneRepMax = weight * (1 + reps / 30);
+            } else if (formula === 'brzycki') {
+                if (reps >= 37) {
+                    oneRepMax = weight * 2;
+                } else {
+                    oneRepMax = weight * (36 / (37 - reps));
+                }
+            } else {
+                const epley = weight * (1 + reps / 30);
+                const brzycki = reps >= 37 ? weight * 2 : weight * (36 / (37 - reps));
+                oneRepMax = (epley + brzycki) / 2;
+            }
+
+            oneRepMax = Math.round(oneRepMax * 2) / 2;
+
+            document.getElementById('oneRepMax').textContent = oneRepMax + ' kg';
+            document.getElementById('pct95').textContent = (Math.round(oneRepMax * 0.95 * 2) / 2) + ' kg';
+            document.getElementById('pct90').textContent = (Math.round(oneRepMax * 0.90 * 2) / 2) + ' kg';
+            document.getElementById('pct85').textContent = (Math.round(oneRepMax * 0.85 * 2) / 2) + ' kg';
+            document.getElementById('pct80').textContent = (Math.round(oneRepMax * 0.80 * 2) / 2) + ' kg';
+            document.getElementById('pct75').textContent = (Math.round(oneRepMax * 0.75 * 2) / 2) + ' kg';
+            document.getElementById('pct70').textContent = (Math.round(oneRepMax * 0.70 * 2) / 2) + ' kg';
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

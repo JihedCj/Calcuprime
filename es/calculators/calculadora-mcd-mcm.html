@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de MCD y MCM - Encuentra el máximo común divisor y el mínimo común múltiplo de números. Herramienta matemática esencial.">
+    <meta name="keywords" content="calculadora mcd, calculadora mcm, máximo común divisor, mínimo común múltiplo, calculadora matemática">
+    <title>Calculadora de MCD y MCM - Máximo Común Divisor y Mínimo Común Múltiplo | CalcuPrime</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-mcd-mcm.html">
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/gcd-lcm-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-mcd-mcm.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/gcd-lcm-calculator.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <style>.language-switcher{display:flex;gap:8px;align-items:center;margin-left:auto}.lang-link{padding:6px 12px;border:1px solid #e5e7eb;border-radius:6px;text-decoration:none;color:#374151;font-size:14px;font-weight:500;transition:all .2s}.lang-link:hover{background:#f3f4f6}.lang-link.active{background:#4F46E5;color:white;border-color:#4F46E5}</style>
+</head>
+<body>
+    <header class="header"><nav class="nav container"><a href="../../es/index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">CalcuPrime</span></a><div class="language-switcher"><a href="../../calculators/gcd-lcm-calculator.html" class="lang-link">EN</a><a href="calculadora-mcd-mcm.html" class="lang-link active">ES</a></div><button class="mobile-menu-toggle" id="mobileMenuToggle"><span></span><span></span><span></span></button><ul class="nav-menu" id="navMenu"><li><a href="../../es/index.html#finanzas">Finanzas</a></li><li><a href="../../es/index.html#salud">Salud</a></li><li><a href="../../es/index.html#conversores">Conversores</a></li><li><a href="../../es/index.html#matematicas">Matemáticas</a></li></ul></nav></header>
+    <main class="calculator-container">
+        <div class="calculator-header"><h1 class="calculator-title">Calculadora de MCD y MCM</h1><p class="calculator-description">Calcula el máximo común divisor y el mínimo común múltiplo de números</p></div>
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs"><h3>Ingresa los Números</h3>
+                <div class="form-group"><label class="form-label">Primer Número</label><input type="number" id="num1" class="form-input" value="12" min="1" step="1"></div>
+                <div class="form-group"><label class="form-label">Segundo Número</label><input type="number" id="num2" class="form-input" value="18" min="1" step="1"></div>
+                <div class="form-group"><label class="form-label">Tercer Número (Opcional)</label><input type="number" id="num3" class="form-input" value="" min="1" step="1"></div>
+                <button onclick="calcMCDMCM()" class="btn-calculate">Calcular</button>
+            </div>
+            <div class="calculator-results"><h3>Resultados</h3>
+                <div class="result-item"><div class="result-label">MCD (Máximo Común Divisor)</div><div class="result-value" id="mcd" style="font-size:2.5rem;color:#10b981">6</div></div>
+                <div class="result-item"><div class="result-label">MCM (Mínimo Común Múltiplo)</div><div class="result-value" id="mcm" style="font-size:2.5rem;color:#3b82f6">36</div></div>
+                <div class="result-item"><div class="result-label">Relación</div><div class="result-value" id="relacion">MCD × MCM = Producto de los números</div></div>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>Comprender el MCD y MCM</h2><p>El Máximo Común Divisor (MCD) y el Mínimo Común Múltiplo (MCM) son conceptos fundamentales en teoría de números con aplicaciones prácticas en simplificación de fracciones, resolución de problemas y matemáticas del mundo real. Estos conceptos te ayudan a entender las relaciones entre números y resolver problemas complejos de manera eficiente.</p>
+            <h2>¿Qué es el Máximo Común Divisor (MCD)?</h2><h3>Definición</h3><p>El MCD de dos o más números es el número más grande que divide a todos ellos sin dejar residuo. También se conoce como el Máximo Factor Común (MFC).</p>
+            <h3>Ejemplo</h3><p>Encuentra el MCD de 12 y 18:<br>Factores de 12: 1, 2, 3, 4, 6, 12<br>Factores de 18: 1, 2, 3, 6, 9, 18<br>Factores comunes: 1, 2, 3, 6<br><strong>MCD = 6</strong> (el más grande de los factores comunes)</p>
+            <h3>Métodos para Encontrar el MCD</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px"><strong>1. Método de Listado:</strong> Lista todos los factores y encuentra el más grande en común<br><br><strong>2. Factorización Prima:</strong> Descompón cada número en factores primos y multiplica los factores comunes<br><br><strong>3. Algoritmo de Euclides:</strong> Divide repetidamente y usa residuos hasta llegar a cero</p>
+            <h2>¿Qué es el Mínimo Común Múltiplo (MCM)?</h2><h3>Definición</h3><p>El MCM de dos o más números es el número más pequeño que es múltiplo de todos ellos. Es el primer número que aparece en las listas de múltiplos de todos los números dados.</p>
+            <h3>Ejemplo</h3><p>Encuentra el MCM de 12 y 18:<br>Múltiplos de 12: 12, 24, 36, 48, 60...<br>Múltiplos de 18: 18, 36, 54, 72...<br>Múltiplos comunes: 36, 72, 108...<br><strong>MCM = 36</strong> (el más pequeño de los múltiplos comunes)</p>
+            <h3>Métodos para Encontrar el MCM</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px"><strong>1. Método de Listado:</strong> Lista múltiplos hasta encontrar el primero común<br><br><strong>2. Factorización Prima:</strong> Usa todos los factores primos con sus mayores exponentes<br><br><strong>3. Fórmula MCD-MCM:</strong> MCM(a,b) = (a × b) / MCD(a,b)</p>
+            <h2>Algoritmo de Euclides para el MCD</h2><p>El Algoritmo de Euclides es un método eficiente para encontrar el MCD sin factorizar números. Funciona mediante divisiones repetidas:</p>
+            <p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace"><strong>Pasos:</strong><br>1. Divide el número mayor por el menor<br>2. Reemplaza el número mayor con el menor<br>3. Reemplaza el número menor con el residuo<br>4. Repite hasta que el residuo sea 0<br>5. El último divisor distinto de cero es el MCD</p>
+            <p><strong>Ejemplo:</strong> MCD de 48 y 18<br>48 ÷ 18 = 2 residuo 12<br>18 ÷ 12 = 1 residuo 6<br>12 ÷ 6 = 2 residuo 0<br><strong>MCD = 6</strong></p>
+            <h2>Relación Entre MCD y MCM</h2><h3>Fórmula Fundamental</h3><p style="background:#f3f4f6;padding:20px;border-radius:8px;font-family:monospace">Para dos números a y b:<br>MCD(a,b) × MCM(a,b) = a × b</p>
+            <p>Esta relación te permite calcular uno si conoces el otro. Por ejemplo, si sabes el MCD de 12 y 18 es 6:<br>MCM(12,18) = (12 × 18) / 6 = 216 / 6 = 36</p>
+            <h3>Propiedades Importantes</h3><ul><li><strong>Para Números Primos Relativos:</strong> Si MCD(a,b) = 1, entonces MCM(a,b) = a × b</li><li><strong>MCD nunca es mayor que el número más pequeño</strong></li><li><strong>MCM nunca es menor que el número más grande</strong></li><li><strong>MCD divide tanto a MCD como a MCM</strong></li></ul>
+            <h2>Aplicaciones Prácticas del MCD</h2><h3>Simplificar Fracciones</h3><p>El MCD se usa para reducir fracciones a su forma más simple. Para simplificar 12/18, encuentra el MCD de 12 y 18 (que es 6), luego divide ambos por 6:<br>12/18 = (12÷6)/(18÷6) = 2/3</p>
+            <h3>Dividir Artículos en Grupos Iguales</h3><p>Si tienes 12 manzanas y 18 naranjas y quieres hacer el mayor número posible de canastas idénticas, usa el MCD. Con MCD = 6, puedes hacer 6 canastas, cada una con 2 manzanas y 3 naranjas.</p>
+            <h3>Cortar Materiales en Piezas Iguales</h3><p>Para cortar tablones de 12 pies y 18 pies en las piezas más largas posibles del mismo tamaño sin desperdiciar, usa el MCD. Cada pieza mediría 6 pies (obtendrías 2 piezas del tablón de 12 pies y 3 piezas del tablón de 18 pies).</p>
+            <h2>Aplicaciones Prácticas del MCM</h2><h3>Sumar y Restar Fracciones</h3><p>Al sumar fracciones con diferentes denominadores, el MCM de los denominadores da el mínimo común denominador. Para 1/12 + 1/18, el MCM de 12 y 18 es 36:<br>1/12 + 1/18 = 3/36 + 2/36 = 5/36</p>
+            <h3>Programación y Patrones Repetitivos</h3><p>Si un autobús pasa cada 12 minutos y otro cada 18 minutos, ambos pasarán juntos cada 36 minutos (el MCM de 12 y 18).</p>
+            <h3>Engranajes y Ciclos</h3><p>Dos engranajes con 12 y 18 dientes volverán a su posición original después de que el primero gire 3 veces y el segundo 2 veces (total de 36 dientes, el MCM).</p>
+            <h3>Planificación de Eventos</h3><p>Si un evento ocurre cada 12 días y otro cada 18 días, ambos coincidirán cada 36 días.</p>
+            <h2>MCD y MCM de Múltiples Números</h2><h3>Encontrar el MCD de Tres o Más Números</h3><p>Método 1: Encuentra el MCD de los dos primeros, luego encuentra el MCD de ese resultado con el tercer número.<br><br>Método 2: Factoriza todos los números en primos y multiplica solo los factores comunes a TODOS los números con el menor exponente.</p>
+            <p><strong>Ejemplo:</strong> MCD de 12, 18 y 24<br>12 = 2² × 3<br>18 = 2 × 3²<br>24 = 2³ × 3<br>Factores comunes: 2¹ × 3¹ = 6<br><strong>MCD = 6</strong></p>
+            <h3>Encontrar el MCM de Tres o Más Números</h3><p>Método 1: Encuentra el MCM de los dos primeros, luego encuentra el MCM de ese resultado con el tercer número.<br><br>Método 2: Factoriza todos los números en primos y multiplica todos los factores únicos usando el mayor exponente de cada uno.</p>
+            <p><strong>Ejemplo:</strong> MCM de 12, 18 y 24<br>12 = 2² × 3<br>18 = 2 × 3²<br>24 = 2³ × 3<br>Toma los exponentes mayores: 2³ × 3² = 8 × 9 = 72<br><strong>MCM = 72</strong></p>
+            <h2>Casos Especiales</h2><h3>Cuando un Número Divide al Otro</h3><p>Si un número es múltiplo del otro, entonces:<br>MCD = el número más pequeño<br>MCM = el número más grande<br><br>Ejemplo: 6 y 18<br>MCD(6,18) = 6<br>MCM(6,18) = 18</p>
+            <h3>Números Primos Relativos (Coprimos)</h3><p>Dos números son primos relativos si su MCD es 1. Para números primos relativos:<br>MCD = 1<br>MCM = producto de los números<br><br>Ejemplo: 7 y 15<br>MCD(7,15) = 1<br>MCM(7,15) = 105</p>
+            <h3>Números Primos</h3><p>Dos números primos diferentes siempre son primos relativos:<br>MCD = 1<br>MCM = producto de los primos</p>
+            <h2>Métodos de Factorización Prima</h2><h3>Para Encontrar el MCD</h3><p>1. Factoriza cada número en factores primos<br>2. Identifica factores primos comunes a TODOS los números<br>3. Para cada factor común, usa el menor exponente<br>4. Multiplica estos factores</p>
+            <h3>Para Encontrar el MCM</h3><p>1. Factoriza cada número en factores primos<br>2. Lista TODOS los factores primos únicos<br>3. Para cada factor, usa el mayor exponente<br>4. Multiplica estos factores</p>
+            <h2>Consejos para Cálculos Mentales Rápidos</h2><ul><li><strong>Números Pequeños:</strong> Memoriza MCD y MCM comunes (como 6 y 9, 8 y 12)</li><li><strong>Potencias de 2:</strong> Para potencias de 2, el MCD es la menor potencia, el MCM es la mayor</li><li><strong>Uno es Divisor:</strong> MCD de cualquier número con 1 es siempre 1</li><li><strong>Divisibilidad Rápida:</strong> Aprende reglas de divisibilidad para factorizar rápidamente</li><li><strong>Usa la Relación MCD-MCM:</strong> Si uno es fácil de calcular, usa la fórmula para el otro</li></ul>
+            <h2>Preguntas Frecuentes</h2><h3>¿Cuál es la diferencia entre MCD y MCM?</h3><p>El MCD es el divisor común más grande (el factor más grande que divide a todos los números). El MCM es el múltiplo común más pequeño (el número más pequeño que todos los números dados dividen). El MCD siempre es menor o igual al número más pequeño; el MCM siempre es mayor o igual al número más grande.</p>
+            <h3>¿Puede el MCD ser mayor que uno de los números?</h3><p>No. El MCD nunca puede ser mayor que el número más pequeño, porque un número no puede tener un factor mayor que sí mismo.</p>
+            <h3>¿Por qué MCD × MCM = a × b para dos números?</h3><p>Esta relación se deriva de la factorización prima. Cuando multiplicas dos números, cada factor primo aparece. En MCD tomas los menores exponentes, en MCM tomas los mayores. Cuando multiplicas MCD por MCM, cada factor primo aparece exactamente con la suma de sus exponentes mínimo y máximo, lo cual es igual al producto de los números originales.</p>
+            <h3>¿Cómo encuentro el MCD de números decimales?</h3><p>El MCD se define solo para números enteros. Si tienes decimales, multiplícalos por una potencia de 10 para hacerlos enteros, encuentra el MCD, luego divide ese MCD por la misma potencia de 10.</p>
+            <h3>¿Pueden tres números no tener factor común excepto 1?</h3><p>Sí. Por ejemplo, 6, 10 y 15 tienen MCD = 1, aunque cada par de números comparte un factor común. Los números deben compartir un factor común ENTRE LOS TRES para que el MCD sea mayor que 1.</p>
+        </div>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p></div></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>function mcd2(a,b){return b===0?a:mcd2(b,a%b);}function mcd(...nums){return nums.reduce((a,b)=>mcd2(a,b));}function mcm2(a,b){return Math.abs(a*b)/mcd2(a,b);}function mcm(...nums){return nums.reduce((a,b)=>mcm2(a,b));}function calcMCDMCM(){const n1=parseInt(document.getElementById('num1').value)||0;const n2=parseInt(document.getElementById('num2').value)||0;const n3=parseInt(document.getElementById('num3').value)||0;if(n1<=0||n2<=0){alert('Ingresa números enteros positivos');return;}const nums=n3>0?[n1,n2,n3]:[n1,n2];const mcdResult=mcd(...nums);const mcmResult=mcm(...nums);document.getElementById('mcd').textContent=mcdResult;document.getElementById('mcm').textContent=mcmResult;if(nums.length===2){const producto=n1*n2;document.getElementById('relacion').textContent=`${mcdResult} × ${mcmResult} = ${mcdResult*mcmResult} = ${n1} × ${n2}`;}else{document.getElementById('relacion').textContent='MCD divide a todos los números';}}document.querySelectorAll('.form-input').forEach(e=>e.addEventListener('input',calcMCDMCM));window.addEventListener('load',calcMCDMCM);</script>
+</body>
+</html>

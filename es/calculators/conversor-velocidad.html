@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conversor de velocidad gratuito - Convierte entre mph, km/h, m/s, nudos y otras unidades de velocidad. Herramienta de conversión de velocidad rápida y precisa.">
+    <meta name="keywords" content="conversor velocidad, mph a kmh, conversión velocidad, conversor nudos, metros por segundo, km por hora">
+
+    <title>Conversor de Velocidad - Convierte mph, km/h, m/s, Nudos | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/conversor-velocidad.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/speed-converter.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/conversor-velocidad.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/speed-converter.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/speed-converter.html" class="lang-link">EN</a>
+                <a href="conversor-velocidad.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Conversor de Velocidad</h1>
+            <p class="calculator-description">Convierte entre mph, km/h, m/s, nudos y otras unidades de velocidad instantáneamente</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Convertir Velocidad</h3>
+
+                <div class="form-group">
+                    <label for="speedValue" class="form-label">Valor de Velocidad</label>
+                    <input type="number" id="speedValue" class="form-input" value="100" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="fromUnit" class="form-label">Desde</label>
+                    <select id="fromUnit" class="form-select">
+                        <option value="kmh">Kilómetros por hora (km/h)</option>
+                        <option value="mph" selected>Millas por hora (mph)</option>
+                        <option value="ms">Metros por segundo (m/s)</option>
+                        <option value="knots">Nudos (kt)</option>
+                        <option value="fps">Pies por segundo (ft/s)</option>
+                        <option value="mach">Mach</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="toUnit" class="form-label">Hacia</label>
+                    <select id="toUnit" class="form-select">
+                        <option value="kmh" selected>Kilómetros por hora (km/h)</option>
+                        <option value="mph">Millas por hora (mph)</option>
+                        <option value="ms">Metros por segundo (m/s)</option>
+                        <option value="knots">Nudos (kt)</option>
+                        <option value="fps">Pies por segundo (ft/s)</option>
+                        <option value="mach">Mach</option>
+                    </select>
+                </div>
+
+                <button onclick="convertSpeed()" class="btn-calculate">Convertir</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultado de Conversión</h3>
+
+                <div class="result-item">
+                    <div class="result-label">Velocidad Convertida</div>
+                    <div class="result-value" id="result" style="font-size: 3rem; color: #10b981;">160.93 km/h</div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 20px; background: #f9fafb; border-radius: 8px;">
+                    <h4 style="margin-bottom: 15px;">Conversiones Comunes</h4>
+                    <div id="commonConversions" style="font-size: 0.9rem; line-height: 1.8;">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo las Conversiones de Velocidad</h2>
+            <p>La velocidad mide qué tan rápido se mueve un objeto a lo largo del tiempo. Las diferentes regiones y aplicaciones utilizan diversas unidades de velocidad. Los Estados Unidos usan principalmente millas por hora (mph) para vehículos, mientras que la mayoría del mundo usa kilómetros por hora (km/h). Los científicos prefieren metros por segundo (m/s), la navegación marítima y aérea usa nudos, y la velocidad del sonido se mide en Mach. Nuestro conversor maneja instantáneamente todas estas unidades con precisión.</p>
+
+            <h2>Unidades de Velocidad Comunes</h2>
+
+            <h3>Kilómetros por Hora (km/h)</h3>
+            <p>El kilómetro por hora es la unidad de velocidad estándar en la mayoría de los países. Los límites de velocidad, velocímetros y pronósticos meteorológicos usan km/h en Europa, Asia, América Latina, África y Oceanía. Un kilómetro equivale a 1,000 metros, y la hora tiene 3,600 segundos, por lo que 1 km/h = 0.2778 m/s. Los límites de velocidad típicos de autopista varían de 100-130 km/h (62-81 mph) según el país.</p>
+
+            <h3>Millas por Hora (mph)</h3>
+            <p>Las millas por hora dominan en Estados Unidos, Reino Unido y algunos territorios de la Commonwealth. Una milla equivale a 1.609344 kilómetros exactamente. Los límites de velocidad de autopistas estadounidenses típicamente van de 55-80 mph (88-129 km/h) dependiendo del estado. El récord de velocidad terrestre es 763 mph (1,228 km/h), alcanzado por el ThrustSSC en 1997, rompiendo la barrera del sonido en tierra.</p>
+
+            <h3>Metros por Segundo (m/s)</h3>
+            <p>Los metros por segundo son la unidad SI (Sistema Internacional) para la velocidad, preferida en física e ingeniería. Proporciona la relación más directa entre distancia (metros) y tiempo (segundos). La velocidad de caminata promedio es aproximadamente 1.4 m/s (5 km/h, 3.1 mph). Los velocistas de élite alcanzan 10+ m/s (36 km/h, 22+ mph) durante breves ráfagas. La velocidad del sonido a nivel del mar es aproximadamente 343 m/s (1,235 km/h, 767 mph).</p>
+
+            <h3>Nudos (kt)</h3>
+            <p>Un nudo equivale a una milla náutica por hora. Las millas náuticas (1.852 km o 1.151 millas terrestres) se basan en la circunferencia de la Tierra, haciendo que los nudos sean ideales para la navegación. Los aviones comerciales navegan a 450-575 nudos (833-1,065 km/h). Las regulaciones marítimas internacionales, pronósticos del tiempo y aviación usan nudos exclusivamente. El récord de velocidad de vela es 65.45 nudos (121 km/h), establecido por el Vestas Sailrocket en 2012.</p>
+
+            <h3>Pies por Segundo (ft/s)</h3>
+            <p>Los pies por segundo se usan principalmente en ingeniería y balística estadounidense. La velocidad del bozal de un rifle típico es 2,500-3,000 ft/s (762-914 m/s). Los paracaidistas caen a velocidades terminales alrededor de 120 mph o 176 ft/s (54 m/s) en posición extendida. Los ingenieros hidráulicos miden la velocidad del flujo de agua en ft/s al diseñar canales y tuberías.</p>
+
+            <h3>Mach</h3>
+            <p>Mach mide la velocidad en relación con la velocidad del sonido. Mach 1 = la velocidad del sonido (aproximadamente 343 m/s o 767 mph a nivel del mar). La velocidad del sonido varía con la temperatura y altitud: más frío y más alto significa más lento. Los aviones subsónicos vuelan por debajo de Mach 1, supersónicos entre Mach 1-5, e hipersónicos por encima de Mach 5. El SR-71 Blackbird alcanzaba Mach 3.3 (2,200+ mph). Los cohetes espaciales exceden Mach 25 al entrar en órbita.</p>
+
+            <h2>Fórmulas de Conversión de Velocidad</h2>
+
+            <h3>Conversiones Métricas-Imperiales</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; line-height: 1.8;">
+                <strong>mph a km/h:</strong> km/h = mph × 1.609344<br>
+                <strong>km/h a mph:</strong> mph = km/h × 0.621371<br>
+                <strong>m/s a mph:</strong> mph = m/s × 2.236936<br>
+                <strong>mph a m/s:</strong> m/s = mph × 0.44704<br>
+                <strong>km/h a m/s:</strong> m/s = km/h ÷ 3.6<br>
+                <strong>m/s a km/h:</strong> km/h = m/s × 3.6
+            </p>
+
+            <h3>Conversiones de Navegación</h3>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; line-height: 1.8;">
+                <strong>Nudos a km/h:</strong> km/h = nudos × 1.852<br>
+                <strong>km/h a nudos:</strong> nudos = km/h × 0.539957<br>
+                <strong>Nudos a mph:</strong> mph = nudos × 1.15078<br>
+                <strong>mph a nudos:</strong> nudos = mph × 0.868976
+            </p>
+
+            <h2>Aplicaciones Prácticas</h2>
+
+            <h3>Viajes y Transporte</h3>
+            <p>Al viajar internacionalmente, entender las conversiones de velocidad previene violaciones de límites de velocidad. Si estás acostumbrado a límites de 65 mph en autopistas estadounidenses y ves señales de 100 km/h en Europa, ¡ralentiza! 100 km/h son solo 62 mph. Por el contrario, un límite alemán de Autobahn de 130 km/h permite 81 mph. Los autos de alquiler a menudo muestran tanto km/h como mph en los velocímetros.</p>
+
+            <h3>Deportes y Atletismo</h3>
+            <p>Las velocidades de lanzamiento en béisbol se miden en mph en Estados Unidos (lanzamientos rápidos de 95+ mph), pero en km/h internacionalmente (153+ km/h). La velocidad de carrera de Usain Bolt de 27.8 mph (44.72 km/h, 12.4 m/s) estableció el récord mundial de 100 metros. Los ciclistas del Tour de France promedian 40 km/h (25 mph) durante etapas completas, con sprints alcanzando 70+ km/h (43+ mph).</p>
+
+            <h3>Meteorología</h3>
+            <p>La velocidad del viento se reporta en diferentes unidades según la región: mph en EE.UU., km/h en la mayoría de los países, nudos en previsiones marinas. Los huracanes Categoría 5 tienen vientos sostenidos de 157+ mph (252+ km/h, 137+ nudos). Los tornados pueden exceder 300 mph (483 km/h) en vórtices violentos. Entender estas conversiones ayuda a evaluar el peligro climático al viajar.</p>
+
+            <h3>Aviación</h3>
+            <p>Los pilotos usan nudos para la velocidad del aire, pero ATC (Control de Tráfico Aéreo) puede comunicar en km/h o mph dependiendo del país. Los aviones comerciales navegan a 450-575 nudos (833-1,065 km/h, 518-662 mph). Las pequeñas aeronaves Cessna navegan alrededor de 120-140 nudos (222-259 km/h, 138-161 mph). La certificación de pilotos requiere competencia en convertir entre unidades de velocidad.</p>
+
+            <h2>Consejos para Conversión Rápida</h2>
+
+            <h3>Atajos Mentales mph-km/h</h3>
+            <ul>
+                <li><strong>mph a km/h:</strong> Multiplica por 1.6 (cerca de 1.609) - 60 mph ≈ 96 km/h</li>
+                <li><strong>km/h a mph:</strong> Multiplica por 0.6 (cerca de 0.621) - 100 km/h ≈ 60 mph</li>
+                <li><strong>Más preciso:</strong> Multiplica mph por 8, luego divide por 5 - (60×8)/5 = 96 km/h exactos</li>
+                <li><strong>Fibonacci:</strong> Usa números consecutivos de Fibonacci: 5 mph ≈ 8 km/h, 8 mph ≈ 13 km/h, 13 mph ≈ 21 km/h</li>
+            </ul>
+
+            <h3>Conversiones Rápidas m/s</h3>
+            <ul>
+                <li><strong>km/h a m/s:</strong> Divide por 3.6 - 36 km/h = 10 m/s</li>
+                <li><strong>m/s a km/h:</strong> Multiplica por 3.6 - 10 m/s = 36 km/h</li>
+                <li><strong>mph a m/s:</strong> Divide por 2.237 (≈ 2.2 para estimaciones) - 22 mph ≈ 10 m/s</li>
+            </ul>
+
+            <h2>Datos Interesantes sobre la Velocidad</h2>
+            <ul>
+                <li><strong>Velocidad de Caminata Humana:</strong> 3-4 mph (5-6 km/h, 1.4 m/s) - El ritmo preferido evoluciona para la eficiencia energética</li>
+                <li><strong>Límite de Velocidad en Zonas Escolares:</strong> Típicamente 20-25 mph (32-40 km/h) - Reduce drásticamente las lesiones de peatones</li>
+                <li><strong>Velocidad de Guepardo:</strong> 70 mph (112 km/h, 31 m/s) - El animal terrestre más rápido, sostenido durante 20-30 segundos</li>
+                <li><strong>Velocidad de Terminal Humano:</strong> 120 mph (193 km/h, 54 m/s) - Caída libre máxima sin paracaídas</li>
+                <li><strong>Velocidad de Bala:</strong> 1,700-4,000 mph (2,736-6,437 km/h) - Depende del calibre y diseño del arma</li>
+                <li><strong>Velocidad del Sonido:</strong> 767 mph (1,235 km/h, 343 m/s) - Varía con temperatura y medio</li>
+                <li><strong>Rotación de la Tierra:</strong> 1,040 mph (1,674 km/h) en el ecuador - No lo sentimos debido al movimiento constante</li>
+                <li><strong>Órbita de la ISS:</strong> 17,500 mph (28,000 km/h) - Completa una órbita cada 90 minutos</li>
+                <li><strong>Velocidad de la Luz:</strong> 670,616,629 mph (1,079,252,849 km/h) - El límite de velocidad universal</li>
+            </ul>
+
+            <h2>Errores Comunes</h2>
+            <ul>
+                <li><strong>Confundir Millas Náuticas y Terrestres:</strong> Una milla náutica (1.852 km) es 15% más larga que una milla terrestre (1.609 km)</li>
+                <li><strong>Asumir Velocidad Lineal del Sonido:</strong> Mach varía significativamente con altitud y temperatura</li>
+                <li><strong>Olvidar Cambiar Unidades en Cálculos:</strong> Mezclar mph y km/h en ecuaciones de física causa errores masivos</li>
+                <li><strong>Malinterpretar Velocidades Promedio vs Máximas:</strong> Los récords de velocidad son instantáneos, no sostenidos</li>
+            </ul>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Por qué diferentes países usan diferentes unidades de velocidad?</h3>
+            <p>Las razones históricas explican la variación. Estados Unidos conserva el sistema imperial británico, mientras que la mayoría de los países adoptaron el sistema métrico (SI) a finales del siglo XIX/XX por su simplicidad decimal. La navegación usa nudos porque las millas náuticas se relacionan directamente con los grados de latitud (1 minuto de latitud = 1 milla náutica), facilitando la navegación antes del GPS.</p>
+
+            <h3>¿Son precisos los velocímetros de los automóviles?</h3>
+            <p>Los velocímetros típicamente leen de 1-10% más alto que la velocidad real debido a requisitos legales: leer bajo podría causar exceso de velocidad no intencional. El tamaño de los neumáticos afecta la precisión: neumáticos más grandes hacen que el velocímetro lea bajo, neumáticos más pequeños hacen que lea alto. Los GPS proporcionan mediciones de velocidad más precisas pero pueden retrasarse ligeramente.</p>
+
+            <h3>¿Qué tan rápido es lo suficientemente rápido para romper la barrera del sonido?</h3>
+            <p>La barrera del sonido varía con las condiciones. A nivel del mar a 15°C (59°F), el sonido viaja a 761 mph (1,225 km/h, 340 m/s). A la altitud de crucero de los aviones (35,000 pies), el aire más frío reduce la velocidad del sonido a aproximadamente 660 mph (1,062 km/h). Los "booms sónicos" ocurren cuando los objetos aceleran a través de Mach 1, comprimiendo ondas de sonido en una onda de choque.</p>
+
+            <h3>¿Puedo convertir RPM a mph?</h3>
+            <p>Sí, pero necesitas saber la circunferencia de la rueda. Fórmula: mph = (RPM × circunferencia de rueda en pulgadas × 60) ÷ 63,360. Para una rueda de bicicleta de 26 pulgadas (circunferencia ≈ 82 pulgadas) girando a 100 RPM: mph = (100 × 82 × 60) ÷ 63,360 ≈ 7.76 mph. Los automóviles usan sensores de velocidad de rueda similares para los velocímetros.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        const conversions = {
+            kmh: 1,
+            mph: 0.621371,
+            ms: 0.277778,
+            knots: 0.539957,
+            fps: 0.911344,
+            mach: 0.000816
+
+        };
+
+        function convertSpeed() {
+            const value = parseFloat(document.getElementById('speedValue').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+
+            if (!value || value < 0) {
+                alert('Por favor ingresa un valor de velocidad válido');
+                return;
+            }
+
+            // Convert to km/h first
+            const kmhValue = value / conversions[fromUnit];
+
+            // Convert from km/h to target unit
+            const result = kmhValue * conversions[toUnit];
+
+            const unitNames = {
+                kmh: 'km/h',
+                mph: 'mph',
+                ms: 'm/s',
+                knots: 'nudos',
+                fps: 'ft/s',
+                mach: 'Mach'
+            };
+
+            document.getElementById('result').textContent =
+                result.toFixed(2) + ' ' + unitNames[toUnit];
+
+            // Show common conversions
+            let commonHtml = '';
+            for (let unit in conversions) {
+                if (unit !== toUnit) {
+                    const converted = kmhValue * conversions[unit];
+                    commonHtml += `<div><strong>${value} ${unitNames[fromUnit]}</strong> = ${converted.toFixed(2)} ${unitNames[unit]}</div>`;
+                }
+            }
+            document.getElementById('commonConversions').innerHTML = commonHtml;
+
+            showResult('result');
+        }
+
+        function showResult(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.opacity = '0';
+                element.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'scale(1)';
+                }, 50);
+            }
+        }
+
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('input', convertSpeed);
+            input.addEventListener('change', convertSpeed);
+        });
+
+        window.addEventListener('load', convertSpeed);
+    </script>
+</body>
+</html>

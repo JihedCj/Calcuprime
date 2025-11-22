@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de consumo de agua gratuita - Calcula cuánta agua debes beber diariamente según peso y actividad.">
+    <meta name="keywords" content="calculadora consumo agua, calculadora agua, calculadora hidratación, agua diaria necesaria, cuánta agua">
+
+    <title>Calculadora de Consumo de Agua | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-consumo-agua.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/water-intake-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-consumo-agua.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/water-intake-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/water-intake-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-consumo-agua.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Consumo de Agua</h1>
+            <p class="calculator-description">Calcula tus necesidades diarias de agua según peso, actividad y clima</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Tu Información</h3>
+                <div class="form-group">
+                    <label for="weight" class="form-label">Peso (kg)</label>
+                    <input type="number" id="weight" class="form-input" value="75" min="30" max="200" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="activity" class="form-label">Nivel de Actividad</label>
+                    <select id="activity" class="form-input">
+                        <option value="sedentary">Sedentario</option>
+                        <option value="light" selected>Ligeramente Activo</option>
+                        <option value="moderate">Moderadamente Activo</option>
+                        <option value="very">Muy Activo</option>
+                        <option value="extra">Extremadamente Activo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="climate" class="form-label">Clima</label>
+                    <select id="climate" class="form-input">
+                        <option value="cool">Frío / Templado</option>
+                        <option value="moderate" selected>Moderado</option>
+                        <option value="hot">Caluroso / Húmedo</option>
+                    </select>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular Consumo de Agua</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tu Consumo Diario de Agua</h3>
+                <div class="result-item">
+                    <div class="result-label">Agua Recomendada</div>
+                    <div class="result-value" id="waterLiters" style="font-size: 2.5rem; color: #10b981;">0 L</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">En Mililitros</div>
+                    <div class="result-value" id="waterMl">0 ml</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Vasos (250ml)</div>
+                    <div class="result-value" id="waterGlasses">0 vasos</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Botellas (500ml)</div>
+                    <div class="result-value" id="waterBottles">0 botellas</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Por Qué la Hidratación Importa</h2>
+            <p>El agua comprende aproximadamente 60% del peso corporal y es esencial para prácticamente cada función fisiológica. La hidratación apropiada regula temperatura corporal, transporta nutrientes, elimina desechos, lubrica articulaciones, protege tejidos sensibles y apoya rendimiento físico y mental. Incluso deshidratación leve (pérdida del 1-2% del peso corporal) deteriora función cognitiva, estado de ánimo y capacidad de ejercicio. La deshidratación severa amenaza la vida. Sin embargo, las necesidades individuales de agua varían dramáticamente basadas en tamaño corporal, nivel de actividad, clima y salud individual.</p>
+
+            <h2>Calculando Tus Necesidades de Agua</h2>
+            <p>Aunque la recomendación común de "8 vasos al día" proporciona una guía general, las necesidades verdaderas varían significativamente entre individuos. Nuestra calculadora usa múltiples factores para estimar tus necesidades personales de hidratación:</p>
+
+            <p><strong>Peso Corporal:</strong> Individuos más grandes requieren más agua. La recomendación base es 30-40 ml por kilogramo de peso corporal diariamente. Una persona de 75 kg necesita 2,250-3,000 ml (2.25-3.0 litros) base.</p>
+
+            <p><strong>Nivel de Actividad:</strong> El ejercicio aumenta las necesidades de agua a través de pérdida de sudor. El ejercicio ligero puede agregar 300-500 ml, mientras que entrenamientos intensos o de resistencia pueden requerir 1-2+ litros adicionales dependiendo de duración e intensidad de sudor.</p>
+
+            <p><strong>Clima:</strong> Ambientes calurosos y húmedos aumentan pérdida de sudor, incrementando necesidades de agua en 500-1,500 ml diariamente comparado con climas templados. Altitud elevada también aumenta necesidades de hidratación.</p>
+
+            <h2>Señales de Deshidratación</h2>
+            <p><strong>Deshidratación Leve (1-2% pérdida de peso corporal):</strong></p>
+            <ul>
+                <li>Sed (el mecanismo de sed ya indica déficit del 1-2%)</li>
+                <li>Boca seca</li>
+                <li>Orina amarillo oscuro</li>
+                <li>Fatiga leve</li>
+                <li>Dolores de cabeza</li>
+                <li>Rendimiento cognitivo reducido</li>
+                <li>Rendimiento de ejercicio disminuido</li>
+            </ul>
+
+            <p><strong>Deshidratación Moderada (3-5% pérdida de peso corporal):</strong></p>
+            <ul>
+                <li>Sed extrema</li>
+                <li>Muy poca o ninguna producción de orina</li>
+                <li>Orina extremadamente oscura</li>
+                <li>Mareos o aturdimiento</li>
+                <li>Debilidad muscular</li>
+                <li>Frecuencia cardíaca rápida</li>
+                <li>Respiración rápida</li>
+            </ul>
+
+            <p><strong>Deshidratación Severa (>5% pérdida de peso corporal):</strong> Emergencia médica. Busca atención inmediata si experimentas confusión, pulso rápido pero débil, ojos hundidos, piel que no rebota al pellizcar, inconsciencia.</p>
+
+            <h2>Hidratación y Rendimiento de Ejercicio</h2>
+            <p>Incluso deshidratación del 2% de peso corporal disminuye significativamente el rendimiento de ejercicio. Los efectos incluyen:</p>
+
+            <p><strong>Resistencia Reducida:</strong> La deshidratación reduce volumen sanguíneo, forzando al corazón a trabajar más duro para circular sangre. Esto eleva frecuencia cardíaca y reduce la capacidad para sostener intensidad.</p>
+
+            <p><strong>Capacidad de Fuerza Deteriorada:</strong> La deshidratación altera función muscular y coordinación neuromuscular, reduciendo producción de fuerza y potencia.</p>
+
+            <p><strong>Regulación de Temperatura Deteriorada:</strong> La capacidad de sudor disminuye cuando deshidratado, elevando temperatura corporal central. Esto aumenta el riesgo de enfermedades por calor durante ejercicio en ambientes cálidos.</p>
+
+            <p><strong>Función Cognitiva Reducida:</strong> La deshidratación deteriora enfoque, tiempo de reacción y toma de decisiones: crítico para deportes que requieren habilidad y estrategia.</p>
+
+            <h2>Estrategia de Hidratación para Ejercicio</h2>
+            <p><strong>Antes del Ejercicio:</strong> Comienza bien hidratado. Bebe 400-600 ml de agua 2-3 horas antes del ejercicio, luego 200-300 ml 15-20 minutos antes de comenzar. La orina debe ser amarillo pálido.</p>
+
+            <p><strong>Durante el Ejercicio:</strong> Para ejercicio de menos de 60 minutos, el agua generalmente es suficiente. Para ejercicio de más de 60 minutos o entrenamientos intensos con sudor pesado, considera bebidas deportivas que contienen electrolitos (sodio, potasio). Apunta a 150-250 ml cada 15-20 minutos durante el ejercicio, ajustando basado en tasa de sudor, intensidad y condiciones ambientales.</p>
+
+            <p><strong>Después del Ejercicio:</strong> Rehidrata completamente reemplazando 150% del peso de fluido perdido. Si perdiste 1 kg (1,000 ml de sudor), bebe 1,500 ml durante las siguientes 2-4 horas. Los electrolitos ayudan a retener fluido, así que incluye una fuente de sodio (bebidas deportivas, agua salada, comida salada).</p>
+
+            <h2>Hidratación y Función Cognitiva</h2>
+            <p>El cerebro es aproximadamente 75% agua. Incluso deshidratación leve deteriora función cognitiva:</p>
+
+            <p><strong>Memoria y Concentración:</strong> Estudios muestran que deshidratación del 1-2% deteriora memoria a corto plazo, atención y concentración. Los estudiantes que se mantienen hidratados se desempeñan mejor en exámenes que aquellos deshidratados.</p>
+
+            <p><strong>Estado de Ánimo:</strong> La deshidratación aumenta sentimientos de fatiga, confusión, ira y tensión mientras disminuye vigor y claridad mental. Mantenerse hidratado apoya estado de ánimo estable y resiliencia emocional.</p>
+
+            <p><strong>Dolor de Cabeza:</strong> La deshidratación es un desencadenante común de dolores de cabeza y migrañas. Muchas personas encuentran que aumentar la ingesta de agua reduce la frecuencia y severidad del dolor de cabeza.</p>
+
+            <h2>Fuentes de Hidratación</h2>
+            <p><strong>Agua:</strong> La fuente de hidratación óptima. Cero calorías, ampliamente disponible, económica. Agua del grifo, agua embotellada y agua con gas cuentan igual.</p>
+
+            <p><strong>Otras Bebidas:</strong> Café, té, leche, jugo y bebidas deportivas contribuyen a la hidratación. Contrario al mito popular, el café y té no deshidratan; su contenido de agua supera el ligero efecto diurético de la cafeína.</p>
+
+            <p><strong>Alimentos:</strong> Frutas y verduras (sandía, pepino, naranjas, tomates, lechuga) contribuyen significativamente a la hidratación. La mayoría de las personas obtienen 20% de su agua diaria de los alimentos.</p>
+
+            <p><strong>Bebidas Deportivas:</strong> Benefician entrenamientos de más de 60 minutos o sudoración intensa. Contienen electrolitos (sodio, potasio) que ayudan a retener fluido y carbohidratos que alimentan el rendimiento. No necesarios para actividad ligera o ejercicio corto.</p>
+
+            <h2>Pautas de Color de Orina</h2>
+            <p>El color de la orina proporciona una forma simple de evaluar el estado de hidratación:</p>
+
+            <ul>
+                <li><strong>Amarillo Pálido / Limonada Ligera:</strong> Óptimamente hidratado</li>
+                <li><strong>Amarillo Transparente:</strong> Bien hidratado</li>
+                <li><strong>Amarillo Oscuro / Jugo de Manzana:</strong> Deshidratación leve, aumenta ingesta de agua</li>
+                <li><strong>Ámbar / Miel:</strong> Deshidratación moderada, bebe agua ahora</li>
+                <li><strong>Naranja / Marrón:</strong> Deshidratación severa, busca atención médica</li>
+            </ul>
+
+            <p>Nota: Vitaminas (particularmente B2/riboflavina) y ciertos medicamentos pueden colorear la orina de amarillo brillante independientemente del estado de hidratación. Usa el color de orina como una guía, no una regla absoluta.</p>
+
+            <h2>Sobrehidratación (Hiponatremia)</h2>
+            <p>Aunque rara, la sobrehidratación puede ser peligrosa. Beber cantidades excesivas de agua (típicamente >1 litro por hora durante períodos prolongados) diluye electrolitos sanguíneos, particularmente sodio, llevando a hiponatremia.</p>
+
+            <p><strong>Síntomas de Hiponatremia:</strong> Náuseas, vómitos, dolor de cabeza, confusión, convulsiones, coma. Más común en maratonistas y atletas de resistencia ultra que beben agua excesiva sin reemplazar electrolitos.</p>
+
+            <p><strong>Prevención:</strong> Bebe en respuesta a la sed durante ejercicio en lugar de forzar fluidos excesivos. Durante entrenamientos de ultra resistencia (>4 horas), incluye electrolitos (bebidas deportivas, tabletas de sal) con agua.</p>
+
+            <h2>Consejos Prácticos para Mantenerse Hidratado</h2>
+            <p><strong>Lleva una Botella de Agua:</strong> Tener agua fácilmente disponible aumenta dramáticamente el consumo. Invierte en una botella de agua reutilizable que te guste y llévala contigo.</p>
+
+            <p><strong>Establece Recordatorios:</strong> Usa alertas de teléfono o apps de rastreo de agua para recordarte beber regularmente durante el día.</p>
+
+            <p><strong>Bebe con las Comidas:</strong> Tener agua con cada comida y bocadillo asegura ingesta regular.</p>
+
+            <p><strong>Sabor Tu Agua:</strong> Si el agua simple es aburrida, agrega rodajas de limón, lima, pepino o bayas para sabor natural sin calorías.</p>
+
+            <p><strong>Come Alimentos Ricos en Agua:</strong> Frutas y verduras contribuyen significativamente a la hidratación mientras proporcionan nutrientes.</p>
+
+            <p><strong>Monitorea el Color de Orina:</strong> Verifica el color de orina regularmente y ajusta la ingesta de agua en consecuencia.</p>
+
+            <h2>Necesidades Especiales de Hidratación</h2>
+            <p><strong>Embarazo:</strong> Las mujeres embarazadas necesitan aproximadamente 300 ml adicionales diariamente (total ~2.3-3.0 litros) para apoyar mayor volumen sanguíneo y líquido amniótico.</p>
+
+            <p><strong>Lactancia:</strong> Las mujeres lactantes requieren ~700 ml adicionales diariamente (total ~3.1-3.8 litros) para producción de leche.</p>
+
+            <p><strong>Enfermedad:</strong> Fiebre, vómitos o diarrea aumentan dramáticamente pérdidas de fluidos. Aumenta la ingesta de agua y considera soluciones de rehidratación oral para reponer electrolitos.</p>
+
+            <p><strong>Mayores:</strong> El mecanismo de sed disminuye con la edad. Los adultos mayores deben beber en horario incluso sin sed para prevenir deshidratación.</p>
+
+            <h2>Conclusión</h2>
+            <p>La hidratación apropiada apoya salud, rendimiento y bienestar. Las necesidades individuales varían basadas en peso corporal, actividad, clima y circunstancias personales. Usa nuestra calculadora como punto de partida, luego ajusta basado en indicadores prácticos: sed, color de orina, cómo te sientes. La mayoría de las personas se benefician de beber más agua de lo que actualmente consumen. Prioriza la hidratación como un hábito de salud fundamental, llevando una botella de agua, bebiendo con comidas y monitoreando el color de orina. Aunque es posible beber demasiado, la mayoría de las personas están más en riesgo de deshidratación crónica leve que de sobrehidratación.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const weight = parseFloat(document.getElementById('weight').value) || 75;
+            const activity = document.getElementById('activity').value;
+            const climate = document.getElementById('climate').value;
+
+            // Base water intake: 35ml per kg
+            let waterMl = weight * 35;
+
+            // Adjust for activity level
+            switch(activity) {
+                case 'sedentary':
+                    waterMl += 0;
+                    break;
+                case 'light':
+                    waterMl += 400;
+                    break;
+                case 'moderate':
+                    waterMl += 800;
+                    break;
+                case 'very':
+                    waterMl += 1200;
+                    break;
+                case 'extra':
+                    waterMl += 1600;
+                    break;
+            }
+
+            // Adjust for climate
+            switch(climate) {
+                case 'cool':
+                    waterMl += 0;
+                    break;
+                case 'moderate':
+                    waterMl += 300;
+                    break;
+                case 'hot':
+                    waterMl += 700;
+                    break;
+            }
+
+            const waterLiters = (waterMl / 1000).toFixed(1);
+            const waterGlasses = Math.round(waterMl / 250);
+            const waterBottles = (waterMl / 500).toFixed(1);
+
+            document.getElementById('waterLiters').textContent = waterLiters + ' L';
+            document.getElementById('waterMl').textContent = Math.round(waterMl) + ' ml';
+            document.getElementById('waterGlasses').textContent = waterGlasses + ' vasos';
+            document.getElementById('waterBottles').textContent = waterBottles + ' botellas';
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

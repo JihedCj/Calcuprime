@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de macros gratuita - Calcula necesidades de proteína, carbohidratos y grasas. Planifica tu dieta de macronutrientes para objetivos de fitness.">
+    <meta name="keywords" content="calculadora macros, calculadora macronutrientes, calculadora proteína, calculadora carbohidratos, macros dieta">
+
+    <title>Calculadora de Macros | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-macros.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/macro-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-macros.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/macro-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/macro-calculator.html" class="lang-link">EN</a>
+                <a href="calculadora-macros.html" class="lang-link active">ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de Macros</h1>
+            <p class="calculator-description">Calcula tus necesidades de macronutrientes para objetivos de fitness óptimos</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Tu Información</h3>
+                <div class="form-group">
+                    <label for="weight" class="form-label">Peso (kg)</label>
+                    <input type="number" id="weight" class="form-input" value="75" min="30" max="200" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="height" class="form-label">Altura (cm)</label>
+                    <input type="number" id="height" class="form-input" value="175" min="120" max="230" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="age" class="form-label">Edad (años)</label>
+                    <input type="number" id="age" class="form-input" value="30" min="15" max="80" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="gender" class="form-label">Sexo</label>
+                    <select id="gender" class="form-input">
+                        <option value="male">Masculino</option>
+                        <option value="female">Femenino</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="activity" class="form-label">Nivel de Actividad</label>
+                    <select id="activity" class="form-input">
+                        <option value="1.2">Sedentario (poco o nada de ejercicio)</option>
+                        <option value="1.375">Ligeramente Activo (1-3 días/semana)</option>
+                        <option value="1.55" selected>Moderadamente Activo (3-5 días/semana)</option>
+                        <option value="1.725">Muy Activo (6-7 días/semana)</option>
+                        <option value="1.9">Extra Activo (atleta, 2x/día)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="goal" class="form-label">Objetivo</label>
+                    <select id="goal" class="form-input">
+                        <option value="lose">Pérdida de Grasa (déficit 20%)</option>
+                        <option value="maintain" selected>Mantenimiento</option>
+                        <option value="gain">Ganancia Muscular (superávit 10%)</option>
+                    </select>
+                </div>
+                <button onclick="calculate()" class="btn-calculate">Calcular Macros</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Tus Macros Diarios</h3>
+                <div class="result-item">
+                    <div class="result-label">Calorías Diarias</div>
+                    <div class="result-value" id="calories" style="font-size: 2.5rem; color: #10b981;">0 kcal</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Proteína</div>
+                    <div class="result-value" id="protein">0g (0%)</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Carbohidratos</div>
+                    <div class="result-value" id="carbs">0g (0%)</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Grasas</div>
+                    <div class="result-value" id="fats">0g (0%)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Entendiendo los Macronutrientes</h2>
+            <p>Los macronutrientes (macros) son los tres nutrientes principales que proporcionan energía a tu cuerpo: proteína, carbohidratos y grasas. Cada uno juega roles únicos en la salud, rendimiento y composición corporal. Equilibrar tus macros apropiadamente según tus objetivos optimiza los resultados, ya sea pérdida de grasa, ganancia muscular o mantenimiento. Nuestra calculadora usa fórmulas validadas científicamente para determinar tus necesidades calóricas y proporciones de macros basadas en tu metabolismo individual, nivel de actividad y objetivos.</p>
+
+            <h2>Proteína: El Constructor de Músculo</h2>
+            <p>La proteína proporciona aminoácidos esenciales para reparar y construir tejido muscular, apoyar función inmune, producir enzimas y hormonas, y mantener tejidos corporales. Para individuos activos, la proteína es el macronutriente más importante.</p>
+
+            <p><strong>Necesidades de Proteína por Objetivo:</strong></p>
+            <ul>
+                <li><strong>Pérdida de Grasa:</strong> 2.0-2.4g/kg de peso corporal. La proteína alta durante déficit calórico preserva músculo, aumenta saciedad y apoya metabolismo.</li>
+                <li><strong>Ganancia Muscular:</strong> 1.6-2.2g/kg de peso corporal. Suficiente proteína maximiza síntesis de proteína muscular cuando se combina con entrenamiento de resistencia.</li>
+                <li><strong>Mantenimiento:</strong> 1.6-2.0g/kg de peso corporal. Mantiene masa muscular y apoya recuperación del entrenamiento.</li>
+            </ul>
+
+            <p>La proteína contiene 4 calorías por gramo. Fuentes de calidad incluyen pollo, pavo, pescado, huevos, lácteos, legumbres y proteína en polvo.</p>
+
+            <h2>Carbohidratos: La Fuente de Energía</h2>
+            <p>Los carbohidratos son la fuente de energía preferida de tu cuerpo, particularmente durante ejercicio de alta intensidad. Se almacenan como glucógeno en músculos e hígado, alimentando entrenamientos y apoyando recuperación. Los carbohidratos también ahorran proteína, permitiendo que se use para construcción muscular en lugar de energía.</p>
+
+            <p><strong>Necesidades de Carbohidratos por Objetivo:</strong></p>
+            <ul>
+                <li><strong>Pérdida de Grasa:</strong> Moderados (30-40% de calorías). Suficientes para apoyar entrenamientos mientras crean déficit calórico.</li>
+                <li><strong>Ganancia Muscular:</strong> Altos (40-50% de calorías). Combustible para entrenamientos intensos y construcción muscular.</li>
+                <li><strong>Mantenimiento:</strong> Moderados a Altos (35-45% de calorías). Balanceados para actividad y preferencias.</li>
+            </ul>
+
+            <p>Los carbohidratos contienen 4 calorías por gramo. Enfócate en carbohidratos complejos: arroz integral, quinoa, avena, batatas, frutas y verduras.</p>
+
+            <h2>Grasas: El Regulador Hormonal</h2>
+            <p>Las grasas dietéticas son esenciales para producción de hormonas (incluida testosterona), absorción de vitaminas (A, D, E, K), salud cerebral, salud articular y saciedad. Las grasas no te hacen engordar; el exceso de calorías lo hace.</p>
+
+            <p><strong>Necesidades de Grasas por Objetivo:</strong></p>
+            <ul>
+                <li><strong>Pérdida de Grasa:</strong> Moderadas (25-30% de calorías). Suficientes para función hormonal mientras permiten más proteína y carbohidratos.</li>
+                <li><strong>Ganancia Muscular:</strong> Moderadas (20-30% de calorías). Balanceadas para apoyar hormonas sin desplazar carbohidratos.</li>
+                <li><strong>Mantenimiento:</strong> Moderadas (25-35% de calorías). Flexibles basadas en preferencia personal.</li>
+            </ul>
+
+            <p>Las grasas contienen 9 calorías por gramo. Enfócate en grasas saludables: aceite de oliva, aguacates, nueces, semillas, pescado graso y mantequillas de nueces.</p>
+
+            <h2>Calculando Tus Calorías</h2>
+            <p>Nuestra calculadora usa la ecuación de Mifflin-St Jeor para estimar tu Tasa Metabólica Basal (TMB): calorías quemadas en reposo. Luego multiplica la TMB por tu nivel de actividad para determinar tu Gasto Energético Diario Total (GEDT): calorías totales quemadas diariamente.</p>
+
+            <p><strong>Fórmula TMB:</strong></p>
+            <p>Hombres: TMB = (10 × peso en kg) + (6.25 × altura en cm) - (5 × edad) + 5</p>
+            <p>Mujeres: TMB = (10 × peso en kg) + (6.25 × altura en cm) - (5 × edad) - 161</p>
+
+            <p><strong>Ajustes por Objetivo:</strong></p>
+            <ul>
+                <li><strong>Pérdida de Grasa:</strong> GEDT × 0.80 (déficit del 20%)</li>
+                <li><strong>Mantenimiento:</strong> GEDT × 1.0 (sin cambio)</li>
+                <li><strong>Ganancia Muscular:</strong> GEDT × 1.10 (superávit del 10%)</li>
+            </ul>
+
+            <h2>Distribución de Macros por Objetivo</h2>
+            <p><strong>Pérdida de Grasa:</strong> Proteína Alta (35%), Carbohidratos Moderados (35%), Grasas Moderadas (30%). La proteína alta preserva músculo y aumenta saciedad durante déficit calórico.</p>
+
+            <p><strong>Ganancia Muscular:</strong> Proteína Alta (30%), Carbohidratos Altos (45%), Grasas Moderadas (25%). Los carbohidratos altos alimentan entrenamientos intensos mientras la proteína apoya construcción muscular.</p>
+
+            <p><strong>Mantenimiento:</strong> Proteína Moderada-Alta (30%), Carbohidratos Moderados (40%), Grasas Moderadas (30%). Distribución balanceada para salud general y rendimiento.</p>
+
+            <h2>Consejos de Rastreo de Macros</h2>
+            <p><strong>Usa una App de Rastreo de Alimentos:</strong> Apps como MyFitnessPal, Cronometer o MacroFactor simplifican el rastreo. Pesa los alimentos inicialmente para entender las porciones, luego puedes estimar más preciso con el tiempo.</p>
+
+            <p><strong>Enfócate en Alimentos Integrales Primero:</strong> Satisface la mayoría de las necesidades de macros a través de alimentos integrales densos en nutrientes (carnes magras, pescado, huevos, granos integrales, frutas, verduras, grasas saludables) para vitaminas, minerales y fibra. Los suplementos son convenientes pero no deben reemplazar completamente los alimentos reales.</p>
+
+            <p><strong>Prioriza la Proteína:</strong> Alcanza tu objetivo de proteína diariamente. Si te quedas corto en carbohidratos o grasas ocasionalmente, está bien siempre que alcances proteína y calorías totales.</p>
+
+            <p><strong>La Consistencia Importa Más que la Perfección:</strong> Alcanzar macros 80-90% de días importa mucho más que días perfectos ocasionales entre muchos días fuera de objetivo. Apunta a tu objetivo diariamente pero no te estreses por estar 10-15g corto ocasionalmente.</p>
+
+            <h2>Ajustando Tus Macros</h2>
+            <p><strong>No Perdiendo Peso:</strong> Si no pierdes peso después de 2-3 semanas en déficit, reduce calorías en 10-15% (principalmente de carbohidratos y grasas, mantén proteína alta) o aumenta actividad.</p>
+
+            <p><strong>No Ganando Peso:</strong> Si no ganas peso después de 2-3 semanas en superávit, aumenta calorías en 10-15% (principalmente carbohidratos para alimentar entrenamientos).</p>
+
+            <p><strong>Hambre Excesiva:</strong> Aumenta ligeramente proteína y fibra, reduce velocidad de pérdida de peso (déficit más pequeño), o toma una pausa de dieta de 1-2 semanas en calorías de mantenimiento.</p>
+
+            <p><strong>Bajo Rendimiento en Entrenamientos:</strong> Aumenta carbohidratos, especialmente alrededor de entrenamientos. Considera tiempo de nutrientes: carbohidratos antes/después de entrenamientos.</p>
+
+            <h2>Errores Comunes de Rastreo de Macros</h2>
+            <p><strong>No Rastrear Aceites de Cocina:</strong> Una cucharada de aceite de oliva = 14g grasa = 120 calorías. Estos "olvidos" se suman rápidamente.</p>
+
+            <p><strong>Estimar Porciones Inconsistentemente:</strong> Rastrear 150g de pollo cuando realmente comes 250g sabotea el progreso. Pesa los alimentos al menos inicialmente.</p>
+
+            <p><strong>Olvidar Bocadillos y Bebidas:</strong> Bocadillos, condimentos, crema en café: todo cuenta. Rastrea todo lo que consumas.</p>
+
+            <p><strong>Ser Demasiado Rígido:</strong> Obsesionarse con alcanzar macros exactamente crea estrés. Dentro de ±5g está perfectamente bien. La flexibilidad apoya adherencia a largo plazo.</p>
+
+            <h2>Flexibilidad con Macros</h2>
+            <p>Aunque los rangos de macros proporcionan estructura, la preferencia personal importa. Algunas personas funcionan mejor con carbohidratos más altos, otras con grasas más altas. Siempre que:</p>
+            <ul>
+                <li>Alcances calorías totales para tu objetivo</li>
+                <li>Obtengas proteína adecuada (1.6-2.4g/kg)</li>
+                <li>No vayas debajo del 15% de calorías de grasas (para salud hormonal)</li>
+                <li>Obtengas carbohidratos suficientes para apoyar entrenamientos</li>
+            </ul>
+
+            <p>Puedes ajustar carbohidratos y grasas según preferencia. Algunas personas se sienten mejor con carbohidratos más altos (50% de calorías), otras con grasas más altas (40% de calorías). Experimenta dentro de estos parámetros para encontrar lo que mejor funciona para ti.</p>
+
+            <h2>Conclusión</h2>
+            <p>El rastreo de macros proporciona un marco estructurado pero flexible para lograr objetivos de composición corporal. A diferencia de dietas restrictivas que eliminan grupos de alimentos completos, el rastreo de macros te permite comer alimentos que disfrutas mientras progresas hacia tus objetivos. Comienza con las recomendaciones de nuestra calculadora, rastrea consistentemente por 2-3 semanas, luego ajusta basándote en resultados. Combina rastreo de macros con entrenamiento de calidad, sueño adecuado y manejo del estrés para resultados óptimos.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const weight = parseFloat(document.getElementById('weight').value) || 75;
+            const height = parseFloat(document.getElementById('height').value) || 175;
+            const age = parseFloat(document.getElementById('age').value) || 30;
+            const gender = document.getElementById('gender').value;
+            const activity = parseFloat(document.getElementById('activity').value);
+            const goal = document.getElementById('goal').value;
+
+            // Calculate BMR using Mifflin-St Jeor equation
+            let bmr;
+            if (gender === 'male') {
+                bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+            } else {
+                bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+            }
+
+            // Calculate TDEE
+            let tdee = bmr * activity;
+
+            // Adjust calories based on goal
+            let calories;
+            let proteinPercent, carbsPercent, fatsPercent;
+
+            if (goal === 'lose') {
+                calories = Math.round(tdee * 0.80); // 20% deficit
+                proteinPercent = 0.35;
+                carbsPercent = 0.35;
+                fatsPercent = 0.30;
+            } else if (goal === 'gain') {
+                calories = Math.round(tdee * 1.10); // 10% surplus
+                proteinPercent = 0.30;
+                carbsPercent = 0.45;
+                fatsPercent = 0.25;
+            } else { // maintain
+                calories = Math.round(tdee);
+                proteinPercent = 0.30;
+                carbsPercent = 0.40;
+                fatsPercent = 0.30;
+            }
+
+            // Calculate macros in grams
+            const proteinGrams = Math.round((calories * proteinPercent) / 4);
+            const carbsGrams = Math.round((calories * carbsPercent) / 4);
+            const fatsGrams = Math.round((calories * fatsPercent) / 9);
+
+            // Display results
+            document.getElementById('calories').textContent = calories + ' kcal';
+            document.getElementById('protein').textContent = proteinGrams + 'g (' + Math.round(proteinPercent * 100) + '%)';
+            document.getElementById('carbs').textContent = carbsGrams + 'g (' + Math.round(carbsPercent * 100) + '%)';
+            document.getElementById('fats').textContent = fatsGrams + 'g (' + Math.round(fatsPercent * 100) + '%)';
+        }
+
+        document.querySelectorAll('.form-input').forEach(input => input.addEventListener('input', calculate));
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>

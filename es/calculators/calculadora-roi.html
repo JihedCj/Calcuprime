@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora de ROI gratu ita - Calcula el retorno de inversión de proyectos, marketing, bienes raíces. Herramienta esencial para decisiones empresariales.">
+    <meta name="keywords" content="calculadora roi, retorno inversión, rentabilidad, análisis inversión, roi marketing">
+
+    <title>Calculadora de ROI - Retorno de Inversión | CalcuPrime</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/calculator.css">
+    <link rel="canonical" href="https://calcuprime.com/es/calculators/calculadora-roi.html">
+
+    <!-- Hreflang Links -->
+    <link rel="alternate" hreflang="en" href="https://calcuprime.com/calculators/roi-calculator.html">
+    <link rel="alternate" hreflang="es" href="https://calcuprime.com/es/calculators/calculadora-roi.html">
+    <link rel="alternate" hreflang="x-default" href="https://calcuprime.com/calculators/roi-calculator.html">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+
+    <style>
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-left: auto;
+        }
+        .lang-link {
+            padding: 6px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .lang-link:hover {
+            background: #f3f4f6;
+        }
+        .lang-link.active {
+            background: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../es/index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">CalcuPrime</span>
+            </a>
+
+            <div class="language-switcher">
+                <a href="../../calculators/roi-calculator.html" class="lang-link">🇺🇸 EN</a>
+                <a href="calculadora-roi.html" class="lang-link active">🇪🇸 ES</a>
+            </div>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../../es/index.html#finanzas">Finanzas</a></li>
+                <li><a href="../../es/index.html#salud">Salud</a></li>
+                <li><a href="../../es/index.html#conversores">Conversores</a></li>
+                <li><a href="../../es/index.html#matematicas">Matemáticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Calculadora de ROI (Retorno de Inversión)</h1>
+            <p class="calculator-description">Calcula el retorno de inversión y evalúa la rentabilidad de tus proyectos</p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="calculator-inputs">
+                <h3>Detalles de la Inversión</h3>
+
+                <div class="form-group">
+                    <label for="initialInvestment" class="form-label">Inversión Inicial ($)</label>
+                    <input type="number" id="initialInvestment" class="form-input" value="10000" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="finalValue" class="form-label">Valor Final / Ganancia Total ($)</label>
+                    <input type="number" id="finalValue" class="form-input" value="15000" min="0" step="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="timeFrame" class="form-label">Período de Tiempo (años)</label>
+                    <input type="number" id="timeFrame" class="form-input" value="1" min="0.1" step="0.1">
+                </div>
+
+                <button onclick="calculate()" class="btn-calculate">Calcular ROI</button>
+            </div>
+
+            <div class="calculator-results">
+                <h3>Resultados</h3>
+
+                <div class="result-item">
+                    <div class="result-label">ROI</div>
+                    <div class="result-value" id="roiPercentage" style="font-size: 3rem; color: #10b981;">0%</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">Ganancia / Pérdida Neta</div>
+                    <div class="result-value" id="netProfit">$0</div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-label">ROI Anualizado</div>
+                    <div class="result-value" id="annualizedROI">0%</div>
+                </div>
+
+                <div id="roiStatus" style="margin-top: 20px; padding: 15px; border-radius: 8px; text-align: center; font-weight: 600;">
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el ROI (Retorno de Inversión)?</h2>
+            <p>El Retorno de Inversión (ROI, por sus siglas en inglés Return on Investment) es una métrica financiera fundamental que mide la rentabilidad de una inversión comparando las ganancias obtenidas con el costo inicial. Es una de las herramientas más utilizadas en el mundo de los negocios, finanzas e inversiones porque proporciona una manera simple y universal de evaluar si una inversión vale la pena o no.</p>
+
+            <p>El ROI se expresa típicamente como un porcentaje y te dice cuánto dinero ganaste o perdiste en relación con lo que invertiste inicialmente. Un ROI positivo significa que tu inversión generó ganancias, mientras que un ROI negativo indica una pérdida. Esta métrica es extremadamente versátil y puede aplicarse a prácticamente cualquier tipo de inversión: desde campañas de marketing y proyectos empresariales hasta inversiones en bienes raíces, acciones, educación, o mejoras en equipamiento.</p>
+
+            <h2>Fórmula del ROI</h2>
+            <p>La fórmula básica del ROI es sorprendentemente simple:</p>
+
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace; text-align: center; font-size: 1.1rem;">
+                <strong>ROI = [(Valor Final - Inversión Inicial) / Inversión Inicial] × 100</strong>
+            </p>
+
+            <p>O de manera más detallada:</p>
+            <p style="background: #f3f4f6; padding: 20px; border-radius: 8px; font-family: monospace;">
+                <strong>ROI (%) = [(Ganancia Neta / Costo de Inversión) × 100]</strong><br><br>
+                Donde:<br>
+                • Ganancia Neta = Ingresos Totales - Costo Total de la Inversión<br>
+                • Costo de Inversión = Inversión Inicial + Costos Adicionales<br><br>
+                <strong>ROI Anualizado = [(1 + ROI)^(1/años) - 1] × 100</strong>
+            </p>
+
+            <h3>Ejemplo Básico</h3>
+            <p>Imagina que inviertes $10,000 en acciones y después de un año las vendes por $12,500:</p>
+            <ul>
+                <li>Inversión Inicial: $10,000</li>
+                <li>Valor Final: $12,500</li>
+                <li>Ganancia Neta: $2,500</li>
+                <li>ROI = ($2,500 / $10,000) × 100 = 25%</li>
+            </ul>
+            <p>Esto significa que obtuviste un retorno del 25% sobre tu inversión original, ganando $0.25 por cada dólar invertido.</p>
+
+            <h2>Aplicaciones del ROI en Diferentes Contextos</h2>
+
+            <h3>1. Marketing y Publicidad</h3>
+            <p>El ROI es crucial para evaluar la efectividad de campañas de marketing:</p>
+            <ul>
+                <li><strong>Marketing digital:</strong> Si gastas $5,000 en anuncios de Facebook y generas $20,000 en ventas, tu ROI es 300%</li>
+                <li><strong>Email marketing:</strong> Típicamente uno de los canales con mayor ROI, frecuentemente 3,800% o más</li>
+                <li><strong>SEO:</strong> Inversión a largo plazo pero puede generar ROI masivo con el tiempo</li>
+                <li><strong>Contenido:</strong> Blogs, videos, infografías que atraen clientes con costo inicial pero beneficio continuo</li>
+            </ul>
+            <p><strong>Cálculo:</strong> ROI Marketing = [(Ingresos por Ventas - Costo de Marketing) / Costo de Marketing] × 100</p>
+
+            <h3>2. Bienes Raíces</h3>
+            <p>El ROI en bienes raíces puede calcularse de múltiples maneras:</p>
+            <ul>
+                <li><strong>Propiedades de alquiler:</strong> Considera ingreso por renta, apreciación, y beneficios fiscales</li>
+                <li><strong>Fix and flip:</strong> Compra, remodelación y venta rápida</li>
+                <li><strong>ROI de renta:</strong> (Ingreso Anual de Renta / Precio de Compra) × 100</li>
+            </ul>
+            <p><strong>Ejemplo:</strong> Compras una casa por $200,000, la rentas por $1,500/mes ($18,000/año). ROI simple = 9% anual</p>
+
+            <h3>3. Proyectos Empresariales</h3>
+            <p>Evalúa si nuevos proyectos valen la inversión de recursos:</p>
+            <ul>
+                <li><strong>Nuevo software:</strong> Sistema CRM cuesta $50,000, aumenta ventas en $200,000 anuales = 300% ROI</li>
+                <li><strong>Expansión de negocio:</strong> Abrir nueva ubicación vs. retorno esperado</li>
+                <li><strong>Mejoras de eficiencia:</strong> Automatización que reduce costos laborales</li>
+                <li><strong>Desarrollo de productos:</strong> Inversión en I+D vs. ingresos por nuevos productos</li>
+            </ul>
+
+            <h3>4. Inversiones Financieras</h3>
+            <ul>
+                <li><strong>Acciones:</strong> Ganancias de capital + dividendos vs. inversión inicial</li>
+                <li><strong>Fondos mutuos:</strong> Retorno total del fondo</li>
+                <li><strong>Bonos:</strong> Intereses ganados vs. precio de compra</li>
+                <li><strong>Criptomonedas:</strong> Ganancia/pérdida en inversión volátil</li>
+            </ul>
+
+            <h3>5. Educación y Desarrollo Personal</h3>
+            <p>El ROI de la educación considera ingresos incrementados vs. costo:</p>
+            <ul>
+                <li><strong>Título universitario:</strong> Costo de matrícula vs. aumento salarial a lo largo de la carrera</li>
+                <li><strong>Certificaciones profesionales:</strong> Costo del curso vs. oportunidades laborales mejoradas</li>
+                <li><strong>Capacitación de empleados:</strong> Inversión en entrenamiento vs. productividad aumentada</li>
+            </ul>
+
+            <h2>Limitaciones y Consideraciones del ROI</h2>
+
+            <h3>No Considera el Tiempo</h3>
+            <p>Un ROI del 20% suena igual ya sea que lo logres en 1 mes o en 10 años, pero claramente son muy diferentes. Por esto, el ROI Anualizado es más útil:</p>
+            <ul>
+                <li>20% ROI en 1 año = 20% anualizado (excelente)</li>
+                <li>20% ROI en 10 años = 1.8% anualizado (pobre)</li>
+            </ul>
+
+            <h3>Ignora el Riesgo</h3>
+            <p>Dos inversiones pueden tener el mismo ROI pero niveles de riesgo completamente diferentes. Bonos del gobierno con 5% ROI son mucho menos riesgosos que criptomonedas con 5% ROI.</p>
+
+            <h3>No Incluye Costos Ocultos</h3>
+            <p>Asegúrate de incluir todos los costos en tu cálculo:</p>
+            <ul>
+                <li>Costos de mantenimiento continuo</li>
+                <li>Impuestos</li>
+                <li>Tarifas de transacción</li>
+                <li>Costos de oportunidad</li>
+                <li>Inflación</li>
+            </ul>
+
+            <h3>Puede Ser Manipulado</h3>
+            <p>La forma en que defines "inversión" y "retorno" puede cambiar dramáticamente el ROI. Sé consistente y honesto en tus cálculos.</p>
+
+            <h2>Cómo Interpretar Resultados de ROI</h2>
+
+            <h3>ROI Positivo vs. Negativo</h3>
+            <ul>
+                <li><strong>ROI Positivo (+):</strong> Tu inversión generó ganancias. Cuanto más alto, mejor.</li>
+                <li><strong>ROI Negativo (-):</strong> Perdiste dinero en la inversión. Necesitas reevaluar la estrategia.</li>
+                <li><strong>ROI de 0%:</strong> Ni ganaste ni perdiste. Recuperaste exactamente tu inversión.</li>
+            </ul>
+
+            <h3>¿Qué es un "Buen" ROI?</h3>
+            <p>Depende enormemente del contexto:</p>
+            <ul>
+                <li><strong>Mercado de valores (promedio histórico):</strong> ~10% anual</li>
+                <li><strong>Bienes raíces:</strong> 8-12% anual considerando renta y apreciación</li>
+                <li><strong>Marketing:</strong> 5:1 (500% ROI) se considera bueno, pero varía por industria</li>
+                <li><strong>Startups:</strong> Buscan ROI de 10x-100x (1,000%-10,000%) pero con alto riesgo</li>
+                <li><strong>Bonos:</strong> 3-6% anual, bajo riesgo</li>
+            </ul>
+
+            <h3>Comparación con Alternativas</h3>
+            <p>El ROI debe compararse con otras opciones de inversión disponibles:</p>
+            <ul>
+                <li>¿Es mejor que dejar el dinero en una cuenta de ahorros?</li>
+                <li>¿Supera la tasa de inflación?</li>
+                <li>¿Es mejor que un fondo indexado del mercado de valores?</li>
+                <li>¿Justifica el riesgo adicional?</li>
+            </ul>
+
+            <h2>Estrategias para Mejorar el ROI</h2>
+
+            <h3>1. Reduce Costos de Inversión</h3>
+            <ul>
+                <li>Negocia mejores precios con proveedores</li>
+                <li>Elimina gastos innecesarios</li>
+                <li>Optimiza procesos para mayor eficiencia</li>
+                <li>Compra materiales al por mayor cuando tenga sentido</li>
+            </ul>
+
+            <h3>2. Aumenta el Valor Final</h3>
+            <ul>
+                <li>Mejora la calidad del producto/servicio para precios premium</li>
+                <li>Expande el alcance de mercado</li>
+                <li>Agrega características de valor agregado</li>
+                <li>Optimiza estrategias de precios</li>
+            </ul>
+
+            <h3>3. Acelera el Tiempo de Retorno</h3>
+            <ul>
+                <li>Implementa estrategias de venta más rápidas</li>
+                <li>Reduce ciclos de producción</li>
+                <li>Mejora flujos de trabajo</li>
+                <li>Automatiza procesos repetitivos</li>
+            </ul>
+
+            <h3>4. Reinvierte las Ganancias</h3>
+            <p>El efecto compuesto puede multiplicar el ROI con el tiempo. Reinvertir ganancias en la misma o mejores oportunidades acelera el crecimiento exponencial.</p>
+
+            <h2>ROI en Decisiones Empresariales</h2>
+
+            <h3>Evaluación de Proyectos</h3>
+            <p>Cuando evalúes múltiples proyectos potenciales:</p>
+            <ol>
+                <li><strong>Calcula el ROI de cada opción:</strong> Usa proyecciones realistas, no optimistas</li>
+                <li><strong>Considera el horizonte temporal:</strong> Anualiza los ROI para comparación justa</li>
+                <li><strong>Evalúa recursos requeridos:</strong> Tiempo, personal, capital</li>
+                <li><strong>Analiza riesgos:</strong> Mayor ROI potencial generalmente significa mayor riesgo</li>
+                <li><strong>Revisa alineación estratégica:</strong> ¿El proyecto apoya objetivos a largo plazo?</li>
+            </ol>
+
+            <h3>Monitoreo Continuo</h3>
+            <p>El ROI no es un cálculo de "una vez y listo":</p>
+            <ul>
+                <li>Rastrea ROI mensual o trimestralmente</li>
+                <li>Compara ROI proyectado vs. ROI real</li>
+                <li>Identifica tendencias y patrones</li>
+                <li>Ajusta estrategias basadas en datos</li>
+                <li>Documenta lecciones aprendidas para futuras decisiones</li>
+            </ul>
+
+            <h2>Errores Comunes al Calcular ROI</h2>
+
+            <h3>1. Ignorar Costos Indirectos</h3>
+            <p>Incluye tiempo del personal, uso de recursos existentes, costos de oportunidad. Un proyecto "gratis" que consume 100 horas del equipo no es realmente gratis.</p>
+
+            <h3>2. Usar Proyecciones Excesivamente Optimistas</h3>
+            <p>Sé conservador en estimaciones de ingresos y realista sobre costos. Es mejor sorprenderte positivamente que fallar en alcanzar proyecciones infladas.</p>
+
+            <h3>3. No Ajustar por Inflación</h3>
+            <p>Un ROI del 3% en un entorno con inflación del 4% realmente significa que estás perdiendo poder adquisitivo.</p>
+
+            <h3>4. Comparar Períodos Diferentes Sin Anualizar</h3>
+            <p>Siempre anualiza el ROI cuando compares inversiones con diferentes plazos.</p>
+
+            <h3>5. Olvidar el Valor del Dinero en el Tiempo</h3>
+            <p>$1,000 hoy valen más que $1,000 en 5 años. Para análisis más sofisticado, usa VPN (Valor Presente Neto) o TIR (Tasa Interna de Retorno).</p>
+
+            <h2>Herramientas Complementarias al ROI</h2>
+
+            <h3>VPN (Valor Presente Neto)</h3>
+            <p>Considera el valor temporal del dinero descontando flujos de efectivo futuros a su valor presente. Mejor para proyectos con flujos de efectivo en múltiples períodos.</p>
+
+            <h3>TIR (Tasa Interna de Retorno)</h3>
+            <p>La tasa de descuento que hace que el VPN sea cero. Útil para comparar proyectos con diferentes tamaños de inversión.</p>
+
+            <h3>Período de Recuperación (Payback Period)</h3>
+            <p>Cuánto tiempo toma recuperar tu inversión inicial. Simple pero no considera ganancias después de la recuperación.</p>
+
+            <h3>ROAS (Return on Ad Spend)</h3>
+            <p>Específico para publicidad: Ingresos generados / Gasto en publicidad. Si gastas $1,000 en anuncios y generas $5,000, tu ROAS es 5:1.</p>
+
+            <h2>Preguntas Frecuentes</h2>
+
+            <h3>¿Cuál es la diferencia entre ROI y ganancia?</h3>
+            <p>La ganancia es la cantidad absoluta de dinero ganado ($5,000), mientras que el ROI es el porcentaje de retorno relativo a la inversión (50% si invertiste $10,000). El ROI permite comparar inversiones de diferentes tamaños.</p>
+
+            <h3>¿Puedo tener ROI mayor al 100%?</h3>
+            <p>¡Sí! Un ROI del 200% significa que triplicaste tu dinero. Si invertiste $10,000 y terminaste con $30,000, tu ROI es 200% ($20,000 de ganancia / $10,000 de inversión).</p>
+
+            <h3>¿Cómo calculo ROI si aún no he vendido la inversión?</h3>
+            <p>Usa el valor de mercado actual como "valor final". Esto te da el ROI "en papel" o no realizado. Ten en cuenta que puede cambiar antes de que realmente vendas.</p>
+
+            <h3>¿El ROI incluye impuestos?</h3>
+            <p>Depende de tu análisis. Para decisiones de inversión personal, usa ganancias después de impuestos para un ROI "real". Para análisis empresarial, a veces se usa ROI antes de impuestos.</p>
+
+            <h3>¿Qué ROI debería buscar en mi negocio?</h3>
+            <p>Depende de tu industria, pero generalmente busca ROI que supere tu costo de capital (lo que pagarías por un préstamo) más un margen de riesgo. Mínimo 15-20% para proyectos pequeños, 30%+ para proyectos de alto riesgo.</p>
+
+            <p>El ROI es una herramienta poderosa pero debe usarse junto con otros análisis financieros y consideraciones estratégicas. Usa esta calculadora para evaluar todas tus inversiones potenciales y tomar decisiones informadas basadas en datos reales, no solo intuición.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 CalcuPrime. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        function calculate() {
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value) || 0;
+            const finalValue = parseFloat(document.getElementById('finalValue').value) || 0;
+            const timeFrame = parseFloat(document.getElementById('timeFrame').value) || 1;
+
+            if (initialInvestment <= 0) {
+                return;
+            }
+
+            const netProfit = finalValue - initialInvestment;
+            const roiPercentage = (netProfit / initialInvestment) * 100;
+
+            // Calculate annualized ROI
+            const annualizedROI = (Math.pow((finalValue / initialInvestment), (1 / timeFrame)) - 1) * 100;
+
+            // Display results
+            const roiColor = netProfit >= 0 ? '#10b981' : '#ef4444';
+            document.getElementById('roiPercentage').textContent = roiPercentage.toFixed(2) + '%';
+            document.getElementById('roiPercentage').style.color = roiColor;
+            document.getElementById('netProfit').textContent = netProfit.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+            document.getElementById('netProfit').style.color = roiColor;
+            document.getElementById('annualizedROI').textContent = annualizedROI.toFixed(2) + '%';
+
+            // Status message
+            const statusDiv = document.getElementById('roiStatus');
+            if (roiPercentage > 20) {
+                statusDiv.style.backgroundColor = '#d1fae5';
+                statusDiv.style.color = '#065f46';
+                statusDiv.textContent = '¡Excelente ROI! Esta inversión está generando retornos fuertes.';
+            } else if (roiPercentage > 0) {
+                statusDiv.style.backgroundColor = '#dbeafe';
+                statusDiv.style.color = '#1e40af';
+                statusDiv.textContent = 'ROI positivo. La inversión está generando ganancias moderadas.';
+            } else if (roiPercentage === 0) {
+                statusDiv.style.backgroundColor = '#fef3c7';
+                statusDiv.style.color = '#92400e';
+                statusDiv.textContent = 'Punto de equilibrio. Recuperaste exactamente tu inversión.';
+            } else {
+                statusDiv.style.backgroundColor = '#fee2e2';
+                statusDiv.style.color = '#991b1b';
+                statusDiv.textContent = 'ROI negativo. Esta inversión resultó en una pérdida.';
+            }
+        }
+
+        // Event listeners
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+
+        window.addEventListener('load', calculate);
+    </script>
+</body>
+</html>
