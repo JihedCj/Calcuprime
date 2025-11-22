@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APR Calculator - Annual Percentage Rate Calculator with Fees</title>
+    <meta name="description" content="Calculate true APR including all fees and costs. Compare loans accurately by seeing the real cost of borrowing beyond the advertised interest rate.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>APR Calculator</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calculate the true Annual Percentage Rate (APR) of a loan including all fees and costs. See the real cost of borrowing.</p>
+
+        <div class="input-group">
+            <label for="loanAmount" class="form-label">Loan Amount ($)</label>
+            <input type="number" id="loanAmount" class="form-input" placeholder="e.g., 20000" min="0" step="1000" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="interestRate" class="form-label">Stated Interest Rate (%)</label>
+            <input type="number" id="interestRate" class="form-input" placeholder="e.g., 8.5" min="0" max="50" step="0.1" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="loanTerm" class="form-label">Loan Term (months)</label>
+            <input type="number" id="loanTerm" class="form-input" placeholder="e.g., 60" min="1" max="360" step="1" value="">
+        </div>
+
+        <div style="background: #f9fafb; padding: 20px; border-radius: 12px; margin: 20px 0;">
+            <h3 style="margin-top: 0;">Fees and Costs</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div class="input-group" style="margin: 0;">
+                    <label for="originationFee" class="form-label">Origination Fee ($)</label>
+                    <input type="number" id="originationFee" class="form-input" placeholder="0" min="0" step="50" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="processingFee" class="form-label">Processing Fee ($)</label>
+                    <input type="number" id="processingFee" class="form-input" placeholder="0" min="0" step="25" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="documentFee" class="form-label">Document Fee ($)</label>
+                    <input type="number" id="documentFee" class="form-input" placeholder="0" min="0" step="25" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="otherFees" class="form-label">Other Fees ($)</label>
+                    <input type="number" id="otherFees" class="form-input" placeholder="0" min="0" step="25" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">True APR</span>
+                <span class="result-value"><span id="trueAPR">0.00</span>%</span>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <div class="result-row">
+                    <span class="result-label">Stated Interest Rate</span>
+                    <span class="result-value"><span id="statedRate">0.00</span>%</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">APR Difference</span>
+                    <span class="result-value">+<span id="aprDiff">0.00</span>%</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Total Fees</span>
+                    <span class="result-value">$<span id="totalFees">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Monthly Payment</span>
+                    <span class="result-value">$<span id="monthlyPayment">0.00</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Total Interest Cost</span>
+                    <span class="result-value">$<span id="totalInterest">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Total Loan Cost</span>
+                    <span class="result-value">$<span id="totalCost">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>What is APR?</h2>
+            <p>Annual Percentage Rate (APR) is the true cost of borrowing money, expressed as a yearly percentage. Unlike the simple interest rate, APR includes all fees and costs associated with obtaining the loan—origination fees, processing fees, document fees, points, and other charges. This makes APR a much more accurate measure for comparing loan offers.</p>
+            
+            <p>For example, a lender might advertise a 6% interest rate that looks attractive. But if they charge 3% in origination fees ($3,000 on a $100,000 loan), the true APR is actually 6.42%. Another lender offering 6.25% with zero fees has a true APR of 6.25%—making it the better deal despite the higher advertised rate.</p>
+            
+            <p>By law, lenders must disclose APR on loan documents, but many borrowers don't understand what it means or why it differs from the interest rate. Understanding APR helps you avoid deceptive lending practices and make genuinely informed borrowing decisions.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>APR vs Interest Rate: What's the Difference?</h2>
+            
+            <h3>Interest Rate</h3>
+            <p>The interest rate is simply the percentage of the loan amount charged for borrowing money. It determines your monthly payment amount but doesn't account for any fees. A $200,000 mortgage at 6% interest costs $1,199/month (principal and interest only). This rate affects how much you pay each month but tells an incomplete story of the loan's true cost.</p>
+            
+            <h3>APR (Annual Percentage Rate)</h3>
+            <p>APR includes the interest rate PLUS all fees spread over the life of the loan. If that same $200,000 mortgage has $6,000 in fees (3% origination, appraisal, title, etc.), those costs are amortized over 30 years. The APR might be 6.28%—higher than the 6% interest rate because it reflects the true cost of borrowing including all upfront fees.</p>
+            
+            <h3>Why Both Matter</h3>
+            <p>Interest rate determines your monthly payment. APR determines which loan actually costs less over time. Always compare APRs when shopping for loans, not just interest rates. A loan with a 5.75% rate and $8,000 in fees could cost more than a loan at 6.0% with $2,000 in fees, depending on how long you keep the loan.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Fees Included in APR</h2>
+            
+            <h3>Origination Fees (1-6% of loan amount)</h3>
+            <p>Charged by lenders to process and underwrite the loan. On a $300,000 mortgage, a 1% origination fee is $3,000. Some lenders charge this as "discount points" or "origination points." This is pure profit for the lender—there's no actual "service" costing them $3,000. Negotiate this fee or shop lenders that don't charge it.</p>
+            
+            <h3>Processing and Underwriting Fees ($300-$900)</h3>
+            <p>Covers the lender's administrative costs to review your application, verify income, check credit, and process paperwork. Often called "processing fee," "underwriting fee," or "administrative fee." Some lenders bundle this into origination fee; others charge separately. Either way, it's included in APR.</p>
+            
+            <h3>Application Fees ($75-$500)</h3>
+            <p>Charged when you apply, supposedly to cover credit report and initial review costs. In reality, credit reports cost lenders $15-30, so anything above $50 is profit. Many reputable lenders don't charge application fees at all. If charged, it's included in APR (unless you withdraw application before approval).</p>
+            
+            <h3>Document Preparation Fees ($100-$400)</h3>
+            <p>For preparing loan documents. This is largely automated nowadays, so high doc prep fees are questionable. Some states regulate these fees; others don't. Negotiate or ask for waiver if excessive.</p>
+            
+            <h3>Broker Fees (0.5-2.75% of loan)</h3>
+            <p>If using a mortgage broker, they charge a commission either paid by you or by the lender (via higher rate). Either way, it's a cost that affects APR. On $250,000 loan, 1% broker fee = $2,500. Sometimes worth it for access to better rates, sometimes not.</p>
+            
+            <h3>Discount Points (1 point = 1% of loan)</h3>
+            <p>Prepaid interest to "buy down" your rate. Paying 2 points ($6,000 on $300,000 loan) might reduce rate from 6.5% to 6.0%. Whether this makes sense depends on break-even period—how long until monthly savings exceed upfront cost. Points are included in APR calculation.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Fees NOT Included in APR</h2>
+            <p>Confusingly, APR doesn't include every cost associated with getting a loan. These are legitimate expenses but not part of the APR calculation:</p>
+            
+            <h3>Appraisal Fees ($300-$600)</h3>
+            <p>Required for mortgages to determine property value. You pay the appraiser directly, not the lender. Not included in APR because it's a third-party service, not a lending cost. But it's still money out of your pocket at closing.</p>
+            
+            <h3>Title Search and Insurance ($1,000-$4,000)</h3>
+            <p>Title company verifies property ownership and insures against ownership disputes. Required for mortgages but not included in APR. Costs vary by property value and location. Closing disclosure will show these separately from lender fees.</p>
+            
+            <h3>Home Inspection ($300-$500)</h3>
+            <p>Optional but recommended. You hire inspector to check property condition. Not a loan cost, so not in APR, but essential for protecting your investment.</p>
+            
+            <h3>Credit Report Fees ($15-$50)</h3>
+            <p>Some lenders include this in application fee; others charge separately. When charged as a pass-through cost (lender pays credit bureau, you reimburse lender), it may not be included in APR. Regulations vary.</p>
+            
+            <h3>HOA Transfer Fees, Recording Fees, etc.</h3>
+            <p>Third-party costs not directly related to obtaining the loan. You'd pay these whether financing or paying cash. Not included in APR but shown on closing disclosure.</p>
+            
+            <p><strong>Key Point:</strong> APR helps compare lenders' costs, but total closing costs include additional third-party fees. Always review the complete Loan Estimate (LE) and Closing Disclosure (CD), not just APR.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use APR to Compare Loans</h2>
+            
+            <h3>Same Loan Type and Term</h3>
+            <p>APR comparison only works when comparing apples to apples—same loan type (conventional, FHA, VA), same term (30-year vs 30-year, not 30-year vs 15-year), and similar scenarios (primary residence, investment property, etc.). Comparing a 30-year fixed APR to a 5/1 ARM APR is misleading because they're fundamentally different products.</p>
+            
+            <h3>Get Multiple Loan Estimates</h3>
+            <p>Shop at least 3-5 lenders and get official Loan Estimates within the same 14-day period (to minimize credit score impact—multiple mortgage inquiries in 14-45 days count as one). Compare the APR on page 3 of each Loan Estimate. The lowest APR is usually the best deal, assuming all other factors equal.</p>
+            
+            <h3>Watch for Lowball Tactics</h3>
+            <p>Some lenders advertise ultra-low APRs to attract customers, then hit you with unexpected fees or rate increases during underwriting. Get everything in writing via official Loan Estimate. If actual APR at closing is more than 0.125% higher than initial estimate (without good reason like credit score change), you can walk away penalty-free.</p>
+            
+            <h3>Consider How Long You'll Keep the Loan</h3>
+            <p>If you'll refinance in 3-5 years or sell the house, a loan with slightly higher APR but lower/no fees might cost less total. Example: Loan A has 6% APR with $5,000 fees. Loan B has 6.15% APR with $500 fees. Over 30 years, Loan A is cheaper. But if you sell after 4 years, Loan B saves money because you avoided $4,500 in upfront fees and the slightly higher rate didn't accumulate much extra interest in just 4 years.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>APR for Different Loan Types</h2>
+            
+            <h3>Mortgage APR</h3>
+            <p>Mortgages have the most comprehensive APR disclosures due to federal regulations (TILA - Truth in Lending Act). Lenders must provide APR on initial Loan Estimate and final Closing Disclosure. Typical mortgage APR is 0.1-0.5% higher than interest rate due to fees. If APR is 1%+ higher than rate, fees are excessive—shop around.</p>
+            
+            <h3>Auto Loan APR</h3>
+            <p>Car loans typically have lower fees than mortgages, so APR and interest rate are often identical or very close. Watch for dealer markups: dealership might get you a loan at 5% from bank but tell you it's 7%, pocketing the difference. Always get pre-approved from your bank/credit union to know market rate, then see if dealer can beat it (sometimes they can via manufacturer incentives).</p>
+            
+            <h3>Personal Loan APR</h3>
+            <p>Online lenders often advertise "no fees" but build costs into the interest rate. APR and rate are the same if truly no fees. Traditional banks may charge 1-6% origination fees, making APR higher than rate. On a $20,000 personal loan, a 2% fee ($400) might raise APR from 8% to 8.3%. Compare APRs across lenders, not just rates.</p>
+            
+            <h3>Credit Card APR</h3>
+            <p>Credit cards show APR, but it's essentially the same as interest rate because there are no upfront loan fees (annual fees exist but aren't part of APR calculation). Card APR is the yearly cost of carrying a balance. If your card has 18% APR and you carry $1,000 balance, you'll pay ~$180/year in interest if you only make minimum payments.</p>
+            
+            <h3>Payday Loan APR (Avoid These!)</h3>
+            <p>Payday loans have APRs of 300-700% or higher. A $300 loan for 2 weeks with a $45 fee has an APR of 391%! Payday lenders are required to disclose APR, which makes their predatory nature obvious. Never use payday loans—explore credit unions, payment plans, side income, or even credit cards (bad, but 20% APR is better than 400%).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Negotiating Lower APR</h2>
+            
+            <h3>Improve Your Credit Score</h3>
+            <p>The single biggest factor affecting APR is credit score. Going from 680 to 740 can drop mortgage APR by 0.5-1.0% ($30,000-60,000 saved over 30 years on a $300,000 loan). Before applying, check credit reports for errors, pay down credit card balances below 30% utilization, and don't open new accounts.</p>
+            
+            <h3>Increase Down Payment</h3>
+            <p>Larger down payment = lower risk for lender = better rates. Going from 10% to 20% down eliminates PMI and often qualifies you for better rates. 25-30% down can get you into super-conforming or portfolio loan programs with even lower rates. If you have the cash, larger down payment reduces both rate and fees.</p>
+            
+            <h3>Shop Multiple Lenders</h3>
+            <p>Rates and fees vary significantly between lenders. One lender might quote 6.5% with $3,000 fees (6.68% APR); another offers 6.375% with $1,000 fees (6.43% APR). Shopping saves thousands. Don't be loyal to your current bank—they often don't offer competitive rates to existing customers (no acquisition cost, less incentive to discount).</p>
+            
+            <h3>Negotiate Fees Directly</h3>
+            <p>Many fees are negotiable: origination fees, processing fees, doc prep fees. Say: "Lender X is offering the same rate with $1,500 less in fees. Can you match or beat that?" Loan officers have discretion to waive or reduce fees to win business. Worst case: they say no. Best case: you save $1,000-3,000.</p>
+            
+            <h3>Consider Paying Points for Lower Rate</h3>
+            <p>If you'll keep the loan 7+ years, paying discount points to permanently reduce your rate can make sense. Run break-even analysis: if 1 point ($3,000) saves $40/month, break-even is 75 months (6.25 years). After that, it's pure savings. For shorter time horizons, skip points—you won't recover the cost.</p>
+            
+            <h3>Time Your Application</h3>
+            <p>Rates fluctuate daily based on bond markets. If you have flexibility, apply when rates dip. Lock your rate when satisfied—rates can rise before closing (typically 30-60 days). Some lenders offer float-down options: if rates drop after you lock, you can re-lock at lower rate (may require fee).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Red Flags: When APR Reveals Bad Loans</h2>
+            
+            <h3>APR Much Higher Than Interest Rate (1%+ difference)</h3>
+            <p>If interest rate is 6% but APR is 7.5%, fees are excessive. On $200,000 mortgage, that implies $7,500+ in lender fees. Unless there's a specific reason (buying down rate with points at your request), this is a red flag. Shop competitors.</p>
+            
+            <h3>Lender Reluctant to Disclose APR</h3>
+            <p>Federal law requires APR disclosure within 3 days of application. If lender is evasive ("we'll calculate that later," "don't worry about APR," "our rates are too complex for APR"), run away. Reputable lenders provide APR upfront and clearly.</p>
+            
+            <h3>"No Fee" Loans with High Rates</h3>
+            <p>Some lenders advertise "no closing costs" but charge higher interest rates to compensate. This can be legitimate if you don't plan to keep loan long-term. But compare: no-fee loan at 6.5% vs. loan with $3,000 fees at 6.0%. Over 30 years, the lower-rate loan costs less despite fees. Over 3 years, no-fee loan might be better. Do the math.</p>
+            
+            <h3>Adjustable-Rate APR Assumptions</h3>
+            <p>ARMs (adjustable-rate mortgages) show APR based on assumptions about future rate adjustments. A 5/1 ARM might show 5.2% APR, but that assumes rates only increase moderately. If rates spike, your actual APR could be 7-8%+. APR on ARMs is less reliable for comparison—focus on caps (max rate increase) and margins.</p>
+            
+            <h3>Lowball Estimates That Change Later</h3>
+            <p>If your initial quote shows 5.8% APR but final Closing Disclosure shows 6.3% with no explanation (your credit didn't change, property value didn't drop, etc.), this is bait-and-switch. You can walk away or demand original terms. Reputable lenders honor initial quotes barring genuine changes in circumstances.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>Why is my APR higher than my interest rate?</h3>
+            <p>APR includes all fees spread over the loan term, while interest rate is just the cost of borrowing. If you pay $4,000 in fees on a $200,000 loan at 6% interest, those fees add approximately 0.2-0.3% to the APR. This is normal. The bigger the difference between rate and APR, the higher the fees you're paying.</p>
+            
+            <h3>Is a lower APR always better?</h3>
+            <p>Usually, but not always. If Loan A has 5.9% APR with $6,000 in fees and Loan B has 6.1% APR with $500 in fees, Loan A is only better if you keep the loan long enough to recoup the extra $5,500 in fees through lower monthly payments. If you'll refinance or move in 3 years, Loan B might cost less total despite higher APR.</p>
+            
+            <h3>Can I negotiate APR directly?</h3>
+            <p>Not exactly. APR is calculated from rate and fees, so you negotiate those components. Ask lender to reduce origination fee, processing fee, etc., or offer a lower interest rate. Those changes will automatically lower the APR. Don't say "give me a lower APR"—say "waive the $1,500 origination fee" or "match competitor's 5.75% rate."</p>
+            
+            <h3>Does APR include insurance and taxes?</h3>
+            <p>No. APR includes lender fees but not third-party costs like property taxes, homeowners insurance, HOA fees, or PMI (mortgage insurance). These appear separately on your Loan Estimate. Your total monthly payment includes principal, interest, taxes, insurance (PITI), and possibly PMI/HOA, but APR only reflects principal, interest, and lender fees.</p>
+            
+            <h3>How do I calculate APR myself?</h3>
+            <p>APR calculation is complex—it involves solving for the interest rate that equates the loan amount minus fees to the present value of all future payments. This requires financial calculators or software. Our calculator does this for you. Manual formula: requires iterative solving (trial and error) or financial formulas beyond basic math. Trust disclosed APR on Loan Estimate or use this calculator to verify.</p>
+            
+            <h3>What's a good APR for a mortgage/car loan/personal loan?</h3>
+            <p>Depends on your credit and current market rates. As of 2024: Excellent credit (760+) mortgage: 6.0-6.5% APR. Good credit (700-759): 6.5-7.25%. Fair credit (660-699): 7.25-8.5%. Auto loans: 4-7% excellent credit, 7-12% good credit, 12-20% fair/poor. Personal loans: 6-10% excellent, 10-18% good, 18-28% fair, 28-36% poor. Compare your quoted APR to these ranges.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value) || 0;
+            const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const loanTerm = parseInt(document.getElementById('loanTerm').value) || 0;
+            
+            const originationFee = parseFloat(document.getElementById('originationFee').value) || 0;
+            const processingFee = parseFloat(document.getElementById('processingFee').value) || 0;
+            const documentFee = parseFloat(document.getElementById('documentFee').value) || 0;
+            const otherFees = parseFloat(document.getElementById('otherFees').value) || 0;
+
+            if (loanAmount === 0 || interestRate === 0 || loanTerm === 0) {
+                return;
+            }
+
+            const totalFees = originationFee + processingFee + documentFee + otherFees;
+            const monthlyRate = interestRate / 100 / 12;
+            
+            // Calculate monthly payment
+            const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, loanTerm)) / 
+                                  (Math.pow(1 + monthlyRate, loanTerm) - 1);
+            
+            const totalPaid = monthlyPayment * loanTerm;
+            const totalInterest = totalPaid - loanAmount;
+            const totalCost = totalPaid + totalFees;
+
+            // Calculate true APR (amount financed is loan amount minus fees)
+            const amountFinanced = loanAmount - totalFees;
+            
+            // Iterative APR calculation
+            let aprGuess = interestRate / 100;
+            let iterations = 0;
+            const maxIterations = 100;
+            const tolerance = 0.00001;
+            
+            while (iterations < maxIterations) {
+                const monthlyAPR = aprGuess / 12;
+                const presentValue = monthlyPayment * ((1 - Math.pow(1 + monthlyAPR, -loanTerm)) / monthlyAPR);
+                const error = presentValue - amountFinanced;
+                
+                if (Math.abs(error) < tolerance) break;
+                
+                // Adjust guess
+                aprGuess = aprGuess - error / amountFinanced * 0.1;
+                iterations++;
+            }
+            
+            const trueAPR = aprGuess * 100;
+            const aprDiff = trueAPR - interestRate;
+
+            // Display results
+            document.getElementById('trueAPR').textContent = trueAPR.toFixed(3);
+            document.getElementById('statedRate').textContent = interestRate.toFixed(2);
+            document.getElementById('aprDiff').textContent = aprDiff.toFixed(3);
+            document.getElementById('totalFees').textContent = totalFees.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('monthlyPayment').textContent = monthlyPayment.toFixed(2);
+            document.getElementById('totalInterest').textContent = totalInterest.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('totalCost').textContent = totalCost.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        }
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', calculate);
+        });
+    </script>
+</body>
+</html>
