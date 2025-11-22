@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Loan Calculator - Federal & Private Loan Payment Calculator</title>
+    <meta name="description" content="Calculate student loan payments for federal and private loans. Compare repayment plans, see total interest, and plan your student debt payoff strategy.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .loan-type-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .loan-tab {
+            padding: 12px 24px;
+            background: #f3f4f6;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+        .loan-tab.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        .plan-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .plan-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+        .plan-card.recommended {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+        .plan-card h4 {
+            margin-top: 0;
+            color: #1d1d1f;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Student Loan Calculator</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calculate monthly payments for federal and private student loans. Compare repayment plans and see total interest costs.</p>
+
+        <div class="loan-type-tabs">
+            <div class="loan-tab active" onclick="setLoanType('standard')" id="standardTab">Standard Repayment</div>
+            <div class="loan-tab" onclick="setLoanType('graduated')" id="graduatedTab">Graduated Repayment</div>
+            <div class="loan-tab" onclick="setLoanType('extended')" id="extendedTab">Extended Repayment</div>
+            <div class="loan-tab" onclick="setLoanType('income')" id="incomeTab">Income-Driven</div>
+        </div>
+
+        <div class="input-group">
+            <label for="loanBalance" class="form-label">Total Student Loan Balance ($)</label>
+            <input type="number" id="loanBalance" class="form-input" placeholder="e.g., 35000" min="0" step="1000" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="interestRate" class="form-label">Interest Rate (%)</label>
+            <input type="number" id="interestRate" class="form-input" placeholder="e.g., 5.5" min="0" max="15" step="0.1" value="">
+            <small style="color: #6b7280; display: block; margin-top: 5px;">Federal loans: 4-7% | Private loans: 3-14%</small>
+        </div>
+
+        <div id="standardInputs">
+            <div class="input-group">
+                <label for="loanTerm" class="form-label">Loan Term (years)</label>
+                <select id="loanTerm" class="form-input">
+                    <option value="10">10 years (Standard)</option>
+                    <option value="15">15 years</option>
+                    <option value="20">20 years</option>
+                    <option value="25">25 years (Extended)</option>
+                    <option value="30">30 years</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="incomeInputs" style="display: none;">
+            <div class="input-group">
+                <label for="annualIncome" class="form-label">Annual Income ($)</label>
+                <input type="number" id="annualIncome" class="form-input" placeholder="e.g., 50000" min="0" step="1000" value="">
+            </div>
+            <div class="input-group">
+                <label for="familySize" class="form-label">Family Size</label>
+                <input type="number" id="familySize" class="form-input" placeholder="1" min="1" max="20" step="1" value="1">
+            </div>
+            <div class="input-group">
+                <label for="idrPlan" class="form-label">Income-Driven Plan</label>
+                <select id="idrPlan" class="form-input">
+                    <option value="paye">PAYE (Pay As You Earn)</option>
+                    <option value="repaye">REPAYE (Revised Pay As You Earn)</option>
+                    <option value="ibr">IBR (Income-Based Repayment)</option>
+                    <option value="icr">ICR (Income-Contingent Repayment)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Monthly Payment</span>
+                <span class="result-value">$<span id="monthlyPayment">0.00</span></span>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <div class="result-row">
+                    <span class="result-label">Total Amount Paid</span>
+                    <span class="result-value">$<span id="totalPaid">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Total Interest</span>
+                    <span class="result-value">$<span id="totalInterest">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Payoff Time</span>
+                    <span class="result-value"><span id="payoffTime">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="comparisonSection" style="display: none;">
+            <h3 style="margin-top: 40px; margin-bottom: 16px;">Compare All Repayment Plans</h3>
+            <div class="plan-comparison">
+                <div class="plan-card">
+                    <h4>Standard (10 yr)</h4>
+                    <p><strong>Monthly:</strong> $<span id="standard10">0</span></p>
+                    <p><strong>Total Interest:</strong> $<span id="standard10Interest">0</span></p>
+                </div>
+                <div class="plan-card">
+                    <h4>Extended (25 yr)</h4>
+                    <p><strong>Monthly:</strong> $<span id="extended25">0</span></p>
+                    <p><strong>Total Interest:</strong> $<span id="extended25Interest">0</span></p>
+                </div>
+                <div class="plan-card">
+                    <h4>Income-Driven</h4>
+                    <p><strong>Monthly (Year 1):</strong> $<span id="idrPayment">0</span></p>
+                    <p><strong>Forgiveness After:</strong> <span id="idrForgiveness">20-25 years</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Student Loans</h2>
+            <p>Student loans have become a defining financial reality for millions of Americans. With over 45 million borrowers owing a collective $1.7+ trillion, student debt impacts everything from home buying to retirement savings. Understanding your repayment options, calculating true costs, and strategically managing these loans can save tens of thousands of dollars and years of payments.</p>
+            
+            <p>Federal student loans offer flexible repayment options, income-driven plans, and potential forgiveness that private loans don't. However, they also come with complexities that confuse borrowers. Private student loans offer fewer protections but sometimes lower interest rates for borrowers with excellent credit. This calculator helps you navigate both types and choose the best repayment strategy.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Federal Student Loan Repayment Plans</h2>
+            
+            <h3>Standard Repayment Plan (10 Years)</h3>
+            <p><strong>How it works:</strong> Fixed monthly payment over 10 years (120 payments). This is the default plan for federal loans.</p>
+            <p><strong>Monthly Payment:</strong> Highest among federal plans, but total interest is lowest.</p>
+            <p><strong>Best for:</strong> Borrowers who can afford higher payments and want to minimize total interest. Anyone pursuing Public Service Loan Forgiveness (PSLF) who can afford the standard payment should use this—PSLF forgives remaining balance after 10 years of qualifying payments, so you'd pay nothing if you qualify.</p>
+            <p><strong>Total Interest:</strong> Lowest of all federal repayment options. On a $35,000 loan at 5.5%, you'd pay about $11,700 in interest over 10 years—$46,700 total.</p>
+            
+            <h3>Graduated Repayment Plan (10 Years)</h3>
+            <p><strong>How it works:</strong> Payments start low and increase every 2 years, still paying off in 10 years total.</p>
+            <p><strong>Monthly Payment:</strong> Starts at roughly 50% of standard payment, gradually increasing to 150% of standard payment by years 9-10.</p>
+            <p><strong>Best for:</strong> Recent graduates expecting significant income growth. Doctors, lawyers, and professionals in training may start at $50-60k but expect to earn $150k+ within 5-10 years.</p>
+            <p><strong>Total Interest:</strong> Slightly higher than standard (5-10% more) because early payments are smaller, allowing more interest to accrue. On that same $35,000 loan, you'd pay about $12,800 in interest—$47,800 total.</p>
+            
+            <h3>Extended Repayment Plan (25 Years)</h3>
+            <p><strong>How it works:</strong> Stretches payments over 25 years (300 payments). Only available if you have $30,000+ in federal loans.</p>
+            <p><strong>Monthly Payment:</strong> Much lower than standard—roughly 40-50% of the standard payment.</p>
+            <p><strong>Best for:</strong> Borrowers with high debt relative to income who don't qualify for income-driven plans or prefer fixed payments over income-based calculations.</p>
+            <p><strong>Total Interest:</strong> Dramatically higher—often 2.5-3x standard plan interest. On $35,000 at 5.5%, you'd pay about $24,500 in interest—$59,500 total. That's an extra $12,800 compared to standard!</p>
+            
+            <h3>Income-Driven Repayment Plans</h3>
+            <p><strong>How they work:</strong> Monthly payment is calculated as a percentage of discretionary income (10-20% depending on plan), recalculated annually based on income and family size. Remaining balance forgiven after 20-25 years of payments.</p>
+            
+            <p><strong>PAYE (Pay As You Earn):</strong> 10% of discretionary income, forgiveness after 20 years. Must be a "new borrower" as of 10/1/2007 with loans disbursed after 10/1/2011. Payment capped at standard 10-year amount.</p>
+            
+            <p><strong>REPAYE (Revised Pay As You Earn):</strong> 10% of discretionary income, forgiveness after 20 years (undergrad loans) or 25 years (grad loans). No cap on payment if income increases dramatically. Available to all federal borrowers regardless of when loans were taken out. Interest subsidy benefit: if your payment doesn't cover accrued interest, government pays 50% of unpaid interest on subsidized loans and 50% of unpaid interest on unsubsidized loans for first 3 years.</p>
+            
+            <p><strong>IBR (Income-Based Repayment):</strong> 10-15% of discretionary income (10% if new borrower after 7/1/2014, 15% otherwise), forgiveness after 20-25 years. Payment capped at standard 10-year amount. If income increases significantly, payment caps but doesn't continue growing.</p>
+            
+            <p><strong>ICR (Income-Contingent Repayment):</strong> Lesser of 20% of discretionary income OR fixed payment over 12 years adjusted for income. Forgiveness after 25 years. Generally the least favorable income-driven plan—only choose if you don't qualify for others or have Parent PLUS loans (can consolidate to Direct Consolidation Loan and then use ICR).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Federal vs. Private Student Loans</h2>
+            
+            <h3>Federal Student Loans</h3>
+            <p><strong>Interest Rates:</strong> Fixed rates set by Congress annually. Undergrad: 4.5-5.5%, Grad: 6-7%, PLUS: 7-8% as of 2023-2024.</p>
+            <p><strong>Credit Requirements:</strong> None for most federal loans (subsidized/unsubsidized). Parent PLUS loans require no adverse credit history but aren't credit-score based.</p>
+            <p><strong>Repayment Flexibility:</strong> Multiple repayment plans including income-driven options. Can switch plans anytime.</p>
+            <p><strong>Forgiveness Options:</strong> Public Service Loan Forgiveness (PSLF) after 10 years, Teacher Loan Forgiveness, income-driven forgiveness after 20-25 years, Total & Permanent Disability discharge.</p>
+            <p><strong>Forbearance/Deferment:</strong> Generous options during financial hardship, unemployment, or return to school. Interest may not accrue during deferment for subsidized loans.</p>
+            <p><strong>Death/Disability Discharge:</strong> Loans discharged upon borrower's death or total/permanent disability.</p>
+            
+            <h3>Private Student Loans</h3>
+            <p><strong>Interest Rates:</strong> Variable or fixed, 3-14% based on credit score and market conditions. Excellent credit (750+) with cosigner: 3-6%. Fair credit (650-700): 8-12%. Poor credit: 12-14% or denied.</p>
+            <p><strong>Credit Requirements:</strong> Strict. Most undergrads need creditworthy cosigner (parent). Recent grads with good credit may qualify solo for refinancing.</p>
+            <p><strong>Repayment Flexibility:</strong> Limited. Most require immediate repayment or interest-only payments while in school. Few offer deferment options.</p>
+            <p><strong>Forgiveness Options:</strong> None. You owe every penny no matter what.</p>
+            <p><strong>Forbearance/Deferment:</strong> Minimal. Some lenders offer 3-12 months forbearance total over loan lifetime. Returned to school deferment may be available.</p>
+            <p><strong>Death/Disability Discharge:</strong> Rare. Some lenders offer it, many don't—your estate or cosigner may be responsible.</p>
+            
+            <h3>When to Choose Private Loans</h3>
+            <p>Only after exhausting federal options: scholarships, grants, work-study, federal direct subsidized/unsubsidized loans, federal PLUS loans. Private loans make sense if: (1) You've maxed federal borrowing limits, (2) Your private loan interest rate is significantly lower than Parent PLUS rate (7-8%), AND you're 100% confident you won't need federal protections, (3) You're refinancing existing loans and have stable income/excellent credit.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Public Service Loan Forgiveness (PSLF)</h2>
+            <p>PSLF forgives remaining federal loan balance after 120 qualifying monthly payments (10 years) while working full-time for qualifying employers. This can be life-changing—potentially $50,000-150,000+ forgiven tax-free.</p>
+            
+            <h3>Qualifying Employers</h3>
+            <p>Government organizations (federal, state, local, tribal), 501(c)(3) non-profit organizations, AmeriCorps, Peace Corps. Does NOT include: for-profit companies, most private-sector jobs, many non-profits that aren't 501(c)(3).</p>
+            
+            <h3>Qualifying Payments</h3>
+            <p>Must be made on eligible federal direct loans under a qualifying repayment plan (all income-driven plans plus standard 10-year plan). Graduated and extended plans don't qualify. Payments must be on-time (within 15 days of due date) and for full amount due. Payments made while in deferment/forbearance don't count.</p>
+            
+            <h3>Strategy for Maximizing PSLF</h3>
+            <p>Use the income-driven plan that gives you the LOWEST payment (usually PAYE or REPAYE) to minimize what you pay over 10 years. Why pay more if it's getting forgiven? If you pay $300/month instead of $600/month for 10 years, that's $36,000 in your pocket instead of loan servicer's pocket. The forgiven amount is the same either way.</p>
+            
+            <p>File annually to recertify income even if it increased—your payment will adjust but that's fine. Maximize pre-tax retirement contributions to lower AGI and thus lower your required payment. Married borrowers should carefully decide whether to file taxes jointly or separately—sometimes filing separately lowers required payments enough to be worthwhile despite tax implications.</p>
+            
+            <h3>PSLF Application Process</h3>
+            <p>Submit Employment Certification Form (ECF) annually to track qualifying payments. After 120 payments, submit PSLF Application. Don't wait until payment 120 to submit first ECF—you might discover mid-career that you've been on wrong plan or loan type. Regular ECF submissions prevent unpleasant surprises.</p>
+            
+            <h3>Common PSLF Mistakes</h3>
+            <p>Wrong loan type (FFEL or Perkins loans don't qualify—must consolidate to Direct Consolidation Loan, which restarts 120-payment clock). Wrong repayment plan (graduated/extended don't count). Wrong employer type (assumed non-profit qualified but wasn't 501(c)(3)). Part-time employment (must work 30+ hours/week or full-time by employer's definition). Missed payment certification (didn't submit ECFs, discovered payment errors too late to fix).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Student Loan Refinancing</h2>
+            <p>Refinancing replaces existing student loans with a new private loan at (hopefully) a lower interest rate. Can refinance federal, private, or both together. Rates range from 3-8% for excellent credit.</p>
+            
+            <h3>When Refinancing Makes Sense</h3>
+            <p>You can save 2%+ on interest rate and have steady income. Not pursuing PSLF or other federal forgiveness. Don't need income-driven repayment flexibility. Have strong credit (720+) or creditworthy cosigner. Have private loans at high rates (10%+) from undergrad/grad school. Have large loan balance ($50,000+) where even 1-2% savings = significant money.</p>
+            
+            <h3>When NOT to Refinance</h3>
+            <p>You're pursuing or might pursue PSLF (refinancing makes loans private, losing PSLF eligibility). Your income is unstable or might decrease (lose income-driven plan options). You might return to school (lose in-school deferment). You work in public service or might in future. You value federal protections (forbearance, disability discharge, death discharge). Your credit is poor (you'll get terrible refinance rates).</p>
+            
+            <h3>Best Refinancing Lenders (2024)</h3>
+            <p>SoFi: 3.5-8% rates, no fees, unemployment protection, career coaching. Earnest: 3.47-8.99%, customizable loan terms, skip one payment/year. Laurel Road: 3.74-8.89%, healthcare professional focus, no fees. CommonBond: 3.84-9.49%, social mission (funds education), hybrid repayment options. Splash Financial: Comparison marketplace showing multiple lender offers at once.</p>
+            
+            <h3>How to Refinance</h3>
+            <p>Check credit score (720+ gets best rates). Shop 3-5 lenders using soft credit pulls (won't hurt score). Compare APR (includes fees), monthly payment, total repayment amount, and loan term. Apply for best offer with hard credit pull (multiple within 14-45 days count as one inquiry). Get approved, new lender pays off old loans, start new payment. Process takes 2-4 weeks typically.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Strategies to Pay Off Student Loans Faster</h2>
+            
+            <h3>Avalanche Method</h3>
+            <p>Pay minimums on all loans, throw extra money at highest interest rate loan first. Once paid off, roll that payment to next-highest rate. Mathematically optimal—saves maximum interest. Best for disciplined borrowers focused on numbers rather than psychological wins.</p>
+            
+            <h3>Snowball Method</h3>
+            <p>Pay minimums on all loans, attack smallest balance first regardless of rate. Quick wins build momentum and motivation. Psychologically powerful but pays slightly more interest than avalanche. Best for borrowers who need encouragement and tangible progress to stay motivated.</p>
+            
+            <h3>Employer Student Loan Assistance</h3>
+            <p>Some employers offer student loan repayment assistance ($100-300/month typical). This is free money—maximize it. Companies in tech, finance, healthcare, and law often offer this benefit. Always ask during job negotiations—it's increasingly common.</p>
+            
+            <h3>Side Income Application</h3>
+            <p>Every extra dollar toward principal saves interest and shortens loan term. $200/month extra on $35,000 at 5.5% over 10 years saves $3,200 interest and pays loan off 28 months early. Freelancing, part-time work, selling items—all accelerate payoff dramatically.</p>
+            
+            <h3>Windfalls and Lump Sums</h3>
+            <p>Tax refunds, bonuses, gifts, stimulus checks—apply directly to loan principal. A $2,000 lump sum payment in year 1 of a 10-year loan can save $600-900 in interest over loan life. Specify "apply to principal" when making extra payments or servicers may apply to future interest.</p>
+            
+            <h3>Refinance to Lower Rate, Keep Old Payment</h3>
+            <p>If you refinance from 6.5% to 4.5%, don't lower your payment—keep paying the old amount. All extra goes to principal. You'll pay off years earlier while enjoying lower interest rate protection if you need to drop to minimum payment.</p>
+            
+            <h3>Biweekly Payments</h3>
+            <p>Pay half your monthly payment every two weeks instead of one full payment monthly. Results in 13 full payments per year instead of 12 (26 half-payments = 13 full). On a 10-year loan, this can shorten payoff to 8-9 years and save 10-15% of total interest.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Tax Implications of Student Loans</h2>
+            
+            <h3>Student Loan Interest Deduction</h3>
+            <p>Deduct up to $2,500 of student loan interest paid per year on your taxes. This is an "above-the-line" deduction, meaning you don't need to itemize—you can take standard deduction AND student loan interest deduction. Phase-out begins at $75,000 AGI (single) or $155,000 (married), completely phased out at $90,000/$185,000.</p>
+            
+            <p>For someone in 22% tax bracket deducting full $2,500: saves $550 in taxes annually. Over 10 years of repayment, that's $5,500 of tax savings. Not life-changing but meaningful.</p>
+            
+            <h3>Forgiven Loan Taxability</h3>
+            <p>Forgiveness through income-driven plans: Currently NOT taxable through 2025 (American Rescue Plan provision). After 2025, unless extended, forgiven amount is taxable income. If you have $80,000 forgiven and you're in 24% tax bracket, you'd owe ~$19,200 in taxes that year—a "tax bomb." Plan ahead by saving in dedicated account.</p>
+            
+            <p>PSLF Forgiveness: Completely tax-free, no tax bomb. This makes PSLF even more valuable.</p>
+            
+            <p>Death/Disability Discharge: Tax-free as of 2018 (previously was taxable income).</p>
+            
+            <h3>Employer Student Loan Assistance</h3>
+            <p>Up to $5,250/year in employer student loan repayment assistance is tax-free to employee (2020-2025 provision). If your employer pays $3,000 toward your loans, you don't pay income tax on that $3,000. Similar treatment to 401(k) match. After 2025, this provision expires unless extended.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>Should I pay off student loans or save for retirement?</h3>
+            <p>Do both if possible. Minimum: contribute enough to 401(k) to get full employer match (that's 50-100% instant return, can't beat it), then aggressively pay loans. If no employer match: if loans are above 6-7% interest, prioritize loans; if below 4-5%, prioritize retirement; if 5-6%, split between both. The math supports retirement for low-rate loans, but psychological burden of debt is real—choose what lets you sleep at night.</p>
+            
+            <h3>Should I pay off student loans or save for house down payment?</h3>
+            <p>Depends on loan interest rate, local housing market, and personal priorities. High-interest loans (7%+): pay those first. Low-interest loans (3-5%): saving for house may make more sense, especially in appreciating market. Middle ground: do both—save some for down payment while making loan payments. Many lenders count student loan payments in debt-to-income ratio, so paying loans down can improve mortgage qualification.</p>
+            
+            <h3>Can I discharge student loans in bankruptcy?</h3>
+            <p>Extremely difficult but not impossible. Must prove "undue hardship" through adversary proceeding—separate lawsuit within bankruptcy. Courts use Brunner Test: (1) You can't maintain minimal standard of living while repaying, (2) Situation unlikely to change for significant portion of repayment period, (3) You made good-faith effort to repay. Very high bar. Only about 0.1% of student loan borrowers successfully discharge in bankruptcy. Income-driven plans with $0 payments are usually better option than bankruptcy for struggling borrowers.</p>
+            
+            <h3>What happens if I don't pay my student loans?</h3>
+            <p>Federal loans: 30+ days late = reported to credit bureaus. 90+ days = default reported. 270+ days = default triggers, entire balance due immediately, wages garnished (up to 15%), tax refunds seized, Social Security benefits garnished (for borrowers 50+), collections fees added (up to 25% of balance), ineligible for deferment/forbearance/forgiveness, lawsuit possible. Private loans: 90-120 days = default, sent to collections, sued, wage garnishment varies by state, no tax refund offset but can seize bank accounts/property through court judgment. Bottom line: don't ignore—call servicer, request forbearance/deferment, apply for income-driven plan showing $0 payment if necessary.</p>
+            
+            <h3>Should I consolidate my federal student loans?</h3>
+            <p>Only if: You have old FFEL or Perkins loans and want to qualify for PSLF or income-driven plans (must consolidate to Direct Consolidation Loan). You have many loans and want one payment (convenience, not financial benefit). DON'T consolidate if: You've made progress toward PSLF (consolidation restarts 120-payment count). You're close to paying off some loans (consolidation averages all rates). You're pursuing teacher loan forgiveness or Perkins cancellation (consolidation makes you ineligible). Consolidation doesn't lower your interest rate—it's weighted average of existing loans rounded up to nearest 1/8%.</p>
+            
+            <h3>How do I find out what kind of loans I have?</h3>
+            <p>Federal loans: Log into StudentAid.gov with FSA ID to see all federal loans, servicers, balances, types. Private loans: Check credit report at AnnualCreditReport.com—all loans listed with creditor names. Contact your school financial aid office—they have records of all aid disbursed. Review old emails/paperwork from when loans were taken out.</p>
+            
+            <h3>Can my spouse's income affect my student loan payments?</h3>
+            <p>Depends on repayment plan and tax filing status. REPAYE always counts spouse income regardless of filing status (you can't avoid it). PAYE, IBR, ICR count spouse income ONLY if you file taxes jointly. If you file separately, only your income counts. However, married filing separately usually means higher taxes—run the numbers. Sometimes separate filing + lower loan payment saves more than joint filing's tax benefit; sometimes not. Use IRS calculators and loan payment estimators to compare.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentLoanType = 'standard';
+
+        function setLoanType(type) {
+            currentLoanType = type;
+            
+            document.querySelectorAll('.loan-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(type + 'Tab').classList.add('active');
+            
+            if (type === 'income') {
+                document.getElementById('standardInputs').style.display = 'none';
+                document.getElementById('incomeInputs').style.display = 'block';
+            } else {
+                document.getElementById('standardInputs').style.display = 'block';
+                document.getElementById('incomeInputs').style.display = 'none';
+            }
+            
+            calculate();
+        }
+
+        function calculate() {
+            const balance = parseFloat(document.getElementById('loanBalance').value) || 0;
+            const rate = parseFloat(document.getElementById('interestRate').value) || 0;
+            
+            if (balance === 0 || rate === 0) {
+                document.getElementById('monthlyPayment').textContent = '0.00';
+                document.getElementById('totalPaid').textContent = '0';
+                document.getElementById('totalInterest').textContent = '0';
+                document.getElementById('payoffTime').textContent = '0';
+                document.getElementById('comparisonSection').style.display = 'none';
+                return;
+            }
+
+            const monthlyRate = rate / 100 / 12;
+            let payment, totalPaid, term;
+
+            if (currentLoanType === 'income') {
+                const income = parseFloat(document.getElementById('annualIncome').value) || 0;
+                const familySize = parseInt(document.getElementById('familySize').value) || 1;
+                const plan = document.getElementById('idrPlan').value;
+                
+                if (income === 0) return;
+                
+                // Simplified discretionary income calculation (150% poverty line estimate)
+                const povertyLine = 14580 + (familySize - 1) * 5140;
+                const discretionaryIncome = Math.max(0, income - (1.5 * povertyLine));
+                
+                let percentage = 0.10; // PAYE/REPAYE default
+                if (plan === 'ibr') percentage = 0.10;
+                if (plan === 'icr') percentage = 0.20;
+                
+                payment = (discretionaryIncome * percentage) / 12;
+                term = plan === 'icr' ? 25 : 20;
+                
+                // Cap payment at standard 10-year for PAYE/IBR
+                if ((plan === 'paye' || plan === 'ibr')) {
+                    const standard10 = balance * (monthlyRate * Math.pow(1 + monthlyRate, 120)) / (Math.pow(1 + monthlyRate, 120) - 1);
+                    payment = Math.min(payment, standard10);
+                }
+                
+                totalPaid = payment * term * 12;
+                
+                document.getElementById('payoffTime').textContent = `${term} years (with potential forgiveness)`;
+            } else {
+                term = parseInt(document.getElementById('loanTerm').value) || 10;
+                const months = term * 12;
+                
+                if (currentLoanType === 'graduated') {
+                    // Simplified graduated payment (increases ~7-8% every 2 years)
+                    payment = balance * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+                    payment = payment * 0.9; // Start at 90% of standard
+                    totalPaid = payment * months * 1.05; // Rough approximation
+                } else {
+                    payment = balance * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+                    totalPaid = payment * months;
+                }
+                
+                document.getElementById('payoffTime').textContent = `${term} years (${term * 12} months)`;
+            }
+
+            const totalInterest = totalPaid - balance;
+
+            document.getElementById('monthlyPayment').textContent = payment.toFixed(2);
+            document.getElementById('totalPaid').textContent = totalPaid.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('totalInterest').textContent = totalInterest.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+            // Calculate comparison
+            const standard10Payment = balance * (monthlyRate * Math.pow(1 + monthlyRate, 120)) / (Math.pow(1 + monthlyRate, 120) - 1);
+            const standard10Total = standard10Payment * 120;
+            const standard10Interest = standard10Total - balance;
+
+            const extended25Payment = balance * (monthlyRate * Math.pow(1 + monthlyRate, 300)) / (Math.pow(1 + monthlyRate, 300) - 1);
+            const extended25Total = extended25Payment * 300;
+            const extended25Interest = extended25Total - balance;
+
+            document.getElementById('standard10').textContent = standard10Payment.toFixed(2);
+            document.getElementById('standard10Interest').textContent = standard10Interest.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            document.getElementById('extended25').textContent = extended25Payment.toFixed(2);
+            document.getElementById('extended25Interest').textContent = extended25Interest.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+            
+            if (currentLoanType === 'income') {
+                document.getElementById('idrPayment').textContent = payment.toFixed(2);
+                const plan = document.getElementById('idrPlan').value;
+                document.getElementById('idrForgiveness').textContent = (plan === 'icr' ? '25' : '20') + ' years';
+            }
+
+            document.getElementById('comparisonSection').style.display = 'block';
+        }
+
+        document.getElementById('loanBalance').addEventListener('input', calculate);
+        document.getElementById('interestRate').addEventListener('input', calculate);
+        document.getElementById('loanTerm').addEventListener('change', calculate);
+        document.getElementById('annualIncome').addEventListener('input', calculate);
+        document.getElementById('familySize').addEventListener('input', calculate);
+        document.getElementById('idrPlan').addEventListener('change', calculate);
+    </script>
+</body>
+</html>

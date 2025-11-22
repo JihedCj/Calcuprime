@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debt Consolidation Calculator - Compare Debt Payoff vs Consolidation</title>
+    <meta name="description" content="Compare paying off multiple debts separately vs. consolidating into a single loan. Calculate total interest savings and monthly payment reductions.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .debt-inputs {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .debt-row {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1.5fr 40px;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: end;
+        }
+        .add-debt-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .add-debt-btn:hover {
+            background: #059669;
+        }
+        .remove-debt-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .comparison-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+        }
+        .comparison-card.better {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+        .comparison-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+        .savings-highlight {
+            background: #dcfce7;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #10b981;
+        }
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            .debt-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Debt Consolidation Calculator</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Compare paying off multiple debts separately vs. consolidating them into a single loan. See your potential savings and simplified payment structure.</p>
+
+        <div class="debt-inputs">
+            <h3 style="margin-top: 0; margin-bottom: 16px;">Your Current Debts</h3>
+            <div id="debtList">
+                <div class="debt-row">
+                    <div class="input-group" style="margin: 0;">
+                        <label class="form-label">Debt Balance ($)</label>
+                        <input type="number" class="form-input debt-balance" placeholder="e.g., 5000" min="0" step="100" value="">
+                    </div>
+                    <div class="input-group" style="margin: 0;">
+                        <label class="form-label">Interest Rate (%)</label>
+                        <input type="number" class="form-input debt-rate" placeholder="e.g., 18.5" min="0" max="50" step="0.1" value="">
+                    </div>
+                    <div class="input-group" style="margin: 0;">
+                        <label class="form-label">Min Payment ($)</label>
+                        <input type="number" class="form-input debt-payment" placeholder="e.g., 150" min="0" step="10" value="">
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+            <button class="add-debt-btn" onclick="addDebt()">+ Add Another Debt</button>
+        </div>
+
+        <div style="background: #f3f4f6; padding: 20px; border-radius: 12px; margin-bottom: 30px;">
+            <h3 style="margin-top: 0; margin-bottom: 16px;">Consolidation Loan Terms</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div class="input-group" style="margin: 0;">
+                    <label for="consolidationRate" class="form-label">New Interest Rate (%)</label>
+                    <input type="number" id="consolidationRate" class="form-input" placeholder="e.g., 8.5" min="0" max="30" step="0.1" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label for="consolidationTerm" class="form-label">Loan Term (months)</label>
+                    <input type="number" id="consolidationTerm" class="form-input" placeholder="e.g., 60" min="12" max="120" step="1" value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison-grid" id="comparisonResults" style="display: none;">
+            <div class="comparison-card" id="currentCard">
+                <div class="comparison-title">Current: Separate Debts</div>
+                <div class="result-row">
+                    <span class="result-label">Total Debt</span>
+                    <span class="result-value">$<span id="currentTotal">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Total Monthly Payment</span>
+                    <span class="result-value">$<span id="currentMonthly">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Total Interest</span>
+                    <span class="result-value">$<span id="currentInterest">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Total Paid</span>
+                    <span class="result-value">$<span id="currentPaid">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Time to Pay Off</span>
+                    <span class="result-value"><span id="currentTime">0</span></span>
+                </div>
+            </div>
+
+            <div class="comparison-card" id="consolidatedCard">
+                <div class="comparison-title">New: Consolidated Loan</div>
+                <div class="result-row">
+                    <span class="result-label">Total Debt</span>
+                    <span class="result-value">$<span id="consolidatedTotal">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Monthly Payment</span>
+                    <span class="result-value">$<span id="consolidatedMonthly">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Total Interest</span>
+                    <span class="result-value">$<span id="consolidatedInterest">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Total Paid</span>
+                    <span class="result-value">$<span id="consolidatedPaid">0</span></span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Time to Pay Off</span>
+                    <span class="result-value"><span id="consolidatedTime">0</span> months</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="savings-highlight" id="savingsBox" style="display: none;">
+            <h3 style="margin-top: 0; margin-bottom: 12px;">💰 Your Potential Savings</h3>
+            <div class="result-row">
+                <span class="result-label">Monthly Payment Reduction</span>
+                <span class="result-value" style="color: #10b981; font-weight: 700;">$<span id="monthlySavings">0</span></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Total Interest Savings</span>
+                <span class="result-value" style="color: #10b981; font-weight: 700;">$<span id="interestSavings">0</span></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Recommendation</span>
+                <span class="result-value" id="recommendation" style="font-weight: 600;"></span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>What is Debt Consolidation?</h2>
+            <p>Debt consolidation is the process of combining multiple debts—credit cards, personal loans, medical bills, or other obligations—into a single new loan. Instead of juggling multiple monthly payments with different interest rates and due dates, you make one payment to one lender.</p>
+            
+            <p>The primary goals of debt consolidation are to simplify your finances, potentially secure a lower interest rate, reduce your monthly payment, or shorten your repayment timeline. When done correctly, consolidation can save thousands of dollars in interest and help you become debt-free faster.</p>
+            
+            <p>However, consolidation isn't always the right solution. If the new loan has a higher interest rate than your average current rate, or if you extend the repayment period too long, you could end up paying more over time despite having lower monthly payments. This calculator helps you compare the real costs and make an informed decision.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use This Calculator</h2>
+            <p><strong>Step 1:</strong> Enter your first debt's balance, interest rate, and minimum monthly payment. This could be a credit card, personal loan, medical bill, or any other debt.</p>
+            
+            <p><strong>Step 2:</strong> Click "Add Another Debt" to enter additional debts. Most people consolidate 2-5 debts, but you can add as many as needed. The more debts you enter, the more you'll benefit from simplified payments.</p>
+            
+            <p><strong>Step 3:</strong> Enter the interest rate you've been offered for a consolidation loan. If you haven't applied yet, use a conservative estimate based on your credit score (good credit: 6-10%, fair credit: 10-15%, poor credit: 15-20%).</p>
+            
+            <p><strong>Step 4:</strong> Enter the loan term in months. Common terms are 36, 48, or 60 months. Shorter terms mean higher monthly payments but less total interest; longer terms mean lower payments but more total interest.</p>
+            
+            <p><strong>Step 5:</strong> Review the comparison. The calculator shows your current situation (keeping debts separate) vs. consolidation, highlighting potential savings or costs.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Your Results</h2>
+            
+            <h3>Current: Separate Debts</h3>
+            <p>This section shows what happens if you continue paying your debts separately at their current minimum payments. The calculator assumes you pay the minimum on each debt until each is paid off. This baseline helps you see whether consolidation offers real benefits.</p>
+            
+            <p><strong>Total Monthly Payment:</strong> The sum of all your current minimum payments. This is what you're paying each month right now across all debts.</p>
+            
+            <p><strong>Total Interest:</strong> How much interest you'll pay over the life of all debts combined if you only make minimum payments. This number is often shockingly high because minimum payments are designed to keep you in debt longer.</p>
+            
+            <p><strong>Time to Pay Off:</strong> How long it takes to pay off all debts making minimum payments. For credit cards especially, this can be 10-20+ years because minimum payments barely exceed the interest charge.</p>
+            
+            <h3>New: Consolidated Loan</h3>
+            <p>This section shows the consolidation scenario. You take out one new loan for the total amount of all your debts, pay them all off, and then make a single monthly payment on the consolidation loan.</p>
+            
+            <p><strong>Monthly Payment:</strong> Your single payment on the consolidation loan. This is typically fixed and won't change over the loan term. Compare this to your current total monthly payment.</p>
+            
+            <p><strong>Total Interest:</strong> Interest paid over the consolidation loan term. If this is lower than your current total interest, consolidation saves you money. If higher, you're paying more for the convenience of a single payment.</p>
+            
+            <h3>Your Potential Savings</h3>
+            <p><strong>Monthly Payment Reduction:</strong> If positive, this is how much less you'll pay each month with consolidation. This frees up monthly cash flow for emergencies, savings, or extra debt payments. If negative, consolidation increases your monthly payment.</p>
+            
+            <p><strong>Total Interest Savings:</strong> If positive, this is how much money you'll save in interest over the life of the loan by consolidating. Even small interest rate reductions can save thousands on large debt amounts. If negative, consolidation costs you more in the long run.</p>
+            
+            <p><strong>Recommendation:</strong> Based on the numbers, the calculator recommends whether consolidation makes sense. Generally, consolidation is recommended when it saves interest and/or significantly reduces monthly payments without extending the payoff period excessively.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>When Debt Consolidation Makes Sense</h2>
+            
+            <h3>You Qualify for a Lower Interest Rate</h3>
+            <p>If your consolidation loan interest rate is lower than the weighted average of your current debts, you'll save money. For example, if you're paying 18-24% on credit cards and can get a personal loan at 8-12%, that's potentially thousands in savings. Even a 3-5% reduction on $20,000 of debt can save $2,000-4,000 over a 5-year payoff period.</p>
+            
+            <h3>You Have Multiple High-Interest Debts</h3>
+            <p>The more high-interest debts you have, the more you benefit from consolidation. Someone with five credit cards at 18-22% APR carrying $15,000 total is paying roughly $225-275/month in interest alone. Consolidating to an 8% personal loan could cut that interest charge in half.</p>
+            
+            <h3>You're Struggling to Manage Multiple Payments</h3>
+            <p>Even if the interest savings aren't dramatic, consolidation simplifies your life. Instead of tracking 4-5 different due dates, interest rates, and payment amounts, you have one payment to one lender. This reduces the chance of missed payments (which trigger late fees and credit score damage) and makes budgeting easier.</p>
+            
+            <h3>You Need Lower Monthly Payments</h3>
+            <p>If your current debt payments are stretching your budget to the breaking point, consolidation can reduce your monthly obligation. However, be aware: extending your repayment period to lower payments means paying more total interest. This trade-off might be necessary for cash flow, but understand the real cost.</p>
+            
+            <h3>You're Disciplined About Not Accumulating New Debt</h3>
+            <p>This is crucial: consolidation only works if you don't run up the credit cards again after paying them off. Studies show that 60-70% of people who consolidate debt reaccumulate it within 2-3 years. If you consolidate but keep spending on credit, you'll end up with the consolidation loan PLUS new credit card debt—doubling your problem.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>When to Avoid Debt Consolidation</h2>
+            
+            <h3>The New Rate Isn't Significantly Lower</h3>
+            <p>If you're only dropping 1-2% in interest rate, consolidation may not be worth the effort, especially if there are origination fees (typically 1-6% of the loan amount). For example, a 3% origination fee on a $20,000 loan is $600—that could wipe out a year's worth of interest savings from a small rate reduction.</p>
+            
+            <h3>You're Extending the Payoff Period Too Much</h3>
+            <p>Be wary of consolidation offers that drastically extend your repayment timeline. If you currently have 3 years left to pay off your debts but the consolidation loan is for 7 years, you might pay less monthly but significantly more total interest. Paying $200/month for 84 months ($16,800) costs more than paying $350/month for 36 months ($12,600) even at the same interest rate.</p>
+            
+            <h3>You Haven't Addressed the Root Cause</h3>
+            <p>If you accumulated debt due to overspending, unexpected medical bills, job loss, or lack of emergency funds, consolidation treats the symptom but not the disease. Without changing spending habits, building an emergency fund, or increasing income, you'll likely end up in the same position (or worse) within a few years.</p>
+            
+            <h3>You're Close to Paying Off Current Debts</h3>
+            <p>If you only have 6-12 months left on your current debts, the hassle and potential fees of consolidation may not be worthwhile. You're almost done—just power through. Also, if you've been making extra payments and have built momentum, refinancing could restart the clock and kill your motivation.</p>
+            
+            <h3>The Loan Has Excessive Fees</h3>
+            <p>Watch out for consolidation loans with high origination fees, prepayment penalties, or other hidden costs. Some consolidation companies are predatory, offering "low rates" but loading the loan with fees that negate any savings. Read all loan documents carefully and calculate the true APR including all fees.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Types of Debt Consolidation Options</h2>
+            
+            <h3>Personal Loans</h3>
+            <p><strong>How it works:</strong> Unsecured loan from a bank, credit union, or online lender used to pay off existing debts.</p>
+            <p><strong>Pros:</strong> Fixed interest rate, fixed monthly payment, predictable payoff timeline, no collateral required, potential for significantly lower rates than credit cards</p>
+            <p><strong>Cons:</strong> Requires good-to-excellent credit for best rates, origination fees common (1-6%), may have prepayment penalties</p>
+            <p><strong>Best for:</strong> Good credit borrowers with $5,000-$50,000 in high-interest debt who want predictable payments</p>
+            
+            <h3>Balance Transfer Credit Cards</h3>
+            <p><strong>How it works:</strong> Transfer high-interest credit card balances to a new card offering 0% APR for 12-21 months.</p>
+            <p><strong>Pros:</strong> 0% interest during promotional period can save thousands, no loan origination fees, can keep accounts open to maintain credit score</p>
+            <p><strong>Cons:</strong> Requires excellent credit (720+), 3-5% balance transfer fee, interest rate jumps to 15-25% after promotional period ends, must pay off during 0% period to maximize savings</p>
+            <p><strong>Best for:</strong> Excellent credit borrowers with $5,000-$15,000 debt who can pay it off within 12-18 months</p>
+            
+            <h3>Home Equity Loan or HELOC</h3>
+            <p><strong>How it works:</strong> Borrow against your home's equity to pay off unsecured debts.</p>
+            <p><strong>Pros:</strong> Lower interest rates (6-9% typical), larger loan amounts available ($25,000-$250,000+), interest may be tax-deductible, longer repayment terms</p>
+            <p><strong>Cons:</strong> Your home becomes collateral—default could mean foreclosure, closing costs (2-5% of loan), turns unsecured debt into secured debt, reduces home equity</p>
+            <p><strong>Best for:</strong> Homeowners with significant equity and large debt amounts ($25,000+) who are absolutely committed to not reaccumulating debt</p>
+            
+            <h3>Debt Management Plan (DMP)</h3>
+            <p><strong>How it works:</strong> Credit counseling agency negotiates lower interest rates with creditors, you make one payment to the agency, they distribute to creditors.</p>
+            <p><strong>Pros:</strong> Lower interest rates (often 0-10%), one monthly payment, agencies sometimes negotiate fee waivers, no loan/credit check required</p>
+            <p><strong>Cons:</strong> Must close credit cards (hurts credit short-term), 3-5 year commitment, monthly fees to agency ($25-50), can't use credit during plan</p>
+            <p><strong>Best for:</strong> People struggling to make minimum payments with credit scores already damaged, needing structured help and accountability</p>
+            
+            <h3>401(k) Loan</h3>
+            <p><strong>How it works:</strong> Borrow from your retirement account to pay off debts.</p>
+            <p><strong>Pros:</strong> No credit check, low interest (typically prime + 1%), interest paid to yourself, doesn't show on credit report</p>
+            <p><strong>Cons:</strong> If you leave your job, entire balance due within 60-90 days or it becomes a taxable distribution + 10% penalty, reduces retirement savings and loses market growth, if you default you're taxed + penalized on the amount</p>
+            <p><strong>Best for:</strong> Last resort only—the retirement implications are severe. Only consider if you're about to face bankruptcy and have no other options.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Step-by-Step: Getting a Consolidation Loan</h2>
+            
+            <h3>Step 1: Check Your Credit Score</h3>
+            <p>Your credit score determines your interest rate. Check your score for free at AnnualCreditReport.com, Credit Karma, or through your bank. Scores 720+ get best rates (6-10%), 660-719 get moderate rates (10-15%), below 660 may struggle to qualify or face rates of 15-25%+.</p>
+            
+            <h3>Step 2: Calculate Total Debt Amount</h3>
+            <p>List all debts you want to consolidate with exact balances. Don't round—lenders will verify exact amounts. Include credit cards, personal loans, medical bills, and any other unsecured debts. Exclude mortgage and auto loans unless specifically doing a cash-out refinance.</p>
+            
+            <h3>Step 3: Shop Multiple Lenders</h3>
+            <p>Get quotes from at least 3-5 lenders: your bank, local credit unions (often offer best rates for members), and online lenders like SoFi, Marcus, LightStream, or Upstart. Use rate comparison sites but know they'll trigger multiple credit inquiries (these are combined if done within 14-45 days and count as one inquiry).</p>
+            
+            <h3>Step 4: Compare All Loan Terms</h3>
+            <p>Don't just look at interest rate. Compare: (1) APR (includes fees), (2) Origination fees, (3) Prepayment penalties, (4) Monthly payment amount, (5) Total repayment amount, (6) Loan term length. The lowest interest rate isn't always the best deal if fees are excessive.</p>
+            
+            <h3>Step 5: Apply for the Best Offer</h3>
+            <p>Submit your application with required documents: proof of income (pay stubs, tax returns), proof of identity (driver's license), proof of address, debt statements. Most lenders give instant or same-day decisions. Approval typically takes 1-7 days, funding takes 1-5 days after approval.</p>
+            
+            <h3>Step 6: Use Funds to Pay Off Debts Immediately</h3>
+            <p>Some lenders send funds directly to your creditors; others deposit in your bank account. If you receive the money, pay off all consolidated debts within 24-48 hours. Keep confirmation numbers. Don't be tempted to use the money for anything else—that's fraud and defeats the purpose.</p>
+            
+            <h3>Step 7: Close or Freeze Paid-Off Accounts</h3>
+            <p>After paying off credit cards, consider closing accounts or "freezing" them (cutting up cards but keeping accounts open for credit score purposes). If you lack discipline, close them. Your credit score may dip 10-30 points temporarily but will recover within 3-6 months as you make on-time payments.</p>
+            
+            <h3>Step 8: Automate Consolidation Loan Payments</h3>
+            <p>Set up automatic payments from your checking account. Never miss a payment—that's the quickest way to ruin the benefits of consolidation. Many lenders offer a 0.25-0.50% rate discount for auto-pay, saving another $100-300 over the loan term.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Debt Consolidation Mistakes</h2>
+            
+            <h3>Mistake 1: Reaccumulating Debt on Paid-Off Cards</h3>
+            <p>The #1 reason consolidation fails: people pay off credit cards, feel relief, and start using them again. Within 18-24 months, they have the consolidation loan PLUS new credit card debt. Solution: Close cards, use cash/debit only, or keep one card with a $500 limit for emergencies only.</p>
+            
+            <h3>Mistake 2: Only Looking at Monthly Payment</h3>
+            <p>Lenders love to advertise "lower monthly payments" without mentioning you're paying for 7 years instead of 3. A $400/month payment for 84 months ($33,600 total) is worse than $600/month for 36 months ($21,600 total) even at the same rate. Always calculate total repayment amount.</p>
+            
+            <h3>Mistake 3: Ignoring Fees and Fine Print</h3>
+            <p>A 6% interest rate sounds great until you discover the 5% origination fee. On a $25,000 loan, that's $1,250 upfront—effectively raising your real rate to 7-8%. Also watch for prepayment penalties: some lenders charge you for paying off the loan early, trapping you in debt longer.</p>
+            
+            <h3>Mistake 4: Not Addressing Underlying Spending Issues</h3>
+            <p>If overspending caused your debt, consolidation without behavior change is pointless. You need a budget, emergency fund, and potentially financial counseling. Consider apps like YNAB (You Need A Budget), Mint, or working with a non-profit credit counselor before consolidating.</p>
+            
+            <h3>Mistake 5: Consolidating Low-Interest Debt</h3>
+            <p>Don't consolidate federal student loans (4-6%) or 0% promotional credit cards into a 10% consolidation loan. Only consolidate high-interest debt (15%+). Keep low-interest debt separate and pay it off on its original schedule.</p>
+            
+            <h3>Mistake 6: Falling for Debt Settlement Scams</h3>
+            <p>Debt settlement companies (not the same as consolidation) promise to "negotiate your debt down to 40-60% of balance." Reality: they tell you to stop paying creditors while saving money to "settle later," destroying your credit. They take 15-25% fees, many debts end up in collections anyway, and you could be sued. Avoid these companies.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Alternatives to Debt Consolidation</h2>
+            
+            <h3>Debt Avalanche Method</h3>
+            <p>Pay minimums on all debts except the highest interest rate debt—throw every extra dollar at that one. Once paid off, roll that payment to the next-highest rate debt. Mathematically optimal: saves the most money. Downside: slowest psychological wins if your highest-rate debt is also your largest balance.</p>
+            
+            <h3>Debt Snowball Method</h3>
+            <p>Pay minimums on all debts except the smallest balance—attack that one aggressively. Once paid off, roll that payment to the next-smallest debt. Psychologically powerful: quick wins build momentum. Downside: pays slightly more interest than avalanche method, but success rate is higher due to motivation.</p>
+            
+            <h3>Balance Transfer (Single Debt)</h3>
+            <p>If you only have one or two credit cards with $5,000-10,000 total, a 0% balance transfer might beat consolidation. Pay the 3-5% fee upfront, then pay off the balance during the 12-18 month promotional period. Requires discipline to pay it off before rate jumps to 20%+.</p>
+            
+            <h3>Side Hustle Income Increase</h3>
+            <p>Sometimes the best debt solution isn't loan tricks but earning more. An extra $500-1,000/month from freelancing, part-time work, or selling items can eliminate $10,000-20,000 debt in 12-18 months without any interest charges or fees. Combine with snowball/avalanche for maximum impact.</p>
+            
+            <h3>Negotiate Directly with Creditors</h3>
+            <p>Call your credit card companies and ask for lower rates. Seriously—it works 40-60% of the time. Say: "I'm considering consolidating my debts. Can you offer a lower rate to keep my business?" Worst case: they say no. Best case: they drop your rate 3-8%, saving thousands without a consolidation loan.</p>
+            
+            <h3>Bankruptcy (Last Resort)</h3>
+            <p>If you're drowning in $50,000+ unsecured debt with no realistic payoff plan, bankruptcy might be more appropriate than consolidation. Chapter 7 wipes out most unsecured debt in 3-6 months; Chapter 13 sets up a 3-5 year repayment plan. Credit impact is severe (stays on report 7-10 years) but may be better than 20 years of minimum payments. Consult a bankruptcy attorney.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>Will debt consolidation hurt my credit score?</h3>
+            <p>Short term: possibly 10-40 points due to the hard credit inquiry and opening a new account. Long term: usually helps if you make on-time payments. Paying off credit cards improves your credit utilization ratio (major credit score factor), which can boost your score 20-60 points within 3-6 months. Closing credit cards after payoff can hurt by reducing available credit, so consider keeping them open with $0 balance.</p>
+            
+            <h3>How long does it take to get approved for a consolidation loan?</h3>
+            <p>Instant to 7 days depending on the lender. Online lenders like SoFi, Marcus, and LightStream often give instant decisions with funding in 1-3 business days. Traditional banks take 3-7 days for approval and another 3-5 days for funding. Credit unions vary widely. Total timeline from application to paying off debts: 3-14 days typically.</p>
+            
+            <h3>Can I consolidate debt with bad credit?</h3>
+            <p>It's difficult but possible. With credit below 620, expect interest rates of 18-28%—barely better than credit cards. You may need a cosigner to qualify or to get reasonable rates. Alternatively, credit unions are more forgiving than banks. If your credit is very poor (below 580), focus on credit repair for 6-12 months before applying, or consider a debt management plan through a non-profit counselor instead.</p>
+            
+            <h3>Should I include all my debts or just some?</h3>
+            <p>Only consolidate high-interest debt (typically 12%+). If you have a car loan at 4%, federal student loans at 5%, or a 0% promotional credit card, leave those alone. Consolidate your 18-24% credit cards, 15% personal loans, and high-interest medical debt. Mixing low-interest and high-interest debt into one medium-interest loan usually costs more money.</p>
+            
+            <h3>What if I can't afford the monthly payment on a consolidation loan?</h3>
+            <p>Then consolidation may not be the right solution yet. If a 5-year consolidation loan payment is still too high, you have a few options: (1) Try a longer term (72-84 months) despite higher total interest, (2) Increase income through side work before consolidating, (3) Try a debt management plan with a non-profit counselor who can negotiate lower payments, (4) In extreme cases, consult a bankruptcy attorney. Don't take a loan you can't afford—that makes things worse.</p>
+            
+            <h3>Can I pay off a consolidation loan early?</h3>
+            <p>Usually yes, but check for prepayment penalties. Many lenders charge 1-3% of the remaining balance if you pay off within the first 2-3 years. Others have no prepayment penalties at all. This should be a major factor in choosing a lender. Paying off early saves interest, so avoid lenders with penalties. If you have a windfall (bonus, tax refund, inheritance), you want the freedom to apply it to your loan.</p>
+            
+            <h3>Is debt consolidation the same as debt settlement?</h3>
+            <p>No—completely different and one is predatory. Debt consolidation: you take a new loan to pay off existing debts in full, simplifying payments and potentially lowering rates. Legitimate and often helpful. Debt settlement: companies claim they'll "negotiate your debts down" but actually tell you to stop paying while they collect fees. Destroys your credit, you get sued, many fail, and costs are hidden. Avoid debt settlement companies—they're almost universally scams.</p>
+            
+            <h3>How much can I realistically save with debt consolidation?</h3>
+            <p>Highly variable. Example: $25,000 in credit card debt at average 20% APR paid over 60 months costs $41,000 total ($16,000 interest). Consolidate to a 10% loan over 60 months: $31,900 total ($6,900 interest) = $9,100 savings. But if you take a 7-year consolidation loan at 12%: $36,500 total ($11,500 interest) = only $4,500 savings despite lower rate. The math varies based on your specific numbers—use this calculator to find out.</p>
+        </div>
+    </div>
+
+    <script>
+        let debtCount = 1;
+
+        function addDebt() {
+            debtCount++;
+            const debtList = document.getElementById('debtList');
+            const newRow = document.createElement('div');
+            newRow.className = 'debt-row';
+            newRow.innerHTML = `
+                <div class="input-group" style="margin: 0;">
+                    <label class="form-label">Debt Balance ($)</label>
+                    <input type="number" class="form-input debt-balance" placeholder="e.g., 5000" min="0" step="100" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label class="form-label">Interest Rate (%)</label>
+                    <input type="number" class="form-input debt-rate" placeholder="e.g., 18.5" min="0" max="50" step="0.1" value="">
+                </div>
+                <div class="input-group" style="margin: 0;">
+                    <label class="form-label">Min Payment ($)</label>
+                    <input type="number" class="form-input debt-payment" placeholder="e.g., 150" min="0" step="10" value="">
+                </div>
+                <button class="remove-debt-btn" onclick="removeDebt(this)">×</button>
+            `;
+            debtList.appendChild(newRow);
+            attachEventListeners();
+        }
+
+        function removeDebt(btn) {
+            btn.parentElement.remove();
+            debtCount--;
+            calculate();
+        }
+
+        function calculate() {
+            const balances = Array.from(document.querySelectorAll('.debt-balance')).map(el => parseFloat(el.value) || 0);
+            const rates = Array.from(document.querySelectorAll('.debt-rate')).map(el => parseFloat(el.value) || 0);
+            const payments = Array.from(document.querySelectorAll('.debt-payment')).map(el => parseFloat(el.value) || 0);
+            
+            const consolidationRate = parseFloat(document.getElementById('consolidationRate').value) || 0;
+            const consolidationTerm = parseInt(document.getElementById('consolidationTerm').value) || 0;
+
+            const totalDebt = balances.reduce((sum, bal) => sum + bal, 0);
+            
+            if (totalDebt === 0 || consolidationRate === 0 || consolidationTerm === 0) {
+                document.getElementById('comparisonResults').style.display = 'none';
+                document.getElementById('savingsBox').style.display = 'none';
+                return;
+            }
+
+            // Calculate current scenario
+            let currentTotalInterest = 0;
+            let currentMonthlyPayment = 0;
+            let maxMonths = 0;
+
+            for (let i = 0; i < balances.length; i++) {
+                if (balances[i] > 0 && payments[i] > 0) {
+                    const monthlyRate = rates[i] / 100 / 12;
+                    let balance = balances[i];
+                    let months = 0;
+                    let totalPaid = 0;
+
+                    while (balance > 0 && months < 600) {
+                        const interest = balance * monthlyRate;
+                        const principal = Math.min(payments[i] - interest, balance);
+                        if (principal <= 0) {
+                            months = 600;
+                            break;
+                        }
+                        balance -= principal;
+                        totalPaid += payments[i];
+                        months++;
+                    }
+
+                    currentTotalInterest += (totalPaid - balances[i]);
+                    currentMonthlyPayment += payments[i];
+                    maxMonths = Math.max(maxMonths, months);
+                }
+            }
+
+            const currentTotalPaid = totalDebt + currentTotalInterest;
+
+            // Calculate consolidation scenario
+            const monthlyRate = consolidationRate / 100 / 12;
+            const consolidatedPayment = totalDebt * (monthlyRate * Math.pow(1 + monthlyRate, consolidationTerm)) / 
+                                       (Math.pow(1 + monthlyRate, consolidationTerm) - 1);
+            const consolidatedTotalPaid = consolidatedPayment * consolidationTerm;
+            const consolidatedInterest = consolidatedTotalPaid - totalDebt;
+
+            // Display results
+            document.getElementById('currentTotal').textContent = totalDebt.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('currentMonthly').textContent = currentMonthlyPayment.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('currentInterest').textContent = currentTotalInterest.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('currentPaid').textContent = currentTotalPaid.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('currentTime').textContent = maxMonths >= 600 ? 'Never (minimum payments too low)' : `${maxMonths} months (${(maxMonths/12).toFixed(1)} years)`;
+
+            document.getElementById('consolidatedTotal').textContent = totalDebt.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('consolidatedMonthly').textContent = consolidatedPayment.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('consolidatedInterest').textContent = consolidatedInterest.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('consolidatedPaid').textContent = consolidatedTotalPaid.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('consolidatedTime').textContent = consolidationTerm;
+
+            const monthlySavings = currentMonthlyPayment - consolidatedPayment;
+            const interestSavings = currentTotalInterest - consolidatedInterest;
+
+            document.getElementById('monthlySavings').textContent = Math.abs(monthlySavings).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('interestSavings').textContent = Math.abs(interestSavings).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+            // Recommendation
+            let recommendation = '';
+            if (interestSavings > 1000 && monthlySavings > 0) {
+                recommendation = '✅ Highly Recommended - Save money and reduce monthly payments';
+                document.getElementById('consolidatedCard').classList.add('better');
+                document.getElementById('currentCard').classList.remove('better');
+            } else if (interestSavings > 0 && monthlySavings > -50) {
+                recommendation = '✅ Recommended - Overall savings worth considering';
+                document.getElementById('consolidatedCard').classList.add('better');
+                document.getElementById('currentCard').classList.remove('better');
+            } else if (interestSavings < -1000) {
+                recommendation = '❌ Not Recommended - You would pay significantly more in interest';
+                document.getElementById('currentCard').classList.add('better');
+                document.getElementById('consolidatedCard').classList.remove('better');
+            } else {
+                recommendation = '⚠️ Marginal - Small difference either way, consider convenience vs. cost';
+                document.getElementById('currentCard').classList.remove('better');
+                document.getElementById('consolidatedCard').classList.remove('better');
+            }
+
+            document.getElementById('recommendation').textContent = recommendation;
+
+            document.getElementById('comparisonResults').style.display = 'grid';
+            document.getElementById('savingsBox').style.display = 'block';
+        }
+
+        function attachEventListeners() {
+            document.querySelectorAll('.debt-balance, .debt-rate, .debt-payment').forEach(input => {
+                input.removeEventListener('input', calculate);
+                input.addEventListener('input', calculate);
+            });
+        }
+
+        document.getElementById('consolidationRate').addEventListener('input', calculate);
+        document.getElementById('consolidationTerm').addEventListener('input', calculate);
+        attachEventListeners();
+    </script>
+</body>
+</html>
