@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint Calculator - Calculate Paint Needed for Rooms & Houses</title>
+    <meta name="description" content="Calculate how much paint you need for any room or house. Enter dimensions and get gallons needed, cost estimates, and coverage details. Avoid buying too much or too little paint.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Paint Calculator</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calculate exactly how much paint you need for walls, ceilings, and trim. Save money by buying the right amount the first time.</p>
+
+        <div class="input-group">
+            <label for="roomLength" class="form-label">Room Length (feet)</label>
+            <input type="number" id="roomLength" class="form-input" placeholder="e.g., 15" min="0" step="any" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="roomWidth" class="form-label">Room Width (feet)</label>
+            <input type="number" id="roomWidth" class="form-input" placeholder="e.g., 12" min="0" step="any" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="wallHeight" class="form-label">Wall Height (feet)</label>
+            <input type="number" id="wallHeight" class="form-input" placeholder="e.g., 8" min="0" step="any" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="doorCount" class="form-label">Number of Doors</label>
+            <input type="number" id="doorCount" class="form-input" placeholder="e.g., 2" min="0" step="1" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="windowCount" class="form-label">Number of Windows</label>
+            <input type="number" id="windowCount" class="form-input" placeholder="e.g., 2" min="0" step="1" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="coats" class="form-label">Number of Coats</label>
+            <select id="coats" class="form-input">
+                <option value="1">1 Coat</option>
+                <option value="2" selected>2 Coats (Recommended)</option>
+                <option value="3">3 Coats</option>
+            </select>
+        </div>
+
+        <div style="margin: 30px 0; padding: 20px; background: #f3f4f6; border-radius: 8px;">
+            <h3 style="margin: 0 0 10px 0; color: #1f2937;">Paint Ceiling?</h3>
+            <label style="display: flex; align-items: center; cursor: pointer; margin-bottom: 15px;">
+                <input type="checkbox" id="paintCeiling" style="margin-right: 10px; width: 18px; height: 18px; cursor: pointer;">
+                <span>Include ceiling in calculation</span>
+            </label>
+
+            <div class="input-group" style="margin: 0;">
+                <label for="paintPrice" class="form-label">Paint Price per Gallon ($)</label>
+                <input type="number" id="paintPrice" class="form-input" placeholder="e.g., 35" min="0" step="0.01" value="">
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Total Square Feet to Paint</span>
+                <span class="result-value"><span id="totalSqFt">0</span> sq ft</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Paint Needed (Walls)</span>
+                <span class="result-value" style="font-size: 28px; font-weight: bold; color: #2563eb;"><span id="wallsGallons">0.00</span> gallons</span>
+            </div>
+            <div class="result-row" id="ceilingRow" style="display: none;">
+                <span class="result-label">Paint Needed (Ceiling)</span>
+                <span class="result-value" style="font-size: 28px; font-weight: bold; color: #7c3aed;"><span id="ceilingGallons">0.00</span> gallons</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Total Paint Needed</span>
+                <span class="result-value" style="font-size: 32px; font-weight: bold; color: #059669;"><span id="totalGallons">0.00</span> gallons</span>
+            </div>
+            <div class="result-row" id="costRow">
+                <span class="result-label">Estimated Cost</span>
+                <span class="result-value" style="font-size: 28px; font-weight: bold; color: #dc2626;">$<span id="totalCost">0.00</span></span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Measure for Paint</h2>
+            <p>Accurate measurements prevent expensive overbuying or frustrating mid-project store runs. Follow these professional painting contractor techniques to calculate paint needs with precision.</p>
+
+            <h3>Step 1: Measure Room Dimensions</h3>
+            <p>Use a tape measure to find room length and width (floor measurements). Measure wall height from floor to ceiling (or to crown molding if not painting above it). For irregular rooms, break into rectangles and add areas together. Standard ceiling height is 8 feet, but many modern homes have 9-10 foot ceilings.</p>
+
+            <h3>Step 2: Count Openings</h3>
+            <p>Count all doors and windows—these areas don't need paint. Standard door: 20 sq ft. Standard window: 15 sq ft. The calculator automatically deducts these from total area. Large picture windows or French doors may require manual adjustment—use actual measurements for precise results.</p>
+
+            <h3>Step 3: Determine Coats Needed</h3>
+            <p><strong>One coat:</strong> Only when painting similar colors (white over white, light beige over light tan). Usually insufficient coverage.</p>
+            <p><strong>Two coats:</strong> Standard for most projects. Required when changing colors. Provides uniform finish and proper coverage.</p>
+            <p><strong>Three coats:</strong> Necessary for dramatic color changes (dark to light, especially red/yellow over dark colors). Also for high-traffic areas needing extra durability.</p>
+
+            <h3>Understanding Paint Coverage</h3>
+            <p>Standard coverage: <strong>350-400 square feet per gallon</strong> per coat. This calculator uses 350 sq ft/gallon for conservative estimates (better to have extra than run short). Factors affecting coverage:</p>
+            <ul>
+                <li><strong>Surface texture:</strong> Smooth drywall = better coverage. Textured/popcorn = 25% more paint needed.</li>
+                <li><strong>Paint quality:</strong> Premium paints have better hiding power, may cover in one coat where cheap paint needs two.</li>
+                <li><strong>Color change:</strong> Dark to light requires more coats/paint than light to dark.</li>
+                <li><strong>Application method:</strong> Roller is most efficient. Spraying uses 20-30% more paint. Brush-only wastes paint.</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Paint Types & When to Use Each</h2>
+
+            <h3>Interior Paint Finishes</h3>
+            <p><strong>Flat/Matte:</strong> No shine, hides imperfections best. Use on ceilings and low-traffic walls (bedrooms, dining rooms). Not washable—marks and scuffs are permanent. Cheapest option.</p>
+
+            <p><strong>Eggshell:</strong> Slight sheen, some washability. Most popular for living rooms, bedrooms, hallways. Good balance of appearance and durability. Hides minor wall imperfections while allowing gentle cleaning.</p>
+
+            <p><strong>Satin:</strong> Soft glow, easily washable. Ideal for kitchens, bathrooms, kids' rooms, hallways. Moisture-resistant. Shows wall imperfections more than eggshell. Mid-range price.</p>
+
+            <p><strong>Semi-Gloss:</strong> Noticeable shine, very durable and washable. Perfect for trim, doors, cabinets, bathrooms. Resists moisture and frequent cleaning. Highlights every wall flaw—requires perfect prep. Higher cost.</p>
+
+            <p><strong>High-Gloss:</strong> Maximum shine and durability. Used on furniture, cabinets, front doors. Extremely durable but shows every imperfection. Most expensive finish.</p>
+
+            <h3>Primer: When Is It Necessary?</h3>
+            <p>Primer seals surfaces and provides uniform base for paint adhesion. Required situations:</p>
+            <ul>
+                <li><strong>New drywall:</strong> Unprimed drywall absorbs paint unevenly. Primer essential.</li>
+                <li><strong>Dark to light colors:</strong> Painting white over navy blue? Prime first or need 3-4 coats.</li>
+                <li><strong>Stained surfaces:</strong> Water stains, smoke damage, crayon marks bleed through paint. Stain-blocking primer stops this.</li>
+                <li><strong>Glossy surfaces:</strong> Painting over semi-gloss trim? Sand and prime for adhesion.</li>
+                <li><strong>Bare wood:</strong> Primer prevents tannin bleed and grain raising.</li>
+            </ul>
+            <p>Modern "paint + primer in one" products work when painting similar colors over previously painted walls in good condition. Not a substitute for true primer in above scenarios.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Paint Cost Breakdown</h2>
+
+            <h3>Price Ranges by Quality</h3>
+            <p><strong>Budget Paint ($20-30/gallon):</strong> Big box store brands, contractor-grade. Thin consistency, requires 2-3 coats. Poor hiding power. Less durable—shows wear in 2-3 years. Suitable for rental properties, garages, or rarely-seen areas.</p>
+
+            <p><strong>Mid-Range Paint ($35-50/gallon):</strong> Major brands (Behr, Valspar, PPG). Good coverage in 2 coats. 5-7 year durability. Best value for homeowners. Adequate washability for normal use.</p>
+
+            <p><strong>Premium Paint ($55-80/gallon):</strong> Sherwin-Williams, Benjamin Moore top lines. Superior coverage—often one-coat for similar colors. Rich colors, smooth finish. 10+ year durability. Fewer VOCs. Better hiding power means less paint needed (offsets higher price).</p>
+
+            <p><strong>Designer Paint ($80-150/gallon):</strong> Farrow & Ball, Fine Paints of Europe. Unique colors, depth, luxurious finish. More for aesthetics than practical benefits. Niche market for high-end homes.</p>
+
+            <h3>Additional Supplies Budget</h3>
+            <p>Paint is 60-70% of total project cost. Budget for:</p>
+            <ul>
+                <li><strong>Primer:</strong> $25-40/gallon (if needed)</li>
+                <li><strong>Roller covers:</strong> $3-8 each (need 1-2 per room)</li>
+                <li><strong>Roller frame:</strong> $8-15</li>
+                <li><strong>Paint tray:</strong> $3-8</li>
+                <li><strong>Brushes:</strong> $8-20 each (2" angled for cutting in, 3" for trim)</li>
+                <li><strong>Painter's tape:</strong> $5-12 per roll (need 2-3 rolls per room)</li>
+                <li><strong>Drop cloths:</strong> $15-40 (canvas reusable, plastic disposable)</li>
+                <li><strong>Spackle & sandpaper:</strong> $10-20 for wall prep</li>
+            </ul>
+            <p><strong>Total supplies for average room:</strong> $75-150 beyond paint cost. Reusable items (brushes, roller frames, drop cloths) amortize over multiple projects.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Professional Painting Tips</h2>
+
+            <h3>Surface Preparation (Most Important Step)</h3>
+            <p>Professional results require proper prep—90% of final quality comes from preparation, not painting technique:</p>
+            <ul>
+                <li><strong>Clean walls:</strong> Wash with TSP (trisodium phosphate) or sugar soap. Grease, dust, and grime prevent adhesion.</li>
+                <li><strong>Repair damage:</strong> Fill nail holes and cracks with spackle. Sand smooth when dry. Dings and holes telegraph through paint.</li>
+                <li><strong>Sand glossy surfaces:</strong> Scuff with 220-grit sandpaper for adhesion. New paint won't stick to slick surfaces.</li>
+                <li><strong>Remove outlet covers:</strong> Paint around actual outlet for clean look. Takes 5 minutes, looks 100% better.</li>
+                <li><strong>Tape edges:</strong> Use quality painter's tape (FrogTape or 3M) on trim, ceilings, adjacent walls. Cheap tape bleeds—wastes more time fixing mistakes.</li>
+            </ul>
+
+            <h3>Cutting In: The Professional Technique</h3>
+            <p>"Cutting in" means painting a 2-3 inch border around edges with a brush before rolling. This creates clean lines and prevents roller marks on trim.</p>
+            <p><strong>How to cut in:</strong> Use 2-2.5" angled brush. Load brush by dipping 1/3 into paint, tap (don't wipe) excess. Paint a line 1/8" from edge with bristle tips. Smooth out to 2-3" wide strip. Work in 3-4 foot sections, then roll walls while cut-in is wet for seamless blending.</p>
+            <p><strong>Pro tip:</strong> Cut in entire room, then roll all walls. Keeps wet edge for blending. Alternatively, cut one wall, immediately roll it, repeat.</p>
+
+            <h3>Rolling Technique</h3>
+            <p>Use 3/8" nap roller for smooth walls, 1/2"-3/4" nap for textured. Thicker nap holds more paint, covers texture better.</p>
+            <p><strong>Loading roller:</strong> Roll in tray to saturate evenly. Don't oversaturate—causes drips. Don't undersaturate—causes thin coverage and roller marks.</p>
+            <p><strong>Application:</strong> Roll in W or M pattern to distribute paint, then smooth with vertical strokes. Maintain wet edge—never let edge dry before adjoining area. Overlap previous section by 6 inches. Use light pressure—heavy pressure squeezes paint out and leaves thin coat.</p>
+
+            <h3>Multiple Coats: Timing Matters</h3>
+            <p>Wait for first coat to dry before second coat. Latex paint: 2-4 hours between coats (check can). Oil-based: 24 hours. Humid weather extends dry time.</p>
+            <p>Don't wait too long between coats—over 24 hours may require light sanding for adhesion. Same-day second coat (after dry to touch) provides best bonding.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Painting Mistakes & Solutions</h2>
+
+            <h3>Mistake 1: Skipping Primer</h3>
+            <p><strong>Result:</strong> Uneven coverage, color bleed-through, poor adhesion, 3+ coats needed.</p>
+            <p><strong>Solution:</strong> Prime new drywall, stained areas, and when changing from dark to light colors. Costs $25 upfront, saves $50+ in extra paint and time.</p>
+
+            <h3>Mistake 2: Buying Cheap Paint</h3>
+            <p><strong>Result:</strong> Thin, watery consistency. Needs 3 coats. Poor hiding, streaks, roller marks. Wears quickly.</p>
+            <p><strong>Solution:</strong> Mid-range paint ($35-50/gallon) covers better, lasts longer, requires fewer coats. Premium paint often one-coats similar colors—uses less total paint. Time saved and better results justify higher price.</p>
+
+            <h3>Mistake 3: Not Enough Paint</h3>
+            <p><strong>Result:</strong> Mid-project store run. Color mismatch between batches (even same formula varies). Lose wet edge, causing lap marks.</p>
+            <p><strong>Solution:</strong> Buy 10-15% more than calculated. Gallons only—quarts cost more per ounce. Extra paint for touch-ups over years. Unopened cans usually returnable.</p>
+
+            <h3>Mistake 4: Poor Surface Prep</h3>
+            <p><strong>Result:</strong> Paint highlights every flaw—nail holes, cracks, rough patches. New paint peels where old paint was loose.</p>
+            <p><strong>Solution:</strong> Spend extra hour prepping. Fill, sand, clean. Smooth surface = professional results. Rushing prep guarantees amateur appearance.</p>
+
+            <h3>Mistake 5: Painting in Wrong Conditions</h3>
+            <p><strong>Result:</strong> Paint doesn't dry properly. High humidity causes slow drying, sagging, tackiness. Too cold = poor flow and adhesion. Direct sunlight = too-fast drying, lap marks.</p>
+            <p><strong>Solution:</strong> Ideal: 50-85°F, 40-70% humidity, no direct sun. Use fans for ventilation, not drying (causes skin-over with wet underneath). Close windows during high humidity.</p>
+
+            <h3>Mistake 6: Overloading Brush/Roller</h3>
+            <p><strong>Result:</strong> Drips, runs, uneven coating, wasted paint.</p>
+            <p><strong>Solution:</strong> Load brush 1/3 depth, tap off excess. Load roller with moderate saturation—should roll smoothly without dripping. Multiple thin coats beat one thick coat.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Special Scenarios</h2>
+
+            <h3>Painting Ceilings</h3>
+            <p>Ceilings require flat finish paint—any sheen highlights imperfections. Use ceiling-specific paint (thicker, less spatter). Paint ceiling before walls (drips land on unpainted walls). Use extension pole to avoid ladder fatigue. Roll in one direction for uniform appearance.</p>
+            <p><strong>Coverage:</strong> Same as walls—350-400 sq ft/gallon. Textured popcorn ceilings use 50% more paint. One coat usually sufficient if painting ceiling white over white.</p>
+
+            <h3>Painting Trim & Doors</h3>
+            <p>Use semi-gloss or satin for durability. Requires brushing—roller texture looks unprofessional. Sand smooth between coats (220-grit). Remove doors and paint flat for best results (no drips).</p>
+            <p><strong>Coverage:</strong> 400-450 sq ft/gallon for smooth trim. Doors: approximately 1 quart per door per coat. Baseboards: 1 gallon covers 400-500 linear feet.</p>
+
+            <h3>Accent Walls</h3>
+            <p>One accent wall adds drama without overwhelming. Calculate just that wall's area. Bold colors (navy, black, red) require 2-3 coats over white. Sample first—paint 2'×2' section, view in different lighting for 24 hours before committing.</p>
+
+            <h3>Exterior Painting</h3>
+            <p>Exterior paint coverage: 250-400 sq ft/gallon (varies with siding type). Rough cedar siding: 250 sq ft/gallon. Smooth vinyl: 400 sq ft/gallon. Stucco: 200-300 sq ft/gallon.</p>
+            <p>Exterior requires 2 coats minimum. Weathered surfaces need more. Add 20% for overspray when spraying. Primer essential on bare wood and stained areas.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>How long does interior paint last?</h3>
+            <p>Walls: 5-10 years depending on traffic and cleaning. High-traffic areas (hallways, kitchens) need repainting every 3-5 years. Low-traffic rooms (guest bedrooms) last 10+ years. Trim and doors: 8-10 years. Premium paint lasts 2-3 years longer than budget paint.</p>
+
+            <h3>Can I paint over wallpaper?</h3>
+            <p>Not recommended. Wallpaper seams and texture show through paint. Moisture in paint may loosen adhesive, causing bubbles. Better to remove wallpaper first (score, apply removal solution, scrape, sand). If removal impossible, use oil-based primer to seal, then paint. Results still inferior to painting over bare wall.</p>
+
+            <h3>Do I need to prime if using paint + primer in one?</h3>
+            <p>"Paint and primer in one" is thicker paint, not true primer. Works over previously painted walls in good condition when painting similar colors. Doesn't replace primer for: new drywall, stained surfaces, dark-to-light color changes, or glossy surfaces. Marketing term more than technical innovation.</p>
+
+            <h3>How much paint do I need for touch-ups?</h3>
+            <p>Save 1 quart per room for future touch-ups. Label with room name and date. Paint lasts 2-3 years sealed; stir well before using. If touch-ups show (sheen difference), may need to repaint entire wall for uniform appearance.</p>
+
+            <h3>Should I buy all paint at once or as needed?</h3>
+            <p>Buy all at once. Computer-mixed colors vary slightly between batches—noticeable when painting adjacent areas. If need more mid-project, buy gallon and mix into remaining paint (boxing) to blend variation. Return unopened cans if over-purchased.</p>
+
+            <h3>How do I dispose of leftover paint?</h3>
+            <p>Latex paint: dry out with cat litter or paint hardener, dispose in trash when solid. Or donate to community theaters, Habitat for Humanity. Oil-based paint is hazardous waste—take to disposal facility. Never pour down drains. Sealed cans last years for touch-ups.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Hiring a Painter: Cost Comparison</h2>
+            <p><strong>DIY cost:</strong> 12×15 room with 8' ceilings = 384 sq ft walls = ~2.5 gallons ($90-200) + supplies ($75-150) = $165-350 total + 8-12 hours labor.</p>
+            <p><strong>Professional cost:</strong> Same room = $380-800 depending on location, including paint, labor, prep. Painters charge $25-80/hour or $1-3 per sq ft.</p>
+            <p><strong>When to DIY:</strong> Small projects (one room), flat walls, time available, budget tight. Savings: $200-500 per room.</p>
+            <p><strong>When to hire:</strong> Whole house, high ceilings, extensive prep needed, textured walls/ceilings, time-constrained. Professional results, warranty, done in 2-3 days vs weeks of weekends.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            const length = parseFloat(document.getElementById('roomLength').value) || 0;
+            const width = parseFloat(document.getElementById('roomWidth').value) || 0;
+            const height = parseFloat(document.getElementById('wallHeight').value) || 0;
+            const doors = parseInt(document.getElementById('doorCount').value) || 0;
+            const windows = parseInt(document.getElementById('windowCount').value) || 0;
+            const coats = parseInt(document.getElementById('coats').value) || 2;
+            const paintCeiling = document.getElementById('paintCeiling').checked;
+            const paintPrice = parseFloat(document.getElementById('paintPrice').value) || 0;
+
+            if (length === 0 || width === 0 || height === 0) {
+                resetResults();
+                return;
+            }
+
+            // Calculate wall area
+            const perimeter = 2 * (length + width);
+            const wallArea = perimeter * height;
+
+            // Deduct doors and windows (standard sizes)
+            const doorArea = doors * 20; // Standard door ~20 sq ft
+            const windowArea = windows * 15; // Standard window ~15 sq ft
+            const paintableWallArea = wallArea - doorArea - windowArea;
+
+            // Calculate ceiling area
+            const ceilingArea = length * width;
+
+            // Coverage: 350 sq ft per gallon per coat
+            const sqFtPerGallon = 350;
+
+            // Calculate gallons needed
+            const wallsGallons = (paintableWallArea * coats) / sqFtPerGallon;
+            const ceilingGallonsNeeded = paintCeiling ? ceilingArea / sqFtPerGallon : 0;
+            const totalGallonsNeeded = wallsGallons + ceilingGallonsNeeded;
+
+            // Display results
+            document.getElementById('totalSqFt').textContent = Math.round(paintableWallArea);
+            document.getElementById('wallsGallons').textContent = wallsGallons.toFixed(2);
+            document.getElementById('ceilingGallons').textContent = ceilingGallonsNeeded.toFixed(2);
+            document.getElementById('totalGallons').textContent = totalGallonsNeeded.toFixed(2);
+
+            // Show/hide ceiling row
+            const ceilingRow = document.getElementById('ceilingRow');
+            if (paintCeiling) {
+                ceilingRow.style.display = 'flex';
+            } else {
+                ceilingRow.style.display = 'none';
+            }
+
+            // Calculate cost if price provided
+            const costRow = document.getElementById('costRow');
+            if (paintPrice > 0) {
+                const totalCost = totalGallonsNeeded * paintPrice;
+                document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+                costRow.style.display = 'flex';
+            } else {
+                costRow.style.display = 'none';
+            }
+        }
+
+        function resetResults() {
+            document.getElementById('totalSqFt').textContent = '0';
+            document.getElementById('wallsGallons').textContent = '0.00';
+            document.getElementById('ceilingGallons').textContent = '0.00';
+            document.getElementById('totalGallons').textContent = '0.00';
+            document.getElementById('totalCost').textContent = '0.00';
+        }
+
+        // Attach event listeners
+        document.getElementById('roomLength').addEventListener('input', calculate);
+        document.getElementById('roomWidth').addEventListener('input', calculate);
+        document.getElementById('wallHeight').addEventListener('input', calculate);
+        document.getElementById('doorCount').addEventListener('input', calculate);
+        document.getElementById('windowCount').addEventListener('input', calculate);
+        document.getElementById('coats').addEventListener('change', calculate);
+        document.getElementById('paintCeiling').addEventListener('change', calculate);
+        document.getElementById('paintPrice').addEventListener('input', calculate);
+    </script>
+</body>
+</html>

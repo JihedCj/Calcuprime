@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Cost Calculator - Calculate Gas Expenses for Road Trips & Commutes</title>
+    <meta name="description" content="Calculate fuel costs for trips and daily commutes. Enter distance, MPG, and gas price to instantly compute total fuel expenses. Perfect for road trip planning and budgeting.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Fuel Cost Calculator</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calculate gas expenses for road trips, daily commutes, or yearly driving costs. Plan your travel budget with precision.</p>
+
+        <div class="input-group">
+            <label for="distance" class="form-label">Distance (miles or km)</label>
+            <input type="number" id="distance" class="form-input" placeholder="e.g., 250" min="0" step="any" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="distanceUnit" class="form-label">Distance Unit</label>
+            <select id="distanceUnit" class="form-input">
+                <option value="miles" selected>Miles</option>
+                <option value="km">Kilometers</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="fuelEfficiency" class="form-label">Fuel Efficiency</label>
+            <input type="number" id="fuelEfficiency" class="form-input" placeholder="e.g., 28" min="0" step="any" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="efficiencyUnit" class="form-label">Efficiency Unit</label>
+            <select id="efficiencyUnit" class="form-input">
+                <option value="mpg" selected>MPG (Miles per Gallon)</option>
+                <option value="l100km">L/100km (Liters per 100km)</option>
+                <option value="kmpl">km/L (Kilometers per Liter)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="fuelPrice" class="form-label">Fuel Price per Gallon/Liter</label>
+            <input type="number" id="fuelPrice" class="form-input" placeholder="e.g., 3.50" min="0" step="0.01" value="">
+        </div>
+
+        <div class="input-group">
+            <label for="priceUnit" class="form-label">Price Unit</label>
+            <select id="priceUnit" class="form-input">
+                <option value="gallon" selected>$ per Gallon</option>
+                <option value="liter">$ per Liter</option>
+            </select>
+        </div>
+
+        <div style="margin: 30px 0; padding: 20px; background: #f3f4f6; border-radius: 8px;">
+            <h3 style="margin: 0 0 10px 0; color: #1f2937;">Optional: Round Trip</h3>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+                <input type="checkbox" id="roundTrip" style="margin-right: 10px; width: 18px; height: 18px; cursor: pointer;">
+                <span>This is a round trip (double the distance)</span>
+            </label>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Total Fuel Cost</span>
+                <span class="result-value" style="font-size: 32px; font-weight: bold; color: #059669;">$<span id="totalCost">0.00</span></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Fuel Needed</span>
+                <span class="result-value"><span id="fuelNeeded">0.00</span> <span id="fuelUnit">gallons</span></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Cost per Mile/Km</span>
+                <span class="result-value">$<span id="costPerUnit">0.00</span> per <span id="costDistanceUnit">mile</span></span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use This Fuel Cost Calculator</h2>
+            <p>Planning a road trip or calculating your daily commute costs? This calculator helps you estimate fuel expenses with precision. Simply enter your trip distance, your vehicle's fuel efficiency (MPG or L/100km), and current gas prices. The calculator instantly shows your total fuel cost, gallons/liters needed, and cost per mile or kilometer.</p>
+
+            <h3>Step-by-Step Instructions</h3>
+            <ol>
+                <li><strong>Enter Distance:</strong> Input your trip length in miles or kilometers. For your daily commute, multiply one-way distance by workdays per month.</li>
+                <li><strong>Input Fuel Efficiency:</strong> Find your vehicle's MPG on the door sticker, owner's manual, or fueleconomy.gov. European cars show L/100km on the dashboard.</li>
+                <li><strong>Add Current Gas Price:</strong> Check local gas station prices or use GasBuddy.com for area averages.</li>
+                <li><strong>Round Trip Option:</strong> Check this box if you're returning to your starting point—it automatically doubles the distance.</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2>Understanding Fuel Efficiency Units</h2>
+
+            <h3>MPG (Miles Per Gallon) - US Standard</h3>
+            <p>Most common in the United States. Represents how many miles your vehicle travels on one gallon of gasoline. Higher MPG = better fuel economy. Average car: 25-30 MPG. Hybrids: 50+ MPG. Trucks/SUVs: 18-25 MPG.</p>
+
+            <h3>L/100km (Liters per 100 Kilometers) - European Standard</h3>
+            <p>Used in Europe and most countries worldwide. Shows how many liters needed to drive 100 kilometers. Lower L/100km = better fuel economy (opposite of MPG). Average car: 6-8 L/100km. Conversion: MPG to L/100km ≈ 235 ÷ MPG.</p>
+
+            <h3>km/L (Kilometers per Liter) - Asian Standard</h3>
+            <p>Common in Asia, Australia, and parts of South America. Similar concept to MPG but using metric units. Higher km/L = better economy. Average car: 12-15 km/L. Conversion: 1 km/L ≈ 2.35 MPG.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Practical Applications & Scenarios</h2>
+
+            <h3>Road Trip Planning</h3>
+            <p>Budgeting a cross-country adventure? Calculate total fuel costs before departure. Example: 1,200-mile trip, 28 MPG car, $3.50/gallon gas = $150 in fuel. Add 10-15% buffer for detours, AC usage, and highway vs city driving differences. Split costs among passengers for accurate per-person expenses.</p>
+
+            <h3>Daily Commute Costs</h3>
+            <p>Estimate monthly and yearly commuting expenses. Example: 30-mile round trip daily commute, 22 workdays/month, 25 MPG vehicle, $3.50/gallon = (30 × 22 ÷ 25) × $3.50 = $92.40/month or $1,109/year. Use this to evaluate if remote work, carpooling, or relocating makes financial sense.</p>
+
+            <h3>Vehicle Comparison Shopping</h3>
+            <p>Compare fuel costs between vehicles you're considering. Example: SUV at 20 MPG vs sedan at 32 MPG for 15,000 miles/year at $3.50/gallon. SUV: $2,625/year. Sedan: $1,641/year. Savings: $984 annually. Over 5-year ownership: $4,920 saved with efficient car—often offsets higher purchase price.</p>
+
+            <h3>Uber/Lyft Driver Profitability</h3>
+            <p>Rideshare drivers must track fuel as business expense. If you drive 500 miles/week at 28 MPG with $3.50/gallon gas: $62.50/week in fuel or $3,250/year. Essential for tax deductions and understanding true hourly earnings after expenses.</p>
+
+            <h3>Moving & Relocation</h3>
+            <p>Factor in fuel costs when moving long distances. Towing a trailer significantly reduces MPG (often 50% decrease). Example: 800-mile move, normally 25 MPG but 12 MPG towing, $3.50/gallon = $233 fuel cost one-way. Plan gas station stops—trucks with trailers need truck diesel pumps.</p>
+
+            <h3>Business Travel Reimbursement</h3>
+            <p>Calculate fair reimbursement for employees using personal vehicles. IRS mileage rate (67 cents/mile in 2024) covers fuel, maintenance, and depreciation. Compare actual fuel cost to reimbursement. 100-mile business trip in 30 MPG car at $3.50/gallon: $11.67 fuel cost but $67 reimbursement.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Factors That Affect Fuel Costs</h2>
+
+            <h3>Driving Conditions</h3>
+            <p><strong>City vs Highway:</strong> City driving uses 20-30% more fuel due to stop-and-go traffic. Highway cruising at steady speeds maximizes efficiency. Your 28 MPG rating might be 24 MPG city, 34 MPG highway.</p>
+            <p><strong>Traffic Congestion:</strong> Rush hour idling drastically reduces MPG. A normally efficient hybrid that gets 50 MPG highway might drop to 35 MPG in heavy traffic.</p>
+            <p><strong>Weather Impact:</strong> Cold weather reduces fuel economy 15-20% (engine takes longer to reach optimal temperature). Summer AC use decreases MPG by 10-15%. Headwinds and mountain driving also reduce efficiency.</p>
+
+            <h3>Vehicle Load & Maintenance</h3>
+            <p><strong>Weight Penalty:</strong> Every 100 pounds reduces MPG by 1-2%. Roof racks create drag (5-10% MPG loss). Remove unnecessary cargo between trips.</p>
+            <p><strong>Tire Pressure:</strong> Under-inflated tires reduce MPG by 0.2% per PSI below optimal. Check monthly. Properly inflated tires improve handling and extend tire life.</p>
+            <p><strong>Engine Maintenance:</strong> Dirty air filters reduce efficiency 10%. Old spark plugs, wrong oil viscosity, and engine problems all decrease MPG. Regular tune-ups maintain rated fuel economy.</p>
+
+            <h3>Driving Habits</h3>
+            <p><strong>Aggressive Driving:</strong> Rapid acceleration and hard braking reduce MPG by 15-30%. Smooth, gradual inputs maximize efficiency.</p>
+            <p><strong>Speed:</strong> Every 5 MPH over 50 MPH reduces fuel economy. Going 75 MPH instead of 65 MPH increases fuel cost by 15-20%. Use cruise control on highways.</p>
+            <p><strong>Idling:</strong> Modern cars don't need "warm up" time. Idling gets 0 MPG. Turn off engine for stops over 30 seconds (trains, long drive-throughs).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Fuel Price Trends & Money-Saving Tips</h2>
+
+            <h3>When Gas Prices Are Highest</h3>
+            <p>Prices typically peak in summer (May-September) due to increased demand and more expensive summer-blend gasoline required by EPA. Lowest prices usually occur in winter (January-February). Holiday weekends see price spikes. Fill up mid-week (Tuesday/Wednesday) when prices are typically lowest.</p>
+
+            <h3>Finding Cheap Gas</h3>
+            <p><strong>Price Apps:</strong> Use GasBuddy, Waze, or AAA to find cheapest stations nearby. Prices vary 20-40 cents/gallon within same area.</p>
+            <p><strong>Warehouse Clubs:</strong> Costco, Sam's Club, and BJ's often have gas 15-30 cents cheaper than retail stations. Membership pays for itself with regular fill-ups.</p>
+            <p><strong>Rewards Programs:</strong> Grocery store fuel rewards (Kroger, Safeway) offer 10-50 cents/gallon discounts. Credit card cash back: 3-5% on gas purchases adds up over time.</p>
+            <p><strong>Avoid Highway/Convenience Stations:</strong> Gas near highways and in remote areas costs 20-50 cents more per gallon. Fill up in suburbs before road trips.</p>
+
+            <h3>Alternative Money-Saving Strategies</h3>
+            <p><strong>Carpooling:</strong> Sharing commute with one other person cuts fuel costs in half. Four-person carpool reduces individual cost by 75%.</p>
+            <p><strong>Trip Consolidation:</strong> Combine errands into one trip. Multiple short trips from cold starts use more fuel than one longer continuous trip.</p>
+            <p><strong>Work From Home:</strong> If you commute 50 miles daily with 25 MPG at $3.50/gallon: $350/month saved per WFH day. Even one day/week = $1,820/year savings.</p>
+            <p><strong>Public Transportation:</strong> Compare fuel costs to bus/train passes. Monthly pass: $80-120. Monthly fuel for same commute might be $150-250.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Electric & Hybrid Vehicles: Fuel Cost Comparison</h2>
+
+            <h3>Hybrid Fuel Savings</h3>
+            <p>Hybrids excel in city driving with regenerative braking. Example comparison for 15,000 annual miles at $3.50/gallon:</p>
+            <p><strong>Regular sedan (28 MPG):</strong> $1,875/year</p>
+            <p><strong>Hybrid sedan (52 MPG):</strong> $1,010/year</p>
+            <p><strong>Annual savings:</strong> $865. Over 5 years: $4,325 saved (often offsets $2,000-3,000 hybrid premium).</p>
+
+            <h3>Electric Vehicle "Fuel" Costs</h3>
+            <p>EVs use kilowatt-hours (kWh) instead of gallons. Average EV efficiency: 3-4 miles per kWh. Electricity cost: $0.12-0.15/kWh national average.</p>
+            <p><strong>Example:</strong> 15,000 miles in EV at 3.5 miles/kWh, $0.13/kWh = $557/year</p>
+            <p><strong>Gas car comparison (28 MPG, $3.50/gallon):</strong> $1,875/year</p>
+            <p><strong>EV savings:</strong> $1,318 annually. Charging at home overnight with off-peak rates can reduce costs to $0.08/kWh ($343/year).</p>
+
+            <h3>Plug-in Hybrid Best of Both</h3>
+            <p>PHEVs offer 25-50 mile electric range for daily commutes plus gas engine for long trips. If your commute is under electric range, gas expenses approach zero except for road trips. Example: 30-mile daily commute on electric ($1.50/day) + occasional gas for 2,000 miles/year road trips ($250) = $800/year total vs $2,000+ for gas-only vehicle.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>How do I find my car's MPG?</h3>
+            <p>Check the door jamb sticker (driver's side door), owner's manual, or visit fueleconomy.gov and enter your year/make/model. Modern cars display real-time MPG on dashboard. For older vehicles, calculate manually: fill tank, record odometer, drive until next fill-up, divide miles driven by gallons added.</p>
+
+            <h3>Why is my actual MPG lower than the EPA rating?</h3>
+            <p>EPA tests use ideal conditions: flat terrain, moderate temperature, no AC, gentle acceleration. Real-world driving includes hills, weather extremes, traffic, AC usage, and cargo weight. Expect 10-25% lower than EPA rating. Aggressive driving can reduce MPG by 30%+.</p>
+
+            <h3>Does premium gas improve MPG?</h3>
+            <p>Only if your car requires premium (owner's manual specifies). Using premium in a regular-gas car provides zero MPG benefit—waste of 50-70 cents/gallon. If manual says "premium recommended" (not required), regular is fine. "Premium required" cars may knock, lose power, or damage engines with regular.</p>
+
+            <h3>How much does AC affect fuel costs?</h3>
+            <p>Air conditioning reduces MPG by 10-25% depending on temperature and fan speed. On highway, AC is more efficient than open windows (windows create drag). In city, cracking windows beats AC for fuel economy. Parking in shade and using vent mode reduces AC load.</p>
+
+            <h3>Are fuel additives worth the cost?</h3>
+            <p>Most modern gas contains adequate detergents. Top Tier gas (Chevron, Shell, Costco) has extra detergents that can improve MPG 2-3% in older engines with carbon buildup. Aftermarket additives rarely provide value exceeding their cost. Regular maintenance (clean air filter, good spark plugs) has bigger MPG impact.</p>
+
+            <h3>How do I calculate fuel cost for a diesel vehicle?</h3>
+            <p>Same calculator works for diesel—just enter diesel price and your truck's MPG. Diesels typically get 20-30% better MPG than gas equivalents but diesel fuel costs 20-40 cents more per gallon. Calculate both to compare total cost. Example: Diesel truck 28 MPG at $4.00/gallon vs gas truck 22 MPG at $3.50/gallon for 15,000 miles: diesel = $2,143/year, gas = $2,386/year. Diesel saves $243 annually.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Business & Tax Deductions for Fuel</h2>
+
+            <h3>Standard Mileage vs Actual Expenses</h3>
+            <p>Self-employed individuals can deduct vehicle expenses two ways:</p>
+            <p><strong>Standard Mileage Rate (2024: $0.67/mile):</strong> Simple—multiply business miles by rate. Covers fuel, maintenance, depreciation, insurance. Can't deduct actual fuel costs separately.</p>
+            <p><strong>Actual Expenses Method:</strong> Track all costs (fuel, repairs, insurance, depreciation) and deduct business-use percentage. Example: 60% business use = deduct 60% of all vehicle expenses. More complex but often higher deduction for expensive vehicles.</p>
+
+            <h3>Record Keeping Requirements</h3>
+            <p>IRS requires detailed logs: date, destination, business purpose, miles driven. Apps like MileIQ, Stride, or Everlance automate tracking. Keep fuel receipts if using actual expense method. Business-use percentage requires total annual mileage documentation (business + personal).</p>
+
+            <h3>Rideshare & Delivery Driver Deductions</h3>
+            <p>Uber, Lyft, DoorDash, and Instacart drivers are self-employed—vehicle expenses are deductible. Most use standard mileage rate. Track miles from accepting ride/order until drop-off. Dead miles (driving between rides) count as business miles. Gas receipts alone won't maximize deduction—mileage tracking yields bigger tax savings.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Long-Term Cost Planning</h2>
+
+            <h3>Lifetime Ownership Fuel Costs</h3>
+            <p>Fuel is a major ownership expense. Calculate before buying:</p>
+            <p><strong>Scenario:</strong> 12,000 miles/year, 10-year ownership, $3.50/gallon average</p>
+            <p><strong>Gas guzzler (18 MPG):</strong> 120,000 miles ÷ 18 MPG = 6,667 gallons × $3.50 = $23,333</p>
+            <p><strong>Average car (28 MPG):</strong> 120,000 miles ÷ 28 MPG = 4,286 gallons × $3.50 = $15,000</p>
+            <p><strong>Efficient car (40 MPG):</strong> 120,000 miles ÷ 40 MPG = 3,000 gallons × $3.50 = $10,500</p>
+            <p><strong>Analysis:</strong> Efficient car saves $12,833 over guzzler, $4,500 over average. Often justifies paying $2,000-4,000 more upfront for better MPG.</p>
+
+            <h3>Future-Proofing Against Gas Price Volatility</h3>
+            <p>Gas prices fluctuate dramatically—$2.00-5.00+ per gallon over past decade. Buying fuel-efficient vehicle or hybrid provides hedge against future price spikes. If gas reaches $5.00/gallon, that 18 MPG SUV costs $33,333 in fuel over 120,000 miles vs $15,000 for 40 MPG car—$18,333 difference.</p>
+        </div>
+    </div>
+
+    <script>
+        function calculate() {
+            let distance = parseFloat(document.getElementById('distance').value) || 0;
+            const distanceUnit = document.getElementById('distanceUnit').value;
+            let fuelEfficiency = parseFloat(document.getElementById('fuelEfficiency').value) || 0;
+            const efficiencyUnit = document.getElementById('efficiencyUnit').value;
+            let fuelPrice = parseFloat(document.getElementById('fuelPrice').value) || 0;
+            const priceUnit = document.getElementById('priceUnit').value;
+            const roundTrip = document.getElementById('roundTrip').checked;
+
+            if (distance === 0 || fuelEfficiency === 0 || fuelPrice === 0) {
+                document.getElementById('totalCost').textContent = '0.00';
+                document.getElementById('fuelNeeded').textContent = '0.00';
+                document.getElementById('costPerUnit').textContent = '0.00';
+                return;
+            }
+
+            // Double distance if round trip
+            if (roundTrip) {
+                distance *= 2;
+            }
+
+            // Convert everything to miles and MPG for calculation
+            let distanceInMiles = distance;
+            if (distanceUnit === 'km') {
+                distanceInMiles = distance * 0.621371;
+            }
+
+            let mpg = fuelEfficiency;
+            if (efficiencyUnit === 'l100km') {
+                // Convert L/100km to MPG: MPG = 235.214 / L/100km
+                mpg = 235.214 / fuelEfficiency;
+            } else if (efficiencyUnit === 'kmpl') {
+                // Convert km/L to MPG: MPG = km/L * 2.35214
+                mpg = fuelEfficiency * 2.35214;
+            }
+
+            // Convert fuel price to per gallon
+            let pricePerGallon = fuelPrice;
+            if (priceUnit === 'liter') {
+                pricePerGallon = fuelPrice * 3.78541; // 3.78541 liters per gallon
+            }
+
+            // Calculate fuel needed in gallons
+            const gallonsNeeded = distanceInMiles / mpg;
+
+            // Calculate total cost
+            const totalCost = gallonsNeeded * pricePerGallon;
+
+            // Calculate cost per unit distance
+            const costPerMile = totalCost / distance;
+
+            // Display results
+            document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+
+            // Show fuel needed in appropriate unit
+            if (priceUnit === 'liter') {
+                const litersNeeded = gallonsNeeded * 3.78541;
+                document.getElementById('fuelNeeded').textContent = litersNeeded.toFixed(2);
+                document.getElementById('fuelUnit').textContent = 'liters';
+            } else {
+                document.getElementById('fuelNeeded').textContent = gallonsNeeded.toFixed(2);
+                document.getElementById('fuelUnit').textContent = 'gallons';
+            }
+
+            document.getElementById('costPerUnit').textContent = costPerMile.toFixed(3);
+            document.getElementById('costDistanceUnit').textContent = distanceUnit === 'km' ? 'km' : 'mile';
+        }
+
+        // Attach event listeners
+        document.getElementById('distance').addEventListener('input', calculate);
+        document.getElementById('distanceUnit').addEventListener('change', calculate);
+        document.getElementById('fuelEfficiency').addEventListener('input', calculate);
+        document.getElementById('efficiencyUnit').addEventListener('change', calculate);
+        document.getElementById('fuelPrice').addEventListener('input', calculate);
+        document.getElementById('priceUnit').addEventListener('change', calculate);
+        document.getElementById('roundTrip').addEventListener('change', calculate);
+    </script>
+</body>
+</html>

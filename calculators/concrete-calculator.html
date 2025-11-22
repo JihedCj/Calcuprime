@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concrete Calculator - Calculate Cubic Yards for Slabs, Footings & Driveways</title>
+    <meta name="description" content="Calculate concrete needed for slabs, driveways, footings, and foundations. Enter dimensions to get cubic yards, bags needed, and cost estimates. Avoid ordering too much or too little.">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Concrete Calculator</h1>
+        <p style="margin-bottom: 30px; color: #6b7280;">Calculate how much concrete you need for slabs, driveways, footings, or foundations. Get accurate cubic yards and cost estimates.</p>
+
+        <div class="input-group">
+            <label for="projectType" class="form-label">Project Type</label>
+            <select id="projectType" class="form-input">
+                <option value="slab">Slab/Driveway (Rectangular)</option>
+                <option value="footing">Footing (Rectangular)</option>
+                <option value="circular">Circular Slab</option>
+                <option value="column">Column/Pier (Circular)</option>
+            </select>
+        </div>
+
+        <div id="rectangularInputs">
+            <div class="input-group">
+                <label for="length" class="form-label">Length (feet)</label>
+                <input type="number" id="length" class="form-input" placeholder="e.g., 20" min="0" step="any" value="">
+            </div>
+
+            <div class="input-group">
+                <label for="width" class="form-label">Width (feet)</label>
+                <input type="number" id="width" class="form-input" placeholder="e.g., 10" min="0" step="any" value="">
+            </div>
+
+            <div class="input-group">
+                <label for="thickness" class="form-label">Thickness (inches)</label>
+                <input type="number" id="thickness" class="form-input" placeholder="e.g., 4" min="0" step="any" value="">
+            </div>
+        </div>
+
+        <div id="circularInputs" style="display: none;">
+            <div class="input-group">
+                <label for="diameter" class="form-label">Diameter (feet)</label>
+                <input type="number" id="diameter" class="form-input" placeholder="e.g., 15" min="0" step="any" value="">
+            </div>
+
+            <div class="input-group">
+                <label for="circularThickness" class="form-label">Thickness (inches)</label>
+                <input type="number" id="circularThickness" class="form-input" placeholder="e.g., 4" min="0" step="any" value="">
+            </div>
+        </div>
+
+        <div id="columnInputs" style="display: none;">
+            <div class="input-group">
+                <label for="columnDiameter" class="form-label">Diameter (inches)</label>
+                <input type="number" id="columnDiameter" class="form-input" placeholder="e.g., 12" min="0" step="any" value="">
+            </div>
+
+            <div class="input-group">
+                <label for="columnHeight" class="form-label">Height (feet)</label>
+                <input type="number" id="columnHeight" class="form-input" placeholder="e.g., 3" min="0" step="any" value="">
+            </div>
+        </div>
+
+        <div style="margin: 30px 0; padding: 20px; background: #f3f4f6; border-radius: 8px;">
+            <h3 style="margin: 0 0 15px 0; color: #1f2937;">Optional: Pricing</h3>
+
+            <div class="input-group" style="margin-bottom: 15px;">
+                <label for="deliveryType" class="form-label">Concrete Source</label>
+                <select id="deliveryType" class="form-input">
+                    <option value="ready-mix">Ready-Mix Delivery ($)</option>
+                    <option value="bags">Bagged Concrete (80 lb bags)</option>
+                </select>
+            </div>
+
+            <div id="readyMixPrice" class="input-group" style="margin: 0;">
+                <label for="pricePerYard" class="form-label">Price per Cubic Yard ($)</label>
+                <input type="number" id="pricePerYard" class="form-input" placeholder="e.g., 125" min="0" step="0.01" value="">
+            </div>
+
+            <div id="bagPrice" class="input-group" style="margin: 0; display: none;">
+                <label for="pricePerBag" class="form-label">Price per 80 lb Bag ($)</label>
+                <input type="number" id="pricePerBag" class="form-input" placeholder="e.g., 4.50" min="0" step="0.01" value="">
+            </div>
+        </div>
+
+        <div class="result-card">
+            <div class="result-row">
+                <span class="result-label">Concrete Needed</span>
+                <span class="result-value" style="font-size: 32px; font-weight: bold; color: #059669;"><span id="cubicYards">0.00</span> cubic yards</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Cubic Feet</span>
+                <span class="result-value"><span id="cubicFeet">0.00</span> cu ft</span>
+            </div>
+            <div class="result-row" id="bagsRow">
+                <span class="result-label">80 lb Bags Needed</span>
+                <span class="result-value"><span id="bagsNeeded">0</span> bags</span>
+            </div>
+            <div class="result-row" id="costRow" style="display: none;">
+                <span class="result-label">Estimated Cost</span>
+                <span class="result-value" style="font-size: 28px; font-weight: bold; color: #dc2626;">$<span id="totalCost">0.00</span></span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Recommended Order (10% extra)</span>
+                <span class="result-value" style="color: #7c3aed;"><span id="recommendedOrder">0.00</span> cubic yards</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>How to Use This Concrete Calculator</h2>
+            <p>Planning a concrete project requires accurate volume calculations to avoid costly mistakes. Ordering too little means delay and visible seams. Ordering too much wastes hundreds of dollars. This calculator helps you get it right the first time.</p>
+
+            <h3>Measuring Your Project</h3>
+            <p><strong>Rectangular Slabs/Driveways:</strong> Measure length and width in feet. Measure thickness in inches (4" is standard for walkways, 6" for driveways). Multiply length × width × thickness to get volume.</p>
+
+            <p><strong>Circular Slabs/Pads:</strong> Measure diameter (distance across circle through center). Measure thickness in inches. Calculator uses formula: π × (radius)² × thickness.</p>
+
+            <p><strong>Footings:</strong> Measure length, width, and depth. Standard footing: 16" wide × 8" deep for single-story homes, 20" wide × 10" deep for two-story.</p>
+
+            <p><strong>Columns/Piers:</strong> Measure diameter of column form (cardboard tubes come in 8", 10", 12" standard sizes). Measure height from bottom of footing to top of pier.</p>
+
+            <h3>Understanding Volume Units</h3>
+            <p><strong>Cubic Yards:</strong> Standard unit for ready-mix concrete orders. 1 cubic yard = 27 cubic feet (3'×3'×3'). Concrete trucks carry 10 cubic yards full load.</p>
+            <p><strong>Cubic Feet:</strong> Better visualization for small projects. 1 cubic foot of concrete weighs ~150 pounds.</p>
+            <p><strong>80 lb Bags:</strong> Each bag yields 0.6 cubic feet. One cubic yard = 45 bags (impractical for projects over 1 yard). Use bags only for small repairs, post holes, or projects under 0.5 yards.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Concrete Projects</h2>
+
+            <h3>Driveway Slab</h3>
+            <p><strong>Typical size:</strong> 20' × 20' (two-car) or 12' × 20' (single-car)</p>
+            <p><strong>Thickness:</strong> 6" (required for vehicle loads). 4" cracks under cars.</p>
+            <p><strong>Example calculation:</strong> 20' × 20' × 6" = 7.4 cubic yards (order 8 yards with 10% extra)</p>
+            <p><strong>Cost:</strong> $900-1,200 in concrete + $3,000-6,000 labor = $4,000-7,000 total</p>
+            <p><strong>Requirements:</strong> Gravel base (4-6"), rebar or wire mesh reinforcement, expansion joints every 10', slope for drainage (1/8" per foot).</p>
+
+            <h3>Patio Slab</h3>
+            <p><strong>Typical size:</strong> 12' × 16' (backyard patio) or 10' × 12' (small patio)</p>
+            <p><strong>Thickness:</strong> 4" (foot traffic only, no vehicles)</p>
+            <p><strong>Example calculation:</strong> 12' × 16' × 4" = 2.4 cubic yards (order 2.5-3 yards)</p>
+            <p><strong>Cost:</strong> $300-400 concrete + $1,200-2,400 labor = $1,500-2,800 total</p>
+            <p><strong>Tips:</strong> Broom finish for traction when wet. Slight slope away from house. Consider stamped/colored concrete for upgraded appearance (+$4-8/sq ft).</p>
+
+            <h3>Walkway/Sidewalk</h3>
+            <p><strong>Typical size:</strong> 3' wide × variable length</p>
+            <p><strong>Thickness:</strong> 4" standard</p>
+            <p><strong>Example calculation:</strong> 3' × 30' × 4" = 1.1 cubic yards (order 1.5 yards)</p>
+            <p><strong>Cost:</strong> $150-200 concrete + $600-1,200 labor = $750-1,400 total</p>
+            <p><strong>Requirements:</strong> Control joints every 4-5 feet to control cracking. Gravel base for drainage. Slight crown or slope for water runoff.</p>
+
+            <h3>Foundation Footing</h3>
+            <p><strong>Typical size:</strong> 16" wide × 8" deep × perimeter of house</p>
+            <p><strong>Example calculation:</strong> 30' × 40' house = 140' perimeter × 16" wide × 8" deep = 4.6 cubic yards</p>
+            <p><strong>Requirements:</strong> Below frost line (depth varies by region—36" in Minnesota, 12" in Texas). Rebar required (typically #4 rebar). Must be on undisturbed soil or compacted gravel. Building permit required.</p>
+
+            <h3>Fence Post Holes</h3>
+            <p><strong>Typical size:</strong> 12" diameter × 30" deep per post (4"×4" post)</p>
+            <p><strong>Bags needed:</strong> 2-3 bags per post (much easier than ready-mix for small projects)</p>
+            <p><strong>Cost per post:</strong> $9-14 in concrete + $15-25 labor if hiring</p>
+            <p><strong>Tip:</strong> Set posts in cardboard tube forms (Sonotube) for above-grade piers. Pour concrete around post, check level and plumb, brace until cured (24-48 hours).</p>
+
+            <h3>Garage Floor</h3>
+            <p><strong>Typical size:</strong> 20' × 20' (single car) or 24' × 24' (two car with workspace)</p>
+            <p><strong>Thickness:</strong> 6" (vehicle loads + storage)</p>
+            <p><strong>Example calculation:</strong> 24' × 24' × 6" = 10.7 cubic yards (order 11-12 yards)</p>
+            <p><strong>Cost:</strong> $1,400-1,700 concrete + $4,000-7,000 labor = $5,500-9,000 total</p>
+            <p><strong>Special requirements:</strong> Vapor barrier under slab. Rebar grid 12" spacing. Thickened edge (12" wide × 18" deep) acts as footing. Anchor bolts for wall plates.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Ready-Mix vs Bagged Concrete</h2>
+
+            <h3>Ready-Mix Delivery (Projects Over 1 Cubic Yard)</h3>
+            <p><strong>Cost:</strong> $110-150 per cubic yard delivered. Minimum order: 1 yard (some companies require 3-5 yard minimum). Short load fee ($50-100) for orders under minimum.</p>
+            <p><strong>Pros:</strong> Large volumes in minutes. Consistent quality. Professional strength. No mixing labor.</p>
+            <p><strong>Cons:</strong> Must use immediately (90-minute window). Access required for truck (10' wide, 30' long). Minimum order requirements.</p>
+            <p><strong>Best for:</strong> Driveways, patios, slabs, large footings—any project over 1 cubic yard. One yard = 45 bags = hours of mixing labor.</p>
+
+            <h3>Bagged Concrete (Small Projects Under 0.5 Yards)</h3>
+            <p><strong>Cost:</strong> $4-6 per 80 lb bag. Each bag yields 0.6 cubic feet. One yard requires 45 bags = $180-270 in materials alone (before mixing labor).</p>
+            <p><strong>Pros:</strong> Buy exactly what you need. Work at own pace. No truck access required. Store extras for future repairs.</p>
+            <p><strong>Cons:</strong> Labor-intensive mixing. Inconsistent batches. Expensive for large projects. Heavy lifting (80 lbs per bag).</p>
+            <p><strong>Best for:</strong> Fence posts, small repairs, mailbox post, stepping stones, very small pads under 0.5 yards.</p>
+
+            <h3>Break-Even Point</h3>
+            <p>Ready-mix becomes cheaper than bagged at ~0.75 cubic yards (34 bags). Even factoring short load fees, ready-mix wins at 1+ yards. Plus time savings: mixing 45 bags takes 4-6 hours of hard labor. Ready-mix: 15 minutes to pour.</p>
+
+            <h3>Mixing Bagged Concrete</h3>
+            <p>Use wheelbarrow or mortar mixer. Add 3/4 of water specified on bag. Mix thoroughly. Add remaining water slowly until workable consistency (thick, not soupy). Pour within 20-30 minutes. One bag takes 5-7 minutes to mix properly. Rent mixer ($35/day) if doing more than 10 bags.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Concrete Strength & Types</h2>
+
+            <h3>PSI Ratings (Pounds per Square Inch)</h3>
+            <p><strong>2,500 PSI:</strong> Minimum for residential projects. Walkways, patios (foot traffic only). Not for driveways.</p>
+            <p><strong>3,000 PSI:</strong> Standard residential. Driveways, garage floors, foundations. Most common order.</p>
+            <p><strong>3,500-4,000 PSI:</strong> High-traffic commercial. Heavy equipment areas. Faster curing. Costs $5-10 more per yard.</p>
+            <p><strong>4,500+ PSI:</strong> Specialized applications. Extreme loads or conditions. Bridge decks, parking structures.</p>
+            <p><strong>Ordering:</strong> Specify 3,000 PSI for driveways/garages, 2,500 PSI for walkways/patios. Higher PSI costs more but provides longer life and crack resistance.</p>
+
+            <h3>Concrete Mix Add-Ins</h3>
+            <p><strong>Fiber Reinforcement:</strong> Synthetic fibers mixed throughout ($5-8 per yard). Reduces cracking, increases durability. Good alternative to wire mesh for slabs.</p>
+            <p><strong>Accelerator:</strong> Speeds curing time. Use in cold weather. Allows finishing sooner. Extra $5-10 per yard.</p>
+            <p><strong>Retarder:</strong> Slows setting. Essential in hot weather (over 85°F) or large pours. Extends working time from 90 to 120+ minutes. $3-6 per yard.</p>
+            <p><strong>Air Entrainment:</strong> Microscopic air bubbles increase freeze-thaw resistance. Required in cold climates. Already included in most ready-mix in northern states.</p>
+            <p><strong>Color:</strong> Integral color mixed throughout. Browns, grays, reds available. $50-120 per yard depending on intensity. More expensive but permanent (doesn't wear off like stains).</p>
+
+            <h3>Slump: Workability Rating</h3>
+            <p>Slump measures concrete wetness/flowability. Ordered in inches:</p>
+            <p><strong>4" slump:</strong> Standard, stiff mix. Best for most flatwork. Easy to screed and finish.</p>
+            <p><strong>5-6" slump:</strong> More flowable. Easier to pour in forms or around rebar. Slightly weaker when cured.</p>
+            <p><strong>3" slump:</strong> Very stiff. Difficult to work. Used for structural applications where strength is critical.</p>
+            <p><strong>Ordering:</strong> Request 4" slump for DIY projects (easier to work). Professionals often use 3-4" (stronger but harder to finish).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Site Preparation & Requirements</h2>
+
+            <h3>Subgrade Preparation</h3>
+            <p><strong>Excavation:</strong> Dig 4-6" deeper than slab thickness for gravel base. Level and compact soil. Remove vegetation, roots, organic material (causes settling).</p>
+            <p><strong>Gravel Base:</strong> 4-6" of crushed stone or gravel. Provides drainage, prevents frost heaving, distributes load. Compact in 2" layers with plate compactor.</p>
+            <p><strong>Vapor Barrier:</strong> 6 mil plastic sheeting under all interior slabs (basements, garages). Prevents moisture from soil entering concrete. Overlap seams 6-12". Not needed for exterior slabs.</p>
+
+            <h3>Reinforcement</h3>
+            <p><strong>Rebar:</strong> Steel bars increase tensile strength. #3 or #4 rebar in 12-18" grid for driveways. Place on rebar chairs (2-3" below surface). Required for footings and structural slabs.</p>
+            <p><strong>Wire Mesh:</strong> 6×6 W1.4×W1.4 (wires every 6", thickness W1.4). Lighter reinforcement for patios, walkways. Prevents large cracks but doesn't prevent cracking entirely.</p>
+            <p><strong>Fiber Reinforcement:</strong> Synthetic fibers mixed in concrete. Reduces shrinkage cracks. Easier than wire mesh (no positioning needed). Good for non-structural slabs.</p>
+
+            <h3>Formwork</h3>
+            <p>Use 2×4 or 2×6 lumber staked every 2-3 feet. Check level and square. Coat with form oil for easy removal. Brace forms to withstand concrete pressure (150 lbs per cubic foot). Remove forms after 24-48 hours. Reusable forms save money on large projects.</p>
+
+            <h3>Truck Access</h3>
+            <p>Ready-mix trucks need 10' width, 12' height clearance, hard surface to drive on. Chute reaches 10-12 feet. Farther pours require pumper truck ($300-600 additional). Check if truck can reach all pour areas. If not accessible, arrange wheelbarrow brigade (1 cubic yard = 40+ wheelbarrow loads).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Pouring & Finishing Concrete</h2>
+
+            <h3>Pre-Pour Checklist</h3>
+            <ul>
+                <li>Forms level, square, braced, oiled</li>
+                <li>Gravel base compacted, level</li>
+                <li>Vapor barrier installed (if applicable)</li>
+                <li>Reinforcement positioned on chairs</li>
+                <li>Tools ready: screed, bull float, hand floats, edger, jointer, broom</li>
+                <li>Helpers lined up (concrete waits for no one)</li>
+                <li>Weather check (avoid rain, freezing, extreme heat)</li>
+            </ul>
+
+            <h3>The Pour</h3>
+            <p><strong>Start at far corner:</strong> Work toward exit. Pour in sections, don't dump in piles. Spread with rake to roughly 1/2" above form height.</p>
+            <p><strong>Consolidate:</strong> Use screed board (straight 2×4) in sawing motion across forms to level. Vibrate edges with shovel to eliminate voids. Don't overwork—brings water to surface.</p>
+            <p><strong>Timing:</strong> Work quickly but don't rush finishing. Concrete starts setting in 90 minutes. Hot weather accelerates (60 minutes). Use retarder if needed.</p>
+
+            <h3>Finishing Steps (Order Matters)</h3>
+            <p><strong>1. Bull Float (immediately after screeding):</strong> Large flat tool smooths surface, embeds aggregate. Push/pull with slight angle. Don't overwork.</p>
+            <p><strong>2. Wait for Bleed Water:</strong> Water rises to surface. Wait until evaporates (30-90 minutes depending on weather). Working wet surface causes dusting and weak finish.</p>
+            <p><strong>3. Edging:</strong> Run edger along forms to create rounded corners (prevents chipping). Tool creates 1/4" radius.</p>
+            <p><strong>4. Jointing:</strong> Cut control joints 1/4 depth of slab every 10' with jointer tool. Joints control where cracks occur (invisible in joint). Square slabs need joint spacing equal to width.</p>
+            <p><strong>5. Float:</strong> Wooden or magnesium float smooths surface, fills low spots. Circular or arcing motion. Don't overwork.</p>
+            <p><strong>6. Broom Finish:</strong> Drag soft-bristle broom perpendicular to traffic for traction. Skip this for interior slabs (use steel trowel for smooth finish).</p>
+
+            <h3>Curing: Critical for Strength</h3>
+            <p>Concrete gains strength as it hydrates, not as it "dries." Keeping moist for 7 days increases final strength 50%.</p>
+            <p><strong>Curing methods:</strong></p>
+            <ul>
+                <li><strong>Water:</strong> Spray with hose 3-4 times daily for 7 days. Best method, labor-intensive.</li>
+                <li><strong>Curing compound:</strong> Spray-on liquid sealer. Apply immediately after finishing. Easy, effective. $20-30 per gallon (covers 200-300 sq ft).</li>
+                <li><strong>Plastic sheeting:</strong> Cover with 6 mil plastic, weigh down edges. Traps moisture. Can cause discoloration.</li>
+                <li><strong>Wet burlap:</strong> Cover with burlap, keep wet. Traditional method. Labor-intensive.</li>
+            </ul>
+            <p><strong>Timeline:</strong> Walk on after 24-48 hours. Drive on after 7 days. Full strength at 28 days (95%+ final strength).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Common Concrete Problems</h2>
+
+            <h3>Cracking</h3>
+            <p><strong>Causes:</strong> Shrinkage (concrete shrinks 1/8" per 10'), settlement, freeze-thaw, no control joints, too much water in mix.</p>
+            <p><strong>Prevention:</strong> Control joints every 10', proper curing, adequate base, right water content, reinforcement.</p>
+            <p><strong>Repairs:</strong> Hairline cracks (<1/8"): cosmetic only, use concrete caulk. Wide cracks (>1/4"): structural issue, may need mudjacking or replacement.</p>
+
+            <h3>Scaling/Spalling</h3>
+            <p><strong>Causes:</strong> Freeze-thaw damage, deicing salts, finishing while bleed water present, poor curing.</p>
+            <p><strong>Prevention:</strong> Air-entrained mix in freeze climates, proper finishing timing, adequate curing, sealer application, avoid deicing salts first winter.</p>
+            <p><strong>Repairs:</strong> Light scaling: grind smooth, apply overlay. Severe: remove and replace affected sections.</p>
+
+            <h3>Dusting/Weak Surface</h3>
+            <p><strong>Causes:</strong> Finishing while bleed water on surface, too much water in mix, rain during finishing, poor curing.</p>
+            <p><strong>Prevention:</strong> Wait for bleed water to evaporate before finishing, proper water content, protect from rain, cure adequately.</p>
+            <p><strong>Repairs:</strong> Chemical hardener densifies surface. Or grind off weak layer and apply overlay.</p>
+
+            <h3>Discoloration</h3>
+            <p><strong>Causes:</strong> Inconsistent water content, different batches, varying cure rates (plastic creates dark spots), calcium chloride accelerator.</p>
+            <p><strong>Prevention:</strong> Consistent mixing, single pour vs multiple batches, uniform curing method.</p>
+            <p><strong>Repairs:</strong> Cosmetic only. Acid stain can blend colors. Or paint/coat entire surface.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Cost-Saving Tips</h2>
+
+            <h3>Do Your Own Prep Work</h3>
+            <p>Hire contractors just for pour and finish—save 50% vs full service. You handle excavation, gravel, forms, reinforcement. Contractor pours and finishes (skilled work). 400 sq ft patio: full service $2,800, pour-only $1,200 + $400 your labor/materials = $1,600 total. Saves $1,200.</p>
+
+            <h3>Timing Matters</h3>
+            <p>Concrete companies less busy in winter (northern climates) and late fall/early spring. Ask for off-season discounts. Avoid summer and fall rushes (5-10% higher prices). Schedule mid-week—weekends may cost extra.</p>
+
+            <h3>Combine Orders with Neighbors</h3>
+            <p>Avoid short-load fees by combining orders. If you need 2 yards and neighbor needs 3 yards, order together (5 yards, no fees). Split delivery charge. Requires coordination but saves $50-100 each.</p>
+
+            <h3>Broom Finish vs Stamped/Decorative</h3>
+            <p>Broom finish: included in basic cost. Stamped concrete: +$8-18 per sq ft. Exposed aggregate: +$5-12 per sq ft. Stained: +$2-8 per sq ft. For budget projects, standard broom finish looks fine and performs identically.</p>
+
+            <h3>Consider Bagged for Tiny Projects</h3>
+            <p>Projects under 0.5 yards (fence posts, small repairs) cost less with bags than ready-mix minimum order + short-load fee. 0.25 yards = 12 bags ($55) vs 1-yard minimum ($125) + short-load fee ($75) = $200. Bags save $145.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>How thick should my concrete slab be?</h3>
+            <p>Walkways/patios (foot traffic only): 4 inches. Driveways/garages (cars): 6 inches. RV pads or heavy equipment: 8 inches. Thicker = stronger but more expensive (50% more concrete going from 4" to 6").</p>
+
+            <h3>Do I need rebar or wire mesh?</h3>
+            <p>Footings and structural slabs: rebar required by code. Driveways: rebar or fiber reinforcement recommended. Walkways/patios: wire mesh or fiber optional but advised. Reinforcement doesn't prevent cracking—controls crack width and holds concrete together.</p>
+
+            <h3>Can I pour concrete myself or hire contractor?</h3>
+            <p>DIY-able for small projects (under 200 sq ft) with research and helpers. Larger projects or structural work should hire professionals. Concrete is unforgiving—mistakes are permanent and expensive to fix. Consider hiring for pour/finish but doing your own prep work (good compromise).</p>
+
+            <h3>How long until I can use new concrete?</h3>
+            <p>Walk on: 24-48 hours (when no longer soft). Drive on: 7 days minimum. Heavy loads: 28 days for full strength. Rushing causes surface damage and reduces long-term strength. Patient curing pays off.</p>
+
+            <h3>What's the best temperature for pouring concrete?</h3>
+            <p>Ideal: 50-80°F air temperature. Above 90°F: concrete sets too fast, add retarder, work quickly, cure carefully. Below 40°F: sets too slow, may freeze (ruins concrete), use accelerator and insulated blankets. Avoid pouring if rain expected within 24 hours or temperature below 40°F or above 95°F.</p>
+
+            <h3>Should I seal my concrete?</h3>
+            <p>Yes for driveways (protects from deicing salts, stains, moisture). Wait 28 days before sealing. Reseal every 2-3 years. Sealer costs $40-80 per 5 gallons (covers 1,000-2,000 sq ft). Interior slabs and walkways optional unless staining is concern.</p>
+        </div>
+    </div>
+
+    <script>
+        function updateInputVisibility() {
+            const projectType = document.getElementById('projectType').value;
+
+            document.getElementById('rectangularInputs').style.display = 'none';
+            document.getElementById('circularInputs').style.display = 'none';
+            document.getElementById('columnInputs').style.display = 'none';
+
+            if (projectType === 'slab' || projectType === 'footing') {
+                document.getElementById('rectangularInputs').style.display = 'block';
+            } else if (projectType === 'circular') {
+                document.getElementById('circularInputs').style.display = 'block';
+            } else if (projectType === 'column') {
+                document.getElementById('columnInputs').style.display = 'block';
+            }
+
+            calculate();
+        }
+
+        function updatePriceInputs() {
+            const deliveryType = document.getElementById('deliveryType').value;
+
+            if (deliveryType === 'ready-mix') {
+                document.getElementById('readyMixPrice').style.display = 'block';
+                document.getElementById('bagPrice').style.display = 'none';
+            } else {
+                document.getElementById('readyMixPrice').style.display = 'none';
+                document.getElementById('bagPrice').style.display = 'block';
+            }
+
+            calculate();
+        }
+
+        function calculate() {
+            const projectType = document.getElementById('projectType').value;
+            let cubicFeet = 0;
+
+            if (projectType === 'slab' || projectType === 'footing') {
+                const length = parseFloat(document.getElementById('length').value) || 0;
+                const width = parseFloat(document.getElementById('width').value) || 0;
+                const thickness = parseFloat(document.getElementById('thickness').value) || 0;
+
+                if (length > 0 && width > 0 && thickness > 0) {
+                    cubicFeet = length * width * (thickness / 12);
+                }
+            } else if (projectType === 'circular') {
+                const diameter = parseFloat(document.getElementById('diameter').value) || 0;
+                const thickness = parseFloat(document.getElementById('circularThickness').value) || 0;
+
+                if (diameter > 0 && thickness > 0) {
+                    const radius = diameter / 2;
+                    cubicFeet = Math.PI * radius * radius * (thickness / 12);
+                }
+            } else if (projectType === 'column') {
+                const diameter = parseFloat(document.getElementById('columnDiameter').value) || 0;
+                const height = parseFloat(document.getElementById('columnHeight').value) || 0;
+
+                if (diameter > 0 && height > 0) {
+                    const radius = (diameter / 12) / 2; // Convert inches to feet, then get radius
+                    cubicFeet = Math.PI * radius * radius * height;
+                }
+            }
+
+            // Calculate cubic yards (1 yard = 27 cubic feet)
+            const cubicYards = cubicFeet / 27;
+
+            // Calculate bags needed (1 bag = 0.6 cubic feet)
+            const bagsNeeded = Math.ceil(cubicFeet / 0.6);
+
+            // Recommended order (10% extra)
+            const recommendedOrder = cubicYards * 1.1;
+
+            // Display results
+            document.getElementById('cubicYards').textContent = cubicYards.toFixed(2);
+            document.getElementById('cubicFeet').textContent = cubicFeet.toFixed(2);
+            document.getElementById('bagsNeeded').textContent = bagsNeeded;
+            document.getElementById('recommendedOrder').textContent = recommendedOrder.toFixed(2);
+
+            // Calculate cost if price provided
+            const deliveryType = document.getElementById('deliveryType').value;
+            const costRow = document.getElementById('costRow');
+
+            if (deliveryType === 'ready-mix') {
+                const pricePerYard = parseFloat(document.getElementById('pricePerYard').value) || 0;
+                if (pricePerYard > 0 && cubicYards > 0) {
+                    const totalCost = cubicYards * pricePerYard;
+                    document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+                    costRow.style.display = 'flex';
+                } else {
+                    costRow.style.display = 'none';
+                }
+            } else {
+                const pricePerBag = parseFloat(document.getElementById('pricePerBag').value) || 0;
+                if (pricePerBag > 0 && bagsNeeded > 0) {
+                    const totalCost = bagsNeeded * pricePerBag;
+                    document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+                    costRow.style.display = 'flex';
+                } else {
+                    costRow.style.display = 'none';
+                }
+            }
+        }
+
+        // Initial setup
+        updateInputVisibility();
+        updatePriceInputs();
+
+        // Event listeners
+        document.getElementById('projectType').addEventListener('change', updateInputVisibility);
+        document.getElementById('deliveryType').addEventListener('change', updatePriceInputs);
+
+        document.getElementById('length').addEventListener('input', calculate);
+        document.getElementById('width').addEventListener('input', calculate);
+        document.getElementById('thickness').addEventListener('input', calculate);
+        document.getElementById('diameter').addEventListener('input', calculate);
+        document.getElementById('circularThickness').addEventListener('input', calculate);
+        document.getElementById('columnDiameter').addEventListener('input', calculate);
+        document.getElementById('columnHeight').addEventListener('input', calculate);
+        document.getElementById('pricePerYard').addEventListener('input', calculate);
+        document.getElementById('pricePerBag').addEventListener('input', calculate);
+    </script>
+</body>
+</html>
